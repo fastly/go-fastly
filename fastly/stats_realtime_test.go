@@ -1,13 +1,14 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
 
 func TestClient_GetRealtimeStats_validation(t *testing.T) {
 	var err error
-	_, err = TestStatsClient.GetRealtimeStats(&GetRealtimeStatsInput{
+	_, err = TestStatsClient.GetRealtimeStats(context.TODO(), &GetRealtimeStatsInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
@@ -22,7 +23,7 @@ func TestStatsClient_GetRealtimeStats(t *testing.T) {
 
 	// Get
 	RecordRealtimeStats(t, "realtime_stats/get", func(c *RTSClient) {
-		_, err = c.GetRealtimeStats(&GetRealtimeStatsInput{
+		_, err = c.GetRealtimeStats(context.TODO(), &GetRealtimeStatsInput{
 			ServiceID: TestDeliveryServiceID,
 			Timestamp: 0,
 			Limit:     ToPointer(uint32(3)),
@@ -42,7 +43,7 @@ func TestStatsClient_GetRealtimeStatsJSON(t *testing.T) {
 
 	var err error
 	RecordRealtimeStats(t, "realtime_stats/get", func(c *RTSClient) {
-		err = c.GetRealtimeStatsJSON(&GetRealtimeStatsInput{
+		err = c.GetRealtimeStatsJSON(context.TODO(), &GetRealtimeStatsInput{
 			ServiceID: TestDeliveryServiceID,
 			Timestamp: 0,
 			Limit:     ToPointer(uint32(3)),

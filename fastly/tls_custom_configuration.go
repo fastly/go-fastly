@@ -32,8 +32,6 @@ type DNSRecord struct {
 
 // ListCustomTLSConfigurationsInput is used as input to the ListCustomTLSConfigurationsInput function.
 type ListCustomTLSConfigurationsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// FilterBulk is whether or not to only include bulk=true configurations
 	FilterBulk bool
 	// Include captures related objects. Optional, comma-separated values. Permitted values: dns_records.
@@ -71,13 +69,13 @@ func (i *ListCustomTLSConfigurationsInput) formatFilters() map[string]string {
 }
 
 // ListCustomTLSConfigurations retrieves all resources.
-func (c *Client) ListCustomTLSConfigurations(i *ListCustomTLSConfigurationsInput) ([]*CustomTLSConfiguration, error) {
+func (c *Client) ListCustomTLSConfigurations(ctx context.Context, i *ListCustomTLSConfigurationsInput) ([]*CustomTLSConfiguration, error) {
 	path := "/tls/configurations"
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Params = i.formatFilters()
 	requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -102,8 +100,6 @@ func (c *Client) ListCustomTLSConfigurations(i *ListCustomTLSConfigurationsInput
 
 // GetCustomTLSConfigurationInput is used as input to the GetCustomTLSConfiguration function.
 type GetCustomTLSConfigurationInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS configuration.
 	ID string
 	// Include captures related objects. Optional, comma-separated values. Permitted values: dns_records.
@@ -111,21 +107,21 @@ type GetCustomTLSConfigurationInput struct {
 }
 
 // GetCustomTLSConfiguration retrieves the specified resource.
-func (c *Client) GetCustomTLSConfiguration(i *GetCustomTLSConfigurationInput) (*CustomTLSConfiguration, error) {
+func (c *Client) GetCustomTLSConfiguration(ctx context.Context, i *GetCustomTLSConfigurationInput) (*CustomTLSConfiguration, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
 
 	path := ToSafeURL("tls", "configurations", i.ID)
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
 
 	if i.Include != "" {
 		requestOptions.Params["include"] = i.Include
 	}
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -141,8 +137,6 @@ func (c *Client) GetCustomTLSConfiguration(i *GetCustomTLSConfigurationInput) (*
 
 // UpdateCustomTLSConfigurationInput is used as input to the UpdateCustomTLSConfiguration function.
 type UpdateCustomTLSConfigurationInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS configuration.
 	ID string
 	// Name is a custom name for your TLS configuration.
@@ -150,7 +144,7 @@ type UpdateCustomTLSConfigurationInput struct {
 }
 
 // UpdateCustomTLSConfiguration updates the specified resource.
-func (c *Client) UpdateCustomTLSConfiguration(i *UpdateCustomTLSConfigurationInput) (*CustomTLSConfiguration, error) {
+func (c *Client) UpdateCustomTLSConfiguration(ctx context.Context, i *UpdateCustomTLSConfigurationInput) (*CustomTLSConfiguration, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
@@ -161,7 +155,7 @@ func (c *Client) UpdateCustomTLSConfiguration(i *UpdateCustomTLSConfigurationInp
 
 	path := ToSafeURL("tls", "configurations", i.ID)
 
-	resp, err := c.PatchJSONAPI(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSONAPI(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -13,7 +14,7 @@ func TestClient_ProductEnablement_image_optimizer(t *testing.T) {
 	// Enable Product - Bot Management
 	var pe *ProductEnablement
 	Record(t, "product_enablement/enable_image_optimizer", func(c *Client) {
-		pe, err = c.EnableProduct(&ProductEnablementInput{
+		pe, err = c.EnableProduct(context.TODO(), &ProductEnablementInput{
 			ProductID: ProductImageOptimizer,
 			ServiceID: TestDeliveryServiceID,
 		})
@@ -29,7 +30,7 @@ func TestClient_ProductEnablement_image_optimizer(t *testing.T) {
 	// Get Product status
 	var gpe *ProductEnablement
 	Record(t, "product_enablement/get_image_optimizer", func(c *Client) {
-		gpe, err = c.GetProduct(&ProductEnablementInput{
+		gpe, err = c.GetProduct(context.TODO(), &ProductEnablementInput{
 			ProductID: ProductImageOptimizer,
 			ServiceID: TestDeliveryServiceID,
 		})
@@ -44,7 +45,7 @@ func TestClient_ProductEnablement_image_optimizer(t *testing.T) {
 
 	// Disable Product
 	Record(t, "product_enablement/disable_image_optimizer", func(c *Client) {
-		err = c.DisableProduct(&ProductEnablementInput{
+		err = c.DisableProduct(context.TODO(), &ProductEnablementInput{
 			ProductID: ProductImageOptimizer,
 			ServiceID: TestDeliveryServiceID,
 		})
@@ -55,7 +56,7 @@ func TestClient_ProductEnablement_image_optimizer(t *testing.T) {
 
 	// Get Product status again to check disabled
 	Record(t, "product_enablement/get-disabled_image_optimizer", func(c *Client) {
-		gpe, err = c.GetProduct(&ProductEnablementInput{
+		gpe, err = c.GetProduct(context.TODO(), &ProductEnablementInput{
 			ProductID: ProductImageOptimizer,
 			ServiceID: TestDeliveryServiceID,
 		})
@@ -71,14 +72,14 @@ func TestClient_ProductEnablement_image_optimizer(t *testing.T) {
 func TestClient_GetProduct_validation_image_optimizer(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetProduct(&ProductEnablementInput{
+	_, err = TestClient.GetProduct(context.TODO(), &ProductEnablementInput{
 		ProductID: ProductImageOptimizer,
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetProduct(&ProductEnablementInput{
+	_, err = TestClient.GetProduct(context.TODO(), &ProductEnablementInput{
 		ServiceID: "foo",
 	})
 	if !errors.Is(err, ErrMissingProductID) {
@@ -88,14 +89,14 @@ func TestClient_GetProduct_validation_image_optimizer(t *testing.T) {
 
 func TestClient_EnableProduct_validation_image_optimizer(t *testing.T) {
 	var err error
-	_, err = TestClient.EnableProduct(&ProductEnablementInput{
+	_, err = TestClient.EnableProduct(context.TODO(), &ProductEnablementInput{
 		ProductID: ProductImageOptimizer,
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.EnableProduct(&ProductEnablementInput{
+	_, err = TestClient.EnableProduct(context.TODO(), &ProductEnablementInput{
 		ServiceID: "foo",
 	})
 	if !errors.Is(err, ErrMissingProductID) {
@@ -106,14 +107,14 @@ func TestClient_EnableProduct_validation_image_optimizer(t *testing.T) {
 func TestClient_DisableProduct_validation_image_optimizer(t *testing.T) {
 	var err error
 
-	err = TestClient.DisableProduct(&ProductEnablementInput{
+	err = TestClient.DisableProduct(context.TODO(), &ProductEnablementInput{
 		ProductID: ProductImageOptimizer,
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DisableProduct(&ProductEnablementInput{
+	err = TestClient.DisableProduct(context.TODO(), &ProductEnablementInput{
 		ServiceID: "foo",
 	})
 	if !errors.Is(err, ErrMissingProductID) {

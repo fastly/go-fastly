@@ -8,16 +8,17 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// UpdateInput specifies the information needed for the Put() function to perform
-// the operation.
+// UpdateInput specifies the information needed for the Update function
+// to perform the operation.
 type UpdateInput struct {
-	// Action is the action to take when signal for virtual patch is detected (optional).
+	// Action is the action to take when signal for virtual patch is detected.
 	Action *string `json:"action"`
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context `json:"-"`
-	// Enabled is the toggle status indicator of the VirtualPatch (optional).
+	// Enabled is the toggle status indicator of the VirtualPatch.
 	Enabled *bool `json:"enabled"`
-	// Mode is action to take when a signal for virtual patch is detected (optional).
+	// Mode is action to take when a signal for virtual patch is
+	// detected.
 	Mode *string `json:"mode"`
 	// VirtualPatchID is the virtual patch identifier (required).
 	VirtualPatchID *string `json:"-"`
@@ -26,7 +27,7 @@ type UpdateInput struct {
 }
 
 // Update updates the specified virtual patch.
-func Update(c *fastly.Client, i *UpdateInput) (*VirtualPatch, error) {
+func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*VirtualPatch, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -36,7 +37,7 @@ func Update(c *fastly.Client, i *UpdateInput) (*VirtualPatch, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "virtual-patches", *i.VirtualPatchID)
 
-	resp, err := c.PatchJSON(path, i, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSON(ctx, path, i, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

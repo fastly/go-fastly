@@ -27,8 +27,6 @@ type Logentries struct {
 
 // ListLogentriesInput is used as input to the ListLogentries function.
 type ListLogentriesInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -36,7 +34,7 @@ type ListLogentriesInput struct {
 }
 
 // ListLogentries retrieves all resources.
-func (c *Client) ListLogentries(i *ListLogentriesInput) ([]*Logentries, error) {
+func (c *Client) ListLogentries(ctx context.Context, i *ListLogentriesInput) ([]*Logentries, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -45,7 +43,7 @@ func (c *Client) ListLogentries(i *ListLogentriesInput) ([]*Logentries, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logentries")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -60,8 +58,6 @@ func (c *Client) ListLogentries(i *ListLogentriesInput) ([]*Logentries, error) {
 
 // CreateLogentriesInput is used as input to the CreateLogentries function.
 type CreateLogentriesInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -89,7 +85,7 @@ type CreateLogentriesInput struct {
 }
 
 // CreateLogentries creates a new resource.
-func (c *Client) CreateLogentries(i *CreateLogentriesInput) (*Logentries, error) {
+func (c *Client) CreateLogentries(ctx context.Context, i *CreateLogentriesInput) (*Logentries, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -98,7 +94,7 @@ func (c *Client) CreateLogentries(i *CreateLogentriesInput) (*Logentries, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logentries")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -113,8 +109,6 @@ func (c *Client) CreateLogentries(i *CreateLogentriesInput) (*Logentries, error)
 
 // GetLogentriesInput is used as input to the GetLogentries function.
 type GetLogentriesInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the logentries to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -124,7 +118,7 @@ type GetLogentriesInput struct {
 }
 
 // GetLogentries retrieves the specified resource.
-func (c *Client) GetLogentries(i *GetLogentriesInput) (*Logentries, error) {
+func (c *Client) GetLogentries(ctx context.Context, i *GetLogentriesInput) (*Logentries, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -136,7 +130,7 @@ func (c *Client) GetLogentries(i *GetLogentriesInput) (*Logentries, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logentries", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -151,8 +145,6 @@ func (c *Client) GetLogentries(i *GetLogentriesInput) (*Logentries, error) {
 
 // UpdateLogentriesInput is used as input to the UpdateLogentries function.
 type UpdateLogentriesInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -182,7 +174,7 @@ type UpdateLogentriesInput struct {
 }
 
 // UpdateLogentries updates the specified resource.
-func (c *Client) UpdateLogentries(i *UpdateLogentriesInput) (*Logentries, error) {
+func (c *Client) UpdateLogentries(ctx context.Context, i *UpdateLogentriesInput) (*Logentries, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -194,7 +186,7 @@ func (c *Client) UpdateLogentries(i *UpdateLogentriesInput) (*Logentries, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logentries", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -209,8 +201,6 @@ func (c *Client) UpdateLogentries(i *UpdateLogentriesInput) (*Logentries, error)
 
 // DeleteLogentriesInput is the input parameter to DeleteLogentries.
 type DeleteLogentriesInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the logentries to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -220,7 +210,7 @@ type DeleteLogentriesInput struct {
 }
 
 // DeleteLogentries deletes the specified resource.
-func (c *Client) DeleteLogentries(i *DeleteLogentriesInput) error {
+func (c *Client) DeleteLogentries(ctx context.Context, i *DeleteLogentriesInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -232,7 +222,7 @@ func (c *Client) DeleteLogentries(i *DeleteLogentriesInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logentries", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

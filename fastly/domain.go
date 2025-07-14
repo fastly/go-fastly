@@ -22,8 +22,6 @@ type Domain struct {
 
 // ListDomainsInput is used as input to the ListDomains function.
 type ListDomainsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -31,7 +29,7 @@ type ListDomainsInput struct {
 }
 
 // ListDomains retrieves all resources.
-func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
+func (c *Client) ListDomains(ctx context.Context, i *ListDomainsInput) ([]*Domain, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -41,7 +39,7 @@ func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "domain")
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -58,8 +56,6 @@ func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
 type CreateDomainInput struct {
 	// Comment is a personal, freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the name of the domain that the service will respond to.
 	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -69,7 +65,7 @@ type CreateDomainInput struct {
 }
 
 // CreateDomain creates a new resource.
-func (c *Client) CreateDomain(i *CreateDomainInput) (*Domain, error) {
+func (c *Client) CreateDomain(ctx context.Context, i *CreateDomainInput) (*Domain, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -79,7 +75,7 @@ func (c *Client) CreateDomain(i *CreateDomainInput) (*Domain, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "domain")
 
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -94,8 +90,6 @@ func (c *Client) CreateDomain(i *CreateDomainInput) (*Domain, error) {
 
 // GetDomainInput is used as input to the GetDomain function.
 type GetDomainInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the domain to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -105,7 +99,7 @@ type GetDomainInput struct {
 }
 
 // GetDomain retrieves the specified resource.
-func (c *Client) GetDomain(i *GetDomainInput) (*Domain, error) {
+func (c *Client) GetDomain(ctx context.Context, i *GetDomainInput) (*Domain, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -118,7 +112,7 @@ func (c *Client) GetDomain(i *GetDomainInput) (*Domain, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "domain", i.Name)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -135,8 +129,6 @@ func (c *Client) GetDomain(i *GetDomainInput) (*Domain, error) {
 type UpdateDomainInput struct {
 	// Comment is a personal, freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the name of the domain that the service will respond to (required).
 	Name string `url:"-"`
 	// NewName is the updated name of the domain
@@ -148,7 +140,7 @@ type UpdateDomainInput struct {
 }
 
 // UpdateDomain updates the specified resource.
-func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
+func (c *Client) UpdateDomain(ctx context.Context, i *UpdateDomainInput) (*Domain, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -161,7 +153,7 @@ func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "domain", i.Name)
 
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -176,8 +168,6 @@ func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
 
 // DeleteDomainInput is used as input to the DeleteDomain function.
 type DeleteDomainInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the domain that the service will respond to (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -187,7 +177,7 @@ type DeleteDomainInput struct {
 }
 
 // DeleteDomain deletes the specified resource.
-func (c *Client) DeleteDomain(i *DeleteDomainInput) error {
+func (c *Client) DeleteDomain(ctx context.Context, i *DeleteDomainInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -200,7 +190,7 @@ func (c *Client) DeleteDomain(i *DeleteDomainInput) error {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "domain", i.Name)
 
-	ignored, err := c.Delete(path, CreateRequestOptions(i.Context))
+	ignored, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}
@@ -210,8 +200,6 @@ func (c *Client) DeleteDomain(i *DeleteDomainInput) error {
 
 // ValidateDomainInput is used as input to the ValidateDomain function.
 type ValidateDomainInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the domain to validate (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -221,7 +209,7 @@ type ValidateDomainInput struct {
 }
 
 // ValidateDomain validates the specified resource.
-func (c *Client) ValidateDomain(i *ValidateDomainInput) (*DomainValidationResult, error) {
+func (c *Client) ValidateDomain(ctx context.Context, i *ValidateDomainInput) (*DomainValidationResult, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -234,7 +222,7 @@ func (c *Client) ValidateDomain(i *ValidateDomainInput) (*DomainValidationResult
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "domain", i.Name, "check")
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -302,8 +290,6 @@ type DomainMetadata struct {
 
 // ValidateAllDomainsInput is used as input to the ValidateAllDomains function.
 type ValidateAllDomainsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -311,7 +297,7 @@ type ValidateAllDomainsInput struct {
 }
 
 // ValidateAllDomains validates the specified resource.
-func (c *Client) ValidateAllDomains(i *ValidateAllDomainsInput) (results []*DomainValidationResult, err error) {
+func (c *Client) ValidateAllDomains(ctx context.Context, i *ValidateAllDomainsInput) (results []*DomainValidationResult, err error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -321,7 +307,7 @@ func (c *Client) ValidateAllDomains(i *ValidateAllDomainsInput) (results []*Doma
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "domain", "check_all")
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

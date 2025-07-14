@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 
@@ -44,7 +45,7 @@ func TestClient_FastlyAlerts(t *testing.T) {
 
 	// Enable Product - Domain Inspector
 	Record(t, "alerts/enable_required_product", func(c *Client) {
-		_, err = c.EnableProduct(&ProductEnablementInput{
+		_, err = c.EnableProduct(context.TODO(), &ProductEnablementInput{
 			ProductID: ProductDomainInspector,
 			ServiceID: TestDeliveryServiceID,
 		})
@@ -55,7 +56,7 @@ func TestClient_FastlyAlerts(t *testing.T) {
 
 	// Test
 	Record(t, "alerts/test_alert_definition", func(c *Client) {
-		err = c.TestAlertDefinition(tadi)
+		err = c.TestAlertDefinition(context.TODO(), tadi)
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -64,7 +65,7 @@ func TestClient_FastlyAlerts(t *testing.T) {
 	// Create
 	var ad *AlertDefinition
 	Record(t, "alerts/create_alert_definition", func(c *Client) {
-		ad, err = c.CreateAlertDefinition(cadi)
+		ad, err = c.CreateAlertDefinition(context.TODO(), cadi)
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -72,13 +73,13 @@ func TestClient_FastlyAlerts(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "alerts/cleanup_alert_definition", func(c *Client) {
-			_ = c.DeleteAlertDefinition(&DeleteAlertDefinitionInput{
+			_ = c.DeleteAlertDefinition(context.TODO(), &DeleteAlertDefinitionInput{
 				ID: &ad.ID,
 			})
 		})
 
 		Record(t, "alerts/disable_required_product", func(c *Client) {
-			_ = c.DisableProduct(&ProductEnablementInput{
+			_ = c.DisableProduct(context.TODO(), &ProductEnablementInput{
 				ProductID: ProductDomainInspector,
 				ServiceID: TestDeliveryServiceID,
 			})
@@ -116,7 +117,7 @@ func TestClient_FastlyAlerts(t *testing.T) {
 	// List Definitions
 	var adr *AlertDefinitionsResponse
 	Record(t, "alerts/list_alert_definitions", func(c *Client) {
-		adr, err = c.ListAlertDefinitions(&ListAlertDefinitionsInput{
+		adr, err = c.ListAlertDefinitions(context.TODO(), &ListAlertDefinitionsInput{
 			Cursor:    ToPointer(""),
 			Limit:     ToPointer(10),
 			Name:      ToPointer(ad.Name),
@@ -134,7 +135,7 @@ func TestClient_FastlyAlerts(t *testing.T) {
 	// Get
 	var gad *AlertDefinition
 	Record(t, "alerts/get_alert_definition", func(c *Client) {
-		gad, err = c.GetAlertDefinition(&GetAlertDefinitionInput{
+		gad, err = c.GetAlertDefinition(context.TODO(), &GetAlertDefinitionInput{
 			ID: &ad.ID,
 		})
 	})
@@ -148,7 +149,7 @@ func TestClient_FastlyAlerts(t *testing.T) {
 	// Update
 	var uad *AlertDefinition
 	Record(t, "alerts/update_alert_definition", func(c *Client) {
-		uad, err = c.UpdateAlertDefinition(&UpdateAlertDefinitionInput{
+		uad, err = c.UpdateAlertDefinition(context.TODO(), &UpdateAlertDefinitionInput{
 			Description:        ToPointer("test description"),
 			Dimensions:         testDimensions,
 			EvaluationStrategy: testEvaluationStrategy,
@@ -167,7 +168,7 @@ func TestClient_FastlyAlerts(t *testing.T) {
 
 	// Delete
 	Record(t, "alerts/delete_alert_definition", func(c *Client) {
-		err = c.DeleteAlertDefinition(&DeleteAlertDefinitionInput{
+		err = c.DeleteAlertDefinition(context.TODO(), &DeleteAlertDefinitionInput{
 			ID: &ad.ID,
 		})
 	})
@@ -177,7 +178,7 @@ func TestClient_FastlyAlerts(t *testing.T) {
 
 	// List History
 	Record(t, "alerts/list_alert_history", func(c *Client) {
-		_, err = c.ListAlertHistory(&ListAlertHistoryInput{
+		_, err = c.ListAlertHistory(context.TODO(), &ListAlertHistoryInput{
 			After:        ToPointer("2006-01-02T15:04:05Z"),
 			Before:       ToPointer("2056-01-02T15:04:05Z"),
 			Cursor:       ToPointer(""),
@@ -218,7 +219,7 @@ func TestClient_FastlyPercentAlerts(t *testing.T) {
 	var ad *AlertDefinition
 	var err error
 	Record(t, "alerts/create_alert_definition_stats_percent", func(c *Client) {
-		ad, err = c.CreateAlertDefinition(cadi)
+		ad, err = c.CreateAlertDefinition(context.TODO(), cadi)
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -226,7 +227,7 @@ func TestClient_FastlyPercentAlerts(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "alerts/cleanup_alert_definition_stats_percent", func(c *Client) {
-			err = c.DeleteAlertDefinition(&DeleteAlertDefinitionInput{
+			err = c.DeleteAlertDefinition(context.TODO(), &DeleteAlertDefinitionInput{
 				ID: &ad.ID,
 			})
 		})
@@ -263,7 +264,7 @@ func TestClient_FastlyPercentAlerts(t *testing.T) {
 
 func TestClient_GetAlertDefinition_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.GetAlertDefinition(&GetAlertDefinitionInput{
+	_, err = TestClient.GetAlertDefinition(context.TODO(), &GetAlertDefinitionInput{
 		ID: nil,
 	})
 	if !errors.Is(err, ErrMissingID) {
@@ -273,7 +274,7 @@ func TestClient_GetAlertDefinition_validation(t *testing.T) {
 
 func TestClient_UpdateAlertDefinition_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.UpdateAlertDefinition(&UpdateAlertDefinitionInput{
+	_, err = TestClient.UpdateAlertDefinition(context.TODO(), &UpdateAlertDefinitionInput{
 		ID: nil,
 	})
 	if !errors.Is(err, ErrMissingID) {
@@ -282,7 +283,7 @@ func TestClient_UpdateAlertDefinition_validation(t *testing.T) {
 }
 
 func TestClient_DeleteAlertDefinition_validation(t *testing.T) {
-	err := TestClient.DeleteAlertDefinition(&DeleteAlertDefinitionInput{
+	err := TestClient.DeleteAlertDefinition(context.TODO(), &DeleteAlertDefinitionInput{
 		ID: nil,
 	})
 	if !errors.Is(err, ErrMissingID) {

@@ -1,6 +1,7 @@
 package accesskeys
 
 import (
+	"context"
 	"testing"
 
 	"github.com/fastly/go-fastly/v10/fastly"
@@ -18,7 +19,7 @@ func TestClient_AccessKey(t *testing.T) {
 
 	// List all AccessKeys.
 	fastly.Record(t, "list", func(c *fastly.Client) {
-		accessKeys, err = ListAccessKeys(c)
+		accessKeys, err = ListAccessKeys(context.TODO(), c)
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -37,7 +38,7 @@ func TestClient_AccessKey(t *testing.T) {
 	// Create a AccessKey for testing.
 	var accessKey *AccessKey
 	fastly.Record(t, "create", func(c *fastly.Client) {
-		accessKey, err = Create(c, &CreateInput{
+		accessKey, err = Create(context.TODO(), c, &CreateInput{
 			Description: fastly.ToPointer(TestAccessKeyDescription),
 			Permission:  fastly.ToPointer(TestAccessKeyPermission),
 			Buckets:     fastly.ToPointer(TestAccessKeyBuckets),
@@ -68,7 +69,7 @@ func TestClient_AccessKey(t *testing.T) {
 	// Ensure we delete the test AccessKey at the end.
 	defer func() {
 		fastly.Record(t, "delete", func(c *fastly.Client) {
-			err = Delete(c, &DeleteInput{
+			err = Delete(context.TODO(), c, &DeleteInput{
 				AccessKeyID: fastly.ToPointer(accessKey.AccessKeyID),
 			})
 		})
@@ -80,7 +81,7 @@ func TestClient_AccessKey(t *testing.T) {
 	// Get the test AccessKey.
 	var ak *AccessKey
 	fastly.Record(t, "get", func(c *fastly.Client) {
-		ak, err = Get(c, &GetInput{
+		ak, err = Get(context.TODO(), c, &GetInput{
 			AccessKeyID: fastly.ToPointer(accessKey.AccessKeyID),
 		})
 	})
@@ -103,7 +104,7 @@ func TestClient_AccessKey(t *testing.T) {
 	// List all entries of the test AccessKey and compare it to the input.
 	var actualAccessKeys *AccessKeys
 	fastly.Record(t, "list_with_new", func(c *fastly.Client) {
-		actualAccessKeys, err = ListAccessKeys(c)
+		actualAccessKeys, err = ListAccessKeys(context.TODO(), c)
 	})
 	if err != nil {
 		t.Errorf("error fetching list of AccessKey entries: %v", err)
@@ -132,14 +133,14 @@ func TestClient_AccessKey(t *testing.T) {
 }
 
 func TestClient_Create_validation(t *testing.T) {
-	_, err := Create(fastly.TestClient, &CreateInput{
+	_, err := Create(context.TODO(), fastly.TestClient, &CreateInput{
 		Description: nil,
 	})
 	if err != fastly.ErrMissingDescription {
 		t.Errorf("expected ErrMissingDescription: got %s", err)
 	}
 
-	_, err = Create(fastly.TestClient, &CreateInput{
+	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		Description: fastly.ToPointer("description"),
 		Permission:  nil,
 	})
@@ -147,7 +148,7 @@ func TestClient_Create_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingPermission: got %s", err)
 	}
 
-	_, err = Create(fastly.TestClient, &CreateInput{
+	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		Description: fastly.ToPointer("description"),
 		Permission:  fastly.ToPointer("bad-permission"),
 	})
@@ -157,7 +158,7 @@ func TestClient_Create_validation(t *testing.T) {
 }
 
 func TestClient_Get_validation(t *testing.T) {
-	_, err := Get(fastly.TestClient, &GetInput{
+	_, err := Get(context.TODO(), fastly.TestClient, &GetInput{
 		AccessKeyID: nil,
 	})
 	if err != fastly.ErrMissingAccessKeyID {
@@ -166,7 +167,7 @@ func TestClient_Get_validation(t *testing.T) {
 }
 
 func TestClient_Delete_validation(t *testing.T) {
-	err := Delete(fastly.TestClient, &DeleteInput{
+	err := Delete(context.TODO(), fastly.TestClient, &DeleteInput{
 		AccessKeyID: nil,
 	})
 	if err != fastly.ErrMissingAccessKeyID {

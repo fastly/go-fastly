@@ -9,11 +9,9 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// ListInput specifies the information needed for the List() function to perform
-// the operation.
+// ListInput specifies the information needed for the List() function
+// to perform the operation.
 type ListInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Limit how many results are returned.
 	Limit *int
 	// Mode filter results based on mode.
@@ -22,9 +20,10 @@ type ListInput struct {
 	Page *int
 }
 
-// List retrieves a list of workspaces, with optional filtering and pagination.
-func List(c *fastly.Client, i *ListInput) (*Workspaces, error) {
-	requestOptions := fastly.CreateRequestOptions(i.Context)
+// List retrieves a list of workspaces, with optional filtering and
+// pagination.
+func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Workspaces, error) {
+	requestOptions := fastly.CreateRequestOptions()
 	if i.Limit != nil {
 		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
@@ -35,7 +34,7 @@ func List(c *fastly.Client, i *ListInput) (*Workspaces, error) {
 		requestOptions.Params["page"] = strconv.Itoa(*i.Page)
 	}
 
-	resp, err := c.Get("/ngwaf/v1/workspaces", requestOptions)
+	resp, err := c.Get(ctx, "/ngwaf/v1/workspaces", requestOptions)
 	if err != nil {
 		return nil, err
 	}

@@ -55,8 +55,6 @@ type BillingExtra struct {
 
 // GetBillingInput is used as input to the GetBilling function.
 type GetBillingInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Month is a 2-digit month (required).
 	Month uint8
 	// Year is a 4-digit year (required).
@@ -64,7 +62,7 @@ type GetBillingInput struct {
 }
 
 // GetBilling returns the billing information for the current account.
-func (c *Client) GetBilling(i *GetBillingInput) (*Billing, error) {
+func (c *Client) GetBilling(ctx context.Context, i *GetBillingInput) (*Billing, error) {
 	if i.Year == 0 {
 		return nil, ErrMissingYear
 	}
@@ -74,7 +72,7 @@ func (c *Client) GetBilling(i *GetBillingInput) (*Billing, error) {
 
 	path := ToSafeURL("billing", "year", strconv.Itoa(int(i.Year)), "month", fmt.Sprintf("%02d", i.Month))
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"strings"
 	"testing"
@@ -38,7 +39,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// Create
 	var es *Elasticsearch
 	Record(t, "elasticsearch/create", func(c *Client) {
-		es, err = c.CreateElasticsearch(&CreateElasticsearchInput{
+		es, err = c.CreateElasticsearch(context.TODO(), &CreateElasticsearchInput{
 			ServiceID:         TestDeliveryServiceID,
 			ServiceVersion:    *tv.Number,
 			Name:              ToPointer("test-elasticsearch"),
@@ -65,14 +66,14 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// ensure deleted
 	defer func() {
 		Record(t, "elasticsearch/cleanup", func(c *Client) {
-			_ = c.DeleteElasticsearch(&DeleteElasticsearchInput{
+			_ = c.DeleteElasticsearch(context.TODO(), &DeleteElasticsearchInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-elasticsearch",
 			})
 
 			// ensure that renamed endpoint created in Update test is deleted
-			_ = c.DeleteElasticsearch(&DeleteElasticsearchInput{
+			_ = c.DeleteElasticsearch(context.TODO(), &DeleteElasticsearchInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-elasticsearch",
@@ -129,7 +130,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// List
 	var ess []*Elasticsearch
 	Record(t, "elasticsearch/list", func(c *Client) {
-		ess, err = c.ListElasticsearch(&ListElasticsearchInput{
+		ess, err = c.ListElasticsearch(context.TODO(), &ListElasticsearchInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -144,7 +145,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// Get
 	var nes *Elasticsearch
 	Record(t, "elasticsearch/get", func(c *Client) {
-		nes, err = c.GetElasticsearch(&GetElasticsearchInput{
+		nes, err = c.GetElasticsearch(context.TODO(), &GetElasticsearchInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-elasticsearch",
@@ -202,7 +203,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// Update
 	var ues *Elasticsearch
 	Record(t, "elasticsearch/update", func(c *Client) {
-		ues, err = c.UpdateElasticsearch(&UpdateElasticsearchInput{
+		ues, err = c.UpdateElasticsearch(context.TODO(), &UpdateElasticsearchInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-elasticsearch",
@@ -226,7 +227,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 
 	// Delete
 	Record(t, "elasticsearch/delete", func(c *Client) {
-		err = c.DeleteElasticsearch(&DeleteElasticsearchInput{
+		err = c.DeleteElasticsearch(context.TODO(), &DeleteElasticsearchInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-elasticsearch",
@@ -239,14 +240,14 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 
 func TestClient_ListElasticsearch_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.ListElasticsearch(&ListElasticsearchInput{
+	_, err = TestClient.ListElasticsearch(context.TODO(), &ListElasticsearchInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListElasticsearch(&ListElasticsearchInput{
+	_, err = TestClient.ListElasticsearch(context.TODO(), &ListElasticsearchInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -257,14 +258,14 @@ func TestClient_ListElasticsearch_validation(t *testing.T) {
 
 func TestClient_CreateElasticsearch_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.CreateElasticsearch(&CreateElasticsearchInput{
+	_, err = TestClient.CreateElasticsearch(context.TODO(), &CreateElasticsearchInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateElasticsearch(&CreateElasticsearchInput{
+	_, err = TestClient.CreateElasticsearch(context.TODO(), &CreateElasticsearchInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -276,7 +277,7 @@ func TestClient_CreateElasticsearch_validation(t *testing.T) {
 func TestClient_GetElasticsearch_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetElasticsearch(&GetElasticsearchInput{
+	_, err = TestClient.GetElasticsearch(context.TODO(), &GetElasticsearchInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -284,7 +285,7 @@ func TestClient_GetElasticsearch_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetElasticsearch(&GetElasticsearchInput{
+	_, err = TestClient.GetElasticsearch(context.TODO(), &GetElasticsearchInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -292,7 +293,7 @@ func TestClient_GetElasticsearch_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetElasticsearch(&GetElasticsearchInput{
+	_, err = TestClient.GetElasticsearch(context.TODO(), &GetElasticsearchInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -304,7 +305,7 @@ func TestClient_GetElasticsearch_validation(t *testing.T) {
 func TestClient_UpdateElasticsearch_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateElasticsearch(&UpdateElasticsearchInput{
+	_, err = TestClient.UpdateElasticsearch(context.TODO(), &UpdateElasticsearchInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -312,7 +313,7 @@ func TestClient_UpdateElasticsearch_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateElasticsearch(&UpdateElasticsearchInput{
+	_, err = TestClient.UpdateElasticsearch(context.TODO(), &UpdateElasticsearchInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -320,7 +321,7 @@ func TestClient_UpdateElasticsearch_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateElasticsearch(&UpdateElasticsearchInput{
+	_, err = TestClient.UpdateElasticsearch(context.TODO(), &UpdateElasticsearchInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -332,7 +333,7 @@ func TestClient_UpdateElasticsearch_validation(t *testing.T) {
 func TestClient_DeleteElasticsearch_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteElasticsearch(&DeleteElasticsearchInput{
+	err = TestClient.DeleteElasticsearch(context.TODO(), &DeleteElasticsearchInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -340,7 +341,7 @@ func TestClient_DeleteElasticsearch_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteElasticsearch(&DeleteElasticsearchInput{
+	err = TestClient.DeleteElasticsearch(context.TODO(), &DeleteElasticsearchInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -348,7 +349,7 @@ func TestClient_DeleteElasticsearch_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteElasticsearch(&DeleteElasticsearchInput{
+	err = TestClient.DeleteElasticsearch(context.TODO(), &DeleteElasticsearchInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

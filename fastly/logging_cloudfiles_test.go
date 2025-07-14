@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -17,7 +18,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	// Create
 	var cloudfilesCreateResp1, cloudfilesCreateResp2, cloudfilesCreateResp3 *Cloudfiles
 	Record(t, "cloudfiles/create", func(c *Client) {
-		cloudfilesCreateResp1, err = c.CreateCloudfiles(&CreateCloudfilesInput{
+		cloudfilesCreateResp1, err = c.CreateCloudfiles(context.TODO(), &CreateCloudfilesInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-cloudfiles"),
@@ -41,7 +42,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	}
 
 	Record(t, "cloudfiles/create2", func(c *Client) {
-		cloudfilesCreateResp2, err = c.CreateCloudfiles(&CreateCloudfilesInput{
+		cloudfilesCreateResp2, err = c.CreateCloudfiles(context.TODO(), &CreateCloudfilesInput{
 			ServiceID:       TestDeliveryServiceID,
 			ServiceVersion:  *tv.Number,
 			Name:            ToPointer("test-cloudfiles-2"),
@@ -65,7 +66,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	}
 
 	Record(t, "cloudfiles/create3", func(c *Client) {
-		cloudfilesCreateResp3, err = c.CreateCloudfiles(&CreateCloudfilesInput{
+		cloudfilesCreateResp3, err = c.CreateCloudfiles(context.TODO(), &CreateCloudfilesInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-cloudfiles-3"),
@@ -91,7 +92,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	// This case is expected to fail because both CompressionCodec and
 	// GzipLevel are present.
 	Record(t, "cloudfiles/create4", func(c *Client) {
-		_, err = c.CreateCloudfiles(&CreateCloudfilesInput{
+		_, err = c.CreateCloudfiles(context.TODO(), &CreateCloudfilesInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-cloudfiles-4"),
@@ -118,25 +119,25 @@ func TestClient_Cloudfiles(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "cloudfiles/cleanup", func(c *Client) {
-			_ = c.DeleteCloudfiles(&DeleteCloudfilesInput{
+			_ = c.DeleteCloudfiles(context.TODO(), &DeleteCloudfilesInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-cloudfiles",
 			})
 
-			_ = c.DeleteCloudfiles(&DeleteCloudfilesInput{
+			_ = c.DeleteCloudfiles(context.TODO(), &DeleteCloudfilesInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-cloudfiles-2",
 			})
 
-			_ = c.DeleteCloudfiles(&DeleteCloudfilesInput{
+			_ = c.DeleteCloudfiles(context.TODO(), &DeleteCloudfilesInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-cloudfiles-3",
 			})
 
-			_ = c.DeleteCloudfiles(&DeleteCloudfilesInput{
+			_ = c.DeleteCloudfiles(context.TODO(), &DeleteCloudfilesInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-cloudfiles",
@@ -202,7 +203,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	// List
 	var lc []*Cloudfiles
 	Record(t, "cloudfiles/list", func(c *Client) {
-		lc, err = c.ListCloudfiles(&ListCloudfilesInput{
+		lc, err = c.ListCloudfiles(context.TODO(), &ListCloudfilesInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -217,7 +218,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	// Get
 	var cloudfilesGetResp *Cloudfiles
 	Record(t, "cloudfiles/get", func(c *Client) {
-		cloudfilesGetResp, err = c.GetCloudfiles(&GetCloudfilesInput{
+		cloudfilesGetResp, err = c.GetCloudfiles(context.TODO(), &GetCloudfilesInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-cloudfiles",
@@ -275,7 +276,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	// Update
 	var cloudfilesUpdateResp1, cloudfilesUpdateResp2, cloudfilesUpdateResp3 *Cloudfiles
 	Record(t, "cloudfiles/update", func(c *Client) {
-		cloudfilesUpdateResp1, err = c.UpdateCloudfiles(&UpdateCloudfilesInput{
+		cloudfilesUpdateResp1, err = c.UpdateCloudfiles(context.TODO(), &UpdateCloudfilesInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-cloudfiles",
@@ -292,7 +293,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	}
 
 	Record(t, "cloudfiles/update2", func(c *Client) {
-		cloudfilesUpdateResp2, err = c.UpdateCloudfiles(&UpdateCloudfilesInput{
+		cloudfilesUpdateResp2, err = c.UpdateCloudfiles(context.TODO(), &UpdateCloudfilesInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-cloudfiles-2",
@@ -304,7 +305,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	}
 
 	Record(t, "cloudfiles/update3", func(c *Client) {
-		cloudfilesUpdateResp3, err = c.UpdateCloudfiles(&UpdateCloudfilesInput{
+		cloudfilesUpdateResp3, err = c.UpdateCloudfiles(context.TODO(), &UpdateCloudfilesInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-cloudfiles-3",
@@ -354,7 +355,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 
 	// Delete
 	Record(t, "cloudfiles/delete", func(c *Client) {
-		err = c.DeleteCloudfiles(&DeleteCloudfilesInput{
+		err = c.DeleteCloudfiles(context.TODO(), &DeleteCloudfilesInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-cloudfiles",
@@ -367,14 +368,14 @@ func TestClient_Cloudfiles(t *testing.T) {
 
 func TestClient_ListCloudfiles_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.ListCloudfiles(&ListCloudfilesInput{
+	_, err = TestClient.ListCloudfiles(context.TODO(), &ListCloudfilesInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListCloudfiles(&ListCloudfilesInput{
+	_, err = TestClient.ListCloudfiles(context.TODO(), &ListCloudfilesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -385,14 +386,14 @@ func TestClient_ListCloudfiles_validation(t *testing.T) {
 
 func TestClient_CreateCloudfiles_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.CreateCloudfiles(&CreateCloudfilesInput{
+	_, err = TestClient.CreateCloudfiles(context.TODO(), &CreateCloudfilesInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateCloudfiles(&CreateCloudfilesInput{
+	_, err = TestClient.CreateCloudfiles(context.TODO(), &CreateCloudfilesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -404,7 +405,7 @@ func TestClient_CreateCloudfiles_validation(t *testing.T) {
 func TestClient_GetCloudfiles_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetCloudfiles(&GetCloudfilesInput{
+	_, err = TestClient.GetCloudfiles(context.TODO(), &GetCloudfilesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -412,7 +413,7 @@ func TestClient_GetCloudfiles_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetCloudfiles(&GetCloudfilesInput{
+	_, err = TestClient.GetCloudfiles(context.TODO(), &GetCloudfilesInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -420,7 +421,7 @@ func TestClient_GetCloudfiles_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetCloudfiles(&GetCloudfilesInput{
+	_, err = TestClient.GetCloudfiles(context.TODO(), &GetCloudfilesInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -432,7 +433,7 @@ func TestClient_GetCloudfiles_validation(t *testing.T) {
 func TestClient_UpdateCloudfiles_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateCloudfiles(&UpdateCloudfilesInput{
+	_, err = TestClient.UpdateCloudfiles(context.TODO(), &UpdateCloudfilesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -440,7 +441,7 @@ func TestClient_UpdateCloudfiles_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateCloudfiles(&UpdateCloudfilesInput{
+	_, err = TestClient.UpdateCloudfiles(context.TODO(), &UpdateCloudfilesInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -448,7 +449,7 @@ func TestClient_UpdateCloudfiles_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateCloudfiles(&UpdateCloudfilesInput{
+	_, err = TestClient.UpdateCloudfiles(context.TODO(), &UpdateCloudfilesInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -460,7 +461,7 @@ func TestClient_UpdateCloudfiles_validation(t *testing.T) {
 func TestClient_DeleteCloudfiles_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteCloudfiles(&DeleteCloudfilesInput{
+	err = TestClient.DeleteCloudfiles(context.TODO(), &DeleteCloudfilesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -468,7 +469,7 @@ func TestClient_DeleteCloudfiles_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteCloudfiles(&DeleteCloudfilesInput{
+	err = TestClient.DeleteCloudfiles(context.TODO(), &DeleteCloudfilesInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -476,7 +477,7 @@ func TestClient_DeleteCloudfiles_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteCloudfiles(&DeleteCloudfilesInput{
+	err = TestClient.DeleteCloudfiles(context.TODO(), &DeleteCloudfilesInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

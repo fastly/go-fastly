@@ -9,26 +9,24 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// ListInput specifies the information needed for the List() function to perform
-// the operation.
+// ListInput specifies the information needed for the List() function
+// to perform the operation.
 type ListInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
-	// Limit how many results are returned (optional).
+	// Limit how many results are returned.
 	Limit *int
-	// Page number of the collection to request (optional).
+	// Page number of the collection to request.
 	Page *int
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string
 }
 
-// List retrieves a list of vitual patches, with optional pagination.
-func List(c *fastly.Client, i *ListInput) (*VirtualPatches, error) {
+// List retrieves a list of virtual patches, with optional pagination.
+func List(ctx context.Context, c *fastly.Client, i *ListInput) (*VirtualPatches, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
 
-	requestOptions := fastly.CreateRequestOptions(i.Context)
+	requestOptions := fastly.CreateRequestOptions()
 	if i.Page != nil {
 		requestOptions.Params["page"] = strconv.Itoa(*i.Page)
 	}
@@ -38,7 +36,7 @@ func List(c *fastly.Client, i *ListInput) (*VirtualPatches, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "virtual-patches")
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}

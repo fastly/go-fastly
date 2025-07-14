@@ -1,6 +1,7 @@
 package workspaces
 
 import (
+	"context"
 	"errors"
 	"testing"
 
@@ -27,7 +28,7 @@ func TestClient_Workspace(t *testing.T) {
 
 	// List all workspaces.
 	fastly.Record(t, "list_workspaces", func(c *fastly.Client) {
-		wss, err = List(c, &ListInput{})
+		wss, err = List(context.TODO(), c, &ListInput{})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -43,7 +44,7 @@ func TestClient_Workspace(t *testing.T) {
 	// Create a test workspace.
 	var ws *Workspace
 	fastly.Record(t, "create_workspace", func(c *fastly.Client) {
-		ws, err = Create(c, &CreateInput{
+		ws, err = Create(context.TODO(), c, &CreateInput{
 			Name:                   fastly.ToPointer(wsName),
 			Description:            fastly.ToPointer(wsDescription),
 			Mode:                   fastly.ToPointer(wsMode),
@@ -94,7 +95,7 @@ func TestClient_Workspace(t *testing.T) {
 	// Ensure we delete the test workspace at the end.
 	defer func() {
 		fastly.Record(t, "delete_workspace", func(c *fastly.Client) {
-			err = Delete(c, &DeleteInput{
+			err = Delete(context.TODO(), c, &DeleteInput{
 				WorkspaceID: fastly.ToPointer(ws.WorkspaceID),
 			})
 		})
@@ -106,7 +107,7 @@ func TestClient_Workspace(t *testing.T) {
 	// Get the test workspace.
 	var gws *Workspace
 	fastly.Record(t, "get_workspace", func(c *fastly.Client) {
-		gws, err = Get(c, &GetInput{
+		gws, err = Get(context.TODO(), c, &GetInput{
 			WorkspaceID: fastly.ToPointer(ws.WorkspaceID),
 		})
 	})
@@ -166,7 +167,7 @@ func TestClient_Workspace(t *testing.T) {
 
 	var uws *Workspace
 	fastly.Record(t, "update_workspace", func(c *fastly.Client) {
-		uws, err = Update(c, &UpdateInput{
+		uws, err = Update(context.TODO(), c, &UpdateInput{
 			WorkspaceID:                 fastly.ToPointer(ws.WorkspaceID),
 			Name:                        fastly.ToPointer(uwsName),
 			Description:                 fastly.ToPointer(uwsDescription),
@@ -219,7 +220,7 @@ func TestClient_Workspace(t *testing.T) {
 
 func TestClient_GetWorkspace_validation(t *testing.T) {
 	var err error
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
@@ -229,13 +230,13 @@ func TestClient_GetWorkspace_validation(t *testing.T) {
 
 func TestClient_CreateWorkspace_validation(t *testing.T) {
 	var err error
-	_, err = Create(fastly.TestClient, &CreateInput{
+	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		Name: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingName) {
 		t.Errorf("expected ErrMissingName: got %s", err)
 	}
-	_, err = Create(fastly.TestClient, &CreateInput{
+	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		Name: fastly.ToPointer("test"),
 		Mode: nil,
 	})
@@ -246,7 +247,7 @@ func TestClient_CreateWorkspace_validation(t *testing.T) {
 
 func TestClient_UpdateWorkspace_validation(t *testing.T) {
 	var err error
-	_, err = Update(fastly.TestClient, &UpdateInput{
+	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
@@ -255,7 +256,7 @@ func TestClient_UpdateWorkspace_validation(t *testing.T) {
 }
 
 func TestClient_DeleteWorkspace_validation(t *testing.T) {
-	err := Delete(fastly.TestClient, &DeleteInput{
+	err := Delete(context.TODO(), fastly.TestClient, &DeleteInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {

@@ -8,23 +8,26 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// UpdateInput specifies the information needed for the Update() function to
-// perform the operation.
+// UpdateInput specifies the information needed for the Update()
+// function to perform the operation.
 type UpdateInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
-	// Field is the name of the field to redact. Will be converted to lowercase.
+	// Field is the name of the field to redact. Will be converted
+	// to lowercase.
 	Field *string `json:"field,omitempty"`
-	// RedactionID is the id of the redaction that's being updated (required).
+	// RedactionID is the id of the redaction that's being updated
+	// (required).
 	RedactionID *string `json:"-"`
-	// Type is the type of field being redacted. Must be one of `request_parameter`, `request_header`, or `response_header`.
+	// Type is the type of field being redacted. Must be one of
+	// `request_parameter`, `request_header`, or
+	// `response_header`.
 	Type *string `json:"type,omitempty"`
-	// WorkspaceID is the ID of the workspace that the redaction belongs to.
+	// WorkspaceID is the ID of the workspace that the redaction
+	// belongs to (required).
 	WorkspaceID *string `json:"-"`
 }
 
-// Update updates the specified workspace.
-func Update(c *fastly.Client, i *UpdateInput) (*Redaction, error) {
+// Update updates the specified redaction.
+func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Redaction, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -34,7 +37,7 @@ func Update(c *fastly.Client, i *UpdateInput) (*Redaction, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "redactions", *i.RedactionID)
 
-	resp, err := c.PatchJSON(path, i, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSON(ctx, path, i, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

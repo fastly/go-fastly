@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -17,7 +18,7 @@ func TestClient_NewRelic(t *testing.T) {
 	// Create
 	var newRelicResp1, newRelicResp2 *NewRelic
 	Record(t, "newrelic/create", func(c *Client) {
-		newRelicResp1, err = c.CreateNewRelic(&CreateNewRelicInput{
+		newRelicResp1, err = c.CreateNewRelic(context.TODO(), &CreateNewRelicInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-newrelic"),
@@ -32,7 +33,7 @@ func TestClient_NewRelic(t *testing.T) {
 	}
 
 	Record(t, "newrelic/create2", func(c *Client) {
-		newRelicResp2, err = c.CreateNewRelic(&CreateNewRelicInput{
+		newRelicResp2, err = c.CreateNewRelic(context.TODO(), &CreateNewRelicInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-newrelic-2"),
@@ -48,7 +49,7 @@ func TestClient_NewRelic(t *testing.T) {
 
 	// This case is expected to fail due to an invalid region
 	Record(t, "newrelic/create3", func(c *Client) {
-		_, err = c.CreateNewRelic(&CreateNewRelicInput{
+		_, err = c.CreateNewRelic(context.TODO(), &CreateNewRelicInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-newrelic-3"),
@@ -65,19 +66,19 @@ func TestClient_NewRelic(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "newrelic/delete", func(c *Client) {
-			_ = c.DeleteNewRelic(&DeleteNewRelicInput{
+			_ = c.DeleteNewRelic(context.TODO(), &DeleteNewRelicInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-newrelic",
 			})
 
-			_ = c.DeleteNewRelic(&DeleteNewRelicInput{
+			_ = c.DeleteNewRelic(context.TODO(), &DeleteNewRelicInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-newrelic-2",
 			})
 
-			_ = c.DeleteNewRelic(&DeleteNewRelicInput{
+			_ = c.DeleteNewRelic(context.TODO(), &DeleteNewRelicInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-newrelic",
@@ -125,7 +126,7 @@ func TestClient_NewRelic(t *testing.T) {
 	// List
 	var ln []*NewRelic
 	Record(t, "newrelic/list", func(c *Client) {
-		ln, err = c.ListNewRelic(&ListNewRelicInput{
+		ln, err = c.ListNewRelic(context.TODO(), &ListNewRelicInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -140,7 +141,7 @@ func TestClient_NewRelic(t *testing.T) {
 	// Get
 	var newRelicGetResp, newRelicGetResp2 *NewRelic
 	Record(t, "newrelic/get", func(c *Client) {
-		newRelicGetResp, err = c.GetNewRelic(&GetNewRelicInput{
+		newRelicGetResp, err = c.GetNewRelic(context.TODO(), &GetNewRelicInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-newrelic",
@@ -151,7 +152,7 @@ func TestClient_NewRelic(t *testing.T) {
 	}
 
 	Record(t, "newrelic/get2", func(c *Client) {
-		newRelicGetResp2, err = c.GetNewRelic(&GetNewRelicInput{
+		newRelicGetResp2, err = c.GetNewRelic(context.TODO(), &GetNewRelicInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-newrelic-2",
@@ -201,7 +202,7 @@ func TestClient_NewRelic(t *testing.T) {
 	// Update
 	var newRelicUpdateResp1 *NewRelic
 	Record(t, "newrelic/update", func(c *Client) {
-		newRelicUpdateResp1, err = c.UpdateNewRelic(&UpdateNewRelicInput{
+		newRelicUpdateResp1, err = c.UpdateNewRelic(context.TODO(), &UpdateNewRelicInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-newrelic",
@@ -217,7 +218,7 @@ func TestClient_NewRelic(t *testing.T) {
 
 	// This case is expected to fail due to an invalid region.
 	Record(t, "newrelic/update2", func(c *Client) {
-		_, err = c.UpdateNewRelic(&UpdateNewRelicInput{
+		_, err = c.UpdateNewRelic(context.TODO(), &UpdateNewRelicInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-newrelic",
@@ -243,7 +244,7 @@ func TestClient_NewRelic(t *testing.T) {
 
 	// Delete
 	Record(t, "newrelic/delete", func(c *Client) {
-		err = c.DeleteNewRelic(&DeleteNewRelicInput{
+		err = c.DeleteNewRelic(context.TODO(), &DeleteNewRelicInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-newrelic",
@@ -257,14 +258,14 @@ func TestClient_NewRelic(t *testing.T) {
 func TestClient_ListNewRelic_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.ListNewRelic(&ListNewRelicInput{
+	_, err = TestClient.ListNewRelic(context.TODO(), &ListNewRelicInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListNewRelic(&ListNewRelicInput{
+	_, err = TestClient.ListNewRelic(context.TODO(), &ListNewRelicInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -276,14 +277,14 @@ func TestClient_ListNewRelic_validation(t *testing.T) {
 func TestClient_CreateNewRelic_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.CreateNewRelic(&CreateNewRelicInput{
+	_, err = TestClient.CreateNewRelic(context.TODO(), &CreateNewRelicInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateNewRelic(&CreateNewRelicInput{
+	_, err = TestClient.CreateNewRelic(context.TODO(), &CreateNewRelicInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -295,7 +296,7 @@ func TestClient_CreateNewRelic_validation(t *testing.T) {
 func TestClient_GetNewRelic_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetNewRelic(&GetNewRelicInput{
+	_, err = TestClient.GetNewRelic(context.TODO(), &GetNewRelicInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -303,7 +304,7 @@ func TestClient_GetNewRelic_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetNewRelic(&GetNewRelicInput{
+	_, err = TestClient.GetNewRelic(context.TODO(), &GetNewRelicInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -311,7 +312,7 @@ func TestClient_GetNewRelic_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetNewRelic(&GetNewRelicInput{
+	_, err = TestClient.GetNewRelic(context.TODO(), &GetNewRelicInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -323,7 +324,7 @@ func TestClient_GetNewRelic_validation(t *testing.T) {
 func TestClient_UpdateNewRelic_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateNewRelic(&UpdateNewRelicInput{
+	_, err = TestClient.UpdateNewRelic(context.TODO(), &UpdateNewRelicInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -331,7 +332,7 @@ func TestClient_UpdateNewRelic_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateNewRelic(&UpdateNewRelicInput{
+	_, err = TestClient.UpdateNewRelic(context.TODO(), &UpdateNewRelicInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -339,7 +340,7 @@ func TestClient_UpdateNewRelic_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateNewRelic(&UpdateNewRelicInput{
+	_, err = TestClient.UpdateNewRelic(context.TODO(), &UpdateNewRelicInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -351,7 +352,7 @@ func TestClient_UpdateNewRelic_validation(t *testing.T) {
 func TestClient_DeleteNewRelic_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteNewRelic(&DeleteNewRelicInput{
+	err = TestClient.DeleteNewRelic(context.TODO(), &DeleteNewRelicInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -359,7 +360,7 @@ func TestClient_DeleteNewRelic_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteNewRelic(&DeleteNewRelicInput{
+	err = TestClient.DeleteNewRelic(context.TODO(), &DeleteNewRelicInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -367,7 +368,7 @@ func TestClient_DeleteNewRelic_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteNewRelic(&DeleteNewRelicInput{
+	err = TestClient.DeleteNewRelic(context.TODO(), &DeleteNewRelicInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

@@ -34,8 +34,6 @@ type Cloudfiles struct {
 
 // ListCloudfilesInput is used as input to the ListCloudfiles function.
 type ListCloudfilesInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -43,7 +41,7 @@ type ListCloudfilesInput struct {
 }
 
 // ListCloudfiles retrieves all resources.
-func (c *Client) ListCloudfiles(i *ListCloudfilesInput) ([]*Cloudfiles, error) {
+func (c *Client) ListCloudfiles(ctx context.Context, i *ListCloudfilesInput) ([]*Cloudfiles, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -52,7 +50,7 @@ func (c *Client) ListCloudfiles(i *ListCloudfilesInput) ([]*Cloudfiles, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "cloudfiles")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -73,8 +71,6 @@ type CreateCloudfilesInput struct {
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -110,7 +106,7 @@ type CreateCloudfilesInput struct {
 }
 
 // CreateCloudfiles creates a new resource.
-func (c *Client) CreateCloudfiles(i *CreateCloudfilesInput) (*Cloudfiles, error) {
+func (c *Client) CreateCloudfiles(ctx context.Context, i *CreateCloudfilesInput) (*Cloudfiles, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -119,7 +115,7 @@ func (c *Client) CreateCloudfiles(i *CreateCloudfilesInput) (*Cloudfiles, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "cloudfiles")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -134,8 +130,6 @@ func (c *Client) CreateCloudfiles(i *CreateCloudfilesInput) (*Cloudfiles, error)
 
 // GetCloudfilesInput is used as input to the GetCloudfiles function.
 type GetCloudfilesInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the Cloudfiles to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -145,7 +139,7 @@ type GetCloudfilesInput struct {
 }
 
 // GetCloudfiles retrieves the specified resource.
-func (c *Client) GetCloudfiles(i *GetCloudfilesInput) (*Cloudfiles, error) {
+func (c *Client) GetCloudfiles(ctx context.Context, i *GetCloudfilesInput) (*Cloudfiles, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -157,7 +151,7 @@ func (c *Client) GetCloudfiles(i *GetCloudfilesInput) (*Cloudfiles, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "cloudfiles", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -178,8 +172,6 @@ type UpdateCloudfilesInput struct {
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -217,7 +209,7 @@ type UpdateCloudfilesInput struct {
 }
 
 // UpdateCloudfiles updates the specified resource.
-func (c *Client) UpdateCloudfiles(i *UpdateCloudfilesInput) (*Cloudfiles, error) {
+func (c *Client) UpdateCloudfiles(ctx context.Context, i *UpdateCloudfilesInput) (*Cloudfiles, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -229,7 +221,7 @@ func (c *Client) UpdateCloudfiles(i *UpdateCloudfilesInput) (*Cloudfiles, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "cloudfiles", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -244,8 +236,6 @@ func (c *Client) UpdateCloudfiles(i *UpdateCloudfilesInput) (*Cloudfiles, error)
 
 // DeleteCloudfilesInput is the input parameter to DeleteCloudfiles.
 type DeleteCloudfilesInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the Cloudfiles to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -255,7 +245,7 @@ type DeleteCloudfilesInput struct {
 }
 
 // DeleteCloudfiles deletes the specified resource.
-func (c *Client) DeleteCloudfiles(i *DeleteCloudfilesInput) error {
+func (c *Client) DeleteCloudfiles(ctx context.Context, i *DeleteCloudfilesInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -267,7 +257,7 @@ func (c *Client) DeleteCloudfiles(i *DeleteCloudfilesInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "cloudfiles", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

@@ -23,8 +23,6 @@ type ConfigStoreItem struct {
 
 // CreateConfigStoreItemInput is the input to the CreateConfigStoreItem.
 type CreateConfigStoreItemInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// StoreID is the ID of the config store (required).
 	StoreID string
 	// Key is the item's name (required).
@@ -34,18 +32,18 @@ type CreateConfigStoreItemInput struct {
 }
 
 // CreateConfigStoreItem creates a new Fastly config store item.
-func (c *Client) CreateConfigStoreItem(i *CreateConfigStoreItemInput) (*ConfigStoreItem, error) {
+func (c *Client) CreateConfigStoreItem(ctx context.Context, i *CreateConfigStoreItemInput) (*ConfigStoreItem, error) {
 	if i.StoreID == "" {
 		return nil, ErrMissingStoreID
 	}
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID, "item")
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Accept"] = JSONMimeType
 	requestOptions.Parallel = true
 
-	resp, err := c.PostForm(path, i, requestOptions)
+	resp, err := c.PostForm(ctx, path, i, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -61,8 +59,6 @@ func (c *Client) CreateConfigStoreItem(i *CreateConfigStoreItemInput) (*ConfigSt
 
 // DeleteConfigStoreItemInput is the input to DeleteConfigStoreItem.
 type DeleteConfigStoreItemInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// StoreID is the ID of the item's config store (required).
 	StoreID string
 	// Key is the name of the config store item to delete (required).
@@ -70,7 +66,7 @@ type DeleteConfigStoreItemInput struct {
 }
 
 // DeleteConfigStoreItem deletes the given config store item.
-func (c *Client) DeleteConfigStoreItem(i *DeleteConfigStoreItemInput) error {
+func (c *Client) DeleteConfigStoreItem(ctx context.Context, i *DeleteConfigStoreItemInput) error {
 	if i.StoreID == "" {
 		return ErrMissingStoreID
 	}
@@ -80,11 +76,11 @@ func (c *Client) DeleteConfigStoreItem(i *DeleteConfigStoreItemInput) error {
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID, "item", i.Key)
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Accept"] = JSONMimeType
 	requestOptions.Parallel = true
 
-	resp, err := c.Delete(path, requestOptions)
+	resp, err := c.Delete(ctx, path, requestOptions)
 	if err != nil {
 		return err
 	}
@@ -97,8 +93,6 @@ func (c *Client) DeleteConfigStoreItem(i *DeleteConfigStoreItemInput) error {
 
 // GetConfigStoreItemInput is the input to the GetConfigStoreItem.
 type GetConfigStoreItemInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// StoreID is the ID of the item's config store (required).
 	StoreID string
 	// Key is the name of the config store item to fetch (required).
@@ -106,7 +100,7 @@ type GetConfigStoreItemInput struct {
 }
 
 // GetConfigStoreItem gets the config store item with the given parameters.
-func (c *Client) GetConfigStoreItem(i *GetConfigStoreItemInput) (*ConfigStoreItem, error) {
+func (c *Client) GetConfigStoreItem(ctx context.Context, i *GetConfigStoreItemInput) (*ConfigStoreItem, error) {
 	if i.StoreID == "" {
 		return nil, ErrMissingStoreID
 	}
@@ -116,11 +110,11 @@ func (c *Client) GetConfigStoreItem(i *GetConfigStoreItemInput) (*ConfigStoreIte
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID, "item", i.Key)
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Accept"] = JSONMimeType
 	requestOptions.Parallel = true
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -136,21 +130,19 @@ func (c *Client) GetConfigStoreItem(i *GetConfigStoreItemInput) (*ConfigStoreIte
 
 // ListConfigStoreItemsInput is the input to ListConfigStoreItems.
 type ListConfigStoreItemsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// StoreID is the ID of the config store to retrieve items for (required).
 	StoreID string
 }
 
 // ListConfigStoreItems returns a list of config store items for the given store.
-func (c *Client) ListConfigStoreItems(i *ListConfigStoreItemsInput) ([]*ConfigStoreItem, error) {
+func (c *Client) ListConfigStoreItems(ctx context.Context, i *ListConfigStoreItemsInput) ([]*ConfigStoreItem, error) {
 	if i.StoreID == "" {
 		return nil, ErrMissingStoreID
 	}
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID, "items")
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -169,8 +161,6 @@ func (c *Client) ListConfigStoreItems(i *ListConfigStoreItemsInput) ([]*ConfigSt
 
 // UpdateConfigStoreItemInput is the input to the UpdateConfigStoreItem.
 type UpdateConfigStoreItemInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Key is the name of the config store item to update (required).
 	Key string
 	// StoreID is the ID of the item's config store (required).
@@ -182,7 +172,7 @@ type UpdateConfigStoreItemInput struct {
 }
 
 // UpdateConfigStoreItem updates a specific config store item.
-func (c *Client) UpdateConfigStoreItem(i *UpdateConfigStoreItemInput) (*ConfigStoreItem, error) {
+func (c *Client) UpdateConfigStoreItem(ctx context.Context, i *UpdateConfigStoreItemInput) (*ConfigStoreItem, error) {
 	if i.StoreID == "" {
 		return nil, ErrMissingStoreID
 	}
@@ -201,11 +191,11 @@ func (c *Client) UpdateConfigStoreItem(i *UpdateConfigStoreItemInput) (*ConfigSt
 		httpMethod = http.MethodPatch
 	}
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Accept"] = JSONMimeType
 	requestOptions.Parallel = true
 
-	resp, err := c.RequestForm(httpMethod, path, i, requestOptions)
+	resp, err := c.RequestForm(ctx, httpMethod, path, i, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -222,8 +212,6 @@ func (c *Client) UpdateConfigStoreItem(i *UpdateConfigStoreItemInput) (*ConfigSt
 // BatchModifyConfigStoreItemsInput is the input parameter to the
 // BatchModifyConfigStoreItems function.
 type BatchModifyConfigStoreItemsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
 	// Items is a list of Config Store items.
 	Items []*BatchConfigStoreItem `json:"items"`
 	// StoreID is the ID of the Config Store to modify items for (required).
@@ -241,7 +229,7 @@ type BatchConfigStoreItem struct {
 }
 
 // BatchModifyConfigStoreItems bulk updates dictionary items.
-func (c *Client) BatchModifyConfigStoreItems(i *BatchModifyConfigStoreItemsInput) error {
+func (c *Client) BatchModifyConfigStoreItems(ctx context.Context, i *BatchModifyConfigStoreItemsInput) error {
 	if i.StoreID == "" {
 		return ErrMissingStoreID
 	}
@@ -251,7 +239,7 @@ func (c *Client) BatchModifyConfigStoreItems(i *BatchModifyConfigStoreItemsInput
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID, "items")
 
-	resp, err := c.PatchJSON(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

@@ -54,8 +54,6 @@ const (
 
 // ProductEnablementInput is used as input to the various product API functions.
 type ProductEnablementInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ProductID is the ID of the product and is constrained by the Product type (required).
 	ProductID Product
 	// ServiceID is the ID of the service (required).
@@ -66,7 +64,7 @@ type ProductEnablementInput struct {
 //
 // Deprecated: The 'Get' functions in the product-specific packages
 // should be used instead of this function.
-func (c *Client) GetProduct(i *ProductEnablementInput) (*ProductEnablement, error) {
+func (c *Client) GetProduct(ctx context.Context, i *ProductEnablementInput) (*ProductEnablement, error) {
 	if i.ProductID == ProductUndefined {
 		return nil, ErrMissingProductID
 	}
@@ -76,7 +74,7 @@ func (c *Client) GetProduct(i *ProductEnablementInput) (*ProductEnablement, erro
 
 	path := ToSafeURL("enabled-products", i.ProductID.String(), "services", i.ServiceID)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +92,7 @@ func (c *Client) GetProduct(i *ProductEnablementInput) (*ProductEnablement, erro
 //
 // Deprecated: The 'Enable' functions in the product-specific packages
 // should be used instead of this function.
-func (c *Client) EnableProduct(i *ProductEnablementInput) (*ProductEnablement, error) {
+func (c *Client) EnableProduct(ctx context.Context, i *ProductEnablementInput) (*ProductEnablement, error) {
 	if i.ProductID == ProductUndefined {
 		return nil, ErrMissingProductID
 	}
@@ -104,7 +102,7 @@ func (c *Client) EnableProduct(i *ProductEnablementInput) (*ProductEnablement, e
 
 	path := ToSafeURL("enabled-products", i.ProductID.String(), "services", i.ServiceID)
 
-	resp, err := c.PutJSON(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -121,7 +119,7 @@ func (c *Client) EnableProduct(i *ProductEnablementInput) (*ProductEnablement, e
 //
 // Deprecated: The 'Disable' functions in the product-specific packages
 // should be used instead of this function.
-func (c *Client) DisableProduct(i *ProductEnablementInput) error {
+func (c *Client) DisableProduct(ctx context.Context, i *ProductEnablementInput) error {
 	if i.ProductID == ProductUndefined {
 		return ErrMissingProductID
 	}
@@ -131,7 +129,7 @@ func (c *Client) DisableProduct(i *ProductEnablementInput) error {
 
 	path := ToSafeURL("enabled-products", i.ProductID.String(), "services", i.ServiceID)
 
-	ignored, err := c.Delete(path, CreateRequestOptions(i.Context))
+	ignored, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

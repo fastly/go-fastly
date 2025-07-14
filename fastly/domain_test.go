@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -24,7 +25,7 @@ func TestClient_Domains(t *testing.T) {
 	// Create
 	var d *Domain
 	Record(t, "domains/create", func(c *Client) {
-		d, err = c.CreateDomain(&CreateDomainInput{
+		d, err = c.CreateDomain(context.TODO(), &CreateDomainInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer(domain1),
@@ -37,7 +38,7 @@ func TestClient_Domains(t *testing.T) {
 
 	var d2 *Domain
 	Record(t, "domains/create2", func(c *Client) {
-		d2, err = c.CreateDomain(&CreateDomainInput{
+		d2, err = c.CreateDomain(context.TODO(), &CreateDomainInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer(domain2),
@@ -51,13 +52,13 @@ func TestClient_Domains(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "domains/cleanup", func(c *Client) {
-			_ = c.DeleteDomain(&DeleteDomainInput{
+			_ = c.DeleteDomain(context.TODO(), &DeleteDomainInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           domain1,
 			})
 
-			_ = c.DeleteDomain(&DeleteDomainInput{
+			_ = c.DeleteDomain(context.TODO(), &DeleteDomainInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           domain3,
@@ -78,7 +79,7 @@ func TestClient_Domains(t *testing.T) {
 	// List
 	var ds []*Domain
 	Record(t, "domains/list", func(c *Client) {
-		ds, err = c.ListDomains(&ListDomainsInput{
+		ds, err = c.ListDomains(context.TODO(), &ListDomainsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -93,7 +94,7 @@ func TestClient_Domains(t *testing.T) {
 	// Get
 	var nd *Domain
 	Record(t, "domains/get", func(c *Client) {
-		nd, err = c.GetDomain(&GetDomainInput{
+		nd, err = c.GetDomain(context.TODO(), &GetDomainInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           domain1,
@@ -112,7 +113,7 @@ func TestClient_Domains(t *testing.T) {
 	// Update
 	var ud *Domain
 	Record(t, "domains/update", func(c *Client) {
-		ud, err = c.UpdateDomain(&UpdateDomainInput{
+		ud, err = c.UpdateDomain(context.TODO(), &UpdateDomainInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           domain1,
@@ -129,7 +130,7 @@ func TestClient_Domains(t *testing.T) {
 	// Validate
 	var vd *DomainValidationResult
 	Record(t, "domains/validation", func(c *Client) {
-		vd, err = c.ValidateDomain(&ValidateDomainInput{
+		vd, err = c.ValidateDomain(context.TODO(), &ValidateDomainInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           domain3,
@@ -144,7 +145,7 @@ func TestClient_Domains(t *testing.T) {
 
 	var vds []*DomainValidationResult
 	Record(t, "domains/validate-all", func(c *Client) {
-		vds, err = c.ValidateAllDomains(&ValidateAllDomainsInput{
+		vds, err = c.ValidateAllDomains(context.TODO(), &ValidateAllDomainsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -163,7 +164,7 @@ func TestClient_Domains(t *testing.T) {
 
 	// Delete
 	Record(t, "domains/delete", func(c *Client) {
-		err = c.DeleteDomain(&DeleteDomainInput{
+		err = c.DeleteDomain(context.TODO(), &DeleteDomainInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           domain3,
@@ -176,14 +177,14 @@ func TestClient_Domains(t *testing.T) {
 
 func TestClient_ListDomains_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.ListDomains(&ListDomainsInput{
+	_, err = TestClient.ListDomains(context.TODO(), &ListDomainsInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListDomains(&ListDomainsInput{
+	_, err = TestClient.ListDomains(context.TODO(), &ListDomainsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -194,14 +195,14 @@ func TestClient_ListDomains_validation(t *testing.T) {
 
 func TestClient_CreateDomain_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.CreateDomain(&CreateDomainInput{
+	_, err = TestClient.CreateDomain(context.TODO(), &CreateDomainInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateDomain(&CreateDomainInput{
+	_, err = TestClient.CreateDomain(context.TODO(), &CreateDomainInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -213,7 +214,7 @@ func TestClient_CreateDomain_validation(t *testing.T) {
 func TestClient_GetDomain_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetDomain(&GetDomainInput{
+	_, err = TestClient.GetDomain(context.TODO(), &GetDomainInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -221,7 +222,7 @@ func TestClient_GetDomain_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetDomain(&GetDomainInput{
+	_, err = TestClient.GetDomain(context.TODO(), &GetDomainInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -229,7 +230,7 @@ func TestClient_GetDomain_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetDomain(&GetDomainInput{
+	_, err = TestClient.GetDomain(context.TODO(), &GetDomainInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -241,7 +242,7 @@ func TestClient_GetDomain_validation(t *testing.T) {
 func TestClient_UpdateDomain_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateDomain(&UpdateDomainInput{
+	_, err = TestClient.UpdateDomain(context.TODO(), &UpdateDomainInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -249,7 +250,7 @@ func TestClient_UpdateDomain_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateDomain(&UpdateDomainInput{
+	_, err = TestClient.UpdateDomain(context.TODO(), &UpdateDomainInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -257,7 +258,7 @@ func TestClient_UpdateDomain_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateDomain(&UpdateDomainInput{
+	_, err = TestClient.UpdateDomain(context.TODO(), &UpdateDomainInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -269,7 +270,7 @@ func TestClient_UpdateDomain_validation(t *testing.T) {
 func TestClient_DeleteDomain_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteDomain(&DeleteDomainInput{
+	err = TestClient.DeleteDomain(context.TODO(), &DeleteDomainInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -277,7 +278,7 @@ func TestClient_DeleteDomain_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteDomain(&DeleteDomainInput{
+	err = TestClient.DeleteDomain(context.TODO(), &DeleteDomainInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -285,7 +286,7 @@ func TestClient_DeleteDomain_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteDomain(&DeleteDomainInput{
+	err = TestClient.DeleteDomain(context.TODO(), &DeleteDomainInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -297,7 +298,7 @@ func TestClient_DeleteDomain_validation(t *testing.T) {
 func TestClient_ValidateDomain_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.ValidateDomain(&ValidateDomainInput{
+	_, err = TestClient.ValidateDomain(context.TODO(), &ValidateDomainInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -305,7 +306,7 @@ func TestClient_ValidateDomain_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ValidateDomain(&ValidateDomainInput{
+	_, err = TestClient.ValidateDomain(context.TODO(), &ValidateDomainInput{
 		Name:           "test",
 		ServiceVersion: 0,
 	})
@@ -313,7 +314,7 @@ func TestClient_ValidateDomain_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ValidateDomain(&ValidateDomainInput{
+	_, err = TestClient.ValidateDomain(context.TODO(), &ValidateDomainInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

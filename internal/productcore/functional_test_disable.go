@@ -1,6 +1,7 @@
 package productcore
 
 import (
+	"context"
 	"strings"
 	"testing"
 
@@ -17,7 +18,7 @@ type DisableTestInput struct {
 	Phase string
 	// OpFn is the function to be invoked to perform the
 	// disablement
-	OpFn func(*fastly.Client, string) error
+	OpFn func(context.Context, *fastly.Client, string) error
 	// ServiceID identifies the service on which the product
 	// should be disabled
 	ServiceID string
@@ -43,7 +44,7 @@ func NewDisableTest(i *DisableTestInput) *test_utils.FunctionalTest {
 	}
 
 	r.TestFn = func(_ *testing.T, _ *test_utils.FunctionalTest, c *fastly.Client) error {
-		err := i.OpFn(c, i.ServiceID)
+		err := i.OpFn(context.TODO(), c, i.ServiceID)
 		return err
 	}
 

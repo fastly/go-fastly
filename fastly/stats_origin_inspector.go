@@ -82,8 +82,6 @@ type OriginMeta struct {
 
 // GetOriginMetricsInput is the input to an OriginMetrics request.
 type GetOriginMetricsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Cursor is the value from a previous response to retrieve the next page. To request the first page, this should be empty.
 	Cursor *string
 	// Datacenters limits query to one or more specific POPs.
@@ -109,9 +107,9 @@ type GetOriginMetricsInput struct {
 }
 
 // GetOriginMetricsForService retrieves the specified resource.
-func (c *Client) GetOriginMetricsForService(i *GetOriginMetricsInput) (*OriginInspector, error) {
+func (c *Client) GetOriginMetricsForService(ctx context.Context, i *GetOriginMetricsInput) (*OriginInspector, error) {
 	var resp any
-	if err := c.GetOriginMetricsForServiceJSON(i, &resp); err != nil {
+	if err := c.GetOriginMetricsForServiceJSON(ctx, i, &resp); err != nil {
 		return nil, err
 	}
 
@@ -123,14 +121,14 @@ func (c *Client) GetOriginMetricsForService(i *GetOriginMetricsInput) (*OriginIn
 }
 
 // GetOriginMetricsForServiceJSON retrieves the specified resource.
-func (c *Client) GetOriginMetricsForServiceJSON(i *GetOriginMetricsInput, dst any) error {
+func (c *Client) GetOriginMetricsForServiceJSON(ctx context.Context, i *GetOriginMetricsInput, dst any) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
 
 	path := ToSafeURL("metrics", "origins", "services", i.ServiceID)
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Params["datacenter"] = strings.Join(i.Datacenters, ",")
 	requestOptions.Params["group_by"] = strings.Join(i.GroupBy, ",")
 	requestOptions.Params["host"] = strings.Join(i.Hosts, ",")
@@ -153,7 +151,7 @@ func (c *Client) GetOriginMetricsForServiceJSON(i *GetOriginMetricsInput, dst an
 		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return err
 	}

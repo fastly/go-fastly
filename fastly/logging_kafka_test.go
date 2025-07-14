@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"strings"
 	"testing"
@@ -24,7 +25,7 @@ func TestClient_Kafkas(t *testing.T) {
 	// Create
 	var k *Kafka
 	Record(t, "kafkas/create", func(c *Client) {
-		k, err = c.CreateKafka(&CreateKafkaInput{
+		k, err = c.CreateKafka(context.TODO(), &CreateKafkaInput{
 			AuthMethod:       ToPointer("scram-sha-512"),
 			Brokers:          ToPointer("192.168.1.1,192.168.1.2"),
 			CompressionCodec: ToPointer("lz4"),
@@ -54,13 +55,13 @@ func TestClient_Kafkas(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "kafkas/cleanup", func(c *Client) {
-			_ = c.DeleteKafka(&DeleteKafkaInput{
+			_ = c.DeleteKafka(context.TODO(), &DeleteKafkaInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-kafka",
 			})
 
-			_ = c.DeleteKafka(&DeleteKafkaInput{
+			_ = c.DeleteKafka(context.TODO(), &DeleteKafkaInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-kafka",
@@ -126,7 +127,7 @@ func TestClient_Kafkas(t *testing.T) {
 	// List
 	var ks []*Kafka
 	Record(t, "kafkas/list", func(c *Client) {
-		ks, err = c.ListKafkas(&ListKafkasInput{
+		ks, err = c.ListKafkas(context.TODO(), &ListKafkasInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -141,7 +142,7 @@ func TestClient_Kafkas(t *testing.T) {
 	// Get
 	var nk *Kafka
 	Record(t, "kafkas/get", func(c *Client) {
-		nk, err = c.GetKafka(&GetKafkaInput{
+		nk, err = c.GetKafka(context.TODO(), &GetKafkaInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-kafka",
@@ -208,7 +209,7 @@ func TestClient_Kafkas(t *testing.T) {
 	// Update
 	var uk *Kafka
 	Record(t, "kafkas/update", func(c *Client) {
-		uk, err = c.UpdateKafka(&UpdateKafkaInput{
+		uk, err = c.UpdateKafka(context.TODO(), &UpdateKafkaInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-kafka",
@@ -232,7 +233,7 @@ func TestClient_Kafkas(t *testing.T) {
 
 	// Delete
 	Record(t, "kafkas/delete", func(c *Client) {
-		err = c.DeleteKafka(&DeleteKafkaInput{
+		err = c.DeleteKafka(context.TODO(), &DeleteKafkaInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-kafka",
@@ -245,14 +246,14 @@ func TestClient_Kafkas(t *testing.T) {
 
 func TestClient_ListKafkas_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.ListKafkas(&ListKafkasInput{
+	_, err = TestClient.ListKafkas(context.TODO(), &ListKafkasInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListKafkas(&ListKafkasInput{
+	_, err = TestClient.ListKafkas(context.TODO(), &ListKafkasInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -263,14 +264,14 @@ func TestClient_ListKafkas_validation(t *testing.T) {
 
 func TestClient_CreateKafka_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.CreateKafka(&CreateKafkaInput{
+	_, err = TestClient.CreateKafka(context.TODO(), &CreateKafkaInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateKafka(&CreateKafkaInput{
+	_, err = TestClient.CreateKafka(context.TODO(), &CreateKafkaInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -282,7 +283,7 @@ func TestClient_CreateKafka_validation(t *testing.T) {
 func TestClient_GetKafka_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetKafka(&GetKafkaInput{
+	_, err = TestClient.GetKafka(context.TODO(), &GetKafkaInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -290,7 +291,7 @@ func TestClient_GetKafka_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetKafka(&GetKafkaInput{
+	_, err = TestClient.GetKafka(context.TODO(), &GetKafkaInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -298,7 +299,7 @@ func TestClient_GetKafka_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetKafka(&GetKafkaInput{
+	_, err = TestClient.GetKafka(context.TODO(), &GetKafkaInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -310,7 +311,7 @@ func TestClient_GetKafka_validation(t *testing.T) {
 func TestClient_UpdateKafka_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateKafka(&UpdateKafkaInput{
+	_, err = TestClient.UpdateKafka(context.TODO(), &UpdateKafkaInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -318,7 +319,7 @@ func TestClient_UpdateKafka_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateKafka(&UpdateKafkaInput{
+	_, err = TestClient.UpdateKafka(context.TODO(), &UpdateKafkaInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -326,7 +327,7 @@ func TestClient_UpdateKafka_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateKafka(&UpdateKafkaInput{
+	_, err = TestClient.UpdateKafka(context.TODO(), &UpdateKafkaInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -338,7 +339,7 @@ func TestClient_UpdateKafka_validation(t *testing.T) {
 func TestClient_DeleteKafka_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteKafka(&DeleteKafkaInput{
+	err = TestClient.DeleteKafka(context.TODO(), &DeleteKafkaInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -346,7 +347,7 @@ func TestClient_DeleteKafka_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteKafka(&DeleteKafkaInput{
+	err = TestClient.DeleteKafka(context.TODO(), &DeleteKafkaInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -354,7 +355,7 @@ func TestClient_DeleteKafka_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteKafka(&DeleteKafkaInput{
+	err = TestClient.DeleteKafka(context.TODO(), &DeleteKafkaInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

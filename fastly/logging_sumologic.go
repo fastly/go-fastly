@@ -26,8 +26,6 @@ type Sumologic struct {
 
 // ListSumologicsInput is used as input to the ListSumologics function.
 type ListSumologicsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -35,7 +33,7 @@ type ListSumologicsInput struct {
 }
 
 // ListSumologics retrieves all resources.
-func (c *Client) ListSumologics(i *ListSumologicsInput) ([]*Sumologic, error) {
+func (c *Client) ListSumologics(ctx context.Context, i *ListSumologicsInput) ([]*Sumologic, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -44,7 +42,7 @@ func (c *Client) ListSumologics(i *ListSumologicsInput) ([]*Sumologic, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "sumologic")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -59,8 +57,6 @@ func (c *Client) ListSumologics(i *ListSumologicsInput) ([]*Sumologic, error) {
 
 // CreateSumologicInput is used as input to the CreateSumologic function.
 type CreateSumologicInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -84,7 +80,7 @@ type CreateSumologicInput struct {
 }
 
 // CreateSumologic creates a new resource.
-func (c *Client) CreateSumologic(i *CreateSumologicInput) (*Sumologic, error) {
+func (c *Client) CreateSumologic(ctx context.Context, i *CreateSumologicInput) (*Sumologic, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -93,7 +89,7 @@ func (c *Client) CreateSumologic(i *CreateSumologicInput) (*Sumologic, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "sumologic")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -108,8 +104,6 @@ func (c *Client) CreateSumologic(i *CreateSumologicInput) (*Sumologic, error) {
 
 // GetSumologicInput is used as input to the GetSumologic function.
 type GetSumologicInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the sumologic to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -119,7 +113,7 @@ type GetSumologicInput struct {
 }
 
 // GetSumologic retrieves the specified resource.
-func (c *Client) GetSumologic(i *GetSumologicInput) (*Sumologic, error) {
+func (c *Client) GetSumologic(ctx context.Context, i *GetSumologicInput) (*Sumologic, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -131,7 +125,7 @@ func (c *Client) GetSumologic(i *GetSumologicInput) (*Sumologic, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "sumologic", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -148,8 +142,6 @@ func (c *Client) GetSumologic(i *GetSumologicInput) (*Sumologic, error) {
 type UpdateSumologicInput struct {
 	// Address is a hostname or IPv4 address.
 	Address *string `url:"address,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -175,7 +167,7 @@ type UpdateSumologicInput struct {
 }
 
 // UpdateSumologic updates the specified resource.
-func (c *Client) UpdateSumologic(i *UpdateSumologicInput) (*Sumologic, error) {
+func (c *Client) UpdateSumologic(ctx context.Context, i *UpdateSumologicInput) (*Sumologic, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -187,7 +179,7 @@ func (c *Client) UpdateSumologic(i *UpdateSumologicInput) (*Sumologic, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "sumologic", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -202,8 +194,6 @@ func (c *Client) UpdateSumologic(i *UpdateSumologicInput) (*Sumologic, error) {
 
 // DeleteSumologicInput is the input parameter to DeleteSumologic.
 type DeleteSumologicInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the sumologic to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -213,7 +203,7 @@ type DeleteSumologicInput struct {
 }
 
 // DeleteSumologic deletes the specified resource.
-func (c *Client) DeleteSumologic(i *DeleteSumologicInput) error {
+func (c *Client) DeleteSumologic(ctx context.Context, i *DeleteSumologicInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -225,7 +215,7 @@ func (c *Client) DeleteSumologic(i *DeleteSumologicInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "sumologic", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

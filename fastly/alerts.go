@@ -55,8 +55,6 @@ type AlertsMeta struct {
 
 // ListAlertDefinitionsInput is used as input to the ListAlertDefinitions function.
 type ListAlertDefinitionsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Cursor is the pagination cursor from a previous request's meta (optional).
 	Cursor *string
 	// Limit is the maximum number of items included in each response (optional).
@@ -70,10 +68,10 @@ type ListAlertDefinitionsInput struct {
 }
 
 // ListAlertDefinitions retrieves filtered, paginated alert definitions.
-func (c *Client) ListAlertDefinitions(i *ListAlertDefinitionsInput) (*AlertDefinitionsResponse, error) {
+func (c *Client) ListAlertDefinitions(ctx context.Context, i *ListAlertDefinitionsInput) (*AlertDefinitionsResponse, error) {
 	p := "/alerts/definitions"
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	if i.Cursor != nil {
 		requestOptions.Params["cursor"] = *i.Cursor
 	}
@@ -90,7 +88,7 @@ func (c *Client) ListAlertDefinitions(i *ListAlertDefinitionsInput) (*AlertDefin
 		requestOptions.Params["sort"] = *i.Sort
 	}
 
-	resp, err := c.Get(p, requestOptions)
+	resp, err := c.Get(ctx, p, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -106,8 +104,6 @@ func (c *Client) ListAlertDefinitions(i *ListAlertDefinitionsInput) (*AlertDefin
 
 // CreateAlertDefinitionInput is used as input to the CreateAlertDefinition function.
 type CreateAlertDefinitionInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
 	// Description is additional text included in an alert notification (optional, limit 4096).
 	Description *string `json:"description"`
 	// Dimensions are a list of origins or domains that the alert is restricted to.
@@ -127,8 +123,8 @@ type CreateAlertDefinitionInput struct {
 }
 
 // CreateAlertDefinition creates a new alert definition.
-func (c *Client) CreateAlertDefinition(i *CreateAlertDefinitionInput) (*AlertDefinition, error) {
-	resp, err := c.PostJSON("/alerts/definitions", i, CreateRequestOptions(i.Context))
+func (c *Client) CreateAlertDefinition(ctx context.Context, i *CreateAlertDefinitionInput) (*AlertDefinition, error) {
+	resp, err := c.PostJSON(ctx, "/alerts/definitions", i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -143,21 +139,19 @@ func (c *Client) CreateAlertDefinition(i *CreateAlertDefinitionInput) (*AlertDef
 
 // GetAlertDefinitionInput is used as input to the GetAlertDefinition function.
 type GetAlertDefinitionInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID of definition to fetch (required).
 	ID *string
 }
 
 // GetAlertDefinition retrieves a specified alert definition.
-func (c *Client) GetAlertDefinition(i *GetAlertDefinitionInput) (*AlertDefinition, error) {
+func (c *Client) GetAlertDefinition(ctx context.Context, i *GetAlertDefinitionInput) (*AlertDefinition, error) {
 	if i.ID == nil {
 		return nil, ErrMissingID
 	}
 
 	path := ToSafeURL("alerts", "definitions", *i.ID)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -173,8 +167,6 @@ func (c *Client) GetAlertDefinition(i *GetAlertDefinitionInput) (*AlertDefinitio
 
 // UpdateAlertDefinitionInput is used as input to the UpdateAlertDefinition function.
 type UpdateAlertDefinitionInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
 	// Description is additional text included in an alert notification (optional, limit 4096).
 	Description *string `json:"description"`
 	// Dimensions are a list of origins or domains that the alert is restricted to.
@@ -192,14 +184,14 @@ type UpdateAlertDefinitionInput struct {
 }
 
 // UpdateAlertDefinition updates the specified alert definition.
-func (c *Client) UpdateAlertDefinition(i *UpdateAlertDefinitionInput) (*AlertDefinition, error) {
+func (c *Client) UpdateAlertDefinition(ctx context.Context, i *UpdateAlertDefinitionInput) (*AlertDefinition, error) {
 	if i.ID == nil {
 		return nil, ErrMissingID
 	}
 
 	path := ToSafeURL("alerts", "definitions", *i.ID)
 
-	resp, err := c.PutJSON(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -214,21 +206,19 @@ func (c *Client) UpdateAlertDefinition(i *UpdateAlertDefinitionInput) (*AlertDef
 
 // DeleteAlertDefinitionInput is used as input to the DeleteAlertDefinition function.
 type DeleteAlertDefinitionInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID of definition to delete (required).
 	ID *string
 }
 
 // DeleteAlertDefinition deletes the specified alert definition.
-func (c *Client) DeleteAlertDefinition(i *DeleteAlertDefinitionInput) error {
+func (c *Client) DeleteAlertDefinition(ctx context.Context, i *DeleteAlertDefinitionInput) error {
 	if i.ID == nil {
 		return ErrMissingID
 	}
 
 	path := ToSafeURL("alerts", "definitions", *i.ID)
 
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}
@@ -243,8 +233,6 @@ func (c *Client) DeleteAlertDefinition(i *DeleteAlertDefinitionInput) error {
 
 // TestAlertDefinitionInput is used as input to the TestAlertDefinition function.
 type TestAlertDefinitionInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
 	// Description is additional text included in an alert notification (optional, limit 4096).
 	Description *string `json:"description"`
 	// Dimensions are a list of origins or domains that the alert is restricted to.
@@ -264,8 +252,8 @@ type TestAlertDefinitionInput struct {
 }
 
 // TestAlertDefinition validates alert definition and sends test notifications without creating.
-func (c *Client) TestAlertDefinition(i *TestAlertDefinitionInput) error {
-	resp, err := c.PostJSON("/alerts/definitions/test", i, CreateRequestOptions(i.Context))
+func (c *Client) TestAlertDefinition(ctx context.Context, i *TestAlertDefinitionInput) error {
+	resp, err := c.PostJSON(ctx, "/alerts/definitions/test", i, CreateRequestOptions())
 	if err != nil {
 		return err
 	}
@@ -284,8 +272,6 @@ type ListAlertHistoryInput struct {
 	After *string
 	// Before filters history having start or end on or before the provided timestamp (optional).
 	Before *string
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Cursor is the pagination cursor from a previous request's meta (optional).
 	Cursor *string
 	// DefinitionID filters history by definition (optional).
@@ -301,10 +287,10 @@ type ListAlertHistoryInput struct {
 }
 
 // ListAlertHistory retrieves filtered, paginated alert history records.
-func (c *Client) ListAlertHistory(i *ListAlertHistoryInput) (*AlertHistoryResponse, error) {
+func (c *Client) ListAlertHistory(ctx context.Context, i *ListAlertHistoryInput) (*AlertHistoryResponse, error) {
 	p := "/alerts/history"
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	if i.After != nil {
 		requestOptions.Params["after"] = *i.After
 	}
@@ -330,7 +316,7 @@ func (c *Client) ListAlertHistory(i *ListAlertHistoryInput) (*AlertHistoryRespon
 		requestOptions.Params["status"] = *i.Status
 	}
 
-	resp, err := c.Get(p, requestOptions)
+	resp, err := c.Get(ctx, p, requestOptions)
 	if err != nil {
 		return nil, err
 	}

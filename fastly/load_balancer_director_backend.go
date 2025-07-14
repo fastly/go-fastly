@@ -23,8 +23,6 @@ type DirectorBackend struct {
 type CreateDirectorBackendInput struct {
 	// Backend is the name of the backend (required).
 	Backend string
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Director is the name of the director (required).
 	Director string
 	// ServiceID is the ID of the service (required).
@@ -34,7 +32,7 @@ type CreateDirectorBackendInput struct {
 }
 
 // CreateDirectorBackend creates a new resource.
-func (c *Client) CreateDirectorBackend(i *CreateDirectorBackendInput) (*DirectorBackend, error) {
+func (c *Client) CreateDirectorBackend(ctx context.Context, i *CreateDirectorBackendInput) (*DirectorBackend, error) {
 	if i.Backend == "" {
 		return nil, ErrMissingBackend
 	}
@@ -50,7 +48,7 @@ func (c *Client) CreateDirectorBackend(i *CreateDirectorBackendInput) (*Director
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "director", i.Director, "backend", i.Backend)
 
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -67,8 +65,6 @@ func (c *Client) CreateDirectorBackend(i *CreateDirectorBackendInput) (*Director
 type GetDirectorBackendInput struct {
 	// Backend is the name of the backend (required).
 	Backend string
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Director is the name of the director (required).
 	Director string
 	// ServiceID is the ID of the service (required).
@@ -78,7 +74,7 @@ type GetDirectorBackendInput struct {
 }
 
 // GetDirectorBackend retrieves the specified resource.
-func (c *Client) GetDirectorBackend(i *GetDirectorBackendInput) (*DirectorBackend, error) {
+func (c *Client) GetDirectorBackend(ctx context.Context, i *GetDirectorBackendInput) (*DirectorBackend, error) {
 	if i.Backend == "" {
 		return nil, ErrMissingBackend
 	}
@@ -94,7 +90,7 @@ func (c *Client) GetDirectorBackend(i *GetDirectorBackendInput) (*DirectorBacken
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "director", i.Director, "backend", i.Backend)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -111,8 +107,6 @@ func (c *Client) GetDirectorBackend(i *GetDirectorBackendInput) (*DirectorBacken
 type DeleteDirectorBackendInput struct {
 	// Backend is the name of the backend (required).
 	Backend string
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Director is the name of the director (required).
 	Director string
 	// ServiceID is the ID of the service (required).
@@ -122,7 +116,7 @@ type DeleteDirectorBackendInput struct {
 }
 
 // DeleteDirectorBackend deletes the specified resource.
-func (c *Client) DeleteDirectorBackend(i *DeleteDirectorBackendInput) error {
+func (c *Client) DeleteDirectorBackend(ctx context.Context, i *DeleteDirectorBackendInput) error {
 	if i.Backend == "" {
 		return ErrMissingBackend
 	}
@@ -138,7 +132,7 @@ func (c *Client) DeleteDirectorBackend(i *DeleteDirectorBackendInput) error {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "director", i.Director, "backend", i.Backend)
 
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

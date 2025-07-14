@@ -8,21 +8,22 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// UpdateInput specifies the information needed for the Update() function to
-// perform the operation.
+// UpdateInput specifies the information needed for the Update()
+// function to perform the operation.
 type UpdateInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
-	// Description is the new description for the signal (required).
+	// Description is the new description for the signal
+	// (required).
 	Description *string `json:"description"`
-	// SignalID is the id of the signal that's being updated (required).
+	// SignalID is the id of the signal that's being updated
+	// (required).
 	SignalID *string `json:"-"`
-	// WorkspaceID is the ID of the workspace that the signal belongs to.
+	// WorkspaceID is the ID of the workspace that the signal
+	// belongs to (required).
 	WorkspaceID *string `json:"-"`
 }
 
 // Update updates the specified signal.
-func Update(c *fastly.Client, i *UpdateInput) (*Signal, error) {
+func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Signal, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -35,7 +36,7 @@ func Update(c *fastly.Client, i *UpdateInput) (*Signal, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "signals", *i.SignalID)
 
-	resp, err := c.PatchJSON(path, i, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSON(ctx, path, i, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

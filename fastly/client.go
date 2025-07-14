@@ -17,7 +17,6 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/google/go-querystring/query"
@@ -69,6 +68,8 @@ var ProjectVersion = "10.5.1"
 var UserAgent = fmt.Sprintf("FastlyGo/%s (+%s; %s)",
 	ProjectVersion, ProjectURL, runtime.Version())
 
+var resourceLocks = NewResourceLockManager()
+
 // Client is the main entrypoint to the Fastly golang API library.
 type Client struct {
 	// Address is the address of Fastly's API endpoint.
@@ -85,9 +86,6 @@ type Client struct {
 	remaining int
 	// reset is last observed value of http header Fastly-RateLimit-Reset
 	reset int64
-	// updateLock forces serialization of calls that modify a service.
-	// Concurrent modifications have undefined semantics.
-	updateLock sync.Mutex
 	// url is the parsed URL from Address
 	url *url.URL
 }
@@ -203,140 +201,136 @@ func (c *Client) RateLimitReset() time.Time {
 }
 
 // Get issues an HTTP GET request.
-func (c *Client) Get(p string, ro RequestOptions) (*http.Response, error) {
+func (c *Client) Get(ctx context.Context, p string, ro RequestOptions) (*http.Response, error) {
 	ro.Parallel = true
-	return c.Request(http.MethodGet, p, ro)
+	return c.Request(ctx, http.MethodGet, p, ro)
 }
 
 // GetJSON issues an HTTP GET request and indicates that the response
 // should be JSON encoded.
-func (c *Client) GetJSON(p string, ro RequestOptions) (*http.Response, error) {
+func (c *Client) GetJSON(ctx context.Context, p string, ro RequestOptions) (*http.Response, error) {
 	ro.Parallel = true
 	ro.Headers["Accept"] = JSONMimeType
-	return c.Request(http.MethodGet, p, ro)
+	return c.Request(ctx, http.MethodGet, p, ro)
 }
 
 // Head issues an HTTP HEAD request.
-func (c *Client) Head(p string, ro RequestOptions) (*http.Response, error) {
+func (c *Client) Head(ctx context.Context, p string, ro RequestOptions) (*http.Response, error) {
 	ro.Parallel = true
-	return c.Request(http.MethodHead, p, ro)
+	return c.Request(ctx, http.MethodHead, p, ro)
 }
 
 // Patch issues an HTTP PATCH request.
-func (c *Client) Patch(p string, ro RequestOptions) (*http.Response, error) {
-	return c.Request(http.MethodPatch, p, ro)
+func (c *Client) Patch(ctx context.Context, p string, ro RequestOptions) (*http.Response, error) {
+	return c.Request(ctx, http.MethodPatch, p, ro)
 }
 
 // PatchForm issues an HTTP PUT request with the given interface form-encoded.
-func (c *Client) PatchForm(p string, i any, ro RequestOptions) (*http.Response, error) {
-	return c.RequestForm(http.MethodPatch, p, i, ro)
+func (c *Client) PatchForm(ctx context.Context, p string, i any, ro RequestOptions) (*http.Response, error) {
+	return c.RequestForm(ctx, http.MethodPatch, p, i, ro)
 }
 
 // PatchJSON issues an HTTP PUT request with the given interface json-encoded.
-func (c *Client) PatchJSON(p string, i any, ro RequestOptions) (*http.Response, error) {
-	return c.RequestJSON(http.MethodPatch, p, i, ro)
+func (c *Client) PatchJSON(ctx context.Context, p string, i any, ro RequestOptions) (*http.Response, error) {
+	return c.RequestJSON(ctx, http.MethodPatch, p, i, ro)
 }
 
 // PatchJSONAPI issues an HTTP PUT request with the given interface json-encoded.
-func (c *Client) PatchJSONAPI(p string, i any, ro RequestOptions) (*http.Response, error) {
-	return c.RequestJSONAPI(http.MethodPatch, p, i, ro)
+func (c *Client) PatchJSONAPI(ctx context.Context, p string, i any, ro RequestOptions) (*http.Response, error) {
+	return c.RequestJSONAPI(ctx, http.MethodPatch, p, i, ro)
 }
 
 // Post issues an HTTP POST request.
-func (c *Client) Post(p string, ro RequestOptions) (*http.Response, error) {
-	return c.Request(http.MethodPost, p, ro)
+func (c *Client) Post(ctx context.Context, p string, ro RequestOptions) (*http.Response, error) {
+	return c.Request(ctx, http.MethodPost, p, ro)
 }
 
 // PostForm issues an HTTP POST request with the given interface form-encoded.
-func (c *Client) PostForm(p string, i any, ro RequestOptions) (*http.Response, error) {
-	return c.RequestForm(http.MethodPost, p, i, ro)
+func (c *Client) PostForm(ctx context.Context, p string, i any, ro RequestOptions) (*http.Response, error) {
+	return c.RequestForm(ctx, http.MethodPost, p, i, ro)
 }
 
 // PostJSON issues an HTTP POST request with the given interface json-encoded.
-func (c *Client) PostJSON(p string, i any, ro RequestOptions) (*http.Response, error) {
-	return c.RequestJSON(http.MethodPost, p, i, ro)
+func (c *Client) PostJSON(ctx context.Context, p string, i any, ro RequestOptions) (*http.Response, error) {
+	return c.RequestJSON(ctx, http.MethodPost, p, i, ro)
 }
 
 // PostJSONAPI issues an HTTP POST request with the given interface json-encoded.
-func (c *Client) PostJSONAPI(p string, i any, ro RequestOptions) (*http.Response, error) {
-	return c.RequestJSONAPI(http.MethodPost, p, i, ro)
+func (c *Client) PostJSONAPI(ctx context.Context, p string, i any, ro RequestOptions) (*http.Response, error) {
+	return c.RequestJSONAPI(ctx, http.MethodPost, p, i, ro)
 }
 
 // PostJSONAPIBulk issues an HTTP POST request with the given interface json-encoded and bulk requests.
-func (c *Client) PostJSONAPIBulk(p string, i any, ro RequestOptions) (*http.Response, error) {
-	return c.RequestJSONAPIBulk(http.MethodPost, p, i, ro)
+func (c *Client) PostJSONAPIBulk(ctx context.Context, p string, i any, ro RequestOptions) (*http.Response, error) {
+	return c.RequestJSONAPIBulk(ctx, http.MethodPost, p, i, ro)
 }
 
 // Put issues an HTTP PUT request.
-func (c *Client) Put(p string, ro RequestOptions) (*http.Response, error) {
-	return c.Request(http.MethodPut, p, ro)
+func (c *Client) Put(ctx context.Context, p string, ro RequestOptions) (*http.Response, error) {
+	return c.Request(ctx, http.MethodPut, p, ro)
 }
 
 // PutForm issues an HTTP PUT request with the given interface form-encoded.
-func (c *Client) PutForm(p string, i any, ro RequestOptions) (*http.Response, error) {
-	return c.RequestForm(http.MethodPut, p, i, ro)
+func (c *Client) PutForm(ctx context.Context, p string, i any, ro RequestOptions) (*http.Response, error) {
+	return c.RequestForm(ctx, http.MethodPut, p, i, ro)
 }
 
 // PutFormFile issues an HTTP PUT request (multipart/form-encoded) to put a file to an endpoint.
-func (c *Client) PutFormFile(urlPath, filePath, fieldName string, ro RequestOptions) (*http.Response, error) {
-	return c.RequestFormFile(http.MethodPut, urlPath, filePath, fieldName, ro)
+func (c *Client) PutFormFile(ctx context.Context, urlPath, filePath, fieldName string, ro RequestOptions) (*http.Response, error) {
+	return c.RequestFormFile(ctx, http.MethodPut, urlPath, filePath, fieldName, ro)
 }
 
 // PutFormFileFromReader issues an HTTP PUT request (multipart/form-encoded) to put a file to an endpoint.
-func (c *Client) PutFormFileFromReader(urlPath, fileName string, fileBytes io.Reader, fieldName string, ro RequestOptions) (*http.Response, error) {
-	return c.RequestFormFileFromReader(http.MethodPut, urlPath, fileName, fileBytes, fieldName, ro)
+func (c *Client) PutFormFileFromReader(ctx context.Context, urlPath, fileName string, fileBytes io.Reader, fieldName string, ro RequestOptions) (*http.Response, error) {
+	return c.RequestFormFileFromReader(ctx, http.MethodPut, urlPath, fileName, fileBytes, fieldName, ro)
 }
 
 // PutJSON issues an HTTP PUT request with the given interface json-encoded.
-func (c *Client) PutJSON(p string, i any, ro RequestOptions) (*http.Response, error) {
-	return c.RequestJSON(http.MethodPut, p, i, ro)
+func (c *Client) PutJSON(ctx context.Context, p string, i any, ro RequestOptions) (*http.Response, error) {
+	return c.RequestJSON(ctx, http.MethodPut, p, i, ro)
 }
 
 // PutJSONAPI issues an HTTP PUT request with the given interface json-encoded.
-func (c *Client) PutJSONAPI(p string, i any, ro RequestOptions) (*http.Response, error) {
-	return c.RequestJSONAPI(http.MethodPut, p, i, ro)
+func (c *Client) PutJSONAPI(ctx context.Context, p string, i any, ro RequestOptions) (*http.Response, error) {
+	return c.RequestJSONAPI(ctx, http.MethodPut, p, i, ro)
 }
 
 // Delete issues an HTTP DELETE request.
-func (c *Client) Delete(p string, ro RequestOptions) (*http.Response, error) {
-	return c.Request(http.MethodDelete, p, ro)
+func (c *Client) Delete(ctx context.Context, p string, ro RequestOptions) (*http.Response, error) {
+	return c.Request(ctx, http.MethodDelete, p, ro)
 }
 
 // DeleteJSONAPI issues an HTTP DELETE request with the given interface json-encoded.
-func (c *Client) DeleteJSONAPI(p string, i any, ro RequestOptions) (*http.Response, error) {
-	return c.RequestJSONAPI(http.MethodDelete, p, i, ro)
+func (c *Client) DeleteJSONAPI(ctx context.Context, p string, i any, ro RequestOptions) (*http.Response, error) {
+	return c.RequestJSONAPI(ctx, http.MethodDelete, p, i, ro)
 }
 
 // DeleteJSONAPIBulk issues an HTTP DELETE request with the given interface json-encoded and bulk requests.
-func (c *Client) DeleteJSONAPIBulk(p string, i any, ro RequestOptions) (*http.Response, error) {
-	return c.RequestJSONAPIBulk(http.MethodDelete, p, i, ro)
+func (c *Client) DeleteJSONAPIBulk(ctx context.Context, p string, i any, ro RequestOptions) (*http.Response, error) {
+	return c.RequestJSONAPIBulk(ctx, http.MethodDelete, p, i, ro)
 }
 
 // Request makes an HTTP request against the HTTPClient using the given verb,
 // Path, and request options.
-func (c *Client) Request(verb, p string, ro RequestOptions) (*http.Response, error) {
-	req, err := c.RawRequest(verb, p, ro)
+func (c *Client) Request(ctx context.Context, verb, p string, ro RequestOptions) (*http.Response, error) {
+	req, err := c.RawRequest(ctx, verb, p, ro)
 	if err != nil {
 		return nil, err
 	}
 
 	if !ro.Parallel {
-		c.updateLock.Lock()
-		defer c.updateLock.Unlock()
-	}
-
-	// if a context is provided, set the context on the request
-	if ro.Context != nil {
-		req = req.WithContext(*ro.Context)
+		resourceID := "unknown"
+		if id, ok := resourceIDFromContext(ctx); ok {
+			resourceID = id
+		}
+		l := resourceLocks.Get(resourceID)
+		l.Lock()
+		defer l.Unlock()
 	}
 
 	if c.DebugMode {
-		var r *http.Request
-		if ro.Context != nil {
-			r = req.Clone(*ro.Context)
-		} else {
-			r = req.Clone(context.Background())
-		}
+		r := req.Clone(context.TODO())
+
 		// 'r' and 'req' both have a reference to a Body that
 		// is an io.Reader, but only one of them can read its
 		// contents since io.Reader is not seekable and cannot
@@ -405,8 +399,6 @@ type RequestOptions struct {
 	Body io.Reader
 	// BodyLength is the final size of the Body.
 	BodyLength int64
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Headers is a map of key-value pairs that will be added to the Request.
 	Headers map[string]string
 	// HealthCheckHeaders indicates if there is any special parsing required to
@@ -421,9 +413,8 @@ type RequestOptions struct {
 	Params map[string]string
 }
 
-func CreateRequestOptions(ctx *context.Context) RequestOptions {
+func CreateRequestOptions() RequestOptions {
 	return RequestOptions{
-		Context: ctx,
 		Headers: map[string]string{},
 		Params:  map[string]string{},
 	}
@@ -431,12 +422,12 @@ func CreateRequestOptions(ctx *context.Context) RequestOptions {
 
 // RawRequest accepts a verb, URL, and RequestOptions struct and returns the
 // constructed http.Request and any errors that occurred.
-func (c *Client) RawRequest(verb, p string, ro RequestOptions) (*http.Request, error) {
+func (c *Client) RawRequest(ctx context.Context, verb, p string, ro RequestOptions) (*http.Request, error) {
 	// Append the path to the URL.
 	u := strings.TrimRight(c.url.String(), "/") + "/" + strings.TrimLeft(p, "/")
 
 	// Create the request object.
-	request, err := http.NewRequest(verb, u, ro.Body)
+	request, err := http.NewRequestWithContext(ctx, verb, u, ro.Body)
 	if err != nil {
 		return nil, err
 	}
@@ -472,7 +463,7 @@ func (c *Client) RawRequest(verb, p string, ro RequestOptions) (*http.Request, e
 // but doesn't add any parameters or change any encoding in the URL
 // passed to it. It's mostly for calling the URLs given to us
 // directly from Fastly without mangling them.
-func (c *Client) SimpleGet(target string) (*http.Response, error) {
+func (c *Client) SimpleGet(ctx context.Context, target string) (*http.Response, error) {
 	// We parse the URL and then convert it right back to a string
 	// later; this just acts as a check that Fastly isn't sending
 	// us nonsense.
@@ -481,7 +472,7 @@ func (c *Client) SimpleGet(target string) (*http.Response, error) {
 		return nil, err
 	}
 
-	request, err := http.NewRequest(http.MethodGet, u.String(), nil)
+	request, err := http.NewRequestWithContext(ctx, http.MethodGet, u.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -523,7 +514,7 @@ func parseHealthCheckHeaders(s string) string {
 
 // RequestForm makes an HTTP request with the given interface being encoded as
 // form data.
-func (c *Client) RequestForm(verb, p string, i any, ro RequestOptions) (*http.Response, error) {
+func (c *Client) RequestForm(ctx context.Context, verb, p string, i any, ro RequestOptions) (*http.Response, error) {
 	ro.Headers["Content-Type"] = "application/x-www-form-urlencoded"
 
 	v, err := query.Values(i)
@@ -543,22 +534,22 @@ func (c *Client) RequestForm(verb, p string, i any, ro RequestOptions) (*http.Re
 	ro.Body = strings.NewReader(body)
 	ro.BodyLength = int64(len(body))
 
-	return c.Request(verb, p, ro)
+	return c.Request(ctx, verb, p, ro)
 }
 
 // RequestFormFile makes an HTTP request to upload a file to an endpoint.
-func (c *Client) RequestFormFile(verb, urlPath, filePath, fieldName string, ro RequestOptions) (*http.Response, error) {
+func (c *Client) RequestFormFile(ctx context.Context, verb, urlPath, filePath, fieldName string, ro RequestOptions) (*http.Response, error) {
 	file, err := os.Open(filepath.Clean(filePath))
 	if err != nil {
 		return nil, fmt.Errorf("error reading file: %w", err)
 	}
 	defer file.Close()
 
-	return c.RequestFormFileFromReader(verb, urlPath, filepath.Base(filePath), file, fieldName, ro)
+	return c.RequestFormFileFromReader(ctx, verb, urlPath, filepath.Base(filePath), file, fieldName, ro)
 }
 
 // RequestFormFileFromReader makes an HTTP request to upload a raw reader to an endpoint.
-func (c *Client) RequestFormFileFromReader(verb, urlPath, fileName string, fileBytes io.Reader, fieldName string, ro RequestOptions) (*http.Response, error) {
+func (c *Client) RequestFormFileFromReader(ctx context.Context, verb, urlPath, fileName string, fileBytes io.Reader, fieldName string, ro RequestOptions) (*http.Response, error) {
 	var body bytes.Buffer
 	writer := multipart.NewWriter(&body)
 	part, err := writer.CreateFormFile(fieldName, fileName)
@@ -581,7 +572,7 @@ func (c *Client) RequestFormFileFromReader(verb, urlPath, fileName string, fileB
 	ro.Body = &body
 	ro.BodyLength = int64(body.Len())
 
-	return c.Request(verb, urlPath, ro)
+	return c.Request(ctx, verb, urlPath, ro)
 }
 
 // setHeaders ensures that RequestOptions has headers set and applies the given content type and accept headers.
@@ -620,33 +611,33 @@ func marshalBodyJSONAPI(i any, ro RequestOptions) (RequestOptions, error) {
 }
 
 // RequestJSON constructs a JSON HTTP request.
-func (c *Client) RequestJSON(verb, p string, i any, ro RequestOptions) (*http.Response, error) {
+func (c *Client) RequestJSON(ctx context.Context, verb, p string, i any, ro RequestOptions) (*http.Response, error) {
 	ro = setHeaders(ro, JSONMimeType, JSONMimeType)
 	ro, err := marshalBodyJSON(i, ro)
 	if err != nil {
 		return nil, err
 	}
-	return c.Request(verb, p, ro)
+	return c.Request(ctx, verb, p, ro)
 }
 
 // RequestJSONAPI constructs a JSON API HTTP request.
-func (c *Client) RequestJSONAPI(verb, p string, i any, ro RequestOptions) (*http.Response, error) {
+func (c *Client) RequestJSONAPI(ctx context.Context, verb, p string, i any, ro RequestOptions) (*http.Response, error) {
 	ro = setHeaders(ro, jsonapi.MediaType, jsonapi.MediaType)
 	ro, err := marshalBodyJSONAPI(i, ro)
 	if err != nil {
 		return nil, err
 	}
-	return c.Request(verb, p, ro)
+	return c.Request(ctx, verb, p, ro)
 }
 
 // RequestJSONAPIBulk constructs a bulk JSON API HTTP request.
-func (c *Client) RequestJSONAPIBulk(verb, p string, i any, ro RequestOptions) (*http.Response, error) {
+func (c *Client) RequestJSONAPIBulk(ctx context.Context, verb, p string, i any, ro RequestOptions) (*http.Response, error) {
 	ro = setHeaders(ro, jsonapi.MediaType+"; ext=bulk", jsonapi.MediaType+"; ext=bulk")
 	ro, err := marshalBodyJSONAPI(i, ro)
 	if err != nil {
 		return nil, err
 	}
-	return c.Request(verb, p, ro)
+	return c.Request(ctx, verb, p, ro)
 }
 
 // checkResp wraps an HTTP request from the default client and verifies that the

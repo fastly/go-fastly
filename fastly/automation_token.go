@@ -63,7 +63,7 @@ type GetAutomationTokensInput struct {
 }
 
 // GetAutomationTokens retrieves all resources.
-func (c *Client) GetAutomationTokens(i *GetAutomationTokensInput) *ListPaginator[AutomationTokenPaginator] {
+func (c *Client) GetAutomationTokens(ctx context.Context, i *GetAutomationTokensInput) *ListPaginator[AutomationTokenPaginator] {
 	input := ListOpts{}
 	if i.Page != nil {
 		input.Page = *i.Page
@@ -71,12 +71,12 @@ func (c *Client) GetAutomationTokens(i *GetAutomationTokensInput) *ListPaginator
 	if i.PerPage != nil {
 		input.PerPage = *i.PerPage
 	}
-	return NewPaginator[AutomationTokenPaginator](c, input, "/automation-tokens")
+	return NewPaginator[AutomationTokenPaginator](ctx, c, input, "/automation-tokens")
 }
 
 // ListAutomationTokens retrieves all resources.
-func (c *Client) ListAutomationTokens() ([]*AutomationToken, error) {
-	p := c.GetAutomationTokens(&GetAutomationTokensInput{})
+func (c *Client) ListAutomationTokens(ctx context.Context) ([]*AutomationToken, error) {
+	p := c.GetAutomationTokens(ctx, &GetAutomationTokensInput{})
 	var results []*AutomationToken
 	for p.HasNext() {
 		data, err := p.GetNext()
@@ -93,21 +93,19 @@ func (c *Client) ListAutomationTokens() ([]*AutomationToken, error) {
 
 // GetAutomationTokenInput is used as input to the GetAutomationToken function.
 type GetAutomationTokenInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// TokenID is an alphanumeric string identifying the token (required).
 	TokenID string
 }
 
 // GetAutomationToken retrieves a specific resource by ID.
-func (c *Client) GetAutomationToken(i *GetAutomationTokenInput) (*AutomationToken, error) {
+func (c *Client) GetAutomationToken(ctx context.Context, i *GetAutomationTokenInput) (*AutomationToken, error) {
 	if i.TokenID == "" {
 		return nil, ErrMissingTokenID
 	}
 
 	path := ToSafeURL("automation-tokens", i.TokenID)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -122,8 +120,6 @@ func (c *Client) GetAutomationToken(i *GetAutomationTokenInput) (*AutomationToke
 
 // CreateAutomationTokenInput is used as input to the CreateAutomationToken function.
 type CreateAutomationTokenInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
 	// ExpiresAt is a time-stamp (UTC) of when the token will expire.
 	ExpiresAt *time.Time `json:"expires_at,omitempty" url:"expires_at,omitempty"`
 	// Name is the name of the token.
@@ -146,14 +142,14 @@ type CreateAutomationTokenInput struct {
 // CreateAutomationToken creates a new resource.
 //
 // Requires sudo capability for the token being used.
-func (c *Client) CreateAutomationToken(i *CreateAutomationTokenInput) (*AutomationToken, error) {
-	ignored, err := c.PostForm("/sudo", i, CreateRequestOptions(i.Context))
+func (c *Client) CreateAutomationToken(ctx context.Context, i *CreateAutomationTokenInput) (*AutomationToken, error) {
+	ignored, err := c.PostForm(ctx, "/sudo", i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
 	defer ignored.Body.Close()
 
-	resp, err := c.PostJSON("/automation-tokens", i, CreateRequestOptions(i.Context))
+	resp, err := c.PostJSON(ctx, "/automation-tokens", i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -168,21 +164,19 @@ func (c *Client) CreateAutomationToken(i *CreateAutomationTokenInput) (*Automati
 
 // DeleteAutomationTokenInput is used as input to the DeleteAutomationToken function.
 type DeleteAutomationTokenInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// TokenID is an alphanumeric string identifying a token (required).
 	TokenID string
 }
 
 // DeleteAutomationToken deletes the specified resource.
-func (c *Client) DeleteAutomationToken(i *DeleteAutomationTokenInput) error {
+func (c *Client) DeleteAutomationToken(ctx context.Context, i *DeleteAutomationTokenInput) error {
 	if i.TokenID == "" {
 		return ErrMissingTokenID
 	}
 
 	path := ToSafeURL("tokens", i.TokenID)
 
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

@@ -24,8 +24,6 @@ type Server struct {
 
 // ListServersInput is used as input to the ListServers function.
 type ListServersInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// PoolID is the ID of the pool (required).
 	PoolID string
 	// ServiceID is the ID of the service (required).
@@ -33,7 +31,7 @@ type ListServersInput struct {
 }
 
 // ListServers retrieves all resources.
-func (c *Client) ListServers(i *ListServersInput) ([]*Server, error) {
+func (c *Client) ListServers(ctx context.Context, i *ListServersInput) ([]*Server, error) {
 	if i.PoolID == "" {
 		return nil, ErrMissingPoolID
 	}
@@ -43,7 +41,7 @@ func (c *Client) ListServers(i *ListServersInput) ([]*Server, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "pool", i.PoolID, "servers")
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -62,8 +60,6 @@ type CreateServerInput struct {
 	Address *string `url:"address,omitempty"`
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Disabled allows servers to be enabled and disabled in a pool.
 	Disabled *bool `url:"disabled,omitempty"`
 	// MaxConn is the maximum number of connections. If the value is 0, it inherits the value from pool's max_conn_default.
@@ -82,7 +78,7 @@ type CreateServerInput struct {
 
 // CreateServer creates a new resource.
 // Servers are versionless resources that are associated with a Pool.
-func (c *Client) CreateServer(i *CreateServerInput) (*Server, error) {
+func (c *Client) CreateServer(ctx context.Context, i *CreateServerInput) (*Server, error) {
 	if i.PoolID == "" {
 		return nil, ErrMissingPoolID
 	}
@@ -92,7 +88,7 @@ func (c *Client) CreateServer(i *CreateServerInput) (*Server, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "pool", i.PoolID, "server")
 
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -107,8 +103,6 @@ func (c *Client) CreateServer(i *CreateServerInput) (*Server, error) {
 
 // GetServerInput is used as input to the GetServer function.
 type GetServerInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// PoolID is the ID of the pool (required).
 	PoolID string
 	// Server is an alphanumeric string identifying a Server (required).
@@ -118,7 +112,7 @@ type GetServerInput struct {
 }
 
 // GetServer retrieves the specified resource.
-func (c *Client) GetServer(i *GetServerInput) (*Server, error) {
+func (c *Client) GetServer(ctx context.Context, i *GetServerInput) (*Server, error) {
 	if i.PoolID == "" {
 		return nil, ErrMissingPoolID
 	}
@@ -131,7 +125,7 @@ func (c *Client) GetServer(i *GetServerInput) (*Server, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "pool", i.PoolID, "server", i.Server)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -150,8 +144,6 @@ type UpdateServerInput struct {
 	Address *string `url:"address,omitempty"`
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Disabled allows servers to be enabled and disabled in a pool.
 	Disabled *bool `url:"disabled,omitempty"`
 	// MaxConn is the maximum number of connections. If the value is 0, it inherits the value from pool's max_conn_default.
@@ -171,7 +163,7 @@ type UpdateServerInput struct {
 }
 
 // UpdateServer updates the specified resource.
-func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
+func (c *Client) UpdateServer(ctx context.Context, i *UpdateServerInput) (*Server, error) {
 	if i.PoolID == "" {
 		return nil, ErrMissingPoolID
 	}
@@ -184,7 +176,7 @@ func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "pool", i.PoolID, "server", i.Server)
 
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -199,8 +191,6 @@ func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
 
 // DeleteServerInput is used as input to the DeleteServer function.
 type DeleteServerInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// PoolID is the ID of the pool (required).
 	PoolID string
 	// Server is an alphanumeric string identifying a Server (required).
@@ -210,7 +200,7 @@ type DeleteServerInput struct {
 }
 
 // DeleteServer deletes the specified resource.
-func (c *Client) DeleteServer(i *DeleteServerInput) error {
+func (c *Client) DeleteServer(ctx context.Context, i *DeleteServerInput) error {
 	if i.PoolID == "" {
 		return ErrMissingPoolID
 	}
@@ -223,7 +213,7 @@ func (c *Client) DeleteServer(i *DeleteServerInput) error {
 
 	path := ToSafeURL("service", i.ServiceID, "pool", i.PoolID, "server", i.Server)
 
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

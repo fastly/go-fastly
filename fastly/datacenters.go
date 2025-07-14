@@ -1,5 +1,7 @@
 package fastly
 
+import "context"
+
 // Coordinates represent the location of a datacenter.
 type Coordinates struct {
 	Latitude  *float64 `mapstructure:"latitude"`
@@ -18,8 +20,8 @@ type Datacenter struct {
 }
 
 // AllDatacenters returns the lists of datacenters for Fastly's network.
-func (c *Client) AllDatacenters() (datacenters []Datacenter, err error) {
-	resp, err := c.Get("/datacenters", CreateRequestOptions(nil))
+func (c *Client) AllDatacenters(ctx context.Context) (datacenters []Datacenter, err error) {
+	resp, err := c.Get(ctx, "/datacenters", CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

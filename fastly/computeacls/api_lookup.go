@@ -16,12 +16,10 @@ type LookupInput struct {
 	ComputeACLID *string
 	// ComputeACLIP is a valid IPv4 or IPv6 address (required).
 	ComputeACLIP *string
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 }
 
 // Lookup finds a matching ACL entry for an IP address.
-func Lookup(c *fastly.Client, i *LookupInput) (*ComputeACLEntry, error) {
+func Lookup(ctx context.Context, c *fastly.Client, i *LookupInput) (*ComputeACLEntry, error) {
 	if i.ComputeACLID == nil {
 		return nil, fastly.ErrMissingComputeACLID
 	}
@@ -31,7 +29,7 @@ func Lookup(c *fastly.Client, i *LookupInput) (*ComputeACLEntry, error) {
 
 	path := fastly.ToSafeURL("resources", "acls", *i.ComputeACLID, "entry", *i.ComputeACLIP)
 
-	resp, err := c.Get(path, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

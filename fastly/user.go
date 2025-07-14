@@ -26,21 +26,19 @@ type User struct {
 
 // ListCustomerUsersInput is used as input to the ListCustomerUsers function.
 type ListCustomerUsersInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// CustomerID is an alphanumeric string identifying the customer (required).
 	CustomerID string
 }
 
 // ListCustomerUsers retrieves all resources.
-func (c *Client) ListCustomerUsers(i *ListCustomerUsersInput) ([]*User, error) {
+func (c *Client) ListCustomerUsers(ctx context.Context, i *ListCustomerUsersInput) ([]*User, error) {
 	if i.CustomerID == "" {
 		return nil, ErrMissingCustomerID
 	}
 
 	path := ToSafeURL("customer", i.CustomerID, "users")
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -54,8 +52,8 @@ func (c *Client) ListCustomerUsers(i *ListCustomerUsersInput) ([]*User, error) {
 }
 
 // GetCurrentUser retrieves the user information for the authenticated user.
-func (c *Client) GetCurrentUser() (*User, error) {
-	resp, err := c.Get("/current_user", CreateRequestOptions(nil))
+func (c *Client) GetCurrentUser(ctx context.Context) (*User, error) {
+	resp, err := c.Get(ctx, "/current_user", CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -71,8 +69,6 @@ func (c *Client) GetCurrentUser() (*User, error) {
 
 // GetUserInput is used as input to the GetUser function.
 type GetUserInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// UserID is an alphanumeric string identifying the user (required).
 	UserID string
 }
@@ -80,14 +76,14 @@ type GetUserInput struct {
 // GetUser retrieves the specified resource.
 //
 // If no user exists for the given id, the API returns a 404 response.
-func (c *Client) GetUser(i *GetUserInput) (*User, error) {
+func (c *Client) GetUser(ctx context.Context, i *GetUserInput) (*User, error) {
 	if i.UserID == "" {
 		return nil, ErrMissingUserID
 	}
 
 	path := ToSafeURL("user", i.UserID)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -103,8 +99,6 @@ func (c *Client) GetUser(i *GetUserInput) (*User, error) {
 
 // CreateUserInput is used as input to the CreateUser function.
 type CreateUserInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Login is the login associated with the user (typically, an email address).
 	Login *string `url:"login,omitempty"`
 	// Name is the real life name of the user.
@@ -114,8 +108,8 @@ type CreateUserInput struct {
 }
 
 // CreateUser creates a new resource.
-func (c *Client) CreateUser(i *CreateUserInput) (*User, error) {
-	resp, err := c.PostForm("/user", i, CreateRequestOptions(i.Context))
+func (c *Client) CreateUser(ctx context.Context, i *CreateUserInput) (*User, error) {
+	resp, err := c.PostForm(ctx, "/user", i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -130,8 +124,6 @@ func (c *Client) CreateUser(i *CreateUserInput) (*User, error) {
 
 // UpdateUserInput is used as input to the UpdateUser function.
 type UpdateUserInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the real life name of the user.
 	Name *string `url:"name,omitempty"`
 	// Role is the permissions role assigned to the user. Can be user, billing, engineer, or superuser.
@@ -141,14 +133,14 @@ type UpdateUserInput struct {
 }
 
 // UpdateUser updates the specified resource.
-func (c *Client) UpdateUser(i *UpdateUserInput) (*User, error) {
+func (c *Client) UpdateUser(ctx context.Context, i *UpdateUserInput) (*User, error) {
 	if i.UserID == "" {
 		return nil, ErrMissingUserID
 	}
 
 	path := ToSafeURL("user", i.UserID)
 
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -163,21 +155,19 @@ func (c *Client) UpdateUser(i *UpdateUserInput) (*User, error) {
 
 // DeleteUserInput is used as input to the DeleteUser function.
 type DeleteUserInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// UserID is an alphanumeric string identifying the user (required).
 	UserID string
 }
 
 // DeleteUser deletes the specified resource.
-func (c *Client) DeleteUser(i *DeleteUserInput) error {
+func (c *Client) DeleteUser(ctx context.Context, i *DeleteUserInput) error {
 	if i.UserID == "" {
 		return ErrMissingUserID
 	}
 
 	path := ToSafeURL("user", i.UserID)
 
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}
@@ -200,14 +190,14 @@ type ResetUserPasswordInput struct {
 }
 
 // ResetUserPassword revokes a specific token by its ID.
-func (c *Client) ResetUserPassword(i *ResetUserPasswordInput) error {
+func (c *Client) ResetUserPassword(ctx context.Context, i *ResetUserPasswordInput) error {
 	if i.Login == "" {
 		return ErrMissingLogin
 	}
 
 	path := ToSafeURL("user", i.Login, "password", "request_reset")
 
-	resp, err := c.Post(path, CreateRequestOptions(nil))
+	resp, err := c.Post(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

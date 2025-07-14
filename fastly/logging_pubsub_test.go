@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"strings"
 	"testing"
@@ -18,7 +19,7 @@ func TestClient_Pubsubs(t *testing.T) {
 	// Create
 	var pubsub *Pubsub
 	Record(t, "pubsubs/create", func(c *Client) {
-		pubsub, err = c.CreatePubsub(&CreatePubsubInput{
+		pubsub, err = c.CreatePubsub(context.TODO(), &CreatePubsubInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-pubsub"),
@@ -39,13 +40,13 @@ func TestClient_Pubsubs(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "pubsubs/cleanup", func(c *Client) {
-			_ = c.DeletePubsub(&DeletePubsubInput{
+			_ = c.DeletePubsub(context.TODO(), &DeletePubsubInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-pubsub",
 			})
 
-			_ = c.DeletePubsub(&DeletePubsubInput{
+			_ = c.DeletePubsub(context.TODO(), &DeletePubsubInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-pubsub",
@@ -111,7 +112,7 @@ bv1KwcKoQbNVXwauH79JKc0=
 	// List
 	var pubsubs []*Pubsub
 	Record(t, "pubsubs/list", func(c *Client) {
-		pubsubs, err = c.ListPubsubs(&ListPubsubsInput{
+		pubsubs, err = c.ListPubsubs(context.TODO(), &ListPubsubsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -126,7 +127,7 @@ bv1KwcKoQbNVXwauH79JKc0=
 	// Get
 	var npubsub *Pubsub
 	Record(t, "pubsubs/get", func(c *Client) {
-		npubsub, err = c.GetPubsub(&GetPubsubInput{
+		npubsub, err = c.GetPubsub(context.TODO(), &GetPubsubInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-pubsub",
@@ -163,7 +164,7 @@ bv1KwcKoQbNVXwauH79JKc0=
 	// Update
 	var upubsub *Pubsub
 	Record(t, "pubsubs/update", func(c *Client) {
-		upubsub, err = c.UpdatePubsub(&UpdatePubsubInput{
+		upubsub, err = c.UpdatePubsub(context.TODO(), &UpdatePubsubInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-pubsub",
@@ -187,7 +188,7 @@ bv1KwcKoQbNVXwauH79JKc0=
 
 	// Delete
 	Record(t, "pubsubs/delete", func(c *Client) {
-		err = c.DeletePubsub(&DeletePubsubInput{
+		err = c.DeletePubsub(context.TODO(), &DeletePubsubInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-pubsub",
@@ -200,14 +201,14 @@ bv1KwcKoQbNVXwauH79JKc0=
 
 func TestClient_ListPubsubs_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.ListPubsubs(&ListPubsubsInput{
+	_, err = TestClient.ListPubsubs(context.TODO(), &ListPubsubsInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListPubsubs(&ListPubsubsInput{
+	_, err = TestClient.ListPubsubs(context.TODO(), &ListPubsubsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -218,14 +219,14 @@ func TestClient_ListPubsubs_validation(t *testing.T) {
 
 func TestClient_CreatePubsub_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.CreatePubsub(&CreatePubsubInput{
+	_, err = TestClient.CreatePubsub(context.TODO(), &CreatePubsubInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreatePubsub(&CreatePubsubInput{
+	_, err = TestClient.CreatePubsub(context.TODO(), &CreatePubsubInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -237,7 +238,7 @@ func TestClient_CreatePubsub_validation(t *testing.T) {
 func TestClient_GetPubsub_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetPubsub(&GetPubsubInput{
+	_, err = TestClient.GetPubsub(context.TODO(), &GetPubsubInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -245,7 +246,7 @@ func TestClient_GetPubsub_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetPubsub(&GetPubsubInput{
+	_, err = TestClient.GetPubsub(context.TODO(), &GetPubsubInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -253,7 +254,7 @@ func TestClient_GetPubsub_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetPubsub(&GetPubsubInput{
+	_, err = TestClient.GetPubsub(context.TODO(), &GetPubsubInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -265,7 +266,7 @@ func TestClient_GetPubsub_validation(t *testing.T) {
 func TestClient_UpdatePubsub_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdatePubsub(&UpdatePubsubInput{
+	_, err = TestClient.UpdatePubsub(context.TODO(), &UpdatePubsubInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -273,7 +274,7 @@ func TestClient_UpdatePubsub_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdatePubsub(&UpdatePubsubInput{
+	_, err = TestClient.UpdatePubsub(context.TODO(), &UpdatePubsubInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -281,7 +282,7 @@ func TestClient_UpdatePubsub_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdatePubsub(&UpdatePubsubInput{
+	_, err = TestClient.UpdatePubsub(context.TODO(), &UpdatePubsubInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -293,7 +294,7 @@ func TestClient_UpdatePubsub_validation(t *testing.T) {
 func TestClient_DeletePubsub_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeletePubsub(&DeletePubsubInput{
+	err = TestClient.DeletePubsub(context.TODO(), &DeletePubsubInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -301,7 +302,7 @@ func TestClient_DeletePubsub_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeletePubsub(&DeletePubsubInput{
+	err = TestClient.DeletePubsub(context.TODO(), &DeletePubsubInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -309,7 +310,7 @@ func TestClient_DeletePubsub_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeletePubsub(&DeletePubsubInput{
+	err = TestClient.DeletePubsub(context.TODO(), &DeletePubsubInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

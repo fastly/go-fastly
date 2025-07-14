@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"bytes"
+	"context"
 	"crypto/ed25519"
 	"errors"
 	"fmt"
@@ -18,7 +19,7 @@ func TestClient_CreateSecretStore(t *testing.T) {
 		err error
 	)
 	Record(t, fmt.Sprintf("secret_store/%s", t.Name()), func(c *Client) {
-		ss, err = c.CreateSecretStore(&CreateSecretStoreInput{
+		ss, err = c.CreateSecretStore(context.TODO(), &CreateSecretStoreInput{
 			Name: t.Name(),
 		})
 	})
@@ -29,7 +30,7 @@ func TestClient_CreateSecretStore(t *testing.T) {
 	// Ensure Secret Store is cleaned up.
 	t.Cleanup(func() {
 		Record(t, fmt.Sprintf("secret_store/%s/delete_store", t.Name()), func(c *Client) {
-			err = c.DeleteSecretStore(&DeleteSecretStoreInput{
+			err = c.DeleteSecretStore(context.TODO(), &DeleteSecretStoreInput{
 				StoreID: ss.StoreID,
 			})
 		})
@@ -64,7 +65,7 @@ func TestClient_ListSecretStores(t *testing.T) {
 
 	var list *SecretStores
 	Record(t, fmt.Sprintf("secret_store/%s", t.Name()), func(c *Client) {
-		list, err = c.ListSecretStores(&ListSecretStoresInput{})
+		list, err = c.ListSecretStores(context.TODO(), &ListSecretStoresInput{})
 	})
 	if err != nil {
 		t.Fatalf("error listing secret store: %v", err)
@@ -94,7 +95,7 @@ func TestClient_ListSecretStores(t *testing.T) {
 	}
 
 	Record(t, fmt.Sprintf("secret_store/%s/list-with-name", t.Name()), func(c *Client) {
-		list, err = c.ListSecretStores(&ListSecretStoresInput{Name: stores[0].Name})
+		list, err = c.ListSecretStores(context.TODO(), &ListSecretStoresInput{Name: stores[0].Name})
 	})
 
 	if err != nil {
@@ -120,7 +121,7 @@ func TestClient_GetSecretStore(t *testing.T) {
 		err   error
 	)
 	Record(t, fmt.Sprintf("secret_store/%s", t.Name()), func(c *Client) {
-		store, err = c.GetSecretStore(&GetSecretStoreInput{
+		store, err = c.GetSecretStore(context.TODO(), &GetSecretStoreInput{
 			StoreID: ss.StoreID,
 		})
 	})
@@ -144,7 +145,7 @@ func TestClient_DeleteSecretStore(t *testing.T) {
 		err error
 	)
 	Record(t, fmt.Sprintf("secret_store/%s/create_store", t.Name()), func(c *Client) {
-		ss, err = c.CreateSecretStore(&CreateSecretStoreInput{
+		ss, err = c.CreateSecretStore(context.TODO(), &CreateSecretStoreInput{
 			Name: t.Name(),
 		})
 	})
@@ -153,7 +154,7 @@ func TestClient_DeleteSecretStore(t *testing.T) {
 	}
 
 	Record(t, fmt.Sprintf("secret_store/%s", t.Name()), func(c *Client) {
-		err = c.DeleteSecretStore(&DeleteSecretStoreInput{
+		err = c.DeleteSecretStore(context.TODO(), &DeleteSecretStoreInput{
 			StoreID: ss.StoreID,
 		})
 	})
@@ -172,7 +173,7 @@ func TestClient_CreateSecret(t *testing.T) {
 		err error
 	)
 	Record(t, fmt.Sprintf("secret_store/%s", t.Name()), func(c *Client) {
-		s, err = c.CreateSecret(&CreateSecretInput{
+		s, err = c.CreateSecret(context.TODO(), &CreateSecretInput{
 			StoreID: ss.StoreID,
 			Name:    t.Name(),
 			Secret:  []byte("secretum servare"),
@@ -200,7 +201,7 @@ func TestClient_CreateOrRecreateSecret(t *testing.T) {
 		err error
 	)
 	Record(t, fmt.Sprintf("secret_store/%s", t.Name()), func(c *Client) {
-		s, err = c.CreateSecret(&CreateSecretInput{
+		s, err = c.CreateSecret(context.TODO(), &CreateSecretInput{
 			StoreID: ss.StoreID,
 			Name:    t.Name(),
 			Secret:  []byte("secretum servare"),
@@ -234,7 +235,7 @@ func TestClient_RecreateSecret(t *testing.T) {
 	Record(t, fmt.Sprintf("secret_store/%s", t.Name()), func(c *Client) {
 		// There must be an existing secret already, otherwise
 		// the following PATCH request will fail.
-		s, err = c.CreateSecret(&CreateSecretInput{
+		s, err = c.CreateSecret(context.TODO(), &CreateSecretInput{
 			StoreID: ss.StoreID,
 			Name:    t.Name(),
 			Secret:  []byte("secretum servare"),
@@ -243,7 +244,7 @@ func TestClient_RecreateSecret(t *testing.T) {
 			return
 		}
 
-		s, err = c.CreateSecret(&CreateSecretInput{
+		s, err = c.CreateSecret(context.TODO(), &CreateSecretInput{
 			StoreID: ss.StoreID,
 			Name:    t.Name(),
 			Secret:  []byte("secretum servare"),
@@ -276,7 +277,7 @@ func TestClient_CreateSecret_clientEncryption(t *testing.T) {
 	)
 
 	Record(t, fmt.Sprintf("secret_store/%s/create_client_key", t.Name()), func(c *Client) {
-		ck, err = c.CreateClientKey()
+		ck, err = c.CreateClientKey(context.TODO())
 	})
 	if err != nil {
 		t.Fatalf("error creating client key: %v", err)
@@ -297,7 +298,7 @@ func TestClient_CreateSecret_clientEncryption(t *testing.T) {
 	var sk ed25519.PublicKey
 
 	Record(t, fmt.Sprintf("secret_store/%s/get_signing_key", t.Name()), func(c *Client) {
-		sk, err = c.GetSigningKey()
+		sk, err = c.GetSigningKey(context.TODO())
 	})
 	if err != nil {
 		t.Fatalf("error getting signing key: %v", err)
@@ -319,7 +320,7 @@ func TestClient_CreateSecret_clientEncryption(t *testing.T) {
 	var s *Secret
 
 	Record(t, fmt.Sprintf("secret_store/%s/create_secret", t.Name()), func(c *Client) {
-		s, err = c.CreateSecret(&CreateSecretInput{
+		s, err = c.CreateSecret(context.TODO(), &CreateSecretInput{
 			StoreID:   ss.StoreID,
 			Name:      t.Name(),
 			ClientKey: ck.PublicKey,
@@ -350,7 +351,7 @@ func TestClient_ListSecrets(t *testing.T) {
 	)
 	for i := 0; i < 5; i++ {
 		Record(t, fmt.Sprintf("secret_store/%s/create_secret_%02d", t.Name(), i), func(c *Client) {
-			s, err = c.CreateSecret(&CreateSecretInput{
+			s, err = c.CreateSecret(context.TODO(), &CreateSecretInput{
 				StoreID: ss.StoreID,
 				Name:    fmt.Sprintf("%s-%02d", t.Name(), i),
 				Secret:  []byte("secretum servare"),
@@ -364,7 +365,7 @@ func TestClient_ListSecrets(t *testing.T) {
 
 	var list *Secrets
 	Record(t, fmt.Sprintf("secret_store/%s", t.Name()), func(c *Client) {
-		list, err = c.ListSecrets(&ListSecretsInput{
+		list, err = c.ListSecrets(context.TODO(), &ListSecretsInput{
 			StoreID: ss.StoreID,
 		})
 	})
@@ -406,7 +407,7 @@ func TestClient_GetSecret(t *testing.T) {
 		err error
 	)
 	Record(t, fmt.Sprintf("secret_store/%s/create_secret", t.Name()), func(c *Client) {
-		s, err = c.CreateSecret(&CreateSecretInput{
+		s, err = c.CreateSecret(context.TODO(), &CreateSecretInput{
 			StoreID: ss.StoreID,
 			Name:    t.Name(),
 			Secret:  []byte("secretum servare"),
@@ -418,7 +419,7 @@ func TestClient_GetSecret(t *testing.T) {
 
 	var secret *Secret
 	Record(t, fmt.Sprintf("secret_store/%s", t.Name()), func(c *Client) {
-		secret, err = c.GetSecret(&GetSecretInput{
+		secret, err = c.GetSecret(context.TODO(), &GetSecretInput{
 			StoreID: ss.StoreID,
 			Name:    s.Name,
 		})
@@ -445,7 +446,7 @@ func TestClient_DeleteSecret(t *testing.T) {
 		err error
 	)
 	Record(t, fmt.Sprintf("secret_store/%s/create_secret", t.Name()), func(c *Client) {
-		s, err = c.CreateSecret(&CreateSecretInput{
+		s, err = c.CreateSecret(context.TODO(), &CreateSecretInput{
 			StoreID: ss.StoreID,
 			Name:    t.Name(),
 			Secret:  []byte("secretum servare"),
@@ -456,7 +457,7 @@ func TestClient_DeleteSecret(t *testing.T) {
 	}
 
 	Record(t, fmt.Sprintf("secret_store/%s", t.Name()), func(c *Client) {
-		err = c.DeleteSecret(&DeleteSecretInput{
+		err = c.DeleteSecret(context.TODO(), &DeleteSecretInput{
 			StoreID: ss.StoreID,
 			Name:    s.Name,
 		})
@@ -471,28 +472,28 @@ func TestClient_SecretStore_validation(t *testing.T) {
 
 	var err error
 
-	_, err = TestClient.CreateSecretStore(&CreateSecretStoreInput{
+	_, err = TestClient.CreateSecretStore(context.TODO(), &CreateSecretStoreInput{
 		Name: "",
 	})
 	if want := ErrMissingName; !errors.Is(want, err) {
 		t.Errorf("CreateSecretStore: got error %v, want %v", err, want)
 	}
 
-	_, err = TestClient.GetSecretStore(&GetSecretStoreInput{
+	_, err = TestClient.GetSecretStore(context.TODO(), &GetSecretStoreInput{
 		StoreID: "",
 	})
 	if want := ErrMissingStoreID; !errors.Is(want, err) {
 		t.Errorf("GetSecretStore: got error %v, want %v", err, want)
 	}
 
-	err = TestClient.DeleteSecretStore(&DeleteSecretStoreInput{
+	err = TestClient.DeleteSecretStore(context.TODO(), &DeleteSecretStoreInput{
 		StoreID: "",
 	})
 	if want := ErrMissingStoreID; !errors.Is(want, err) {
 		t.Errorf("DeleteSecretStore: got error %v, want %v", err, want)
 	}
 
-	_, err = TestClient.CreateSecret(&CreateSecretInput{
+	_, err = TestClient.CreateSecret(context.TODO(), &CreateSecretInput{
 		StoreID: "",
 		Name:    "name",
 		Secret:  []byte("secret"),
@@ -500,7 +501,7 @@ func TestClient_SecretStore_validation(t *testing.T) {
 	if want := ErrMissingStoreID; !errors.Is(want, err) {
 		t.Errorf("CreateSecret: got error %v, want %v", err, want)
 	}
-	_, err = TestClient.CreateSecret(&CreateSecretInput{
+	_, err = TestClient.CreateSecret(context.TODO(), &CreateSecretInput{
 		StoreID: "123",
 		Name:    "",
 		Secret:  []byte("secret"),
@@ -508,7 +509,7 @@ func TestClient_SecretStore_validation(t *testing.T) {
 	if want := ErrMissingName; !errors.Is(want, err) {
 		t.Errorf("CreateSecret: got error %v, want %v", err, want)
 	}
-	_, err = TestClient.CreateSecret(&CreateSecretInput{
+	_, err = TestClient.CreateSecret(context.TODO(), &CreateSecretInput{
 		StoreID: "123",
 		Name:    "name",
 		Secret:  []byte(nil),
@@ -517,21 +518,21 @@ func TestClient_SecretStore_validation(t *testing.T) {
 		t.Errorf("CreateSecret: got error %v, want %v", err, want)
 	}
 
-	_, err = TestClient.ListSecrets(&ListSecretsInput{
+	_, err = TestClient.ListSecrets(context.TODO(), &ListSecretsInput{
 		StoreID: "",
 	})
 	if want := ErrMissingStoreID; !errors.Is(want, err) {
 		t.Errorf("ListSecrets: got error %v, want %v", err, want)
 	}
 
-	_, err = TestClient.GetSecret(&GetSecretInput{
+	_, err = TestClient.GetSecret(context.TODO(), &GetSecretInput{
 		StoreID: "",
 		Name:    "name",
 	})
 	if want := ErrMissingStoreID; !errors.Is(want, err) {
 		t.Errorf("GetSecret: got error %v, want %v", err, want)
 	}
-	_, err = TestClient.GetSecret(&GetSecretInput{
+	_, err = TestClient.GetSecret(context.TODO(), &GetSecretInput{
 		StoreID: "id",
 		Name:    "",
 	})
@@ -539,14 +540,14 @@ func TestClient_SecretStore_validation(t *testing.T) {
 		t.Errorf("GetSecret: got error %v, want %v", err, want)
 	}
 
-	err = TestClient.DeleteSecret(&DeleteSecretInput{
+	err = TestClient.DeleteSecret(context.TODO(), &DeleteSecretInput{
 		StoreID: "",
 		Name:    "name",
 	})
 	if want := ErrMissingStoreID; !errors.Is(want, err) {
 		t.Errorf("DeleteSecret: got error %v, want %v", err, want)
 	}
-	err = TestClient.DeleteSecret(&DeleteSecretInput{
+	err = TestClient.DeleteSecret(context.TODO(), &DeleteSecretInput{
 		StoreID: "id",
 		Name:    "",
 	})
@@ -563,7 +564,7 @@ func createSecretStoreHelper(t *testing.T, i int) *SecretStore {
 		err error
 	)
 	Record(t, fmt.Sprintf("secret_store/%s/create_store_%02d", t.Name(), i), func(c *Client) {
-		ss, err = c.CreateSecretStore(&CreateSecretStoreInput{
+		ss, err = c.CreateSecretStore(context.TODO(), &CreateSecretStoreInput{
 			Name: fmt.Sprintf("%s-%02d", t.Name(), i),
 		})
 	})
@@ -574,7 +575,7 @@ func createSecretStoreHelper(t *testing.T, i int) *SecretStore {
 	// Cleanup secret store.
 	t.Cleanup(func() {
 		Record(t, fmt.Sprintf("secret_store/%s/delete_store_%02d", t.Name(), i), func(c *Client) {
-			err = c.DeleteSecretStore(&DeleteSecretStoreInput{
+			err = c.DeleteSecretStore(context.TODO(), &DeleteSecretStoreInput{
 				StoreID: ss.StoreID,
 			})
 		})

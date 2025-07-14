@@ -25,8 +25,6 @@ type Papertrail struct {
 
 // ListPapertrailsInput is used as input to the ListPapertrails function.
 type ListPapertrailsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -34,7 +32,7 @@ type ListPapertrailsInput struct {
 }
 
 // ListPapertrails retrieves all resources.
-func (c *Client) ListPapertrails(i *ListPapertrailsInput) ([]*Papertrail, error) {
+func (c *Client) ListPapertrails(ctx context.Context, i *ListPapertrailsInput) ([]*Papertrail, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -43,7 +41,7 @@ func (c *Client) ListPapertrails(i *ListPapertrailsInput) ([]*Papertrail, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "papertrail")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -60,8 +58,6 @@ func (c *Client) ListPapertrails(i *ListPapertrailsInput) ([]*Papertrail, error)
 type CreatePapertrailInput struct {
 	// Address is a hostname or IPv4 address.
 	Address *string `url:"address,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -83,7 +79,7 @@ type CreatePapertrailInput struct {
 }
 
 // CreatePapertrail creates a new resource.
-func (c *Client) CreatePapertrail(i *CreatePapertrailInput) (*Papertrail, error) {
+func (c *Client) CreatePapertrail(ctx context.Context, i *CreatePapertrailInput) (*Papertrail, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -92,7 +88,7 @@ func (c *Client) CreatePapertrail(i *CreatePapertrailInput) (*Papertrail, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "papertrail")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -107,8 +103,6 @@ func (c *Client) CreatePapertrail(i *CreatePapertrailInput) (*Papertrail, error)
 
 // GetPapertrailInput is used as input to the GetPapertrail function.
 type GetPapertrailInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the papertrail to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -118,7 +112,7 @@ type GetPapertrailInput struct {
 }
 
 // GetPapertrail retrieves the specified resource.
-func (c *Client) GetPapertrail(i *GetPapertrailInput) (*Papertrail, error) {
+func (c *Client) GetPapertrail(ctx context.Context, i *GetPapertrailInput) (*Papertrail, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -130,7 +124,7 @@ func (c *Client) GetPapertrail(i *GetPapertrailInput) (*Papertrail, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "papertrail", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -147,8 +141,6 @@ func (c *Client) GetPapertrail(i *GetPapertrailInput) (*Papertrail, error) {
 type UpdatePapertrailInput struct {
 	// Address is a hostname or IPv4 address.
 	Address *string `url:"address,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -172,7 +164,7 @@ type UpdatePapertrailInput struct {
 }
 
 // UpdatePapertrail updates the specified resource.
-func (c *Client) UpdatePapertrail(i *UpdatePapertrailInput) (*Papertrail, error) {
+func (c *Client) UpdatePapertrail(ctx context.Context, i *UpdatePapertrailInput) (*Papertrail, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -184,7 +176,7 @@ func (c *Client) UpdatePapertrail(i *UpdatePapertrailInput) (*Papertrail, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "papertrail", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -199,8 +191,6 @@ func (c *Client) UpdatePapertrail(i *UpdatePapertrailInput) (*Papertrail, error)
 
 // DeletePapertrailInput is the input parameter to DeletePapertrail.
 type DeletePapertrailInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the papertrail to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -210,7 +200,7 @@ type DeletePapertrailInput struct {
 }
 
 // DeletePapertrail deletes the specified resource.
-func (c *Client) DeletePapertrail(i *DeletePapertrailInput) error {
+func (c *Client) DeletePapertrail(ctx context.Context, i *DeletePapertrailInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -222,7 +212,7 @@ func (c *Client) DeletePapertrail(i *DeletePapertrailInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "papertrail", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -35,7 +36,7 @@ func TestClient_ObservabilityCustomDashboards(t *testing.T) {
 	// Create
 	var ocd *ObservabilityCustomDashboard
 	Record(t, "observability_custom_dashboards/create_custom_dashboard", func(c *Client) {
-		ocd, err = c.CreateObservabilityCustomDashboard(cocd)
+		ocd, err = c.CreateObservabilityCustomDashboard(context.TODO(), cocd)
 	})
 	if err != nil {
 		t.Fatalf("Error encountered: %v\ninput: %#v", err, cocd)
@@ -43,7 +44,7 @@ func TestClient_ObservabilityCustomDashboards(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "observability_custom_dashboards/delete_custom_dashboard", func(c *Client) {
-			err = c.DeleteObservabilityCustomDashboard(&DeleteObservabilityCustomDashboardInput{
+			err = c.DeleteObservabilityCustomDashboard(context.TODO(), &DeleteObservabilityCustomDashboardInput{
 				ID: &ocd.ID,
 			})
 		})
@@ -64,7 +65,7 @@ func TestClient_ObservabilityCustomDashboards(t *testing.T) {
 	// List Dashboards
 	var ldr *ListDashboardsResponse
 	Record(t, "observability_custom_dashboards/list_custom_dashboards", func(c *Client) {
-		ldr, err = c.ListObservabilityCustomDashboards(&ListObservabilityCustomDashboardsInput{})
+		ldr, err = c.ListObservabilityCustomDashboards(context.TODO(), &ListObservabilityCustomDashboardsInput{})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -76,7 +77,7 @@ func TestClient_ObservabilityCustomDashboards(t *testing.T) {
 	// Get
 	var gocd *ObservabilityCustomDashboard
 	Record(t, "observability_custom_dashboards/get_custom_dashboard", func(c *Client) {
-		gocd, err = c.GetObservabilityCustomDashboard(&GetObservabilityCustomDashboardInput{
+		gocd, err = c.GetObservabilityCustomDashboard(context.TODO(), &GetObservabilityCustomDashboardInput{
 			ID: &ocd.ID,
 		})
 	})
@@ -110,7 +111,7 @@ func TestClient_ObservabilityCustomDashboards(t *testing.T) {
 		},
 	})
 	Record(t, "observability_custom_dashboards/update_custom_dashboard", func(c *Client) {
-		ucd, err = c.UpdateObservabilityCustomDashboard(&UpdateObservabilityCustomDashboardInput{
+		ucd, err = c.UpdateObservabilityCustomDashboard(context.TODO(), &UpdateObservabilityCustomDashboardInput{
 			Description: ToPointer("My dashboard just got even cooler."),
 			ID:          &ocd.ID,
 			Items:       &items,

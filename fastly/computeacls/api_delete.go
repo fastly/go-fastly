@@ -10,21 +10,19 @@ import (
 // DeleteInput specifies the information needed for the Delete() function to
 // perform the operation.
 type DeleteInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ComputeACLID is an ACL Identifier (required).
 	ComputeACLID *string
 }
 
 // DeleteComputeACL deletes the specified compute ACL.
-func Delete(c *fastly.Client, i *DeleteInput) error {
+func Delete(ctx context.Context, c *fastly.Client, i *DeleteInput) error {
 	if i.ComputeACLID == nil {
 		return fastly.ErrMissingComputeACLID
 	}
 
 	path := fastly.ToSafeURL("resources", "acls", *i.ComputeACLID)
 
-	resp, err := c.Delete(path, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, fastly.CreateRequestOptions())
 	if err != nil {
 		return err
 	}

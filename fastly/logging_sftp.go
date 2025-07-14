@@ -36,8 +36,6 @@ type SFTP struct {
 
 // ListSFTPsInput is used as input to the ListSFTPs function.
 type ListSFTPsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -45,7 +43,7 @@ type ListSFTPsInput struct {
 }
 
 // ListSFTPs retrieves all resources.
-func (c *Client) ListSFTPs(i *ListSFTPsInput) ([]*SFTP, error) {
+func (c *Client) ListSFTPs(ctx context.Context, i *ListSFTPsInput) ([]*SFTP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -54,7 +52,7 @@ func (c *Client) ListSFTPs(i *ListSFTPsInput) ([]*SFTP, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "sftp")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -73,8 +71,6 @@ type CreateSFTPInput struct {
 	Address *string `url:"address,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.
 	CompressionCodec *string `url:"compression_codec,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -116,7 +112,7 @@ type CreateSFTPInput struct {
 }
 
 // CreateSFTP creates a new resource.
-func (c *Client) CreateSFTP(i *CreateSFTPInput) (*SFTP, error) {
+func (c *Client) CreateSFTP(ctx context.Context, i *CreateSFTPInput) (*SFTP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -125,7 +121,7 @@ func (c *Client) CreateSFTP(i *CreateSFTPInput) (*SFTP, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "sftp")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -140,8 +136,6 @@ func (c *Client) CreateSFTP(i *CreateSFTPInput) (*SFTP, error) {
 
 // GetSFTPInput is used as input to the GetSFTP function.
 type GetSFTPInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the SFTP to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -151,7 +145,7 @@ type GetSFTPInput struct {
 }
 
 // GetSFTP retrieves the specified resource.
-func (c *Client) GetSFTP(i *GetSFTPInput) (*SFTP, error) {
+func (c *Client) GetSFTP(ctx context.Context, i *GetSFTPInput) (*SFTP, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -163,7 +157,7 @@ func (c *Client) GetSFTP(i *GetSFTPInput) (*SFTP, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "sftp", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -182,8 +176,6 @@ type UpdateSFTPInput struct {
 	Address *string `url:"address,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.
 	CompressionCodec *string `url:"compression_codec,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -227,7 +219,7 @@ type UpdateSFTPInput struct {
 }
 
 // UpdateSFTP updates the specified resource.
-func (c *Client) UpdateSFTP(i *UpdateSFTPInput) (*SFTP, error) {
+func (c *Client) UpdateSFTP(ctx context.Context, i *UpdateSFTPInput) (*SFTP, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -239,7 +231,7 @@ func (c *Client) UpdateSFTP(i *UpdateSFTPInput) (*SFTP, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "sftp", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -254,8 +246,6 @@ func (c *Client) UpdateSFTP(i *UpdateSFTPInput) (*SFTP, error) {
 
 // DeleteSFTPInput is the input parameter to DeleteSFTP.
 type DeleteSFTPInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the SFTP to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -265,7 +255,7 @@ type DeleteSFTPInput struct {
 }
 
 // DeleteSFTP deletes the specified resource.
-func (c *Client) DeleteSFTP(i *DeleteSFTPInput) error {
+func (c *Client) DeleteSFTP(ctx context.Context, i *DeleteSFTPInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -277,7 +267,7 @@ func (c *Client) DeleteSFTP(i *DeleteSFTPInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "sftp", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

@@ -28,8 +28,6 @@ type CustomTLSCertificate struct {
 
 // ListCustomTLSCertificatesInput is used as input to the Client.ListCustomTLSCertificates function.
 type ListCustomTLSCertificatesInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// FilterInUse limits the returned certificates to those currently using Fastly to terminate TLS (that is, certificates associated with an activation). Permitted values: true, false.
 	FilterInUse *bool
 	// FilterNotAfter limits the returned certificates to those that expire prior to the specified date in UTC. Accepts parameters: lte (e.g., filter[not_after][lte]=2020-05-05).
@@ -80,13 +78,13 @@ func (i *ListCustomTLSCertificatesInput) formatFilters() map[string]string {
 }
 
 // ListCustomTLSCertificates retrieves all resources.
-func (c *Client) ListCustomTLSCertificates(i *ListCustomTLSCertificatesInput) ([]*CustomTLSCertificate, error) {
+func (c *Client) ListCustomTLSCertificates(ctx context.Context, i *ListCustomTLSCertificatesInput) ([]*CustomTLSCertificate, error) {
 	path := "/tls/certificates"
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Params = i.formatFilters()
 	requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -111,21 +109,19 @@ func (c *Client) ListCustomTLSCertificates(i *ListCustomTLSCertificatesInput) ([
 
 // GetCustomTLSCertificateInput is used as input to the GetCustomTLSCertificate function.
 type GetCustomTLSCertificateInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS certificate.
 	ID string
 }
 
 // GetCustomTLSCertificate retrieves the specified resource.
-func (c *Client) GetCustomTLSCertificate(i *GetCustomTLSCertificateInput) (*CustomTLSCertificate, error) {
+func (c *Client) GetCustomTLSCertificate(ctx context.Context, i *GetCustomTLSCertificateInput) (*CustomTLSCertificate, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
 
 	path := ToSafeURL("tls", "certificates", i.ID)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -143,23 +139,23 @@ func (c *Client) GetCustomTLSCertificate(i *GetCustomTLSCertificateInput) (*Cust
 type CreateCustomTLSCertificateInput struct {
 	// CertBlob is the PEM-formatted certificate blob.
 	CertBlob string `jsonapi:"attr,cert_blob"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS certificate.
 	ID string `jsonapi:"primary,tls_certificate"` // ID value does not need to be set.
 	// Name is a customizable name for your certificate.
 	Name string `jsonapi:"attr,name,omitempty"`
+	// LIMITED AVAILABILITY: Indicates that the supplied certificate was not signed by a trusted CA.
+	AllowUntrustedRoot bool `jsonapi:"attr,allow_untrusted_root,omitempty"`
 }
 
 // CreateCustomTLSCertificate creates a new resource.
-func (c *Client) CreateCustomTLSCertificate(i *CreateCustomTLSCertificateInput) (*CustomTLSCertificate, error) {
+func (c *Client) CreateCustomTLSCertificate(ctx context.Context, i *CreateCustomTLSCertificateInput) (*CustomTLSCertificate, error) {
 	if i.CertBlob == "" {
 		return nil, ErrMissingCertBlob
 	}
 
 	path := "/tls/certificates"
 
-	resp, err := c.PostJSONAPI(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostJSONAPI(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -177,12 +173,12 @@ func (c *Client) CreateCustomTLSCertificate(i *CreateCustomTLSCertificateInput) 
 type UpdateCustomTLSCertificateInput struct {
 	// CertBlob is the PEM-formatted certificate blob.
 	CertBlob string `jsonapi:"attr,cert_blob"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS certificate.
 	ID string `jsonapi:"primary,tls_certificate"`
 	// Name is a customizable name for your certificate.
 	Name string `jsonapi:"attr,name,omitempty"`
+	// LIMITED AVAILABILITY: Indicates that the supplied certificate was not signed by a trusted CA.
+	AllowUntrustedRoot bool `jsonapi:"attr,allow_untrusted_root,omitempty"`
 }
 
 // UpdateCustomTLSCertificate updates the specified resource.
@@ -190,7 +186,7 @@ type UpdateCustomTLSCertificateInput struct {
 // By using this endpoint, the original certificate will cease to be used for future TLS handshakes.
 // Thus, only SAN entries that appear in the replacement certificate will become TLS enabled.
 // Any SAN entries that are missing in the replacement certificate will become disabled.
-func (c *Client) UpdateCustomTLSCertificate(i *UpdateCustomTLSCertificateInput) (*CustomTLSCertificate, error) {
+func (c *Client) UpdateCustomTLSCertificate(ctx context.Context, i *UpdateCustomTLSCertificateInput) (*CustomTLSCertificate, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
@@ -201,7 +197,7 @@ func (c *Client) UpdateCustomTLSCertificate(i *UpdateCustomTLSCertificateInput) 
 
 	path := ToSafeURL("tls", "certificates", i.ID)
 
-	resp, err := c.PatchJSONAPI(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSONAPI(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -216,21 +212,19 @@ func (c *Client) UpdateCustomTLSCertificate(i *UpdateCustomTLSCertificateInput) 
 
 // DeleteCustomTLSCertificateInput used for deleting a certificate.
 type DeleteCustomTLSCertificateInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS certificate.
 	ID string
 }
 
 // DeleteCustomTLSCertificate deletes the specified resource.
-func (c *Client) DeleteCustomTLSCertificate(i *DeleteCustomTLSCertificateInput) error {
+func (c *Client) DeleteCustomTLSCertificate(ctx context.Context, i *DeleteCustomTLSCertificateInput) error {
 	if i.ID == "" {
 		return ErrMissingID
 	}
 
 	path := ToSafeURL("tls", "certificates", i.ID)
 
-	ignored, err := c.Delete(path, CreateRequestOptions(i.Context))
+	ignored, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

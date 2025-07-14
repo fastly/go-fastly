@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -19,7 +20,7 @@ func TestClient_Kinesis(t *testing.T) {
 	// NOTE: You can't send the API and empty ResponseCondition.
 	var kinesisCreateResp1, kinesisCreateResp2 *Kinesis
 	Record(t, "kinesis/create", func(c *Client) {
-		kinesisCreateResp1, err = c.CreateKinesis(&CreateKinesisInput{
+		kinesisCreateResp1, err = c.CreateKinesis(context.TODO(), &CreateKinesisInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
 			Name:           ToPointer("test-kinesis"),
@@ -37,7 +38,7 @@ func TestClient_Kinesis(t *testing.T) {
 	}
 
 	Record(t, "kinesis/create2", func(c *Client) {
-		kinesisCreateResp2, err = c.CreateKinesis(&CreateKinesisInput{
+		kinesisCreateResp2, err = c.CreateKinesis(context.TODO(), &CreateKinesisInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
 			Name:           ToPointer("test-kinesis-2"),
@@ -55,7 +56,7 @@ func TestClient_Kinesis(t *testing.T) {
 
 	// This case is expected to fail
 	Record(t, "kinesis/create3", func(c *Client) {
-		_, err = c.CreateKinesis(&CreateKinesisInput{
+		_, err = c.CreateKinesis(context.TODO(), &CreateKinesisInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
 			Name:           ToPointer("test-kinesis-3"),
@@ -75,7 +76,7 @@ func TestClient_Kinesis(t *testing.T) {
 
 	// This case is expected to fail
 	Record(t, "kinesis/create4", func(c *Client) {
-		_, err = c.CreateKinesis(&CreateKinesisInput{
+		_, err = c.CreateKinesis(context.TODO(), &CreateKinesisInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
 			Name:           ToPointer("test-kinesis-3"),
@@ -94,19 +95,19 @@ func TestClient_Kinesis(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "kinesis/cleanup", func(c *Client) {
-			_ = c.DeleteKinesis(&DeleteKinesisInput{
+			_ = c.DeleteKinesis(context.TODO(), &DeleteKinesisInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *v.Number,
 				Name:           "test-kinesis",
 			})
 
-			_ = c.DeleteKinesis(&DeleteKinesisInput{
+			_ = c.DeleteKinesis(context.TODO(), &DeleteKinesisInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *v.Number,
 				Name:           "test-kinesis-2",
 			})
 
-			_ = c.DeleteKinesis(&DeleteKinesisInput{
+			_ = c.DeleteKinesis(context.TODO(), &DeleteKinesisInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *v.Number,
 				Name:           "new-test-kinesis",
@@ -157,7 +158,7 @@ func TestClient_Kinesis(t *testing.T) {
 	// List
 	var kineses []*Kinesis
 	Record(t, "kinesis/list", func(c *Client) {
-		kineses, err = c.ListKinesis(&ListKinesisInput{
+		kineses, err = c.ListKinesis(context.TODO(), &ListKinesisInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
 		})
@@ -172,7 +173,7 @@ func TestClient_Kinesis(t *testing.T) {
 	// Get
 	var kinesisGetResp, kinesisGetResp2 *Kinesis
 	Record(t, "kinesis/get", func(c *Client) {
-		kinesisGetResp, err = c.GetKinesis(&GetKinesisInput{
+		kinesisGetResp, err = c.GetKinesis(context.TODO(), &GetKinesisInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
 			Name:           "test-kinesis",
@@ -183,7 +184,7 @@ func TestClient_Kinesis(t *testing.T) {
 	}
 
 	Record(t, "kinesis/get2", func(c *Client) {
-		kinesisGetResp2, err = c.GetKinesis(&GetKinesisInput{
+		kinesisGetResp2, err = c.GetKinesis(context.TODO(), &GetKinesisInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
 			Name:           "test-kinesis-2",
@@ -242,7 +243,7 @@ func TestClient_Kinesis(t *testing.T) {
 	// Update
 	var kinesisUpdateResp1, kinesisUpdateResp2, kinesisUpdateResp3 *Kinesis
 	Record(t, "kinesis/update", func(c *Client) {
-		kinesisUpdateResp1, err = c.UpdateKinesis(&UpdateKinesisInput{
+		kinesisUpdateResp1, err = c.UpdateKinesis(context.TODO(), &UpdateKinesisInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *v.Number,
 			Name:             "test-kinesis",
@@ -257,7 +258,7 @@ func TestClient_Kinesis(t *testing.T) {
 	// Test that a configuration using an access key/secret key can be
 	// updated to use IAM role.
 	Record(t, "kinesis/update2", func(c *Client) {
-		kinesisUpdateResp2, err = c.UpdateKinesis(&UpdateKinesisInput{
+		kinesisUpdateResp2, err = c.UpdateKinesis(context.TODO(), &UpdateKinesisInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
 			Name:           "new-test-kinesis",
@@ -273,7 +274,7 @@ func TestClient_Kinesis(t *testing.T) {
 	// Test that a configuration using an IAM role can be updated to use
 	// access key/secret key.
 	Record(t, "kinesis/update3", func(c *Client) {
-		kinesisUpdateResp3, err = c.UpdateKinesis(&UpdateKinesisInput{
+		kinesisUpdateResp3, err = c.UpdateKinesis(context.TODO(), &UpdateKinesisInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
 			Name:           "test-kinesis-2",
@@ -289,7 +290,7 @@ func TestClient_Kinesis(t *testing.T) {
 	// Test that an invalid IAM role ARN is rejected. This case is expected
 	// to fail.
 	Record(t, "kinesis/update4", func(c *Client) {
-		_, err = c.UpdateKinesis(&UpdateKinesisInput{
+		_, err = c.UpdateKinesis(context.TODO(), &UpdateKinesisInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
 			Name:           "test-kinesis",
@@ -327,7 +328,7 @@ func TestClient_Kinesis(t *testing.T) {
 
 	// Delete
 	Record(t, "kinesis/delete", func(c *Client) {
-		err = c.DeleteKinesis(&DeleteKinesisInput{
+		err = c.DeleteKinesis(context.TODO(), &DeleteKinesisInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
 			Name:           "new-test-kinesis",
@@ -340,14 +341,14 @@ func TestClient_Kinesis(t *testing.T) {
 
 func TestClient_ListKinesis_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.ListKinesis(&ListKinesisInput{
+	_, err = TestClient.ListKinesis(context.TODO(), &ListKinesisInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListKinesis(&ListKinesisInput{
+	_, err = TestClient.ListKinesis(context.TODO(), &ListKinesisInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -358,14 +359,14 @@ func TestClient_ListKinesis_validation(t *testing.T) {
 
 func TestClient_CreateKinesis_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.CreateKinesis(&CreateKinesisInput{
+	_, err = TestClient.CreateKinesis(context.TODO(), &CreateKinesisInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateKinesis(&CreateKinesisInput{
+	_, err = TestClient.CreateKinesis(context.TODO(), &CreateKinesisInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -377,7 +378,7 @@ func TestClient_CreateKinesis_validation(t *testing.T) {
 func TestClient_GetKinesis_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetKinesis(&GetKinesisInput{
+	_, err = TestClient.GetKinesis(context.TODO(), &GetKinesisInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -385,7 +386,7 @@ func TestClient_GetKinesis_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetKinesis(&GetKinesisInput{
+	_, err = TestClient.GetKinesis(context.TODO(), &GetKinesisInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -393,7 +394,7 @@ func TestClient_GetKinesis_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetKinesis(&GetKinesisInput{
+	_, err = TestClient.GetKinesis(context.TODO(), &GetKinesisInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -405,7 +406,7 @@ func TestClient_GetKinesis_validation(t *testing.T) {
 func TestClient_UpdateKinesis_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateKinesis(&UpdateKinesisInput{
+	_, err = TestClient.UpdateKinesis(context.TODO(), &UpdateKinesisInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -413,7 +414,7 @@ func TestClient_UpdateKinesis_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateKinesis(&UpdateKinesisInput{
+	_, err = TestClient.UpdateKinesis(context.TODO(), &UpdateKinesisInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -421,7 +422,7 @@ func TestClient_UpdateKinesis_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateKinesis(&UpdateKinesisInput{
+	_, err = TestClient.UpdateKinesis(context.TODO(), &UpdateKinesisInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -433,7 +434,7 @@ func TestClient_UpdateKinesis_validation(t *testing.T) {
 func TestClient_DeleteKinesis_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteKinesis(&DeleteKinesisInput{
+	err = TestClient.DeleteKinesis(context.TODO(), &DeleteKinesisInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -441,7 +442,7 @@ func TestClient_DeleteKinesis_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteKinesis(&DeleteKinesisInput{
+	err = TestClient.DeleteKinesis(context.TODO(), &DeleteKinesisInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -449,7 +450,7 @@ func TestClient_DeleteKinesis_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteKinesis(&DeleteKinesisInput{
+	err = TestClient.DeleteKinesis(context.TODO(), &DeleteKinesisInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"testing"
 )
 
@@ -10,7 +11,7 @@ func TestClient_ListAutomationTokens(t *testing.T) {
 	var tokens []*AutomationToken
 	var err error
 	Record(t, "automation_tokens/list", func(c *Client) {
-		tokens, err = c.ListAutomationTokens()
+		tokens, err = c.ListAutomationTokens(context.TODO())
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -30,7 +31,7 @@ func TestClient_GetAutomationToken(t *testing.T) {
 	var token *AutomationToken
 	var err error
 	Record(t, "automation_tokens/get", func(c *Client) {
-		token, err = c.GetAutomationToken(input)
+		token, err = c.GetAutomationToken(context.TODO(), input)
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -52,7 +53,7 @@ func TestClient_CreateAutomationToken(t *testing.T) {
 	var token *AutomationToken
 	var err error
 	Record(t, "automation_tokens/create", func(c *Client) {
-		token, err = c.CreateAutomationToken(input)
+		token, err = c.CreateAutomationToken(context.TODO(), input)
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -75,7 +76,7 @@ func TestClient_DeleteAutomationToken(t *testing.T) {
 
 	var err error
 	Record(t, "automation_tokens/delete", func(c *Client) {
-		err = c.DeleteAutomationToken(input)
+		err = c.DeleteAutomationToken(context.TODO(), input)
 	})
 	if err != nil {
 		t.Fatal(err)

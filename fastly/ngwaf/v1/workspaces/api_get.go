@@ -8,24 +8,22 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// GetInput specifies the information needed for the Get() function to perform
-// the operation.
+// GetInput specifies the information needed for the Get() function to
+// perform the operation.
 type GetInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string
 }
 
 // Get retrieves the specified workspace.
-func Get(c *fastly.Client, i *GetInput) (*Workspace, error) {
+func Get(ctx context.Context, c *fastly.Client, i *GetInput) (*Workspace, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID)
 
-	resp, err := c.Get(path, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

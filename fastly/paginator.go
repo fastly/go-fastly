@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -19,7 +20,7 @@ type PaginatorKVStoreEntries interface {
 
 // PaginationClient represents a HTTP client.
 type PaginationClient interface {
-	Get(p string, ro RequestOptions) (*http.Response, error)
+	Get(ctx context.Context, p string, ro RequestOptions) (*http.Response, error)
 }
 
 // NewPaginator returns a *ListPaginator[T].
@@ -29,8 +30,9 @@ type PaginationClient interface {
 // This is because we don't assign it to any of the defined function parameters.
 // If we did, then we could do this: https://go.dev/play/p/dfTMGjaSSAX.
 // This means we have to have the caller pass the API path.
-func NewPaginator[T any](client PaginationClient, opts ListOpts, path string) *ListPaginator[T] {
+func NewPaginator[T any](ctx context.Context, client PaginationClient, opts ListOpts, path string) *ListPaginator[T] {
 	return &ListPaginator[T]{
+		ctx:    ctx,
 		client: client,
 		opts:   opts,
 		path:   path,
@@ -56,6 +58,7 @@ type ListPaginator[T any] struct {
 	NextPage    int
 
 	// Private
+	ctx      context.Context
 	client   PaginationClient
 	consumed bool
 	opts     ListOpts
@@ -97,7 +100,7 @@ func (p *ListPaginator[T]) GetNext() ([]*T, error) {
 		}
 	}
 
-	requestOptions := CreateRequestOptions(nil)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Params["per_page"] = strconv.Itoa(perPage)
 	requestOptions.Params["page"] = strconv.Itoa(p.CurrentPage)
 
@@ -108,7 +111,7 @@ func (p *ListPaginator[T]) GetNext() ([]*T, error) {
 		requestOptions.Params["sort"] = p.opts.Sort
 	}
 
-	resp, err := p.client.Get(p.path, requestOptions)
+	resp, err := p.client.Get(p.ctx, p.path, requestOptions)
 	if err != nil {
 		return nil, err
 	}

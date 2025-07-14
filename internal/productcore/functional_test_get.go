@@ -1,6 +1,7 @@
 package productcore
 
 import (
+	"context"
 	"strings"
 	"testing"
 
@@ -25,7 +26,7 @@ type GetTestInput[O products.ProductOutput] struct {
 	Phase string
 	// OpFn is the function to be invoked to perform the
 	// get operation
-	OpFn func(*fastly.Client, string) (O, error)
+	OpFn func(context.Context, *fastly.Client, string) (O, error)
 	// ProductID identifies the product for which information
 	// should be obtained on the service; note that it is only
 	// used to validate the ProductID in the output from OpFn (if
@@ -70,7 +71,7 @@ func NewGetTest[O products.ProductOutput](i *GetTestInput[O]) *test_utils.Functi
 	}
 
 	r.TestFn = func(t *testing.T, tc *test_utils.FunctionalTest, c *fastly.Client) error {
-		result, err := i.OpFn(c, i.ServiceID)
+		result, err := i.OpFn(context.TODO(), c, i.ServiceID)
 		if err == nil {
 			validateOutput(t, tc, result, i.ProductID, i.ServiceID)
 			if i.CheckOutputFn != nil {

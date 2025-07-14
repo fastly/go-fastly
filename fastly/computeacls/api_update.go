@@ -12,8 +12,6 @@ import (
 type UpdateInput struct {
 	// ComputeACLID  is an ACL Identifier (required).
 	ComputeACLID *string
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
 	// Entries is a list of ACL entries.
 	Entries []*BatchComputeACLEntry `json:"entries"`
 }
@@ -24,19 +22,19 @@ type BatchComputeACLEntry struct {
 	Prefix *string `json:"prefix"`
 	// Action is one of "ALLOW" or "BLOCK".
 	Action *string `json:"action"`
-	// Operation is one of "create" or "update".
+	// Operation is one of "create", "update", or "delete".
 	Operation *string `json:"op"`
 }
 
 // Update updates the specified compute ACl.
-func Update(c *fastly.Client, i *UpdateInput) error {
+func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) error {
 	if i.ComputeACLID == nil {
 		return fastly.ErrMissingComputeACLID
 	}
 
 	path := fastly.ToSafeURL("resources", "acls", *i.ComputeACLID, "entries")
 
-	resp, err := c.PatchJSON(path, i, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSON(ctx, path, i, fastly.CreateRequestOptions())
 	if err != nil {
 		return err
 	}

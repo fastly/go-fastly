@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"reflect"
 	"testing"
@@ -17,7 +18,7 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 	var err error
 	var sa *ServiceAuthorization
 	Record(t, fixtureBase+"create", func(c *Client) {
-		sa, err = c.CreateServiceAuthorization(&CreateServiceAuthorizationInput{
+		sa, err = c.CreateServiceAuthorization(context.TODO(), &CreateServiceAuthorizationInput{
 			Service:    &SAService{ID: TestDeliveryServiceID},
 			User:       &SAUser{ID: "1pnpEMCscfjqgvH7Qofda6"},
 			Permission: "full",
@@ -30,7 +31,7 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 	// List
 	var sasResp *ServiceAuthorizations
 	Record(t, fixtureBase+"/list", func(c *Client) {
-		sasResp, err = c.ListServiceAuthorizations(&ListServiceAuthorizationsInput{
+		sasResp, err = c.ListServiceAuthorizations(context.TODO(), &ListServiceAuthorizationsInput{
 			PageSize: 10,
 		})
 	})
@@ -44,7 +45,7 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, fixtureBase+"cleanup", func(c *Client) {
-			_ = c.DeleteServiceAuthorization(&DeleteServiceAuthorizationInput{
+			_ = c.DeleteServiceAuthorization(context.TODO(), &DeleteServiceAuthorizationInput{
 				ID: sa.ID,
 			})
 		})
@@ -65,7 +66,7 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 	// Get
 	var nsa *ServiceAuthorization
 	Record(t, fixtureBase+"get", func(c *Client) {
-		nsa, err = c.GetServiceAuthorization(&GetServiceAuthorizationInput{
+		nsa, err = c.GetServiceAuthorization(context.TODO(), &GetServiceAuthorizationInput{
 			ID: sa.ID,
 		})
 	})
@@ -80,7 +81,7 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 	// Update
 	var usa *ServiceAuthorization
 	Record(t, fixtureBase+"update", func(c *Client) {
-		usa, err = c.UpdateServiceAuthorization(&UpdateServiceAuthorizationInput{
+		usa, err = c.UpdateServiceAuthorization(context.TODO(), &UpdateServiceAuthorizationInput{
 			ID:         sa.ID,
 			Permission: "purge_select",
 		})
@@ -98,7 +99,7 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 
 	// Delete
 	Record(t, fixtureBase+"delete", func(c *Client) {
-		err = c.DeleteServiceAuthorization(&DeleteServiceAuthorizationInput{
+		err = c.DeleteServiceAuthorization(context.TODO(), &DeleteServiceAuthorizationInput{
 			ID: sa.ID,
 		})
 	})
@@ -109,7 +110,7 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 
 func TestClient_GetServiceAuthorization_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.GetServiceAuthorization(&GetServiceAuthorizationInput{
+	_, err = TestClient.GetServiceAuthorization(context.TODO(), &GetServiceAuthorizationInput{
 		ID: "",
 	})
 	if !errors.Is(err, ErrMissingID) {
@@ -119,7 +120,7 @@ func TestClient_GetServiceAuthorization_validation(t *testing.T) {
 
 func TestClient_CreateServiceAuthorization_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.CreateServiceAuthorization(&CreateServiceAuthorizationInput{
+	_, err = TestClient.CreateServiceAuthorization(context.TODO(), &CreateServiceAuthorizationInput{
 		Service: &SAService{ID: ""},
 		User:    &SAUser{ID: ""},
 	})
@@ -127,7 +128,7 @@ func TestClient_CreateServiceAuthorization_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateServiceAuthorization(&CreateServiceAuthorizationInput{
+	_, err = TestClient.CreateServiceAuthorization(context.TODO(), &CreateServiceAuthorizationInput{
 		Service: &SAService{ID: "my-service-id"},
 		User:    &SAUser{ID: ""},
 	})
@@ -138,7 +139,7 @@ func TestClient_CreateServiceAuthorization_validation(t *testing.T) {
 
 func TestClient_UpdateServiceAuthorization_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.UpdateServiceAuthorization(&UpdateServiceAuthorizationInput{
+	_, err = TestClient.UpdateServiceAuthorization(context.TODO(), &UpdateServiceAuthorizationInput{
 		ID:         "",
 		Permission: "",
 	})
@@ -146,7 +147,7 @@ func TestClient_UpdateServiceAuthorization_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateServiceAuthorization(&UpdateServiceAuthorizationInput{
+	_, err = TestClient.UpdateServiceAuthorization(context.TODO(), &UpdateServiceAuthorizationInput{
 		ID:         "my-service-authorization-id",
 		Permission: "",
 	})
@@ -156,7 +157,7 @@ func TestClient_UpdateServiceAuthorization_validation(t *testing.T) {
 }
 
 func TestClient_DeleteServiceAuthorization_validation(t *testing.T) {
-	err := TestClient.DeleteServiceAuthorization(&DeleteServiceAuthorizationInput{
+	err := TestClient.DeleteServiceAuthorization(context.TODO(), &DeleteServiceAuthorizationInput{
 		ID: "",
 	})
 	if !errors.Is(err, ErrMissingID) {

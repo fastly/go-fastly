@@ -29,8 +29,6 @@ type EdgeCheckResponse struct {
 
 // EdgeCheckInput is used as input to the EdgeCheck function.
 type EdgeCheckInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// URL is the full URL (host and path) to check on all nodes.
 	// If protocol is omitted, http will be assumed (required).
 	URL string `url:"url,omitempty"`
@@ -38,17 +36,17 @@ type EdgeCheckInput struct {
 
 // EdgeCheck queries the edge cache for all of Fastly's servers for the given
 // URL.
-func (c *Client) EdgeCheck(i *EdgeCheckInput) ([]*EdgeCheck, error) {
+func (c *Client) EdgeCheck(ctx context.Context, i *EdgeCheckInput) ([]*EdgeCheck, error) {
 	var requestOptions RequestOptions
 	if i != nil {
-		requestOptions = CreateRequestOptions(i.Context)
+		requestOptions = CreateRequestOptions()
 		requestOptions.Params["url"] = i.URL
 	} else {
-		requestOptions = CreateRequestOptions(nil)
+		requestOptions = CreateRequestOptions()
 	}
 	requestOptions.Parallel = true
 
-	resp, err := c.Get("/content/edge_check", requestOptions)
+	resp, err := c.Get(ctx, "/content/edge_check", requestOptions)
 	if err != nil {
 		return nil, err
 	}

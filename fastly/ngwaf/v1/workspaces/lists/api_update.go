@@ -8,11 +8,9 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// UpdateInput specifies the information needed for the Update() function to
-// perform the operation.
+// UpdateInput specifies the information needed for the Update()
+// function to perform the operation.
 type UpdateInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Description is the description of the list.
 	Description *string `json:"description,omitempty"`
 	// Entries are the entries of the list.
@@ -23,8 +21,8 @@ type UpdateInput struct {
 	WorkspaceID *string
 }
 
-// Update updates the specified workspace.
-func Update(c *fastly.Client, i *UpdateInput) (*List, error) {
+// Update updates the specified list.
+func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*List, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -34,7 +32,7 @@ func Update(c *fastly.Client, i *UpdateInput) (*List, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "lists", *i.ListID)
 
-	resp, err := c.PatchJSON(path, i, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSON(ctx, path, i, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

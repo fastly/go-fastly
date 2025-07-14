@@ -22,8 +22,6 @@ type Condition struct {
 
 // ListConditionsInput is used as input to the ListConditions function.
 type ListConditionsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -31,7 +29,7 @@ type ListConditionsInput struct {
 }
 
 // ListConditions retrieves all resources.
-func (c *Client) ListConditions(i *ListConditionsInput) ([]*Condition, error) {
+func (c *Client) ListConditions(ctx context.Context, i *ListConditionsInput) ([]*Condition, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -40,7 +38,7 @@ func (c *Client) ListConditions(i *ListConditionsInput) ([]*Condition, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "condition")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -55,8 +53,6 @@ func (c *Client) ListConditions(i *ListConditionsInput) ([]*Condition, error) {
 
 // CreateConditionInput is used as input to the CreateCondition function.
 type CreateConditionInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the name of the condition.
 	Name *string `url:"name,omitempty"`
 	// Priority is a numeric string. Priority determines execution order. Lower numbers execute first.
@@ -72,7 +68,7 @@ type CreateConditionInput struct {
 }
 
 // CreateCondition creates a new resource.
-func (c *Client) CreateCondition(i *CreateConditionInput) (*Condition, error) {
+func (c *Client) CreateCondition(ctx context.Context, i *CreateConditionInput) (*Condition, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -81,7 +77,7 @@ func (c *Client) CreateCondition(i *CreateConditionInput) (*Condition, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "condition")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -96,8 +92,6 @@ func (c *Client) CreateCondition(i *CreateConditionInput) (*Condition, error) {
 
 // GetConditionInput is used as input to the GetCondition function.
 type GetConditionInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the condition to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -107,7 +101,7 @@ type GetConditionInput struct {
 }
 
 // GetCondition retrieves the specified resource.
-func (c *Client) GetCondition(i *GetConditionInput) (*Condition, error) {
+func (c *Client) GetCondition(ctx context.Context, i *GetConditionInput) (*Condition, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -119,7 +113,7 @@ func (c *Client) GetCondition(i *GetConditionInput) (*Condition, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "condition", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -136,8 +130,6 @@ func (c *Client) GetCondition(i *GetConditionInput) (*Condition, error) {
 type UpdateConditionInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the name of the condition to update (required).
 	Name string `url:"-"`
 	// Priority is a numeric string. Priority determines execution order. Lower numbers execute first.
@@ -153,7 +145,7 @@ type UpdateConditionInput struct {
 }
 
 // UpdateCondition updates the specified resource.
-func (c *Client) UpdateCondition(i *UpdateConditionInput) (*Condition, error) {
+func (c *Client) UpdateCondition(ctx context.Context, i *UpdateConditionInput) (*Condition, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -165,7 +157,7 @@ func (c *Client) UpdateCondition(i *UpdateConditionInput) (*Condition, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "condition", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -180,8 +172,6 @@ func (c *Client) UpdateCondition(i *UpdateConditionInput) (*Condition, error) {
 
 // DeleteConditionInput is the input parameter to DeleteCondition.
 type DeleteConditionInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the condition to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -191,7 +181,7 @@ type DeleteConditionInput struct {
 }
 
 // DeleteCondition deletes the specified resource.
-func (c *Client) DeleteCondition(i *DeleteConditionInput) error {
+func (c *Client) DeleteCondition(ctx context.Context, i *DeleteConditionInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -203,7 +193,7 @@ func (c *Client) DeleteCondition(i *DeleteConditionInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "condition", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

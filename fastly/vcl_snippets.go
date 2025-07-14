@@ -63,8 +63,6 @@ type Snippet struct {
 type CreateSnippetInput struct {
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content *string `url:"content,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Dynamic sets the snippet version to regular (0) or dynamic (1).
 	Dynamic *int `url:"dynamic,omitempty"`
 	// Name is the name for the snippet (required).
@@ -80,7 +78,7 @@ type CreateSnippetInput struct {
 }
 
 // CreateSnippet creates a new resource.
-func (c *Client) CreateSnippet(i *CreateSnippetInput) (*Snippet, error) {
+func (c *Client) CreateSnippet(ctx context.Context, i *CreateSnippetInput) (*Snippet, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -89,7 +87,7 @@ func (c *Client) CreateSnippet(i *CreateSnippetInput) (*Snippet, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "snippet")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -106,8 +104,6 @@ func (c *Client) CreateSnippet(i *CreateSnippetInput) (*Snippet, error) {
 type UpdateSnippetInput struct {
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content *string `url:"content,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the name for the snippet (required).
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
@@ -123,7 +119,7 @@ type UpdateSnippetInput struct {
 }
 
 // UpdateSnippet updates the specified resource.
-func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*Snippet, error) {
+func (c *Client) UpdateSnippet(ctx context.Context, i *UpdateSnippetInput) (*Snippet, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -135,7 +131,7 @@ func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*Snippet, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "snippet", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -162,8 +158,6 @@ type DynamicSnippet struct {
 type UpdateDynamicSnippetInput struct {
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content *string `url:"content,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// SnippetID is the SnippetID of the Snippet to modify (required)
 	SnippetID string `url:"-"`
 	// ServiceID is the ID of the Service to add the snippet to (required).
@@ -171,7 +165,7 @@ type UpdateDynamicSnippetInput struct {
 }
 
 // UpdateDynamicSnippet updates the specified resource.
-func (c *Client) UpdateDynamicSnippet(i *UpdateDynamicSnippetInput) (*DynamicSnippet, error) {
+func (c *Client) UpdateDynamicSnippet(ctx context.Context, i *UpdateDynamicSnippetInput) (*DynamicSnippet, error) {
 	if i.SnippetID == "" {
 		return nil, ErrMissingSnippetID
 	}
@@ -181,7 +175,7 @@ func (c *Client) UpdateDynamicSnippet(i *UpdateDynamicSnippetInput) (*DynamicSni
 
 	path := ToSafeURL("service", i.ServiceID, "snippet", i.SnippetID)
 
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -196,8 +190,6 @@ func (c *Client) UpdateDynamicSnippet(i *UpdateDynamicSnippetInput) (*DynamicSni
 
 // DeleteSnippetInput is the input parameter to the DeleteSnippet function.
 type DeleteSnippetInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the Name of the Snippet to Delete (required).
 	Name string
 	// ServiceID is the ID of the Service to add the snippet to (required).
@@ -207,7 +199,7 @@ type DeleteSnippetInput struct {
 }
 
 // DeleteSnippet deletes the specified resource.
-func (c *Client) DeleteSnippet(i *DeleteSnippetInput) error {
+func (c *Client) DeleteSnippet(ctx context.Context, i *DeleteSnippetInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -219,7 +211,7 @@ func (c *Client) DeleteSnippet(i *DeleteSnippetInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "snippet", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}
@@ -237,8 +229,6 @@ func (c *Client) DeleteSnippet(i *DeleteSnippetInput) error {
 
 // ListSnippetsInput is used as input to the ListSnippets function.
 type ListSnippetsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -249,7 +239,7 @@ type ListSnippetsInput struct {
 //
 // Content is not displayed for Dynmanic Snippets due to them being
 // versionless, use the GetDynamicSnippet function to show current content.
-func (c *Client) ListSnippets(i *ListSnippetsInput) ([]*Snippet, error) {
+func (c *Client) ListSnippets(ctx context.Context, i *ListSnippetsInput) ([]*Snippet, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -258,7 +248,7 @@ func (c *Client) ListSnippets(i *ListSnippetsInput) ([]*Snippet, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "snippet")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -273,8 +263,6 @@ func (c *Client) ListSnippets(i *ListSnippetsInput) ([]*Snippet, error) {
 
 // GetSnippetInput is used as input to the GetSnippet function.
 type GetSnippetInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the Snippet to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -287,7 +275,7 @@ type GetSnippetInput struct {
 //
 // Dynamic Snippets will not show content due to them being versionless, use
 // GetDynamicSnippet to see content.
-func (c *Client) GetSnippet(i *GetSnippetInput) (*Snippet, error) {
+func (c *Client) GetSnippet(ctx context.Context, i *GetSnippetInput) (*Snippet, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -299,7 +287,7 @@ func (c *Client) GetSnippet(i *GetSnippetInput) (*Snippet, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "snippet", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -314,8 +302,6 @@ func (c *Client) GetSnippet(i *GetSnippetInput) (*Snippet, error) {
 
 // GetDynamicSnippetInput is used as input to the GetDynamicSnippet function.
 type GetDynamicSnippetInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// SnippetID is the SnippetID of the Snippet to fetch (required).
 	SnippetID string
 	// ServiceID is the ID of the service (required).
@@ -325,7 +311,7 @@ type GetDynamicSnippetInput struct {
 // GetDynamicSnippet retrieves the specified resource.
 //
 // This will show the current content associated with a Dynamic Snippet.
-func (c *Client) GetDynamicSnippet(i *GetDynamicSnippetInput) (*DynamicSnippet, error) {
+func (c *Client) GetDynamicSnippet(ctx context.Context, i *GetDynamicSnippetInput) (*DynamicSnippet, error) {
 	if i.SnippetID == "" {
 		return nil, ErrMissingSnippetID
 	}
@@ -335,7 +321,7 @@ func (c *Client) GetDynamicSnippet(i *GetDynamicSnippetInput) (*DynamicSnippet, 
 
 	path := ToSafeURL("service", i.ServiceID, "snippet", i.SnippetID)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

@@ -92,8 +92,6 @@ type ImageOptimizerDefaultSettings struct {
 // GetImageOptimizerDefaultSettingsInput is used as input to the
 // GetImageOptimizerDefaultSettings function.
 type GetImageOptimizerDefaultSettingsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -107,8 +105,6 @@ type GetImageOptimizerDefaultSettingsInput struct {
 type UpdateImageOptimizerDefaultSettingsInput struct {
 	// Enables GIF to MP4 transformations on this service.
 	AllowVideo *bool `json:"allow_video,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
 	// The default quality to use with JPEG output. This can be overridden with the "quality" parameter on specific image optimizer requests.
 	JpegQuality *int `json:"jpeg_quality,omitempty"`
 	// The default type of JPEG output to use. This can be overridden with "format=bjpeg" and "format=pjpeg" on specific image optimizer requests.
@@ -130,7 +126,7 @@ type UpdateImageOptimizerDefaultSettingsInput struct {
 // GetImageOptimizerDefaultSettings retrives the current Image Optimizer default settings on a given service version.
 //
 // Returns (nil, nil) if no default settings are set.
-func (c *Client) GetImageOptimizerDefaultSettings(i *GetImageOptimizerDefaultSettingsInput) (*ImageOptimizerDefaultSettings, error) {
+func (c *Client) GetImageOptimizerDefaultSettings(ctx context.Context, i *GetImageOptimizerDefaultSettingsInput) (*ImageOptimizerDefaultSettings, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -140,7 +136,7 @@ func (c *Client) GetImageOptimizerDefaultSettings(i *GetImageOptimizerDefaultSet
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "image_optimizer_default_settings")
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		if herr, ok := err.(*HTTPError); ok {
 			if herr.StatusCode == http.StatusNotFound {
@@ -165,7 +161,7 @@ func (c *Client) GetImageOptimizerDefaultSettings(i *GetImageOptimizerDefaultSet
 // A minimum of one non-nil property is required.
 //
 // Returns the new Image Optimizer default settings.
-func (c *Client) UpdateImageOptimizerDefaultSettings(i *UpdateImageOptimizerDefaultSettingsInput) (*ImageOptimizerDefaultSettings, error) {
+func (c *Client) UpdateImageOptimizerDefaultSettings(ctx context.Context, i *UpdateImageOptimizerDefaultSettingsInput) (*ImageOptimizerDefaultSettings, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -178,7 +174,7 @@ func (c *Client) UpdateImageOptimizerDefaultSettings(i *UpdateImageOptimizerDefa
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "image_optimizer_default_settings")
 
-	resp, err := c.PatchJSON(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
