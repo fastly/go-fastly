@@ -1,0 +1,50 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"actions":[{"type":"block","redirect_url":"https://test.com","response_code":301}],"conditions":[{"type":"single","field":"ip","operator":"equals","value":"127.0.0.1"},{"type":"single","field":"path","operator":"equals","value":"/login"},{"type":"single","field":"agent_name","operator":"equals","value":"host-001"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AD"},{"type":"single","field":"method","operator":"equals","value":"POST"}]},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"protocol_version","operator":"equals","value":"HTTP/1.0"},{"type":"single","field":"method","operator":"equals","value":"HEAD"},{"type":"single","field":"domain","operator":"equals","value":"example.com"}]}],"description":"test","enabled":true,"group_operator":"all","request_logging":"sampled","scope":{"type":"account","applies_to":["*"]},"type":"request"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/ngwaf/v1/rules
+    method: POST
+  response:
+    body: |
+      {"title":"The request does not validate or is improperly formed","status":400,"detail":"Validation failed - corp rules cannot use custom responses","errors":[]}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "161"
+      Content-Type:
+      - application/problem+json
+      Date:
+      - Tue, 15 Jul 2025 14:55:20 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-chi-klot8100082-CHI
+      X-Timer:
+      - S1752591320.887629,VS0,VE141
+    status: 400 Bad Request
+    code: 400
+    duration: ""

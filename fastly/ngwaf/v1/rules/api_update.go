@@ -7,34 +7,34 @@ import (
 	"time"
 
 	"github.com/fastly/go-fastly/v10/fastly"
+	"github.com/fastly/go-fastly/v10/fastly/ngwaf/v1/common"
 )
 
 // UpdateInput specifies the information needed for the Update() function to
 // perform the operation.
 type UpdateInput struct {
-	// Context allows for cancellation and timeout control over the request lifecycle.
-	// Type specifies the category of the rule (e.g., "request") (required).
-	Type *string
-	// Description provides a human-readable explanation of what the rule does (required).
-	Description *string
-	// GroupOperator defines the logical operator ("any" or "all") used to evaluate grouped conditions.
-	GroupOperator *string
-	// Enabled determines if the rule is active. If false or omitted, the rule is disabled by default.
-	Enabled *bool
-	// ExpiresAt sets a specific time when the rule will automatically be disabled.
-	ExpiresAt *time.Time
 	// Actions is a list of actions that should be executed when rule conditions are met (required).
 	Actions []*UpdateAction
 	// Conditions contains individual (non-grouped) matching criteria.
 	Conditions []*UpdateCondition
+	// Description provides a human-readable explanation of what the rule does (required).
+	Description *string
+	// Enabled determines if the rule is active. If false or omitted, the rule is disabled by default.
+	Enabled *bool
+	// ExpiresAt sets a specific time when the rule will automatically be disabled.
+	ExpiresAt *time.Time
 	// GroupConditions is a list of grouped conditions with nested logical evaluation.
 	GroupConditions []*UpdateGroupCondition
+	// GroupOperator defines the logical operator ("any" or "all") used to evaluate grouped conditions.
+	GroupOperator *string
 	// RequestLogging defines how request logs are handled when the rule is matched ("sampled" or "none"). Applicable only for request-type rules.
 	RequestLogging *string
 	// RuleID is the rule identifier (required).
 	RuleID *string
-	// WorkspaceID is the workspace identifier (required).
-	WorkspaceID *string
+	// Scope defines where the rule is applied, including its type (e.g., "workspace" or "account") and the specific IDs it applies to (required).
+	Scope *common.Scope
+	// Type specifies the category of the rule (e.g., "request") (required).
+	Type *string
 }
 
 // UpdateAction represents an action taken when a rule's conditions are met.
@@ -73,11 +73,11 @@ type UpdateGroupCondition struct {
 
 // Update updates a rule.
 func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Rule, error) {
-	if i.WorkspaceID == nil {
-		return nil, fastly.ErrMissingWorkspaceID
-	}
 	if i.RuleID == nil {
 		return nil, fastly.ErrMissingRuleID
+	}
+	if i.Scope == nil {
+		return nil, fastly.ErrMissingScope
 	}
 
 	var mergedConditions []any
@@ -89,26 +89,31 @@ func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Rule, error
 	}
 
 	v := struct {
-		Type           *string         `json:"type,omitempty"`
-		Description    *string         `json:"description,omitempty"`
-		GroupOperator  *string         `json:"group_operator,omitempty"`
-		Enabled        *bool           `json:"enabled,omitempty"`
-		ExpiresAt      *time.Time      `json:"expires_at,omitempty"`
 		Actions        []*UpdateAction `json:"actions,omitempty"`
 		Conditions     []any           `json:"conditions,omitempty"`
+		Description    *string         `json:"description,omitempty"`
+		Enabled        *bool           `json:"enabled,omitempty"`
+		ExpiresAt      *time.Time      `json:"expires_at,omitempty"`
+		GroupOperator  *string         `json:"group_operator,omitempty"`
 		RequestLogging *string         `json:"request_logging,omitempty"`
+		Scope          *common.Scope   `json:"scope,omitempty"`
+		Type           *string         `json:"type,omitempty"`
 	}{
-		Type:           i.Type,
-		Description:    i.Description,
-		GroupOperator:  i.GroupOperator,
-		Enabled:        i.Enabled,
-		ExpiresAt:      i.ExpiresAt,
 		Actions:        i.Actions,
 		Conditions:     mergedConditions,
+		Description:    i.Description,
+		Enabled:        i.Enabled,
+		ExpiresAt:      i.ExpiresAt,
+		GroupOperator:  i.GroupOperator,
 		RequestLogging: i.RequestLogging,
+		Scope:          i.Scope,
+		Type:           i.Type,
 	}
 
-	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "rules", *i.RuleID)
+	path, err := common.BuildPath(i.Scope, "rules", *i.RuleID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to build API path: %w", err)
+	}
 
 	resp, err := c.PatchJSON(ctx, path, v, fastly.CreateRequestOptions())
 	if err != nil {

@@ -177,6 +177,10 @@ var ErrMissingAccessKeyID = NewFieldError("AccessKeyID")
 // requires a "Description" key, but one was not set.
 var ErrMissingDescription = NewFieldError("Description")
 
+// ErrMissingScope is an error that is returned when an input struct
+// requires a "Scope" key, but one was not set.
+var ErrMissingScope = NewFieldError("Scope")
+
 // ErrMissingDictionaryID is an error that is returned when an input struct
 // requires a "DictionaryID" key, but one was not set.
 var ErrMissingDictionaryID = NewFieldError("DictionaryID")
