@@ -10,7 +10,7 @@ import (
 // resource type, and resource ID.
 //
 // For scope type "workspace", the first element of AppliesTo is used as the workspace ID.
-// For scope type "account", the workspace ID is ignored.
+// For scope type "account", the AppliesTo is ignored.
 func BuildPath(scope *Scope, resource, resourceID string) (string, error) {
 	if scope == nil {
 		return "", fmt.Errorf("scope is required to build path")
