@@ -21,6 +21,8 @@
 - fix(client): Implement new mechanism for serializing mutating requests. ([#715](https://github.com/fastly/go-fastly/pull/715))
 
 ### Dependencies:
+- build(deps): `golang.org/x/crypto` from 0.39.0 to 0.40.0 ([#720](https://github.com/fastly/go-fastly/pull/720))
+- build(deps): `golang.org/x/sys` from 0.33.0 to 0.34.0 ([#720](https://github.com/fastly/go-fastly/pull/720))
 
 ## [v10.5.1](https://github.com/fastly/go-fastly/releases/tag/v10.5.1) (2025-06-30)
 
