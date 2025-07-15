@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/fastly/go-fastly/v10/fastly"
+	"github.com/fastly/go-fastly/v10/fastly/ngwaf/v1/common"
 )
 
 // UpdateInput specifies the information needed for the Update()
@@ -17,20 +18,21 @@ type UpdateInput struct {
 	Entries *[]string `json:"entries,omitempty"`
 	// ListID is the ID of the list to update (required).
 	ListID *string
-	// WorkspaceID is the workspace identifier (required).
-	WorkspaceID *string
+	// Scope defines where the list is located, including its type (e.g.,
+	// "workspace" or "account") and the specific IDs it applies to (required).
+	Scope *common.Scope
 }
 
 // Update updates the specified list.
 func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*List, error) {
-	if i.WorkspaceID == nil {
-		return nil, fastly.ErrMissingWorkspaceID
-	}
 	if i.ListID == nil {
 		return nil, fastly.ErrMissingListID
 	}
 
-	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "lists", *i.ListID)
+	path, err := common.BuildPath(i.Scope, "lists", *i.ListID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to build API path: %w", err)
+	}
 
 	resp, err := c.PatchJSON(ctx, path, i, fastly.CreateRequestOptions())
 	if err != nil {

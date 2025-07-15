@@ -3,32 +3,48 @@ package lists
 import (
 	"context"
 	"errors"
+	"fmt"
+	"strings"
 	"testing"
 
 	"github.com/fastly/go-fastly/v10/fastly"
+	"github.com/fastly/go-fastly/v10/fastly/ngwaf/v1/common"
 )
 
 const (
 	listDescription string = "This is a list"
 	listEntry       string = "entry1"
-	listName        string = "List Name"
-	listReferenceID string = "site.list-name"
+	listName        string = "List Name "
+	listReferenceID string = "list-name-"
 	listType        string = "string"
 )
 
-func TestClient_List(t *testing.T) {
+func TestClient_Lists_WorkspaceScope(t *testing.T) {
+	runListsTest(t, common.ScopeTypeWorkspace, fastly.TestNGWAFWorkspaceID)
+}
+
+func TestClient_Lists_AccountScope(t *testing.T) {
+	runListsTest(t, common.ScopeTypeAccount, "*") // assuming TestNGWAFAccountID exists
+}
+
+func runListsTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 	var err error
 	listEntries := []string{listEntry}
+	testListName := listName + string(scopeType)
+	testListReferenceID := listReferenceID + string(scopeType)
 
 	// Create a test list.
 	var list *List
-	fastly.Record(t, "create_list", func(c *fastly.Client) {
+	fastly.Record(t, fmt.Sprintf("%s_create_list", scopeType), func(c *fastly.Client) {
 		list, err = Create(context.TODO(), c, &CreateInput{
 			Description: fastly.ToPointer(listDescription),
 			Entries:     fastly.ToPointer(listEntries),
-			Name:        fastly.ToPointer(listName),
-			Type:        fastly.ToPointer(listType),
-			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+			Name:        fastly.ToPointer(testListName),
+			Scope: &common.Scope{
+				Type:      scopeType,
+				AppliesTo: []string{appliesToID},
+			},
+			Type: fastly.ToPointer(listType),
 		})
 	})
 	if err != nil {
@@ -43,26 +59,28 @@ func TestClient_List(t *testing.T) {
 	if list.Entries[0] != listEntries[0] {
 		t.Errorf("unexpected list entry: got %q, expected %q", list.Entries[0], listEntries[0])
 	}
-	if list.Name != listName {
-		t.Errorf("unexpected list name: got %q, expected %q", list.Name, listName)
+	if list.Name != testListName {
+		t.Errorf("unexpected list name: got %q, expected %q", list.Name, testListName)
 	}
-	if list.ReferenceID != listReferenceID {
-		t.Errorf("unexpected list reference ID: got %q, expected %q", list.ReferenceID, listReferenceID)
+	if !strings.Contains(list.ReferenceID, testListReferenceID) {
+		t.Errorf("unexpected list reference ID: expected %q to contain %q", list.ReferenceID, testListReferenceID)
 	}
 	if list.Type != listType {
 		t.Errorf("unexpected list type: got %q, expected %q", list.Type, listType)
 	}
-	// Scope should always be workspace
-	if list.Scope.Type != "workspace" {
-		t.Errorf("unexpected list scope: got %q, expected %q", list.Scope.Type, "workspace")
+	if list.Scope.Type != string(scopeType) {
+		t.Errorf("unexpected list scope: got %q, expected %q", list.Scope.Type, string(scopeType))
 	}
 
 	// Ensure we delete the test list at the end.
 	defer func() {
-		fastly.Record(t, "delete_list", func(c *fastly.Client) {
+		fastly.Record(t, fmt.Sprintf("%s_delete_list", scopeType), func(c *fastly.Client) {
 			err = Delete(context.TODO(), c, &DeleteInput{
-				ListID:      fastly.ToPointer(list.ListID),
-				WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+				ListID: fastly.ToPointer(list.ListID),
+				Scope: &common.Scope{
+					Type:      scopeType,
+					AppliesTo: []string{appliesToID},
+				},
 			})
 		})
 		if err != nil {
@@ -72,10 +90,13 @@ func TestClient_List(t *testing.T) {
 
 	// Get the test list.
 	var getList *List
-	fastly.Record(t, "get_list", func(c *fastly.Client) {
+	fastly.Record(t, fmt.Sprintf("%s_get_list", scopeType), func(c *fastly.Client) {
 		getList, err = Get(context.TODO(), c, &GetInput{
-			ListID:      fastly.ToPointer(list.ListID),
-			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+			ListID: fastly.ToPointer(list.ListID),
+			Scope: &common.Scope{
+				Type:      scopeType,
+				AppliesTo: []string{appliesToID},
+			},
 		})
 	})
 	if err != nil {
@@ -90,18 +111,17 @@ func TestClient_List(t *testing.T) {
 	if getList.Entries[0] != listEntries[0] {
 		t.Errorf("unexpected list entry: got %q, expected %q", getList.Entries[0], listEntries[0])
 	}
-	if getList.Name != listName {
-		t.Errorf("unexpected list name: got %q, expected %q", getList.Name, listName)
+	if getList.Name != testListName {
+		t.Errorf("unexpected list name: got %q, expected %q", getList.Name, testListName)
 	}
-	if getList.ReferenceID != listReferenceID {
-		t.Errorf("unexpected list reference ID: got %q, expected %q", getList.ReferenceID, listReferenceID)
+	if !strings.Contains(getList.ReferenceID, testListReferenceID) {
+		t.Errorf("unexpected list reference ID: expected %q to contain %q", getList.ReferenceID, testListReferenceID)
 	}
 	if getList.Type != listType {
 		t.Errorf("unexpected list type: got %q, expected %q", getList.Type, listType)
 	}
-	// Scope should always be workspace
-	if getList.Scope.Type != "workspace" {
-		t.Errorf("unexpected list scope: got %q, expected %q", getList.Scope.Type, "workspace")
+	if getList.Scope.Type != string(scopeType) {
+		t.Errorf("unexpected list scope: got %q, expected %q", getList.Scope.Type, string(scopeType))
 	}
 
 	// Update the test list.
@@ -111,12 +131,15 @@ func TestClient_List(t *testing.T) {
 	}
 
 	var updateList *List
-	fastly.Record(t, "update_list", func(c *fastly.Client) {
+	fastly.Record(t, fmt.Sprintf("%s_update_list", scopeType), func(c *fastly.Client) {
 		updateList, err = Update(context.TODO(), c, &UpdateInput{
 			Description: fastly.ToPointer(updateListDescription),
 			Entries:     fastly.ToPointer(updateListEntries),
 			ListID:      fastly.ToPointer(list.ListID),
-			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+			Scope: &common.Scope{
+				Type:      scopeType,
+				AppliesTo: []string{appliesToID},
+			},
 		})
 	})
 	if err != nil {
@@ -131,26 +154,28 @@ func TestClient_List(t *testing.T) {
 	if updateList.Entries[0] != updateListEntries[0] {
 		t.Errorf("unexpected list entry: got %q, expected %q", updateList.Entries[0], updateListEntries[0])
 	}
-	if updateList.Name != listName {
-		t.Errorf("unexpected list name: got %q, expected %q", updateList.Name, listName)
+	if updateList.Name != testListName {
+		t.Errorf("unexpected list name: got %q, expected %q", updateList.Name, testListName)
 	}
-	if updateList.ReferenceID != listReferenceID {
-		t.Errorf("unexpected list reference ID: got %q, expected %q", updateList.ReferenceID, listReferenceID)
+	if !strings.Contains(updateList.ReferenceID, testListReferenceID) {
+		t.Errorf("unexpected list reference ID: expected %q to contain %q", updateList.ReferenceID, testListReferenceID)
 	}
 	if updateList.Type != listType {
 		t.Errorf("unexpected list type: got %q, expected %q", updateList.Type, listType)
 	}
-	// Scope should always be workspace
-	if updateList.Scope.Type != "workspace" {
-		t.Errorf("unexpected list scope: got %q, expected %q", updateList.Scope.Type, "workspace")
+	if updateList.Scope.Type != string(scopeType) {
+		t.Errorf("unexpected list scope: got %q, expected %q", updateList.Scope.Type, string(scopeType))
 	}
 
 	var lists *Lists
 
 	// List all lists.
-	fastly.Record(t, "list_lists", func(c *fastly.Client) {
+	fastly.Record(t, fmt.Sprintf("%s_list_lists", scopeType), func(c *fastly.Client) {
 		lists, err = ListLists(context.TODO(), c, &ListInput{
-			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+			Scope: &common.Scope{
+				Type:      scopeType,
+				AppliesTo: []string{appliesToID},
+			},
 		})
 	})
 	if err != nil {
@@ -169,102 +194,101 @@ func TestClient_List(t *testing.T) {
 	if listedList.Entries[0] != updateListEntries[0] {
 		t.Errorf("unexpected list entry: got %q, expected %q", listedList.Entries[0], updateListEntries[0])
 	}
-	if listedList.Name != listName {
+	if listedList.Name != testListName {
 		t.Errorf("unexpected list name: got %q, expected %q", listedList.Name, listName)
 	}
-	if listedList.ReferenceID != listReferenceID {
-		t.Errorf("unexpected list reference ID: got %q, expected %q", listedList.ReferenceID, listReferenceID)
+	if !strings.Contains(listedList.ReferenceID, testListReferenceID) {
+		t.Errorf("unexpected list reference ID: expected %q to contain %q", listedList.ReferenceID, listReferenceID)
 	}
 	if listedList.Type != listType {
 		t.Errorf("unexpected list type: got %q, expected %q", listedList.Type, listType)
 	}
-	// Scope should always be workspace
-	if listedList.Scope.Type != "workspace" {
-		t.Errorf("unexpected list scope: got %q, expected %q", listedList.Scope.Type, "workspace")
+	if listedList.Scope.Type != string(scopeType) {
+		t.Errorf("unexpected list scope: got %q, expected %q", listedList.Scope.Type, string(scopeType))
 	}
 }
 
 func TestClient_CreateList_validation(t *testing.T) {
 	var err error
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		WorkspaceID: nil,
-	})
-	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
-		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
-	}
-	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
-		Entries:     nil,
+		Entries: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingEntries) {
 		t.Errorf("expected ErrmissingEntries: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
-		Entries:     fastly.ToPointer([]string{listEntry}),
-		Name:        nil,
+		Entries: fastly.ToPointer([]string{listEntry}),
+		Name:    nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingName) {
 		t.Errorf("expected ErrMissingName: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
-		Entries:     fastly.ToPointer([]string{listEntry}),
-		Name:        fastly.ToPointer(listName),
-		Type:        nil,
+		Entries: fastly.ToPointer([]string{listEntry}),
+		Name:    fastly.ToPointer(listName),
+		Type:    nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingType) {
 		t.Errorf("expected ErrMissingType: got %s", err)
+	}
+	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
+		Entries: fastly.ToPointer([]string{listEntry}),
+		Name:    fastly.ToPointer(listName),
+		Type:    fastly.ToPointer(listType),
+		Scope:   nil,
+	})
+	if !errors.Is(err, fastly.ErrMissingScope) {
+		t.Errorf("expected ErrMissingScope: got %s", err)
 	}
 }
 
 func TestClient_GetList_validation(t *testing.T) {
 	var err error
 	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
-		WorkspaceID: nil,
-	})
-	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
-		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
-	}
-	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
-		ListID:      nil,
+		ListID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingListID) {
 		t.Errorf("expected ErrMissingListID: got %s", err)
+	}
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
+		ListID: fastly.ToPointer("someID"),
+		Scope:  nil,
+	})
+	if !errors.Is(err, fastly.ErrMissingScope) {
+		t.Errorf("expected ErrMissingScope: got %s", err)
 	}
 }
 
 func TestClient_UpdateList_validation(t *testing.T) {
 	var err error
 	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
-		WorkspaceID: nil,
-	})
-	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
-		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
-	}
-	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
-		ListID:      nil,
+		ListID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingListID) {
 		t.Errorf("expected ErrMissingListID: got %s", err)
+	}
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
+		ListID: fastly.ToPointer("someID"),
+		Scope:  nil,
+	})
+	if !errors.Is(err, fastly.ErrMissingScope) {
+		t.Errorf("expected ErrMissingScope: got %s", err)
 	}
 }
 
 func TestClient_DeleteList_validation(t *testing.T) {
 	var err error
 	err = Delete(context.TODO(), fastly.TestClient, &DeleteInput{
-		WorkspaceID: nil,
-	})
-	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
-		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
-	}
-	err = Delete(context.TODO(), fastly.TestClient, &DeleteInput{
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
-		ListID:      nil,
+		ListID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingListID) {
 		t.Errorf("expected ErrMissingListID: got %s", err)
+	}
+	err = Delete(context.TODO(), fastly.TestClient, &DeleteInput{
+		ListID: fastly.ToPointer("someID"),
+		Scope:  nil,
+	})
+	if !errors.Is(err, fastly.ErrMissingScope) {
+		t.Errorf("expected ErrMissingScope: got %s", err)
 	}
 }
