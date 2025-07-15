@@ -6,20 +6,25 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.5.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/signals/IuiHfvyZjz9T01Ro8ijUEB
-    method: DELETE
+      - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/signals/vC6Otrkrrp7mEzzQMirfxQ
+    method: GET
   response:
-    body: ""
+    body: |
+      {"title":"This resource does not exist","status":404,"detail":"No tag found","errors":[]}
     headers:
       Accept-Ranges:
       - bytes
+      Age:
+      - "0"
       Cache-Control:
       - no-store
+      Content-Length:
+      - "90"
       Content-Type:
-      - application/json
+      - application/problem+json
       Date:
-      - Sun, 29 Jun 2025 15:20:04 GMT
+      - Wed, 16 Jul 2025 17:39:06 GMT
       Pragma:
       - no-cache
       Server:
@@ -35,9 +40,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100076-CHI, cache-nyc-kteb1890034-NYC
+      - cache-chi-kigq8000160-CHI, cache-nyc-kteb1890071-NYC
       X-Timer:
-      - S1751210405.557819,VS0,VE423
-    status: 204 No Content
-    code: 204
+      - S1752687546.150797,VS0,VE102
+    status: 404 Not Found
+    code: 404
     duration: ""
