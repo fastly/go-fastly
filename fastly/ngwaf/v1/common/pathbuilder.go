@@ -18,7 +18,7 @@ func BuildPath(scope *Scope, resource, resourceID string) (string, error) {
 
 	switch scope.Type {
 	case ScopeTypeWorkspace:
-		if len(scope.AppliesTo) > 1 || scope.AppliesTo[0] == "" {
+		if len(scope.AppliesTo) != 1 || scope.AppliesTo[0] == "" {
 			return "", fmt.Errorf("scope.applies_to must contain exactly one workspace ID for scope type 'workspace'")
 		}
 		workspaceID := scope.AppliesTo[0]
