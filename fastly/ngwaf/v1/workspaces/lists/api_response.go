@@ -2,7 +2,8 @@ package lists
 
 import "time"
 
-// List is the API response structure for the create, update, and get operations.
+// List is the API response structure for the create, update, and get
+// operations.
 type List struct {
 	// CreatedAt is the date and time in ISO 8601 format.
 	CreatedAt time.Time `json:"created_at"`

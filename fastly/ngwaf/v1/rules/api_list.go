@@ -10,8 +10,8 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly/ngwaf/v1/common"
 )
 
-// ListInput specifies the information needed for the List() function to perform
-// the operation.
+// ListInput specifies the information needed for the List() function
+// to perform the operation.
 type ListInput struct {
 	// Action filter results based on action.
 	Action *string
@@ -27,7 +27,8 @@ type ListInput struct {
 	Types *string
 }
 
-// List retrieves a list of rules, with optional filtering and pagination.
+// List retrieves a list of rules, with optional filtering and
+// pagination.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Rules, error) {
 	if i.Scope == nil {
 		return nil, fastly.ErrMissingScope

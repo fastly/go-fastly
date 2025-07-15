@@ -2,9 +2,10 @@ package signals
 
 import "time"
 
-// Signal is the api response to signals and signals operations.
+// Signal is the API response to signals and signals operations.
 type Signal struct {
-	// CreatedAt is the created date and time the event was created in ISO 8601 format.
+	// CreatedAt is the created date and time the event was
+	// created in ISO 8601 format.
 	CreatedAt time.Time `json:"created_at"`
 	// Description is the user created description of the signal
 	Description string `json:"description"`
@@ -44,7 +45,8 @@ type Scope struct {
 	AppliesTo []string `json:"applies_to"`
 }
 
-// Reason is the signal that corresponds to the reason an event was triggered.
+// Reason is the signal that corresponds to the reason an event was
+// triggered.
 type Reason struct {
 	// Signal ID is the ID of the signal that triggered the event
 	SignalID string `json:"signal_id"`

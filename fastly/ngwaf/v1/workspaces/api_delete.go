@@ -7,8 +7,8 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// DeleteInput specifies the information needed for the Delete() function to
-// perform the operation.
+// DeleteInput specifies the information needed for the Delete()
+// function to perform the operation.
 type DeleteInput struct {
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string

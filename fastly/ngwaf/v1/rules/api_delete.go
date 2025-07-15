@@ -9,8 +9,8 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly/ngwaf/v1/common"
 )
 
-// DeleteInput specifies the information needed for the Delete() function to
-// perform the operation.
+// DeleteInput specifies the information needed for the Delete()
+// function to perform the operation.
 type DeleteInput struct {
 	// RuleID is the rule identifier (required).
 	RuleID *string

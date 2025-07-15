@@ -8,8 +8,8 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// UpdateInput specifies the information needed for the Update() function to
-// perform the operation.
+// UpdateInput specifies the information needed for the Update()
+// function to perform the operation.
 type UpdateInput struct {
 	// Description is the description of the list.
 	Description *string `json:"description,omitempty"`
@@ -21,7 +21,7 @@ type UpdateInput struct {
 	WorkspaceID *string
 }
 
-// Update updates the specified workspace.
+// Update updates the specified list.
 func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*List, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
