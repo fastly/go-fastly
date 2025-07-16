@@ -16,13 +16,13 @@ type ListInput struct {
 	// response, used to retrieve the next page. To request the first page, this
 	// should be an empty string or nil.
 	Cursor *string
-	// FQDN filters results by the FQDN using a fuzzy/partial match (optional).
+	// FQDN filters results by the FQDN using a fuzzy/partial match.
 	FQDN *string
-	// Limit is the maximum number of results to return (optional).
+	// Limit is the maximum number of results to return.
 	Limit *int
-	// ServiceID filter results based on a service_id (optional).
+	// ServiceID filter results based on a service_id.
 	ServiceID *string
-	// Sort is the order in which to list the results (optional).
+	// Sort is the order in which to list the results.
 	Sort *string
 }
 

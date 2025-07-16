@@ -61,6 +61,12 @@ const batchModifyMaxExceeded string = "batch modify maximum operations exceeded"
 // specifies an "Entries" key value exceeding the maximum allowed.
 var ErrMaxExceededEntries = NewFieldError("Entries").Message(batchModifyMaxExceeded)
 
+const alertTypeDoesNotMatch string = "alert type does not match"
+
+// ErrInvalidType is an error that is returned when an alert is being updated,
+// but the alert is not of the correct type.
+var ErrInvalidType = NewFieldError("Type").Message(alertTypeDoesNotMatch)
+
 // ErrMaxExceededItems is an error that is returned when an input struct
 // specifies an "Items" key value exceeding the maximum allowed.
 var ErrMaxExceededItems = NewFieldError("Items").Message(batchModifyMaxExceeded)
@@ -76,6 +82,10 @@ var ErrMissingACLID = NewFieldError("ACLID")
 // ErrMissingAddress is an error that is returned when an input struct
 // requires a "Address" key, but one was not set.
 var ErrMissingAddress = NewFieldError("Address")
+
+// ErrMissingAlertID is an error that is returned when an input struct
+// requires a "AlertID" key, but one was not set.
+var ErrMissingAlertID = NewFieldError("AlertID")
 
 // ErrMissingBackend is an error that is returned when an input struct
 // requires a "Backend" key, but one was not set.
@@ -100,6 +110,10 @@ var ErrMissingComputeACLID = NewFieldError("ComputeACLID")
 // ErrMissingComputeACLIP is an error that is returned when an input struct
 // requires a "ComputeACLIP" key, but one was not set.
 var ErrMissingComputeACLIP = NewFieldError("ComputeACLIP")
+
+// ErrMissingConfig is an error that is returned when an input struct
+// requires a "Config" key, but one was not set.
+var ErrMissingConfig = NewFieldError("Config")
 
 // ErrMissingWorkspaceID is an error that is returned when an input struct
 // requires a "WorkspaceID" key, but one was not set.
@@ -189,6 +203,10 @@ var ErrMissingDirector = NewFieldError("Director")
 // requires a "EventID" key, but one was not set.
 var ErrMissingEventID = NewFieldError("EventID")
 
+// ErrMissingEvents is an error that is returned when an input struct
+// requires a "Events" key, but one was not set.
+var ErrMissingEvents = NewFieldError("Events")
+
 // ErrMissingFrom is an error that is returned when an input struct
 // requires a "From" key, but one was not set.
 var ErrMissingFrom = NewFieldError("From")
@@ -228,6 +246,10 @@ var ErrMissingResourceID = NewFieldError("ResourceID")
 // ErrMissingERLID is an error that is returned when an input struct
 // requires an "ERLID" key, but one was not set.
 var ErrMissingERLID = NewFieldError("ERLID")
+
+// ErrMissingHost is an error that is returned when an input struct
+// requires an "Host" key, but one was not set.
+var ErrMissingHost = NewFieldError("Host")
 
 // ErrMissingIP is an error that is returned when an input struct
 // requires a "IP" key, but one was not set.
@@ -277,6 +299,10 @@ var ErrMissingNewName = NewFieldError("NewName")
 // requires a "Number" key, but one was not set.
 var ErrMissingNumber = NewFieldError("Number")
 
+// ErrMissingProject is an error that is returned when an input struct
+// requires a "Project" key, but one was not set.
+var ErrMissingProject = NewFieldError("Project")
+
 // ErrMissingPoolID is an error that is returned when an input struct
 // requires a "PoolID" key, but one was not set.
 var ErrMissingPoolID = NewFieldError("PoolID")
@@ -304,6 +330,10 @@ var ErrMissingServiceAuthorizationsService = NewFieldError("Service").Message("S
 // ErrMissingServiceAuthorizationsUser is an error that is returned when an input struct
 // requires a "User" key of type SAUser, but one was not set or was misconfigured.
 var ErrMissingServiceAuthorizationsUser = NewFieldError("User").Message("SAUser requires an ID")
+
+// ErrMissingSite is an error that is returned when an input struct
+// requires a "Site" key, but one was not set.
+var ErrMissingSite = NewFieldError("Site")
 
 // ErrMissingStart is an error that is returned when an input struct
 // requires a "Start" key, but one was not set.
@@ -357,6 +387,10 @@ var ErrMissingKind = NewFieldError("Kind")
 // requires a "URL" key, but one was not set.
 var ErrMissingURL = NewFieldError("URL")
 
+// ErrMissingUsername is an error that is returned when an input struct
+// requires a "Username" key, but one was not set.
+var ErrMissingUsername = NewFieldError("Username")
+
 // ErrMissingValue is an error that is returned when an input struct
 // requires a "Value" key, but one was not set.
 var ErrMissingValue = NewFieldError("Value")
@@ -384,6 +418,10 @@ var ErrMissingWAFVersionID = NewFieldError("WAFVersionID")
 // ErrMissingWAFVersionNumber is an error that is returned when an input
 // struct requires a "WAFVersionNumber" key, but one was not set.
 var ErrMissingWAFVersionNumber = NewFieldError("WAFVersionNumber")
+
+// ErrMissingWebhook is an error that is returned when an input
+// struct requires a "Webhook" key, but one was not set.
+var ErrMissingWebhook = NewFieldError("Webhook")
 
 // ErrMissingYear is an error that is returned when an input struct requires a
 // "Year" key, but one was not set.

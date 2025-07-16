@@ -55,15 +55,15 @@ type AlertsMeta struct {
 
 // ListAlertDefinitionsInput is used as input to the ListAlertDefinitions function.
 type ListAlertDefinitionsInput struct {
-	// Cursor is the pagination cursor from a previous request's meta (optional).
+	// Cursor is the pagination cursor from a previous request's meta.
 	Cursor *string
-	// Limit is the maximum number of items included in each response (optional).
+	// Limit is the maximum number of items included in each response.
 	Limit *int
-	// Name filters definitions by name substring (optional).
+	// Name filters definitions by name substring.
 	Name *string
-	// ServiceID filters definitions by service (optional).
+	// ServiceID filters definitions by service.
 	ServiceID *string
-	// Sort is the field on which to sort definitions (optional).
+	// Sort is the field on which to sort definitions.
 	Sort *string
 }
 
@@ -104,7 +104,7 @@ func (c *Client) ListAlertDefinitions(ctx context.Context, i *ListAlertDefinitio
 
 // CreateAlertDefinitionInput is used as input to the CreateAlertDefinition function.
 type CreateAlertDefinitionInput struct {
-	// Description is additional text included in an alert notification (optional, limit 4096).
+	// Description is additional text included in an alert notification (limit 4096).
 	Description *string `json:"description"`
 	// Dimensions are a list of origins or domains that the alert is restricted to.
 	Dimensions map[string][]string `json:"dimensions"`
@@ -268,19 +268,19 @@ func (c *Client) TestAlertDefinition(ctx context.Context, i *TestAlertDefinition
 
 // ListAlertHistoryInput is used as input to the ListAlertHistory function.
 type ListAlertHistoryInput struct {
-	// After filters history having start or end on or after the provided timestamp (optional).
+	// After filters history having start or end on or after the provided timestamp.
 	After *string
-	// Before filters history having start or end on or before the provided timestamp (optional).
+	// Before filters history having start or end on or before the provided timestamp.
 	Before *string
-	// Cursor is the pagination cursor from a previous request's meta (optional).
+	// Cursor is the pagination cursor from a previous request's meta.
 	Cursor *string
-	// DefinitionID filters history by definition (optional).
+	// DefinitionID filters history by definition.
 	DefinitionID *string
-	// Limit is the maximum number of items included in each response (optional).
+	// Limit is the maximum number of items included in each response.
 	Limit *int
-	// ServiceID filters history by service (optional).
+	// ServiceID filters history by service.
 	ServiceID *string
-	// Sort is the field on which to sort definitions (optional).
+	// Sort is the field on which to sort definitions.
 	Sort *string
 	// Status is the alert status.
 	Status *string

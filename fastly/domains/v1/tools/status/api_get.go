@@ -20,7 +20,7 @@ const (
 type GetInput struct {
 	// Domain is the domain name being checked for availability.
 	Domain string
-	// Scope determines the availability check to perform (optional).
+	// Scope determines the availability check to perform.
 	// Scope defaults to a precise status check, specify ScopeEstimate for an estimated check.
 	Scope *Scope
 }

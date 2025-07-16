@@ -12,6 +12,7 @@
 - fix(ngwaf/v1/workspaces/redactions): remove mode and page params and remove requirement for both field and type for update ([#712](https://github.com/fastly/go-fastly/pull/712))
 
 ### Enhancements:
+- feat(ngwaf): add support for alerts ([#714](https://github.com/fastly/go-fastly/pull/714))
 
 - feat(ngwaf/v1/workspaces/thresholds): adds CRUD support for NGWAF Thresholds ([#713](https://github.com/fastly/go-fastly/pull/713))
 - feat(tls_custom_certificate): Add support for allow_untrusted_root attribute ([#596](https://github.com/fastly/go-fastly/pull/596))
