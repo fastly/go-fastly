@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/fastly/go-fastly/v10/fastly"
+	"github.com/fastly/go-fastly/v10/fastly/ngwaf/v1/common"
 )
 
 // CreateInput specifies the information needed for the Create()
@@ -17,18 +18,16 @@ type CreateInput struct {
 	Entries *[]string `json:"entries"`
 	// Name is the name of the list (required).
 	Name *string `json:"name"`
+	// Scope defines where the list is located, including its type (e.g.,
+	// "workspace" or "account") and the specific IDs it applies to (required).
+	Scope *common.Scope `json:"-"`
 	// Type is the type of the list. Must be one of `string` |
 	// `wildcard` | `ip` | `country` | `signal` (required).
 	Type *string `json:"type"`
-	// WorkspaceID is the workspace identifier (required).
-	WorkspaceID *string
 }
 
 // Create creates a new list.
 func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*List, error) {
-	if i.WorkspaceID == nil {
-		return nil, fastly.ErrMissingWorkspaceID
-	}
 	if i.Entries == nil {
 		return nil, fastly.ErrMissingEntries
 	}
@@ -38,8 +37,14 @@ func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*List, error
 	if i.Type == nil {
 		return nil, fastly.ErrMissingType
 	}
+	if i.Scope == nil {
+		return nil, fastly.ErrMissingScope
+	}
 
-	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "lists")
+	path, err := common.BuildPath(i.Scope, "lists", "")
+	if err != nil {
+		return nil, fmt.Errorf("failed to build API path: %w", err)
+	}
 
 	resp, err := c.PostJSON(ctx, path, i, fastly.CreateRequestOptions())
 	if err != nil {

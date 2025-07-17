@@ -6,22 +6,27 @@ import (
 	"fmt"
 
 	"github.com/fastly/go-fastly/v10/fastly"
+	"github.com/fastly/go-fastly/v10/fastly/ngwaf/v1/common"
 )
 
 // ListInput specifies the information needed for the List() function to perform
 // the operation.
 type ListInput struct {
-	// WorkspaceID is the workspace identifier (required).
-	WorkspaceID *string
+	// Scope defines where the list is located, including its type (e.g.,
+	// "workspace" or "account") and the specific IDs it applies to (required).
+	Scope *common.Scope
 }
 
 // ListLists retrieves a list of lists for the given workspace.
 func ListLists(ctx context.Context, c *fastly.Client, i *ListInput) (*Lists, error) {
-	if i.WorkspaceID == nil {
-		return nil, fastly.ErrMissingWorkspaceID
+	if i.Scope == nil {
+		return nil, fastly.ErrMissingScope
 	}
 
-	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "lists")
+	path, err := common.BuildPath(i.Scope, "lists", "")
+	if err != nil {
+		return nil, fmt.Errorf("failed to build API path: %w", err)
+	}
 
 	resp, err := c.Get(ctx, path, fastly.CreateRequestOptions())
 	if err != nil {
