@@ -114,7 +114,7 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 			RequestLogging: &requestLogging,
 			Actions: []*CreateAction{
 				{
-					Type:         &actionType,
+					Type: &actionType,
 				},
 			},
 			Conditions: []*CreateCondition{
@@ -386,7 +386,7 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 			RequestLogging: &updatedRequestLogging,
 			Actions: []*UpdateAction{
 				{
-					Type:         &updatedActionType,
+					Type: &updatedActionType,
 				},
 			},
 			Conditions: []*UpdateCondition{
