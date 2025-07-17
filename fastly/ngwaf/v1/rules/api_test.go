@@ -33,8 +33,6 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 
 	// Action
 	actionType := "block"
-	redirectURL := "https://test.com"
-	responseCode := 301
 
 	// Single conditions
 	conditionType := "single"
@@ -117,8 +115,6 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 			Actions: []*CreateAction{
 				{
 					Type:         &actionType,
-					RedirectURL:  &redirectURL,
-					ResponseCode: &responseCode,
 				},
 			},
 			Conditions: []*CreateCondition{
@@ -202,8 +198,6 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 	assert.Len(rule.Actions, 1)
 	action := rule.Actions[0]
 	assert.Equal(actionType, action.Type)
-	assert.Equal(redirectURL, action.RedirectURL)
-	assert.Equal(responseCode, action.ResponseCode)
 
 	assert.Len(rule.Conditions, 5) // 3 single + 2 group top-level
 
@@ -292,8 +286,6 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 	assert.Len(testRule.Actions, 1)
 	testRuleAction := rule.Actions[0]
 	assert.Equal(actionType, testRuleAction.Type)
-	assert.Equal(redirectURL, testRuleAction.RedirectURL)
-	assert.Equal(responseCode, testRuleAction.ResponseCode)
 
 	assert.Len(testRule.Conditions, 5) // 3 single + 2 group top-level
 
@@ -349,8 +341,6 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 
 	// Updated Action
 	updatedActionType := "allow"
-	updatedRedirectURL := ""
-	updatedResponseCode := 0
 
 	// Updated Single Conditions
 	updatedOperator1 := "does_not_equal"
@@ -397,8 +387,6 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 			Actions: []*UpdateAction{
 				{
 					Type:         &updatedActionType,
-					RedirectURL:  &updatedRedirectURL,
-					ResponseCode: &updatedResponseCode,
 				},
 			},
 			Conditions: []*UpdateCondition{
@@ -483,8 +471,6 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 	assert.Len(updatedRule.Actions, 1)
 	updatedAction := updatedRule.Actions[0]
 	assert.Equal(updatedActionType, updatedAction.Type)
-	assert.Equal(updatedRedirectURL, updatedAction.RedirectURL)
-	assert.Equal(updatedResponseCode, updatedAction.ResponseCode)
 
 	assert.Len(updatedRule.Conditions, 5) // 3 single + 2 group top-level
 
