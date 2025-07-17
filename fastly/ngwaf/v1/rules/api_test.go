@@ -3,14 +3,24 @@ package rules
 import (
 	"context"
 	"errors"
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/require"
 
 	"github.com/fastly/go-fastly/v10/fastly"
+	"github.com/fastly/go-fastly/v10/fastly/ngwaf/v1/common"
 )
 
-func TestClient_Rule(t *testing.T) {
+func TestClient_Rule_WorkspaceScope(t *testing.T) {
+	runRuleTest(t, common.ScopeTypeWorkspace, fastly.TestNGWAFWorkspaceID)
+}
+
+func TestClient_Rule_AccountScope(t *testing.T) {
+	runRuleTest(t, common.ScopeTypeAccount, "*") // assuming TestNGWAFAccountID exists
+}
+
+func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 	assert := require.New(t)
 
 	var err error
@@ -23,8 +33,6 @@ func TestClient_Rule(t *testing.T) {
 
 	// Action
 	actionType := "block"
-	redirectURL := "https://test.com"
-	responseCode := 301
 
 	// Single conditions
 	conditionType := "single"
@@ -67,9 +75,12 @@ func TestClient_Rule(t *testing.T) {
 
 	// List all rules.
 	var rs *Rules
-	fastly.Record(t, "list_rules", func(c *fastly.Client) {
+	fastly.Record(t, fmt.Sprintf("%s_list_rules", scopeType), func(c *fastly.Client) {
 		rs, err = List(context.TODO(), c, &ListInput{
-			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+			Scope: &common.Scope{
+				Type:      scopeType,
+				AppliesTo: []string{appliesToID},
+			},
 		})
 	})
 	if err != nil {
@@ -81,8 +92,8 @@ func TestClient_Rule(t *testing.T) {
 
 	for _, rule := range rs.Data {
 		// Ensure we are checking the correct scope
-		assert.Equal("workspace", rule.Scope.Type)
-		assert.Contains(rule.Scope.AppliesTo, fastly.TestNGWAFWorkspaceID)
+		assert.Equal(string(scopeType), rule.Scope.Type)
+		assert.Contains(rule.Scope.AppliesTo, appliesToID)
 
 		// Assert the rule with description "test" does not exist
 		assert.NotEqual(description, rule.Description, "unexpected rule with description 'test' found")
@@ -90,9 +101,12 @@ func TestClient_Rule(t *testing.T) {
 
 	// Create a test rule.
 	var rule *Rule
-	fastly.Record(t, "create_rule", func(c *fastly.Client) {
+	fastly.Record(t, fmt.Sprintf("%s_create_rule", scopeType), func(c *fastly.Client) {
 		rule, err = Create(context.TODO(), c, &CreateInput{
-			WorkspaceID:    fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+			Scope: &common.Scope{
+				Type:      scopeType,
+				AppliesTo: []string{appliesToID},
+			},
 			Type:           &ruleType,
 			Description:    &description,
 			GroupOperator:  &groupOperator,
@@ -100,9 +114,7 @@ func TestClient_Rule(t *testing.T) {
 			RequestLogging: &requestLogging,
 			Actions: []*CreateAction{
 				{
-					Type:         &actionType,
-					RedirectURL:  &redirectURL,
-					ResponseCode: &responseCode,
+					Type: &actionType,
 				},
 			},
 			Conditions: []*CreateCondition{
@@ -175,6 +187,8 @@ func TestClient_Rule(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	assert.Equal(string(scopeType), rule.Scope.Type)
+	assert.Contains(rule.Scope.AppliesTo, appliesToID)
 	assert.Equal(ruleType, rule.Type)
 	assert.Equal(description, rule.Description)
 	assert.Equal(groupOperator, rule.GroupOperator)
@@ -184,8 +198,6 @@ func TestClient_Rule(t *testing.T) {
 	assert.Len(rule.Actions, 1)
 	action := rule.Actions[0]
 	assert.Equal(actionType, action.Type)
-	assert.Equal(redirectURL, action.RedirectURL)
-	assert.Equal(responseCode, action.ResponseCode)
 
 	assert.Len(rule.Conditions, 5) // 3 single + 2 group top-level
 
@@ -234,10 +246,13 @@ func TestClient_Rule(t *testing.T) {
 
 	// Ensure we delete the test rule at the end.
 	defer func() {
-		fastly.Record(t, "delete_rule", func(c *fastly.Client) {
+		fastly.Record(t, fmt.Sprintf("%s_delete_rule", scopeType), func(c *fastly.Client) {
 			err = Delete(context.TODO(), c, &DeleteInput{
-				RuleID:      fastly.ToPointer(rule.RuleID),
-				WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+				RuleID: fastly.ToPointer(rule.RuleID),
+				Scope: &common.Scope{
+					Type:      scopeType,
+					AppliesTo: []string{appliesToID},
+				},
 			})
 		})
 		if err != nil {
@@ -247,16 +262,21 @@ func TestClient_Rule(t *testing.T) {
 
 	// Get the test rule.
 	var testRule *Rule
-	fastly.Record(t, "get_rule", func(c *fastly.Client) {
+	fastly.Record(t, fmt.Sprintf("%s_get_rule", scopeType), func(c *fastly.Client) {
 		testRule, err = Get(context.TODO(), c, &GetInput{
-			RuleID:      fastly.ToPointer(rule.RuleID),
-			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+			RuleID: fastly.ToPointer(rule.RuleID),
+			Scope: &common.Scope{
+				Type:      scopeType,
+				AppliesTo: []string{appliesToID},
+			},
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 
+	assert.Equal(string(scopeType), testRule.Scope.Type)
+	assert.Contains(testRule.Scope.AppliesTo, appliesToID)
 	assert.Equal(ruleType, testRule.Type)
 	assert.Equal(description, testRule.Description)
 	assert.Equal(groupOperator, testRule.GroupOperator)
@@ -266,8 +286,6 @@ func TestClient_Rule(t *testing.T) {
 	assert.Len(testRule.Actions, 1)
 	testRuleAction := rule.Actions[0]
 	assert.Equal(actionType, testRuleAction.Type)
-	assert.Equal(redirectURL, testRuleAction.RedirectURL)
-	assert.Equal(responseCode, testRuleAction.ResponseCode)
 
 	assert.Len(testRule.Conditions, 5) // 3 single + 2 group top-level
 
@@ -323,8 +341,6 @@ func TestClient_Rule(t *testing.T) {
 
 	// Updated Action
 	updatedActionType := "allow"
-	updatedRedirectURL := ""
-	updatedResponseCode := 0
 
 	// Updated Single Conditions
 	updatedOperator1 := "does_not_equal"
@@ -357,9 +373,12 @@ func TestClient_Rule(t *testing.T) {
 
 	// Update the test rule.
 	var updatedRule *Rule
-	fastly.Record(t, "update_rule", func(c *fastly.Client) {
+	fastly.Record(t, fmt.Sprintf("%s_update_rule", scopeType), func(c *fastly.Client) {
 		updatedRule, err = Update(context.TODO(), c, &UpdateInput{
-			WorkspaceID:    fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+			Scope: &common.Scope{
+				Type:      scopeType,
+				AppliesTo: []string{appliesToID},
+			},
 			RuleID:         fastly.ToPointer(rule.RuleID),
 			Description:    &updatedDescription,
 			GroupOperator:  &updatedGroupOperator,
@@ -367,9 +386,7 @@ func TestClient_Rule(t *testing.T) {
 			RequestLogging: &updatedRequestLogging,
 			Actions: []*UpdateAction{
 				{
-					Type:         &updatedActionType,
-					RedirectURL:  &updatedRedirectURL,
-					ResponseCode: &updatedResponseCode,
+					Type: &updatedActionType,
 				},
 			},
 			Conditions: []*UpdateCondition{
@@ -443,6 +460,8 @@ func TestClient_Rule(t *testing.T) {
 	}
 
 	// Assertions
+	assert.Equal(string(scopeType), updatedRule.Scope.Type)
+	assert.Contains(updatedRule.Scope.AppliesTo, appliesToID)
 	assert.Equal(ruleType, updatedRule.Type)
 	assert.Equal(updatedDescription, updatedRule.Description)
 	assert.Equal(updatedGroupOperator, updatedRule.GroupOperator)
@@ -452,8 +471,6 @@ func TestClient_Rule(t *testing.T) {
 	assert.Len(updatedRule.Actions, 1)
 	updatedAction := updatedRule.Actions[0]
 	assert.Equal(updatedActionType, updatedAction.Type)
-	assert.Equal(updatedRedirectURL, updatedAction.RedirectURL)
-	assert.Equal(updatedResponseCode, updatedAction.ResponseCode)
 
 	assert.Len(updatedRule.Conditions, 5) // 3 single + 2 group top-level
 
@@ -505,32 +522,35 @@ func TestClient_Rule(t *testing.T) {
 func TestClient_CreateRule_validation(t *testing.T) {
 	var err error
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		WorkspaceID: nil,
-	})
-	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
-		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
-	}
-	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Type:        nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		Type: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingType) {
 		t.Errorf("expected ErrMissingType: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Description: nil,
 		Type:        fastly.ToPointer("request"),
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		Description: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingDescription) {
 		t.Errorf("expected ErrMissingDescription: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
+		Type:        fastly.ToPointer("request"),
+		Description: fastly.ToPointer("test"),
+		Scope:       nil,
+	})
+	if !errors.Is(err, fastly.ErrMissingScope) {
+		t.Errorf("expected ErrMissingScope: got %s", err)
+	}
+	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
+		Type:        fastly.ToPointer("request"),
+		Description: fastly.ToPointer("test"),
+		Scope: &common.Scope{
+			Type:      common.ScopeTypeWorkspace,
+			AppliesTo: []string{"123"},
+		},
 		Conditions:      []*CreateCondition{},
 		GroupConditions: []*CreateGroupCondition{},
-		Description:     fastly.ToPointer("test"),
-		Type:            fastly.ToPointer("request"),
-		WorkspaceID:     fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingConditions) {
 		t.Errorf("expected ErrMissingConditions: got %s", err)
@@ -540,60 +560,60 @@ func TestClient_CreateRule_validation(t *testing.T) {
 func TestClient_GetRule_validation(t *testing.T) {
 	var err error
 	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
-		WorkspaceID: nil,
-	})
-	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
-		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
-	}
-	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
-		RuleID:      nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		RuleID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingRuleID) {
 		t.Errorf("expected ErrMissingRuleID: got %s", err)
+	}
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
+		RuleID: fastly.ToPointer("123"),
+		Scope:  nil,
+	})
+	if !errors.Is(err, fastly.ErrMissingScope) {
+		t.Errorf("expected ErrMissingScope: got %s", err)
 	}
 }
 
 func TestClient_ListRules_validation(t *testing.T) {
 	var err error
-	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
-		WorkspaceID: nil,
+	_, err = List(context.TODO(), fastly.TestClient, &ListInput{
+		Scope: nil,
 	})
-	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
-		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
+	if !errors.Is(err, fastly.ErrMissingScope) {
+		t.Errorf("expected ErrMissingScope: got %s", err)
 	}
 }
 
 func TestClient_UpdateRule_validation(t *testing.T) {
 	var err error
-	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
-		WorkspaceID: nil,
-	})
-	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
-		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
-	}
-	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
-		RuleID:      nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
+		RuleID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingRuleID) {
 		t.Errorf("expected ErrMissingRuleID: got %s", err)
+	}
+	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
+		RuleID: fastly.ToPointer("123"),
+		Scope:  nil,
+	})
+	if !errors.Is(err, fastly.ErrMissingScope) {
+		t.Errorf("expected ErrMissingScope: got %s", err)
 	}
 }
 
 func TestClient_DeleteRule_validation(t *testing.T) {
 	var err error
-	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
-		WorkspaceID: nil,
-	})
-	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
-		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
-	}
-	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
-		RuleID:      nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+	err = Delete(context.TODO(), fastly.TestClient, &DeleteInput{
+		RuleID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingRuleID) {
 		t.Errorf("expected ErrMissingRuleID: got %s", err)
+	}
+	err = Delete(context.TODO(), fastly.TestClient, &DeleteInput{
+		RuleID: fastly.ToPointer("123"),
+		Scope:  nil,
+	})
+	if !errors.Is(err, fastly.ErrMissingScope) {
+		t.Errorf("expected ErrMissingScope: got %s", err)
 	}
 }

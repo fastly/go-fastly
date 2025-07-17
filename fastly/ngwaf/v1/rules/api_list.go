@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/fastly/go-fastly/v10/fastly"
+	"github.com/fastly/go-fastly/v10/fastly/ngwaf/v1/common"
 )
 
 // ListInput specifies the information needed for the List() function
@@ -20,18 +21,20 @@ type ListInput struct {
 	Limit *int
 	// Page number of the collection to request.
 	Page *int
+	// Scope defines where the rule is applied, including its type
+	// (e.g., "workspace" or "account") and the specific IDs it
+	// applies to (required).
+	Scope *common.Scope
 	// Types filter results based on types (accepts more than one
 	// value and performs a union across rules of given types).
 	Types *string
-	// WorkspaceID is the workspace identifier (required).
-	WorkspaceID *string
 }
 
 // List retrieves a list of rules, with optional filtering and
 // pagination.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Rules, error) {
-	if i.WorkspaceID == nil {
-		return nil, fastly.ErrMissingWorkspaceID
+	if i.Scope == nil {
+		return nil, fastly.ErrMissingScope
 	}
 
 	requestOptions := fastly.CreateRequestOptions()
@@ -51,7 +54,10 @@ func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Rules, error) {
 		requestOptions.Params["types"] = *i.Types
 	}
 
-	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "rules")
+	path, err := common.BuildPath(i.Scope, "rules", "")
+	if err != nil {
+		return nil, fmt.Errorf("failed to build API path: %w", err)
+	}
 
 	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {

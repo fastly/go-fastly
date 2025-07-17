@@ -1,0 +1,50 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"actions":[{"type":"block"}],"conditions":[{"type":"single","field":"ip","operator":"equals","value":"127.0.0.1"},{"type":"single","field":"path","operator":"equals","value":"/login"},{"type":"single","field":"agent_name","operator":"equals","value":"host-001"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AD"},{"type":"single","field":"method","operator":"equals","value":"POST"}]},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"protocol_version","operator":"equals","value":"HTTP/1.0"},{"type":"single","field":"method","operator":"equals","value":"HEAD"},{"type":"single","field":"domain","operator":"equals","value":"example.com"}]}],"description":"test","enabled":true,"group_operator":"all","request_logging":"sampled","scope":{"type":"account","applies_to":["*"]},"type":"request"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/ngwaf/v1/rules
+    method: POST
+  response:
+    body: |
+      {"id":"6878698676eed0b373a665e5","type":"request","scope":{"type":"account","applies_to":["*"]},"enabled":true,"description":"test","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"ip","operator":"equals","value":"127.0.0.1"},{"type":"single","field":"path","operator":"equals","value":"/login"},{"type":"single","field":"agent_name","operator":"equals","value":"host-001"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AD"},{"type":"single","field":"method","operator":"equals","value":"POST"}]},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"protocol_version","operator":"equals","value":"HTTP/1.0"},{"type":"single","field":"method","operator":"equals","value":"HEAD"},{"type":"single","field":"domain","operator":"equals","value":"example.com"}]}],"actions":[{"type":"block"}],"created_at":"2025-07-17T03:09:58Z","updated_at":"2025-07-17T03:09:58Z"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "999"
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 17 Jul 2025 03:09:59 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-chi-klot8100089-CHI
+      X-Timer:
+      - S1752721799.878890,VS0,VE735
+    status: 201 Created
+    code: 201
+    duration: ""
