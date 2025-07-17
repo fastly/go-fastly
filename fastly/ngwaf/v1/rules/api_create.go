@@ -13,26 +13,37 @@ import (
 // CreateInput specifies the information needed for the Create()
 // function to perform the operation.
 type CreateInput struct {
-	// Actions is a list of actions that should be executed when rule conditions are met (required).
+	// Actions is a list of actions that should be executed when
+	// rule conditions are met (required).
 	Actions []*CreateAction
 	// Conditions contains individual (non-grouped) matching
 	// criteria.
 	Conditions []*CreateCondition
-	// Description provides a human-readable explanation of what the rule does (required).
+	// Description provides a human-readable explanation of what
+	// the rule does (required).
 	Description *string
-	// Enabled determines if the rule is active. If false or omitted, the rule is disabled by default.
+	// Enabled determines if the rule is active. If false or
+	// omitted, the rule is disabled by default.
 	Enabled *bool
-	// ExpiresAt sets a specific time when the rule will automatically be disabled.
+	// ExpiresAt sets a specific time when the rule will
+	// automatically be disabled.
 	ExpiresAt *time.Time
-	// GroupConditions is a list of grouped conditions with nested logical evaluation.
+	// GroupConditions is a list of grouped conditions with nested
+	// logical evaluation.
 	GroupConditions []*CreateGroupCondition
-	// GroupOperator defines the logical operator ("any" or "all") used to evaluate grouped conditions.
+	// GroupOperator defines the logical operator ("any" or "all")
+	// used to evaluate grouped conditions.
 	GroupOperator *string
-	// RequestLogging defines how request logs are handled when the rule is matched ("sampled" or "none"). Applicable only for request-type rules.
+	// RequestLogging defines how request logs are handled when
+	// the rule is matched ("sampled" or "none"). Applicable only
+	// for request-type rules.
 	RequestLogging *string
-	// Scope defines where the rule is applied, including its type (e.g., "workspace" or "account") and the specific IDs it applies to (required).
+	// Scope defines where the rule is applied, including its type
+	// (e.g., "workspace" or "account") and the specific IDs it
+	// applies to (required).
 	Scope *common.Scope
-	// Type specifies the category of the rule (e.g., "request") (required).
+	// Type specifies the category of the rule (e.g., "request")
+	// (required).
 	Type *string
 }
 

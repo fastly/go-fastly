@@ -21,9 +21,12 @@ type ListInput struct {
 	Limit *int
 	// Page number of the collection to request.
 	Page *int
-	// Scope defines where the rule is applied, including its type (e.g., "workspace" or "account") and the specific IDs it applies to (required).
+	// Scope defines where the rule is applied, including its type
+	// (e.g., "workspace" or "account") and the specific IDs it
+	// applies to (required).
 	Scope *common.Scope
-	// Types filter results based on types (accepts more than one value and performs a union across rules of given types).
+	// Types filter results based on types (accepts more than one
+	// value and performs a union across rules of given types).
 	Types *string
 }
 

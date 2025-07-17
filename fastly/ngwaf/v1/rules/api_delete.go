@@ -14,7 +14,9 @@ import (
 type DeleteInput struct {
 	// RuleID is the rule identifier (required).
 	RuleID *string
-	// Scope defines where the rule is applied, including its type (e.g., "workspace" or "account") and the specific IDs it applies to (required).
+	// Scope defines where the rule is applied, including its
+	// type (e.g., "workspace" or "account") and the specific
+	// IDs it applies to (required).
 	Scope *common.Scope
 }
 
