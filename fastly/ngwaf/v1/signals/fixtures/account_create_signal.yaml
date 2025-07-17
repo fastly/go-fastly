@@ -15,7 +15,7 @@ interactions:
     method: POST
   response:
     body: |
-      {"id":"vC6Otrkrrp7mEzzQMirfxQ","reference_id":"corp.a-real-name-account","name":"A Real Name account","description":"This is a description","created_at":"2025-07-16T17:39:05Z","updated_at":"2025-07-16T17:39:05Z","scope":{"type":"account","applies_to":["*"]}}
+      {"id":"v2vq8TNDMtAt3HVmozpn3O","reference_id":"corp.a-real-name-account","name":"A Real Name account","description":"This is a description","created_at":"2025-07-17T15:28:10Z","updated_at":"2025-07-17T15:28:10Z","scope":{"type":"account","applies_to":["*"]}}
     headers:
       Accept-Ranges:
       - bytes
@@ -26,7 +26,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 16 Jul 2025 17:39:06 GMT
+      - Thu, 17 Jul 2025 15:28:10 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000086-CHI, cache-nyc-kteb1890071-NYC
+      - cache-chi-kigq8000086-CHI, cache-nyc-kteb1890079-NYC
       X-Timer:
-      - S1752687546.691485,VS0,VE424
+      - S1752766090.067162,VS0,VE412
     status: 201 Created
     code: 201
     duration: ""
