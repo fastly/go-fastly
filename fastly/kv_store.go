@@ -26,7 +26,7 @@ type KVStore struct {
 type CreateKVStoreInput struct {
 	// Name is the name of the store to create (required).
 	Name string `json:"name"`
-	// Location is the regional location of the store (optional).
+	// Location is the regional location of the store.
 	Location string `json:"-"`
 }
 
@@ -61,7 +61,7 @@ type ListKVStoresInput struct {
 	Cursor string
 	// Limit is the maximum number of items included the response.
 	Limit int
-	// Name is the name of the KV store (optional).
+	// Name is the name of the KV store.
 	Name string
 }
 

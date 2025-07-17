@@ -395,7 +395,7 @@ func (c *Client) Request(ctx context.Context, verb, p string, ro RequestOptions)
 // RequestOptions is the list of options to pass to the request.
 type RequestOptions struct {
 	// Body is an io.Reader object that will be streamed or uploaded with the
-	// Request.
+	// Request. This will overwrite any input object.
 	Body io.Reader
 	// BodyLength is the final size of the Body.
 	BodyLength int64

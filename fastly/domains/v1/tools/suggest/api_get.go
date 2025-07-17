@@ -12,15 +12,15 @@ import (
 type GetInput struct {
 	// Query are the term(s) to search against.
 	Query string
-	// Defaults is a comma-separated list of default zones to include in the search results response (optional).
+	// Defaults is a comma-separated list of default zones to include in the search results response.
 	Defaults *string
-	// Keywords is a comma-separated list of keywords for seeding the results (optional).
+	// Keywords is a comma-separated list of keywords for seeding the results.
 	// Example: a new gTLD like `kitchen`, or a related keyword like `vegan`.
 	// Helpful for search result relevance (e.g. from a targeted ad click, a user profile, etc.)
 	Keywords *string
-	// Location overrides the IP location detection for country-code zones, with a two-character country code (optional).
+	// Location overrides the IP location detection for country-code zones, with a two-character country code.
 	Location *string
-	// Vendor is the domain name of a specific registrar or vendor (optional).
+	// Vendor is the domain name of a specific registrar or vendor.
 	// Vendor is used to filter results by the zones supported by the vendor.
 	Vendor *string
 }
