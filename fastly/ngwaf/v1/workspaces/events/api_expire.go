@@ -8,8 +8,8 @@ import (
 	"github.com/fastly/go-fastly/v11/fastly"
 )
 
-// ExpireInput specifies the information needed for the Expire() function to
-// perform the operation.
+// ExpireInput specifies the information needed for the Expire()
+// function to perform the operation.
 type ExpireInput struct {
 	// EventID is the event identifier (required).
 	EventID *string `json:"-"`

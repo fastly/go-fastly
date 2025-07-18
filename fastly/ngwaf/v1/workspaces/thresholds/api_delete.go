@@ -7,12 +7,12 @@ import (
 	"github.com/fastly/go-fastly/v11/fastly"
 )
 
-// DeleteInput specifies the information needed for the Delete() function to
-// perform the operation.
+// DeleteInput specifies the information needed for the Delete()
+// function to perform the operation.
 type DeleteInput struct {
-	// ThresholdID is the threshold identifier. Required.
+	// ThresholdID is the threshold identifier (required).
 	ThresholdID *string
-	// WorkspaceID is the workspace identifier. Required.
+	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string
 }
 

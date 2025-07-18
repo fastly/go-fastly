@@ -23,7 +23,7 @@ type TLSMutualAuthentication struct {
 
 // ListTLSMutualAuthenticationsInput is used as input to the Client.ListTLSMutualAuthentication function.
 type ListTLSMutualAuthenticationsInput struct {
-	// Include is a list of related objects to include (optional).
+	// Include is a list of related objects to include.
 	Include []string
 	// PageNumber is the required page index for pagination.
 	PageNumber int
@@ -80,7 +80,7 @@ func (c *Client) ListTLSMutualAuthentication(ctx context.Context, i *ListTLSMutu
 type GetTLSMutualAuthenticationInput struct {
 	// ID is an alphanumeric string identifying a mutual authentication (required).
 	ID string
-	// Include is a comma-separated list of related objects to include (optional).
+	// Include is a comma-separated list of related objects to include.
 	Include string
 }
 
@@ -121,7 +121,7 @@ type CreateTLSMutualAuthenticationInput struct {
 	Enforced bool `jsonapi:"attr,enforced"`
 	// ID should not be set (it's internally used to help marshal the JSONAPI request data).
 	ID string `jsonapi:"primary,mutual_authentication"`
-	// Name is a custom name for your mutual authentication (optional).
+	// Name is a custom name for your mutual authentication.
 	Name string `jsonapi:"attr,name,omitempty"`
 }
 
@@ -155,7 +155,7 @@ type UpdateTLSMutualAuthenticationInput struct {
 	Enforced bool `jsonapi:"attr,enforced"`
 	// ID is an alphanumeric string identifying a mutual authentication (required).
 	ID string `jsonapi:"primary,mutual_authentication"`
-	// Name is a custom name for your mutual authentication (optional).
+	// Name is a custom name for your mutual authentication.
 	Name string `jsonapi:"attr,name,omitempty"`
 }
 

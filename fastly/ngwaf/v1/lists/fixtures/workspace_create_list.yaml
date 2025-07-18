@@ -1,0 +1,51 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"description":"This is a list","entries":["entry1"],"name":"List Name
+      workspace","type":"string"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/lists
+    method: POST
+  response:
+    body: |
+      {"id":"BihNOa797HeV0We2A4LBr4","type":"string","reference_id":"site.list-name-workspace","name":"List Name workspace","description":"This is a list","entries":["entry1"],"created_at":"2025-07-16T18:12:24Z","updated_at":"2025-07-16T18:12:24Z","scope":{"type":"workspace"}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "272"
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 16 Jul 2025 18:12:24 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000107-CHI, cache-ewr-kewr1740049-EWR
+      X-Timer:
+      - S1752689544.015094,VS0,VE403
+    status: 201 Created
+    code: 201
+    duration: ""

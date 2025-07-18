@@ -8,8 +8,8 @@ import (
 	"github.com/fastly/go-fastly/v11/fastly"
 )
 
-// GetInput specifies the information needed for the Get() function to perform
-// the operation.
+// GetInput specifies the information needed for the Get() function to
+// perform the operation.
 type GetInput struct {
 	// VirtualPatchID is the virtual patch identifier (required).
 	VirtualPatchID *string

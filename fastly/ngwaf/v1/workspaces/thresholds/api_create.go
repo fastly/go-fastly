@@ -8,26 +8,35 @@ import (
 	"github.com/fastly/go-fastly/v11/fastly"
 )
 
-// CreateInput specifies the information needed for the Create() function to
-// perform the operation.
+// CreateInput specifies the information needed for the Create()
+// function to perform the operation.
 type CreateInput struct {
-	// Action to take when threshold is exceeded. Must be one of `block` or `log`. Required.
+	// Action to take when threshold is exceeded. Must be one of
+	// `block` or `log` (required).
 	Action *string `json:"action"`
-	// DontNotify indicates whether to silence notifications when action is taken. Defaults to false.
+	// DontNotify indicates whether to silence notifications when
+	// action is taken. Defaults to false.
 	DontNotify *bool `json:"dont_notify,omitempty"`
-	// Duration is the duration the action is in place. Default duration is 0. If set, must be greater than 0 and less than 31556900 (1 year).
+	// Duration is the duration the action is in place. Default
+	// duration is 0. If set, must be greater than 0 and less than
+	// 31556900 (1 year).
 	Duration *int `json:"duration,omitempty"`
-	// Enabled is whether this threshold is active. Defaults to false.
+	// Enabled is whether this threshold is active. Defaults to
+	// false.
 	Enabled *bool `json:"enabled,omitempty"`
-	// Limit is the threshold limit. Must be between 1 and 10000 inclusive. Required.
+	// Limit is the threshold limit. Must be between 1 and 10000
+	// inclusive (required).
 	Limit *int `json:"limit"`
-	// Interval is the threshold interval in seconds. Must be one of 60, 600, or 36000. Required.
+	// Interval is the threshold interval in seconds. Must be one
+	// of 60, 600, or 36000 (required).
 	Interval *int `json:"interval"`
-	// Name is the threshold name. Required.
+	// Name is the threshold name (required).
 	Name *string `json:"name"`
-	// Signal is the name of the signal this threshold is acting on. Required.
+	// Signal is the name of the signal this threshold is acting
+	// on (required).
 	Signal *string `json:"signal"`
-	// WorkspaceID is the ID of the workspace that the threshold is being created in. Required.
+	// WorkspaceID is the ID of the workspace that the threshold
+	// is being created in (required).
 	WorkspaceID *string `json:"-"`
 }
 

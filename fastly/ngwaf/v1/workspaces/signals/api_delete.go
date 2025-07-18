@@ -7,8 +7,8 @@ import (
 	"github.com/fastly/go-fastly/v11/fastly"
 )
 
-// DeleteInput specifies the information needed for the Delete() function to
-// perform the operation.
+// DeleteInput specifies the information needed for the Delete()
+// function to perform the operation.
 type DeleteInput struct {
 	// SignalID is the signal identifier (required).
 	SignalID *string

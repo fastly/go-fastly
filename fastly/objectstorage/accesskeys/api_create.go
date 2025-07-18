@@ -26,7 +26,7 @@ type CreateInput struct {
 	Description *string `json:"description"`
 	// Permission is the permissions the access key will have (required).
 	Permission *string `json:"permission"`
-	// Buckets are the buckets the access key will have (optional).
+	// Buckets are the buckets the access key will have.
 	Buckets *[]string `json:"buckets"`
 }
 

@@ -8,14 +8,17 @@ import (
 	"github.com/fastly/go-fastly/v11/fastly"
 )
 
-// CreateInput specifies the information needed for the Create() function to
-// perform the operation.
+// CreateInput specifies the information needed for the Create()
+// function to perform the operation.
 type CreateInput struct {
-	// Description is a description of the signal (optional).
+	// Description is a description of the signal.
 	Description *string `json:"description,omitempty"`
-	// Name is the name of the signal. Must be between 3 and 25 characters. Letters, numbers, hyphens, and spaces are accepted. Special characters and periods are not accepted.
+	// Name is the name of the signal. Must be between 3 and 25
+	// characters. Letters, numbers, hyphens, and spaces are
+	// accepted. Special characters and periods are not accepted (required).
 	Name *string `json:"name"`
-	// WorkspaceID is the ID of the workspace that the signal is being created in.
+	// WorkspaceID is the ID of the workspace that the signal is
+	// being created in (required).
 	WorkspaceID *string `json:"-"`
 }
 

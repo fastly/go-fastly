@@ -9,8 +9,8 @@ import (
 	"github.com/fastly/go-fastly/v11/fastly"
 )
 
-// ListInput specifies the information needed for the List() function to perform
-// the operation.
+// ListInput specifies the information needed for the List() function
+// to perform the operation.
 type ListInput struct {
 	// Limit how many results are returned.
 	Limit *int
@@ -20,7 +20,8 @@ type ListInput struct {
 	Page *int
 }
 
-// List retrieves a list of workspaces, with optional filtering and pagination.
+// List retrieves a list of workspaces, with optional filtering and
+// pagination.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Workspaces, error) {
 	requestOptions := fastly.CreateRequestOptions()
 	if i.Limit != nil {

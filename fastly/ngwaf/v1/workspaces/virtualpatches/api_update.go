@@ -8,13 +8,17 @@ import (
 	"github.com/fastly/go-fastly/v11/fastly"
 )
 
-// UpdateInput specifies the information needed for the Put() function to perform
-// the operation.
+// UpdateInput specifies the information needed for the Update function
+// to perform the operation.
 type UpdateInput struct {
-	// Action
-	// Enabled is the toggle status indicator of the VirtualPatch (optional).
+	// Action is the action to take when signal for virtual patch is detected.
+	Action *string `json:"action"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `json:"-"`
+	// Enabled is the toggle status indicator of the VirtualPatch.
 	Enabled *bool `json:"enabled"`
-	// Mode is action to take when a signal for virtual patch is detected (optional).
+	// Mode is action to take when a signal for virtual patch is
+	// detected.
 	Mode *string `json:"mode"`
 	// VirtualPatchID is the virtual patch identifier (required).
 	VirtualPatchID *string `json:"-"`

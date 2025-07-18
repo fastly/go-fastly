@@ -8,28 +8,35 @@ import (
 	"github.com/fastly/go-fastly/v11/fastly"
 )
 
-// UpdateInput specifies the information needed for the Update() function to
-// perform the operation.
+// UpdateInput specifies the information needed for the Update()
+// function to perform the operation.
 type UpdateInput struct {
-	// Action to take when threshold is exceeded. Must be one of `block` or `log`. Required.
+	// Action to take when threshold is exceeded. Must be one of
+	// `block` or `log` (required).
 	Action *string `json:"action"`
-	// DontNotify indicates whether to silence notifications when action is taken.
+	// DontNotify indicates whether to silence notifications when
+	// action is taken.
 	DontNotify *bool `json:"dont_notify,omitempty"`
-	// Duration is the duration the action is in place. Must be greater than 0 and less than 31556900 (1 year).
+	// Duration is the duration the action is in place. Must be
+	// greater than 0 and less than 31556900 (1 year).
 	Duration *int `json:"duration,omitempty"`
 	// Enabled is whether this threshold is active.
 	Enabled *bool `json:"enabled,omitempty"`
-	// Limit is the threshold limit. Must be between 1 and 10000 inclusive.
+	// Limit is the threshold limit. Must be between 1 and 10000
+	// inclusive.
 	Limit *int `json:"limit,omitempty"`
-	// Interval is the threshold interval in seconds. Must be one of 60, 600, or 36000.
+	// Interval is the threshold interval in seconds. Must be one
+	// of 60, 600, or 36000.
 	Interval *int `json:"interval,omitempty"`
 	// Name is the threshold name.
 	Name *string `json:"name,omitempty"`
-	// Signal is the name of the signal this threshold is acting on.
+	// Signal is the name of the signal this threshold is acting
+	// on.
 	Signal *string `json:"signal,omitempty"`
-	// ThresholdID is the threshold identifier. Required.
+	// ThresholdID is the threshold identifier (required).
 	ThresholdID *string `json:"-"`
-	// WorkspaceID is the ID of the workspace that the threshold being updated is in. Required.
+	// WorkspaceID is the ID of the workspace that the threshold
+	// being updated is in (required).
 	WorkspaceID *string `json:"-"`
 }
 

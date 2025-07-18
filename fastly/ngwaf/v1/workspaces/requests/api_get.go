@@ -8,8 +8,8 @@ import (
 	"github.com/fastly/go-fastly/v11/fastly"
 )
 
-// GetInput specifies the information needed for the Get() function to perform
-// the operation.
+// GetInput specifies the information needed for the Get() function to
+// perform the operation.
 type GetInput struct {
 	// RequestID is the request identifier (required).
 	RequestID *string
@@ -17,7 +17,7 @@ type GetInput struct {
 	WorkspaceID *string
 }
 
-// Get retrieves the specified reqest.
+// Get retrieves the specified request.
 func Get(ctx context.Context, c *fastly.Client, i *GetInput) (*Request, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID

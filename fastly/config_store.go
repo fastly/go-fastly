@@ -150,7 +150,7 @@ func (c *Client) GetConfigStoreMetadata(ctx context.Context, i *GetConfigStoreMe
 
 // ListConfigStoreServicesInput is the input to ListConfigStoreServices.
 type ListConfigStoresInput struct {
-	// Name is the name of a config store (optional).
+	// Name is the name of a config store.
 	Name string
 }
 
