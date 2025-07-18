@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/fastly/go-fastly/v10/fastly/products"
-	"github.com/fastly/go-fastly/v10/internal/test_utils"
+	"github.com/fastly/go-fastly/v11/fastly/products"
+	"github.com/fastly/go-fastly/v11/internal/test_utils"
 )
 
 // validateOutput provides common validation for all responses to

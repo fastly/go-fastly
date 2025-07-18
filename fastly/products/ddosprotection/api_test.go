@@ -4,11 +4,11 @@ import (
 	"context"
 	"testing"
 
-	"github.com/fastly/go-fastly/v10/fastly"
-	"github.com/fastly/go-fastly/v10/fastly/products"
-	"github.com/fastly/go-fastly/v10/fastly/products/ddosprotection"
-	"github.com/fastly/go-fastly/v10/internal/productcore"
-	"github.com/fastly/go-fastly/v10/internal/test_utils"
+	"github.com/fastly/go-fastly/v11/fastly"
+	"github.com/fastly/go-fastly/v11/fastly/products"
+	"github.com/fastly/go-fastly/v11/fastly/products/ddosprotection"
+	"github.com/fastly/go-fastly/v11/internal/productcore"
+	"github.com/fastly/go-fastly/v11/internal/test_utils"
 
 	"github.com/stretchr/testify/require"
 )

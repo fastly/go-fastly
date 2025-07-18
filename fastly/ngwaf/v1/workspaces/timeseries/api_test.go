@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/fastly/go-fastly/v10/fastly"
+	"github.com/fastly/go-fastly/v11/fastly"
 )
 
 // Global value for the tests.
