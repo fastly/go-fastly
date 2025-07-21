@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/fastly/go-fastly/v11/fastly"
+	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/common"
 )
 
 // CreateInput specifies the information needed for the Create()
@@ -17,21 +18,24 @@ type CreateInput struct {
 	// characters. Letters, numbers, hyphens, and spaces are
 	// accepted. Special characters and periods are not accepted (required).
 	Name *string `json:"name"`
-	// WorkspaceID is the ID of the workspace that the signal is
-	// being created in (required).
-	WorkspaceID *string `json:"-"`
+	// Scope defines where the signal is located, including its type (e.g.,
+	// "workspace" or "account") and the specific IDs it applies to (required).
+	Scope *common.Scope `json:"-"`
 }
 
 // Create creates a new signal in the given workspace.
 func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Signal, error) {
-	if i.WorkspaceID == nil {
-		return nil, fastly.ErrMissingWorkspaceID
-	}
 	if i.Name == nil {
 		return nil, fastly.ErrMissingName
 	}
+	if i.Scope == nil {
+		return nil, fastly.ErrMissingScope
+	}
 
-	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "signals")
+	path, err := common.BuildPath(i.Scope, "signals", "")
+	if err != nil {
+		return nil, fmt.Errorf("failed to build API path: %w", err)
+	}
 
 	resp, err := c.PostJSON(ctx, path, i, fastly.CreateRequestOptions())
 	if err != nil {

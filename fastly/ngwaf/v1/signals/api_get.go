@@ -6,27 +6,32 @@ import (
 	"fmt"
 
 	"github.com/fastly/go-fastly/v11/fastly"
+	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/common"
 )
 
 // GetInput specifies the information needed for the Get() function to
 // perform the operation.
 type GetInput struct {
+	// Scope defines where the signal is applied, including its type (e.g.,
+	// "workspace" or "account") and the specific IDs it applies to (required).
+	Scope *common.Scope
 	// SignalID is the signal identifier (required).
 	SignalID *string
-	// WorkspaceID is the workspace identifier (required).
-	WorkspaceID *string
 }
 
 // Get retrieves the specified signal for the given workspace.
 func Get(ctx context.Context, c *fastly.Client, i *GetInput) (*Signal, error) {
-	if i.WorkspaceID == nil {
-		return nil, fastly.ErrMissingWorkspaceID
+	if i.Scope == nil {
+		return nil, fastly.ErrMissingScope
 	}
 	if i.SignalID == nil {
 		return nil, fastly.ErrMissingSignalID
 	}
 
-	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "signals", *i.SignalID)
+	path, err := common.BuildPath(i.Scope, "signals", *i.SignalID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to build API path: %w", err)
+	}
 
 	resp, err := c.Get(ctx, path, fastly.CreateRequestOptions())
 	if err != nil {

@@ -14,6 +14,7 @@
 - fix(ngwaf/v1/workspaces/redactions): remove mode and page params and remove requirement for both field and type for update ([#712](https://github.com/fastly/go-fastly/pull/712))
 - refactor(ngwaf/v1/rules): combine workspaces and account rules and provide tooling to do the same for lists and signals ([#721](https://github.com/fastly/go-fastly/pull/721))
 - feat(ngwaf/v1/lists): add account level support to ngwaf lists ([#723](https://github.com/fastly/go-fastly/pull/723))
+- feat(ngwaf/v1/signals): moves signals up to the base level and adds support for account level signals ([#722](https://github.com/fastly/go-fastly/pull/722))
 
 ### Enhancements:
 - feat(ngwaf): add support for alerts ([#714](https://github.com/fastly/go-fastly/pull/714))
