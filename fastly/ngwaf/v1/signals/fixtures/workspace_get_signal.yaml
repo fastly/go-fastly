@@ -7,11 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/signals/aDN0pSweW5mjxTgNaxE08U
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/signals/JYLhUW8UOr3kfAhGYQzVXb
     method: GET
   response:
     body: |
-      {"id":"aDN0pSweW5mjxTgNaxE08U","reference_id":"site.a-real-name-workspace","name":"A Real Name workspace","description":"This is a description","created_at":"2025-07-17T15:28:00Z","updated_at":"2025-07-17T15:28:00Z","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]}}
+      {"id":"JYLhUW8UOr3kfAhGYQzVXb","reference_id":"site.a-real-name-workspace","name":"A Real Name workspace","description":"This is a description","created_at":"2025-07-21T14:42:20Z","updated_at":"2025-07-21T14:42:20Z","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]}}
     headers:
       Accept-Ranges:
       - bytes
@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 17 Jul 2025 15:28:01 GMT
+      - Mon, 21 Jul 2025 14:42:21 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000149-CHI, cache-nyc-kteb1890079-NYC
+      - cache-chi-klot8100068-CHI, cache-ewr-kewr1740086-EWR
       X-Timer:
-      - S1752766081.220722,VS0,VE103
+      - S1753108941.068317,VS0,VE101
     status: 200 OK
     code: 200
     duration: ""

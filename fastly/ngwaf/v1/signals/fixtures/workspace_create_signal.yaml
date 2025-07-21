@@ -15,7 +15,7 @@ interactions:
     method: POST
   response:
     body: |
-      {"id":"aDN0pSweW5mjxTgNaxE08U","reference_id":"site.a-real-name-workspace","name":"A Real Name workspace","description":"This is a description","created_at":"2025-07-17T15:28:00Z","updated_at":"2025-07-17T15:28:00Z","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]}}
+      {"id":"JYLhUW8UOr3kfAhGYQzVXb","reference_id":"site.a-real-name-workspace","name":"A Real Name workspace","description":"This is a description","created_at":"2025-07-21T14:42:20Z","updated_at":"2025-07-21T14:42:20Z","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]}}
     headers:
       Accept-Ranges:
       - bytes
@@ -26,7 +26,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 17 Jul 2025 15:28:01 GMT
+      - Mon, 21 Jul 2025 14:42:21 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100078-CHI, cache-nyc-kteb1890079-NYC
+      - cache-chi-klot8100078-CHI, cache-ewr-kewr1740086-EWR
       X-Timer:
-      - S1752766081.747632,VS0,VE453
+      - S1753108941.633486,VS0,VE413
     status: 201 Created
     code: 201
     duration: ""
