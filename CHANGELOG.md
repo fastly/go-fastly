@@ -2,13 +2,27 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.5.1...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v11.0.0...)
 
 ### Breaking:
 
+### Enhancements:
+
+### Bug fixes:
+
+### Dependencies:
+
+## [v11.0.0](https://github.com/fastly/go-fastly/releases/tag/v11.0.0) (2025-07-21)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.5.1...v11.0.0)
+
+### Breaking:
+
+- breaking(go.mod): Upgrade to version 11. [#719](https://github.com/fastly/go-fastly/pull/719)
+- fix(product_enablement): Remove deprecated functionality. ([#719](https://github.com/fastly/go-fastly/pull/719))
 - feat(context): context.Context support has been added to all exported functions. ([#717](https://github.com/fastly/go-fastly/pull/717))
 - refactor(ngwaf/v1/workspaces): move all workspace specific endpoints into the appropriate folder ([#708](https://github.com/fastly/go-fastly/pull/708))
-- fix(ngwaf/v1/workpsaces/requests): add missing field to metadata struct and update documentation around limits ([#711](https://github.com/fastly/go-fastly/pull/711))
+- fix(ngwaf/v1/workspaces/requests): add missing field to metadata struct and update documentation around limits ([#711](https://github.com/fastly/go-fastly/pull/711))
 - fix(ngwaf/v1/workspaces/redactions): remove mode and page params and remove requirement for both field and type for update ([#712](https://github.com/fastly/go-fastly/pull/712))
 - refactor(ngwaf/v1/rules): combine workspaces and account rules and provide tooling to do the same for lists and signals ([#721](https://github.com/fastly/go-fastly/pull/721))
 - feat(ngwaf/v1/lists): add account level support to ngwaf lists ([#723](https://github.com/fastly/go-fastly/pull/723))
@@ -16,7 +30,6 @@
 
 ### Enhancements:
 - feat(ngwaf): add support for alerts ([#714](https://github.com/fastly/go-fastly/pull/714))
-
 - feat(ngwaf/v1/workspaces/thresholds): adds CRUD support for NGWAF Thresholds ([#713](https://github.com/fastly/go-fastly/pull/713))
 - feat(tls_custom_certificate): Add support for allow_untrusted_root attribute ([#596](https://github.com/fastly/go-fastly/pull/596))
 
@@ -30,7 +43,7 @@
 
 ## [v10.5.1](https://github.com/fastly/go-fastly/releases/tag/v10.5.1) (2025-06-30)
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.5.1...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.5.0...v10.5.1)
 
 ### Bug fixes:
 

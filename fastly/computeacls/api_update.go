@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/fastly/go-fastly/v10/fastly"
+	"github.com/fastly/go-fastly/v11/fastly"
 )
 
 // UpdateInput specifies the information needed for the Update() function to

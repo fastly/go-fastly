@@ -43,17 +43,6 @@ func TestClient_FastlyAlerts(t *testing.T) {
 
 	var err error
 
-	// Enable Product - Domain Inspector
-	Record(t, "alerts/enable_required_product", func(c *Client) {
-		_, err = c.EnableProduct(context.TODO(), &ProductEnablementInput{
-			ProductID: ProductDomainInspector,
-			ServiceID: TestDeliveryServiceID,
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-
 	// Test
 	Record(t, "alerts/test_alert_definition", func(c *Client) {
 		err = c.TestAlertDefinition(context.TODO(), tadi)
@@ -75,13 +64,6 @@ func TestClient_FastlyAlerts(t *testing.T) {
 		Record(t, "alerts/cleanup_alert_definition", func(c *Client) {
 			_ = c.DeleteAlertDefinition(context.TODO(), &DeleteAlertDefinitionInput{
 				ID: &ad.ID,
-			})
-		})
-
-		Record(t, "alerts/disable_required_product", func(c *Client) {
-			_ = c.DisableProduct(context.TODO(), &ProductEnablementInput{
-				ProductID: ProductDomainInspector,
-				ServiceID: TestDeliveryServiceID,
 			})
 		})
 	}()
