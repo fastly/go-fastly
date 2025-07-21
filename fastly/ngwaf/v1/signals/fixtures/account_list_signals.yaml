@@ -6,23 +6,23 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.5.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/signals/IuiHfvyZjz9T01Ro8ijUEB
+      - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/signals
     method: GET
   response:
     body: |
-      {"id":"IuiHfvyZjz9T01Ro8ijUEB","reference_id":"site.a-real-name","name":"A real Name","description":"This is a description","created_at":"2025-06-29T15:20:03Z","updated_at":"2025-06-29T15:20:03Z","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]}}
+      {"data":[{"id":"corp.a-real-name-account","reference_id":"corp.a-real-name-account","name":"A Real Name account","description":"This is an updated description","created_at":"2025-07-21T14:51:34Z","updated_at":"2025-07-21T14:51:34Z","scope":{"type":"account","applies_to":["*"]}}],"meta":{"total":1,"limit":100}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "266"
+      - "312"
       Content-Type:
       - application/json
       Date:
-      - Sun, 29 Jun 2025 15:20:03 GMT
+      - Mon, 21 Jul 2025 14:51:35 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100076-CHI, cache-nyc-kteb1890034-NYC
+      - cache-chi-kigq8000086-CHI, cache-nyc-kteb1890023-NYC
       X-Timer:
-      - S1751210404.845746,VS0,VE93
+      - S1753109495.005503,VS0,VE93
     status: 200 OK
     code: 200
     duration: ""

@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/signals
+    method: GET
+  response:
+    body: |
+      {"data":[{"id":"JYLhUW8UOr3kfAhGYQzVXb","reference_id":"site.a-real-name-workspace","name":"A Real Name workspace","description":"This is an updated description","created_at":"2025-07-21T14:42:20Z","updated_at":"2025-07-21T14:42:25Z","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]}}],"meta":{"total":1,"limit":100}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "337"
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 21 Jul 2025 14:42:27 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100078-CHI, cache-ewr-kewr1740086-EWR
+      X-Timer:
+      - S1753108947.227427,VS0,VE104
+    status: 200 OK
+    code: 200
+    duration: ""
