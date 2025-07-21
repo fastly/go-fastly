@@ -2,7 +2,19 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.5.1...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v11.0.0...)
+
+### Breaking:
+
+### Enhancements:
+
+### Bug fixes:
+
+### Dependencies:
+
+## [v11.0.0](https://github.com/fastly/go-fastly/releases/tag/v11.0.0) (2025-07-21)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.51...v11.0.0)
 
 ### Breaking:
 
@@ -31,7 +43,7 @@
 
 ## [v10.5.1](https://github.com/fastly/go-fastly/releases/tag/v10.5.1) (2025-06-30)
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.5.1...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.50...v10.5.1)
 
 ### Bug fixes:
 
