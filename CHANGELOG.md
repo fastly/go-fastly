@@ -8,7 +8,7 @@
 
 ### Enhancements:
 
-- feat(client): Add support for impersonation. [#7XX](https://github.com/fastly/go-fastly/pull/7XX)
+- feat(client): Add support for impersonation. [#724](https://github.com/fastly/go-fastly/pull/724)
 
 ### Bug fixes:
 
