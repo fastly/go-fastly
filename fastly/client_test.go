@@ -6,6 +6,10 @@ import (
 	"net/url"
 	"strings"
 	"testing"
+
+	"github.com/stretchr/testify/require"
+
+	"github.com/fastly/go-fastly/v11/fastly/impersonation"
 )
 
 func TestClient_RawRequest(t *testing.T) {
@@ -54,4 +58,32 @@ func TestClient_RawRequest(t *testing.T) {
 			}
 		}
 	}
+}
+
+type impersonationRoundTripper struct {
+	rawQuery string
+}
+
+func (irt *impersonationRoundTripper) RoundTrip(req *http.Request) (*http.Response, error) {
+	irt.rawQuery = req.URL.RawQuery
+	return &http.Response{StatusCode: http.StatusOK}, nil
+}
+
+func TestClient_Impersonation(t *testing.T) {
+	const testCustomerID = "1234ABCD"
+
+	require := require.New(t)
+	t.Parallel()
+
+	c, err := NewClient("nokey")
+	require.NoError(err)
+
+	irt := &impersonationRoundTripper{}
+	ro := CreateRequestOptions()
+	c.HTTPClient = &http.Client{Transport: irt}
+
+	_, err = c.Request(impersonation.NewContextForCustomerID(context.TODO(), testCustomerID), http.MethodGet, "/test", ro)
+	require.NoError(err)
+
+	require.Equal(impersonation.QueryParam+"="+testCustomerID, irt.rawQuery, "unexpected query parameter")
 }

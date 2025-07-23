@@ -20,8 +20,8 @@ type ResourceLockManager struct {
 	locks map[string]weak.Pointer[sync.Mutex]
 }
 
-// NewResourceLockManager creates constructs a [ResourceLockManager]
-// with an empty map.
+// NewResourceLockManager constructs a [ResourceLockManager] with an
+// empty map.
 func NewResourceLockManager() *ResourceLockManager {
 	return &ResourceLockManager{
 		locks: make(map[string]weak.Pointer[sync.Mutex]),

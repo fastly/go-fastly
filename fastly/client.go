@@ -23,6 +23,8 @@ import (
 	"github.com/google/jsonapi"
 	"github.com/hashicorp/go-cleanhttp"
 	"github.com/mitchellh/mapstructure"
+
+	"github.com/fastly/go-fastly/v11/fastly/impersonation"
 )
 
 // APIKeyEnvVar is the name of the environment variable where the Fastly API
@@ -313,6 +315,10 @@ func (c *Client) DeleteJSONAPIBulk(ctx context.Context, p string, i any, ro Requ
 // Request makes an HTTP request against the HTTPClient using the given verb,
 // Path, and request options.
 func (c *Client) Request(ctx context.Context, verb, p string, ro RequestOptions) (*http.Response, error) {
+	if id, ok := impersonation.CustomerIDFromContext(ctx); ok {
+		ro.Params[impersonation.QueryParam] = id
+	}
+
 	req, err := c.RawRequest(ctx, verb, p, ro)
 	if err != nil {
 		return nil, err
