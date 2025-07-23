@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/fastly/go-fastly/v11/fastly/impersonation"
 )
 
 // Purge is a response from a purge request.
@@ -42,6 +44,10 @@ func (c *Client) Purge(ctx context.Context, i *PurgeInput) (*Purge, error) {
 	requestOptions.Params, err = constructRequestOptionsParam(i.URL)
 	if err != nil {
 		return nil, err
+	}
+
+	if id, ok := impersonation.CustomerIDFromContext(ctx); ok {
+		requestOptions.Params[impersonation.QueryParam] = id
 	}
 
 	resp, err := c.Post(ctx, "purge/"+i.URL, requestOptions)
@@ -99,6 +105,10 @@ func (c *Client) PurgeKey(ctx context.Context, i *PurgeKeyInput) (*Purge, error)
 	requestOptions := CreateRequestOptions()
 	requestOptions.Parallel = true
 
+	if id, ok := impersonation.CustomerIDFromContext(ctx); ok {
+		requestOptions.Params[impersonation.QueryParam] = id
+	}
+
 	req, err := c.RawRequest(ctx, http.MethodPost, path, requestOptions)
 	if err != nil {
 		return nil, err
@@ -145,6 +155,10 @@ func (c *Client) PurgeKeys(ctx context.Context, i *PurgeKeysInput) (map[string]s
 	requestOptions := CreateRequestOptions()
 	requestOptions.Parallel = true
 
+	if id, ok := impersonation.CustomerIDFromContext(ctx); ok {
+		requestOptions.Params[impersonation.QueryParam] = id
+	}
+
 	req, err := c.RawRequest(ctx, http.MethodPost, path, requestOptions)
 	if err != nil {
 		return nil, err
@@ -183,7 +197,12 @@ func (c *Client) PurgeAll(ctx context.Context, i *PurgeAllInput) (*Purge, error)
 
 	path := ToSafeURL("service", i.ServiceID, "purge_all")
 
-	req, err := c.RawRequest(ctx, http.MethodPost, path, CreateRequestOptions())
+	requestOptions := CreateRequestOptions()
+	if id, ok := impersonation.CustomerIDFromContext(ctx); ok {
+		requestOptions.Params[impersonation.QueryParam] = id
+	}
+
+	req, err := c.RawRequest(ctx, http.MethodPost, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}

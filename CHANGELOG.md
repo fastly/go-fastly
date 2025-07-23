@@ -8,6 +8,8 @@
 
 ### Enhancements:
 
+- feat(client): Add support for impersonation. [#724](https://github.com/fastly/go-fastly/pull/724)
+
 ### Bug fixes:
 
 ### Dependencies:
@@ -29,6 +31,7 @@
 - feat(ngwaf/v1/signals): moves signals up to the base level and adds support for account level signals ([#722](https://github.com/fastly/go-fastly/pull/722))
 
 ### Enhancements:
+
 - feat(ngwaf): add support for alerts ([#714](https://github.com/fastly/go-fastly/pull/714))
 - feat(ngwaf/v1/workspaces/thresholds): adds CRUD support for NGWAF Thresholds ([#713](https://github.com/fastly/go-fastly/pull/713))
 - feat(tls_custom_certificate): Add support for allow_untrusted_root attribute ([#596](https://github.com/fastly/go-fastly/pull/596))
@@ -38,6 +41,7 @@
 - fix(client): Implement new mechanism for serializing mutating requests. ([#715](https://github.com/fastly/go-fastly/pull/715))
 
 ### Dependencies:
+
 - build(deps): `golang.org/x/crypto` from 0.39.0 to 0.40.0 ([#720](https://github.com/fastly/go-fastly/pull/720))
 - build(deps): `golang.org/x/sys` from 0.33.0 to 0.34.0 ([#720](https://github.com/fastly/go-fastly/pull/720))
 
