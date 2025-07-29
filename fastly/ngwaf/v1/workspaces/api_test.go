@@ -80,11 +80,11 @@ func TestClient_Workspace(t *testing.T) {
 	if ws.AttackSignalThresholds.OneHour != 10000 {
 		t.Errorf("unexpected workspace attack signal thresholds one_hour parameter: got %v, expected %v", ws.AttackSignalThresholds.OneHour, *wsAttackSignalThresholds.OneHour)
 	}
-	if ws.ClientIPHeaders != nil && len(*ws.ClientIPHeaders) != len(wsClientIPHeaders) {
-		t.Errorf("unexpected client_ip_headers length: got %d, expected %d", len(*ws.ClientIPHeaders), len(wsClientIPHeaders))
+	if ws.ClientIPHeaders != nil && len(ws.ClientIPHeaders) != len(wsClientIPHeaders) {
+		t.Errorf("unexpected client_ip_headers length: got %d, expected %d", len(ws.ClientIPHeaders), len(wsClientIPHeaders))
 	}
 	if ws.ClientIPHeaders != nil {
-		for i, v := range *ws.ClientIPHeaders {
+		for i, v := range ws.ClientIPHeaders {
 			if v != wsClientIPHeaders[i] {
 				t.Errorf("unexpected client_ip_headers[%d]: got %q, expected %q", i, v, wsClientIPHeaders[i])
 			}
@@ -140,12 +140,12 @@ func TestClient_Workspace(t *testing.T) {
 	if gws.AttackSignalThresholds.OneHour != ws.AttackSignalThresholds.OneHour {
 		t.Errorf("unexpected workspace attack signal thresholds one_hour parameter: got %v, expected %v", gws.AttackSignalThresholds.OneHour, ws.AttackSignalThresholds.OneHour)
 	}
-	if len(*gws.ClientIPHeaders) != len(*ws.ClientIPHeaders) {
-		t.Errorf("unexpected client_ip_headers length: got %d, expected %d", len(*gws.ClientIPHeaders), len(*ws.ClientIPHeaders))
+	if len(gws.ClientIPHeaders) != len(ws.ClientIPHeaders) {
+		t.Errorf("unexpected client_ip_headers length: got %d, expected %d", len(gws.ClientIPHeaders), len(ws.ClientIPHeaders))
 	}
-	for i, v := range *gws.ClientIPHeaders {
-		if v != (*ws.ClientIPHeaders)[i] {
-			t.Errorf("unexpected client_ip_headers[%d]: got %q, expected %q", i, v, (*ws.ClientIPHeaders)[i])
+	for i, v := range gws.ClientIPHeaders {
+		if v != (ws.ClientIPHeaders)[i] {
+			t.Errorf("unexpected client_ip_headers[%d]: got %q, expected %q", i, v, (ws.ClientIPHeaders)[i])
 		}
 	}
 	if gws.DefaultBlockingResponseCode != ws.DefaultBlockingResponseCode {
@@ -207,10 +207,10 @@ func TestClient_Workspace(t *testing.T) {
 	if uws.AttackSignalThresholds.OneHour != *uwsAttackSignalThresholds.OneHour {
 		t.Errorf("unexpected workspace attack signal thresholds one_hour parameter: got %v, expected %v", uws.AttackSignalThresholds.OneHour, *uwsAttackSignalThresholds.OneHour)
 	}
-	if len(*uws.ClientIPHeaders) != len(uwsClientIPHeaders) {
-		t.Errorf("unexpected client_ip_headers length: got %d, expected %d", len(*uws.ClientIPHeaders), len(uwsClientIPHeaders))
+	if len(uws.ClientIPHeaders) != len(uwsClientIPHeaders) {
+		t.Errorf("unexpected client_ip_headers length: got %d, expected %d", len(uws.ClientIPHeaders), len(uwsClientIPHeaders))
 	}
-	for i, v := range *uws.ClientIPHeaders {
+	for i, v := range uws.ClientIPHeaders {
 		if v != uwsClientIPHeaders[i] {
 			t.Errorf("unexpected client_ip_headers[%d]: got %q, expected %q", i, v, uwsClientIPHeaders[i])
 		}

@@ -10,7 +10,7 @@ type Workspace struct {
 	AttackSignalThresholds *AttackSignalThresholds `json:"attack_signal_thresholds,omitempty"`
 	// ClientIPHeaders lists the request headers containing the
 	// client IP address.
-	ClientIPHeaders *[]string `json:"client_ip_headers,omitempty"`
+	ClientIPHeaders []string `json:"client_ip_headers,omitempty"`
 	// CreatedAt is the date and time in ISO 8601 format.
 	CreatedAt time.Time `json:"created_at"`
 	// DefaultBlockingResponseCode is the default response code.
