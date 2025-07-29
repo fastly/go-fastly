@@ -12,6 +12,8 @@
 
 ### Bug fixes:
 
+- fix(ngwaf/v1/workspaces): change some optional fields to omit empty [#725](https://github.com/fastly/go-fastly/pull/725)
+
 ### Dependencies:
 
 ## [v11.0.0](https://github.com/fastly/go-fastly/releases/tag/v11.0.0) (2025-07-21)
