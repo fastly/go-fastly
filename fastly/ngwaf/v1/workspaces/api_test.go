@@ -65,8 +65,8 @@ func TestClient_Workspace(t *testing.T) {
 	if ws.Mode != wsMode {
 		t.Errorf("unexpected workspace mode: got %q, expected %q", ws.Mode, wsMode)
 	}
-	if ws.IPAnonymization != wsIPAnonymization {
-		t.Errorf("unexpected workspace IP anonymization: got %q, expected %q", ws.IPAnonymization, wsIPAnonymization)
+	if ws.IPAnonymization != nil && *ws.IPAnonymization != wsIPAnonymization {
+		t.Errorf("unexpected workspace IP anonymization: got %q, expected %q", *ws.IPAnonymization, wsIPAnonymization)
 	}
 	if ws.AttackSignalThresholds.Immediate != true {
 		t.Errorf("unexpected workspace attack signal thresholds immediate parameter: got %t, expected %t", ws.AttackSignalThresholds.Immediate, *wsAttackSignalThresholds.Immediate)
@@ -80,12 +80,14 @@ func TestClient_Workspace(t *testing.T) {
 	if ws.AttackSignalThresholds.OneHour != 10000 {
 		t.Errorf("unexpected workspace attack signal thresholds one_hour parameter: got %v, expected %v", ws.AttackSignalThresholds.OneHour, *wsAttackSignalThresholds.OneHour)
 	}
-	if len(ws.ClientIPHeaders) != len(wsClientIPHeaders) {
-		t.Errorf("unexpected client_ip_headers length: got %d, expected %d", len(ws.ClientIPHeaders), len(wsClientIPHeaders))
+	if ws.ClientIPHeaders != nil && len(*ws.ClientIPHeaders) != len(wsClientIPHeaders) {
+		t.Errorf("unexpected client_ip_headers length: got %d, expected %d", len(*ws.ClientIPHeaders), len(wsClientIPHeaders))
 	}
-	for i, v := range ws.ClientIPHeaders {
-		if v != wsClientIPHeaders[i] {
-			t.Errorf("unexpected client_ip_headers[%d]: got %q, expected %q", i, v, wsClientIPHeaders[i])
+	if ws.ClientIPHeaders != nil {
+		for i, v := range *ws.ClientIPHeaders {
+			if v != wsClientIPHeaders[i] {
+				t.Errorf("unexpected client_ip_headers[%d]: got %q, expected %q", i, v, wsClientIPHeaders[i])
+			}
 		}
 	}
 	if ws.DefaultBlockingResponseCode != wsDefaultBlockingResponseCode {
@@ -123,8 +125,8 @@ func TestClient_Workspace(t *testing.T) {
 	if gws.Mode != ws.Mode {
 		t.Errorf("unexpected workspace mode: got %q, expected %q", gws.Mode, ws.Mode)
 	}
-	if gws.IPAnonymization != ws.IPAnonymization {
-		t.Errorf("unexpected workspace IP anonymization: got %q, expected %q", gws.IPAnonymization, ws.IPAnonymization)
+	if *gws.IPAnonymization != *ws.IPAnonymization {
+		t.Errorf("unexpected workspace IP anonymization: got %q, expected %q", *gws.IPAnonymization, *ws.IPAnonymization)
 	}
 	if gws.AttackSignalThresholds.Immediate != ws.AttackSignalThresholds.Immediate {
 		t.Errorf("unexpected workspace attack signal thresholds immediate parameter: got %t, expected %t", gws.AttackSignalThresholds.Immediate, ws.AttackSignalThresholds.Immediate)
@@ -138,12 +140,12 @@ func TestClient_Workspace(t *testing.T) {
 	if gws.AttackSignalThresholds.OneHour != ws.AttackSignalThresholds.OneHour {
 		t.Errorf("unexpected workspace attack signal thresholds one_hour parameter: got %v, expected %v", gws.AttackSignalThresholds.OneHour, ws.AttackSignalThresholds.OneHour)
 	}
-	if len(gws.ClientIPHeaders) != len(ws.ClientIPHeaders) {
-		t.Errorf("unexpected client_ip_headers length: got %d, expected %d", len(gws.ClientIPHeaders), len(ws.ClientIPHeaders))
+	if len(*gws.ClientIPHeaders) != len(*ws.ClientIPHeaders) {
+		t.Errorf("unexpected client_ip_headers length: got %d, expected %d", len(*gws.ClientIPHeaders), len(*ws.ClientIPHeaders))
 	}
-	for i, v := range gws.ClientIPHeaders {
-		if v != ws.ClientIPHeaders[i] {
-			t.Errorf("unexpected client_ip_headers[%d]: got %q, expected %q", i, v, ws.ClientIPHeaders[i])
+	for i, v := range *gws.ClientIPHeaders {
+		if v != (*ws.ClientIPHeaders)[i] {
+			t.Errorf("unexpected client_ip_headers[%d]: got %q, expected %q", i, v, (*ws.ClientIPHeaders)[i])
 		}
 	}
 	if gws.DefaultBlockingResponseCode != ws.DefaultBlockingResponseCode {
@@ -190,8 +192,8 @@ func TestClient_Workspace(t *testing.T) {
 	if uws.Mode != uwsMode {
 		t.Errorf("unexpected workspace mode: got %q, expected %q", uws.Mode, uwsMode)
 	}
-	if uws.IPAnonymization != uwsIPAnonymization {
-		t.Errorf("unexpected workspace IP anonymization: got %q, expected %q", uws.IPAnonymization, uwsIPAnonymization)
+	if *uws.IPAnonymization != uwsIPAnonymization {
+		t.Errorf("unexpected workspace IP anonymization: got %q, expected %q", *uws.IPAnonymization, uwsIPAnonymization)
 	}
 	if uws.AttackSignalThresholds.Immediate != *uwsAttackSignalThresholds.Immediate {
 		t.Errorf("unexpected workspace attack signal thresholds immediate parameter: got %t, expected %t", uws.AttackSignalThresholds.Immediate, *uwsAttackSignalThresholds.Immediate)
@@ -205,10 +207,10 @@ func TestClient_Workspace(t *testing.T) {
 	if uws.AttackSignalThresholds.OneHour != *uwsAttackSignalThresholds.OneHour {
 		t.Errorf("unexpected workspace attack signal thresholds one_hour parameter: got %v, expected %v", uws.AttackSignalThresholds.OneHour, *uwsAttackSignalThresholds.OneHour)
 	}
-	if len(uws.ClientIPHeaders) != len(uwsClientIPHeaders) {
-		t.Errorf("unexpected client_ip_headers length: got %d, expected %d", len(uws.ClientIPHeaders), len(uwsClientIPHeaders))
+	if len(*uws.ClientIPHeaders) != len(uwsClientIPHeaders) {
+		t.Errorf("unexpected client_ip_headers length: got %d, expected %d", len(*uws.ClientIPHeaders), len(uwsClientIPHeaders))
 	}
-	for i, v := range uws.ClientIPHeaders {
+	for i, v := range *uws.ClientIPHeaders {
 		if v != uwsClientIPHeaders[i] {
 			t.Errorf("unexpected client_ip_headers[%d]: got %q, expected %q", i, v, uwsClientIPHeaders[i])
 		}
