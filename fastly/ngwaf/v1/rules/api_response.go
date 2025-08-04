@@ -92,6 +92,10 @@ type RateLimit struct {
 
 // ClientIdentifiers defines how a client is identified.
 type ClientIdentifier struct {
+	// Key is the of the client identifier
+	Key string `json:"key"`
+	// Name is the name of the client identifier
+	Name string `json:"name"`
 	// Type is the type of identifier.
 	Type string `json:"type"`
 }
