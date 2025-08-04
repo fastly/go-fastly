@@ -34,6 +34,8 @@ type CreateInput struct {
 	// GroupOperator defines the logical operator ("any" or "all")
 	// used to evaluate grouped conditions.
 	GroupOperator *string
+	// RateLimit defines how rate limit rules are enforced.
+	RateLimit *CreateRateLimit
 	// RequestLogging defines how request logs are handled when
 	// the rule is matched ("sampled" or "none"). Applicable only
 	// for request-type rules.
@@ -94,6 +96,20 @@ type CreateGroupCondition struct {
 	Conditions []*CreateCondition `json:"conditions"`
 }
 
+// CreateRateLimit defines how rate limit rules are enforced.
+type CreateRateLimit struct {
+	// List of client identifiers used for rate limiting. Can only be length 1 or 2.
+	ClientIdentifiers []*string
+	// Duration in seconds for the rate limit.
+	Duration *int
+	// Time interval for the rate limit in seconds (60, 600, or 3600 minutes).
+	Interval *int
+	// The signal used to count requests.
+	Signal *string
+	// Rate limit threshold (between 1 and 10000).
+	Threshold *int
+}
+
 // Create creates a new rule.
 func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Rule, error) {
 	if i.Type == nil {
@@ -118,15 +134,16 @@ func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Rule, error
 	}
 
 	v := struct {
-		Actions        []*CreateAction `json:"actions"`
-		Conditions     []any           `json:"conditions"`
-		Description    *string         `json:"description"`
-		Enabled        *bool           `json:"enabled,omitempty"`
-		ExpiresAt      *time.Time      `json:"expires_at,omitempty"`
-		GroupOperator  *string         `json:"group_operator,omitempty"`
-		RequestLogging *string         `json:"request_logging,omitempty"`
-		Scope          *common.Scope   `json:"scope"`
-		Type           *string         `json:"type"`
+		Actions        []*CreateAction  `json:"actions,omitempty"`
+		Conditions     []any            `json:"conditions"`
+		Description    *string          `json:"description"`
+		Enabled        *bool            `json:"enabled,omitempty"`
+		ExpiresAt      *time.Time       `json:"expires_at,omitempty"`
+		GroupOperator  *string          `json:"group_operator,omitempty"`
+		RateLimit      *CreateRateLimit `json:"rate_limit,omitempty"`
+		RequestLogging *string          `json:"request_logging,omitempty"`
+		Scope          *common.Scope    `json:"scope"`
+		Type           *string          `json:"type"`
 	}{
 		Actions:        i.Actions,
 		Conditions:     mergedConditions,
@@ -134,6 +151,7 @@ func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Rule, error
 		Enabled:        i.Enabled,
 		ExpiresAt:      i.ExpiresAt,
 		GroupOperator:  i.GroupOperator,
+		RateLimit:      i.RateLimit,
 		RequestLogging: i.RequestLogging,
 		Scope:          i.Scope,
 		Type:           i.Type,

@@ -1,0 +1,50 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"actions":[{"type":"block_signal","signal":"site.a-real-name-workspace"}],"conditions":[{"type":"single","field":"ip","operator":"equals","value":"127.0.0.1"},{"type":"single","field":"path","operator":"equals","value":"/login"},{"type":"single","field":"agent_name","operator":"equals","value":"host-001"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AD"},{"type":"single","field":"method","operator":"equals","value":"POST"}]},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"protocol_version","operator":"equals","value":"HTTP/1.0"},{"type":"single","field":"method","operator":"equals","value":"HEAD"},{"type":"single","field":"domain","operator":"equals","value":"example.com"}]}],"description":"rate_limit_test","enabled":true,"group_operator":"all","rate_limit":{"ClientIdentifiers":["client1"],"Duration":300,"Interval":60,"Signal":"site.a-real-name-workspace","Threshold":1},"scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]},"type":"rate_limit"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/11.0.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/rules
+    method: POST
+  response:
+    body: |
+      {"id":"6890ca02d3222ac325ec8846","type":"rate_limit","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]},"enabled":true,"description":"rate_limit_test","group_operator":"all","conditions":[{"type":"single","field":"ip","operator":"equals","value":"127.0.0.1"},{"type":"single","field":"path","operator":"equals","value":"/login"},{"type":"single","field":"agent_name","operator":"equals","value":"host-001"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AD"},{"type":"single","field":"method","operator":"equals","value":"POST"}]},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"protocol_version","operator":"equals","value":"HTTP/1.0"},{"type":"single","field":"method","operator":"equals","value":"HEAD"},{"type":"single","field":"domain","operator":"equals","value":"example.com"}]}],"actions":[{"type":"block_signal","signal":"site.a-real-name-workspace"}],"rate_limit":{"signal":"site.a-real-name-workspace","threshold":1,"interval":60,"duration":300,"client_identifiers":[{"type":"ip"}]},"created_at":"2025-08-04T14:56:02Z","updated_at":"2025-08-04T14:56:02Z"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "1186"
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 04 Aug 2025 14:56:02 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000087-CHI, cache-ewr-kewr1740055-EWR
+      X-Timer:
+      - S1754319362.272513,VS0,VE678
+    status: 201 Created
+    code: 201
+    duration: ""

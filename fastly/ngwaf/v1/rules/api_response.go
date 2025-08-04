@@ -76,6 +76,26 @@ type Action struct {
 	ResponseCode int `json:"response_code"`
 }
 
+// RateLimit is the parameters of the rate limit rule.
+type RateLimit struct {
+	// List of client identifiers used for rate limiting.
+	ClientIdentifiers []ClientIdentifier `json:"client_identifiers"`
+	// Duration in seconds for the rate limit.
+	Duration int `json:"duration"`
+	// Time interval for the rate limit in seconds (60, 600, or 3600 minutes).
+	Interval int `json:"interval"`
+	// The signal used to count requests.
+	Signal string `json:"signal"`
+	// Rate limit threshold (between 1 and 10000).
+	Threshold int `json:"threshold"`
+}
+
+// ClientIdentifiers defines how a client is identified.
+type ClientIdentifier struct {
+	// Type is the type of identifier.
+	Type string `json:"type"`
+}
+
 // Rule represents the complete configuration of a WAF rule.
 type Rule struct {
 	// RuleID is the unique identifier of the rule.
@@ -100,6 +120,8 @@ type Rule struct {
 	// Actions lists the actions to take when the rule is
 	// triggered.
 	Actions []Action `json:"actions"`
+	// RateLimit defines the rate limit described by the rule.
+	RateLimit *RateLimit `json:"rate_limit"`
 	// CreatedAt is the timestamp when the rule was created.
 	CreatedAt time.Time `mapstructure:"created_at" json:"created_at"`
 	// UpdatedAt is the timestamp when the rule was last updated.
