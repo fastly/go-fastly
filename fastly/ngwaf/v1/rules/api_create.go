@@ -99,15 +99,25 @@ type CreateGroupCondition struct {
 // CreateRateLimit defines how rate limit rules are enforced.
 type CreateRateLimit struct {
 	// List of client identifiers used for rate limiting. Can only be length 1 or 2.
-	ClientIdentifiers []*string
+	ClientIdentifiers []*CreateClientIdentifier `json:"client_identifiers"`
 	// Duration in seconds for the rate limit.
-	Duration *int
+	Duration *int `json:"duration"`
 	// Time interval for the rate limit in seconds (60, 600, or 3600 minutes).
-	Interval *int
+	Interval *int `json:"interval"`
 	// The signal used to count requests.
-	Signal *string
+	Signal *string `json:"signal"`
 	// Rate limit threshold (between 1 and 10000).
-	Threshold *int
+	Threshold *int `json:"threshold"`
+}
+
+// CreateClientIdentifier is the client identifier for rate limit rules.
+type CreateClientIdentifier struct {
+	// Key is the of the client identifier
+	Key *string `json:"key,omitempty"`
+	// Name is the name of the client identifier
+	Name *string `json:"name,omitempty"`
+	// Type is the type of the client identifier
+	Type *string `json:"type"`
 }
 
 // Create creates a new rule.

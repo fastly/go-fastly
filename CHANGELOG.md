@@ -10,6 +10,8 @@
 
 ### Bug fixes:
 
+- fix(ngwaf/v1/rules): Fix Typing on rate limit struct. [#729](https://github.com/fastly/go-fastly/pull/729)
+
 ### Dependencies:
 
 ## [v11.1.0](https://github.com/fastly/go-fastly/releases/tag/v11.1.0) (2025-08-04)

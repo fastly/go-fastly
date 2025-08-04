@@ -623,7 +623,8 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	threshold := 1
 	interval := 60
 	duration := 300
-	clientIdentifier := "client1"
+	clientIdentifier := "ip"
+	clientIdentifierName := "name"
 
 	// Create a test rule.
 	var rule *Rule
@@ -638,11 +639,16 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			GroupOperator: &groupOperator,
 			Enabled:       &enabled,
 			RateLimit: &CreateRateLimit{
-				Signal:            &signal.ReferenceID,
-				Threshold:         &threshold,
-				Interval:          &interval,
-				Duration:          &duration,
-				ClientIdentifiers: []*string{&clientIdentifier},
+				Signal:    &signal.ReferenceID,
+				Threshold: &threshold,
+				Interval:  &interval,
+				Duration:  &duration,
+				ClientIdentifiers: []*CreateClientIdentifier{
+					{
+						Type: &clientIdentifier,
+						Name: &clientIdentifierName,
+					},
+				},
 			},
 			Actions: []*CreateAction{
 				{
@@ -761,7 +767,8 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	assert.Equal(signal.ReferenceID, action.Signal)
 
 	assert.Equal(duration, rule.RateLimit.Duration)
-	assert.Equal("ip", rule.RateLimit.ClientIdentifiers[0].Type)
+	assert.Equal(clientIdentifier, rule.RateLimit.ClientIdentifiers[0].Type)
+	assert.Equal(clientIdentifierName, rule.RateLimit.ClientIdentifiers[0].Name)
 	assert.Equal(interval, rule.RateLimit.Interval)
 	assert.Equal(signal.ReferenceID, rule.RateLimit.Signal)
 	assert.Equal(threshold, rule.RateLimit.Threshold)
@@ -839,7 +846,8 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	assert.Equal(signal.ReferenceID, testRuleAction.Signal)
 
 	assert.Equal(duration, rule.RateLimit.Duration)
-	assert.Equal("ip", rule.RateLimit.ClientIdentifiers[0].Type)
+	assert.Equal(clientIdentifier, rule.RateLimit.ClientIdentifiers[0].Type)
+	assert.Equal(clientIdentifierName, rule.RateLimit.ClientIdentifiers[0].Name)
 	assert.Equal(interval, rule.RateLimit.Interval)
 	assert.Equal(signal.ReferenceID, rule.RateLimit.Signal)
 	assert.Equal(threshold, rule.RateLimit.Threshold)
@@ -899,7 +907,6 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	updatedThreshold := 2
 	updatedInterval := 600
 	updatedDuration := 600
-	updatedClientIdentifier := "updatedClient1"
 
 	// Updated Single Conditions
 	updatedOperator1 := "does_not_equal"
@@ -943,11 +950,16 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			GroupOperator: &updatedGroupOperator,
 			Enabled:       &updatedEnabled,
 			RateLimit: &UpdateRateLimit{
-				Signal:            &signal.ReferenceID,
-				Threshold:         &updatedThreshold,
-				Interval:          &updatedInterval,
-				Duration:          &updatedDuration,
-				ClientIdentifiers: []*string{&updatedClientIdentifier},
+				Signal:    &signal.ReferenceID,
+				Threshold: &updatedThreshold,
+				Interval:  &updatedInterval,
+				Duration:  &updatedDuration,
+				ClientIdentifiers: []*UpdateClientIdentifier{
+					{
+						Name: &clientIdentifierName,
+						Type: &clientIdentifier,
+					},
+				},
 			},
 			Actions: []*UpdateAction{
 				{
@@ -1039,7 +1051,7 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 
 	// Validate Rate Limit
 	assert.Equal(updatedDuration, updatedRule.RateLimit.Duration)
-	assert.Equal("ip", updatedRule.RateLimit.ClientIdentifiers[0].Type)
+	assert.Equal(clientIdentifier, updatedRule.RateLimit.ClientIdentifiers[0].Type)
 	assert.Equal(updatedInterval, updatedRule.RateLimit.Interval)
 	assert.Equal(signal.ReferenceID, updatedRule.RateLimit.Signal)
 	assert.Equal(updatedThreshold, updatedRule.RateLimit.Threshold)

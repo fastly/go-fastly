@@ -11,12 +11,12 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/11.0.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/rules/6890c9f4d3222ac325ec8779
+      - FastlyGo/11.1.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/rules/68912137cafa17a396d35ca1
     method: PATCH
   response:
     body: |
-      {"id":"6890c9f4d3222ac325ec8779","type":"request","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]},"enabled":false,"description":"updated test","group_operator":"any","request_logging":"none","conditions":[{"type":"single","field":"ip","operator":"does_not_equal","value":"10.0.0.1"},{"type":"single","field":"path","operator":"does_not_equal","value":"/admin"},{"type":"single","field":"agent_name","operator":"matches","value":"bot-*"},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"country","operator":"does_not_equal","value":"US"},{"type":"single","field":"method","operator":"does_not_equal","value":"PUT"}]},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"protocol_version","operator":"does_not_equal","value":"HTTP/2.0"},{"type":"single","field":"method","operator":"does_not_equal","value":"OPTIONS"},{"type":"single","field":"domain","operator":"does_not_equal","value":"internal.example"}]}],"actions":[{"type":"allow"}],"created_at":"2025-08-04T14:55:48Z","updated_at":"2025-08-04T14:55:48Z"}
+      {"id":"68912137cafa17a396d35ca1","type":"request","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]},"enabled":false,"description":"updated test","group_operator":"any","request_logging":"none","conditions":[{"type":"single","field":"ip","operator":"does_not_equal","value":"10.0.0.1"},{"type":"single","field":"path","operator":"does_not_equal","value":"/admin"},{"type":"single","field":"agent_name","operator":"matches","value":"bot-*"},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"country","operator":"does_not_equal","value":"US"},{"type":"single","field":"method","operator":"does_not_equal","value":"PUT"}]},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"protocol_version","operator":"does_not_equal","value":"HTTP/2.0"},{"type":"single","field":"method","operator":"does_not_equal","value":"OPTIONS"},{"type":"single","field":"domain","operator":"does_not_equal","value":"internal.example"}]}],"actions":[{"type":"allow"}],"created_at":"2025-08-04T21:08:07Z","updated_at":"2025-08-04T21:08:07Z"}
     headers:
       Accept-Ranges:
       - bytes
@@ -27,7 +27,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 04 Aug 2025 14:55:49 GMT
+      - Mon, 04 Aug 2025 21:08:09 GMT
       Pragma:
       - no-cache
       Server:
@@ -43,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100101-CHI, cache-ewr-kewr1740055-EWR
+      - cache-chi-klot8100132-CHI, cache-nyc-kteb1890053-NYC
       X-Timer:
-      - S1754319349.062884,VS0,VE711
+      - S1754341688.446537,VS0,VE704
     status: 200 OK
     code: 200
     duration: ""
