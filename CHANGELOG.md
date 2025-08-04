@@ -2,18 +2,24 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v11.0.0...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v11.1.0...)
 
 ### Breaking:
 
 ### Enhancements:
 
-- feat(client): Add support for impersonation. [#724](https://github.com/fastly/go-fastly/pull/724)
-- feat(ngwaf/v1/rules): Add support for rate limit workspace rules [#727](https://github.com/fastly/go-fastly/pull/727)
-
 ### Bug fixes:
 
 ### Dependencies:
+
+## [v11.1.0](https://github.com/fastly/go-fastly/releases/tag/v11.1.0) (2025-08-04)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v11.0.0...v11.1.0)
+
+### Enhancements:
+
+- feat(client): Add support for impersonation. [#724](https://github.com/fastly/go-fastly/pull/724)
+- feat(ngwaf/v1/rules): Add support for rate limit workspace rules [#727](https://github.com/fastly/go-fastly/pull/727)
 
 ## [v11.0.0](https://github.com/fastly/go-fastly/releases/tag/v11.0.0) (2025-07-21)
 
