@@ -7,15 +7,18 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/11.0.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/rules/6890c9f63ff692d75c740181
-    method: DELETE
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/rules
+    method: GET
   response:
-    body: ""
+    body: |
+      {"data":[],"meta":{"limit":100,"total":0}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
+      Content-Length:
+      - "43"
       Content-Type:
       - application/json
       Date:
@@ -35,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000027-CHI, cache-ewr-kewr1740055-EWR
+      - cache-chi-kigq8000087-CHI, cache-ewr-kewr1740055-EWR
       X-Timer:
-      - S1754319358.012203,VS0,VE3642
-    status: 204 No Content
-    code: 204
+      - S1754319362.674026,VS0,VE102
+    status: 200 OK
+    code: 200
     duration: ""

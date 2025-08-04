@@ -34,6 +34,8 @@ type UpdateInput struct {
 	// GroupOperator defines the logical operator ("any" or "all")
 	// used to evaluate grouped conditions.
 	GroupOperator *string
+	// RateLimit defines how rate limit rules are enforced.
+	RateLimit *UpdateRateLimit
 	// RequestLogging defines how request logs are handled when
 	// the rule is matched ("sampled" or "none"). Applicable only
 	// for request-type rules.
@@ -96,6 +98,20 @@ type UpdateGroupCondition struct {
 	Conditions []*UpdateCondition `json:"conditions"`
 }
 
+// UpdateRateLimit defines how rate limit rules are enforced.
+type UpdateRateLimit struct {
+	// List of client identifiers used for rate limiting. Can only be length 1 or 2.
+	ClientIdentifiers []*string
+	// Duration in seconds for the rate limit.
+	Duration *int
+	// Time interval for the rate limit in seconds (60, 600, or 3600 minutes).
+	Interval *int
+	// The signal used to count requests.
+	Signal *string
+	// Rate limit threshold (between 1 and 10000).
+	Threshold *int
+}
+
 // Update updates a rule.
 func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Rule, error) {
 	if i.RuleID == nil {
@@ -114,15 +130,16 @@ func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Rule, error
 	}
 
 	v := struct {
-		Actions        []*UpdateAction `json:"actions,omitempty"`
-		Conditions     []any           `json:"conditions,omitempty"`
-		Description    *string         `json:"description,omitempty"`
-		Enabled        *bool           `json:"enabled,omitempty"`
-		ExpiresAt      *time.Time      `json:"expires_at,omitempty"`
-		GroupOperator  *string         `json:"group_operator,omitempty"`
-		RequestLogging *string         `json:"request_logging,omitempty"`
-		Scope          *common.Scope   `json:"scope,omitempty"`
-		Type           *string         `json:"type,omitempty"`
+		Actions        []*UpdateAction  `json:"actions,omitempty"`
+		Conditions     []any            `json:"conditions,omitempty"`
+		Description    *string          `json:"description,omitempty"`
+		Enabled        *bool            `json:"enabled,omitempty"`
+		ExpiresAt      *time.Time       `json:"expires_at,omitempty"`
+		GroupOperator  *string          `json:"group_operator,omitempty"`
+		RateLimit      *UpdateRateLimit `json:"rate_limit,omitempty"`
+		RequestLogging *string          `json:"request_logging,omitempty"`
+		Scope          *common.Scope    `json:"scope,omitempty"`
+		Type           *string          `json:"type,omitempty"`
 	}{
 		Actions:        i.Actions,
 		Conditions:     mergedConditions,
@@ -131,6 +148,7 @@ func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Rule, error
 		ExpiresAt:      i.ExpiresAt,
 		GroupOperator:  i.GroupOperator,
 		RequestLogging: i.RequestLogging,
+		RateLimit:      i.RateLimit,
 		Scope:          i.Scope,
 		Type:           i.Type,
 	}
