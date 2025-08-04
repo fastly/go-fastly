@@ -110,14 +110,14 @@ type CreateRateLimit struct {
 	Threshold *int `json:"threshold"`
 }
 
-// ClientIdentifier are client identifiers for rate limit rules.
+// CreateClientIdentifier is the client identifier for rate limit rules.
 type CreateClientIdentifier struct {
 	// Key is the of the client identifier
 	Key *string `json:"key"`
 	// Name is the name of the client identifier
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 	// Type is the type of the client identifier
-	Type *string `json:"type"`
+	Type *string `json:"type,omitempty"`
 }
 
 // Create creates a new rule.

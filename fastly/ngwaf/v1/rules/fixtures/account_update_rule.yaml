@@ -12,11 +12,11 @@ interactions:
       - application/json
       User-Agent:
       - FastlyGo/11.1.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/rules/689117a84af0f0fdba5bb709
+    url: https://api.fastly.com/ngwaf/v1/rules/6891213903859c47e4acd3b0
     method: PATCH
   response:
     body: |
-      {"id":"689117a84af0f0fdba5bb709","type":"request","scope":{"type":"account","applies_to":["*"]},"enabled":false,"description":"updated test","group_operator":"any","request_logging":"none","conditions":[{"type":"single","field":"ip","operator":"does_not_equal","value":"10.0.0.1"},{"type":"single","field":"path","operator":"does_not_equal","value":"/admin"},{"type":"single","field":"agent_name","operator":"matches","value":"bot-*"},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"country","operator":"does_not_equal","value":"US"},{"type":"single","field":"method","operator":"does_not_equal","value":"PUT"}]},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"protocol_version","operator":"does_not_equal","value":"HTTP/2.0"},{"type":"single","field":"method","operator":"does_not_equal","value":"OPTIONS"},{"type":"single","field":"domain","operator":"does_not_equal","value":"internal.example"}]}],"actions":[{"type":"allow"}],"created_at":"2025-08-04T20:27:20Z","updated_at":"2025-08-04T20:27:20Z"}
+      {"id":"6891213903859c47e4acd3b0","type":"request","scope":{"type":"account","applies_to":["*"]},"enabled":false,"description":"updated test","group_operator":"any","request_logging":"none","conditions":[{"type":"single","field":"ip","operator":"does_not_equal","value":"10.0.0.1"},{"type":"single","field":"path","operator":"does_not_equal","value":"/admin"},{"type":"single","field":"agent_name","operator":"matches","value":"bot-*"},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"country","operator":"does_not_equal","value":"US"},{"type":"single","field":"method","operator":"does_not_equal","value":"PUT"}]},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"protocol_version","operator":"does_not_equal","value":"HTTP/2.0"},{"type":"single","field":"method","operator":"does_not_equal","value":"OPTIONS"},{"type":"single","field":"domain","operator":"does_not_equal","value":"internal.example"}]}],"actions":[{"type":"allow"}],"created_at":"2025-08-04T21:08:09Z","updated_at":"2025-08-04T21:08:09Z"}
     headers:
       Accept-Ranges:
       - bytes
@@ -27,7 +27,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 04 Aug 2025 20:27:25 GMT
+      - Mon, 04 Aug 2025 21:08:15 GMT
       Pragma:
       - no-cache
       Server:
@@ -43,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100096-CHI, cache-ewr-kewr1740082-EWR
+      - cache-chi-kigq8000080-CHI, cache-nyc-kteb1890053-NYC
       X-Timer:
-      - S1754339243.251512,VS0,VE2546
+      - S1754341692.469019,VS0,VE2820
     status: 200 OK
     code: 200
     duration: ""
