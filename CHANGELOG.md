@@ -8,6 +8,8 @@
 
 ### Enhancements:
 
+- feat(ngwaf/workspaces): add DefaultRedirectURL field to workspaces. [#731](https://github.com/fastly/go-fastly/pull/731)
+
 ### Bug fixes:
 
 ### Dependencies:

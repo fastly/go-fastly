@@ -28,6 +28,9 @@ type UpdateInput struct {
 	ClientIPHeaders []string `json:"client_ip_headers,omitempty"`
 	// DefaultBlockingResponseCode is the default response code.
 	DefaultBlockingResponseCode *int `json:"default_blocking_response_code,omitempty"`
+	// DefaultRedirectURL is a URL that will be used if
+	// the DefaultBlockingResponseCode is set to 301 or 302
+	DefaultRedirectURL *string `json:"default_redirect_url,omitempty"`
 	// Description is the description of the workspace.
 	Description *string `json:"description,omitempty"`
 	// IPAnonymization is the selected option to anonymize IP

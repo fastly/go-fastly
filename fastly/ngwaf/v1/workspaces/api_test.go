@@ -155,7 +155,8 @@ func TestClient_Workspace(t *testing.T) {
 	const uwsDescription = "test-description-updated"
 	const uwsMode = "block"
 	const uwsIPAnonymization = "hashed"
-	const uwsDefaultBlockingResponseCode = 429
+	const uwsDefaultBlockingResponseCode = 301
+	const uwsDefaultRedirectURL = "http://www.test-redirect.com"
 
 	uwsAttackSignalThresholds := new(AttackSignalThresholdsUpdateInput)
 	uwsAttackSignalThresholds.OneMinute = fastly.ToPointer(5000)
@@ -175,6 +176,7 @@ func TestClient_Workspace(t *testing.T) {
 			IPAnonymization:             fastly.ToPointer(uwsIPAnonymization),
 			AttackSignalThresholds:      uwsAttackSignalThresholds,
 			DefaultBlockingResponseCode: fastly.ToPointer(uwsDefaultBlockingResponseCode),
+			DefaultRedirectURL:          fastly.ToPointer(uwsDefaultRedirectURL),
 			ClientIPHeaders:             uwsClientIPHeaders,
 		})
 	})
@@ -215,6 +217,9 @@ func TestClient_Workspace(t *testing.T) {
 	}
 	if uws.DefaultBlockingResponseCode != uwsDefaultBlockingResponseCode {
 		t.Errorf("unexpected default blocking response code: got %d, expected %d", uws.DefaultBlockingResponseCode, uwsDefaultBlockingResponseCode)
+	}
+	if uws.DefaultRedirectURL != uwsDefaultRedirectURL {
+		t.Errorf("unexpected default redirect URL: got %s, expected %s", uws.DefaultRedirectURL, uwsDefaultRedirectURL)
 	}
 }
 
