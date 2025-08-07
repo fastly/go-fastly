@@ -4,6 +4,8 @@ on:
       - opened
       - synchronize
       - reopened
+      - labeled
+      - unlabeled
     branches:
       - main
 name: Test
