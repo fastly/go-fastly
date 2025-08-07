@@ -1,4 +1,4 @@
-package v1
+package domains
 
 import (
 	"context"
@@ -20,7 +20,7 @@ func Delete(ctx context.Context, c *fastly.Client, i *DeleteInput) error {
 		return fastly.ErrMissingDomainID
 	}
 
-	path := fastly.ToSafeURL("domains", "v1", *i.DomainID)
+	path := fastly.ToSafeURL("domain-management", "v1", "domains", *i.DomainID)
 
 	resp, err := c.Delete(ctx, path, fastly.CreateRequestOptions())
 	if err != nil {

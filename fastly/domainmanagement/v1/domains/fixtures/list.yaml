@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.1.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/domains/v1?fqdn=fastly-sdk-gofastly-testing.com&limit=10&sort=fqdn
+      - FastlyGo/11.0.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/domain-management/v1/domains?fqdn=1.fastly-sdk-gofastly-testing.com&limit=10&sort=fqdn
     method: GET
   response:
-    body: '{"data":[{"id":"c3uo2vKt4u93gpTsEjCQpg","created_at":"2025-05-19T10:40:19.000Z","fqdn":"fastly-sdk-gofastly-testing.com","updated_at":"2025-05-19T10:40:19.000Z","service_id":null,"activated":false,"verified":false,"description":"my
+    body: '{"data":[{"id":"DMrAbNVlJcZgwFP2ISUNOQ","created_at":"2025-08-01T18:18:48.000Z","fqdn":"1.fastly-sdk-gofastly-testing.com","updated_at":"2025-08-01T18:18:48.000Z","service_id":null,"activated":false,"verified":false,"description":"my
       description"}],"meta":{"total":1,"limit":10}}'
     headers:
       Accept-Ranges:
@@ -18,11 +18,11 @@ interactions:
       Cache-Control:
       - no-store
       Content-Length:
-      - "277"
+      - "279"
       Content-Type:
       - application/json
       Date:
-      - Mon, 19 May 2025 10:40:19 GMT
+      - Fri, 01 Aug 2025 18:18:49 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +38,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-lon420130-LON
+      - cache-chi-kigq8000025-CHI
       X-Timer:
-      - S1747651220.542247,VS0,VE363
+      - S1754072329.195334,VS0,VE80
     status: 200 OK
     code: 200
     duration: ""

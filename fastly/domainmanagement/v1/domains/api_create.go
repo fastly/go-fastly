@@ -1,4 +1,4 @@
-package v1
+package domains
 
 import (
 	"context"
@@ -22,7 +22,7 @@ type CreateInput struct {
 
 // Create creates a new domain.
 func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Data, error) {
-	resp, err := c.PostJSON(ctx, "/domains/v1", i, fastly.CreateRequestOptions())
+	resp, err := c.PostJSON(ctx, "/domain-management/v1/domains", i, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

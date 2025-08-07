@@ -1,4 +1,4 @@
-package v1
+package domains
 
 import (
 	"context"
@@ -12,7 +12,7 @@ func TestClient_Domain(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	fqdn := "fastly-sdk-gofastly-testing.com"
+	fqdn := "1.fastly-sdk-gofastly-testing.com"
 
 	// Create
 	var d *Data

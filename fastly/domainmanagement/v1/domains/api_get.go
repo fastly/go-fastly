@@ -1,4 +1,4 @@
-package v1
+package domains
 
 import (
 	"context"
@@ -21,7 +21,7 @@ func Get(ctx context.Context, c *fastly.Client, i *GetInput) (*Data, error) {
 		return nil, fastly.ErrMissingDomainID
 	}
 
-	path := fastly.ToSafeURL("domains", "v1", *i.DomainID)
+	path := fastly.ToSafeURL("domain-management", "v1", "domains", *i.DomainID)
 
 	resp, err := c.Get(ctx, path, fastly.CreateRequestOptions())
 	if err != nil {
