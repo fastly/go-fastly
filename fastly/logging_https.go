@@ -8,11 +8,13 @@ import (
 
 // HTTPS represents an HTTPS Logging response from the Fastly API.
 type HTTPS struct {
+	CompressionCodec  *string    `mapstructure:"compression_codec"`
 	ContentType       *string    `mapstructure:"content_type"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            *string    `mapstructure:"format"`
 	FormatVersion     *int       `mapstructure:"format_version"`
+	GzipLevel         *int       `mapstructure:"gzip_level"`
 	HeaderName        *string    `mapstructure:"header_name"`
 	HeaderValue       *string    `mapstructure:"header_value"`
 	JSONFormat        *string    `mapstructure:"json_format"`
@@ -67,12 +69,16 @@ func (c *Client) ListHTTPS(ctx context.Context, i *ListHTTPSInput) ([]*HTTPS, er
 
 // CreateHTTPSInput is used as input to the CreateHTTPS function.
 type CreateHTTPSInput struct {
+	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
+	CompressionCodec *string `url:"compression_codec,omitempty"`
 	// ContentType is the content type of the header sent with the request.
 	ContentType *string `url:"content_type,omitempty"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
 	FormatVersion *int `url:"format_version,omitempty"`
+	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
+	GzipLevel *int `url:"gzip_level,omitempty"`
 	// HeaderName is the name of the custom header sent with the request.
 	HeaderName *string `url:"header_name,omitempty"`
 	// HeaderValue is the value of the custom header sent with the request.

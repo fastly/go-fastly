@@ -66,6 +66,93 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Fatal(err)
 	}
 
+	Record(t, "https/create2", func(c *Client) {
+		h, err = c.CreateHTTPS(context.TODO(), &CreateHTTPSInput{
+			ServiceID:         TestDeliveryServiceID,
+			ServiceVersion:    *tv.Number,
+			Name:              ToPointer("test-https-2"),
+			Format:            ToPointer("format"),
+			URL:               ToPointer("https://example.com/"),
+			RequestMaxEntries: ToPointer(1),
+			RequestMaxBytes:   ToPointer(1000),
+			ContentType:       ToPointer(JSONMimeType),
+			HeaderName:        ToPointer("X-Example-Header"),
+			HeaderValue:       ToPointer("ExampleValue"),
+			Method:            ToPointer(http.MethodPut),
+			JSONFormat:        ToPointer("2"),
+			Placement:         ToPointer("waf_debug"),
+			TLSCACert:         ToPointer(caCert),
+			TLSClientCert:     ToPointer(clientCert),
+			TLSClientKey:      ToPointer(clientKey),
+			TLSHostname:       ToPointer("example.com"),
+			MessageType:       ToPointer("blank"),
+			FormatVersion:     ToPointer(2),
+			GzipLevel:         ToPointer(8),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	Record(t, "https/create3", func(c *Client) {
+		h, err = c.CreateHTTPS(context.TODO(), &CreateHTTPSInput{
+			ServiceID:         TestDeliveryServiceID,
+			ServiceVersion:    *tv.Number,
+			Name:              ToPointer("test-https-3"),
+			Format:            ToPointer("format"),
+			URL:               ToPointer("https://example.com/"),
+			RequestMaxEntries: ToPointer(1),
+			RequestMaxBytes:   ToPointer(1000),
+			ContentType:       ToPointer(JSONMimeType),
+			HeaderName:        ToPointer("X-Example-Header"),
+			HeaderValue:       ToPointer("ExampleValue"),
+			Method:            ToPointer(http.MethodPut),
+			JSONFormat:        ToPointer("2"),
+			Placement:         ToPointer("waf_debug"),
+			TLSCACert:         ToPointer(caCert),
+			TLSClientCert:     ToPointer(clientCert),
+			TLSClientKey:      ToPointer(clientKey),
+			TLSHostname:       ToPointer("example.com"),
+			MessageType:       ToPointer("blank"),
+			FormatVersion:     ToPointer(2),
+			CompressionCodec:  ToPointer("snappy"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// This case is expected to fail because both CompressionCodec and
+	// GzipLevel are present.
+	Record(t, "https/create4", func(c *Client) {
+		_, err = c.CreateHTTPS(context.TODO(), &CreateHTTPSInput{
+			ServiceID:         TestDeliveryServiceID,
+			ServiceVersion:    *tv.Number,
+			Name:              ToPointer("test-https-4"),
+			Format:            ToPointer("format"),
+			URL:               ToPointer("https://example.com/"),
+			RequestMaxEntries: ToPointer(1),
+			RequestMaxBytes:   ToPointer(1000),
+			ContentType:       ToPointer(JSONMimeType),
+			HeaderName:        ToPointer("X-Example-Header"),
+			HeaderValue:       ToPointer("ExampleValue"),
+			Method:            ToPointer(http.MethodPut),
+			JSONFormat:        ToPointer("2"),
+			Placement:         ToPointer("waf_debug"),
+			TLSCACert:         ToPointer(caCert),
+			TLSClientCert:     ToPointer(clientCert),
+			TLSClientKey:      ToPointer(clientKey),
+			TLSHostname:       ToPointer("example.com"),
+			MessageType:       ToPointer("blank"),
+			FormatVersion:     ToPointer(2),
+			GzipLevel:         ToPointer(8),
+			CompressionCodec:  ToPointer("snappy"),
+		})
+	})
+	if err == nil {
+		t.Fatal(err)
+	}
+
 	// ensure deleted
 	defer func() {
 		Record(t, "https/cleanup", func(c *Client) {
