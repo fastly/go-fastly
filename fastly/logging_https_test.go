@@ -38,9 +38,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	clientKey := strings.TrimSpace(privateKey())
 
 	// Create
-	var h *HTTPS
+	var httpsCreateResp1, httpsCreateResp2, httpsCreateResp3 *HTTPS
 	Record(t, "https/create", func(c *Client) {
-		h, err = c.CreateHTTPS(context.TODO(), &CreateHTTPSInput{
+		httpsCreateResp1, err = c.CreateHTTPS(context.TODO(), &CreateHTTPSInput{
 			ServiceID:         TestDeliveryServiceID,
 			ServiceVersion:    *tv.Number,
 			Name:              ToPointer("test-https"),
@@ -67,7 +67,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 
 	Record(t, "https/create2", func(c *Client) {
-		h, err = c.CreateHTTPS(context.TODO(), &CreateHTTPSInput{
+		httpsCreateResp2, err = c.CreateHTTPS(context.TODO(), &CreateHTTPSInput{
 			ServiceID:         TestDeliveryServiceID,
 			ServiceVersion:    *tv.Number,
 			Name:              ToPointer("test-https-2"),
@@ -95,7 +95,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 
 	Record(t, "https/create3", func(c *Client) {
-		h, err = c.CreateHTTPS(context.TODO(), &CreateHTTPSInput{
+		httpsCreateResp3, err = c.CreateHTTPS(context.TODO(), &CreateHTTPSInput{
 			ServiceID:         TestDeliveryServiceID,
 			ServiceVersion:    *tv.Number,
 			Name:              ToPointer("test-https-3"),
@@ -168,59 +168,81 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-https",
 			})
+
+			// ensure that renamed endpoint created in Update test is deleted
+			_ = c.DeleteHTTPS(context.TODO(), &DeleteHTTPSInput{
+				ServiceID:      TestDeliveryServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "test-https-2",
+			})
+			// ensure that renamed endpoint created in Update test is deleted
+			_ = c.DeleteHTTPS(context.TODO(), &DeleteHTTPSInput{
+				ServiceID:      TestDeliveryServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "test-https-3",
+			})
 		})
 	}()
 
-	if *h.Name != "test-https" {
-		t.Errorf("bad name: %q", *h.Name)
+	if *httpsCreateResp1.Format != "format" {
+		t.Errorf("bad format: %q", *httpsCreateResp1.Format)
 	}
-	if *h.Format != "format" {
-		t.Errorf("bad format: %q", *h.Format)
+	if *httpsCreateResp1.URL != "https://example.com/" {
+		t.Errorf("bad url: %q", *httpsCreateResp1.URL)
 	}
-	if *h.URL != "https://example.com/" {
-		t.Errorf("bad url: %q", *h.URL)
+	if *httpsCreateResp1.RequestMaxEntries != 1 {
+		t.Errorf("bad request_max_entries: %q", *httpsCreateResp1.RequestMaxEntries)
 	}
-	if *h.RequestMaxEntries != 1 {
-		t.Errorf("bad request_max_entries: %q", *h.RequestMaxEntries)
+	if *httpsCreateResp1.RequestMaxBytes != 1000 {
+		t.Errorf("bad request_max_bytes: %q", *httpsCreateResp1.RequestMaxBytes)
 	}
-	if *h.RequestMaxBytes != 1000 {
-		t.Errorf("bad request_max_bytes: %q", *h.RequestMaxBytes)
+	if *httpsCreateResp1.ContentType != JSONMimeType {
+		t.Errorf("bad content_type: %q", *httpsCreateResp1.ContentType)
 	}
-	if *h.ContentType != JSONMimeType {
-		t.Errorf("bad content_type: %q", *h.ContentType)
+	if *httpsCreateResp1.HeaderName != "X-Example-Header" {
+		t.Errorf("bad *h.ader_name: %q", *httpsCreateResp1.HeaderName)
 	}
-	if *h.HeaderName != "X-Example-Header" {
-		t.Errorf("bad *h.ader_name: %q", *h.HeaderName)
+	if *httpsCreateResp1.HeaderValue != "ExampleValue" {
+		t.Errorf("bad *h.ader_value: %q", *httpsCreateResp1.HeaderValue)
 	}
-	if *h.HeaderValue != "ExampleValue" {
-		t.Errorf("bad *h.ader_value: %q", *h.HeaderValue)
+	if *httpsCreateResp1.Method != http.MethodPut {
+		t.Errorf("bad met*h.d: %q", *httpsCreateResp1.Method)
 	}
-	if *h.Method != http.MethodPut {
-		t.Errorf("bad met*h.d: %q", *h.Method)
+	if *httpsCreateResp1.JSONFormat != "2" {
+		t.Errorf("bad json_format: %q", *httpsCreateResp1.JSONFormat)
 	}
-	if *h.JSONFormat != "2" {
-		t.Errorf("bad json_format: %q", *h.JSONFormat)
+	if *httpsCreateResp1.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *httpsCreateResp1.Placement)
 	}
-	if *h.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *h.Placement)
+	if *httpsCreateResp1.TLSCACert != caCert {
+		t.Errorf("bad tls_ca_cert: %q", *httpsCreateResp1.TLSCACert)
 	}
-	if *h.TLSCACert != caCert {
-		t.Errorf("bad tls_ca_cert: %q", *h.TLSCACert)
+	if *httpsCreateResp1.TLSHostname != "example.com" {
+		t.Errorf("bad tls_httpsCreateResp1.stname: %q", *httpsCreateResp1.TLSHostname)
 	}
-	if *h.TLSHostname != "example.com" {
-		t.Errorf("bad tls_*h.stname: %q", *h.TLSHostname)
+	if *httpsCreateResp1.TLSClientCert != clientCert {
+		t.Errorf("bad tls_client_cert: %q", *httpsCreateResp1.TLSClientCert)
 	}
-	if *h.TLSClientCert != clientCert {
-		t.Errorf("bad tls_client_cert: %q", *h.TLSClientCert)
+	if *httpsCreateResp1.TLSClientKey != clientKey {
+		t.Errorf("bad tls_client_key: %q", *httpsCreateResp1.TLSClientKey)
 	}
-	if *h.TLSClientKey != clientKey {
-		t.Errorf("bad tls_client_key: %q", *h.TLSClientKey)
+	if *httpsCreateResp1.MessageType != "blank" {
+		t.Errorf("bad message_type: %s", *httpsCreateResp1.MessageType)
 	}
-	if *h.MessageType != "blank" {
-		t.Errorf("bad message_type: %s", *h.MessageType)
+	if *httpsCreateResp1.FormatVersion != 2 {
+		t.Errorf("bad format_version: %d", *httpsCreateResp1.FormatVersion)
 	}
-	if *h.FormatVersion != 2 {
-		t.Errorf("bad format_version: %d", *h.FormatVersion)
+	if httpsCreateResp2.CompressionCodec != nil {
+		t.Errorf("bad compression_codec: %q", *httpsCreateResp2.CompressionCodec)
+	}
+	if *httpsCreateResp2.GzipLevel != 8 {
+		t.Errorf("bad gzip_level: %q", *httpsCreateResp2.GzipLevel)
+	}
+	if *httpsCreateResp3.CompressionCodec != "snappy" {
+		t.Errorf("bad compression_codec: %q", *httpsCreateResp3.CompressionCodec)
+	}
+	if *httpsCreateResp3.GzipLevel != 0 {
+		t.Errorf("bad gzip_level: %q", *httpsCreateResp3.GzipLevel)
 	}
 
 	// List
@@ -250,56 +272,56 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	if err != nil {
 		t.Fatal(err)
 	}
-	if *h.Name != *nh.Name {
-		t.Errorf("bad name: %q", *h.Name)
+	if *httpsCreateResp1.Name != *nh.Name {
+		t.Errorf("bad name: %q", *httpsCreateResp1.Name)
 	}
-	if *h.Format != *nh.Format {
-		t.Errorf("bad format: %q", *h.Format)
+	if *httpsCreateResp1.Format != *nh.Format {
+		t.Errorf("bad format: %q", *httpsCreateResp1.Format)
 	}
-	if *h.URL != *nh.URL {
-		t.Errorf("bad url: %q", *h.URL)
+	if *httpsCreateResp1.URL != *nh.URL {
+		t.Errorf("bad url: %q", *httpsCreateResp1.URL)
 	}
-	if *h.RequestMaxEntries != *nh.RequestMaxEntries {
-		t.Errorf("bad request_max_entries: %q", *h.RequestMaxEntries)
+	if *httpsCreateResp1.RequestMaxEntries != *nh.RequestMaxEntries {
+		t.Errorf("bad request_max_entries: %q", *httpsCreateResp1.RequestMaxEntries)
 	}
-	if *h.RequestMaxBytes != *nh.RequestMaxBytes {
-		t.Errorf("bad request_max_bytes: %q", *h.RequestMaxBytes)
+	if *httpsCreateResp1.RequestMaxBytes != *nh.RequestMaxBytes {
+		t.Errorf("bad request_max_bytes: %q", *httpsCreateResp1.RequestMaxBytes)
 	}
-	if *h.ContentType != *nh.ContentType {
-		t.Errorf("bad content_type: %q", *h.ContentType)
+	if *httpsCreateResp1.ContentType != *nh.ContentType {
+		t.Errorf("bad content_type: %q", *httpsCreateResp1.ContentType)
 	}
-	if *h.HeaderName != *nh.HeaderName {
-		t.Errorf("bad *h.ader_name: %q", *h.HeaderName)
+	if *httpsCreateResp1.HeaderName != *nh.HeaderName {
+		t.Errorf("bad *httpsCreateResp1.ader_name: %q", *httpsCreateResp1.HeaderName)
 	}
-	if *h.HeaderValue != *nh.HeaderValue {
-		t.Errorf("bad *h.ader_value: %q", *h.HeaderValue)
+	if *httpsCreateResp1.HeaderValue != *nh.HeaderValue {
+		t.Errorf("bad *httpsCreateResp1.ader_value: %q", *httpsCreateResp1.HeaderValue)
 	}
-	if *h.Method != *nh.Method {
-		t.Errorf("bad met*h.d: %q", *h.Method)
+	if *httpsCreateResp1.Method != *nh.Method {
+		t.Errorf("bad met*httpsCreateResp1.d: %q", *httpsCreateResp1.Method)
 	}
-	if *h.JSONFormat != *nh.JSONFormat {
-		t.Errorf("bad json_format: %q", *h.JSONFormat)
+	if *httpsCreateResp1.JSONFormat != *nh.JSONFormat {
+		t.Errorf("bad json_format: %q", *httpsCreateResp1.JSONFormat)
 	}
-	if *h.Placement != *nh.Placement {
-		t.Errorf("bad placement: %q", *h.Placement)
+	if *httpsCreateResp1.Placement != *nh.Placement {
+		t.Errorf("bad placement: %q", *httpsCreateResp1.Placement)
 	}
-	if *h.TLSCACert != *nh.TLSCACert {
-		t.Errorf("bad tls_ca_cert: %q", *h.TLSCACert)
+	if *httpsCreateResp1.TLSCACert != *nh.TLSCACert {
+		t.Errorf("bad tls_ca_cert: %q", *httpsCreateResp1.TLSCACert)
 	}
-	if *h.TLSHostname != *nh.TLSHostname {
-		t.Errorf("bad tls_*h.stname: %q", *h.TLSHostname)
+	if *httpsCreateResp1.TLSHostname != *nh.TLSHostname {
+		t.Errorf("bad tls_*httpsCreateResp1.stname: %q", *httpsCreateResp1.TLSHostname)
 	}
-	if *h.TLSClientCert != *nh.TLSClientCert {
-		t.Errorf("bad tls_client_cert: %q", *h.TLSClientCert)
+	if *httpsCreateResp1.TLSClientCert != *nh.TLSClientCert {
+		t.Errorf("bad tls_client_cert: %q", *httpsCreateResp1.TLSClientCert)
 	}
-	if *h.TLSClientKey != *nh.TLSClientKey {
-		t.Errorf("bad tls_client_key: %q", *h.TLSClientKey)
+	if *httpsCreateResp1.TLSClientKey != *nh.TLSClientKey {
+		t.Errorf("bad tls_client_key: %q", *httpsCreateResp1.TLSClientKey)
 	}
-	if *h.MessageType != *nh.MessageType {
-		t.Errorf("bad message_type: %s", *h.MessageType)
+	if *httpsCreateResp1.MessageType != *nh.MessageType {
+		t.Errorf("bad message_type: %s", *httpsCreateResp1.MessageType)
 	}
-	if *h.FormatVersion != *nh.FormatVersion {
-		t.Errorf("bad format_version: %d", *h.FormatVersion)
+	if *httpsCreateResp1.FormatVersion != *nh.FormatVersion {
+		t.Errorf("bad format_version: %d", *httpsCreateResp1.FormatVersion)
 	}
 
 	// Update
