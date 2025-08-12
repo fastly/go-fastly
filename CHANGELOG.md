@@ -14,6 +14,7 @@ feat(logging): Add support for 'CompressionCodec' and 'GzipLevel' attribute to t
 ### Bug fixes:
 
 ### Dependencies:
+- build(deps): `actions/checkout` from 4 to 5 ([#735](https://github.com/fastly/go-fastly/pull/735))
 
 ## [v11.1.2](https://github.com/fastly/go-fastly/releases/tag/v11.1.2) (2025-08-06)
 
