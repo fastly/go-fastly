@@ -7,6 +7,7 @@
 ### Breaking:
 
 ### Enhancements:
+feat(logging): Add support for 'CompressionCodec' and 'GzipLevel' attribute to the HTTPS endpoint.
 
 - feat(domainmanagement): Adds support for domain-management/v1/domains endpoints [#726](https://github.com/fastly/go-fastly/pull/726)
 
