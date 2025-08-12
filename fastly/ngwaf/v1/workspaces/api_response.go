@@ -15,6 +15,9 @@ type Workspace struct {
 	CreatedAt time.Time `json:"created_at"`
 	// DefaultBlockingResponseCode is the default response code.
 	DefaultBlockingResponseCode int `json:"default_blocking_response_code"`
+	// DefaultRedirectURL is a URL that will be used if
+	// the DefaultBlockingResponseCode is set to 301 or 302
+	DefaultRedirectURL string `json:"default_redirect_url"`
 	// Description is the description of the workspace.
 	Description string `json:"description"`
 	// IPAnonymization is the selected option to anonymize IP
