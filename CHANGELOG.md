@@ -7,6 +7,7 @@
 ### Breaking:
 
 ### Enhancements:
+feat(logging): Add support for 'CompressionCodec' and 'GzipLevel' attribute to the HTTPS endpoint.
 
 ### Bug fixes:
 
