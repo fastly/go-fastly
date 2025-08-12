@@ -1,4 +1,4 @@
-package v1
+package domains
 
 import (
 	"context"
@@ -45,7 +45,7 @@ func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Collection, err
 		requestOptions.Params["sort"] = *i.Sort
 	}
 
-	resp, err := c.Get(ctx, "/domains/v1", requestOptions)
+	resp, err := c.Get(ctx, "/domain-management/v1/domains", requestOptions)
 	if err != nil {
 		return nil, err
 	}

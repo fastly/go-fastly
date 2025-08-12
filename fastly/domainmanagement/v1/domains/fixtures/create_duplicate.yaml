@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"description":null,"fqdn":"fastly-sdk-gofastly-testing.com","service_id":null}'
+    body: '{"description":null,"fqdn":"1.fastly-sdk-gofastly-testing.com","service_id":null}'
     form: {}
     headers:
       Accept:
@@ -10,8 +10,8 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/10.1.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/domains/v1
+      - FastlyGo/11.0.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/domain-management/v1/domains
     method: POST
   response:
     body: '{"errors":[{"title":"Invalid value for fqdn","detail":"fqdn has already
@@ -26,7 +26,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 19 May 2025 10:40:19 GMT
+      - Fri, 01 Aug 2025 18:18:49 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-lon420130-LON
+      - cache-chi-kigq8000025-CHI
       X-Timer:
-      - S1747651219.137696,VS0,VE377
+      - S1754072329.033324,VS0,VE103
     status: 400 Bad Request
     code: 400
     duration: ""
