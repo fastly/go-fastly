@@ -10,7 +10,7 @@
 
 - feat(logging): Add support for 'CompressionCodec' and 'GzipLevel' attribute to the HTTPS endpoint.[#734](https://github.com/fastly/go-fastly/pull/734)
 - feat(domainmanagement): Adds support for domain-management/v1/domains endpoints [#726](https://github.com/fastly/go-fastly/pull/726)
-- feat(ngwaf/rules): adds support for the deception action type [#736](https://github.com/fastly/go-fastly/pull/736)
+- feat(ngwaf/rules): adds support for the deception action type and the allow_interactive field [#736](https://github.com/fastly/go-fastly/pull/736)
 
 ### Bug fixes:
 
