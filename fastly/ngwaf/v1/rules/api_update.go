@@ -54,6 +54,9 @@ type UpdateInput struct {
 // UpdateAction represents an action taken when a rule's conditions
 // are met.
 type UpdateAction struct {
+	// AllowInteractive specifies if interaction is allowed and is
+	// only used for the "browser_challenge" action
+	AllowInteractive *bool `json:"allow_interactive,omitempty"`
 	// DeceptionType specifies the type of deception and is only
 	// used for the "deception" action
 	DeceptionType *string `json:"deception_type,omitempty"`

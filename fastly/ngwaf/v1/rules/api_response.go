@@ -64,6 +64,9 @@ type Condition struct {
 // Action defines the action that will be executed when a rule is
 // triggered.
 type Action struct {
+	// AllowInteractive specifies if interaction is allowed and is
+	// only used for the "browser_challenge" action
+	AllowInteractive *bool `json:"allow_interactive,omitempty"`
 	// DeceptionType specifies the type of deception and is only
 	// used for the "deception" action
 	DeceptionType string `json:"deception_type"`
