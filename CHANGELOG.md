@@ -12,9 +12,9 @@
 
 ### Dependencies:
 
-## [v11.2.0](https://github.com/fastly/go-fastly/releases/tag/v11.2.0) (2025-08-14)
+## [v11.3.0](https://github.com/fastly/go-fastly/releases/tag/v11.3.0) (2025-08-14)
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v11.1.2...v11.2.0)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v11.2.0...v11.3.0)
 
 ### Enhancements:
 
@@ -26,9 +26,9 @@
 
 - build(deps): `actions/checkout` from 4 to 5 ([#735](https://github.com/fastly/go-fastly/pull/735))
 
-## [v11.1.2](https://github.com/fastly/go-fastly/releases/tag/v11.1.2) (2025-08-06)
+## [v11.2.0](https://github.com/fastly/go-fastly/releases/tag/v11.2.0) (2025-08-06)
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v11.1.1...v11.1.2)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v11.1.1...v11.2.0)
 
 ### Enhancements:
 
