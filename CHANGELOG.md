@@ -2,9 +2,19 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v11.1.1...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v11.2.0...)
 
 ### Breaking:
+
+### Enhancements:
+
+### Bug fixes:
+
+### Dependencies:
+
+## [v11.2.0](https://github.com/fastly/go-fastly/releases/tag/v11.2.0) (2025-08-14)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v11.1.2...v11.2.0)
 
 ### Enhancements:
 
@@ -12,15 +22,13 @@
 - feat(domainmanagement): Adds support for domain-management/v1/domains endpoints [#726](https://github.com/fastly/go-fastly/pull/726)
 - feat(ngwaf/rules): adds support for the deception action type and the allow_interactive field [#736](https://github.com/fastly/go-fastly/pull/736)
 
-### Bug fixes:
-
 ### Dependencies:
 
 - build(deps): `actions/checkout` from 4 to 5 ([#735](https://github.com/fastly/go-fastly/pull/735))
 
 ## [v11.1.2](https://github.com/fastly/go-fastly/releases/tag/v11.1.2) (2025-08-06)
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v11.1.1...v11.2.0)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v11.1.1...v11.1.2)
 
 ### Enhancements:
 
