@@ -54,18 +54,24 @@ type UpdateInput struct {
 // UpdateAction represents an action taken when a rule's conditions
 // are met.
 type UpdateAction struct {
-	// Type specifies the action type (e.g., "block",
-	// "exclude_signal") (required).
-	Type *string `json:"type"`
-	// Signal is the signal name used only for the
-	// "exclude_signal" action type.
-	Signal *string `json:"signal,omitempty"`
+	// AllowInteractive specifies if interaction is allowed and is
+	// only used for the "browser_challenge" action
+	AllowInteractive *bool `json:"allow_interactive,omitempty"`
+	// DeceptionType specifies the type of deception and is only
+	// used for the "deception" action
+	DeceptionType *string `json:"deception_type,omitempty"`
 	// RedirectURL specifies the target URL when redirecting the
 	// request.
 	RedirectURL *string `json:"redirect_url,omitempty"`
 	// ResponseCode is the HTTP status code returned during
 	// redirection (e.g., 301, 302).
 	ResponseCode *int `json:"response_code,omitempty"`
+	// Signal is the signal name used only for the
+	// "exclude_signal" action type.
+	Signal *string `json:"signal,omitempty"`
+	// Type specifies the action type (e.g., "block",
+	// "exclude_signal") (required).
+	Type *string `json:"type"`
 }
 
 // UpdateCondition defines a single condition.

@@ -64,16 +64,22 @@ type Condition struct {
 // Action defines the action that will be executed when a rule is
 // triggered.
 type Action struct {
-	// Type specifies the action type (e.g., "redirect", "block").
-	Type string `json:"type"`
-	// Signal is used when the action type is "exclude_signal".
-	Signal string `json:"signal"`
+	// AllowInteractive specifies if interaction is allowed and is
+	// only used for the "browser_challenge" action
+	AllowInteractive *bool `json:"allow_interactive,omitempty"`
+	// DeceptionType specifies the type of deception and is only
+	// used for the "deception" action
+	DeceptionType string `json:"deception_type"`
 	// RedirectURL is the URL to redirect to when using a redirect
 	// action.
 	RedirectURL string `json:"redirect_url"`
 	// ResponseCode is the HTTP response code to use for the
 	// redirect.
 	ResponseCode int `json:"response_code"`
+	// Signal is used when the action type is "exclude_signal".
+	Signal string `json:"signal"`
+	// Type specifies the action type (e.g., "redirect", "block").
+	Type string `json:"type"`
 }
 
 // RateLimit is the parameters of the rate limit rule.
