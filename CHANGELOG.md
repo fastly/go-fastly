@@ -11,6 +11,8 @@
 ### Bug fixes:
 
 ### Dependencies:
+- build(deps): `golang.org/x/crypto` from 0.40.0 to 0.41.0 ([#740](https://github.com/fastly/go-fastly/pull/740))
+- build(deps): `golang.org/x/sys` from 0.34.0 to 0.35.0 ([#740](https://github.com/fastly/go-fastly/pull/740))
 
 ## [v11.3.0](https://github.com/fastly/go-fastly/releases/tag/v11.3.0) (2025-08-14)
 
