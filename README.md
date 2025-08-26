@@ -1,4 +1,4 @@
-# Go Fastly
+# GoGoGoGo Fastly
 
 [![Go Documentation](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)][latest]
 
