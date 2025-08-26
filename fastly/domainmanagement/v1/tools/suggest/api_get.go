@@ -50,7 +50,7 @@ func Get(ctx context.Context, c *fastly.Client, g *GetInput) (*Suggestions, erro
 		ro.Params["vendor"] = *g.Vendor
 	}
 
-	path := fastly.ToSafeURL("domains", "v1", "tools", "suggest")
+	path := fastly.ToSafeURL("domain-management", "v1", "tools", "suggest")
 	resp, err := c.Get(ctx, path, ro)
 	if err != nil {
 		return nil, err

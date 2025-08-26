@@ -38,7 +38,7 @@ func Get(ctx context.Context, c *fastly.Client, g *GetInput) (*Status, error) {
 		ro.Params["scope"] = string(*g.Scope)
 	}
 
-	path := fastly.ToSafeURL("domains", "v1", "tools", "status")
+	path := fastly.ToSafeURL("domain-management", "v1", "tools", "status")
 	resp, err := c.Get(ctx, path, ro)
 	if err != nil {
 		return nil, err

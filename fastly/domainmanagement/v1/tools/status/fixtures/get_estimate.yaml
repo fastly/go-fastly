@@ -1,46 +1,46 @@
 ---
 version: 1
 interactions:
-- request:
-    body: ""
-    form: {}
-    headers:
-      User-Agent:
-      - FastlyGo/10.0.1 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/domains/v1/tools/status?domain=fastly-sdk-gofastly-testing.com&scope=estimate
-    method: GET
-  response:
-    body: |
-      {"scope":"estimate","domain":"fastly-sdk-gofastly-testing.com","zone":"com","status":"undelegated","tags":"generic"}
-    headers:
-      Accept-Ranges:
-      - bytes
-      Age:
-      - "1"
-      Cache-Control:
-      - no-store
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Tue, 06 May 2025 16:45:36 GMT
-      Pragma:
-      - no-cache
-      Server:
-      - fastly
-      Strict-Transport-Security:
-      - max-age=31536000
-      Vary:
-      - Accept-Encoding
-      Via:
-      - 1.1 varnish
-      X-Cache:
-      - MISS, MISS
-      X-Cache-Hits:
-      - "0"
-      X-Served-By:
-      - cache-lga21990-LGA, cache-lga21977-LGA
-      X-Timer:
-      - S1746549936.938774,VS0,VE545
-    status: 200 OK
-    code: 200
-    duration: ""
+  - request:
+      body: ""
+      form: {}
+      headers:
+        User-Agent:
+          - FastlyGo/10.0.1 (+github.com/fastly/go-fastly; go1.24.2)
+      url: https://api.fastly.com/domain-management/v1/tools/status?domain=fastly-sdk-gofastly-testing.com&scope=estimate
+      method: GET
+    response:
+      body: |
+        {"scope":"estimate","domain":"fastly-sdk-gofastly-testing.com","zone":"com","status":"undelegated","tags":"generic"}
+      headers:
+        Accept-Ranges:
+          - bytes
+        Age:
+          - "1"
+        Cache-Control:
+          - no-store
+        Content-Type:
+          - application/json; charset=utf-8
+        Date:
+          - Tue, 06 May 2025 16:45:36 GMT
+        Pragma:
+          - no-cache
+        Server:
+          - fastly
+        Strict-Transport-Security:
+          - max-age=31536000
+        Vary:
+          - Accept-Encoding
+        Via:
+          - 1.1 varnish
+        X-Cache:
+          - MISS, MISS
+        X-Cache-Hits:
+          - "0"
+        X-Served-By:
+          - cache-lga21990-LGA, cache-lga21977-LGA
+        X-Timer:
+          - S1746549936.938774,VS0,VE545
+      status: 200 OK
+      code: 200
+      duration: ""
