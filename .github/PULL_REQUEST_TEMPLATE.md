@@ -1,3 +1,11 @@
+### Change summary
+
+ <!--
+Briefly describe the changes introduced in this pull request. Include context or
+reasoning behind the changes, even if they seem minor. If relevant, link to any
+related discussions (e.g. Slack threads, tickets, documents).
+-->
+
  All Submissions:
 
 * [ ] Have you followed the guidelines in our Contributing document?
@@ -11,7 +19,6 @@
 
 ### Changes to Core Features:
 
-* [ ] Have you added an explanation of what your changes do and why you'd like us to include them?
 * [ ] Have you written new tests for your core changes, as applicable?
 * [ ] Have you successfully run tests with your changes locally?
 

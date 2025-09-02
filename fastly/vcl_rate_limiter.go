@@ -1,6 +1,3 @@
-// API reference:
-// https://developer.fastly.com/reference/api/vcl-services/rate-limiter/
-// NB: ERL is an optional feature that must be enabled before use
 package fastly
 
 import (
