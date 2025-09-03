@@ -36,9 +36,6 @@ type EnableTestInput[O products.ProductOutput, I any] struct {
 	// used to validate the ProductID in the output from OpFn (if
 	// any), it is not provided to OpNoInputFn or OpWithInputFn
 	ProductID string
-	// ServiceID identifies the service on which the product
-	// information should be obtained
-	ServiceID string
 	// ExpectFailure specifies whether this test case is expected
 	// to fail
 	ExpectFailure bool
@@ -74,10 +71,10 @@ func NewEnableTest[O products.ProductOutput, I any](i *EnableTestInput[O, I]) *t
 
 	switch any(i.Input).(type) {
 	case products.NullInput:
-		r.TestFn = func(t *testing.T, tc *test_utils.FunctionalTest, c *fastly.Client) error {
-			result, err := i.OpNoInputFn(context.TODO(), c, i.ServiceID)
+		r.TestFn = func(t *testing.T, tc *test_utils.FunctionalTest, c *fastly.Client, serviceID string) error {
+			result, err := i.OpNoInputFn(context.TODO(), c, serviceID)
 			if err == nil {
-				validateOutput(t, tc, result, i.ProductID, i.ServiceID)
+				validateOutput(t, tc, result, i.ProductID, serviceID)
 				if i.CheckOutputFn != nil {
 					i.CheckOutputFn(t, tc, result)
 				}
@@ -85,10 +82,10 @@ func NewEnableTest[O products.ProductOutput, I any](i *EnableTestInput[O, I]) *t
 			return err
 		}
 	default:
-		r.TestFn = func(t *testing.T, tc *test_utils.FunctionalTest, c *fastly.Client) error {
-			result, err := i.OpWithInputFn(context.TODO(), c, i.ServiceID, i.Input)
+		r.TestFn = func(t *testing.T, tc *test_utils.FunctionalTest, c *fastly.Client, serviceID string) error {
+			result, err := i.OpWithInputFn(context.TODO(), c, serviceID, i.Input)
 			if err == nil {
-				validateOutput(t, tc, result, i.ProductID, i.ServiceID)
+				validateOutput(t, tc, result, i.ProductID, serviceID)
 				if i.CheckOutputFn != nil {
 					i.CheckOutputFn(t, tc, result)
 				}

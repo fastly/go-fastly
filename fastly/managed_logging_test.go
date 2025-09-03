@@ -46,6 +46,46 @@ func TestClient_ManagedLogging(t *testing.T) {
 	}
 }
 
+func TestClient_ManagedLogging_Compute(t *testing.T) {
+	t.Parallel()
+
+	var err error
+
+	// Create
+	Record(t, "managed_logging/compute/create", func(c *Client) {
+		_, err = c.CreateManagedLogging(context.TODO(), &CreateManagedLoggingInput{
+			ServiceID: TestComputeServiceID,
+			Kind:      ManagedLoggingInstanceOutput,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Test that enabling managed logging on a service with it already
+	// enabled results in a 409.
+	Record(t, "managed_logging/compute/recreate", func(c *Client) {
+		_, err = c.CreateManagedLogging(context.TODO(), &CreateManagedLoggingInput{
+			ServiceID: TestComputeServiceID,
+			Kind:      ManagedLoggingInstanceOutput,
+		})
+	})
+	if !errors.Is(err, ErrManagedLoggingEnabled) {
+		t.Errorf("unexpected error: %s", err)
+	}
+
+	// Delete
+	Record(t, "managed_logging/compute/delete", func(c *Client) {
+		err = c.DeleteManagedLogging(context.TODO(), &DeleteManagedLoggingInput{
+			ServiceID: TestComputeServiceID,
+			Kind:      ManagedLoggingInstanceOutput,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestClient_CreateManagedLogging_validation(t *testing.T) {
 	_, err := TestClient.CreateManagedLogging(context.TODO(), &CreateManagedLoggingInput{
 		ServiceID: "",

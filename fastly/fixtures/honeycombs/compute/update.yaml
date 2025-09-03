@@ -1,0 +1,60 @@
+---
+version: 1
+interactions:
+- request:
+    body: dataset=newDataset&log_processing_region=eu&name=new-test-honeycomb&token=new-token
+    form:
+      dataset:
+      - newDataset
+      log_processing_region:
+      - eu
+      name:
+      - new-test-honeycomb
+      token:
+      - new-token
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/22/logging/honeycomb/test-honeycomb
+    method: PUT
+  response:
+    body: '{"updated_at":"2025-09-02T17:11:46Z","deleted_at":null,"dataset":"newDataset","service_id":"XsjdElScZGjmfCcTwsYRC1","created_at":"2025-09-02T17:11:46Z","response_condition":"","log_processing_region":"eu","name":"new-test-honeycomb","format":"%h
+      %l %u %t \"%r\" %\u003es %b","version":"22","token":"new-token","placement":"none","format_version":"2"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 02 Sep 2025 17:11:47 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9957"
+      Fastly-Ratelimit-Reset:
+      - "1756836000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100083-CHI, cache-ewr-kewr1740095-EWR
+      X-Timer:
+      - S1756833107.929109,VS0,VE413
+    status: 200 OK
+    code: 200
+    duration: ""

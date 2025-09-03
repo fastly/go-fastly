@@ -1,0 +1,65 @@
+---
+version: 1
+interactions:
+- request:
+    body: format=format&format_version=2&iam_role=arn%3Aaws%3Aiam%3A%3A123456789012%3Arole%2FS3Access&name=test-kinesis-2&placement=none&region=us-east-1&topic=stream-name
+    form:
+      format:
+      - format
+      format_version:
+      - "2"
+      iam_role:
+      - arn:aws:iam::123456789012:role/S3Access
+      name:
+      - test-kinesis-2
+      placement:
+      - none
+      region:
+      - us-east-1
+      topic:
+      - stream-name
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/25/logging/kinesis
+    method: POST
+  response:
+    body: '{"format":"format","format_version":"2","iam_role":"arn:aws:iam::123456789012:role/S3Access","name":"test-kinesis-2","placement":"none","region":"us-east-1","topic":"stream-name","service_id":"XsjdElScZGjmfCcTwsYRC1","version":"25","log_processing_region":"none","deleted_at":null,"secret_key":null,"response_condition":"","access_key":null,"updated_at":"2025-09-02T17:16:45Z","created_at":"2025-09-02T17:16:45Z"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 02 Sep 2025 17:16:46 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9934"
+      Fastly-Ratelimit-Reset:
+      - "1756836000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100048-CHI, cache-ewr-kewr1740046-EWR
+      X-Timer:
+      - S1756833406.774148,VS0,VE336
+    status: 200 OK
+    code: 200
+    duration: ""

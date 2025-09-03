@@ -1,0 +1,67 @@
+---
+version: 1
+interactions:
+- request:
+    body: name=new-test-backend-compute&override_host=www.example.com&port=1234&prefer_ipv6=1&share_key=sharedkey&ssl_check_cert=0&ssl_ciphers=HIGH&ssl_sni_hostname=ssl-hostname-updated.com
+    form:
+      name:
+      - new-test-backend-compute
+      override_host:
+      - www.example.com
+      port:
+      - "1234"
+      prefer_ipv6:
+      - "1"
+      share_key:
+      - sharedkey
+      ssl_check_cert:
+      - "0"
+      ssl_ciphers:
+      - HIGH
+      ssl_sni_hostname:
+      - ssl-hostname-updated.com
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/7/backend/test-backend-compute
+    method: PUT
+  response:
+    body: '{"ssl_client_key":null,"name":"new-test-backend-compute","ssl_hostname":null,"ssl_client_cert":null,"ipv4":null,"ssl_ca_cert":null,"share_key":"sharedkey","ssl_sni_hostname":"ssl-hostname-updated.com","tcp_keepalive_time":null,"client_cert":null,"override_host":"www.example.com","max_tls_version":null,"address":"integ-test.go-fastly.com","use_ssl":false,"healthcheck":null,"deleted_at":null,"ssl_ciphers":"HIGH","connect_timeout":1500,"prefer_ipv6":true,"request_condition":"","auto_loadbalance":false,"version":7,"first_byte_timeout":15000,"ssl_check_cert":false,"weight":100,"updated_at":"2025-08-29T19:38:08Z","comment":"","keepalive_time":null,"created_at":"2025-08-29T19:38:08Z","tcp_keepalive_interval":null,"tcp_keepalive_enable":null,"service_id":"XsjdElScZGjmfCcTwsYRC1","min_tls_version":null,"max_conn":200,"shield":null,"hostname":"integ-test.go-fastly.com","tcp_keepalive_probes":null,"error_threshold":0,"ipv6":null,"ssl_cert_hostname":null,"between_bytes_timeout":10000,"port":1234}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 29 Aug 2025 19:38:09 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9969"
+      Fastly-Ratelimit-Reset:
+      - "1756497600"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100133-CHI, cache-ewr-kewr1740076-EWR
+      X-Timer:
+      - S1756496289.819217,VS0,VE279
+    status: 200 OK
+    code: 200
+    duration: ""

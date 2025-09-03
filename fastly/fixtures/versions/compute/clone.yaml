@@ -1,0 +1,50 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/45/clone
+    method: PUT
+  response:
+    body: '{"number":46,"service_id":"XsjdElScZGjmfCcTwsYRC1","active":false,"environments":[],"comment":"new
+      comment","deployed":false,"deleted_at":null,"created_at":"2025-09-08T14:12:05Z","updated_at":"2025-09-08T14:12:06Z","testing":false,"locked":false,"staging":false}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 08 Sep 2025 14:12:07 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9996"
+      Fastly-Ratelimit-Reset:
+      - "1757343600"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100102-CHI, cache-ewr-kewr1740096-EWR
+      X-Timer:
+      - S1757340727.085219,VS0,VE444
+    status: 200 OK
+    code: 200
+    duration: ""

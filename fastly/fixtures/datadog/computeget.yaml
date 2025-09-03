@@ -1,0 +1,45 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/13/logging/datadog/test-datadog
+    method: GET
+  response:
+    body: '{"region":"US","deleted_at":null,"updated_at":"2025-08-29T19:51:08Z","response_condition":"","created_at":"2025-08-29T19:51:08Z","service_id":"XsjdElScZGjmfCcTwsYRC1","version":"13","format":"format","name":"test-datadog","log_processing_region":"none","format_version":"2","placement":"none","token":"abcd1234"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 29 Aug 2025 19:51:08 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100059-CHI, cache-ewr-kewr1740057-EWR
+      X-Timer:
+      - S1756497069.727397,VS0,VE162
+    status: 200 OK
+    code: 200
+    duration: ""

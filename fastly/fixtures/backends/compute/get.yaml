@@ -1,0 +1,45 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/7/backend/test-backend-compute
+    method: GET
+  response:
+    body: '{"max_conn":200,"ssl_ca_cert":null,"share_key":null,"error_threshold":0,"comment":"","name":"test-backend-compute","between_bytes_timeout":10000,"shield":null,"keepalive_time":null,"tcp_keepalive_time":null,"ipv6":null,"deleted_at":null,"hostname":"integ-test.go-fastly.com","weight":100,"ssl_cert_hostname":null,"port":80,"created_at":"2025-08-29T19:38:08Z","ssl_ciphers":"DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384","client_cert":null,"max_tls_version":null,"connect_timeout":1500,"ssl_hostname":null,"ssl_sni_hostname":"ssl-hostname.com","ssl_client_cert":null,"ipv4":null,"request_condition":"","first_byte_timeout":15000,"service_id":"XsjdElScZGjmfCcTwsYRC1","updated_at":"2025-08-29T19:38:08Z","auto_loadbalance":false,"override_host":"origin.example.com","healthcheck":null,"tcp_keepalive_interval":null,"tcp_keepalive_enable":null,"version":7,"ssl_client_key":null,"address":"integ-test.go-fastly.com","min_tls_version":null,"tcp_keepalive_probes":null,"ssl_check_cert":false,"prefer_ipv6":true,"use_ssl":false}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 29 Aug 2025 19:38:08 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100133-CHI, cache-ewr-kewr1740076-EWR
+      X-Timer:
+      - S1756496289.627567,VS0,VE172
+    status: 200 OK
+    code: 200
+    duration: ""

@@ -358,6 +358,358 @@ func TestClient_Openstack(t *testing.T) {
 	}
 }
 
+func TestClient_Openstack_Compute(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	var tv *Version
+	Record(t, "openstack/compute/version", func(c *Client) {
+		tv = testVersionCompute(t, c)
+	})
+
+	// Create
+	var osCreateResp1, osCreateResp2, osCreateResp3 *Openstack
+	Record(t, "openstack/compute/create", func(c *Client) {
+		osCreateResp1, err = c.CreateOpenstack(context.TODO(), &CreateOpenstackInput{
+			ServiceID:        TestComputeServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             ToPointer("test-openstack"),
+			User:             ToPointer("user"),
+			AccessKey:        ToPointer("secret-key"),
+			BucketName:       ToPointer("bucket-name"),
+			URL:              ToPointer("https://logs.example.com/v1.0"),
+			Path:             ToPointer("/path"),
+			Period:           ToPointer(12),
+			CompressionCodec: ToPointer("snappy"),
+			Format:           ToPointer("format"),
+			FormatVersion:    ToPointer(2),
+			TimestampFormat:  ToPointer("%Y"),
+			MessageType:      ToPointer("classic"),
+			Placement:        ToPointer("none"),
+			PublicKey:        ToPointer(pgpPublicKey()),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	Record(t, "openstack/compute/create2", func(c *Client) {
+		osCreateResp2, err = c.CreateOpenstack(context.TODO(), &CreateOpenstackInput{
+			ServiceID:       TestComputeServiceID,
+			ServiceVersion:  *tv.Number,
+			Name:            ToPointer("test-openstack-2"),
+			User:            ToPointer("user"),
+			AccessKey:       ToPointer("secret-key"),
+			BucketName:      ToPointer("bucket-name"),
+			URL:             ToPointer("https://logs.example.com/v1.0"),
+			Path:            ToPointer("/path"),
+			Period:          ToPointer(12),
+			GzipLevel:       ToPointer(8),
+			Format:          ToPointer("format"),
+			FormatVersion:   ToPointer(2),
+			TimestampFormat: ToPointer("%Y"),
+			MessageType:     ToPointer("classic"),
+			Placement:       ToPointer("none"),
+			PublicKey:       ToPointer(pgpPublicKey()),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	Record(t, "openstack/compute/create3", func(c *Client) {
+		osCreateResp3, err = c.CreateOpenstack(context.TODO(), &CreateOpenstackInput{
+			ServiceID:        TestComputeServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             ToPointer("test-openstack-3"),
+			User:             ToPointer("user"),
+			AccessKey:        ToPointer("secret-key"),
+			BucketName:       ToPointer("bucket-name"),
+			URL:              ToPointer("https://logs.example.com/v1.0"),
+			Path:             ToPointer("/path"),
+			Period:           ToPointer(12),
+			CompressionCodec: ToPointer("snappy"),
+			Format:           ToPointer("format"),
+			FormatVersion:    ToPointer(2),
+			TimestampFormat:  ToPointer("%Y"),
+			MessageType:      ToPointer("classic"),
+			Placement:        ToPointer("none"),
+			PublicKey:        ToPointer(pgpPublicKey()),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// This case is expected to fail because both CompressionCodec and
+	// GzipLevel are present.
+	Record(t, "openstack/compute/create4", func(c *Client) {
+		_, err = c.CreateOpenstack(context.TODO(), &CreateOpenstackInput{
+			ServiceID:        TestComputeServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             ToPointer("test-openstack-4"),
+			User:             ToPointer("user"),
+			AccessKey:        ToPointer("secret-key"),
+			BucketName:       ToPointer("bucket-name"),
+			URL:              ToPointer("https://logs.example.com/v1.0"),
+			Path:             ToPointer("/path"),
+			Period:           ToPointer(12),
+			CompressionCodec: ToPointer("snappy"),
+			GzipLevel:        ToPointer(8),
+			Format:           ToPointer("format"),
+			FormatVersion:    ToPointer(2),
+			TimestampFormat:  ToPointer("%Y"),
+			MessageType:      ToPointer("classic"),
+			Placement:        ToPointer("none"),
+			PublicKey:        ToPointer(pgpPublicKey()),
+		})
+	})
+	if err == nil {
+		t.Fatal(err)
+	}
+
+	// Ensure deleted
+	defer func() {
+		Record(t, "openstack/compute/cleanup", func(c *Client) {
+			_ = c.DeleteOpenstack(context.TODO(), &DeleteOpenstackInput{
+				ServiceID:      TestComputeServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "test-openstack",
+			})
+
+			_ = c.DeleteOpenstack(context.TODO(), &DeleteOpenstackInput{
+				ServiceID:      TestComputeServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "test-openstack-2",
+			})
+
+			_ = c.DeleteOpenstack(context.TODO(), &DeleteOpenstackInput{
+				ServiceID:      TestComputeServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "test-openstack-3",
+			})
+
+			_ = c.DeleteOpenstack(context.TODO(), &DeleteOpenstackInput{
+				ServiceID:      TestComputeServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "new-test-openstack",
+			})
+		})
+	}()
+
+	if *osCreateResp1.Name != "test-openstack" {
+		t.Errorf("bad name: %q", *osCreateResp1.Name)
+	}
+	if *osCreateResp1.User != "user" {
+		t.Errorf("bad user: %q", *osCreateResp1.User)
+	}
+	if *osCreateResp1.BucketName != "bucket-name" {
+		t.Errorf("bad bucket_name: %q", *osCreateResp1.BucketName)
+	}
+	if *osCreateResp1.AccessKey != "secret-key" {
+		t.Errorf("bad access_key: %q", *osCreateResp1.AccessKey)
+	}
+	if *osCreateResp1.Path != "/path" {
+		t.Errorf("bad path: %q", *osCreateResp1.Path)
+	}
+	if *osCreateResp1.URL != "https://logs.example.com/v1.0" {
+		t.Errorf("bad url: %q", *osCreateResp1.URL)
+	}
+	if *osCreateResp1.Period != 12 {
+		t.Errorf("bad period: %q", *osCreateResp1.Period)
+	}
+	if *osCreateResp1.CompressionCodec != "snappy" {
+		t.Errorf("bad comprssion_codec: %q", *osCreateResp1.CompressionCodec)
+	}
+	if *osCreateResp1.GzipLevel != 0 {
+		t.Errorf("bad gzip_level: %q", *osCreateResp1.GzipLevel)
+	}
+	if *osCreateResp1.Format != "format" {
+		t.Errorf("bad format: %q", *osCreateResp1.Format)
+	}
+	if *osCreateResp1.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *osCreateResp1.FormatVersion)
+	}
+	if *osCreateResp1.TimestampFormat != "%Y" {
+		t.Errorf("bad timestamp_format: %q", *osCreateResp1.TimestampFormat)
+	}
+	if *osCreateResp1.MessageType != "classic" {
+		t.Errorf("bad message_type: %q", *osCreateResp1.MessageType)
+	}
+	if *osCreateResp1.Placement != "none" {
+		t.Errorf("bad placement: %q", *osCreateResp1.Placement)
+	}
+	if *osCreateResp1.PublicKey != pgpPublicKey() {
+		t.Errorf("bad public_key: %q", *osCreateResp1.PublicKey)
+	}
+	if osCreateResp2.CompressionCodec != nil {
+		t.Errorf("bad compression_codec: %q", *osCreateResp2.CompressionCodec)
+	}
+	if *osCreateResp2.GzipLevel != 8 {
+		t.Errorf("bad gzip_level: %q", *osCreateResp2.GzipLevel)
+	}
+	if *osCreateResp3.CompressionCodec != "snappy" {
+		t.Errorf("bad compression_codec: %q", *osCreateResp3.CompressionCodec)
+	}
+	if *osCreateResp3.GzipLevel != 0 {
+		t.Errorf("bad gzip_level: %q", *osCreateResp3.GzipLevel)
+	}
+
+	// List
+	var lc []*Openstack
+	Record(t, "openstack/compute/list", func(c *Client) {
+		lc, err = c.ListOpenstack(context.TODO(), &ListOpenstackInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(lc) < 1 {
+		t.Errorf("bad openstack: %v", lc)
+	}
+
+	// Get
+	var osGetResp *Openstack
+	Record(t, "openstack/compute/get", func(c *Client) {
+		osGetResp, err = c.GetOpenstack(context.TODO(), &GetOpenstackInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "test-openstack",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if *osCreateResp1.Name != *osGetResp.Name {
+		t.Errorf("bad name: %q", *osCreateResp1.Name)
+	}
+	if *osCreateResp1.User != *osGetResp.User {
+		t.Errorf("bad user: %q", *osCreateResp1.User)
+	}
+	if *osCreateResp1.BucketName != *osGetResp.BucketName {
+		t.Errorf("bad bucket_name: %q", *osCreateResp1.BucketName)
+	}
+	if *osCreateResp1.AccessKey != *osGetResp.AccessKey {
+		t.Errorf("bad access_key: %q", *osCreateResp1.AccessKey)
+	}
+	if *osCreateResp1.Path != *osGetResp.Path {
+		t.Errorf("bad path: %q", *osCreateResp1.Path)
+	}
+	if *osCreateResp1.URL != *osGetResp.URL {
+		t.Errorf("bad url: %q", *osCreateResp1.URL)
+	}
+	if *osCreateResp1.Period != *osGetResp.Period {
+		t.Errorf("bad period: %q", *osCreateResp1.Period)
+	}
+	if *osCreateResp1.CompressionCodec != *osGetResp.CompressionCodec {
+		t.Errorf("bad compression_codec: %q", *osCreateResp1.CompressionCodec)
+	}
+	if *osCreateResp1.GzipLevel != *osGetResp.GzipLevel {
+		t.Errorf("bad gzip_level: %q", *osCreateResp1.GzipLevel)
+	}
+	if *osCreateResp1.Format != *osGetResp.Format {
+		t.Errorf("bad format: %q", *osCreateResp1.Format)
+	}
+	if *osCreateResp1.FormatVersion != *osGetResp.FormatVersion {
+		t.Errorf("bad format_version: %q", *osCreateResp1.FormatVersion)
+	}
+	if *osCreateResp1.TimestampFormat != *osGetResp.TimestampFormat {
+		t.Errorf("bad timestamp_format: %q", *osCreateResp1.TimestampFormat)
+	}
+	if *osCreateResp1.MessageType != *osGetResp.MessageType {
+		t.Errorf("bad message_type: %q", *osCreateResp1.MessageType)
+	}
+	if *osCreateResp1.Placement != *osGetResp.Placement {
+		t.Errorf("bad placement: %q", *osCreateResp1.Placement)
+	}
+	if *osCreateResp1.PublicKey != *osGetResp.PublicKey {
+		t.Errorf("bad public_key: %q", *osCreateResp1.PublicKey)
+	}
+
+	// Update
+	var osUpdateResp1, osUpdateResp2, osUpdateResp3 *Openstack
+	Record(t, "openstack/compute/update", func(c *Client) {
+		osUpdateResp1, err = c.UpdateOpenstack(context.TODO(), &UpdateOpenstackInput{
+			ServiceID:        TestComputeServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-openstack",
+			User:             ToPointer("new-user"),
+			NewName:          ToPointer("new-test-openstack"),
+			CompressionCodec: ToPointer("zstd"),
+			ProcessingRegion: ToPointer("eu"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	Record(t, "openstack/compute/update2", func(c *Client) {
+		osUpdateResp2, err = c.UpdateOpenstack(context.TODO(), &UpdateOpenstackInput{
+			ServiceID:        TestComputeServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-openstack-2",
+			CompressionCodec: ToPointer("zstd"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	Record(t, "openstack/compute/update3", func(c *Client) {
+		osUpdateResp3, err = c.UpdateOpenstack(context.TODO(), &UpdateOpenstackInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "test-openstack-3",
+			GzipLevel:      ToPointer(9),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if *osUpdateResp1.Name != "new-test-openstack" {
+		t.Errorf("bad name: %q", *osUpdateResp1.Name)
+	}
+	if *osUpdateResp1.User != "new-user" {
+		t.Errorf("bad user: %q", *osUpdateResp1.User)
+	}
+	if *osUpdateResp1.CompressionCodec != "zstd" {
+		t.Errorf("bad compression_codec: %q", *osUpdateResp1.CompressionCodec)
+	}
+	if osUpdateResp1.GzipLevel != nil {
+		t.Errorf("bad gzip_level: %q", *osUpdateResp1.GzipLevel)
+	}
+	if *osUpdateResp1.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *osUpdateResp1.ProcessingRegion)
+	}
+	if *osUpdateResp2.CompressionCodec != "zstd" {
+		t.Errorf("bad compression_codec: %q", *osUpdateResp2.CompressionCodec)
+	}
+	if *osUpdateResp2.GzipLevel != 0 {
+		t.Errorf("bad gzip_level: %q", *osUpdateResp2.GzipLevel)
+	}
+	if osUpdateResp3.CompressionCodec != nil {
+		t.Errorf("bad compression_codec: %q", *osUpdateResp3.CompressionCodec)
+	}
+	if *osUpdateResp3.GzipLevel != 9 {
+		t.Errorf("bad gzip_level: %q", *osUpdateResp3.GzipLevel)
+	}
+
+	// Delete
+	Record(t, "openstack/compute/delete", func(c *Client) {
+		err = c.DeleteOpenstack(context.TODO(), &DeleteOpenstackInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-openstack",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestClient_ListOpenstack_validation(t *testing.T) {
 	var err error
 	_, err = TestClient.ListOpenstack(context.TODO(), &ListOpenstackInput{

@@ -1,0 +1,45 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/26/logging/logentries/test-logentries
+    method: GET
+  response:
+    body: '{"token":"abcd1234","updated_at":"2025-09-02T17:18:03Z","format":"format","created_at":"2025-09-02T17:18:03Z","service_id":"XsjdElScZGjmfCcTwsYRC1","format_version":"2","public_key":null,"region":"us","log_processing_region":"none","deleted_at":null,"placement":"none","name":"test-logentries","version":"26","port":"0","response_condition":"","hostname":null,"use_tls":"1"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 02 Sep 2025 17:18:03 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100121-CHI, cache-nyc-kteb1890053-NYC
+      X-Timer:
+      - S1756833484.562510,VS0,VE143
+    status: 200 OK
+    code: 200
+    duration: ""
