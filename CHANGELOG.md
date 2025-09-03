@@ -9,6 +9,7 @@
 ### Enhancements:
 
 ### Bug fixes:
+- fix(logging): Add CompressionCodec and GZipLevel to HTTPS update struct
 
 ### Dependencies:
 - build(deps): `golang.org/x/crypto` from 0.40.0 to 0.41.0 ([#740](https://github.com/fastly/go-fastly/pull/740))

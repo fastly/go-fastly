@@ -179,12 +179,16 @@ func (c *Client) GetHTTPS(ctx context.Context, i *GetHTTPSInput) (*HTTPS, error)
 
 // UpdateHTTPSInput is the input parameter to the UpdateHTTPS function.
 type UpdateHTTPSInput struct {
+	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.
+	CompressionCodec *string `url:"compression_codec,omitempty"`
 	// ContentType is the content type of the header sent with the request.
 	ContentType *string `url:"content_type,omitempty"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
 	FormatVersion *int `url:"format_version,omitempty"`
+	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
+	GzipLevel *int `url:"gzip_level,omitempty"`
 	// HeaderName is the name of the custom header sent with the request.
 	HeaderName *string `url:"header_name,omitempty"`
 	// HeaderValue is the value of the custom header sent with the request.

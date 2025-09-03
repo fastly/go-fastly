@@ -334,6 +334,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			NewName:          ToPointer("new-test-https"),
 			Method:           ToPointer(http.MethodPost),
 			ProcessingRegion: ToPointer("eu"),
+			CompressionCodec: ToPointer("zstd"),
 		})
 	})
 	if err != nil {
@@ -347,6 +348,26 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if *uh.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *uh.ProcessingRegion)
+	}
+	if *uh.CompressionCodec != "zstd" {
+		t.Errorf("bad compression_codec: %q", *uh.CompressionCodec)
+	}
+
+	// Update
+	var uh2 *HTTPS
+	Record(t, "https/update2", func(c *Client) {
+		uh2, err = c.UpdateHTTPS(context.TODO(), &UpdateHTTPSInput{
+			ServiceID:      TestDeliveryServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-https",
+			GzipLevel:      ToPointer(3),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if *uh2.GzipLevel != 3 {
+		t.Errorf("bad gzip_level: %q", *uh2.GzipLevel)
 	}
 
 	// Delete
