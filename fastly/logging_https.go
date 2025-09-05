@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"context"
+	"fmt"
 	"strconv"
 	"time"
 )
@@ -21,6 +22,7 @@ type HTTPS struct {
 	MessageType       *string    `mapstructure:"message_type"`
 	Method            *string    `mapstructure:"method"`
 	Name              *string    `mapstructure:"name"`
+	Period            *int       `mapstructure:"period"`
 	Placement         *string    `mapstructure:"placement"`
 	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	RequestMaxBytes   *int       `mapstructure:"request_max_bytes"`
@@ -91,6 +93,8 @@ type CreateHTTPSInput struct {
 	Method *string `url:"method,omitempty"`
 	// Name is the name for the real-time logging configuration.
 	Name *string `url:"name,omitempty"`
+	// Period is the time interval (in seconds) for log flushing.
+	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
 	// ProcessingRegion is the region where logs will be processed before streaming to the HTTPS server.
@@ -137,6 +141,7 @@ func (c *Client) CreateHTTPS(ctx context.Context, i *CreateHTTPSInput) (*HTTPS, 
 	if err := DecodeBodyMap(resp.Body, &https); err != nil {
 		return nil, err
 	}
+	fmt.Printf("%v\n", https)
 	return https, nil
 }
 
@@ -203,6 +208,8 @@ type UpdateHTTPSInput struct {
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
+	// Period is the time interval (in seconds) for log flushing.
+	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
 	// ProcessingRegion is the region where logs will be processed before streaming to the HTTPS server.

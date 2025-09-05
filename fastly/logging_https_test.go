@@ -53,6 +53,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			HeaderValue:       ToPointer("ExampleValue"),
 			Method:            ToPointer(http.MethodPut),
 			JSONFormat:        ToPointer("2"),
+			Period:            ToPointer(3600),
 			Placement:         ToPointer("waf_debug"),
 			TLSCACert:         ToPointer(caCert),
 			TLSClientCert:     ToPointer(clientCert),
@@ -80,6 +81,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			HeaderValue:       ToPointer("ExampleValue"),
 			Method:            ToPointer(http.MethodPut),
 			JSONFormat:        ToPointer("2"),
+			Period:            ToPointer(3600),
 			Placement:         ToPointer("waf_debug"),
 			TLSCACert:         ToPointer(caCert),
 			TLSClientCert:     ToPointer(clientCert),
@@ -108,6 +110,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			HeaderValue:       ToPointer("ExampleValue"),
 			Method:            ToPointer(http.MethodPut),
 			JSONFormat:        ToPointer("2"),
+			Period:            ToPointer(3600),
 			Placement:         ToPointer("waf_debug"),
 			TLSCACert:         ToPointer(caCert),
 			TLSClientCert:     ToPointer(clientCert),
@@ -138,6 +141,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			HeaderValue:       ToPointer("ExampleValue"),
 			Method:            ToPointer(http.MethodPut),
 			JSONFormat:        ToPointer("2"),
+			Period:            ToPointer(3600),
 			Placement:         ToPointer("waf_debug"),
 			TLSCACert:         ToPointer(caCert),
 			TLSClientCert:     ToPointer(clientCert),
@@ -210,6 +214,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if *httpsCreateResp1.JSONFormat != "2" {
 		t.Errorf("bad json_format: %q", *httpsCreateResp1.JSONFormat)
+	}
+	if *httpsCreateResp1.Period != 3600 {
+		t.Errorf("bad period: %q", *httpsCreateResp1.Period)
 	}
 	if *httpsCreateResp1.Placement != "waf_debug" {
 		t.Errorf("bad placement: %q", *httpsCreateResp1.Placement)
@@ -301,6 +308,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if *httpsCreateResp1.JSONFormat != *nh.JSONFormat {
 		t.Errorf("bad json_format: %q", *httpsCreateResp1.JSONFormat)
+	}
+	if *httpsCreateResp1.Period != *nh.Period {
+		t.Errorf("bad period: %q", *httpsCreateResp1.Period)
 	}
 	if *httpsCreateResp1.Placement != *nh.Placement {
 		t.Errorf("bad placement: %q", *httpsCreateResp1.Placement)
