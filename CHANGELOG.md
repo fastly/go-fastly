@@ -7,6 +7,7 @@
 ### Breaking:
 
 ### Enhancements:
+- feat(logging): Add support for 'Period' attribute to the HTTPS endpoint.[#749](https://github.com/fastly/go-fastly/pull/749)
 
 ### Bug fixes:
 

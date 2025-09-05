@@ -93,7 +93,7 @@ type CreateHTTPSInput struct {
 	Method *string `url:"method,omitempty"`
 	// Name is the name for the real-time logging configuration.
 	Name *string `url:"name,omitempty"`
-	// Period is the time interval (in seconds) for log flushing.
+	// Period is the time interval (in seconds) for log flushing, defaults to 5 seconds.
 	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
@@ -208,7 +208,7 @@ type UpdateHTTPSInput struct {
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
-	// Period is the time interval (in seconds) for log flushing.
+	// Period is the time interval (in seconds) for log flushing, defaults to 5 seconds.
 	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
