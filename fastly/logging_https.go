@@ -2,7 +2,6 @@ package fastly
 
 import (
 	"context"
-	"fmt"
 	"strconv"
 	"time"
 )
@@ -141,7 +140,6 @@ func (c *Client) CreateHTTPS(ctx context.Context, i *CreateHTTPSInput) (*HTTPS, 
 	if err := DecodeBodyMap(resp.Body, &https); err != nil {
 		return nil, err
 	}
-	fmt.Printf("%v\n", https)
 	return https, nil
 }
 
