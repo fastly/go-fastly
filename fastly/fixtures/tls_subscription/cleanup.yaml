@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.3.1 (+github.com/fastly/go-fastly; go1.20.14)
-    url: https://api.fastly.com/tls/subscriptions/mwtZ5xuowgXsyR2nyPjuWw
+      - FastlyGo/11.3.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/tls/subscriptions/CDnaWfggp3Pw5pyy7nxG4Q
     method: DELETE
   response:
     body: '{"errors":[{"title":"Not found","detail":"The subscription you requested
@@ -22,25 +22,25 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Tue, 07 May 2024 12:52:02 GMT
+      - Mon, 08 Sep 2025 17:11:20 GMT
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-lcy-eglc8600089-LCY
+      - cache-chi-kigq8000176-CHI, cache-ewr-kewr1740048-EWR
       X-Timer:
-      - S1715086323.742454,VS0,VE193
+      - S1757351480.958657,VS0,VE154
     status: 404 Not Found
     code: 404
     duration: ""

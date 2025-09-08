@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/11.3.1 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/tls/subscriptions/CDnaWfggp3Pw5pyy7nxG4Q
+    url: https://api.fastly.com/tls/subscriptions/yENvilLSUdiUesxTCIwDKA
     method: DELETE
   response:
     body: ""
@@ -17,7 +17,7 @@ interactions:
       Cache-Control:
       - no-store
       Date:
-      - Mon, 08 Sep 2025 17:11:19 GMT
+      - Mon, 08 Sep 2025 17:20:36 GMT
       Pragma:
       - no-cache
       Server:
@@ -33,9 +33,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-chi-kigq8000176-CHI, cache-ewr-kewr1740048-EWR
+      - cache-chi-kigq8000078-CHI, cache-ewr-kewr1740056-EWR
       X-Timer:
-      - S1757351477.975814,VS0,VE2961
+      - S1757352033.868570,VS0,VE3132
     status: 204 No Content
     code: 204
     duration: ""

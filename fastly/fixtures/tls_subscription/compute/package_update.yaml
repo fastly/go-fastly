@@ -1,0 +1,57 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - multipart/form-data; boundary=767eeea55453f5dd524f69edc5dca7d051148f6b559241386f94ccc05a9f
+      User-Agent:
+      - FastlyGo/11.3.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/56/package
+    method: PUT
+  response:
+    body: '{"service_id":"XsjdElScZGjmfCcTwsYRC1","version":56,"id":"KBL7YNjRGVyx48yEAsaQX4","metadata":{"name":"test-package","description":"An
+      empty starter kit project template.","authors":["\u003coss@fastly.com\u003e"],"language":"rust","size":1540845,"hashsum":"ecc068efcd4071d36d6460152dcc50461b649f01f28589917540a69d33e9b1477decb5f5a9a2f6c269d83a13827502c1fe1f2efc3bdd6beadaabd23e22eb84fd","files_hash":"75ff1cf4d953ff2242bb38e4a01b04503622baf4b7dc540256f4dd5fc89df5aed7fea115adab0b71caa79f6483bb846ac0d4f4f937885fb03ee35d2dfafba6f3","wasm_metadata":{"processed-by":{"fastly":"v0.0.0-unknown
+      (Rust)","rustc":"1.78.0 (9b00956e5 2024-04-29)","clang":"16.0.4 (https://github.com/llvm/llvm-project
+      ae42196bc493ffe877a7e3dff8be32035dea4d07)","fastly_data":{"build_info":{"mem_heap_alloc":"2-5MB"},"machine_info":{},"script_info":{"build_script":"cargo
+      build --bin fastly-compute-project --release --target wasm32-wasi --color always"},"package_info":{"cloned_from":"https://github.com/fastly/compute-starter-kit-rust-empty","packages":{"fnv":"1.0.7","libc":"0.2.154","mime":"0.3.17","url":"2.5.0","idna":"0.5.0","block-buffer":"0.9.0","unicode-ident":"1.0.12","bytes":"1.6.0","time":"0.3.23","cfg-if":"1.0.0","serde_urlencoded":"0.7.1","syn":"2.0.63","ryu":"1.0.18","sha2":"0.9.9","typenum":"1.17.0","fastly-shared":"0.9.12","anyhow":"1.0.83","unicode-normalization":"0.1.23","bitflags":"1.3.2","generic-array":"0.14.7","time-core":"0.1.1","serde_json":"1.0.117","tinyvec_macros":"0.1.1","thiserror":"1.0.60","fastly":"0.9.12","cpufeatures":"0.2.12","fastly-compute-project":"0.1.0","lazy_static":"1.4.0","proc-macro2":"1.0.82","opaque-debug":"0.3.1","serde_derive":"1.0.201","percent-encoding":"2.3.1","version_check":"0.9.4","thiserror-impl":"1.0.60","quote":"1.0.36","time-macros":"0.2.10","fastly-sys":"0.9.12","http":"0.2.12","digest":"0.9.0","tinyvec":"1.6.0","form_urlencoded":"1.2.1","itoa":"1.0.11","unicode-bidi":"0.3.15","fastly-macros":"0.9.12","serde":"1.0.201"}}}},"language":{"Rust":""}}},"updated_at":"2025-09-08T17:20:27Z","deleted_at":null,"created_at":"2025-09-08T17:20:27Z"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 08 Sep 2025 17:20:27 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9961"
+      Fastly-Ratelimit-Reset:
+      - "1757354400"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000087-CHI, cache-ewr-kewr1740056-EWR
+      X-Timer:
+      - S1757352026.290934,VS0,VE1123
+    status: 200 OK
+    code: 200
+    duration: ""
