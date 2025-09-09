@@ -1,0 +1,45 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/25/logging/kinesis/test-kinesis-2
+    method: GET
+  response:
+    body: '{"response_condition":"","region":"us-east-1","log_processing_region":"none","deleted_at":null,"iam_role":"arn:aws:iam::123456789012:role/S3Access","topic":"stream-name","version":"25","name":"test-kinesis-2","placement":"none","access_key":null,"service_id":"XsjdElScZGjmfCcTwsYRC1","format_version":"2","secret_key":null,"updated_at":"2025-09-02T17:16:45Z","created_at":"2025-09-02T17:16:45Z","format":"format"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 02 Sep 2025 17:16:47 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100133-CHI, cache-ewr-kewr1740046-EWR
+      X-Timer:
+      - S1756833407.898202,VS0,VE111
+    status: 200 OK
+    code: 200
+    duration: ""

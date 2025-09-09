@@ -149,6 +149,149 @@ func TestClient_Sumologics(t *testing.T) {
 	}
 }
 
+func TestClient_Sumologics_Compute(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	var tv *Version
+	Record(t, "sumologics/compute/version", func(c *Client) {
+		tv = testVersionCompute(t, c)
+	})
+
+	// Create
+	var s *Sumologic
+	Record(t, "sumologics/compute/create", func(c *Client) {
+		s, err = c.CreateSumologic(context.TODO(), &CreateSumologicInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           ToPointer("test-sumologic"),
+			URL:            ToPointer("https://foo.sumologic.com"),
+			Format:         ToPointer("format"),
+			FormatVersion:  ToPointer(1),
+			MessageType:    ToPointer("classic"),
+			Placement:      ToPointer("none"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Ensure deleted
+	defer func() {
+		Record(t, "sumologics/compute/cleanup", func(c *Client) {
+			_ = c.DeleteSumologic(context.TODO(), &DeleteSumologicInput{
+				ServiceID:      TestComputeServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "test-sumologic",
+			})
+
+			_ = c.DeleteSumologic(context.TODO(), &DeleteSumologicInput{
+				ServiceID:      TestComputeServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "new-test-sumologic",
+			})
+		})
+	}()
+
+	if *s.Name != "test-sumologic" {
+		t.Errorf("bad name: %q", *s.Name)
+	}
+	if *s.URL != "https://foo.sumologic.com" {
+		t.Errorf("bad url: %q", *s.URL)
+	}
+	if *s.Format != "format" {
+		t.Errorf("bad format: %q", *s.Format)
+	}
+	if *s.FormatVersion != 1 {
+		t.Errorf("bad format version: %q", *s.FormatVersion)
+	}
+	if *s.MessageType != "classic" {
+		t.Errorf("bad message type: %q", *s.MessageType)
+	}
+	if *s.Placement != "none" {
+		t.Errorf("bad placement: %q", *s.Placement)
+	}
+
+	// List
+	var ss []*Sumologic
+	Record(t, "sumologics/compute/list", func(c *Client) {
+		ss, err = c.ListSumologics(context.TODO(), &ListSumologicsInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(ss) < 1 {
+		t.Errorf("bad sumologics: %v", ss)
+	}
+
+	// Get
+	var ns *Sumologic
+	Record(t, "sumologics/compute/get", func(c *Client) {
+		ns, err = c.GetSumologic(context.TODO(), &GetSumologicInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "test-sumologic",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if *s.Name != *ns.Name {
+		t.Errorf("bad name: %q", *s.Name)
+	}
+	if *s.URL != *ns.URL {
+		t.Errorf("bad url: %q", *s.URL)
+	}
+	if *s.Format != *ns.Format {
+		t.Errorf("bad format: %q", *s.Format)
+	}
+	if *s.FormatVersion != *ns.FormatVersion {
+		t.Errorf("bad format version: %q", *s.FormatVersion)
+	}
+	if *s.MessageType != *ns.MessageType {
+		t.Errorf("bad message type: %q", *s.MessageType)
+	}
+	if *s.Placement != *ns.Placement {
+		t.Errorf("bad placement: %q", *s.Placement)
+	}
+
+	// Update
+	var us *Sumologic
+	Record(t, "sumologics/compute/update", func(c *Client) {
+		us, err = c.UpdateSumologic(context.TODO(), &UpdateSumologicInput{
+			ServiceID:        TestComputeServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-sumologic",
+			NewName:          ToPointer("new-test-sumologic"),
+			ProcessingRegion: ToPointer("eu"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if *us.Name != "new-test-sumologic" {
+		t.Errorf("bad name: %q", *us.Name)
+	}
+	if *us.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *us.ProcessingRegion)
+	}
+
+	// Delete
+	Record(t, "sumologics/compute/delete", func(c *Client) {
+		err = c.DeleteSumologic(context.TODO(), &DeleteSumologicInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-sumologic",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestClient_ListSumologics_validation(t *testing.T) {
 	var err error
 	_, err = TestClient.ListSumologics(context.TODO(), &ListSumologicsInput{

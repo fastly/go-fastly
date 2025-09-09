@@ -153,6 +153,153 @@ func TestClient_Herokus(t *testing.T) {
 	}
 }
 
+func TestClient_Herokus_Compute(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	var tv *Version
+	Record(t, "herokus/compute/version", func(c *Client) {
+		tv = testVersionCompute(t, c)
+	})
+
+	// Create
+	var h *Heroku
+	Record(t, "herokus/compute/create", func(c *Client) {
+		h, err = c.CreateHeroku(context.TODO(), &CreateHerokuInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           ToPointer("test-heroku"),
+			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
+			FormatVersion:  ToPointer(2),
+			Placement:      ToPointer("none"),
+			Token:          ToPointer("super-secure-token"),
+			URL:            ToPointer("https://1.us.logplex.io/logs"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Ensure deleted
+	defer func() {
+		Record(t, "herokus/compute/cleanup", func(c *Client) {
+			_ = c.DeleteHeroku(context.TODO(), &DeleteHerokuInput{
+				ServiceID:      TestComputeServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "test-heroku",
+			})
+
+			_ = c.DeleteHeroku(context.TODO(), &DeleteHerokuInput{
+				ServiceID:      TestComputeServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "new-test-heroku",
+			})
+		})
+	}()
+
+	if *h.Name != "test-heroku" {
+		t.Errorf("bad name: %q", *h.Name)
+	}
+	if *h.Format != "%h %l %u %t \"%r\" %>s %b" {
+		t.Errorf("bad format: %q", *h.Format)
+	}
+	if *h.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *h.FormatVersion)
+	}
+	if *h.Placement != "none" {
+		t.Errorf("bad placement: %q", *h.Placement)
+	}
+	if *h.Token != "super-secure-token" {
+		t.Errorf("bad token: %q", *h.Token)
+	}
+	if *h.URL != "https://1.us.logplex.io/logs" {
+		t.Errorf("bad url: %q", *h.URL)
+	}
+
+	// List
+	var hs []*Heroku
+	Record(t, "herokus/compute/list", func(c *Client) {
+		hs, err = c.ListHerokus(context.TODO(), &ListHerokusInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(hs) < 1 {
+		t.Errorf("bad herokus: %v", hs)
+	}
+
+	// Get
+	var nh *Heroku
+	Record(t, "herokus/compute/get", func(c *Client) {
+		nh, err = c.GetHeroku(context.TODO(), &GetHerokuInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "test-heroku",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if *h.Name != *nh.Name {
+		t.Errorf("bad name: %q", *h.Name)
+	}
+	if *h.Format != *nh.Format {
+		t.Errorf("bad format: %q", *h.Format)
+	}
+	if *h.FormatVersion != *nh.FormatVersion {
+		t.Errorf("bad format_version: %q", *h.FormatVersion)
+	}
+	if *h.Placement != *nh.Placement {
+		t.Errorf("bad placement: %q", *h.Placement)
+	}
+	if *h.Token != *nh.Token {
+		t.Errorf("bad token: %q", *h.Token)
+	}
+	if *h.URL != *nh.URL {
+		t.Errorf("bad url: %q", *h.URL)
+	}
+
+	// Update
+	var uh *Heroku
+	Record(t, "herokus/compute/update", func(c *Client) {
+		uh, err = c.UpdateHeroku(context.TODO(), &UpdateHerokuInput{
+			ServiceID:        TestComputeServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-heroku",
+			NewName:          ToPointer("new-test-heroku"),
+			Token:            ToPointer("new-token"),
+			ProcessingRegion: ToPointer("eu"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if *uh.Name != "new-test-heroku" {
+		t.Errorf("bad name: %q", *uh.Name)
+	}
+	if *uh.Token != "new-token" {
+		t.Errorf("bad token: %q", *uh.Token)
+	}
+	if *uh.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *uh.ProcessingRegion)
+	}
+
+	// Delete
+	Record(t, "herokus/compute/delete", func(c *Client) {
+		err = c.DeleteHeroku(context.TODO(), &DeleteHerokuInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-heroku",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestClient_ListHerokus_validation(t *testing.T) {
 	var err error
 	_, err = TestClient.ListHerokus(context.TODO(), &ListHerokusInput{

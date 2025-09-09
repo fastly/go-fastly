@@ -12,11 +12,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/80/healthcheck/test-healthcheck
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/135/healthcheck/test-healthcheck
     method: PUT
   response:
-    body: '{"host":"example.com","deleted_at":null,"expected_response":200,"path":"/foo","http_version":"1.1","initial":10,"created_at":"2022-11-07T11:07:40Z","comment":"","timeout":1500,"service_id":"kKJb5bOFI47uHeBVluGfX1","updated_at":"2022-11-07T11:07:40Z","name":"new-test-healthcheck","check_interval":2500,"threshold":10,"headers":["Beep:Boop"],"version":80,"window":5000,"method":"HEAD"}'
+    body: '{"name":"new-test-healthcheck","host":"example.com","method":"HEAD","updated_at":"2025-08-29T19:24:32Z","timeout":1500,"window":5000,"comment":"","created_at":"2025-08-29T19:24:32Z","http_version":"1.1","threshold":10,"service_id":"kKJb5bOFI47uHeBVluGfX1","expected_response":200,"path":"/foo","deleted_at":null,"initial":10,"check_interval":2500,"headers":["Beep:Boop"],"version":135}'
     headers:
       Accept-Ranges:
       - bytes
@@ -25,11 +25,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 07 Nov 2022 11:07:41 GMT
+      - Fri, 29 Aug 2025 19:24:33 GMT
       Fastly-Ratelimit-Remaining:
-      - "9983"
+      - "9993"
       Fastly-Ratelimit-Reset:
-      - "1667822400"
+      - "1756497600"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -43,9 +47,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4133-MAN
+      - cache-chi-klot8100128-CHI, cache-ewr-kewr1740064-EWR
       X-Timer:
-      - S1667819261.910817,VS0,VE221
+      - S1756495473.454532,VS0,VE248
     status: 200 OK
     code: 200
     duration: ""

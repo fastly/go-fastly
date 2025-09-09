@@ -1,0 +1,59 @@
+---
+version: 1
+interactions:
+- request:
+    body: format_version=2&log_processing_region=eu&name=new-test-datadog&region=EU
+    form:
+      format_version:
+      - "2"
+      log_processing_region:
+      - eu
+      name:
+      - new-test-datadog
+      region:
+      - EU
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/13/logging/datadog/test-datadog
+    method: PUT
+  response:
+    body: '{"format_version":"2","token":"abcd1234","placement":"none","format":"format","version":"13","name":"new-test-datadog","log_processing_region":"eu","response_condition":"","created_at":"2025-08-29T19:51:08Z","service_id":"XsjdElScZGjmfCcTwsYRC1","region":"EU","updated_at":"2025-08-29T19:51:08Z","deleted_at":null}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 29 Aug 2025 19:51:09 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9919"
+      Fastly-Ratelimit-Reset:
+      - "1756497600"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100059-CHI, cache-ewr-kewr1740057-EWR
+      X-Timer:
+      - S1756497069.997116,VS0,VE405
+    status: 200 OK
+    code: 200
+    duration: ""

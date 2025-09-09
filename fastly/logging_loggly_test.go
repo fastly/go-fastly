@@ -145,6 +145,145 @@ func TestClient_Loggly(t *testing.T) {
 	}
 }
 
+func TestClient_Loggly_Compute(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	var tv *Version
+	Record(t, "loggly/compute/version", func(c *Client) {
+		tv = testVersionCompute(t, c)
+	})
+
+	// Create
+	var lg *Loggly
+	Record(t, "loggly/compute/create", func(c *Client) {
+		lg, err = c.CreateLoggly(context.TODO(), &CreateLogglyInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           ToPointer("test-loggly"),
+			Token:          ToPointer("abcd1234"),
+			Format:         ToPointer("format"),
+			Placement:      ToPointer("none"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Ensure deleted
+	defer func() {
+		Record(t, "loggly/compute/delete", func(c *Client) {
+			_ = c.DeleteLoggly(context.TODO(), &DeleteLogglyInput{
+				ServiceID:      TestComputeServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "test-loggly",
+			})
+
+			_ = c.DeleteLoggly(context.TODO(), &DeleteLogglyInput{
+				ServiceID:      TestComputeServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "new-test-loggly",
+			})
+		})
+	}()
+
+	if *lg.Name != "test-loggly" {
+		t.Errorf("bad name: %q", *lg.Name)
+	}
+	if *lg.Token != "abcd1234" {
+		t.Errorf("bad token: %q", *lg.Token)
+	}
+	if *lg.Format != "format" {
+		t.Errorf("bad format: %q", *lg.Format)
+	}
+	if *lg.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *lg.FormatVersion)
+	}
+	if *lg.Placement != "none" {
+		t.Errorf("bad placement: %q", *lg.Placement)
+	}
+
+	// List
+	var les []*Loggly
+	Record(t, "loggly/compute/list", func(c *Client) {
+		les, err = c.ListLoggly(context.TODO(), &ListLogglyInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(les) < 1 {
+		t.Errorf("bad logglys: %v", les)
+	}
+
+	// Get
+	var nlg *Loggly
+	Record(t, "loggly/compute/get", func(c *Client) {
+		nlg, err = c.GetLoggly(context.TODO(), &GetLogglyInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "test-loggly",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if *lg.Name != *nlg.Name {
+		t.Errorf("bad name: %q", *lg.Name)
+	}
+	if *lg.Token != *nlg.Token {
+		t.Errorf("bad token: %q", *lg.Token)
+	}
+	if *lg.Format != *nlg.Format {
+		t.Errorf("bad format: %q", *lg.Format)
+	}
+	if *lg.FormatVersion != *nlg.FormatVersion {
+		t.Errorf("bad format_version: %q", *lg.FormatVersion)
+	}
+	if *lg.Placement != *nlg.Placement {
+		t.Errorf("bad placement: %q", *lg.Placement)
+	}
+
+	// Update
+	var ulg *Loggly
+	Record(t, "loggly/compute/update", func(c *Client) {
+		ulg, err = c.UpdateLoggly(context.TODO(), &UpdateLogglyInput{
+			ServiceID:        TestComputeServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-loggly",
+			NewName:          ToPointer("new-test-loggly"),
+			FormatVersion:    ToPointer(2),
+			ProcessingRegion: ToPointer("eu"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if *ulg.Name != "new-test-loggly" {
+		t.Errorf("bad name: %q", *ulg.Name)
+	}
+	if *ulg.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *ulg.FormatVersion)
+	}
+	if *ulg.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *ulg.ProcessingRegion)
+	}
+
+	// Delete
+	Record(t, "loggly/compute/delete", func(c *Client) {
+		err = c.DeleteLoggly(context.TODO(), &DeleteLogglyInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-loggly",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestClient_ListLoggly_validation(t *testing.T) {
 	var err error
 	_, err = TestClient.ListLoggly(context.TODO(), &ListLogglyInput{

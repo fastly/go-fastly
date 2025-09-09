@@ -1,0 +1,191 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/16/logging/ftp/test-ftp
+    method: DELETE
+  response:
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e test-ftp, service =\u003e XsjdElScZGjmfCcTwsYRC1,
+      version =\u003e 16 }''"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 02 Sep 2025 17:02:27 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9990"
+      Fastly-Ratelimit-Reset:
+      - "1756836000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100077-CHI, cache-ewr-kewr1740078-EWR
+      X-Timer:
+      - S1756832547.147871,VS0,VE122
+    status: 404 Not Found
+    code: 404
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/16/logging/ftp/test-ftp-2
+    method: DELETE
+  response:
+    body: '{"status":"ok"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 02 Sep 2025 17:02:27 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9989"
+      Fastly-Ratelimit-Reset:
+      - "1756836000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000092-CHI, cache-ewr-kewr1740078-EWR
+      X-Timer:
+      - S1756832547.296523,VS0,VE281
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/16/logging/ftp/test-ftp-3
+    method: DELETE
+  response:
+    body: '{"status":"ok"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 02 Sep 2025 17:02:27 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9988"
+      Fastly-Ratelimit-Reset:
+      - "1756836000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100072-CHI, cache-ewr-kewr1740078-EWR
+      X-Timer:
+      - S1756832548.599756,VS0,VE242
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/16/logging/ftp/new-test-ftp
+    method: DELETE
+  response:
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e new-test-ftp, service =\u003e XsjdElScZGjmfCcTwsYRC1,
+      version =\u003e 16 }''"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 02 Sep 2025 17:02:27 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9987"
+      Fastly-Ratelimit-Reset:
+      - "1756836000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000110-CHI, cache-ewr-kewr1740078-EWR
+      X-Timer:
+      - S1756832548.860730,VS0,VE134
+    status: 404 Not Found
+    code: 404
+    duration: ""

@@ -1,0 +1,41 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/tls/subscriptions/yENvilLSUdiUesxTCIwDKA
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Date:
+      - Mon, 08 Sep 2025 17:20:36 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - cache-chi-kigq8000078-CHI, cache-ewr-kewr1740056-EWR
+      X-Timer:
+      - S1757352033.868570,VS0,VE3132
+    status: 204 No Content
+    code: 204
+    duration: ""

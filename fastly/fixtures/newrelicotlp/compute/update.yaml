@@ -1,0 +1,57 @@
+---
+version: 1
+interactions:
+- request:
+    body: format_version=2&log_processing_region=eu&name=new-test-newrelicotlp
+    form:
+      format_version:
+      - "2"
+      log_processing_region:
+      - eu
+      name:
+      - new-test-newrelicotlp
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/32/logging/newrelicotlp/test-newrelicotlp
+    method: PUT
+  response:
+    body: '{"response_condition":"","url":"https://example.nr-data.net","placement":"none","name":"new-test-newrelicotlp","version":"32","log_processing_region":"eu","region":null,"deleted_at":null,"format_version":"2","service_id":"XsjdElScZGjmfCcTwsYRC1","format":"format","created_at":"2025-09-02T17:25:36Z","token":"abcd1234","updated_at":"2025-09-02T17:25:36Z"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 02 Sep 2025 17:25:38 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9889"
+      Fastly-Ratelimit-Reset:
+      - "1756836000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000048-CHI, cache-nyc-kteb1890098-NYC
+      X-Timer:
+      - S1756833938.559409,VS0,VE460
+    status: 200 OK
+    code: 200
+    duration: ""

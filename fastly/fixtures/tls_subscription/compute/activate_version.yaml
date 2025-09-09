@@ -1,0 +1,51 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/56/activate
+    method: PUT
+  response:
+    body: '{"service_id":"XsjdElScZGjmfCcTwsYRC1","deleted_at":null,"comment":"","created_at":"2025-09-08T17:20:25Z","deployed":false,"updated_at":"2025-09-08T17:20:27Z","environments":[],"locked":true,"staging":false,"number":56,"testing":false,"active":true,"msg":"Warning:
+      Backend host `integ-test3.go-fastly-3.com` could not be resolved to an IP address:
+      Name or service not known"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 08 Sep 2025 17:20:30 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9959"
+      Fastly-Ratelimit-Reset:
+      - "1757354400"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000085-CHI, cache-ewr-kewr1740056-EWR
+      X-Timer:
+      - S1757352028.066239,VS0,VE1987
+    status: 200 OK
+    code: 200
+    duration: ""

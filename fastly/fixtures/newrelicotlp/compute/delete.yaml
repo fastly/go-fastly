@@ -1,0 +1,49 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/32/logging/newrelicotlp/new-test-newrelicotlp
+    method: DELETE
+  response:
+    body: '{"status":"ok"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 02 Sep 2025 17:25:38 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9888"
+      Fastly-Ratelimit-Reset:
+      - "1756836000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000064-CHI, cache-nyc-kteb1890098-NYC
+      X-Timer:
+      - S1756833938.316664,VS0,VE273
+    status: 200 OK
+    code: 200
+    duration: ""

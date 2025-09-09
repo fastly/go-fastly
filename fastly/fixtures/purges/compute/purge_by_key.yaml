@@ -1,0 +1,31 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/purge/foo
+    method: POST
+  response:
+    body: '{ "status": "ok", "id": "1740093-1756794994-11993984" }'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - "55"
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 08 Sep 2025 14:22:19 GMT
+      Via:
+      - 1.1 varnish
+      X-Served-By:
+      - cache-ewr-kewr1740093-EWR
+      X-Varnish:
+      - "3089611038"
+    status: 200 OK
+    code: 200
+    duration: ""

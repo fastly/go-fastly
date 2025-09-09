@@ -1,0 +1,99 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/37/logging/scalyr/test-scalyr
+    method: DELETE
+  response:
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e test-scalyr, service =\u003e XsjdElScZGjmfCcTwsYRC1,
+      version =\u003e 37 }''"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 02 Sep 2025 17:33:25 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9839"
+      Fastly-Ratelimit-Reset:
+      - "1756836000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000175-CHI, cache-ewr-kewr1740083-EWR
+      X-Timer:
+      - S1756834406.638322,VS0,VE122
+    status: 404 Not Found
+    code: 404
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/37/logging/scalyr/new-test-scalyr
+    method: DELETE
+  response:
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e new-test-scalyr, service =\u003e XsjdElScZGjmfCcTwsYRC1,
+      version =\u003e 37 }''"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 02 Sep 2025 17:33:26 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9838"
+      Fastly-Ratelimit-Reset:
+      - "1756836000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000062-CHI, cache-ewr-kewr1740083-EWR
+      X-Timer:
+      - S1756834406.992062,VS0,VE128
+    status: 404 Not Found
+    code: 404
+    duration: ""

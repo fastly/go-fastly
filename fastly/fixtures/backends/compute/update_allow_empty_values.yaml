@@ -1,0 +1,55 @@
+---
+version: 1
+interactions:
+- request:
+    body: override_host=&port=0
+    form:
+      override_host:
+      - ""
+      port:
+      - "0"
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/7/backend/new-test-backend-compute
+    method: PUT
+  response:
+    body: '{"error_threshold":0,"ipv6":null,"between_bytes_timeout":10000,"ssl_cert_hostname":null,"port":0,"min_tls_version":null,"service_id":"XsjdElScZGjmfCcTwsYRC1","max_conn":200,"hostname":"integ-test.go-fastly.com","shield":null,"tcp_keepalive_probes":null,"weight":100,"updated_at":"2025-08-29T19:38:08Z","created_at":"2025-08-29T19:38:08Z","tcp_keepalive_interval":null,"keepalive_time":null,"comment":"","tcp_keepalive_enable":null,"first_byte_timeout":15000,"ssl_check_cert":false,"connect_timeout":1500,"healthcheck":null,"deleted_at":null,"ssl_ciphers":"HIGH","prefer_ipv6":true,"auto_loadbalance":false,"request_condition":"","version":7,"client_cert":null,"address":"integ-test.go-fastly.com","override_host":null,"max_tls_version":null,"use_ssl":false,"ssl_client_cert":null,"ssl_hostname":null,"share_key":"sharedkey","ssl_ca_cert":null,"ssl_sni_hostname":"ssl-hostname-updated.com","ipv4":null,"tcp_keepalive_time":null,"ssl_client_key":null,"name":"new-test-backend-compute"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 29 Aug 2025 19:38:09 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9967"
+      Fastly-Ratelimit-Reset:
+      - "1756497600"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000151-CHI, cache-ewr-kewr1740076-EWR
+      X-Timer:
+      - S1756496289.383749,VS0,VE273
+    status: 200 OK
+    code: 200
+    duration: ""

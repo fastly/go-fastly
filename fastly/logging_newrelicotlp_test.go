@@ -152,6 +152,152 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 	}
 }
 
+func TestClient_NewRelicOTLP_Compute(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	var tv *Version
+	Record(t, "newrelicotlp/compute/version", func(c *Client) {
+		tv = testVersionCompute(t, c)
+	})
+
+	// Create
+	var n *NewRelicOTLP
+	Record(t, "newrelicotlp/compute/create", func(c *Client) {
+		n, err = c.CreateNewRelicOTLP(context.TODO(), &CreateNewRelicOTLPInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           ToPointer("test-newrelicotlp"),
+			Token:          ToPointer("abcd1234"),
+			URL:            ToPointer("https://example.nr-data.net"),
+			Format:         ToPointer("format"),
+			Placement:      ToPointer("none"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Ensure deleted
+	defer func() {
+		Record(t, "newrelicotlp/compute/delete", func(c *Client) {
+			_ = c.DeleteNewRelicOTLP(context.TODO(), &DeleteNewRelicOTLPInput{
+				ServiceID:      TestComputeServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "test-newrelicotlp",
+			})
+
+			_ = c.DeleteNewRelicOTLP(context.TODO(), &DeleteNewRelicOTLPInput{
+				ServiceID:      TestComputeServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "new-test-newrelicotlp",
+			})
+		})
+	}()
+
+	if *n.Name != "test-newrelicotlp" {
+		t.Errorf("bad name: %q", *n.Name)
+	}
+	if *n.Token != "abcd1234" {
+		t.Errorf("bad token: %q", *n.Token)
+	}
+	if *n.URL != "https://example.nr-data.net" {
+		t.Errorf("bad url: %q", *n.URL)
+	}
+	if *n.Format != "format" {
+		t.Errorf("bad format: %q", *n.Format)
+	}
+	if *n.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *n.FormatVersion)
+	}
+	if *n.Placement != "none" {
+		t.Errorf("bad placement: %q", *n.Placement)
+	}
+
+	// List
+	var ln []*NewRelicOTLP
+	Record(t, "newrelicotlp/compute/list", func(c *Client) {
+		ln, err = c.ListNewRelicOTLP(context.TODO(), &ListNewRelicOTLPInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(ln) < 1 {
+		t.Errorf("bad newrelics: %v", ln)
+	}
+
+	// Get
+	var nn *NewRelicOTLP
+	Record(t, "newrelicotlp/compute/get", func(c *Client) {
+		nn, err = c.GetNewRelicOTLP(context.TODO(), &GetNewRelicOTLPInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "test-newrelicotlp",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if *n.Name != *nn.Name {
+		t.Errorf("bad name: %q", *n.Name)
+	}
+	if *n.Token != *nn.Token {
+		t.Errorf("bad token: %q", *n.Token)
+	}
+	if *n.URL != *nn.URL {
+		t.Errorf("bad url: %q", *n.URL)
+	}
+	if *n.Format != *nn.Format {
+		t.Errorf("bad format: %q", *n.Format)
+	}
+	if *n.FormatVersion != *nn.FormatVersion {
+		t.Errorf("bad format_version: %q", *n.FormatVersion)
+	}
+	if *n.Placement != *nn.Placement {
+		t.Errorf("bad placement: %q", *n.Placement)
+	}
+
+	// Update
+	var un *NewRelicOTLP
+	Record(t, "newrelicotlp/compute/update", func(c *Client) {
+		un, err = c.UpdateNewRelicOTLP(context.TODO(), &UpdateNewRelicOTLPInput{
+			ServiceID:        TestComputeServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-newrelicotlp",
+			NewName:          ToPointer("new-test-newrelicotlp"),
+			FormatVersion:    ToPointer(2),
+			ProcessingRegion: ToPointer("eu"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if *un.Name != "new-test-newrelicotlp" {
+		t.Errorf("bad name: %q", *un.Name)
+	}
+	if *un.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *un.FormatVersion)
+	}
+	if *un.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *un.ProcessingRegion)
+	}
+
+	// Delete
+	Record(t, "newrelicotlp/compute/delete", func(c *Client) {
+		err = c.DeleteNewRelicOTLP(context.TODO(), &DeleteNewRelicOTLPInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-newrelicotlp",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestClient_ListNewRelicOTLP_validation(t *testing.T) {
 	var err error
 	_, err = TestClient.ListNewRelicOTLP(context.TODO(), &ListNewRelicOTLPInput{

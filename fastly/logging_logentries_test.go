@@ -167,6 +167,167 @@ func TestClient_Logentries(t *testing.T) {
 	}
 }
 
+func TestClient_Logentries_Compute(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	var tv *Version
+	Record(t, "logentries/compute/version", func(c *Client) {
+		tv = testVersionCompute(t, c)
+	})
+
+	// Create
+	var le *Logentries
+	Record(t, "logentries/compute/create", func(c *Client) {
+		le, err = c.CreateLogentries(context.TODO(), &CreateLogentriesInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           ToPointer("test-logentries"),
+			Port:           ToPointer(0),
+			UseTLS:         ToPointer(Compatibool(true)),
+			Token:          ToPointer("abcd1234"),
+			Format:         ToPointer("format"),
+			Placement:      ToPointer("none"),
+			Region:         ToPointer("us"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Ensure deleted
+	defer func() {
+		Record(t, "logentries/compute/delete", func(c *Client) {
+			_ = c.DeleteLogentries(context.TODO(), &DeleteLogentriesInput{
+				ServiceID:      TestComputeServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "test-logentries",
+			})
+
+			_ = c.DeleteLogentries(context.TODO(), &DeleteLogentriesInput{
+				ServiceID:      TestComputeServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "new-test-logentries",
+			})
+		})
+	}()
+
+	if *le.Name != "test-logentries" {
+		t.Errorf("bad name: %q", *le.Name)
+	}
+	if *le.Port != 0 {
+		t.Errorf("bad port: %q", *le.Port)
+	}
+	if !*le.UseTLS {
+		t.Errorf("bad use_tls: %t", *le.UseTLS)
+	}
+	if *le.Token != "abcd1234" {
+		t.Errorf("bad token: %q", *le.Token)
+	}
+	if *le.Format != "format" {
+		t.Errorf("bad format: %q", *le.Format)
+	}
+	if *le.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *le.FormatVersion)
+	}
+	if *le.Placement != "none" {
+		t.Errorf("bad placement: %q", *le.Placement)
+	}
+	if *le.Region != "us" {
+		t.Errorf("bad region: %q", *le.Region)
+	}
+
+	// List
+	var les []*Logentries
+	Record(t, "logentries/compute/list", func(c *Client) {
+		les, err = c.ListLogentries(context.TODO(), &ListLogentriesInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(les) < 1 {
+		t.Errorf("bad logentriess: %v", les)
+	}
+
+	// Get
+	var nle *Logentries
+	Record(t, "logentries/compute/get", func(c *Client) {
+		nle, err = c.GetLogentries(context.TODO(), &GetLogentriesInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "test-logentries",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if *le.Name != *nle.Name {
+		t.Errorf("bad name: %q", *le.Name)
+	}
+	if *le.Port != *nle.Port {
+		t.Errorf("bad port: %q", *le.Port)
+	}
+	if *le.UseTLS != *nle.UseTLS {
+		t.Errorf("bad use_tls: %t", *le.UseTLS)
+	}
+	if *le.Token != *nle.Token {
+		t.Errorf("bad token: %q", *le.Token)
+	}
+	if *le.Format != *nle.Format {
+		t.Errorf("bad format: %q", *le.Format)
+	}
+	if *le.FormatVersion != *nle.FormatVersion {
+		t.Errorf("bad format_version: %q", *le.FormatVersion)
+	}
+	if *le.Placement != *nle.Placement {
+		t.Errorf("bad placement: %q", *le.Placement)
+	}
+
+	// Update
+	var ule *Logentries
+	Record(t, "logentries/compute/update", func(c *Client) {
+		ule, err = c.UpdateLogentries(context.TODO(), &UpdateLogentriesInput{
+			ServiceID:        TestComputeServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-logentries",
+			NewName:          ToPointer("new-test-logentries"),
+			FormatVersion:    ToPointer(2),
+			Region:           ToPointer("ap"),
+			ProcessingRegion: ToPointer("eu"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if *ule.Name != "new-test-logentries" {
+		t.Errorf("bad name: %q", *ule.Name)
+	}
+	if *ule.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *ule.FormatVersion)
+	}
+	if *ule.Region != "ap" {
+		t.Errorf("bad region: %q", *ule.Region)
+	}
+	if *ule.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *ule.ProcessingRegion)
+	}
+
+	// Delete
+	Record(t, "logentries/compute/delete", func(c *Client) {
+		err = c.DeleteLogentries(context.TODO(), &DeleteLogentriesInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-logentries",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestClient_ListLogentries_validation(t *testing.T) {
 	var err error
 	_, err = TestClient.ListLogentries(context.TODO(), &ListLogentriesInput{
