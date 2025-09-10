@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/11.3.1 (+github.com/fastly/go-fastly; go1.25.1)
-    url: https://api.fastly.com/service/28SH8dl8ymUmqF8VJbgVNe/version/12/logging/https/new-test-https
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/12/logging/https/new-test-https
     method: DELETE
   response:
     body: '{"status":"ok"}'

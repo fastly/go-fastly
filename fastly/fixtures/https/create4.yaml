@@ -145,7 +145,7 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/11.3.1 (+github.com/fastly/go-fastly; go1.25.1)
-    url: https://api.fastly.com/service/28SH8dl8ymUmqF8VJbgVNe/version/12/logging/https
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/12/logging/https
     method: POST
   response:
     body: '{"msg":"''compression_codec'' and ''gzip_level'' cannot be set simultaneously"}'
