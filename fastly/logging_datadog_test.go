@@ -6,6 +6,153 @@ import (
 	"testing"
 )
 
+func TestClient_Datadog_Compute(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	var tv *Version
+	Record(t, "datadog/computeversion", func(c *Client) {
+		tv = testVersionCompute(t, c)
+	})
+
+	// Create
+	var d *Datadog
+	Record(t, "datadog/computecreate", func(c *Client) {
+		d, err = c.CreateDatadog(context.TODO(), &CreateDatadogInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           ToPointer("test-datadog"),
+			Region:         ToPointer("US"),
+			Token:          ToPointer("abcd1234"),
+			Format:         ToPointer("format"),
+			Placement:      ToPointer("none"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Ensure deleted
+	defer func() {
+		Record(t, "datadog/computedelete", func(c *Client) {
+			_ = c.DeleteDatadog(context.TODO(), &DeleteDatadogInput{
+				ServiceID:      TestComputeServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "test-datadog",
+			})
+
+			_ = c.DeleteDatadog(context.TODO(), &DeleteDatadogInput{
+				ServiceID:      TestComputeServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "new-test-datadog",
+			})
+		})
+	}()
+
+	if *d.Name != "test-datadog" {
+		t.Errorf("bad name: %q", *d.Name)
+	}
+	if *d.Token != "abcd1234" {
+		t.Errorf("bad token: %q", *d.Token)
+	}
+	if *d.Region != "US" {
+		t.Errorf("bad token: %q", *d.Region)
+	}
+	if *d.Format != "format" {
+		t.Errorf("bad format: %q", *d.Format)
+	}
+	if *d.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *d.FormatVersion)
+	}
+	if *d.Placement != "none" {
+		t.Errorf("bad placement: %q", *d.Placement)
+	}
+
+	// List
+	var ld []*Datadog
+	Record(t, "datadog/computelist", func(c *Client) {
+		ld, err = c.ListDatadog(context.TODO(), &ListDatadogInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(ld) < 1 {
+		t.Errorf("bad datadogs: %v", ld)
+	}
+
+	// Get
+	var nd *Datadog
+	Record(t, "datadog/computeget", func(c *Client) {
+		nd, err = c.GetDatadog(context.TODO(), &GetDatadogInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "test-datadog",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if *d.Name != *nd.Name {
+		t.Errorf("bad name: %q", *d.Name)
+	}
+	if *d.Token != *nd.Token {
+		t.Errorf("bad token: %q", *d.Token)
+	}
+	if *d.Format != *nd.Format {
+		t.Errorf("bad format: %q", *d.Format)
+	}
+	if *d.FormatVersion != *nd.FormatVersion {
+		t.Errorf("bad format_version: %q", *d.FormatVersion)
+	}
+	if *d.Placement != *nd.Placement {
+		t.Errorf("bad placement: %q", *d.Placement)
+	}
+
+	// Update
+	var ud *Datadog
+	Record(t, "datadog/computeupdate", func(c *Client) {
+		ud, err = c.UpdateDatadog(context.TODO(), &UpdateDatadogInput{
+			ServiceID:        TestComputeServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-datadog",
+			NewName:          ToPointer("new-test-datadog"),
+			Region:           ToPointer("EU"),
+			FormatVersion:    ToPointer(2),
+			ProcessingRegion: ToPointer("eu"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if *ud.Name != "new-test-datadog" {
+		t.Errorf("bad name: %q", *ud.Name)
+	}
+	if *ud.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *ud.FormatVersion)
+	}
+	if *ud.Region != "EU" {
+		t.Errorf("bad region: %q", *ud.Region)
+	}
+	if *ud.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *ud.ProcessingRegion)
+	}
+
+	// Delete
+	Record(t, "datadog/computedelete", func(c *Client) {
+		err = c.DeleteDatadog(context.TODO(), &DeleteDatadogInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-datadog",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestClient_Datadog(t *testing.T) {
 	t.Parallel()
 

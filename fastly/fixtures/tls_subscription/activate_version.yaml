@@ -6,12 +6,12 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.3.1 (+github.com/fastly/go-fastly; go1.20.14)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/3/activate
+      - FastlyGo/11.3.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/143/activate
     method: PUT
   response:
-    body: '{"staging":false,"deployed":false,"service_id":"kKJb5bOFI47uHeBVluGfX1","locked":true,"comment":"","testing":false,"deleted_at":null,"created_at":"2024-05-07T12:51:55Z","active":true,"updated_at":"2024-05-07T12:51:56Z","number":3,"msg":"Warning:
-      No default director found\nat: (default Line 174 Pos 1)\n#--FASTLY BEREQ BEGIN\n---------------------"}'
+    body: '{"staging":false,"service_id":"kKJb5bOFI47uHeBVluGfX1","environments":[],"locked":true,"testing":false,"deleted_at":null,"comment":"","created_at":"2025-09-08T17:11:11Z","active":true,"deployed":false,"number":143,"updated_at":"2025-09-08T17:11:11Z","msg":"Warning:
+      No default director found\nat: (default Line 174 Pos 1)"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -20,15 +20,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 07 May 2024 12:51:57 GMT
+      - Mon, 08 Sep 2025 17:11:13 GMT
       Fastly-Ratelimit-Remaining:
-      - "9994"
+      - "9972"
       Fastly-Ratelimit-Reset:
-      - "1715086800"
+      - "1757354400"
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -36,15 +36,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
       X-Served-By:
-      - cache-lcy-eglc8600089-LCY
+      - cache-chi-klot8100046-CHI, cache-ewr-kewr1740048-EWR
       X-Timer:
-      - S1715086317.646065,VS0,VE984
+      - S1757351472.177564,VS0,VE1142
     status: 200 OK
     code: 200
     duration: ""

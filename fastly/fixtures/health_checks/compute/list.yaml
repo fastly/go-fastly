@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/5/healthcheck
+    method: GET
+  response:
+    body: '[{"deleted_at":null,"comment":"","path":"/foo","expected_response":200,"threshold":10,"service_id":"XsjdElScZGjmfCcTwsYRC1","host":"example.com","version":5,"http_version":"1.1","name":"test-healthcheck","headers":["Baz:
+      Qux","Foo: Bar"],"method":"HEAD","check_interval":2500,"updated_at":"2025-08-29T19:34:43Z","window":5000,"initial":10,"created_at":"2025-08-29T19:34:43Z","timeout":1500}]'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 29 Aug 2025 19:34:44 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000116-CHI, cache-ewr-kewr1740073-EWR
+      X-Timer:
+      - S1756496084.031630,VS0,VE142
+    status: 200 OK
+    code: 200
+    duration: ""

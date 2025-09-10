@@ -1,0 +1,45 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/enabled-products/v1/ddos_protection/services/kKJb5bOFI47uHeBVluGfX1
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 08 Sep 2025 15:39:19 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 204 No Content
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100078-CHI, cache-ewr-kewr1740095-EWR
+      X-Timer:
+      - S1757345959.196150,VS0,VE485
+    status: 204 No Content
+    code: 204
+    duration: ""

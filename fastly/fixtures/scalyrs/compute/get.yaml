@@ -1,0 +1,45 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/37/logging/scalyr/test-scalyr
+    method: GET
+  response:
+    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","deleted_at":null,"region":"US","project_id":"logplex","log_processing_region":"none","name":"test-scalyr","service_id":"XsjdElScZGjmfCcTwsYRC1","response_condition":"","version":"37","updated_at":"2025-09-02T17:33:23Z","placement":"none","created_at":"2025-09-02T17:33:23Z","format_version":"2","token":"super-secure-token"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 02 Sep 2025 17:33:24 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000175-CHI, cache-ewr-kewr1740083-EWR
+      X-Timer:
+      - S1756834404.085395,VS0,VE132
+    status: 200 OK
+    code: 200
+    duration: ""

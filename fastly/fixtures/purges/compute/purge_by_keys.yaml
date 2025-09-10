@@ -1,0 +1,34 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Surrogate-Key:
+      - foo bar baz
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/purge
+    method: POST
+  response:
+    body: '{ "foo": "1740093-1756794994-11993990-1", "bar": "1740093-1756794994-11993990-2",
+      "baz": "1740093-1756794994-11993990-3" }'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - "122"
+      Date:
+      - Mon, 08 Sep 2025 14:22:20 GMT
+      Fastly-Surrogate-Key-Count:
+      - "3"
+      Via:
+      - 1.1 varnish
+      X-Served-By:
+      - cache-ewr-kewr1740093-EWR
+      X-Varnish:
+      - "3089614571"
+    status: 200 OK
+    code: 200
+    duration: ""

@@ -11,40 +11,40 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       User-Agent:
-      - FastlyGo/9.3.1 (+github.com/fastly/go-fastly; go1.20.14)
+      - FastlyGo/11.3.1 (+github.com/fastly/go-fastly; go1.24.2)
     url: https://api.fastly.com/tls/subscriptions
     method: POST
   response:
-    body: '{"data":{"id":"mwtZ5xuowgXsyR2nyPjuWw","type":"tls_subscription","attributes":{"certificate_authority":"certainly","created_at":"2024-05-07T12:51:58.000Z","state":"pending","has_active_order":true,"updated_at":"2024-05-07T12:51:58.000Z"},"relationships":{"tls_authorizations":{"data":[{"id":"B98ZDNS55WAZ5ltYl6wZUQ","type":"tls_authorization"}]},"tls_certificates":{"data":[]},"tls_domains":{"data":[{"id":"integ-test1.go-fastly-1.com","type":"tls_domain"}]},"common_name":{"data":{"id":"integ-test1.go-fastly-1.com","type":"tls_domain"}},"tls_configuration":{"data":{"id":"Em77eV0D2qMAduXPtvRdKg","type":"tls_configuration"}}}},"included":[{"id":"B98ZDNS55WAZ5ltYl6wZUQ","type":"tls_authorization","attributes":{"challenges":[{"type":"managed-dns","record_type":"CNAME","record_name":"_acme-challenge.integ-test1.go-fastly-1.com","values":["9jwu4ypaom1vthbbvt.fastly-validations.com"]},{"type":"managed-http-cname","record_type":"CNAME","record_name":"integ-test1.go-fastly-1.com","values":["j.sni.global.fastly.net"]},{"type":"managed-http-a","record_type":"A","record_name":"integ-test1.go-fastly-1.com","values":["151.101.2.132","151.101.66.132","151.101.130.132","151.101.194.132"]}],"created_at":"2024-05-07T12:51:58.000Z","state":"pending","updated_at":"2024-05-07T12:51:58.000Z","warnings":null},"relationships":{"tls_domain":{"data":{"id":"integ-test1.go-fastly-1.com","type":"tls_domain"}},"globalsign_email_challenge":{"data":null},"self_managed_http_challenge":{"data":null}}}]}'
+    body: '{"data":{"id":"CDnaWfggp3Pw5pyy7nxG4Q","type":"tls_subscription","attributes":{"certificate_authority":"certainly","created_at":"2025-09-08T17:11:15.000Z","state":"pending","has_active_order":true,"updated_at":"2025-09-08T17:11:15.000Z"},"relationships":{"tls_authorizations":{"data":[{"id":"0jJ6Lop0ajA1R4bSTYzCAw","type":"tls_authorization"}]},"tls_certificates":{"data":[]},"tls_domains":{"data":[{"id":"integ-test1.go-fastly-1.com","type":"tls_domain"}]},"common_name":{"data":{"id":"integ-test1.go-fastly-1.com","type":"tls_domain"}},"tls_configuration":{"data":{"id":"6BJN1m42DmVgmSE7tnZCZg","type":"tls_configuration"}}}},"included":[{"id":"0jJ6Lop0ajA1R4bSTYzCAw","type":"tls_authorization","attributes":{"challenges":[{"type":"managed-dns","record_type":"CNAME","record_name":"_acme-challenge.integ-test1.go-fastly-1.com","values":["f2sk1kgtx8aj614ckh.fastly-validations.com"]},{"type":"managed-http-cname","record_type":"CNAME","record_name":"integ-test1.go-fastly-1.com","values":["t.sni.global.fastly.net"]},{"type":"managed-http-a","record_type":"A","record_name":"integ-test1.go-fastly-1.com","values":["151.101.3.52","151.101.67.52","151.101.131.52","151.101.195.52"]}],"created_at":"2025-09-08T17:11:15.000Z","state":"pending","updated_at":"2025-09-08T17:11:15.000Z","warnings":null},"relationships":{"tls_domain":{"data":{"id":"integ-test1.go-fastly-1.com","type":"tls_domain"}},"globalsign_email_challenge":{"data":null},"self_managed_http_challenge":{"data":null}}}]}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "1490"
+      - "1486"
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Tue, 07 May 2024 12:51:58 GMT
+      - Mon, 08 Sep 2025 17:11:15 GMT
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-lcy-eglc8600089-LCY
+      - cache-chi-kigq8000133-CHI, cache-ewr-kewr1740048-EWR
       X-Timer:
-      - S1715086318.746907,VS0,VE448
+      - S1757351473.343470,VS0,VE1810
     status: 201 Created
     code: 201
     duration: ""

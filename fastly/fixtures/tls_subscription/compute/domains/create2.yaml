@@ -1,0 +1,55 @@
+---
+version: 1
+interactions:
+- request:
+    body: comment=comment&name=integ-test4.go-fastly-4.com
+    form:
+      comment:
+      - comment
+      name:
+      - integ-test4.go-fastly-4.com
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/11.3.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/56/domain
+    method: POST
+  response:
+    body: '{"comment":"comment","name":"integ-test4.go-fastly-4.com","service_id":"XsjdElScZGjmfCcTwsYRC1","version":56,"deleted_at":null,"updated_at":"2025-09-08T17:20:25Z","created_at":"2025-09-08T17:20:25Z"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 08 Sep 2025 17:20:26 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9962"
+      Fastly-Ratelimit-Reset:
+      - "1757354400"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100132-CHI, cache-ewr-kewr1740056-EWR
+      X-Timer:
+      - S1757352026.797348,VS0,VE303
+    status: 200 OK
+    code: 200
+    duration: ""

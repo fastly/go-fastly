@@ -128,3 +128,65 @@ func TestClient_PurgeAll(t *testing.T) {
 		t.Error("bad status")
 	}
 }
+
+func TestClient_PurgeKey_Compute(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	var purge *Purge
+	Record(t, "purges/compute/purge_by_key", func(c *Client) {
+		purge, err = c.PurgeKey(context.TODO(), &PurgeKeyInput{
+			ServiceID: TestComputeServiceID,
+			Key:       "foo",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if *purge.Status != "ok" {
+		t.Error("bad status")
+	}
+	if purge.PurgeID == nil {
+		t.Error("bad id")
+	}
+}
+
+func TestClient_PurgeKeys_Compute(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	var purges map[string]string
+	Record(t, "purges/compute/purge_by_keys", func(c *Client) {
+		purges, err = c.PurgeKeys(context.TODO(), &PurgeKeysInput{
+			ServiceID: TestComputeServiceID,
+			Keys:      []string{"foo", "bar", "baz"},
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if len(purges) != 3 {
+		t.Error("bad length")
+	}
+}
+
+func TestClient_PurgeAll_Compute(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	var purge *Purge
+	Record(t, "purges/compute/purge_all", func(c *Client) {
+		purge, err = c.PurgeAll(context.TODO(), &PurgeAllInput{
+			ServiceID: TestComputeServiceID,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if *purge.Status != "ok" {
+		t.Error("bad status")
+	}
+}

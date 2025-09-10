@@ -1,0 +1,74 @@
+---
+version: 1
+interactions:
+- request:
+    body: check_interval=2500&expected_response=200&host=example.com&initial=10&method=HEAD&name=test-healthcheck&path=%2Ffoo&threshold=10&timeout=1500&window=5000&headers=%5B"Foo:Bar","Baz:Qux"%5D
+    form:
+      check_interval:
+      - "2500"
+      expected_response:
+      - "200"
+      headers:
+      - '["Foo:Bar","Baz:Qux"]'
+      host:
+      - example.com
+      initial:
+      - "10"
+      method:
+      - HEAD
+      name:
+      - test-healthcheck
+      path:
+      - /foo
+      threshold:
+      - "10"
+      timeout:
+      - "1500"
+      window:
+      - "5000"
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/5/healthcheck
+    method: POST
+  response:
+    body: '{"check_interval":2500,"expected_response":200,"host":"example.com","initial":10,"method":"HEAD","name":"test-healthcheck","path":"/foo","threshold":10,"timeout":1500,"window":5000,"headers":["Baz:
+      Qux","Foo: Bar"],"service_id":"XsjdElScZGjmfCcTwsYRC1","version":5,"deleted_at":null,"comment":"","created_at":"2025-08-29T19:34:43Z","http_version":"1.1","updated_at":"2025-08-29T19:34:43Z"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 29 Aug 2025 19:34:44 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9980"
+      Fastly-Ratelimit-Reset:
+      - "1756497600"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000116-CHI, cache-ewr-kewr1740073-EWR
+      X-Timer:
+      - S1756496084.750901,VS0,VE254
+    status: 200 OK
+    code: 200
+    duration: ""

@@ -1,0 +1,59 @@
+---
+version: 1
+interactions:
+- request:
+    body: format_version=2&log_processing_region=eu&name=new-test-logentries&region=ap
+    form:
+      format_version:
+      - "2"
+      log_processing_region:
+      - eu
+      name:
+      - new-test-logentries
+      region:
+      - ap
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/26/logging/logentries/test-logentries
+    method: PUT
+  response:
+    body: '{"format_version":"2","log_processing_region":"eu","updated_at":"2025-09-02T17:18:03Z","hostname":"","public_key":null,"placement":"none","created_at":"2025-09-02T17:18:03Z","use_tls":"1","format":"format","version":"26","name":"new-test-logentries","token":"abcd1234","service_id":"XsjdElScZGjmfCcTwsYRC1","response_condition":"","port":0,"deleted_at":null,"region":"ap"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 02 Sep 2025 17:18:04 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9921"
+      Fastly-Ratelimit-Reset:
+      - "1756836000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100121-CHI, cache-nyc-kteb1890053-NYC
+      X-Timer:
+      - S1756833484.908858,VS0,VE339
+    status: 200 OK
+    code: 200
+    duration: ""
