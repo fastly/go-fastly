@@ -31,6 +31,9 @@ type UpdateInput struct {
 	// GroupConditions is a list of grouped conditions with nested
 	// logical evaluation.
 	GroupConditions []*UpdateGroupCondition
+	// MultivalConditions lists the nested multival conditions within this
+	// group.
+	MultivalConditions []*UpdateMultivalCondition
 	// GroupOperator defines the logical operator ("any" or "all")
 	// used to evaluate grouped conditions.
 	GroupOperator *string
@@ -90,6 +93,22 @@ type UpdateCondition struct {
 	Value *string `json:"value"`
 }
 
+// UpdateConditionMult defines a multival condition.
+type UpdateConditionMult struct {
+	// Type specifies the condition type (must be "single")
+	// (required).
+	Type *string `json:"type"`
+	// Field is the name of the field to be evaluated (e.g., "name",
+	// "value", "value_int") (required).
+	Field *string `json:"field"`
+	// Operator determines how the field is evaluated (e.g.,
+	// "equals", "contains") (required).
+	Operator *string `json:"operator"`
+	// Value is the value against which the field is compared
+	// (required).
+	Value *string `json:"value"`
+}
+
 // UpdateGroupCondition defines a group of conditions with a logical
 // operator.
 type UpdateGroupCondition struct {
@@ -102,6 +121,26 @@ type UpdateGroupCondition struct {
 	// Conditions is the list of single conditions to evaluate
 	// within the group (required).
 	Conditions []*UpdateCondition `json:"conditions"`
+}
+
+// UpdateMultivalCondition defines a multival conditions with a logical
+// operator.
+type UpdateMultivalCondition struct {
+	// Type specifies the condition group type (must be "multival")
+	// (required).
+	Type *string `json:"type"`
+	// Field is the request attribute to evaluate (e.g., "post_parameter",
+	// "signal").
+	Field *string `json:"field"`
+	// Operator is the comparison operator (e.g., "exists",
+	// "does_not_exist").
+	Operator *string `json:"operator"`
+	// GroupOperator specifies how to evaluate the conditions
+	// (e.g., `any`, `all`).
+	GroupOperator *string `json:"group_operator"`
+	// Conditions lists the nested single conditions within this
+	// group.
+	Conditions *[]CreateConditionMult `json:"conditions"`
 }
 
 // UpdateRateLimit defines how rate limit rules are enforced.
@@ -143,6 +182,9 @@ func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Rule, error
 	}
 	for _, gc := range i.GroupConditions {
 		mergedConditions = append(mergedConditions, gc)
+	}
+	for _, mc := range i.MultivalConditions {
+		mergedConditions = append(mergedConditions, mc)
 	}
 
 	v := struct {
