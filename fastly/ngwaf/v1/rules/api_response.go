@@ -198,6 +198,7 @@ func (ci *ConditionItem) UnmarshalJSON(data []byte) error {
 		if err := json.Unmarshal(data, &mc); err != nil {
 			return err
 		}
+		ci.Fields = mc
 	default:
 		return errors.New("unknown condition type: " + a.Type)
 	}

@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"actions":[{"type":"block_signal","signal":"site.a-real-name-workspace"}],"conditions":[{"type":"single","field":"ip","operator":"equals","value":"127.0.0.1"},{"type":"single","field":"path","operator":"equals","value":"/login"},{"type":"single","field":"agent_name","operator":"equals","value":"host-001"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AD"},{"type":"single","field":"method","operator":"equals","value":"POST"}]},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"protocol_version","operator":"equals","value":"HTTP/1.0"},{"type":"single","field":"method","operator":"equals","value":"HEAD"},{"type":"single","field":"domain","operator":"equals","value":"example.com"}]}],"description":"rate_limit_test","enabled":true,"group_operator":"all","rate_limit":{"client_identifiers":[{"key":null,"name":"name","type":"ip"}],"duration":300,"interval":60,"signal":"site.a-real-name-workspace","threshold":1},"scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]},"type":"rate_limit"}'
+    body: '{"actions":[{"signal":"site.a-real-name-workspace","type":"block_signal"}],"conditions":[{"type":"single","field":"ip","operator":"equals","value":"127.0.0.1"},{"type":"single","field":"path","operator":"equals","value":"/login"},{"type":"single","field":"agent_name","operator":"equals","value":"host-001"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AD"},{"type":"single","field":"method","operator":"equals","value":"POST"}]},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"protocol_version","operator":"equals","value":"HTTP/1.0"},{"type":"single","field":"method","operator":"equals","value":"HEAD"},{"type":"single","field":"domain","operator":"equals","value":"example.com"}]},{"type":"multival","field":"request_cookie","operator":"exists","group_operator":"any","conditions":[{"type":"single","field":"name","operator":"equals","value":"fooCookie"},{"type":"single","field":"value","operator":"equals","value":"barCookie"}]}],"description":"rate_limit_test","enabled":true,"group_operator":"all","rate_limit":{"client_identifiers":[{"name":"name","type":"ip"}],"duration":300,"interval":60,"signal":"site.a-real-name-workspace","threshold":1},"scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]},"type":"rate_limit"}'
     form: {}
     headers:
       Accept:
@@ -10,23 +10,23 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/11.1.0 (+github.com/fastly/go-fastly; go1.24.2)
+      - FastlyGo/11.3.1 (+github.com/fastly/go-fastly; go1.24.2)
     url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/rules
     method: POST
   response:
     body: |
-      {"id":"689121424523e79415baefcf","type":"rate_limit","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]},"enabled":true,"description":"rate_limit_test","group_operator":"all","conditions":[{"type":"single","field":"ip","operator":"equals","value":"127.0.0.1"},{"type":"single","field":"path","operator":"equals","value":"/login"},{"type":"single","field":"agent_name","operator":"equals","value":"host-001"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AD"},{"type":"single","field":"method","operator":"equals","value":"POST"}]},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"protocol_version","operator":"equals","value":"HTTP/1.0"},{"type":"single","field":"method","operator":"equals","value":"HEAD"},{"type":"single","field":"domain","operator":"equals","value":"example.com"}]}],"actions":[{"type":"block_signal","signal":"site.a-real-name-workspace"}],"rate_limit":{"signal":"site.a-real-name-workspace","threshold":1,"interval":60,"duration":300,"client_identifiers":[{"type":"ip","name":"name"}]},"created_at":"2025-08-04T21:08:18Z","updated_at":"2025-08-04T21:08:18Z"}
+      {"id":"68c4769564a4fd7ba5e0606b","type":"rate_limit","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]},"enabled":true,"description":"rate_limit_test","group_operator":"all","conditions":[{"type":"single","field":"ip","operator":"equals","value":"127.0.0.1"},{"type":"single","field":"path","operator":"equals","value":"/login"},{"type":"single","field":"agent_name","operator":"equals","value":"host-001"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AD"},{"type":"single","field":"method","operator":"equals","value":"POST"}]},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"protocol_version","operator":"equals","value":"HTTP/1.0"},{"type":"single","field":"method","operator":"equals","value":"HEAD"},{"type":"single","field":"domain","operator":"equals","value":"example.com"}]},{"type":"multival","field":"request_cookie","operator":"exists","group_operator":"any","conditions":[{"type":"single","field":"name","operator":"equals","value":"fooCookie"},{"type":"single","field":"value","operator":"equals","value":"barCookie"}]}],"actions":[{"type":"block_signal","signal":"site.a-real-name-workspace"}],"rate_limit":{"signal":"site.a-real-name-workspace","threshold":1,"interval":60,"duration":300,"client_identifiers":[{"type":"ip","name":"name"}]},"created_at":"2025-09-12T19:37:57Z","updated_at":"2025-09-12T19:37:57Z"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "1200"
+      - "1450"
       Content-Type:
       - application/json
       Date:
-      - Mon, 04 Aug 2025 21:08:19 GMT
+      - Fri, 12 Sep 2025 19:37:58 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000087-CHI, cache-nyc-kteb1890053-NYC
+      - cache-chi-kigq8000059-CHI, cache-ewr-kewr1740044-EWR
       X-Timer:
-      - S1754341699.588980,VS0,VE666
+      - S1757705877.357547,VS0,VE746
     status: 201 Created
     code: 201
     duration: ""
