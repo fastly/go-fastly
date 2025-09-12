@@ -1,0 +1,45 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/MVo3trM9NTFhpYCJsSrEUD/details
+    method: GET
+  response:
+    body: '{"type":"wasm","environments":[],"updated_at":"2025-09-10T13:57:07Z","customer_id":"4dOhK7xEkULiabovMyhRBu","created_at":"2025-09-10T13:57:07Z","name":"test-service","comment":"comment","id":"MVo3trM9NTFhpYCJsSrEUD","versions":[{"active":false,"environments":[],"created_at":"2025-09-10T13:57:10Z","service_id":"MVo3trM9NTFhpYCJsSrEUD","comment":"","deleted_at":null,"number":1,"updated_at":"2025-09-10T13:57:10Z","locked":false,"testing":false,"deployed":false,"staging":false}],"deleted_at":null,"version":{"deleted_at":null,"updated_at":"2025-09-10T13:57:10Z","testing":false,"created_at":"2025-09-10T13:57:10Z","staging":false,"service_id":"MVo3trM9NTFhpYCJsSrEUD","number":1,"environments":[],"comment":"","active":false,"deployed":false,"locked":false,"backends":[],"domains":[],"healthchecks":[]},"active_version":null}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 10 Sep 2025 13:57:13 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000157-CHI, cache-ewr-kewr1740094-EWR
+      X-Timer:
+      - S1757512633.534607,VS0,VE515
+    status: 200 OK
+    code: 200
+    duration: ""
