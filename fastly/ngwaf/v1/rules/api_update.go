@@ -140,7 +140,7 @@ type UpdateMultivalCondition struct {
 	GroupOperator *string `json:"group_operator"`
 	// Conditions lists the nested single conditions within this
 	// group.
-	Conditions *[]CreateConditionMult `json:"conditions"`
+	Conditions []*UpdateConditionMult `json:"conditions"`
 }
 
 // UpdateRateLimit defines how rate limit rules are enforced.
