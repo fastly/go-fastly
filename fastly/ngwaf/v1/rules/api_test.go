@@ -648,7 +648,6 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 	assert.Len(updatedMultivalConditions[0].Conditions, 2)
 	assert.Contains(updatedMultivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: updatedField9, Operator: updatedOperator9, Value: updatedValue9})
 	assert.Contains(updatedMultivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: updatedField10, Operator: updatedOperator10, Value: updatedValue10})
-
 }
 
 func TestClient_Rate_Limit_Rule_WorkspaceScope(t *testing.T) {
