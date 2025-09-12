@@ -49,8 +49,38 @@ type GroupCondition struct {
 	Conditions []Condition `json:"conditions"`
 }
 
+// MultivalCondition defines a set of conditions and how they are
+// logically grouped.
+
+type MultivalCondition struct {
+	// Field is the request attribute to evaluate (e.g., "post_parameter",
+	// "signal").
+	Field string `json:"field"`
+	// Operator is the comparison operator (e.g., "equals",
+	// "contains").
+	Operator string `json:"operator"`
+	// GroupOperator specifies how to evaluate the conditions
+	// (e.g., `any`, `all`).
+	GroupOperator string `json:"group_operator"`
+	// Conditions lists the nested single conditions within this
+	// group.
+	Conditions []ConditionMul `json:"conditions"`
+}
+
 // Condition is a simplified form used inside a group condition.
 type Condition struct {
+	// Type specifies the condition type (should be `single`).
+	Type string `json:"type"`
+	// Field is the request attribute to evaluate.
+	Field string `json:"field"`
+	// Operator is the comparison operator.
+	Operator string `json:"operator"`
+	// Value is the value to compare against.
+	Value string `json:"value"`
+}
+
+// ConditionMul is a simplified form used inside a multival condition.
+type ConditionMul struct {
 	// Type specifies the condition type (should be `single`).
 	Type string `json:"type"`
 	// Field is the request attribute to evaluate.
@@ -139,7 +169,7 @@ type Rule struct {
 }
 
 // UnmarshalJSON handles deserialization of ConditionItem,
-// distinguishing between single and group conditions.
+// distinguishing between single, group and multival conditions.
 func (ci *ConditionItem) UnmarshalJSON(data []byte) error {
 	type alias struct {
 		Type string `json:"type"`
@@ -163,6 +193,12 @@ func (ci *ConditionItem) UnmarshalJSON(data []byte) error {
 			return err
 		}
 		ci.Fields = gc
+	case "multival":
+		var mc MultivalCondition
+		if err := json.Unmarshal(data, &mc); err != nil {
+			return err
+		}
+		ci.Fields = mc
 	default:
 		return errors.New("unknown condition type: " + a.Type)
 	}

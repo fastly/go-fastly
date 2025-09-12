@@ -6,7 +6,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/11.1.0 (+github.com/fastly/go-fastly; go1.24.2)
+      - FastlyGo/11.3.1 (+github.com/fastly/go-fastly; go1.24.2)
     url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/rules
     method: GET
   response:
@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 04 Aug 2025 21:08:07 GMT
+      - Fri, 12 Sep 2025 19:37:45 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000087-CHI, cache-nyc-kteb1890053-NYC
+      - cache-chi-kigq8000059-CHI, cache-ewr-kewr1740044-EWR
       X-Timer:
-      - S1754341687.474118,VS0,VE113
+      - S1757705865.446648,VS0,VE165
     status: 200 OK
     code: 200
     duration: ""

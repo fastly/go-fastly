@@ -7,7 +7,7 @@
 ### Breaking:
 
 ### Enhancements:
-
+- feat(ngwaf/rules): add support for the multival condition type ([#755](https://github.com/fastly/go-fastly/pull/755))
 ### Bug fixes:
 
 ### Dependencies:

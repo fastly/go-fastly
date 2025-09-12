@@ -31,6 +31,9 @@ type CreateInput struct {
 	// GroupConditions is a list of grouped conditions with nested
 	// logical evaluation.
 	GroupConditions []*CreateGroupCondition
+	// MultivalConditions lists the nested multival conditions within this
+	// group.
+	MultivalConditions []*CreateMultivalCondition
 	// GroupOperator defines the logical operator ("any" or "all")
 	// used to evaluate grouped conditions.
 	GroupOperator *string
@@ -88,6 +91,22 @@ type CreateCondition struct {
 	Value *string `json:"value"`
 }
 
+// CreateConditionMult defines a multival condition.
+type CreateConditionMult struct {
+	// Type specifies the condition type (must be "single")
+	// (required).
+	Type *string `json:"type"`
+	// Field is the name of the field to be evaluated (e.g., "name",
+	// "value", "value_int") (required).
+	Field *string `json:"field"`
+	// Operator determines how the field is evaluated (e.g.,
+	// "equals", "contains") (required).
+	Operator *string `json:"operator"`
+	// Value is the value against which the field is compared
+	// (required).
+	Value *string `json:"value"`
+}
+
 // CreateGroupCondition defines a group of conditions with a logical
 // operator.
 type CreateGroupCondition struct {
@@ -100,6 +119,26 @@ type CreateGroupCondition struct {
 	// Conditions is the list of single conditions to evaluate
 	// within the group (required).
 	Conditions []*CreateCondition `json:"conditions"`
+}
+
+// CreateMultivalCondition defines a multival of conditions with a logical
+// operator.
+type CreateMultivalCondition struct {
+	// Type specifies the condition group type (must be "multival")
+	// (required).
+	Type *string `json:"type"`
+	// Field is the request attribute to evaluate (e.g., "post_parameter",
+	// "signal").
+	Field *string `json:"field"`
+	// Operator is the comparison operator (e.g., "exists",
+	// "does_not_exist").
+	Operator *string `json:"operator"`
+	// GroupOperator specifies how to evaluate the conditions
+	// (e.g., `any`, `all`).
+	GroupOperator *string `json:"group_operator"`
+	// Conditions lists the nested single conditions within this
+	// group.
+	Conditions []*CreateConditionMult `json:"conditions"`
 }
 
 // CreateRateLimit defines how rate limit rules are enforced.
@@ -144,6 +183,9 @@ func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Rule, error
 	}
 	for _, gc := range i.GroupConditions {
 		mergedConditions = append(mergedConditions, gc)
+	}
+	for _, mc := range i.MultivalConditions {
+		mergedConditions = append(mergedConditions, mc)
 	}
 	if len(mergedConditions) == 0 {
 		return nil, fastly.ErrMissingConditions
