@@ -134,19 +134,16 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 			},
 			Conditions: []*CreateCondition{
 				{
-					Type:     &conditionType,
 					Field:    &field1,
 					Operator: &operator1,
 					Value:    &value1,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field2,
 					Operator: &operator2,
 					Value:    &value2,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field3,
 					Operator: &operator3,
 					Value:    &value3,
@@ -154,17 +151,14 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 			},
 			GroupConditions: []*CreateGroupCondition{
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &groupOperator1,
 					Conditions: []*CreateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field4,
 							Operator: &operator4,
 							Value:    &value4,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field5,
 							Operator: &operator5,
 							Value:    &value5,
@@ -172,23 +166,19 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 					},
 				},
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &groupOperator2,
 					Conditions: []*CreateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field6,
 							Operator: &operator6,
 							Value:    &value6,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field7,
 							Operator: &operator7,
 							Value:    &value7,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field8,
 							Operator: &operator8,
 							Value:    &value8,
@@ -477,19 +467,16 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 			},
 			Conditions: []*UpdateCondition{
 				{
-					Type:     &conditionType,
 					Field:    &field1,
 					Operator: &updatedOperator1,
 					Value:    &updatedValue1,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field2,
 					Operator: &updatedOperator2,
 					Value:    &updatedValue2,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field3,
 					Operator: &updatedOperator3,
 					Value:    &updatedValue3,
@@ -497,17 +484,14 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 			},
 			GroupConditions: []*UpdateGroupCondition{
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &updatedGroupOperator1,
 					Conditions: []*UpdateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field4,
 							Operator: &updatedOperator4,
 							Value:    &updatedValue4,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field5,
 							Operator: &updatedOperator5,
 							Value:    &updatedValue5,
@@ -515,23 +499,19 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 					},
 				},
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &updatedGroupOperator2,
 					Conditions: []*UpdateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field6,
 							Operator: &updatedOperator6,
 							Value:    &updatedValue6,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field7,
 							Operator: &updatedOperator7,
 							Value:    &updatedValue7,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field8,
 							Operator: &updatedOperator8,
 							Value:    &updatedValue8,
@@ -796,19 +776,16 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			},
 			Conditions: []*CreateCondition{
 				{
-					Type:     &conditionType,
 					Field:    &field1,
 					Operator: &operator1,
 					Value:    &value1,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field2,
 					Operator: &operator2,
 					Value:    &value2,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field3,
 					Operator: &operator3,
 					Value:    &value3,
@@ -816,17 +793,14 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			},
 			GroupConditions: []*CreateGroupCondition{
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &groupOperator1,
 					Conditions: []*CreateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field4,
 							Operator: &operator4,
 							Value:    &value4,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field5,
 							Operator: &operator5,
 							Value:    &value5,
@@ -834,23 +808,19 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 					},
 				},
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &groupOperator2,
 					Conditions: []*CreateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field6,
 							Operator: &operator6,
 							Value:    &value6,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field7,
 							Operator: &operator7,
 							Value:    &value7,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field8,
 							Operator: &operator8,
 							Value:    &value8,
@@ -1177,19 +1147,16 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			},
 			Conditions: []*UpdateCondition{
 				{
-					Type:     &conditionType,
 					Field:    &field1,
 					Operator: &updatedOperator1,
 					Value:    &updatedValue1,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field2,
 					Operator: &updatedOperator2,
 					Value:    &updatedValue2,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field3,
 					Operator: &updatedOperator3,
 					Value:    &updatedValue3,
@@ -1197,17 +1164,14 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			},
 			GroupConditions: []*UpdateGroupCondition{
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &updatedGroupOperator1,
 					Conditions: []*UpdateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field4,
 							Operator: &updatedOperator4,
 							Value:    &updatedValue4,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field5,
 							Operator: &updatedOperator5,
 							Value:    &updatedValue5,
@@ -1215,23 +1179,19 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 					},
 				},
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &updatedGroupOperator2,
 					Conditions: []*UpdateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field6,
 							Operator: &updatedOperator6,
 							Value:    &updatedValue6,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field7,
 							Operator: &updatedOperator7,
 							Value:    &updatedValue7,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field8,
 							Operator: &updatedOperator8,
 							Value:    &updatedValue8,
@@ -1468,19 +1428,16 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			},
 			Conditions: []*CreateCondition{
 				{
-					Type:     &conditionType,
 					Field:    &field1,
 					Operator: &operator1,
 					Value:    &value1,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field2,
 					Operator: &operator2,
 					Value:    &value2,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field3,
 					Operator: &operator3,
 					Value:    &value3,
@@ -1488,17 +1445,14 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			},
 			GroupConditions: []*CreateGroupCondition{
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &groupOperator1,
 					Conditions: []*CreateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field4,
 							Operator: &operator4,
 							Value:    &value4,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field5,
 							Operator: &operator5,
 							Value:    &value5,
@@ -1506,23 +1460,19 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 					},
 				},
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &groupOperator2,
 					Conditions: []*CreateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field6,
 							Operator: &operator6,
 							Value:    &value6,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field7,
 							Operator: &operator7,
 							Value:    &value7,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field8,
 							Operator: &operator8,
 							Value:    &value8,
@@ -1807,19 +1757,16 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			},
 			Conditions: []*UpdateCondition{
 				{
-					Type:     &conditionType,
 					Field:    &field1,
 					Operator: &updatedOperator1,
 					Value:    &updatedValue1,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field2,
 					Operator: &updatedOperator2,
 					Value:    &updatedValue2,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field3,
 					Operator: &updatedOperator3,
 					Value:    &updatedValue3,
@@ -1827,17 +1774,14 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			},
 			GroupConditions: []*UpdateGroupCondition{
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &updatedGroupOperator1,
 					Conditions: []*UpdateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field4,
 							Operator: &updatedOperator4,
 							Value:    &updatedValue4,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field5,
 							Operator: &updatedOperator5,
 							Value:    &updatedValue5,
@@ -1845,23 +1789,19 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 					},
 				},
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &updatedGroupOperator2,
 					Conditions: []*UpdateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field6,
 							Operator: &updatedOperator6,
 							Value:    &updatedValue6,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field7,
 							Operator: &updatedOperator7,
 							Value:    &updatedValue7,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field8,
 							Operator: &updatedOperator8,
 							Value:    &updatedValue8,

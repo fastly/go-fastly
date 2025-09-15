@@ -77,9 +77,6 @@ type CreateAction struct {
 
 // CreateCondition defines a single condition.
 type CreateCondition struct {
-	// Type specifies the condition type (must be "single")
-	// (required).
-	Type *string `json:"type"`
 	// Field is the name of the field to be evaluated (e.g., "ip",
 	// "path") (required).
 	Field *string `json:"field"`
@@ -107,9 +104,6 @@ type CreateConditionMult struct {
 // CreateGroupCondition defines a group of conditions with a logical
 // operator.
 type CreateGroupCondition struct {
-	// Type specifies the condition group type (must be "group")
-	// (required).
-	Type *string `json:"type"`
 	// GroupOperator is the logical operator used to evaluate the
 	// conditions ("any" or "all") (required).
 	GroupOperator *string `json:"group_operator"`
@@ -159,30 +153,33 @@ type CreateClientIdentifier struct {
 	Type *string `json:"type"`
 }
 
-// MarshalJSON implements json.Marshaler to automatically include the required
-// "type": "single" field during JSON serialization.
-func (c *CreateConditionMult) MarshalJSON() ([]byte, error) {
-	type Alias CreateConditionMult
-	return json.Marshal(&struct {
-		Type string `json:"type"`
-		*Alias
-	}{
-		Type:  "single",
-		Alias: (*Alias)(c),
-	})
+// Private structs to ensure correct condition types.
+type privateCreateCondition struct {
+	Type     *string `json:"type"`
+	Field    *string `json:"field"`
+	Operator *string `json:"operator"`
+	Value    *string `json:"value"`
 }
 
-// MarshalJSON implements json.Marshaler to automatically include the required
-// "type": "multival" field during JSON serialization.
-func (c *CreateMultivalCondition) MarshalJSON() ([]byte, error) {
-	type Alias CreateMultivalCondition
-	return json.Marshal(&struct {
-		Type string `json:"type"`
-		*Alias
-	}{
-		Type:  "multival",
-		Alias: (*Alias)(c),
-	})
+type privateCreateConditionMult struct {
+	Type     *string `json:"type"`
+	Field    *string `json:"field"`
+	Operator *string `json:"operator"`
+	Value    *string `json:"value"`
+}
+
+type privateCreateGroupCondition struct {
+	Type          *string                   `json:"type"`
+	GroupOperator *string                   `json:"group_operator"`
+	Conditions    []*privateCreateCondition `json:"conditions"`
+}
+
+type privateCreateMultivalCondition struct {
+	Type          *string                       `json:"type"`
+	Field         *string                       `json:"field"`
+	Operator      *string                       `json:"operator"`
+	GroupOperator *string                       `json:"group_operator"`
+	Conditions    []*privateCreateConditionMult `json:"conditions"`
 }
 
 // Create creates a new rule.
@@ -199,13 +196,49 @@ func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Rule, error
 
 	var mergedConditions []any
 	for _, c := range i.Conditions {
-		mergedConditions = append(mergedConditions, c)
+		privateCondition := &privateCreateCondition{
+			Type:     fastly.ToPointer("single"),
+			Field:    c.Field,
+			Operator: c.Operator,
+			Value:    c.Value,
+		}
+		mergedConditions = append(mergedConditions, privateCondition)
 	}
 	for _, gc := range i.GroupConditions {
-		mergedConditions = append(mergedConditions, gc)
+		var privateSubConditions []*privateCreateCondition
+		for _, subCond := range gc.Conditions {
+			privateSubConditions = append(privateSubConditions, &privateCreateCondition{
+				Type:     fastly.ToPointer("single"),
+				Field:    subCond.Field,
+				Operator: subCond.Operator,
+				Value:    subCond.Value,
+			})
+		}
+		privateGroupCondition := &privateCreateGroupCondition{
+			Type:          fastly.ToPointer("group"),
+			GroupOperator: gc.GroupOperator,
+			Conditions:    privateSubConditions,
+		}
+		mergedConditions = append(mergedConditions, privateGroupCondition)
 	}
 	for _, mc := range i.MultivalConditions {
-		mergedConditions = append(mergedConditions, mc)
+		var privateSubConditions []*privateCreateConditionMult
+		for _, subCond := range mc.Conditions {
+			privateSubConditions = append(privateSubConditions, &privateCreateConditionMult{
+				Type:     fastly.ToPointer("single"),
+				Field:    subCond.Field,
+				Operator: subCond.Operator,
+				Value:    subCond.Value,
+			})
+		}
+		privateMultivalCondition := &privateCreateMultivalCondition{
+			Type:          fastly.ToPointer("multival"),
+			Field:         mc.Field,
+			Operator:      mc.Operator,
+			GroupOperator: mc.GroupOperator,
+			Conditions:    privateSubConditions,
+		}
+		mergedConditions = append(mergedConditions, privateMultivalCondition)
 	}
 	if len(mergedConditions) == 0 {
 		return nil, fastly.ErrMissingConditions

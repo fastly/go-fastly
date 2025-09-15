@@ -79,9 +79,6 @@ type UpdateAction struct {
 
 // UpdateCondition defines a single condition.
 type UpdateCondition struct {
-	// Type specifies the condition type (must be "single")
-	// (required).
-	Type *string `json:"type"`
 	// Field is the name of the field to be evaluated (e.g., "ip",
 	// "path") (required).
 	Field *string `json:"field"`
@@ -109,9 +106,6 @@ type UpdateConditionMult struct {
 // UpdateGroupCondition defines a group of conditions with a logical
 // operator.
 type UpdateGroupCondition struct {
-	// Type specifies the condition group type (must be "group")
-	// (required).
-	Type *string `json:"type"`
 	// GroupOperator is the logical operator used to evaluate the
 	// conditions ("any" or "all") (required).
 	GroupOperator *string `json:"group_operator"`
@@ -161,30 +155,33 @@ type UpdateClientIdentifier struct {
 	Type *string `json:"type"`
 }
 
-// MarshalJSON implements json.Marshaler to automatically include the required
-// "type": "single" field during JSON serialization.
-func (c *UpdateConditionMult) MarshalJSON() ([]byte, error) {
-	type Alias UpdateConditionMult
-	return json.Marshal(&struct {
-		Type string `json:"type"`
-		*Alias
-	}{
-		Type:  "single",
-		Alias: (*Alias)(c),
-	})
+// Private structs to ensure correct condition types.
+type privateUpdateCondition struct {
+	Type     *string `json:"type"`
+	Field    *string `json:"field"`
+	Operator *string `json:"operator"`
+	Value    *string `json:"value"`
 }
 
-// MarshalJSON implements json.Marshaler to automatically include the required
-// "type": "multival" field during JSON serialization.
-func (c *UpdateMultivalCondition) MarshalJSON() ([]byte, error) {
-	type Alias UpdateMultivalCondition
-	return json.Marshal(&struct {
-		Type string `json:"type"`
-		*Alias
-	}{
-		Type:  "multival",
-		Alias: (*Alias)(c),
-	})
+type privateUpdateConditionMult struct {
+	Type     *string `json:"type"`
+	Field    *string `json:"field"`
+	Operator *string `json:"operator"`
+	Value    *string `json:"value"`
+}
+
+type privateUpdateGroupCondition struct {
+	Type          *string                   `json:"type"`
+	GroupOperator *string                   `json:"group_operator"`
+	Conditions    []*privateUpdateCondition `json:"conditions"`
+}
+
+type privateUpdateMultivalCondition struct {
+	Type          *string                       `json:"type"`
+	Field         *string                       `json:"field"`
+	Operator      *string                       `json:"operator"`
+	GroupOperator *string                       `json:"group_operator"`
+	Conditions    []*privateUpdateConditionMult `json:"conditions"`
 }
 
 // Update updates a rule.
@@ -198,13 +195,49 @@ func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Rule, error
 
 	var mergedConditions []any
 	for _, c := range i.Conditions {
-		mergedConditions = append(mergedConditions, c)
+		privateCondition := &privateUpdateCondition{
+			Type:     fastly.ToPointer("single"),
+			Field:    c.Field,
+			Operator: c.Operator,
+			Value:    c.Value,
+		}
+		mergedConditions = append(mergedConditions, privateCondition)
 	}
 	for _, gc := range i.GroupConditions {
-		mergedConditions = append(mergedConditions, gc)
+		var privateSubConditions []*privateUpdateCondition
+		for _, subCond := range gc.Conditions {
+			privateSubConditions = append(privateSubConditions, &privateUpdateCondition{
+				Type:     fastly.ToPointer("single"),
+				Field:    subCond.Field,
+				Operator: subCond.Operator,
+				Value:    subCond.Value,
+			})
+		}
+		privateGroupCondition := &privateUpdateGroupCondition{
+			Type:          fastly.ToPointer("group"),
+			GroupOperator: gc.GroupOperator,
+			Conditions:    privateSubConditions,
+		}
+		mergedConditions = append(mergedConditions, privateGroupCondition)
 	}
 	for _, mc := range i.MultivalConditions {
-		mergedConditions = append(mergedConditions, mc)
+		var privateSubConditions []*privateUpdateConditionMult
+		for _, subCond := range mc.Conditions {
+			privateSubConditions = append(privateSubConditions, &privateUpdateConditionMult{
+				Type:     fastly.ToPointer("single"),
+				Field:    subCond.Field,
+				Operator: subCond.Operator,
+				Value:    subCond.Value,
+			})
+		}
+		privateMultivalCondition := &privateUpdateMultivalCondition{
+			Type:          fastly.ToPointer("multival"),
+			Field:         mc.Field,
+			Operator:      mc.Operator,
+			GroupOperator: mc.GroupOperator,
+			Conditions:    privateSubConditions,
+		}
+		mergedConditions = append(mergedConditions, privateMultivalCondition)
 	}
 
 	v := struct {
