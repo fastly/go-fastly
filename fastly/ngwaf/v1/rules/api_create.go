@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/fastly/go-fastly/v11/fastly"
-	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/common"
+	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/scope"
 )
 
 // CreateInput specifies the information needed for the Create()
@@ -43,7 +43,7 @@ type CreateInput struct {
 	// Scope defines where the rule is applied, including its type
 	// (e.g., "workspace" or "account") and the specific IDs it
 	// applies to (required).
-	Scope *common.Scope
+	Scope *scope.Scope
 	// Type specifies the category of the rule (e.g., "request")
 	// (required).
 	Type *string
@@ -158,7 +158,7 @@ func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Rule, error
 		GroupOperator  *string          `json:"group_operator,omitempty"`
 		RateLimit      *CreateRateLimit `json:"rate_limit,omitempty"`
 		RequestLogging *string          `json:"request_logging,omitempty"`
-		Scope          *common.Scope    `json:"scope"`
+		Scope          *scope.Scope     `json:"scope"`
 		Type           *string          `json:"type"`
 	}{
 		Actions:        i.Actions,
@@ -173,7 +173,7 @@ func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Rule, error
 		Type:           i.Type,
 	}
 
-	path, err := common.BuildPath(i.Scope, "rules", "")
+	path, err := scope.BuildPath(i.Scope, "rules", "")
 	if err != nil {
 		return nil, fmt.Errorf("failed to build API path: %w", err)
 	}

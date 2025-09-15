@@ -7,7 +7,7 @@ import (
 	"strconv"
 
 	"github.com/fastly/go-fastly/v11/fastly"
-	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/common"
+	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/scope"
 )
 
 // ListInput specifies the information needed for the List() function
@@ -17,7 +17,7 @@ type ListInput struct {
 	Limit *int
 	// Scope defines where the signal is located, including its type (e.g.,
 	// "workspace" or "account") and the specific IDs it applies to (required).
-	Scope *common.Scope
+	Scope *scope.Scope
 }
 
 // List retrieves a list of signals for the given workspace, with
@@ -28,7 +28,7 @@ func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Signals, error)
 		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
 
-	path, err := common.BuildPath(i.Scope, "signals", "")
+	path, err := scope.BuildPath(i.Scope, "signals", "")
 	if err != nil {
 		return nil, fmt.Errorf("failed to build API path: %w", err)
 	}
