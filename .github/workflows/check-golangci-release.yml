@@ -1,0 +1,52 @@
+name: Notify on golangci-lint Release
+
+on:
+  schedule:
+    - cron: "0 * * * *" # every hour
+  workflow_dispatch:
+jobs:
+  check-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest golangci-lint release
+        id: get_latest
+        run: |
+          release=$(curl -s https://api.github.com/repos/golangci/golangci-lint/releases/latest)
+          tag=$(echo "$release" | jq -r .tag_name)
+          url=$(echo "$release" | jq -r .html_url)
+          body=$(echo "$release" | jq -r .body)
+          echo "tag=$tag" >> $GITHUB_OUTPUT
+          echo "url=$url" >> $GITHUB_OUTPUT
+          echo "body<<EOF" >> $GITHUB_OUTPUT
+          echo "$body" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+      - name: Compare with last notified release
+        id: compare
+        run: |
+          last=$(cat .last_release 2>/dev/null || echo "")
+          if [ "$last" != "${{ steps.get_latest.outputs.tag }}" ]; then
+            echo "new=true" >> $GITHUB_OUTPUT
+            echo "${{ steps.get_latest.outputs.tag }}" > .last_release
+          fi
+      - name: Cache last release tag
+        uses: actions/cache@v3
+        with:
+          path: .last_release
+          key: last-release-${{ steps.get_latest.outputs.tag }}
+      - name: Save release notes into file
+        if: steps.compare.outputs.new == 'true'
+        run: |
+          echo "A new release of golangci-lint is available!" > release-notes.md
+          echo "" >> release-notes.md
+          echo "Version: **${{ steps.get_latest.outputs.tag }}**" >> release-notes.md
+          echo "Link: ${{ steps.get_latest.outputs.url }}" >> release-notes.md
+          echo "" >> release-notes.md
+          echo "### Release Notes" >> release-notes.md
+          echo "${{ steps.get_latest.outputs.body }}" >> release-notes.md
+      - name: Create issue for new release
+        if: steps.compare.outputs.new == 'true'
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: "🚀 New golangci-lint release: ${{ steps.get_latest.outputs.tag }}"
+          content-filepath: release-notes.md
+          labels: release, dependency
