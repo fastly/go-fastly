@@ -198,19 +198,16 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 			},
 			MultivalConditions: []*CreateMultivalCondition{
 				{
-					Type:          &multivalConditionType,
 					Field:         &multivalField,
 					GroupOperator: &multivalGroupOperator1,
 					Operator:      &multivalOperator,
 					Conditions: []*CreateConditionMult{
 						{
-							Type:     &conditionType,
 							Field:    &field9,
 							Operator: &operator9,
 							Value:    &value9,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field10,
 							Operator: &operator10,
 							Value:    &value10,
@@ -544,19 +541,16 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 			},
 			MultivalConditions: []*UpdateMultivalCondition{
 				{
-					Type:          &multivalConditionType,
 					Field:         &multivalField,
 					GroupOperator: &updatedMultivalGroupOperator1,
 					Operator:      &updatedMultivalOperator,
 					Conditions: []*UpdateConditionMult{
 						{
-							Type:     &conditionType,
 							Field:    &updatedField9,
 							Operator: &updatedOperator9,
 							Value:    &updatedValue9,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &updatedField10,
 							Operator: &updatedOperator10,
 							Value:    &updatedValue10,
@@ -866,19 +860,16 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			},
 			MultivalConditions: []*CreateMultivalCondition{
 				{
-					Type:          &multivalConditionType,
 					Field:         &multivalField,
 					GroupOperator: &multivalGroupOperator1,
 					Operator:      &multivalOperator,
 					Conditions: []*CreateConditionMult{
 						{
-							Type:     &conditionType,
 							Field:    &field9,
 							Operator: &operator9,
 							Value:    &value9,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field10,
 							Operator: &operator10,
 							Value:    &value10,
@@ -1250,19 +1241,16 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			},
 			MultivalConditions: []*UpdateMultivalCondition{
 				{
-					Type:          &multivalConditionType,
 					Field:         &multivalField,
 					GroupOperator: &updatedMultivalGroupOperator1,
 					Operator:      &updatedMultivalOperator,
 					Conditions: []*UpdateConditionMult{
 						{
-							Type:     &conditionType,
 							Field:    &updatedField9,
 							Operator: &updatedOperator9,
 							Value:    &updatedValue9,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &updatedField10,
 							Operator: &updatedOperator10,
 							Value:    &updatedValue10,
@@ -1544,19 +1532,16 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			},
 			MultivalConditions: []*CreateMultivalCondition{
 				{
-					Type:          &multivalConditionType,
 					Field:         &multivalField,
 					GroupOperator: &multivalGroupOperator1,
 					Operator:      &multivalOperator,
 					Conditions: []*CreateConditionMult{
 						{
-							Type:     &conditionType,
 							Field:    &field9,
 							Operator: &operator9,
 							Value:    &value9,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field10,
 							Operator: &operator10,
 							Value:    &value10,
@@ -1886,19 +1871,16 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			},
 			MultivalConditions: []*UpdateMultivalCondition{
 				{
-					Type:          &multivalConditionType,
 					Field:         &multivalField,
 					GroupOperator: &updatedMultivalGroupOperator1,
 					Operator:      &updatedMultivalOperator,
 					Conditions: []*UpdateConditionMult{
 						{
-							Type:     &conditionType,
 							Field:    &updatedField9,
 							Operator: &updatedOperator9,
 							Value:    &updatedValue9,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &updatedField10,
 							Operator: &updatedOperator10,
 							Value:    &updatedValue10,

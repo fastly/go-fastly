@@ -95,9 +95,6 @@ type UpdateCondition struct {
 
 // UpdateConditionMult defines a multival condition.
 type UpdateConditionMult struct {
-	// Type specifies the condition type (must be "single")
-	// (required).
-	Type *string `json:"type"`
 	// Field is the name of the field to be evaluated (e.g., "name",
 	// "value", "value_int") (required).
 	Field *string `json:"field"`
@@ -126,9 +123,6 @@ type UpdateGroupCondition struct {
 // UpdateMultivalCondition defines a multival conditions with a logical
 // operator.
 type UpdateMultivalCondition struct {
-	// Type specifies the condition group type (must be "multival")
-	// (required).
-	Type *string `json:"type"`
 	// Field is the request attribute to evaluate (e.g., "post_parameter",
 	// "signal").
 	Field *string `json:"field"`
@@ -165,6 +159,32 @@ type UpdateClientIdentifier struct {
 	Name *string `json:"name,omitempty"`
 	// Type is the type of the client identifier
 	Type *string `json:"type"`
+}
+
+// MarshalJSON implements json.Marshaler to automatically include the required
+// "type": "single" field during JSON serialization.
+func (c *UpdateConditionMult) MarshalJSON() ([]byte, error) {
+	type Alias UpdateConditionMult
+	return json.Marshal(&struct {
+		Type string `json:"type"`
+		*Alias
+	}{
+		Type:  "single",
+		Alias: (*Alias)(c),
+	})
+}
+
+// MarshalJSON implements json.Marshaler to automatically include the required
+// "type": "multival" field during JSON serialization.
+func (c *UpdateMultivalCondition) MarshalJSON() ([]byte, error) {
+	type Alias UpdateMultivalCondition
+	return json.Marshal(&struct {
+		Type string `json:"type"`
+		*Alias
+	}{
+		Type:  "multival",
+		Alias: (*Alias)(c),
+	})
 }
 
 // Update updates a rule.

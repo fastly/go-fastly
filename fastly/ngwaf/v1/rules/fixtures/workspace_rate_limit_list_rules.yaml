@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 12 Sep 2025 19:37:56 GMT
+      - Mon, 15 Sep 2025 15:18:58 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000059-CHI, cache-ewr-kewr1740044-EWR
+      - cache-chi-kigq8000059-CHI, cache-ewr-kewr1740025-EWR
       X-Timer:
-      - S1757705877.744208,VS0,VE122
+      - S1757949538.129511,VS0,VE102
     status: 200 OK
     code: 200
     duration: ""
