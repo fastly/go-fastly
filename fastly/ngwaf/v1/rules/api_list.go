@@ -7,7 +7,7 @@ import (
 	"strconv"
 
 	"github.com/fastly/go-fastly/v11/fastly"
-	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/common"
+	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/scope"
 )
 
 // ListInput specifies the information needed for the List() function
@@ -24,7 +24,7 @@ type ListInput struct {
 	// Scope defines where the rule is applied, including its type
 	// (e.g., "workspace" or "account") and the specific IDs it
 	// applies to (required).
-	Scope *common.Scope
+	Scope *scope.Scope
 	// Types filter results based on types (accepts more than one
 	// value and performs a union across rules of given types).
 	Types *string
@@ -54,7 +54,7 @@ func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Rules, error) {
 		requestOptions.Params["types"] = *i.Types
 	}
 
-	path, err := common.BuildPath(i.Scope, "rules", "")
+	path, err := scope.BuildPath(i.Scope, "rules", "")
 	if err != nil {
 		return nil, fmt.Errorf("failed to build API path: %w", err)
 	}

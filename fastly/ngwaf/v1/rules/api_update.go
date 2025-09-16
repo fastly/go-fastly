@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/fastly/go-fastly/v11/fastly"
-	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/common"
+	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/scope"
 )
 
 // UpdateInput specifies the information needed for the Update()
@@ -31,6 +31,9 @@ type UpdateInput struct {
 	// GroupConditions is a list of grouped conditions with nested
 	// logical evaluation.
 	GroupConditions []*UpdateGroupCondition
+	// MultivalConditions lists the nested multival conditions within this
+	// group.
+	MultivalConditions []*UpdateMultivalCondition
 	// GroupOperator defines the logical operator ("any" or "all")
 	// used to evaluate grouped conditions.
 	GroupOperator *string
@@ -45,7 +48,7 @@ type UpdateInput struct {
 	// Scope defines where the rule is applied, including its type
 	// (e.g., "workspace" or "account") and the specific IDs it
 	// applies to (required).
-	Scope *common.Scope
+	Scope *scope.Scope
 	// Type specifies the category of the rule (e.g., "request")
 	// (required).
 	Type *string
@@ -76,11 +79,21 @@ type UpdateAction struct {
 
 // UpdateCondition defines a single condition.
 type UpdateCondition struct {
-	// Type specifies the condition type (must be "single")
-	// (required).
-	Type *string `json:"type"`
 	// Field is the name of the field to be evaluated (e.g., "ip",
 	// "path") (required).
+	Field *string `json:"field"`
+	// Operator determines how the field is evaluated (e.g.,
+	// "equals", "contains") (required).
+	Operator *string `json:"operator"`
+	// Value is the value against which the field is compared
+	// (required).
+	Value *string `json:"value"`
+}
+
+// UpdateConditionMult defines a multival condition.
+type UpdateConditionMult struct {
+	// Field is the name of the field to be evaluated (e.g., "name",
+	// "value", "value_int") (required).
 	Field *string `json:"field"`
 	// Operator determines how the field is evaluated (e.g.,
 	// "equals", "contains") (required).
@@ -93,15 +106,29 @@ type UpdateCondition struct {
 // UpdateGroupCondition defines a group of conditions with a logical
 // operator.
 type UpdateGroupCondition struct {
-	// Type specifies the condition group type (must be "group")
-	// (required).
-	Type *string `json:"type"`
 	// GroupOperator is the logical operator used to evaluate the
 	// conditions ("any" or "all") (required).
 	GroupOperator *string `json:"group_operator"`
 	// Conditions is the list of single conditions to evaluate
 	// within the group (required).
 	Conditions []*UpdateCondition `json:"conditions"`
+}
+
+// UpdateMultivalCondition defines a multival conditions with a logical
+// operator.
+type UpdateMultivalCondition struct {
+	// Field is the request attribute to evaluate (e.g., "post_parameter",
+	// "signal").
+	Field *string `json:"field"`
+	// Operator is the comparison operator (e.g., "exists",
+	// "does_not_exist").
+	Operator *string `json:"operator"`
+	// GroupOperator specifies how to evaluate the conditions
+	// (e.g., `any`, `all`).
+	GroupOperator *string `json:"group_operator"`
+	// Conditions lists the nested single conditions within this
+	// group.
+	Conditions []*UpdateConditionMult `json:"conditions"`
 }
 
 // UpdateRateLimit defines how rate limit rules are enforced.
@@ -128,6 +155,35 @@ type UpdateClientIdentifier struct {
 	Type *string `json:"type"`
 }
 
+// Private structs to ensure correct condition types.
+type privateUpdateCondition struct {
+	Type     *string `json:"type"`
+	Field    *string `json:"field"`
+	Operator *string `json:"operator"`
+	Value    *string `json:"value"`
+}
+
+type privateUpdateConditionMult struct {
+	Type     *string `json:"type"`
+	Field    *string `json:"field"`
+	Operator *string `json:"operator"`
+	Value    *string `json:"value"`
+}
+
+type privateUpdateGroupCondition struct {
+	Type          *string                   `json:"type"`
+	GroupOperator *string                   `json:"group_operator"`
+	Conditions    []*privateUpdateCondition `json:"conditions"`
+}
+
+type privateUpdateMultivalCondition struct {
+	Type          *string                       `json:"type"`
+	Field         *string                       `json:"field"`
+	Operator      *string                       `json:"operator"`
+	GroupOperator *string                       `json:"group_operator"`
+	Conditions    []*privateUpdateConditionMult `json:"conditions"`
+}
+
 // Update updates a rule.
 func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Rule, error) {
 	if i.RuleID == nil {
@@ -139,10 +195,49 @@ func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Rule, error
 
 	var mergedConditions []any
 	for _, c := range i.Conditions {
-		mergedConditions = append(mergedConditions, c)
+		privateCondition := &privateUpdateCondition{
+			Type:     fastly.ToPointer("single"),
+			Field:    c.Field,
+			Operator: c.Operator,
+			Value:    c.Value,
+		}
+		mergedConditions = append(mergedConditions, privateCondition)
 	}
 	for _, gc := range i.GroupConditions {
-		mergedConditions = append(mergedConditions, gc)
+		var privateSubConditions []*privateUpdateCondition
+		for _, subCond := range gc.Conditions {
+			privateSubConditions = append(privateSubConditions, &privateUpdateCondition{
+				Type:     fastly.ToPointer("single"),
+				Field:    subCond.Field,
+				Operator: subCond.Operator,
+				Value:    subCond.Value,
+			})
+		}
+		privateGroupCondition := &privateUpdateGroupCondition{
+			Type:          fastly.ToPointer("group"),
+			GroupOperator: gc.GroupOperator,
+			Conditions:    privateSubConditions,
+		}
+		mergedConditions = append(mergedConditions, privateGroupCondition)
+	}
+	for _, mc := range i.MultivalConditions {
+		var privateSubConditions []*privateUpdateConditionMult
+		for _, subCond := range mc.Conditions {
+			privateSubConditions = append(privateSubConditions, &privateUpdateConditionMult{
+				Type:     fastly.ToPointer("single"),
+				Field:    subCond.Field,
+				Operator: subCond.Operator,
+				Value:    subCond.Value,
+			})
+		}
+		privateMultivalCondition := &privateUpdateMultivalCondition{
+			Type:          fastly.ToPointer("multival"),
+			Field:         mc.Field,
+			Operator:      mc.Operator,
+			GroupOperator: mc.GroupOperator,
+			Conditions:    privateSubConditions,
+		}
+		mergedConditions = append(mergedConditions, privateMultivalCondition)
 	}
 
 	v := struct {
@@ -154,7 +249,7 @@ func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Rule, error
 		GroupOperator  *string          `json:"group_operator,omitempty"`
 		RateLimit      *UpdateRateLimit `json:"rate_limit,omitempty"`
 		RequestLogging *string          `json:"request_logging,omitempty"`
-		Scope          *common.Scope    `json:"scope,omitempty"`
+		Scope          *scope.Scope     `json:"scope,omitempty"`
 		Type           *string          `json:"type,omitempty"`
 	}{
 		Actions:        i.Actions,
@@ -169,7 +264,7 @@ func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Rule, error
 		Type:           i.Type,
 	}
 
-	path, err := common.BuildPath(i.Scope, "rules", *i.RuleID)
+	path, err := scope.BuildPath(i.Scope, "rules", *i.RuleID)
 	if err != nil {
 		return nil, fmt.Errorf("failed to build API path: %w", err)
 	}

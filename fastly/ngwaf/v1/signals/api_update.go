@@ -6,7 +6,7 @@ import (
 	"fmt"
 
 	"github.com/fastly/go-fastly/v11/fastly"
-	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/common"
+	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/scope"
 )
 
 // UpdateInput specifies the information needed for the Update()
@@ -17,7 +17,7 @@ type UpdateInput struct {
 	Description *string `json:"description"`
 	// Scope defines where the signal is located, including its type (e.g.,
 	// "workspace" or "account") and the specific IDs it applies to (required).
-	Scope *common.Scope
+	Scope *scope.Scope
 	// SignalID is the id of the signal that's being updated
 	// (required).
 	SignalID *string `json:"-"`
@@ -35,7 +35,7 @@ func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Signal, err
 		return nil, fastly.ErrMissingDescription
 	}
 
-	path, err := common.BuildPath(i.Scope, "signals", *i.SignalID)
+	path, err := scope.BuildPath(i.Scope, "signals", *i.SignalID)
 	if err != nil {
 		return nil, fmt.Errorf("failed to build API path: %w", err)
 	}

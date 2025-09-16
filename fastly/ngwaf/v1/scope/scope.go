@@ -1,11 +1,11 @@
-package common
+package scope
 
-// ScopeType defines the type of scope.
-type ScopeType string
+// Type defines the type of scope.
+type Type string
 
 const (
-	ScopeTypeWorkspace ScopeType = "workspace"
-	ScopeTypeAccount   ScopeType = "account"
+	ScopeTypeWorkspace Type = "workspace"
+	ScopeTypeAccount   Type = "account"
 )
 
 // Scope defines the scope of a resource, specifying its type and applicable workspace identifiers.
@@ -19,7 +19,7 @@ const (
 //   - For "account" scope, this can include multiple workspace IDs or a wildcard "*" to target all workspaces.
 type Scope struct {
 	// Type specifies whether the rule applies at the "workspace" or "account" level (required).
-	Type ScopeType `json:"type"`
+	Type Type `json:"type"`
 	// AppliesTo lists the workspace IDs the rule applies to. For "workspace" type, a single ID is required.
 	// For "account" type, multiple IDs or "*" (wildcard for all workspaces) can be provided.
 	AppliesTo []string `json:"applies_to"`
