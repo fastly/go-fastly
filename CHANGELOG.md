@@ -5,9 +5,10 @@
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v11.2.0...)
 
 ### Breaking:
+- breaking(ngwaf/rules): group and multival conditions no longer accept a 'type' field
 
 ### Enhancements:
-
+- feat(ngwaf/rules): add support for the multival condition type ([#755](https://github.com/fastly/go-fastly/pull/755))
 ### Bug fixes:
 
 ### Dependencies:
