@@ -6,7 +6,7 @@ import (
 	"fmt"
 
 	"github.com/fastly/go-fastly/v11/fastly"
-	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/common"
+	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/scope"
 )
 
 // CreateInput specifies the information needed for the Create()
@@ -20,7 +20,7 @@ type CreateInput struct {
 	Name *string `json:"name"`
 	// Scope defines where the list is located, including its type (e.g.,
 	// "workspace" or "account") and the specific IDs it applies to (required).
-	Scope *common.Scope `json:"-"`
+	Scope *scope.Scope `json:"-"`
 	// Type is the type of the list. Must be one of `string` |
 	// `wildcard` | `ip` | `country` | `signal` (required).
 	Type *string `json:"type"`
@@ -41,7 +41,7 @@ func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*List, error
 		return nil, fastly.ErrMissingScope
 	}
 
-	path, err := common.BuildPath(i.Scope, "lists", "")
+	path, err := scope.BuildPath(i.Scope, "lists", "")
 	if err != nil {
 		return nil, fmt.Errorf("failed to build API path: %w", err)
 	}

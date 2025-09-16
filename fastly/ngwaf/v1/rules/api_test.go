@@ -9,19 +9,19 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/fastly/go-fastly/v11/fastly"
-	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/common"
+	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/scope"
 	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/signals"
 )
 
 func TestClient_Rule_WorkspaceScope(t *testing.T) {
-	runRuleTest(t, common.ScopeTypeWorkspace, fastly.TestNGWAFWorkspaceID)
+	runRuleTest(t, scope.ScopeTypeWorkspace, fastly.TestNGWAFWorkspaceID)
 }
 
 func TestClient_Rule_AccountScope(t *testing.T) {
-	runRuleTest(t, common.ScopeTypeAccount, "*") // assuming TestNGWAFAccountID exists
+	runRuleTest(t, scope.ScopeTypeAccount, "*") // assuming TestNGWAFAccountID exists
 }
 
-func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
+func runRuleTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 	assert := require.New(t)
 
 	var err error
@@ -92,7 +92,7 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 	var rs *Rules
 	fastly.Record(t, fmt.Sprintf("%s_list_rules", scopeType), func(c *fastly.Client) {
 		rs, err = List(context.TODO(), c, &ListInput{
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
@@ -118,7 +118,7 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 	var rule *Rule
 	fastly.Record(t, fmt.Sprintf("%s_create_rule", scopeType), func(c *fastly.Client) {
 		rule, err = Create(context.TODO(), c, &CreateInput{
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
@@ -293,7 +293,7 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 		fastly.Record(t, fmt.Sprintf("%s_delete_rule", scopeType), func(c *fastly.Client) {
 			err = Delete(context.TODO(), c, &DeleteInput{
 				RuleID: fastly.ToPointer(rule.RuleID),
-				Scope: &common.Scope{
+				Scope: &scope.Scope{
 					Type:      scopeType,
 					AppliesTo: []string{appliesToID},
 				},
@@ -309,7 +309,7 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 	fastly.Record(t, fmt.Sprintf("%s_get_rule", scopeType), func(c *fastly.Client) {
 		testRule, err = Get(context.TODO(), c, &GetInput{
 			RuleID: fastly.ToPointer(rule.RuleID),
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
@@ -451,7 +451,7 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 	var updatedRule *Rule
 	fastly.Record(t, fmt.Sprintf("%s_update_rule", scopeType), func(c *fastly.Client) {
 		updatedRule, err = Update(context.TODO(), c, &UpdateInput{
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
@@ -625,10 +625,10 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 }
 
 func TestClient_Rate_Limit_Rule_WorkspaceScope(t *testing.T) {
-	runRateLimitRuleTest(t, common.ScopeTypeWorkspace, fastly.TestNGWAFWorkspaceID)
+	runRateLimitRuleTest(t, scope.ScopeTypeWorkspace, fastly.TestNGWAFWorkspaceID)
 }
 
-func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
+func runRateLimitRuleTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 	assert := require.New(t)
 
 	var err error
@@ -698,7 +698,7 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	var rs *Rules
 	fastly.Record(t, fmt.Sprintf("%s_rate_limit_list_rules", scopeType), func(c *fastly.Client) {
 		rs, err = List(context.TODO(), c, &ListInput{
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
@@ -730,7 +730,7 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 		signal, err = signals.Create(context.TODO(), c, &signals.CreateInput{
 			Description: fastly.ToPointer(testDescription),
 			Name:        fastly.ToPointer(testSignalName),
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
@@ -748,7 +748,7 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	var rule *Rule
 	fastly.Record(t, fmt.Sprintf("%s_rate_limit_create_rule", scopeType), func(c *fastly.Client) {
 		rule, err = Create(context.TODO(), c, &CreateInput{
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
@@ -858,7 +858,7 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 		fastly.Record(t, fmt.Sprintf("%s_rate_limit_delete_rule", scopeType), func(c *fastly.Client) {
 			err = Delete(context.TODO(), c, &DeleteInput{
 				RuleID: fastly.ToPointer(rule.RuleID),
-				Scope: &common.Scope{
+				Scope: &scope.Scope{
 					Type:      scopeType,
 					AppliesTo: []string{appliesToID},
 				},
@@ -869,7 +869,7 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 		}
 		fastly.Record(t, fmt.Sprintf("%s_rate_limit_delete_signal", scopeType), func(c *fastly.Client) {
 			err = signals.Delete(context.TODO(), c, &signals.DeleteInput{
-				Scope: &common.Scope{
+				Scope: &scope.Scope{
 					Type:      scopeType,
 					AppliesTo: []string{appliesToID},
 				},
@@ -970,7 +970,7 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	fastly.Record(t, fmt.Sprintf("%s_rate_limit_get_rule", scopeType), func(c *fastly.Client) {
 		testRule, err = Get(context.TODO(), c, &GetInput{
 			RuleID: fastly.ToPointer(rule.RuleID),
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
@@ -1120,7 +1120,7 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	var updatedRule *Rule
 	fastly.Record(t, fmt.Sprintf("%s_rate_limit_update_rule", scopeType), func(c *fastly.Client) {
 		updatedRule, err = Update(context.TODO(), c, &UpdateInput{
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
@@ -1312,10 +1312,10 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 }
 
 func TestClient_Deception_Rule_WorkspaceScope(t *testing.T) {
-	runDeceptionRuleTest(t, common.ScopeTypeWorkspace, fastly.TestNGWAFWorkspaceID)
+	runDeceptionRuleTest(t, scope.ScopeTypeWorkspace, fastly.TestNGWAFWorkspaceID)
 }
 
-func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
+func runDeceptionRuleTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 	assert := require.New(t)
 
 	var err error
@@ -1386,7 +1386,7 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	var rs *Rules
 	fastly.Record(t, fmt.Sprintf("%s_deception_list_rules", scopeType), func(c *fastly.Client) {
 		rs, err = List(context.TODO(), c, &ListInput{
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
@@ -1412,7 +1412,7 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	var rule *Rule
 	fastly.Record(t, fmt.Sprintf("%s_deception_create_rule", scopeType), func(c *fastly.Client) {
 		rule, err = Create(context.TODO(), c, &CreateInput{
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
@@ -1510,7 +1510,7 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 		fastly.Record(t, fmt.Sprintf("%s_deception_delete_rule", scopeType), func(c *fastly.Client) {
 			err = Delete(context.TODO(), c, &DeleteInput{
 				RuleID: fastly.ToPointer(rule.RuleID),
-				Scope: &common.Scope{
+				Scope: &scope.Scope{
 					Type:      scopeType,
 					AppliesTo: []string{appliesToID},
 				},
@@ -1603,7 +1603,7 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	fastly.Record(t, fmt.Sprintf("%s_deception_get_rule", scopeType), func(c *fastly.Client) {
 		testRule, err = Get(context.TODO(), c, &GetInput{
 			RuleID: fastly.ToPointer(rule.RuleID),
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
@@ -1741,7 +1741,7 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	var updatedRule *Rule
 	fastly.Record(t, fmt.Sprintf("%s_deception_update_rule", scopeType), func(c *fastly.Client) {
 		updatedRule, err = Update(context.TODO(), c, &UpdateInput{
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
@@ -1940,8 +1940,8 @@ func TestClient_CreateRule_validation(t *testing.T) {
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		Type:        fastly.ToPointer("request"),
 		Description: fastly.ToPointer("test"),
-		Scope: &common.Scope{
-			Type:      common.ScopeTypeWorkspace,
+		Scope: &scope.Scope{
+			Type:      scope.ScopeTypeWorkspace,
 			AppliesTo: []string{"123"},
 		},
 		Conditions:      []*CreateCondition{},

@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v11/fastly"
-	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/common"
+	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/scope"
 )
 
 const (
@@ -20,14 +20,14 @@ const (
 )
 
 func TestClient_Lists_WorkspaceScope(t *testing.T) {
-	runListsTest(t, common.ScopeTypeWorkspace, fastly.TestNGWAFWorkspaceID)
+	runListsTest(t, scope.ScopeTypeWorkspace, fastly.TestNGWAFWorkspaceID)
 }
 
 func TestClient_Lists_AccountScope(t *testing.T) {
-	runListsTest(t, common.ScopeTypeAccount, "*") // assuming TestNGWAFAccountID exists
+	runListsTest(t, scope.ScopeTypeAccount, "*") // assuming TestNGWAFAccountID exists
 }
 
-func runListsTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
+func runListsTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 	var err error
 	listEntries := []string{listEntry}
 	testListName := listName + string(scopeType)
@@ -40,7 +40,7 @@ func runListsTest(t *testing.T, scopeType common.ScopeType, appliesToID string) 
 			Description: fastly.ToPointer(listDescription),
 			Entries:     fastly.ToPointer(listEntries),
 			Name:        fastly.ToPointer(testListName),
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
@@ -77,7 +77,7 @@ func runListsTest(t *testing.T, scopeType common.ScopeType, appliesToID string) 
 		fastly.Record(t, fmt.Sprintf("%s_delete_list", scopeType), func(c *fastly.Client) {
 			err = Delete(context.TODO(), c, &DeleteInput{
 				ListID: fastly.ToPointer(list.ListID),
-				Scope: &common.Scope{
+				Scope: &scope.Scope{
 					Type:      scopeType,
 					AppliesTo: []string{appliesToID},
 				},
@@ -93,7 +93,7 @@ func runListsTest(t *testing.T, scopeType common.ScopeType, appliesToID string) 
 	fastly.Record(t, fmt.Sprintf("%s_get_list", scopeType), func(c *fastly.Client) {
 		getList, err = Get(context.TODO(), c, &GetInput{
 			ListID: fastly.ToPointer(list.ListID),
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
@@ -136,7 +136,7 @@ func runListsTest(t *testing.T, scopeType common.ScopeType, appliesToID string) 
 			Description: fastly.ToPointer(updateListDescription),
 			Entries:     fastly.ToPointer(updateListEntries),
 			ListID:      fastly.ToPointer(list.ListID),
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
@@ -172,7 +172,7 @@ func runListsTest(t *testing.T, scopeType common.ScopeType, appliesToID string) 
 	// List all lists.
 	fastly.Record(t, fmt.Sprintf("%s_list_lists", scopeType), func(c *fastly.Client) {
 		lists, err = ListLists(context.TODO(), c, &ListInput{
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
