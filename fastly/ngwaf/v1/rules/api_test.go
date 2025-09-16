@@ -74,6 +74,20 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 	operator8 := "equals"
 	value8 := "example.com"
 
+	// Multival conditions
+	multivalConditionType := "multival"
+	multivalGroupOperator1 := "any"
+	multivalField := "request_cookie"
+	multivalOperator := "exists"
+
+	field9 := "name"
+	operator9 := "equals"
+	value9 := "fooCookie"
+
+	field10 := "value"
+	operator10 := "equals"
+	value10 := "barCookie"
+
 	// List all rules.
 	var rs *Rules
 	fastly.Record(t, fmt.Sprintf("%s_list_rules", scopeType), func(c *fastly.Client) {
@@ -120,19 +134,16 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 			},
 			Conditions: []*CreateCondition{
 				{
-					Type:     &conditionType,
 					Field:    &field1,
 					Operator: &operator1,
 					Value:    &value1,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field2,
 					Operator: &operator2,
 					Value:    &value2,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field3,
 					Operator: &operator3,
 					Value:    &value3,
@@ -140,17 +151,14 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 			},
 			GroupConditions: []*CreateGroupCondition{
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &groupOperator1,
 					Conditions: []*CreateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field4,
 							Operator: &operator4,
 							Value:    &value4,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field5,
 							Operator: &operator5,
 							Value:    &value5,
@@ -158,26 +166,41 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 					},
 				},
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &groupOperator2,
 					Conditions: []*CreateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field6,
 							Operator: &operator6,
 							Value:    &value6,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field7,
 							Operator: &operator7,
 							Value:    &value7,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field8,
 							Operator: &operator8,
 							Value:    &value8,
+						},
+					},
+				},
+			},
+			MultivalConditions: []*CreateMultivalCondition{
+				{
+					Field:         &multivalField,
+					GroupOperator: &multivalGroupOperator1,
+					Operator:      &multivalOperator,
+					Conditions: []*CreateConditionMult{
+						{
+							Field:    &field9,
+							Operator: &operator9,
+							Value:    &value9,
+						},
+						{
+							Field:    &field10,
+							Operator: &operator10,
+							Value:    &value10,
 						},
 					},
 				},
@@ -200,7 +223,7 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 	action := rule.Actions[0]
 	assert.Equal(actionType, action.Type)
 
-	assert.Len(rule.Conditions, 5) // 3 single + 2 group top-level
+	assert.Len(rule.Conditions, 6) // 3 single + 2 group top-level + 1 multival condition
 
 	var singleConditions []SingleCondition
 	for _, cond := range rule.Conditions {
@@ -245,6 +268,26 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 	assert.Contains(groupConditions[1].Conditions, Condition{Type: conditionType, Field: field7, Operator: operator7, Value: value7})
 	assert.Contains(groupConditions[1].Conditions, Condition{Type: conditionType, Field: field8, Operator: operator8, Value: value8})
 
+	// Validate multival conditions
+	var multivalConditions []MultivalCondition
+	for _, cond := range rule.Conditions {
+		if cond.Type == multivalConditionType {
+			if mc, ok := cond.Fields.(MultivalCondition); ok {
+				multivalConditions = append(multivalConditions, mc)
+			} else {
+				t.Errorf("expected MultivalCondition, got %T", cond.Fields)
+			}
+		}
+	}
+
+	assert.Len(multivalConditions, 1)
+
+	// First multival condition
+	assert.Equal(multivalGroupOperator1, multivalConditions[0].GroupOperator)
+	assert.Len(multivalConditions[0].Conditions, 2)
+	assert.Contains(multivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: field9, Operator: operator9, Value: value9})
+	assert.Contains(multivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: field10, Operator: operator10, Value: value10})
+
 	// Ensure we delete the test rule at the end.
 	defer func() {
 		fastly.Record(t, fmt.Sprintf("%s_delete_rule", scopeType), func(c *fastly.Client) {
@@ -288,11 +331,11 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 	testRuleAction := rule.Actions[0]
 	assert.Equal(actionType, testRuleAction.Type)
 
-	assert.Len(testRule.Conditions, 5) // 3 single + 2 group top-level
+	assert.Len(testRule.Conditions, 6) // 3 single + 2 group top-level + 1 multival condition
 
 	// Validate single conditions
 	var testRuleSingleConditions []SingleCondition
-	for _, cond := range rule.Conditions {
+	for _, cond := range testRule.Conditions {
 		if cond.Type == conditionType {
 			if sc, ok := cond.Fields.(SingleCondition); ok {
 				testRuleSingleConditions = append(testRuleSingleConditions, sc)
@@ -309,7 +352,7 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 
 	// Validate group conditions
 	var testRuleGroupConditions []GroupCondition
-	for _, cond := range rule.Conditions {
+	for _, cond := range testRule.Conditions {
 		if cond.Type == groupConditionType {
 			if gc, ok := cond.Fields.(GroupCondition); ok {
 				testRuleGroupConditions = append(testRuleGroupConditions, gc)
@@ -333,6 +376,26 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 	assert.Contains(testRuleGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field6, Operator: operator6, Value: value6})
 	assert.Contains(testRuleGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field7, Operator: operator7, Value: value7})
 	assert.Contains(testRuleGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field8, Operator: operator8, Value: value8})
+
+	// Validate multival conditions
+	var testMultivalConditions []MultivalCondition
+	for _, cond := range testRule.Conditions {
+		if cond.Type == multivalConditionType {
+			if mc, ok := cond.Fields.(MultivalCondition); ok {
+				testMultivalConditions = append(testMultivalConditions, mc)
+			} else {
+				t.Errorf("expected MultivalCondition, got %T", cond.Fields)
+			}
+		}
+	}
+
+	assert.Len(testMultivalConditions, 1)
+
+	// First multival condition
+	assert.Equal(multivalGroupOperator1, testMultivalConditions[0].GroupOperator)
+	assert.Len(testMultivalConditions[0].Conditions, 2)
+	assert.Contains(testMultivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: field9, Operator: operator9, Value: value9})
+	assert.Contains(testMultivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: field10, Operator: operator10, Value: value10})
 
 	// Update rule test variables
 	updatedDescription := "updated test"
@@ -372,6 +435,18 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 	updatedOperator8 := "does_not_equal"
 	updatedValue8 := "internal.example"
 
+	// Updated multival conditions
+	updatedMultivalGroupOperator1 := "all"
+	updatedMultivalOperator := "does_not_exist"
+
+	updatedField9 := "name"
+	updatedOperator9 := "does_not_equal"
+	updatedValue9 := "fooCookieUpdated"
+
+	updatedField10 := "value"
+	updatedOperator10 := "does_not_equal"
+	updatedValue10 := "barCookieUpdated"
+
 	// Update the test rule.
 	var updatedRule *Rule
 	fastly.Record(t, fmt.Sprintf("%s_update_rule", scopeType), func(c *fastly.Client) {
@@ -392,19 +467,16 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 			},
 			Conditions: []*UpdateCondition{
 				{
-					Type:     &conditionType,
 					Field:    &field1,
 					Operator: &updatedOperator1,
 					Value:    &updatedValue1,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field2,
 					Operator: &updatedOperator2,
 					Value:    &updatedValue2,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field3,
 					Operator: &updatedOperator3,
 					Value:    &updatedValue3,
@@ -412,17 +484,14 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 			},
 			GroupConditions: []*UpdateGroupCondition{
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &updatedGroupOperator1,
 					Conditions: []*UpdateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field4,
 							Operator: &updatedOperator4,
 							Value:    &updatedValue4,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field5,
 							Operator: &updatedOperator5,
 							Value:    &updatedValue5,
@@ -430,26 +499,41 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 					},
 				},
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &updatedGroupOperator2,
 					Conditions: []*UpdateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field6,
 							Operator: &updatedOperator6,
 							Value:    &updatedValue6,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field7,
 							Operator: &updatedOperator7,
 							Value:    &updatedValue7,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field8,
 							Operator: &updatedOperator8,
 							Value:    &updatedValue8,
+						},
+					},
+				},
+			},
+			MultivalConditions: []*UpdateMultivalCondition{
+				{
+					Field:         &multivalField,
+					GroupOperator: &updatedMultivalGroupOperator1,
+					Operator:      &updatedMultivalOperator,
+					Conditions: []*UpdateConditionMult{
+						{
+							Field:    &updatedField9,
+							Operator: &updatedOperator9,
+							Value:    &updatedValue9,
+						},
+						{
+							Field:    &updatedField10,
+							Operator: &updatedOperator10,
+							Value:    &updatedValue10,
 						},
 					},
 				},
@@ -473,7 +557,7 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 	updatedAction := updatedRule.Actions[0]
 	assert.Equal(updatedActionType, updatedAction.Type)
 
-	assert.Len(updatedRule.Conditions, 5) // 3 single + 2 group top-level
+	assert.Len(updatedRule.Conditions, 6) // 3 single + 2 group top-level + 1 multival condition
 
 	// Validate single conditions
 	var updatedSingleConditions []SingleCondition
@@ -518,6 +602,26 @@ func runRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
 	assert.Contains(updatedGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field6, Operator: updatedOperator6, Value: updatedValue6})
 	assert.Contains(updatedGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field7, Operator: updatedOperator7, Value: updatedValue7})
 	assert.Contains(updatedGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field8, Operator: updatedOperator8, Value: updatedValue8})
+
+	// Validate multival conditions
+	var updatedMultivalConditions []MultivalCondition
+	for _, cond := range updatedRule.Conditions {
+		if cond.Type == multivalConditionType {
+			if mc, ok := cond.Fields.(MultivalCondition); ok {
+				updatedMultivalConditions = append(updatedMultivalConditions, mc)
+			} else {
+				t.Errorf("expected MultivalCondition, got %T", cond.Fields)
+			}
+		}
+	}
+
+	assert.Len(updatedMultivalConditions, 1)
+
+	// First multival condition
+	assert.Equal(updatedMultivalGroupOperator1, updatedMultivalConditions[0].GroupOperator)
+	assert.Len(updatedMultivalConditions[0].Conditions, 2)
+	assert.Contains(updatedMultivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: updatedField9, Operator: updatedOperator9, Value: updatedValue9})
+	assert.Contains(updatedMultivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: updatedField10, Operator: updatedOperator10, Value: updatedValue10})
 }
 
 func TestClient_Rate_Limit_Rule_WorkspaceScope(t *testing.T) {
@@ -575,6 +679,20 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	field8 := "domain"
 	operator8 := "equals"
 	value8 := "example.com"
+
+	// Multival conditions
+	multivalConditionType := "multival"
+	multivalGroupOperator1 := "any"
+	multivalField := "request_cookie"
+	multivalOperator := "exists"
+
+	field9 := "name"
+	operator9 := "equals"
+	value9 := "fooCookie"
+
+	field10 := "value"
+	operator10 := "equals"
+	value10 := "barCookie"
 
 	// List all rules.
 	var rs *Rules
@@ -658,19 +776,16 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			},
 			Conditions: []*CreateCondition{
 				{
-					Type:     &conditionType,
 					Field:    &field1,
 					Operator: &operator1,
 					Value:    &value1,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field2,
 					Operator: &operator2,
 					Value:    &value2,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field3,
 					Operator: &operator3,
 					Value:    &value3,
@@ -678,17 +793,14 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			},
 			GroupConditions: []*CreateGroupCondition{
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &groupOperator1,
 					Conditions: []*CreateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field4,
 							Operator: &operator4,
 							Value:    &value4,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field5,
 							Operator: &operator5,
 							Value:    &value5,
@@ -696,26 +808,41 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 					},
 				},
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &groupOperator2,
 					Conditions: []*CreateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field6,
 							Operator: &operator6,
 							Value:    &value6,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field7,
 							Operator: &operator7,
 							Value:    &value7,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field8,
 							Operator: &operator8,
 							Value:    &value8,
+						},
+					},
+				},
+			},
+			MultivalConditions: []*CreateMultivalCondition{
+				{
+					Field:         &multivalField,
+					GroupOperator: &multivalGroupOperator1,
+					Operator:      &multivalOperator,
+					Conditions: []*CreateConditionMult{
+						{
+							Field:    &field9,
+							Operator: &operator9,
+							Value:    &value9,
+						},
+						{
+							Field:    &field10,
+							Operator: &operator10,
+							Value:    &value10,
 						},
 					},
 				},
@@ -773,7 +900,7 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	assert.Equal(signal.ReferenceID, rule.RateLimit.Signal)
 	assert.Equal(threshold, rule.RateLimit.Threshold)
 
-	assert.Len(rule.Conditions, 5) // 3 single + 2 group top-level
+	assert.Len(rule.Conditions, 6) // 3 single + 2 group top-level + 1 multival condition
 
 	var singleConditions []SingleCondition
 	for _, cond := range rule.Conditions {
@@ -818,6 +945,26 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	assert.Contains(groupConditions[1].Conditions, Condition{Type: conditionType, Field: field7, Operator: operator7, Value: value7})
 	assert.Contains(groupConditions[1].Conditions, Condition{Type: conditionType, Field: field8, Operator: operator8, Value: value8})
 
+	// Validate multival conditions
+	var multivalConditions []MultivalCondition
+	for _, cond := range rule.Conditions {
+		if cond.Type == multivalConditionType {
+			if mc, ok := cond.Fields.(MultivalCondition); ok {
+				multivalConditions = append(multivalConditions, mc)
+			} else {
+				t.Errorf("expected MultivalCondition, got %T", cond.Fields)
+			}
+		}
+	}
+
+	assert.Len(multivalConditions, 1)
+
+	// First multival condition
+	assert.Equal(multivalGroupOperator1, multivalConditions[0].GroupOperator)
+	assert.Len(multivalConditions[0].Conditions, 2)
+	assert.Contains(multivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: field9, Operator: operator9, Value: value9})
+	assert.Contains(multivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: field10, Operator: operator10, Value: value10})
+
 	// Get the test rule.
 	var testRule *Rule
 	fastly.Record(t, fmt.Sprintf("%s_rate_limit_get_rule", scopeType), func(c *fastly.Client) {
@@ -852,11 +999,11 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	assert.Equal(signal.ReferenceID, rule.RateLimit.Signal)
 	assert.Equal(threshold, rule.RateLimit.Threshold)
 
-	assert.Len(testRule.Conditions, 5) // 3 single + 2 group top-level
+	assert.Len(testRule.Conditions, 6) // 3 single + 2 group top-level + 1 multival condition
 
 	// Validate single conditions
 	var testRuleSingleConditions []SingleCondition
-	for _, cond := range rule.Conditions {
+	for _, cond := range testRule.Conditions {
 		if cond.Type == conditionType {
 			if sc, ok := cond.Fields.(SingleCondition); ok {
 				testRuleSingleConditions = append(testRuleSingleConditions, sc)
@@ -873,7 +1020,7 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 
 	// Validate group conditions
 	var testRuleGroupConditions []GroupCondition
-	for _, cond := range rule.Conditions {
+	for _, cond := range testRule.Conditions {
 		if cond.Type == groupConditionType {
 			if gc, ok := cond.Fields.(GroupCondition); ok {
 				testRuleGroupConditions = append(testRuleGroupConditions, gc)
@@ -897,6 +1044,26 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	assert.Contains(testRuleGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field6, Operator: operator6, Value: value6})
 	assert.Contains(testRuleGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field7, Operator: operator7, Value: value7})
 	assert.Contains(testRuleGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field8, Operator: operator8, Value: value8})
+
+	// Validate multival conditions
+	var testMultivalConditions []MultivalCondition
+	for _, cond := range testRule.Conditions {
+		if cond.Type == multivalConditionType {
+			if mc, ok := cond.Fields.(MultivalCondition); ok {
+				testMultivalConditions = append(testMultivalConditions, mc)
+			} else {
+				t.Errorf("expected MultivalCondition, got %T", cond.Fields)
+			}
+		}
+	}
+
+	assert.Len(testMultivalConditions, 1)
+
+	// First multival condition
+	assert.Equal(multivalGroupOperator1, testMultivalConditions[0].GroupOperator)
+	assert.Len(testMultivalConditions[0].Conditions, 2)
+	assert.Contains(testMultivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: field9, Operator: operator9, Value: value9})
+	assert.Contains(testMultivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: field10, Operator: operator10, Value: value10})
 
 	// Update rule test variables
 	updatedDescription := "updated test"
@@ -937,6 +1104,18 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	updatedOperator8 := "does_not_equal"
 	updatedValue8 := "internal.example"
 
+	// Updated multival conditions
+	updatedMultivalGroupOperator1 := "all"
+	updatedMultivalOperator := "does_not_exist"
+
+	updatedField9 := "name"
+	updatedOperator9 := "does_not_equal"
+	updatedValue9 := "fooCookieUpdated"
+
+	updatedField10 := "value"
+	updatedOperator10 := "does_not_equal"
+	updatedValue10 := "barCookieUpdated"
+
 	// Update the test rule.
 	var updatedRule *Rule
 	fastly.Record(t, fmt.Sprintf("%s_rate_limit_update_rule", scopeType), func(c *fastly.Client) {
@@ -968,19 +1147,16 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			},
 			Conditions: []*UpdateCondition{
 				{
-					Type:     &conditionType,
 					Field:    &field1,
 					Operator: &updatedOperator1,
 					Value:    &updatedValue1,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field2,
 					Operator: &updatedOperator2,
 					Value:    &updatedValue2,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field3,
 					Operator: &updatedOperator3,
 					Value:    &updatedValue3,
@@ -988,17 +1164,14 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			},
 			GroupConditions: []*UpdateGroupCondition{
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &updatedGroupOperator1,
 					Conditions: []*UpdateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field4,
 							Operator: &updatedOperator4,
 							Value:    &updatedValue4,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field5,
 							Operator: &updatedOperator5,
 							Value:    &updatedValue5,
@@ -1006,26 +1179,41 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 					},
 				},
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &updatedGroupOperator2,
 					Conditions: []*UpdateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field6,
 							Operator: &updatedOperator6,
 							Value:    &updatedValue6,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field7,
 							Operator: &updatedOperator7,
 							Value:    &updatedValue7,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field8,
 							Operator: &updatedOperator8,
 							Value:    &updatedValue8,
+						},
+					},
+				},
+			},
+			MultivalConditions: []*UpdateMultivalCondition{
+				{
+					Field:         &multivalField,
+					GroupOperator: &updatedMultivalGroupOperator1,
+					Operator:      &updatedMultivalOperator,
+					Conditions: []*UpdateConditionMult{
+						{
+							Field:    &updatedField9,
+							Operator: &updatedOperator9,
+							Value:    &updatedValue9,
+						},
+						{
+							Field:    &updatedField10,
+							Operator: &updatedOperator10,
+							Value:    &updatedValue10,
 						},
 					},
 				},
@@ -1056,7 +1244,7 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	assert.Equal(signal.ReferenceID, updatedRule.RateLimit.Signal)
 	assert.Equal(updatedThreshold, updatedRule.RateLimit.Threshold)
 
-	assert.Len(updatedRule.Conditions, 5) // 3 single + 2 group top-level
+	assert.Len(updatedRule.Conditions, 6) // 3 single + 2 group top-level + 1 multival condition
 
 	// Validate single conditions
 	var updatedSingleConditions []SingleCondition
@@ -1101,6 +1289,26 @@ func runRateLimitRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	assert.Contains(updatedGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field6, Operator: updatedOperator6, Value: updatedValue6})
 	assert.Contains(updatedGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field7, Operator: updatedOperator7, Value: updatedValue7})
 	assert.Contains(updatedGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field8, Operator: updatedOperator8, Value: updatedValue8})
+
+	// Validate multival conditions
+	var updatedMultivalConditions []MultivalCondition
+	for _, cond := range updatedRule.Conditions {
+		if cond.Type == multivalConditionType {
+			if mc, ok := cond.Fields.(MultivalCondition); ok {
+				updatedMultivalConditions = append(updatedMultivalConditions, mc)
+			} else {
+				t.Errorf("expected MultivalCondition, got %T", cond.Fields)
+			}
+		}
+	}
+
+	assert.Len(updatedMultivalConditions, 1)
+
+	// First multival condition
+	assert.Equal(updatedMultivalGroupOperator1, updatedMultivalConditions[0].GroupOperator)
+	assert.Len(updatedMultivalConditions[0].Conditions, 2)
+	assert.Contains(updatedMultivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: updatedField9, Operator: updatedOperator9, Value: updatedValue9})
+	assert.Contains(updatedMultivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: updatedField10, Operator: updatedOperator10, Value: updatedValue10})
 }
 
 func TestClient_Deception_Rule_WorkspaceScope(t *testing.T) {
@@ -1160,6 +1368,20 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	operator8 := "equals"
 	value8 := "example.com"
 
+	// Multival conditions
+	multivalConditionType := "multival"
+	multivalGroupOperator1 := "any"
+	multivalField := "request_cookie"
+	multivalOperator := "exists"
+
+	field9 := "name"
+	operator9 := "equals"
+	value9 := "fooCookie"
+
+	field10 := "value"
+	operator10 := "equals"
+	value10 := "barCookie"
+
 	// List all rules.
 	var rs *Rules
 	fastly.Record(t, fmt.Sprintf("%s_deception_list_rules", scopeType), func(c *fastly.Client) {
@@ -1206,19 +1428,16 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			},
 			Conditions: []*CreateCondition{
 				{
-					Type:     &conditionType,
 					Field:    &field1,
 					Operator: &operator1,
 					Value:    &value1,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field2,
 					Operator: &operator2,
 					Value:    &value2,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field3,
 					Operator: &operator3,
 					Value:    &value3,
@@ -1226,17 +1445,14 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			},
 			GroupConditions: []*CreateGroupCondition{
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &groupOperator1,
 					Conditions: []*CreateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field4,
 							Operator: &operator4,
 							Value:    &value4,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field5,
 							Operator: &operator5,
 							Value:    &value5,
@@ -1244,26 +1460,41 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 					},
 				},
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &groupOperator2,
 					Conditions: []*CreateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field6,
 							Operator: &operator6,
 							Value:    &value6,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field7,
 							Operator: &operator7,
 							Value:    &value7,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field8,
 							Operator: &operator8,
 							Value:    &value8,
+						},
+					},
+				},
+			},
+			MultivalConditions: []*CreateMultivalCondition{
+				{
+					Field:         &multivalField,
+					GroupOperator: &multivalGroupOperator1,
+					Operator:      &multivalOperator,
+					Conditions: []*CreateConditionMult{
+						{
+							Field:    &field9,
+							Operator: &operator9,
+							Value:    &value9,
+						},
+						{
+							Field:    &field10,
+							Operator: &operator10,
+							Value:    &value10,
 						},
 					},
 				},
@@ -1302,7 +1533,7 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	assert.Equal(actionType, action.Type)
 	assert.Equal(deceptionType, action.DeceptionType)
 
-	assert.Len(rule.Conditions, 5) // 3 single + 2 group top-level
+	assert.Len(rule.Conditions, 6) // 3 single + 2 group top-level + 1 multival condition
 
 	var singleConditions []SingleCondition
 	for _, cond := range rule.Conditions {
@@ -1347,6 +1578,26 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	assert.Contains(groupConditions[1].Conditions, Condition{Type: conditionType, Field: field7, Operator: operator7, Value: value7})
 	assert.Contains(groupConditions[1].Conditions, Condition{Type: conditionType, Field: field8, Operator: operator8, Value: value8})
 
+	// Validate multival conditions
+	var multivalConditions []MultivalCondition
+	for _, cond := range rule.Conditions {
+		if cond.Type == multivalConditionType {
+			if mc, ok := cond.Fields.(MultivalCondition); ok {
+				multivalConditions = append(multivalConditions, mc)
+			} else {
+				t.Errorf("expected MultivalCondition, got %T", cond.Fields)
+			}
+		}
+	}
+
+	assert.Len(multivalConditions, 1)
+
+	// First multival condition
+	assert.Equal(multivalGroupOperator1, multivalConditions[0].GroupOperator)
+	assert.Len(multivalConditions[0].Conditions, 2)
+	assert.Contains(multivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: field9, Operator: operator9, Value: value9})
+	assert.Contains(multivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: field10, Operator: operator10, Value: value10})
+
 	// Get the test rule.
 	var testRule *Rule
 	fastly.Record(t, fmt.Sprintf("%s_deception_get_rule", scopeType), func(c *fastly.Client) {
@@ -1374,11 +1625,11 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	assert.Equal(actionType, testRuleAction.Type)
 	assert.Equal(deceptionType, action.DeceptionType)
 
-	assert.Len(testRule.Conditions, 5) // 3 single + 2 group top-level
+	assert.Len(testRule.Conditions, 6) // 3 single + 2 group top-level + 1 multival condition
 
 	// Validate single conditions
 	var testRuleSingleConditions []SingleCondition
-	for _, cond := range rule.Conditions {
+	for _, cond := range testRule.Conditions {
 		if cond.Type == conditionType {
 			if sc, ok := cond.Fields.(SingleCondition); ok {
 				testRuleSingleConditions = append(testRuleSingleConditions, sc)
@@ -1395,7 +1646,7 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 
 	// Validate group conditions
 	var testRuleGroupConditions []GroupCondition
-	for _, cond := range rule.Conditions {
+	for _, cond := range testRule.Conditions {
 		if cond.Type == groupConditionType {
 			if gc, ok := cond.Fields.(GroupCondition); ok {
 				testRuleGroupConditions = append(testRuleGroupConditions, gc)
@@ -1419,6 +1670,26 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	assert.Contains(testRuleGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field6, Operator: operator6, Value: value6})
 	assert.Contains(testRuleGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field7, Operator: operator7, Value: value7})
 	assert.Contains(testRuleGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field8, Operator: operator8, Value: value8})
+
+	// Validate multival conditions
+	var testMultivalConditions []MultivalCondition
+	for _, cond := range testRule.Conditions {
+		if cond.Type == multivalConditionType {
+			if mc, ok := cond.Fields.(MultivalCondition); ok {
+				testMultivalConditions = append(testMultivalConditions, mc)
+			} else {
+				t.Errorf("expected MultivalCondition, got %T", cond.Fields)
+			}
+		}
+	}
+
+	assert.Len(testMultivalConditions, 1)
+
+	// First multival condition
+	assert.Equal(multivalGroupOperator1, testMultivalConditions[0].GroupOperator)
+	assert.Len(testMultivalConditions[0].Conditions, 2)
+	assert.Contains(testMultivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: field9, Operator: operator9, Value: value9})
+	assert.Contains(testMultivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: field10, Operator: operator10, Value: value10})
 
 	// Update rule test variables
 	updatedDescription := "updated test"
@@ -1454,6 +1725,18 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	updatedOperator8 := "does_not_equal"
 	updatedValue8 := "internal.example"
 
+	// Updated multival conditions
+	updatedMultivalGroupOperator1 := "all"
+	updatedMultivalOperator := "does_not_exist"
+
+	updatedField9 := "name"
+	updatedOperator9 := "does_not_equal"
+	updatedValue9 := "fooCookieUpdated"
+
+	updatedField10 := "value"
+	updatedOperator10 := "does_not_equal"
+	updatedValue10 := "barCookieUpdated"
+
 	// Update the test rule.
 	var updatedRule *Rule
 	fastly.Record(t, fmt.Sprintf("%s_deception_update_rule", scopeType), func(c *fastly.Client) {
@@ -1474,19 +1757,16 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			},
 			Conditions: []*UpdateCondition{
 				{
-					Type:     &conditionType,
 					Field:    &field1,
 					Operator: &updatedOperator1,
 					Value:    &updatedValue1,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field2,
 					Operator: &updatedOperator2,
 					Value:    &updatedValue2,
 				},
 				{
-					Type:     &conditionType,
 					Field:    &field3,
 					Operator: &updatedOperator3,
 					Value:    &updatedValue3,
@@ -1494,17 +1774,14 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 			},
 			GroupConditions: []*UpdateGroupCondition{
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &updatedGroupOperator1,
 					Conditions: []*UpdateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field4,
 							Operator: &updatedOperator4,
 							Value:    &updatedValue4,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field5,
 							Operator: &updatedOperator5,
 							Value:    &updatedValue5,
@@ -1512,26 +1789,41 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 					},
 				},
 				{
-					Type:          &groupConditionType,
 					GroupOperator: &updatedGroupOperator2,
 					Conditions: []*UpdateCondition{
 						{
-							Type:     &conditionType,
 							Field:    &field6,
 							Operator: &updatedOperator6,
 							Value:    &updatedValue6,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field7,
 							Operator: &updatedOperator7,
 							Value:    &updatedValue7,
 						},
 						{
-							Type:     &conditionType,
 							Field:    &field8,
 							Operator: &updatedOperator8,
 							Value:    &updatedValue8,
+						},
+					},
+				},
+			},
+			MultivalConditions: []*UpdateMultivalCondition{
+				{
+					Field:         &multivalField,
+					GroupOperator: &updatedMultivalGroupOperator1,
+					Operator:      &updatedMultivalOperator,
+					Conditions: []*UpdateConditionMult{
+						{
+							Field:    &updatedField9,
+							Operator: &updatedOperator9,
+							Value:    &updatedValue9,
+						},
+						{
+							Field:    &updatedField10,
+							Operator: &updatedOperator10,
+							Value:    &updatedValue10,
 						},
 					},
 				},
@@ -1555,7 +1847,7 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	updatedAction := updatedRule.Actions[0]
 	assert.Equal(actionType, updatedAction.Type)
 
-	assert.Len(updatedRule.Conditions, 5) // 3 single + 2 group top-level
+	assert.Len(updatedRule.Conditions, 6) // 3 single + 2 group top-level + 1 multival condition
 
 	// Validate single conditions
 	var updatedSingleConditions []SingleCondition
@@ -1600,6 +1892,26 @@ func runDeceptionRuleTest(t *testing.T, scopeType common.ScopeType, appliesToID 
 	assert.Contains(updatedGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field6, Operator: updatedOperator6, Value: updatedValue6})
 	assert.Contains(updatedGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field7, Operator: updatedOperator7, Value: updatedValue7})
 	assert.Contains(updatedGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field8, Operator: updatedOperator8, Value: updatedValue8})
+
+	// Validate multival conditions
+	var updatedMultivalConditions []MultivalCondition
+	for _, cond := range updatedRule.Conditions {
+		if cond.Type == multivalConditionType {
+			if mc, ok := cond.Fields.(MultivalCondition); ok {
+				updatedMultivalConditions = append(updatedMultivalConditions, mc)
+			} else {
+				t.Errorf("expected MultivalCondition, got %T", cond.Fields)
+			}
+		}
+	}
+
+	assert.Len(updatedMultivalConditions, 1)
+
+	// First multival condition
+	assert.Equal(updatedMultivalGroupOperator1, updatedMultivalConditions[0].GroupOperator)
+	assert.Len(updatedMultivalConditions[0].Conditions, 2)
+	assert.Contains(updatedMultivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: updatedField9, Operator: updatedOperator9, Value: updatedValue9})
+	assert.Contains(updatedMultivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: updatedField10, Operator: updatedOperator10, Value: updatedValue10})
 }
 
 func TestClient_CreateRule_validation(t *testing.T) {
