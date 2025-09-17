@@ -45,29 +45,19 @@ tidy: ## Cleans the Go module.
 	@$(GO) mod tidy
 .PHONY: tidy
 
-install-linter: ## Installs golangci-lint v2.4.0 into ./bin (cross-platform)
+install-linter: ## Installs golangci-lint via go install
 	@echo "==> Installing golangci-lint $(GOLANGCI_LINT_VERSION)"
 	@mkdir -p $(BIN_DIR)
-	@if [ ! -x "$(GOLANGCI_LINT)" ]; then \
-		OS=$$(uname | tr '[:upper:]' '[:lower:]'); \
-		ARCH=$$(uname -m); \
-		case "$$ARCH" in \
-			x86_64) ARCH="amd64" ;; \
-			arm64|aarch64) ARCH="arm64" ;; \
-			*) echo "Unsupported architecture: $$ARCH" && exit 1 ;; \
-		esac; \
-		URL="https://github.com/golangci/golangci-lint/releases/download/$(GOLANGCI_LINT_VERSION)/golangci-lint-$(GOLANGCI_LINT_VERSION)-$$OS-$$ARCH.tar.gz"; \
-		echo "Downloading: $$URL"; \
-		curl -sSfL "$$URL" | tar -xz -C $(BIN_DIR) --strip-components=1; \
-	fi
+	@GOBIN=$(BIN_DIR) go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@$(GOLANGCI_LINT_VERSION)
 .PHONY: install-linter
 
 check-linter-version: ## Verifies installed golangci-lint version matches expected
 	@echo "==> Checking golangci-lint version"
 	@EXPECTED="$(GOLANGCI_LINT_VERSION)"; \
-	INSTALLED=$$($(GOLANGCI_LINT) version --format short | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+'); \
+	EXPECTED=$${EXPECTED#v}; \
+	INSTALLED=$$($(GOLANGCI_LINT) version --short); \
 	if [ "$$INSTALLED" != "$$EXPECTED" ]; then \
-		echo "Expected golangci-lint $$EXPECTED but found $$INSTALLED"; \
+		echo "Expected golangci-lint v$$EXPECTED but found $$INSTALLED"; \
 		exit 1; \
 	fi
 .PHONY: check-linter-version
