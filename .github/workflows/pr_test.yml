@@ -1,3 +1,5 @@
+name: Test
+
 on:
   pull_request:
     types:
@@ -8,7 +10,6 @@ on:
       - unlabeled
     branches:
       - main
-name: Test
 jobs:
   changelog:
     if: github.actor != 'dependabot[bot]'
@@ -27,6 +28,30 @@ jobs:
         uses: golangci/golangci-lint-action@v8
         with:
           version: v2.4.0
+  golangci-latest:
+    name: lint-latest (informational)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+      - name: Setup Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: 1.24.x
+      - name: Run golangci-lint@latest
+        id: lint
+        uses: golangci/golangci-lint-action@v8
+        with:
+          version: latest
+        continue-on-error: true
+      - name: Report lint summary
+        run: |
+          if [ "${{ steps.lint.outcome }}" == "success" ]; then
+            echo "✅ golangci-lint@latest passed." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ golangci-lint@latest failed (informational only)." >> $GITHUB_STEP_SUMMARY
+          fi
   test:
     strategy:
       matrix:
