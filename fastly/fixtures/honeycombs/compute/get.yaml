@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/22/logging/honeycomb/test-honeycomb
+    method: GET
+  response:
+    body: '{"placement":"none","created_at":"2025-09-02T17:11:46Z","format_version":"2","token":"super-secure-token","updated_at":"2025-09-02T17:11:46Z","name":"test-honeycomb","dataset":"testDataset","version":"22","service_id":"XsjdElScZGjmfCcTwsYRC1","response_condition":"","format":"%h
+      %l %u %t \"%r\" %\u003es %b","deleted_at":null,"log_processing_region":"none"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 02 Sep 2025 17:11:46 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100083-CHI, cache-ewr-kewr1740095-EWR
+      X-Timer:
+      - S1756833106.472105,VS0,VE135
+    status: 200 OK
+    code: 200
+    duration: ""

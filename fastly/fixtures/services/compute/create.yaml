@@ -1,0 +1,57 @@
+---
+version: 1
+interactions:
+- request:
+    body: comment=comment&name=test-service&type=wasm
+    form:
+      comment:
+      - comment
+      name:
+      - test-service
+      type:
+      - wasm
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/11.3.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service
+    method: POST
+  response:
+    body: '{"customer_id":"4dOhK7xEkULiabovMyhRBu","comment":"comment","name":"test-service","type":"wasm","deleted_at":null,"updated_at":"2025-09-10T13:57:07Z","created_at":"2025-09-10T13:57:07Z","id":"MVo3trM9NTFhpYCJsSrEUD","paused":false,"versions":[{"service_id":"MVo3trM9NTFhpYCJsSrEUD","deployed":false,"updated_at":"2025-09-10T13:57:10Z","staging":false,"deleted_at":null,"locked":false,"comment":"","environments":[],"active":false,"created_at":"2025-09-10T13:57:10Z","testing":false,"number":1}],"publish_key":"","environments":[]}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 10 Sep 2025 13:57:10 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9999"
+      Fastly-Ratelimit-Reset:
+      - "1757512800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000148-CHI, cache-ewr-kewr1740094-EWR
+      X-Timer:
+      - S1757512627.392096,VS0,VE3161
+    status: 200 OK
+    code: 200
+    duration: ""

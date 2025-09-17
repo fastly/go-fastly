@@ -1,0 +1,57 @@
+---
+version: 1
+interactions:
+- request:
+    body: format_version=2&log_processing_region=eu&name=new-test-loggly
+    form:
+      format_version:
+      - "2"
+      log_processing_region:
+      - eu
+      name:
+      - new-test-loggly
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/27/logging/loggly/test-loggly
+    method: PUT
+  response:
+    body: '{"name":"new-test-loggly","format":"format","service_id":"XsjdElScZGjmfCcTwsYRC1","token":"abcd1234","format_version":"2","updated_at":"2025-09-02T17:19:21Z","public_key":null,"created_at":"2025-09-02T17:19:21Z","deleted_at":null,"placement":"none","response_condition":"","version":"27","log_processing_region":"eu"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 02 Sep 2025 17:19:22 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9917"
+      Fastly-Ratelimit-Reset:
+      - "1756836000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000174-CHI, cache-ewr-kewr1740091-EWR
+      X-Timer:
+      - S1756833562.970958,VS0,VE460
+    status: 200 OK
+    code: 200
+    duration: ""

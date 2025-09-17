@@ -1,0 +1,62 @@
+---
+version: 1
+interactions:
+- request:
+    body: log_processing_region=eu&name=new-test-scalyr&project_id=app-name&region=EU&token=new-token
+    form:
+      log_processing_region:
+      - eu
+      name:
+      - new-test-scalyr
+      project_id:
+      - app-name
+      region:
+      - EU
+      token:
+      - new-token
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/37/logging/scalyr/test-scalyr
+    method: PUT
+  response:
+    body: '{"placement":"none","response_condition":"","service_id":"XsjdElScZGjmfCcTwsYRC1","format":"%h
+      %l %u %t \"%r\" %\u003es %b","created_at":"2025-09-02T17:33:23Z","format_version":"2","version":"37","updated_at":"2025-09-02T17:33:23Z","deleted_at":null,"project_id":"app-name","token":"new-token","name":"new-test-scalyr","log_processing_region":"eu","region":"EU"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 02 Sep 2025 17:33:24 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9841"
+      Fastly-Ratelimit-Reset:
+      - "1756836000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000175-CHI, cache-ewr-kewr1740083-EWR
+      X-Timer:
+      - S1756834404.294320,VS0,VE471
+    status: 200 OK
+    code: 200
+    duration: ""

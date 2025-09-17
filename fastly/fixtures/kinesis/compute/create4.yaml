@@ -1,0 +1,66 @@
+---
+version: 1
+interactions:
+- request:
+    body: format=format&format_version=2&iam_role=badarn&name=test-kinesis-3&placement=none&region=us-east-1&topic=stream-name
+    form:
+      format:
+      - format
+      format_version:
+      - "2"
+      iam_role:
+      - badarn
+      name:
+      - test-kinesis-3
+      placement:
+      - none
+      region:
+      - us-east-1
+      topic:
+      - stream-name
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/25/logging/kinesis
+    method: POST
+  response:
+    body: '{"msg":"Bad request","detail":"invalid IAM Role ARN badarn: ARNs must have
+      six colon-separated components"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 02 Sep 2025 17:16:46 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9932"
+      Fastly-Ratelimit-Reset:
+      - "1756836000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 400 Bad Request
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100048-CHI, cache-ewr-kewr1740046-EWR
+      X-Timer:
+      - S1756833406.258591,VS0,VE324
+    status: 400 Bad Request
+    code: 400
+    duration: ""

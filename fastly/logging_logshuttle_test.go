@@ -157,6 +157,157 @@ func TestClient_Logshuttles(t *testing.T) {
 	}
 }
 
+func TestClient_Logshuttles_Compute(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	var tv *Version
+	Record(t, "logshuttles/compute/version", func(c *Client) {
+		tv = testVersionCompute(t, c)
+	})
+
+	// Create
+	var l *Logshuttle
+	Record(t, "logshuttles/compute/create", func(c *Client) {
+		l, err = c.CreateLogshuttle(context.TODO(), &CreateLogshuttleInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           ToPointer("test-logshuttle"),
+			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
+			FormatVersion:  ToPointer(2),
+			Placement:      ToPointer("none"),
+			Token:          ToPointer("super-secure-token"),
+			URL:            ToPointer("https://logs.example.com"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Ensure deleted
+	defer func() {
+		Record(t, "logshuttles/compute/cleanup", func(c *Client) {
+			_ = c.DeleteLogshuttle(context.TODO(), &DeleteLogshuttleInput{
+				ServiceID:      TestComputeServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "test-logshuttle",
+			})
+
+			_ = c.DeleteLogshuttle(context.TODO(), &DeleteLogshuttleInput{
+				ServiceID:      TestComputeServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "new-test-logshuttle",
+			})
+		})
+	}()
+
+	if *l.Name != "test-logshuttle" {
+		t.Errorf("bad name: %q", *l.Name)
+	}
+	if *l.Format != "%h %l %u %t \"%r\" %>s %b" {
+		t.Errorf("bad format: %q", *l.Format)
+	}
+	if *l.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *l.FormatVersion)
+	}
+	if *l.Placement != "none" {
+		t.Errorf("bad placement: %q", *l.Placement)
+	}
+	if *l.Token != "super-secure-token" {
+		t.Errorf("bad token: %q", *l.Token)
+	}
+	if *l.URL != "https://logs.example.com" {
+		t.Errorf("bad url: %q", *l.URL)
+	}
+
+	// List
+	var ls []*Logshuttle
+	Record(t, "logshuttles/compute/list", func(c *Client) {
+		ls, err = c.ListLogshuttles(context.TODO(), &ListLogshuttlesInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(ls) < 1 {
+		t.Errorf("bad logshuttles: %v", ls)
+	}
+
+	// Get
+	var nl *Logshuttle
+	Record(t, "logshuttles/compute/get", func(c *Client) {
+		nl, err = c.GetLogshuttle(context.TODO(), &GetLogshuttleInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "test-logshuttle",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if *l.Name != *nl.Name {
+		t.Errorf("bad name: %q", *l.Name)
+	}
+	if *l.Format != *nl.Format {
+		t.Errorf("bad format: %q", *l.Format)
+	}
+	if *l.FormatVersion != *nl.FormatVersion {
+		t.Errorf("bad format_version: %q", *l.FormatVersion)
+	}
+	if *l.Placement != *nl.Placement {
+		t.Errorf("bad placement: %q", *l.Placement)
+	}
+	if *l.Token != *nl.Token {
+		t.Errorf("bad token: %q", *l.Token)
+	}
+	if *l.URL != *nl.URL {
+		t.Errorf("bad url: %q", *l.URL)
+	}
+
+	// Update
+	var ul *Logshuttle
+	Record(t, "logshuttles/compute/update", func(c *Client) {
+		ul, err = c.UpdateLogshuttle(context.TODO(), &UpdateLogshuttleInput{
+			ServiceID:        TestComputeServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-logshuttle",
+			NewName:          ToPointer("new-test-logshuttle"),
+			Token:            ToPointer("new-token"),
+			URL:              ToPointer("https://logs2.example.com"),
+			ProcessingRegion: ToPointer("eu"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if *ul.Name != "new-test-logshuttle" {
+		t.Errorf("bad name: %q", *ul.Name)
+	}
+	if *ul.Token != "new-token" {
+		t.Errorf("bad token: %q", *ul.Token)
+	}
+	if *ul.URL != "https://logs2.example.com" {
+		t.Errorf("bad url: %q", *ul.URL)
+	}
+	if *ul.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *ul.ProcessingRegion)
+	}
+
+	// Delete
+	Record(t, "logshuttles/compute/delete", func(c *Client) {
+		err = c.DeleteLogshuttle(context.TODO(), &DeleteLogshuttleInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-logshuttle",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestClient_ListLogshuttles_validation(t *testing.T) {
 	var err error
 

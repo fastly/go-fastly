@@ -1,0 +1,53 @@
+---
+version: 1
+interactions:
+- request:
+    body: comment=test+comment
+    form:
+      comment:
+      - test comment
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version
+    method: POST
+  response:
+    body: '{"comment":"test comment","service_id":"XsjdElScZGjmfCcTwsYRC1","number":45}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 08 Sep 2025 14:12:05 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9999"
+      Fastly-Ratelimit-Reset:
+      - "1757343600"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000128-CHI, cache-ewr-kewr1740096-EWR
+      X-Timer:
+      - S1757340725.235404,VS0,VE356
+    status: 200 OK
+    code: 200
+    duration: ""

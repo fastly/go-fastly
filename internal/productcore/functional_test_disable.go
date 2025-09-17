@@ -19,9 +19,6 @@ type DisableTestInput struct {
 	// OpFn is the function to be invoked to perform the
 	// disablement
 	OpFn func(context.Context, *fastly.Client, string) error
-	// ServiceID identifies the service on which the product
-	// should be disabled
-	ServiceID string
 	// ExpectFailure specifies whether this test case is expected
 	// to fail
 	ExpectFailure bool
@@ -43,8 +40,8 @@ func NewDisableTest(i *DisableTestInput) *test_utils.FunctionalTest {
 		r.Operation = "disable"
 	}
 
-	r.TestFn = func(_ *testing.T, _ *test_utils.FunctionalTest, c *fastly.Client) error {
-		err := i.OpFn(context.TODO(), c, i.ServiceID)
+	r.TestFn = func(_ *testing.T, _ *test_utils.FunctionalTest, c *fastly.Client, serviceID string) error {
+		err := i.OpFn(context.TODO(), c, serviceID)
 		return err
 	}
 

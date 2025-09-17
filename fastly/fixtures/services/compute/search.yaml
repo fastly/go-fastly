@@ -1,0 +1,47 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/search?name=test-service
+    method: GET
+  response:
+    body: '{"environments":[],"created_at":"2025-09-10T13:57:07Z","id":"MVo3trM9NTFhpYCJsSrEUD","updated_at":"2025-09-10T13:57:07Z","customer_id":"4dOhK7xEkULiabovMyhRBu","deleted_at":null,"type":"wasm","comment":"comment","name":"test-service","versions":[{"comment":"","staging":false,"deployed":false,"created_at":"2025-09-10T13:57:10Z","deleted_at":null,"updated_at":"2025-09-10T13:57:10Z","service_id":"MVo3trM9NTFhpYCJsSrEUD","environments":[],"locked":false,"active":false,"number":1,"testing":false}]}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Age:
+      - "0"
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 10 Sep 2025 13:57:13 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000125-CHI, cache-ewr-kewr1740094-EWR
+      X-Timer:
+      - S1757512633.120611,VS0,VE130
+    status: 200 OK
+    code: 200
+    duration: ""

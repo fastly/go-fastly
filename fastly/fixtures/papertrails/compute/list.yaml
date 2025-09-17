@@ -1,0 +1,45 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/34/logging/papertrail
+    method: GET
+  response:
+    body: '[{"name":"test-papertrail","service_id":"XsjdElScZGjmfCcTwsYRC1","response_condition":"","version":"34","format":"format","deleted_at":null,"log_processing_region":"none","placement":"none","created_at":"2025-09-02T17:28:06Z","format_version":"2","address":"integ-test.go-fastly.com","public_key":null,"updated_at":"2025-09-02T17:28:06Z","port":"1234"}]'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 02 Sep 2025 17:28:07 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000155-CHI, cache-nyc-kteb1890063-NYC
+      X-Timer:
+      - S1756834087.890555,VS0,VE129
+    status: 200 OK
+    code: 200
+    duration: ""

@@ -195,6 +195,20 @@ func testVersion(t *testing.T, c *Client) *Version {
 	return v
 }
 
+// testVersion is a new, blank version suitable for testing.
+func testVersionCompute(t *testing.T, c *Client) *Version {
+	testVersionLock.Lock()
+	defer testVersionLock.Unlock()
+
+	v, err := c.CreateVersion(context.TODO(), &CreateVersionInput{
+		ServiceID: TestComputeServiceID,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	return v
+}
+
 func CreateTestVersion(t *testing.T, versionFixture, serviceID string) *Version {
 	var err error
 	var version *Version

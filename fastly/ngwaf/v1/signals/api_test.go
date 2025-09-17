@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v11/fastly"
-	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/common"
+	"github.com/fastly/go-fastly/v11/fastly/ngwaf/v1/scope"
 )
 
 const (
@@ -18,14 +18,14 @@ const (
 )
 
 func TestClient_Signals_WorkspaceScope(t *testing.T) {
-	runSignalsTest(t, common.ScopeTypeWorkspace, fastly.TestNGWAFWorkspaceID)
+	runSignalsTest(t, scope.ScopeTypeWorkspace, fastly.TestNGWAFWorkspaceID)
 }
 
 func TestClient_Signals_AccountScope(t *testing.T) {
-	runSignalsTest(t, common.ScopeTypeAccount, "*") // assuming TestNGWAFAccountID exists
+	runSignalsTest(t, scope.ScopeTypeAccount, "*") // assuming TestNGWAFAccountID exists
 }
 
-func runSignalsTest(t *testing.T, scopeType common.ScopeType, appliesToID string) {
+func runSignalsTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 	var err error
 	var signalID string
 	testSignalName := testName + string(scopeType)
@@ -38,7 +38,7 @@ func runSignalsTest(t *testing.T, scopeType common.ScopeType, appliesToID string
 		signal, err = Create(context.TODO(), c, &CreateInput{
 			Description: fastly.ToPointer(testDescription),
 			Name:        fastly.ToPointer(testSignalName),
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
@@ -62,7 +62,7 @@ func runSignalsTest(t *testing.T, scopeType common.ScopeType, appliesToID string
 	defer func() {
 		fastly.Record(t, fmt.Sprintf("%s_delete_signal", scopeType), func(c *fastly.Client) {
 			err = Delete(context.TODO(), c, &DeleteInput{
-				Scope: &common.Scope{
+				Scope: &scope.Scope{
 					Type:      scopeType,
 					AppliesTo: []string{appliesToID},
 				},
@@ -78,7 +78,7 @@ func runSignalsTest(t *testing.T, scopeType common.ScopeType, appliesToID string
 	var getTestSignal *Signal
 	fastly.Record(t, fmt.Sprintf("%s_get_signal", scopeType), func(c *fastly.Client) {
 		getTestSignal, err = Get(context.TODO(), c, &GetInput{
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
@@ -102,7 +102,7 @@ func runSignalsTest(t *testing.T, scopeType common.ScopeType, appliesToID string
 	fastly.Record(t, fmt.Sprintf("%s_update_signal", scopeType), func(c *fastly.Client) {
 		updatedSignal, err = Update(context.TODO(), c, &UpdateInput{
 			Description: fastly.ToPointer(string(updatedSignalDescription)),
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
@@ -120,7 +120,7 @@ func runSignalsTest(t *testing.T, scopeType common.ScopeType, appliesToID string
 	var listedSignals *Signals
 	fastly.Record(t, fmt.Sprintf("%s_list_signals", scopeType), func(c *fastly.Client) {
 		listedSignals, err = List(context.TODO(), c, &ListInput{
-			Scope: &common.Scope{
+			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
@@ -159,8 +159,8 @@ func TestClient_GetSignal_validation(t *testing.T) {
 	}
 	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		SignalID: nil,
-		Scope: &common.Scope{
-			Type:      common.ScopeTypeWorkspace,
+		Scope: &scope.Scope{
+			Type:      scope.ScopeTypeWorkspace,
 			AppliesTo: []string{},
 		},
 	})
@@ -204,8 +204,8 @@ func TestClient_UpdateSignal_validation(t *testing.T) {
 	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
 		Description: nil,
 		SignalID:    fastly.ToPointer("someID"),
-		Scope: &common.Scope{
-			Type:      common.ScopeTypeWorkspace,
+		Scope: &scope.Scope{
+			Type:      scope.ScopeTypeWorkspace,
 			AppliesTo: []string{},
 		},
 	})

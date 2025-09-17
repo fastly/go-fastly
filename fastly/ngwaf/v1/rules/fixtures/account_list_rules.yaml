@@ -6,23 +6,23 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/11.1.0 (+github.com/fastly/go-fastly; go1.24.2)
+      - FastlyGo/11.3.1 (+github.com/fastly/go-fastly; go1.24.2)
     url: https://api.fastly.com/ngwaf/v1/rules
     method: GET
   response:
     body: |
-      {"data":[],"meta":{"limit":100,"total":0}}
+      {"data":[{"id":"68c425c1c4cb735d17ba9bad","type":"request","scope":{"type":"account","applies_to":["*"]},"enabled":true,"description":"Utility requests","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"path","operator":"equals","value":"/echo.json"}],"actions":[{"type":"add_signal","signal":"corp.utility"}],"created_at":"2025-09-12T13:53:05Z","updated_at":"2025-09-12T13:53:05Z"},{"id":"68c4258736eef2e33345eb7b","type":"request","scope":{"type":"account","applies_to":["*"]},"enabled":true,"description":"Utility requests","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"path","operator":"equals","value":"/echo.json"}],"actions":[{"type":"add_signal","signal":"corp.utility"}],"created_at":"2025-09-12T13:52:07Z","updated_at":"2025-09-12T13:52:07Z"}],"meta":{"limit":100,"total":2}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "43"
+      - "872"
       Content-Type:
       - application/json
       Date:
-      - Mon, 04 Aug 2025 21:08:09 GMT
+      - Mon, 15 Sep 2025 17:30:28 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100099-CHI, cache-nyc-kteb1890053-NYC
+      - cache-chi-klot8100120-CHI, cache-ewr-kewr1740075-EWR
       X-Timer:
-      - S1754341690.751129,VS0,VE109
+      - S1757957429.855552,VS0,VE105
     status: 200 OK
     code: 200
     duration: ""

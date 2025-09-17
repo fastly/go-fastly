@@ -1,0 +1,63 @@
+---
+version: 1
+interactions:
+- request:
+    body: format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-heroku&placement=none&token=super-secure-token&url=https%3A%2F%2F1.us.logplex.io%2Flogs
+    form:
+      format:
+      - '%h %l %u %t "%r" %>s %b'
+      format_version:
+      - "2"
+      name:
+      - test-heroku
+      placement:
+      - none
+      token:
+      - super-secure-token
+      url:
+      - https://1.us.logplex.io/logs
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/21/logging/heroku
+    method: POST
+  response:
+    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-heroku","placement":"none","token":"super-secure-token","url":"https://1.us.logplex.io/logs","service_id":"XsjdElScZGjmfCcTwsYRC1","version":"21","log_processing_region":"none","created_at":"2025-09-02T17:09:59Z","deleted_at":null,"updated_at":"2025-09-02T17:09:59Z","response_condition":""}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 02 Sep 2025 17:10:00 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9964"
+      Fastly-Ratelimit-Reset:
+      - "1756836000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100052-CHI, cache-ewr-kewr1740062-EWR
+      X-Timer:
+      - S1756833000.778554,VS0,VE389
+    status: 200 OK
+    code: 200
+    duration: ""

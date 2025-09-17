@@ -6,20 +6,31 @@
 
 ### Breaking:
 
+- breaking(ngwaf/rules): group and multival conditions no longer accept a 'type' field ([#755](https://github.com/fastly/go-fastly/pull/755))
+- breaking(ngwaf): rename package `common` to `scope` and `ScopeType` to just `Type` ([#754](https://github.com/fastly/go-fastly/pull/754))
+
 ### Enhancements:
+
+- feat(ngwaf/rules): add support for the multival condition type ([#755](https://github.com/fastly/go-fastly/pull/755))
 
 ### Bug fixes:
 
 ### Dependencies:
+
+- build(deps): `golang.org/x/crypto` from 0.41.0 to 0.42.0 ([#751](https://github.com/fastly/go-fastly/pull/751))
+- build(deps): `golang.org/x/sys` from 0.35.0 to 0.36.0 ([#751](https://github.com/fastly/go-fastly/pull/751))
+- build(deps): `actions/setup-go` from 5 to 6 ([#752](https://github.com/fastly/go-fastly/pull/752))
 
 ## [v11.3.1](https://github.com/fastly/go-fastly/releases/tag/v11.3.1) (2025-09-03)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v11.3.0...v11.3.1)
 
 ### Bug fixes:
+
 - fix(logging): Add CompressionCodec and GZipLevel to HTTPS update struct
 
 ### Dependencies:
+
 - build(deps): `golang.org/x/crypto` from 0.40.0 to 0.41.0 ([#740](https://github.com/fastly/go-fastly/pull/740))
 - build(deps): `golang.org/x/sys` from 0.34.0 to 0.35.0 ([#740](https://github.com/fastly/go-fastly/pull/740))
 - build(deps): `github.com/stretchr/testify` from 1.10.0 to 1.11.0 ([#742](https://github.com/fastly/go-fastly/pull/742))

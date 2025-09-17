@@ -31,9 +31,6 @@ type GetConfigurationTestInput[O products.ProductOutput] struct {
 	// used to validate the ProductID in the output from OpFn (if
 	// any), it is not provided to OpFn
 	ProductID string
-	// ServiceID identifies the service on which the product
-	// information should be obtained
-	ServiceID string
 	// ExpectFailure specifies whether this test case is expected
 	// to fail
 	ExpectFailure bool
@@ -59,10 +56,10 @@ func NewGetConfigurationTest[O products.ProductOutput](i *GetConfigurationTestIn
 		r.Operation = "get-configuration"
 	}
 
-	r.TestFn = func(t *testing.T, tc *test_utils.FunctionalTest, c *fastly.Client) error {
-		result, err := i.OpFn(context.TODO(), c, i.ServiceID)
+	r.TestFn = func(t *testing.T, tc *test_utils.FunctionalTest, c *fastly.Client, serviceID string) error {
+		result, err := i.OpFn(context.TODO(), c, serviceID)
 		if err == nil {
-			validateOutput(t, tc, result, i.ProductID, i.ServiceID)
+			validateOutput(t, tc, result, i.ProductID, serviceID)
 			if i.CheckOutputFn != nil {
 				i.CheckOutputFn(t, tc, result)
 			}
