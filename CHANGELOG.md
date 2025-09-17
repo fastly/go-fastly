@@ -2,7 +2,19 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v11.2.0...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v12.0.0...)
+
+### Breaking:
+
+### Enhancements:
+
+### Bug fixes:
+
+### Dependencies:
+
+## [v12.0.0](https://github.com/fastly/go-fastly/releases/tag/v12.0.0) (2025-09-17)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v11.3.1...v12.0.0)
 
 ### Breaking:
 
@@ -13,8 +25,6 @@
 - feat(logging): Add support for 'Period' attribute to the HTTPS endpoint.[#749](https://github.com/fastly/go-fastly/pull/749)
 
 - feat(ngwaf/rules): add support for the multival condition type ([#755](https://github.com/fastly/go-fastly/pull/755))
-
-### Bug fixes:
 
 ### Dependencies:
 

@@ -3,8 +3,8 @@ package productcore
 import (
 	"context"
 
-	"github.com/fastly/go-fastly/v11/fastly"
-	"github.com/fastly/go-fastly/v11/fastly/products"
+	"github.com/fastly/go-fastly/v12/fastly"
+	"github.com/fastly/go-fastly/v12/fastly/products"
 )
 
 // PatchInput specifies the information needed for the Patch()
