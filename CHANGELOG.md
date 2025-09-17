@@ -10,6 +10,7 @@
 - breaking(ngwaf): rename package `common` to `scope` and `ScopeType` to just `Type` ([#754](https://github.com/fastly/go-fastly/pull/754))
 
 ### Enhancements:
+- feat(logging): Add support for 'Period' attribute to the HTTPS endpoint.[#749](https://github.com/fastly/go-fastly/pull/749)
 
 - feat(ngwaf/rules): add support for the multival condition type ([#755](https://github.com/fastly/go-fastly/pull/755))
 
