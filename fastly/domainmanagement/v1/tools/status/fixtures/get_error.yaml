@@ -1,45 +1,45 @@
 ---
 version: 1
 interactions:
-- request:
-    body: ""
-    form: {}
-    headers:
-      User-Agent:
-      - FastlyGo/10.1.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/domains/v1/tools/status?domain=fastly-sdk-gofastly-testing
-    method: GET
-  response:
-    body: '{"title":"Domain not found","status":400,"detail":"fastly-sdk-gofastly-testing"}'
-    headers:
-      Accept-Ranges:
-      - bytes
-      Age:
-      - "1"
-      Cache-Control:
-      - no-store
-      Content-Type:
-      - application/problem+json
-      Date:
-      - Wed, 21 May 2025 14:33:47 GMT
-      Pragma:
-      - no-cache
-      Server:
-      - fastly
-      Strict-Transport-Security:
-      - max-age=31536000
-      Vary:
-      - Accept-Encoding
-      Via:
-      - 1.1 varnish
-      X-Cache:
-      - MISS, MISS
-      X-Cache-Hits:
-      - "0"
-      X-Served-By:
-      - cache-ewr-kewr1740082-EWR, cache-ewr-kewr1740040-EWR
-      X-Timer:
-      - S1747838028.703547,VS0,VE281
-    status: 400 Bad Request
-    code: 400
-    duration: ""
+  - request:
+      body: ""
+      form: {}
+      headers:
+        User-Agent:
+          - FastlyGo/10.1.0 (+github.com/fastly/go-fastly; go1.24.2)
+      url: https://api.fastly.com/domain-management/v1/tools/status?domain=fastly-sdk-gofastly-testing
+      method: GET
+    response:
+      body: '{"title":"Domain not found","status":400,"detail":"fastly-sdk-gofastly-testing"}'
+      headers:
+        Accept-Ranges:
+          - bytes
+        Age:
+          - "1"
+        Cache-Control:
+          - no-store
+        Content-Type:
+          - application/problem+json
+        Date:
+          - Wed, 21 May 2025 14:33:47 GMT
+        Pragma:
+          - no-cache
+        Server:
+          - fastly
+        Strict-Transport-Security:
+          - max-age=31536000
+        Vary:
+          - Accept-Encoding
+        Via:
+          - 1.1 varnish
+        X-Cache:
+          - MISS, MISS
+        X-Cache-Hits:
+          - "0"
+        X-Served-By:
+          - cache-ewr-kewr1740082-EWR, cache-ewr-kewr1740040-EWR
+        X-Timer:
+          - S1747838028.703547,VS0,VE281
+      status: 400 Bad Request
+      code: 400
+      duration: ""
