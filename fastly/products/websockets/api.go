@@ -3,9 +3,9 @@ package websockets
 import (
 	"context"
 
-	"github.com/fastly/go-fastly/v11/fastly"
-	"github.com/fastly/go-fastly/v11/fastly/products"
-	"github.com/fastly/go-fastly/v11/internal/productcore"
+	"github.com/fastly/go-fastly/v12/fastly"
+	"github.com/fastly/go-fastly/v12/fastly/products"
+	"github.com/fastly/go-fastly/v12/internal/productcore"
 )
 
 const (
