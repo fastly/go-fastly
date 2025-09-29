@@ -1,0 +1,52 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/12.0.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/enabled-products/v1/api_discovery/services/kKJb5bOFI47uHeBVluGfX1
+    method: PUT
+  response:
+    body: |
+      {"product":{"id":"api_discovery","object":"product"},"service":{"id":"kKJb5bOFI47uHeBVluGfX1","object":"service"},"_links":{"self":"/enabled-products/v1/api_discovery/services/kKJb5bOFI47uHeBVluGfX1"}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "202"
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 29 Sep 2025 18:26:31 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100116-CHI, cache-nyc-kteb1890041-NYC
+      X-Timer:
+      - S1759170391.537231,VS0,VE1155
+    status: 200 OK
+    code: 200
+    duration: ""
