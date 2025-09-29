@@ -8,7 +8,7 @@
 
 ### Enhancements:
 
-- feat(products/apidiscovery): Add enable/disable support for API Discovery ([#XXX](https://github.com/fastly/go-fastly/pull/XXX))
+- feat(products/apidiscovery): Add enable/disable support for API Discovery ([#760](https://github.com/fastly/go-fastly/pull/760))
 
 ### Bug fixes:
 
