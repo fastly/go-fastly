@@ -2,7 +2,19 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v12.0.0...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v12.1.0...)
+
+### Breaking:
+
+### Enhancements:
+
+### Bug fixes:
+
+### Dependencies:
+
+## [v12.1.0](https://github.com/fastly/go-fastly/releases/tag/v12.1.0) (2025-09-30)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v12.0.0...v12.1.0)
 
 ### Breaking:
 
