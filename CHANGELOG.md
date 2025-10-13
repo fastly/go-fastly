@@ -11,6 +11,7 @@
 ### Bug fixes:
 
 ### Dependencies:
+- build(deps): `stefanzweifel/git-auto-commit-action` from 6 to 7 ([#763](https://github.com/fastly/go-fastly/pull/763))
 
 ## [v12.1.0](https://github.com/fastly/go-fastly/releases/tag/v12.1.0) (2025-09-30)
 
