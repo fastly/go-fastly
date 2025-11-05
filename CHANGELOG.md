@@ -2,7 +2,36 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v11.2.0...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v12.1.0...)
+
+### Breaking:
+
+### Enhancements:
+
+### Bug fixes:
+
+### Dependencies:
+- build(deps): `golang.org/x/crypto` from 0.42.0 to 0.43.0 ([#762](https://github.com/fastly/go-fastly/pull/762))
+- build(deps): `golang.org/x/sys` from 0.36.0 to 0.37.0 ([#762](https://github.com/fastly/go-fastly/pull/762))
+- build(deps): `stefanzweifel/git-auto-commit-action` from 6 to 7 ([#763](https://github.com/fastly/go-fastly/pull/763))
+
+## [v12.1.0](https://github.com/fastly/go-fastly/releases/tag/v12.1.0) (2025-09-30)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v12.0.0...v12.1.0)
+
+### Breaking:
+
+### Enhancements:
+
+- feat(products/apidiscovery): Add enable/disable support for API Discovery ([#760](https://github.com/fastly/go-fastly/pull/760))
+
+### Bug fixes:
+
+### Dependencies:
+
+## [v12.0.0](https://github.com/fastly/go-fastly/releases/tag/v12.0.0) (2025-09-17)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v11.3.1...v12.0.0)
 
 ### Breaking:
 
@@ -13,8 +42,6 @@
 - feat(logging): Add support for 'Period' attribute to the HTTPS endpoint.[#749](https://github.com/fastly/go-fastly/pull/749)
 
 - feat(ngwaf/rules): add support for the multival condition type ([#755](https://github.com/fastly/go-fastly/pull/755))
-
-### Bug fixes:
 
 ### Dependencies:
 

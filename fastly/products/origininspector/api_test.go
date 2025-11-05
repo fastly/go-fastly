@@ -3,11 +3,11 @@ package origininspector_test
 import (
 	"testing"
 
-	"github.com/fastly/go-fastly/v11/fastly"
-	"github.com/fastly/go-fastly/v11/fastly/products"
-	"github.com/fastly/go-fastly/v11/fastly/products/origininspector"
-	"github.com/fastly/go-fastly/v11/internal/productcore"
-	"github.com/fastly/go-fastly/v11/internal/test_utils"
+	"github.com/fastly/go-fastly/v12/fastly"
+	"github.com/fastly/go-fastly/v12/fastly/products"
+	"github.com/fastly/go-fastly/v12/fastly/products/origininspector"
+	"github.com/fastly/go-fastly/v12/internal/productcore"
+	"github.com/fastly/go-fastly/v12/internal/test_utils"
 )
 
 var functionalTests = []*test_utils.FunctionalTest{
