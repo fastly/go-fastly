@@ -1,46 +1,46 @@
 ---
 version: 1
 interactions:
-- request:
-    body: ""
-    form: {}
-    headers:
-      User-Agent:
-      - FastlyGo/10.0.1 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/domains/v1/tools/suggest?defaults=com&keywords=testing&query=fastly+testing
-    method: GET
-  response:
-    body: |
-      {"results":[{"domain":"fastlytest.ing","subdomain":"fastlytest.","zone":"ing"},{"domain":"fastlytesting.com","subdomain":"fastlytesting.","zone":"com"},{"domain":"fastlytesti.ng","subdomain":"fastlytesti.","zone":"ng"},{"domain":"fastlytest.i.ng","subdomain":"fastlytest.","zone":"i.ng"},{"domain":"fastlytesting.net","subdomain":"fastlytesting.","zone":"net"},{"domain":"fastlytesting.org","subdomain":"fastlytesting.","zone":"org"},{"domain":"fastlytesting.us","subdomain":"fastlytesting.","zone":"us"},{"domain":"fastlytesting.co.us","subdomain":"fastlytesting.","zone":"co.us"},{"domain":"fastlytest.in","subdomain":"fastlytest.","zone":"in","path":"/g"},{"domain":"fastlyte.st","subdomain":"fastlyte.","zone":"st","path":"/ing"},{"domain":"fastlyt.es","subdomain":"fastlyt.","zone":"es","path":"/ting"},{"domain":"fastl.yt","subdomain":"fastl.","zone":"yt","path":"/esting"},{"domain":"fast.ly","subdomain":"fast.","zone":"ly","path":"/testing"},{"domain":"fas.tl","subdomain":"fas.","zone":"tl","path":"/ytesting"},{"domain":"fa.st","subdomain":"fa.","zone":"st","path":"/lytesting"},{"domain":"f.as","subdomain":"f.","zone":"as","path":"/tlytesting"},{"domain":"fast","zone":"fast","path":"/lytesting"}]}
-    headers:
-      Accept-Ranges:
-      - bytes
-      Age:
-      - "1"
-      Cache-Control:
-      - no-store
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Mon, 05 May 2025 20:37:36 GMT
-      Pragma:
-      - no-cache
-      Server:
-      - fastly
-      Strict-Transport-Security:
-      - max-age=31536000
-      Vary:
-      - Accept-Encoding
-      Via:
-      - 1.1 varnish
-      X-Cache:
-      - MISS, MISS
-      X-Cache-Hits:
-      - "0"
-      X-Served-By:
-      - cache-ewr-kewr1740064-EWR, cache-ewr-kewr1740090-EWR
-      X-Timer:
-      - S1746477456.043588,VS0,VE241
-    status: 200 OK
-    code: 200
-    duration: ""
+  - request:
+      body: ""
+      form: {}
+      headers:
+        User-Agent:
+          - FastlyGo/10.0.1 (+github.com/fastly/go-fastly; go1.24.2)
+      url: https://api.fastly.com/domain-management/v1/tools/suggest?defaults=com&keywords=testing&query=fastly+testing
+      method: GET
+    response:
+      body: |
+        {"results":[{"domain":"fastlytest.ing","subdomain":"fastlytest.","zone":"ing"},{"domain":"fastlytesting.com","subdomain":"fastlytesting.","zone":"com"},{"domain":"fastlytesti.ng","subdomain":"fastlytesti.","zone":"ng"},{"domain":"fastlytest.i.ng","subdomain":"fastlytest.","zone":"i.ng"},{"domain":"fastlytesting.net","subdomain":"fastlytesting.","zone":"net"},{"domain":"fastlytesting.org","subdomain":"fastlytesting.","zone":"org"},{"domain":"fastlytesting.us","subdomain":"fastlytesting.","zone":"us"},{"domain":"fastlytesting.co.us","subdomain":"fastlytesting.","zone":"co.us"},{"domain":"fastlytest.in","subdomain":"fastlytest.","zone":"in","path":"/g"},{"domain":"fastlyte.st","subdomain":"fastlyte.","zone":"st","path":"/ing"},{"domain":"fastlyt.es","subdomain":"fastlyt.","zone":"es","path":"/ting"},{"domain":"fastl.yt","subdomain":"fastl.","zone":"yt","path":"/esting"},{"domain":"fast.ly","subdomain":"fast.","zone":"ly","path":"/testing"},{"domain":"fas.tl","subdomain":"fas.","zone":"tl","path":"/ytesting"},{"domain":"fa.st","subdomain":"fa.","zone":"st","path":"/lytesting"},{"domain":"f.as","subdomain":"f.","zone":"as","path":"/tlytesting"},{"domain":"fast","zone":"fast","path":"/lytesting"}]}
+      headers:
+        Accept-Ranges:
+          - bytes
+        Age:
+          - "1"
+        Cache-Control:
+          - no-store
+        Content-Type:
+          - application/json; charset=utf-8
+        Date:
+          - Mon, 05 May 2025 20:37:36 GMT
+        Pragma:
+          - no-cache
+        Server:
+          - fastly
+        Strict-Transport-Security:
+          - max-age=31536000
+        Vary:
+          - Accept-Encoding
+        Via:
+          - 1.1 varnish
+        X-Cache:
+          - MISS, MISS
+        X-Cache-Hits:
+          - "0"
+        X-Served-By:
+          - cache-ewr-kewr1740064-EWR, cache-ewr-kewr1740090-EWR
+        X-Timer:
+          - S1746477456.043588,VS0,VE241
+      status: 200 OK
+      code: 200
+      duration: ""
