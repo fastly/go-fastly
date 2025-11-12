@@ -25,7 +25,7 @@ jobs:
         with:
           go-version: 1.24.x
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v8
+        uses: golangci/golangci-lint-action@v9
         with:
           version: v2.4.0
   golangci-latest:
@@ -41,7 +41,7 @@ jobs:
           go-version: 1.24.x
       - name: Run golangci-lint@latest
         id: lint
-        uses: golangci/golangci-lint-action@v8
+        uses: golangci/golangci-lint-action@v9
         with:
           version: latest
         continue-on-error: true
