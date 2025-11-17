@@ -16,6 +16,7 @@
 - build(deps): `stefanzweifel/git-auto-commit-action` from 6 to 7 ([#763](https://github.com/fastly/go-fastly/pull/763))
 - build(deps): `golang.org/x/sys` from 0.37.0 to 0.38.0 ([#766](https://github.com/fastly/go-fastly/pull/766))
 - build(deps): `golangci/golangci-lint-action` from 8 to 9 ([#767](https://github.com/fastly/go-fastly/pull/767))
+- build(deps): `golang.org/x/crypto` from 0.43.0 to 0.44.0 ([#768](https://github.com/fastly/go-fastly/pull/768))
 
 ## [v12.1.0](https://github.com/fastly/go-fastly/releases/tag/v12.1.0) (2025-09-30)
 
