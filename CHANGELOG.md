@@ -21,6 +21,7 @@
 - build(deps): `actions/checkout` from 5 to 6 ([#770](https://github.com/fastly/go-fastly/pull/770))
 - build(deps): `golang.org/x/crypto` from 0.45.0 to 0.46.0 ([#771](https://github.com/fastly/go-fastly/pull/771))
 - build(deps): `golang.org/x/sys` from 0.38.0 to 0.39.0 ([#771](https://github.com/fastly/go-fastly/pull/771))
+- build(deps): `github.com/google/go-querystring` from 1.1.0 to 1.2.0 ([#773](https://github.com/fastly/go-fastly/pull/773))
 
 ## [v12.1.0](https://github.com/fastly/go-fastly/releases/tag/v12.1.0) (2025-09-30)
 

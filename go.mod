@@ -7,7 +7,7 @@ toolchain go1.24.2
 require (
 	github.com/dnaeon/go-vcr v1.2.0
 	github.com/google/go-cmp v0.7.0
-	github.com/google/go-querystring v1.1.0
+	github.com/google/go-querystring v1.2.0
 	github.com/google/jsonapi v1.0.0
 	github.com/hashicorp/go-cleanhttp v0.5.2
 	github.com/mitchellh/mapstructure v1.5.0
