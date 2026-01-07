@@ -2,13 +2,19 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v12.1.0...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v12.1.1...)
 
 ### Breaking:
 
 ### Enhancements:
 
 ### Bug fixes:
+
+### Dependencies:
+
+## [v12.1.1](https://github.com/fastly/go-fastly/releases/tag/v12.1.1) (2026-01-07)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v12.1.0...v12.1.1)
 
 ### Dependencies:
 - build(deps): `golang.org/x/crypto` from 0.42.0 to 0.43.0 ([#762](https://github.com/fastly/go-fastly/pull/762))
