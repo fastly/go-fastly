@@ -28,7 +28,7 @@ FASTLY_API_KEY ?=
 TEST_COMMAND ?= $(GO) test
 
 # Tooling versions
-GOLANGCI_LINT_VERSION = v2.4.0
+GOLANGCI_LINT_VERSION = v2.8.0
 BIN_DIR := $(CURDIR)/bin
 GOLANGCI_LINT := $(BIN_DIR)/golangci-lint
 
