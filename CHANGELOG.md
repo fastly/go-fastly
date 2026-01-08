@@ -12,6 +12,8 @@
 
 ### Dependencies:
 
+- build(go.mod): upgrade golang version to 1.25.x and golangci-lint to 2.8.0 ([#775](https://github.com/fastly/go-fastly/pull/775))
+
 ## [v12.1.1](https://github.com/fastly/go-fastly/releases/tag/v12.1.1) (2026-01-07)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v12.1.0...v12.1.1)
