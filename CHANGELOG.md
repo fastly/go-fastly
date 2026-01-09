@@ -11,8 +11,8 @@
 ### Bug fixes:
 
 ### Dependencies:
-
 - build(go.mod): upgrade golang version to 1.25.x and golangci-lint to 2.8.0 ([#775](https://github.com/fastly/go-fastly/pull/775))
+- build(deps): `golang.org/x/sys` from 0.39.0 to 0.40.0 ([#776](https://github.com/fastly/go-fastly/pull/776))
 
 ## [v12.1.1](https://github.com/fastly/go-fastly/releases/tag/v12.1.1) (2026-01-07)
 
