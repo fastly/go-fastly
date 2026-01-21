@@ -108,6 +108,18 @@ func TestClient_ComputeACL(t *testing.T) {
 		t.Errorf("error updating compute acl: %v", err)
 	}
 
+	// Ensure that an empty cursor value is omitted from the request.
+	fastly.Record(t, "list_entries_with_empty_cursor", func(c *fastly.Client) {
+		cursor := ""
+		_, err := ListEntries(context.TODO(), c, &ListEntriesInput{
+			ComputeACLID: fastly.ToPointer(acl.ComputeACLID),
+			Cursor:       &cursor,
+		})
+		if err != nil {
+			t.Errorf("listing entries with empty cursor should not return error, got: %v", err)
+		}
+	})
+
 	// List all entries of the test compute ACL and compare it to the input.
 	var actualACLEntries *ComputeACLEntries
 	fastly.Record(t, "list_entries", func(c *fastly.Client) {

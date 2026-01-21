@@ -7,19 +7,21 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/12.1.1 (+github.com/fastly/go-fastly; go1.25.4)
-    url: https://api.fastly.com/resources/acls/jJ7qWmGKbpeniWBQxW5V68
-    method: DELETE
+    url: https://api.fastly.com/resources/acls/jJ7qWmGKbpeniWBQxW5V68/entries
+    method: GET
   response:
-    body: ""
+    body: '{"entries":[{"prefix":"1.2.3.0/24","action":"BLOCK"},{"prefix":"1.2.3.4/32","action":"ALLOW"},{"prefix":"23.23.23.23/32","action":"ALLOW"},{"prefix":"192.168.0.0/16","action":"BLOCK"}],"meta":{"limit":100}}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "0"
+      - "206"
+      Content-Type:
+      - application/json
       Date:
-      - Wed, 21 Jan 2026 13:46:54 GMT
+      - Wed, 21 Jan 2026 13:46:52 GMT
       Pragma:
       - no-cache
       Server:
@@ -33,9 +35,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-chi-klot8100101-CHI, cache-chi-klot8100101-CHI
+      - cache-chi-kigq8000116-CHI, cache-chi-klot8100101-CHI
       X-Timer:
-      - S1769003215.598427,VS0,VE174
+      - S1769003212.826885,VS0,VE575
     status: 200 OK
     code: 200
     duration: ""
