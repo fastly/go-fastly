@@ -10,7 +10,10 @@
 
 ### Bug fixes:
 
+- fix(computeacls): avoid sending `?cursor=` when listing ACL entries. ([#778](https://github.com/fastly/go-fastly/pull/778))
+
 ### Dependencies:
+
 - build(go.mod): upgrade golang version to 1.25.x and golangci-lint to 2.8.0 ([#775](https://github.com/fastly/go-fastly/pull/775))
 - build(deps): `golang.org/x/sys` from 0.39.0 to 0.40.0 ([#776](https://github.com/fastly/go-fastly/pull/776))
 - build(deps): `golang.org/x/crypto` from 0.46.0 to 0.47.0 ([#777](https://github.com/fastly/go-fastly/pull/777))
@@ -20,6 +23,7 @@
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v12.1.0...v12.1.1)
 
 ### Dependencies:
+
 - build(deps): `golang.org/x/crypto` from 0.42.0 to 0.43.0 ([#762](https://github.com/fastly/go-fastly/pull/762))
 - build(deps): `golang.org/x/sys` from 0.36.0 to 0.37.0 ([#762](https://github.com/fastly/go-fastly/pull/762))
 - build(deps): `stefanzweifel/git-auto-commit-action` from 6 to 7 ([#763](https://github.com/fastly/go-fastly/pull/763))
@@ -56,6 +60,7 @@
 - breaking(ngwaf): rename package `common` to `scope` and `ScopeType` to just `Type` ([#754](https://github.com/fastly/go-fastly/pull/754))
 
 ### Enhancements:
+
 - feat(logging): Add support for 'Period' attribute to the HTTPS endpoint.[#749](https://github.com/fastly/go-fastly/pull/749)
 
 - feat(ngwaf/rules): add support for the multival condition type ([#755](https://github.com/fastly/go-fastly/pull/755))

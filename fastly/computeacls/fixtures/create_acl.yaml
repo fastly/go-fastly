@@ -10,11 +10,11 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/9.13.0 (+github.com/fastly/go-fastly; go1.23.3)
+      - FastlyGo/12.1.1 (+github.com/fastly/go-fastly; go1.25.4)
     url: https://api.fastly.com/resources/acls
     method: POST
   response:
-    body: '{"name":"test-compute-acl","id":"twgcU5NNpY0GsVfsCav4o6"}'
+    body: '{"name":"test-compute-acl","id":"jJ7qWmGKbpeniWBQxW5V68"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -25,7 +25,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 12 Feb 2025 23:49:33 GMT
+      - Wed, 21 Jan 2026 13:46:51 GMT
       Pragma:
       - no-cache
       Server:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-mia-kmia1760066-MIA, cache-mia-kmia1760066-MIA
+      - cache-chi-klot8100101-CHI, cache-chi-klot8100101-CHI
       X-Timer:
-      - S1739404173.528059,VS0,VE498
+      - S1769003211.729066,VS0,VE515
     status: 200 OK
     code: 200
     duration: ""

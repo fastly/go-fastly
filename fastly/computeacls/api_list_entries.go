@@ -27,7 +27,7 @@ func ListEntries(ctx context.Context, c *fastly.Client, i *ListEntriesInput) (*C
 	}
 
 	requestOptions := fastly.CreateRequestOptions()
-	if i.Cursor != nil {
+	if i.Cursor != nil && *i.Cursor != "" {
 		requestOptions.Params["cursor"] = *i.Cursor
 	}
 	if i.Limit != nil {
