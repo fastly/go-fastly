@@ -10,6 +10,14 @@
 
 ### Bug fixes:
 
+### Dependencies:
+
+## [v12.1.2](https://github.com/fastly/go-fastly/releases/tag/v12.1.2) (2026-02-04)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v12.1.1...v12.1.2)
+
+### Bug fixes:
+
 - fix(computeacls): avoid sending `?cursor=` when listing ACL entries. ([#778](https://github.com/fastly/go-fastly/pull/778))
 
 ### Dependencies:
