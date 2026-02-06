@@ -44,11 +44,11 @@ func runNestedMultivalTest(t *testing.T, scopeType scope.Type, appliesToID strin
 
 	field2 := "name"
 	operator2 := "equals"
-	value2 := "x-something"
+	value2 := "x-login"
 
 	field3 := "value_string"
 	operator3 := "equals"
-	value3 := "abc-123"
+	value3 := "x-updated"
 
 	// Create a test rule with nested multival conditions in a group.
 	var rule *Rule
