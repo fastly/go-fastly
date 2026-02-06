@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"actions":[{"signal":"site.a-real-name-workspace","type":"block_signal"}],"conditions":[{"type":"single","field":"ip","operator":"equals","value":"127.0.0.1"},{"type":"single","field":"path","operator":"equals","value":"/login"},{"type":"single","field":"agent_name","operator":"equals","value":"host-001"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AD"},{"type":"single","field":"method","operator":"equals","value":"POST"}]},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"protocol_version","operator":"equals","value":"HTTP/1.0"},{"type":"single","field":"method","operator":"equals","value":"HEAD"},{"type":"single","field":"domain","operator":"equals","value":"example.com"}]},{"type":"multival","field":"request_cookie","operator":"exists","group_operator":"any","conditions":[{"type":"single","field":"name","operator":"equals","value":"fooCookie"},{"type":"single","field":"value","operator":"equals","value":"barCookie"}]}],"description":"rate_limit_test","enabled":true,"group_operator":"all","rate_limit":{"client_identifiers":[{"name":"name","type":"ip"}],"duration":300,"interval":60,"signal":"site.a-real-name-workspace","threshold":1},"scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]},"type":"rate_limit"}'
+    body: '{"actions":[{"signal":"site.a-real-name-workspace","type":"block_signal"}],"conditions":[{"type":"single","field":"ip","operator":"equals","value":"127.0.0.1"},{"type":"single","field":"path","operator":"equals","value":"/login"},{"type":"single","field":"agent_name","operator":"equals","value":"host-001"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AD"},{"type":"single","field":"method","operator":"equals","value":"POST"}]},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"protocol_version","operator":"equals","value":"HTTP/1.0"},{"type":"single","field":"method","operator":"equals","value":"HEAD"},{"type":"single","field":"domain","operator":"equals","value":"example.com"}]},{"type":"multival","field":"request_cookie","operator":"exists","group_operator":"any","conditions":[{"type":"single","field":"name","operator":"equals","value":"fooCookie"},{"type":"single","field":"value","operator":"equals","value":"barCookie"}]}],"description":"rate_limit_test","enabled":true,"group_operator":"all","rate_limit":{"client_identifiers":[{"name":"name","type":"ip"}],"duration":300,"interval":60,"signal":"site.a-real-name-workspace","threshold":1},"scope":{"type":"workspace","applies_to":["nBw2ENWfOY1M2dpSwK1l5R"]},"type":"rate_limit"}'
     form: {}
     headers:
       Accept:
@@ -10,12 +10,12 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/11.3.1 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/rules
+      - FastlyGo/12.1.2 (+github.com/fastly/go-fastly; go1.25.4)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/nBw2ENWfOY1M2dpSwK1l5R/rules
     method: POST
   response:
     body: |
-      {"id":"68c84d3d71dbda8ee201ebcf","type":"rate_limit","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]},"enabled":true,"description":"rate_limit_test","group_operator":"all","conditions":[{"type":"single","field":"ip","operator":"equals","value":"127.0.0.1"},{"type":"single","field":"path","operator":"equals","value":"/login"},{"type":"single","field":"agent_name","operator":"equals","value":"host-001"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AD"},{"type":"single","field":"method","operator":"equals","value":"POST"}]},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"protocol_version","operator":"equals","value":"HTTP/1.0"},{"type":"single","field":"method","operator":"equals","value":"HEAD"},{"type":"single","field":"domain","operator":"equals","value":"example.com"}]},{"type":"multival","field":"request_cookie","operator":"exists","group_operator":"any","conditions":[{"type":"single","field":"name","operator":"equals","value":"fooCookie"},{"type":"single","field":"value","operator":"equals","value":"barCookie"}]}],"actions":[{"type":"block_signal","signal":"site.a-real-name-workspace"}],"rate_limit":{"signal":"site.a-real-name-workspace","threshold":1,"interval":60,"duration":300,"client_identifiers":[{"type":"ip","name":"name"}]},"created_at":"2025-09-15T17:30:37Z","updated_at":"2025-09-15T17:30:37Z"}
+      {"id":"69862f8b8d9ede857f312ac6","type":"rate_limit","scope":{"type":"workspace","applies_to":["nBw2ENWfOY1M2dpSwK1l5R"]},"enabled":true,"description":"rate_limit_test","group_operator":"all","conditions":[{"type":"single","field":"ip","operator":"equals","value":"127.0.0.1"},{"type":"single","field":"path","operator":"equals","value":"/login"},{"type":"single","field":"agent_name","operator":"equals","value":"host-001"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AD"},{"type":"single","field":"method","operator":"equals","value":"POST"}]},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"protocol_version","operator":"equals","value":"HTTP/1.0"},{"type":"single","field":"method","operator":"equals","value":"HEAD"},{"type":"single","field":"domain","operator":"equals","value":"example.com"}]},{"type":"multival","field":"request_cookie","operator":"exists","group_operator":"any","conditions":[{"type":"single","field":"name","operator":"equals","value":"fooCookie"},{"type":"single","field":"value","operator":"equals","value":"barCookie"}]}],"actions":[{"type":"block_signal","signal":"site.a-real-name-workspace"}],"rate_limit":{"signal":"site.a-real-name-workspace","threshold":1,"interval":60,"duration":300,"client_identifiers":[{"type":"ip","name":"name"}]},"created_at":"2026-02-06T18:14:35Z","updated_at":"2026-02-06T18:14:35Z"}
     headers:
       Accept-Ranges:
       - bytes
@@ -26,7 +26,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 15 Sep 2025 17:30:37 GMT
+      - Fri, 06 Feb 2026 18:14:36 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000059-CHI, cache-ewr-kewr1740075-EWR
+      - cache-chi-kigq8000080-CHI, cache-ewr-kewr1740048-EWR
       X-Timer:
-      - S1757957437.214362,VS0,VE728
+      - S1770401675.940112,VS0,VE1083
     status: 201 Created
     code: 201
     duration: ""

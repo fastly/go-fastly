@@ -6,23 +6,21 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/11.3.1 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/rules
+      - FastlyGo/12.1.2 (+github.com/fastly/go-fastly; go1.25.4)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/nBw2ENWfOY1M2dpSwK1l5R/rules
     method: GET
   response:
     body: |
-      {"data":[],"meta":{"limit":100,"total":0}}
+      {"data":[{"id":"697402781ad3226d7f842a31","type":"request","scope":{"type":"workspace","applies_to":["nBw2ENWfOY1M2dpSwK1l5R"]},"enabled":true,"description":"nested_test","group_operator":"any","request_logging":"sampled","conditions":[{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"ip","operator":"in_list","value":"site.bad"},{"type":"multival","field":"request_header","operator":"exists","group_operator":"all","conditions":[{"type":"single","field":"name","operator":"equals","value":"x-something"},{"type":"single","field":"value_string","operator":"equals","value":"abc-123"}]}]},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"ip","operator":"in_list","value":"site.bad"},{"type":"multival","field":"request_header","operator":"exists","group_operator":"any","conditions":[{"type":"single","field":"name","operator":"equals","value":"x-somethingelse"},{"type":"single","field":"value_string","operator":"in_list","value":"corp.test"}]}]}],"actions":[{"type":"add_signal","signal":"site.test2"}],"created_at":"2026-01-23T23:21:28Z","updated_at":"2026-01-23T23:21:28Z"},{"id":"695eb2be89158b0a17394fc5","type":"request","scope":{"type":"workspace","applies_to":["nBw2ENWfOY1M2dpSwK1l5R"]},"enabled":true,"description":"cli_test_from_CLI","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"ip","operator":"equals","value":"1.2.3.4"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AE"},{"type":"single","field":"path","operator":"equals","value":"/root"}]},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"domain","operator":"equals","value":"myDomain.com"},{"type":"single","field":"method","operator":"equals","value":"POST"}]}],"actions":[{"type":"deception","deception_type":"invalid_login_response"}],"created_at":"2026-01-07T19:23:42Z","updated_at":"2026-01-07T19:23:42Z"},{"id":"695eb18489158b0a17393f35","type":"request","scope":{"type":"workspace","applies_to":["nBw2ENWfOY1M2dpSwK1l5R"]},"enabled":true,"description":"cli_test_from_CLI","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"ip","operator":"equals","value":"1.2.3.4"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AE"},{"type":"single","field":"path","operator":"equals","value":"/root"}]},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"domain","operator":"equals","value":"myDomain.com"},{"type":"single","field":"method","operator":"equals","value":"POST"}]}],"actions":[{"type":"deception","deception_type":"invalid_login_response"}],"created_at":"2026-01-07T19:18:28Z","updated_at":"2026-01-07T19:18:28Z"},{"id":"695eb14a6ee199304091c982","type":"request","scope":{"type":"workspace","applies_to":["nBw2ENWfOY1M2dpSwK1l5R"]},"enabled":true,"description":"cli_test","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"ip","operator":"equals","value":"1.2.3.4"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AE"},{"type":"single","field":"path","operator":"equals","value":"/root"}]},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"domain","operator":"equals","value":"myDomain.com"},{"type":"single","field":"method","operator":"equals","value":"POST"}]}],"actions":[{"type":"deception","deception_type":"invalid_login_response"}],"created_at":"2026-01-07T19:17:30Z","updated_at":"2026-01-07T19:17:30Z"},{"id":"690cceb5358ad4dd6ca4d21e","type":"signal","scope":{"type":"workspace","applies_to":["nBw2ENWfOY1M2dpSwK1l5R"]},"enabled":true,"description":"Exclude XSS signal to address a false positive","group_operator":"all","conditions":[{"type":"single","field":"path","operator":"like","value":"/contact-form"}],"actions":[{"type":"exclude_signal","signal":"XSS"}],"created_at":"2025-11-06T16:37:09Z","updated_at":"2025-11-06T16:37:09Z"},{"id":"68f7da1513a9e71d92db1e66","type":"request","scope":{"type":"workspace","applies_to":["nBw2ENWfOY1M2dpSwK1l5R"]},"enabled":true,"description":"Block requests with specific header patterns","group_operator":"all","request_logging":"sampled","conditions":[{"type":"multival","field":"request_header","operator":"exists","group_operator":"any","conditions":[{"type":"single","field":"name","operator":"does_not_equal","value":"Header-Sample"},{"type":"single","field":"name","operator":"contains","value":"X-API-Key"}]}],"actions":[{"type":"block"}],"created_at":"2025-10-21T19:08:05Z","updated_at":"2025-10-21T19:08:05Z"},{"id":"68f7d41713a9e71d92dac7ec","type":"templated_signal","scope":{"type":"workspace","applies_to":["nBw2ENWfOY1M2dpSwK1l5R"]},"enabled":true,"description":"","group_operator":"all","conditions":[{"type":"single","field":"method","operator":"equals","value":"POST"},{"type":"single","field":"path","operator":"equals","value":"/login"}],"actions":[{"type":"templated_signal","signal":"LOGINATTEMPT"}],"created_at":"2025-10-21T18:42:31Z","updated_at":"2025-10-21T18:42:31Z"},{"id":"68c2fa576f5d5805be37bed9","type":"request","scope":{"type":"workspace","applies_to":["nBw2ENWfOY1M2dpSwK1l5R"]},"enabled":true,"description":"max_payload","group_operator":"all","request_logging":"none","conditions":[{"type":"multival","field":"request_cookie","operator":"exists","group_operator":"any","conditions":[{"type":"single","field":"name","operator":"equals","value":"fooCookie"},{"type":"single","field":"value","operator":"equals","value":"barCookie"}]},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"does_not_equal","value":"AF"}]},{"type":"single","field":"domain","operator":"equals","value":"123.com"}],"actions":[{"type":"block"}],"created_at":"2025-09-11T16:35:35Z","updated_at":"2025-09-11T16:53:26Z"}],"meta":{"limit":100,"total":8}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
-      Content-Length:
-      - "43"
       Content-Type:
       - application/json
       Date:
-      - Mon, 15 Sep 2025 17:30:26 GMT
+      - Fri, 06 Feb 2026 18:14:23 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +36,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000059-CHI, cache-ewr-kewr1740075-EWR
+      - cache-chi-kigq8000080-CHI, cache-ewr-kewr1740048-EWR
       X-Timer:
-      - S1757957425.865758,VS0,VE1871
+      - S1770401663.207852,VS0,VE447
     status: 200 OK
     code: 200
     duration: ""

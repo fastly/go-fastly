@@ -6,23 +6,23 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/11.3.1 (+github.com/fastly/go-fastly; go1.24.2)
+      - FastlyGo/12.1.2 (+github.com/fastly/go-fastly; go1.25.4)
     url: https://api.fastly.com/ngwaf/v1/rules
     method: GET
   response:
     body: |
-      {"data":[{"id":"68c425c1c4cb735d17ba9bad","type":"request","scope":{"type":"account","applies_to":["*"]},"enabled":true,"description":"Utility requests","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"path","operator":"equals","value":"/echo.json"}],"actions":[{"type":"add_signal","signal":"corp.utility"}],"created_at":"2025-09-12T13:53:05Z","updated_at":"2025-09-12T13:53:05Z"},{"id":"68c4258736eef2e33345eb7b","type":"request","scope":{"type":"account","applies_to":["*"]},"enabled":true,"description":"Utility requests","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"path","operator":"equals","value":"/echo.json"}],"actions":[{"type":"add_signal","signal":"corp.utility"}],"created_at":"2025-09-12T13:52:07Z","updated_at":"2025-09-12T13:52:07Z"}],"meta":{"limit":100,"total":2}}
+      {"data":[{"id":"695ebc5c2f1a314587be5c0f","type":"request","scope":{"type":"account","applies_to":["*"]},"enabled":true,"description":"cli_test_from_CLI","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"ip","operator":"equals","value":"1.2.3.4"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AE"},{"type":"single","field":"path","operator":"equals","value":"/root"}]},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"domain","operator":"equals","value":"myDomain.com"},{"type":"single","field":"method","operator":"equals","value":"POST"}]}],"actions":[{"type":"block"}],"created_at":"2026-01-07T20:04:44Z","updated_at":"2026-01-07T20:04:44Z"},{"id":"68c425c1c4cb735d17ba9bad","type":"request","scope":{"type":"account","applies_to":["*"]},"enabled":true,"description":"Utility requests","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"path","operator":"equals","value":"/echo.json"}],"actions":[{"type":"add_signal","signal":"corp.utility"}],"created_at":"2025-09-12T13:53:05Z","updated_at":"2025-09-12T13:53:05Z"},{"id":"68c4258736eef2e33345eb7b","type":"request","scope":{"type":"account","applies_to":["*"]},"enabled":true,"description":"Utility requests","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"path","operator":"equals","value":"/echo.json"}],"actions":[{"type":"add_signal","signal":"corp.utility"}],"created_at":"2025-09-12T13:52:07Z","updated_at":"2025-09-12T13:52:07Z"}],"meta":{"limit":100,"total":3}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "872"
+      - "1650"
       Content-Type:
       - application/json
       Date:
-      - Mon, 15 Sep 2025 17:30:28 GMT
+      - Fri, 06 Feb 2026 18:14:27 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100120-CHI, cache-ewr-kewr1740075-EWR
+      - cache-chi-klot8100125-CHI, cache-ewr-kewr1740048-EWR
       X-Timer:
-      - S1757957429.855552,VS0,VE105
+      - S1770401667.442884,VS0,VE436
     status: 200 OK
     code: 200
     duration: ""

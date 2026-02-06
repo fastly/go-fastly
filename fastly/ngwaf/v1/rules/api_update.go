@@ -110,8 +110,11 @@ type UpdateGroupCondition struct {
 	// conditions ("any" or "all") (required).
 	GroupOperator *string `json:"group_operator"`
 	// Conditions is the list of single conditions to evaluate
-	// within the group (required).
-	Conditions []*UpdateCondition `json:"conditions"`
+	// within the group.
+	Conditions []*UpdateCondition `json:"-"`
+	// MultivalConditions is the list of multival conditions to evaluate
+	// within the group.
+	MultivalConditions []*UpdateMultivalCondition `json:"-"`
 }
 
 // UpdateMultivalCondition defines a multival conditions with a logical
@@ -171,9 +174,9 @@ type privateUpdateConditionMult struct {
 }
 
 type privateUpdateGroupCondition struct {
-	Type          *string                   `json:"type"`
-	GroupOperator *string                   `json:"group_operator"`
-	Conditions    []*privateUpdateCondition `json:"conditions"`
+	Type          *string `json:"type"`
+	GroupOperator *string `json:"group_operator"`
+	Conditions    []any   `json:"conditions"`
 }
 
 type privateUpdateMultivalCondition struct {
@@ -204,13 +207,31 @@ func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Rule, error
 		mergedConditions = append(mergedConditions, privateCondition)
 	}
 	for _, gc := range i.GroupConditions {
-		var privateSubConditions []*privateUpdateCondition
+		var privateSubConditions []any
 		for _, subCond := range gc.Conditions {
 			privateSubConditions = append(privateSubConditions, &privateUpdateCondition{
 				Type:     fastly.ToPointer("single"),
 				Field:    subCond.Field,
 				Operator: subCond.Operator,
 				Value:    subCond.Value,
+			})
+		}
+		for _, mc := range gc.MultivalConditions {
+			var privateMultivalSubConditions []*privateUpdateConditionMult
+			for _, subCond := range mc.Conditions {
+				privateMultivalSubConditions = append(privateMultivalSubConditions, &privateUpdateConditionMult{
+					Type:     fastly.ToPointer("single"),
+					Field:    subCond.Field,
+					Operator: subCond.Operator,
+					Value:    subCond.Value,
+				})
+			}
+			privateSubConditions = append(privateSubConditions, &privateUpdateMultivalCondition{
+				Type:          fastly.ToPointer("multival"),
+				Field:         mc.Field,
+				Operator:      mc.Operator,
+				GroupOperator: mc.GroupOperator,
+				Conditions:    privateMultivalSubConditions,
 			})
 		}
 		privateGroupCondition := &privateUpdateGroupCondition{
