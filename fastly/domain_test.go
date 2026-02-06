@@ -97,7 +97,7 @@ func TestClient_Domains(t *testing.T) {
 		dsi, err = c.ListDomains(context.TODO(), &ListDomainsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Include:        "staging_ips",
+			IncludeStagingIPs: true,
 		})
 	})
 	if err != nil {
