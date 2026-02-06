@@ -91,6 +91,27 @@ func TestClient_Domains(t *testing.T) {
 		t.Errorf("bad domains: %v", ds)
 	}
 
+	// List with include=staging_ips
+	var dsi []*Domain
+	Record(t, "domains/list_with_staging_ips", func(c *Client) {
+		dsi, err = c.ListDomains(context.TODO(), &ListDomainsInput{
+			ServiceID:      TestDeliveryServiceID,
+			ServiceVersion: *tv.Number,
+			Include:        "staging_ips",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(dsi) < 2 {
+		t.Errorf("bad domains: %v", dsi)
+	}
+	for _, d := range dsi {
+		if d.StagingIP == nil {
+			t.Errorf("expected staging_ip to be populated for domain %q", *d.Name)
+		}
+	}
+
 	// Get
 	var nd *Domain
 	Record(t, "domains/get", func(c *Client) {
