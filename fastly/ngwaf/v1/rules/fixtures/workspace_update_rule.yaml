@@ -3,7 +3,7 @@ version: 1
 interactions:
 - request:
     body: '{"actions":[{"type":"allow"}],"conditions":[{"type":"single","field":"ip","operator":"does_not_equal","value":"10.0.0.1"},{"type":"single","field":"path","operator":"does_not_equal","value":"/admin"},{"type":"single","field":"agent_name","operator":"matches","value":"bot-*"},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"country","operator":"does_not_equal","value":"US"},{"type":"single","field":"method","operator":"does_not_equal","value":"PUT"}]},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"protocol_version","operator":"does_not_equal","value":"HTTP/2.0"},{"type":"single","field":"method","operator":"does_not_equal","value":"OPTIONS"},{"type":"single","field":"domain","operator":"does_not_equal","value":"internal.example"}]},{"type":"multival","field":"request_cookie","operator":"does_not_exist","group_operator":"all","conditions":[{"type":"single","field":"name","operator":"does_not_equal","value":"fooCookieUpdated"},{"type":"single","field":"value","operator":"does_not_equal","value":"barCookieUpdated"}]}],"description":"updated
-      test","enabled":false,"group_operator":"any","request_logging":"none","scope":{"type":"workspace","applies_to":["nBw2ENWfOY1M2dpSwK1l5R"]}}'
+      test","enabled":false,"group_operator":"any","request_logging":"none","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]}}'
     form: {}
     headers:
       Accept:
@@ -11,12 +11,12 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/12.1.2 (+github.com/fastly/go-fastly; go1.25.4)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/nBw2ENWfOY1M2dpSwK1l5R/rules/69862f806232b4afcd58a9e9
+      - FastlyGo/12.1.2 (+github.com/fastly/go-fastly; go1.25.5)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/rules/698650639f68e74ef3eeea96
     method: PATCH
   response:
     body: |
-      {"id":"69862f806232b4afcd58a9e9","type":"request","scope":{"type":"workspace","applies_to":["nBw2ENWfOY1M2dpSwK1l5R"]},"enabled":false,"description":"updated test","group_operator":"any","request_logging":"none","conditions":[{"type":"single","field":"ip","operator":"does_not_equal","value":"10.0.0.1"},{"type":"single","field":"path","operator":"does_not_equal","value":"/admin"},{"type":"single","field":"agent_name","operator":"matches","value":"bot-*"},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"country","operator":"does_not_equal","value":"US"},{"type":"single","field":"method","operator":"does_not_equal","value":"PUT"}]},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"protocol_version","operator":"does_not_equal","value":"HTTP/2.0"},{"type":"single","field":"method","operator":"does_not_equal","value":"OPTIONS"},{"type":"single","field":"domain","operator":"does_not_equal","value":"internal.example"}]},{"type":"multival","field":"request_cookie","operator":"does_not_exist","group_operator":"all","conditions":[{"type":"single","field":"name","operator":"does_not_equal","value":"fooCookieUpdated"},{"type":"single","field":"value","operator":"does_not_equal","value":"barCookieUpdated"}]}],"actions":[{"type":"allow"}],"created_at":"2026-02-06T18:14:24Z","updated_at":"2026-02-06T18:14:24Z"}
+      {"id":"698650639f68e74ef3eeea96","type":"request","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]},"enabled":false,"description":"updated test","group_operator":"any","request_logging":"none","conditions":[{"type":"single","field":"ip","operator":"does_not_equal","value":"10.0.0.1"},{"type":"single","field":"path","operator":"does_not_equal","value":"/admin"},{"type":"single","field":"agent_name","operator":"matches","value":"bot-*"},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"country","operator":"does_not_equal","value":"US"},{"type":"single","field":"method","operator":"does_not_equal","value":"PUT"}]},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"protocol_version","operator":"does_not_equal","value":"HTTP/2.0"},{"type":"single","field":"method","operator":"does_not_equal","value":"OPTIONS"},{"type":"single","field":"domain","operator":"does_not_equal","value":"internal.example"}]},{"type":"multival","field":"request_cookie","operator":"does_not_exist","group_operator":"all","conditions":[{"type":"single","field":"name","operator":"does_not_equal","value":"fooCookieUpdated"},{"type":"single","field":"value","operator":"does_not_equal","value":"barCookieUpdated"}]}],"actions":[{"type":"allow"}],"created_at":"2026-02-06T20:34:43Z","updated_at":"2026-02-06T20:34:43Z"}
     headers:
       Accept-Ranges:
       - bytes
@@ -27,7 +27,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 06 Feb 2026 18:14:26 GMT
+      - Fri, 06 Feb 2026 20:34:45 GMT
       Pragma:
       - no-cache
       Server:
@@ -43,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100060-CHI, cache-ewr-kewr1740048-EWR
+      - cache-chi-kigq8000128-CHI, cache-ewr-kewr1740072-EWR
       X-Timer:
-      - S1770401665.461656,VS0,VE1063
+      - S1770410085.713657,VS0,VE942
     status: 200 OK
     code: 200
     duration: ""

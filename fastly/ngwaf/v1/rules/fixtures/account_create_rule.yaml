@@ -10,12 +10,12 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/12.1.2 (+github.com/fastly/go-fastly; go1.25.4)
+      - FastlyGo/12.1.2 (+github.com/fastly/go-fastly; go1.25.5)
     url: https://api.fastly.com/ngwaf/v1/rules
     method: POST
   response:
     body: |
-      {"id":"69862f84268a2f57767094b0","type":"request","scope":{"type":"account","applies_to":["*"]},"enabled":true,"description":"test","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"ip","operator":"equals","value":"127.0.0.1"},{"type":"single","field":"path","operator":"equals","value":"/login"},{"type":"single","field":"agent_name","operator":"equals","value":"host-001"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AD"},{"type":"single","field":"method","operator":"equals","value":"POST"}]},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"protocol_version","operator":"equals","value":"HTTP/1.0"},{"type":"single","field":"method","operator":"equals","value":"HEAD"},{"type":"single","field":"domain","operator":"equals","value":"example.com"}]},{"type":"multival","field":"request_cookie","operator":"exists","group_operator":"any","conditions":[{"type":"single","field":"name","operator":"equals","value":"fooCookie"},{"type":"single","field":"value","operator":"equals","value":"barCookie"}]}],"actions":[{"type":"block"}],"created_at":"2026-02-06T18:14:28Z","updated_at":"2026-02-06T18:14:28Z"}
+      {"id":"69865067ba8a75e76ac1c662","type":"request","scope":{"type":"account","applies_to":["*"]},"enabled":true,"description":"test","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"ip","operator":"equals","value":"127.0.0.1"},{"type":"single","field":"path","operator":"equals","value":"/login"},{"type":"single","field":"agent_name","operator":"equals","value":"host-001"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AD"},{"type":"single","field":"method","operator":"equals","value":"POST"}]},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"protocol_version","operator":"equals","value":"HTTP/1.0"},{"type":"single","field":"method","operator":"equals","value":"HEAD"},{"type":"single","field":"domain","operator":"equals","value":"example.com"}]},{"type":"multival","field":"request_cookie","operator":"exists","group_operator":"any","conditions":[{"type":"single","field":"name","operator":"equals","value":"fooCookie"},{"type":"single","field":"value","operator":"equals","value":"barCookie"}]}],"actions":[{"type":"block"}],"created_at":"2026-02-06T20:34:47Z","updated_at":"2026-02-06T20:34:47Z"}
     headers:
       Accept-Ranges:
       - bytes
@@ -26,7 +26,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 06 Feb 2026 18:14:29 GMT
+      - Fri, 06 Feb 2026 20:34:48 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100125-CHI, cache-ewr-kewr1740048-EWR
+      - cache-chi-klot8100164-CHI, cache-ewr-kewr1740072-EWR
       X-Timer:
-      - S1770401668.891678,VS0,VE1753
+      - S1770410087.316775,VS0,VE1038
     status: 201 Created
     code: 201
     duration: ""

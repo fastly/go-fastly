@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"actions":[{"type":"block"}],"conditions":[{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"ip","operator":"in_list","value":"site.blacklist"},{"type":"multival","field":"request_header","operator":"exists","group_operator":"all","conditions":[{"type":"single","field":"name","operator":"equals","value":"x-something"},{"type":"single","field":"value_string","operator":"equals","value":"abc-123"}]}]}],"description":"nested_multival_test","enabled":true,"group_operator":"any","request_logging":"sampled","scope":{"type":"workspace","applies_to":["nBw2ENWfOY1M2dpSwK1l5R"]},"type":"request"}'
+    body: '{"actions":[{"type":"block"}],"conditions":[{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"ip","operator":"in_list","value":"site.blacklist"},{"type":"multival","field":"request_header","operator":"exists","group_operator":"all","conditions":[{"type":"single","field":"name","operator":"equals","value":"x-something"},{"type":"single","field":"value_string","operator":"equals","value":"abc-123"}]}]}],"description":"nested_multival_test","enabled":true,"group_operator":"any","request_logging":"sampled","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]},"type":"request"}'
     form: {}
     headers:
       Accept:
@@ -10,12 +10,12 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/12.1.2 (+github.com/fastly/go-fastly; go1.25.4)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/nBw2ENWfOY1M2dpSwK1l5R/rules
+      - FastlyGo/12.1.2 (+github.com/fastly/go-fastly; go1.25.5)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/rules
     method: POST
   response:
     body: |
-      {"id":"698630da125020adf7e06f06","type":"request","scope":{"type":"workspace","applies_to":["nBw2ENWfOY1M2dpSwK1l5R"]},"enabled":true,"description":"nested_multival_test","group_operator":"any","request_logging":"sampled","conditions":[{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"ip","operator":"in_list","value":"site.blacklist"},{"type":"multival","field":"request_header","operator":"exists","group_operator":"all","conditions":[{"type":"single","field":"name","operator":"equals","value":"x-something"},{"type":"single","field":"value_string","operator":"equals","value":"abc-123"}]}]}],"actions":[{"type":"block"}],"created_at":"2026-02-06T18:20:10Z","updated_at":"2026-02-06T18:20:10Z"}
+      {"id":"698650606232b4afcd5a47f7","type":"request","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]},"enabled":true,"description":"nested_multival_test","group_operator":"any","request_logging":"sampled","conditions":[{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"ip","operator":"in_list","value":"site.blacklist"},{"type":"multival","field":"request_header","operator":"exists","group_operator":"all","conditions":[{"type":"single","field":"name","operator":"equals","value":"x-something"},{"type":"single","field":"value_string","operator":"equals","value":"abc-123"}]}]}],"actions":[{"type":"block"}],"created_at":"2026-02-06T20:34:40Z","updated_at":"2026-02-06T20:34:40Z"}
     headers:
       Accept-Ranges:
       - bytes
@@ -26,7 +26,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 06 Feb 2026 18:20:11 GMT
+      - Fri, 06 Feb 2026 20:34:40 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000080-CHI, cache-ewr-kewr1740095-EWR
+      - cache-chi-kigq8000059-CHI, cache-ewr-kewr1740072-EWR
       X-Timer:
-      - S1770402009.150091,VS0,VE2063
+      - S1770410079.876843,VS0,VE1710
     status: 201 Created
     code: 201
     duration: ""
