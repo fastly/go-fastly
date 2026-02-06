@@ -95,8 +95,8 @@ func TestClient_Domains(t *testing.T) {
 	var dsi []*Domain
 	Record(t, "domains/list_with_staging_ips", func(c *Client) {
 		dsi, err = c.ListDomains(context.TODO(), &ListDomainsInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
+			ServiceID:         TestDeliveryServiceID,
+			ServiceVersion:    *tv.Number,
 			IncludeStagingIPs: true,
 		})
 	})
