@@ -7,6 +7,7 @@
 ### Breaking:
 
 ### Enhancements:
+- feat(ngwaf/rules): add support for multival type conditions in group operators. ([#7818](https://github.com/fastly/go-fastly/pull/781))
 
 ### Bug fixes:
 
