@@ -5,7 +5,7 @@
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v12.1.1...)
 
 ### Breaking:
-- breaking(ngwaf/rules): add support for multival type conditions in group operators. ([#781](https://github.com/fastly/go-fastly/pull/781))
+- breaking(ngwaf/rules): add support for multival type conditions in group operators. The `GroupCondition.Conditions` field type changed from `[]Condition` to `[]GroupConditionItem` to support mixed single and multival conditions. ([#781](https://github.com/fastly/go-fastly/pull/781))
 
 ### Enhancements:
 
