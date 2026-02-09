@@ -5,9 +5,9 @@
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v12.1.1...)
 
 ### Breaking:
+- breaking(ngwaf/rules): add support for multival type conditions in group operators. ([#781](https://github.com/fastly/go-fastly/pull/781))
 
 ### Enhancements:
-- feat(ngwaf/rules): add support for multival type conditions in group operators. ([#7818](https://github.com/fastly/go-fastly/pull/781))
 
 ### Bug fixes:
 
