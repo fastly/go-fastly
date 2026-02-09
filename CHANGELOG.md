@@ -8,6 +8,8 @@
 
 ### Enhancements:
 
+- feat(products/staging): Add support for Staging IP addresses ([#780](https://github.com/fastly/go-fastly/pull/780))
+
 ### Bug fixes:
 
 ### Dependencies:
