@@ -258,15 +258,35 @@ func runRuleTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 	// First group condition
 	assert.Equal(groupOperator1, groupConditions[0].GroupOperator)
 	assert.Len(groupConditions[0].Conditions, 2)
-	assert.Contains(groupConditions[0].Conditions, Condition{Type: conditionType, Field: field4, Operator: operator4, Value: value4})
-	assert.Contains(groupConditions[0].Conditions, Condition{Type: conditionType, Field: field5, Operator: operator5, Value: value5})
+
+	// Extract conditions from GroupConditionItems
+	var gc0Conditions []Condition
+	for _, gci := range groupConditions[0].Conditions {
+		if gci.Type == conditionType {
+			if c, ok := gci.Fields.(Condition); ok {
+				gc0Conditions = append(gc0Conditions, c)
+			}
+		}
+	}
+	assert.Contains(gc0Conditions, Condition{Type: conditionType, Field: field4, Operator: operator4, Value: value4})
+	assert.Contains(gc0Conditions, Condition{Type: conditionType, Field: field5, Operator: operator5, Value: value5})
 
 	// Second group condition
 	assert.Equal(groupOperator2, groupConditions[1].GroupOperator)
 	assert.Len(groupConditions[1].Conditions, 3)
-	assert.Contains(groupConditions[1].Conditions, Condition{Type: conditionType, Field: field6, Operator: operator6, Value: value6})
-	assert.Contains(groupConditions[1].Conditions, Condition{Type: conditionType, Field: field7, Operator: operator7, Value: value7})
-	assert.Contains(groupConditions[1].Conditions, Condition{Type: conditionType, Field: field8, Operator: operator8, Value: value8})
+
+	// Extract conditions from GroupConditionItems
+	var gc1Conditions []Condition
+	for _, gci := range groupConditions[1].Conditions {
+		if gci.Type == conditionType {
+			if c, ok := gci.Fields.(Condition); ok {
+				gc1Conditions = append(gc1Conditions, c)
+			}
+		}
+	}
+	assert.Contains(gc1Conditions, Condition{Type: conditionType, Field: field6, Operator: operator6, Value: value6})
+	assert.Contains(gc1Conditions, Condition{Type: conditionType, Field: field7, Operator: operator7, Value: value7})
+	assert.Contains(gc1Conditions, Condition{Type: conditionType, Field: field8, Operator: operator8, Value: value8})
 
 	// Validate multival conditions
 	var multivalConditions []MultivalCondition
@@ -367,15 +387,35 @@ func runRuleTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 	// First group condition
 	assert.Equal(groupOperator1, testRuleGroupConditions[0].GroupOperator)
 	assert.Len(testRuleGroupConditions[0].Conditions, 2)
-	assert.Contains(testRuleGroupConditions[0].Conditions, Condition{Type: conditionType, Field: field4, Operator: operator4, Value: value4})
-	assert.Contains(testRuleGroupConditions[0].Conditions, Condition{Type: conditionType, Field: field5, Operator: operator5, Value: value5})
+
+	// Extract conditions from GroupConditionItems
+	var testRuleGC0Conditions []Condition
+	for _, gci := range testRuleGroupConditions[0].Conditions {
+		if gci.Type == conditionType {
+			if c, ok := gci.Fields.(Condition); ok {
+				testRuleGC0Conditions = append(testRuleGC0Conditions, c)
+			}
+		}
+	}
+	assert.Contains(testRuleGC0Conditions, Condition{Type: conditionType, Field: field4, Operator: operator4, Value: value4})
+	assert.Contains(testRuleGC0Conditions, Condition{Type: conditionType, Field: field5, Operator: operator5, Value: value5})
 
 	// Second group condition
 	assert.Equal(groupOperator2, testRuleGroupConditions[1].GroupOperator)
 	assert.Len(testRuleGroupConditions[1].Conditions, 3)
-	assert.Contains(testRuleGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field6, Operator: operator6, Value: value6})
-	assert.Contains(testRuleGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field7, Operator: operator7, Value: value7})
-	assert.Contains(testRuleGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field8, Operator: operator8, Value: value8})
+
+	// Extract conditions from GroupConditionItems
+	var testRuleGC1Conditions []Condition
+	for _, gci := range testRuleGroupConditions[1].Conditions {
+		if gci.Type == conditionType {
+			if c, ok := gci.Fields.(Condition); ok {
+				testRuleGC1Conditions = append(testRuleGC1Conditions, c)
+			}
+		}
+	}
+	assert.Contains(testRuleGC1Conditions, Condition{Type: conditionType, Field: field6, Operator: operator6, Value: value6})
+	assert.Contains(testRuleGC1Conditions, Condition{Type: conditionType, Field: field7, Operator: operator7, Value: value7})
+	assert.Contains(testRuleGC1Conditions, Condition{Type: conditionType, Field: field8, Operator: operator8, Value: value8})
 
 	// Validate multival conditions
 	var testMultivalConditions []MultivalCondition
@@ -593,15 +633,35 @@ func runRuleTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 	// First group condition
 	assert.Equal(updatedGroupOperator1, updatedGroupConditions[0].GroupOperator)
 	assert.Len(updatedGroupConditions[0].Conditions, 2)
-	assert.Contains(updatedGroupConditions[0].Conditions, Condition{Type: conditionType, Field: field4, Operator: updatedOperator4, Value: updatedValue4})
-	assert.Contains(updatedGroupConditions[0].Conditions, Condition{Type: conditionType, Field: field5, Operator: updatedOperator5, Value: updatedValue5})
+
+	// Extract conditions from GroupConditionItems
+	var updatedGC0Conditions []Condition
+	for _, gci := range updatedGroupConditions[0].Conditions {
+		if gci.Type == conditionType {
+			if c, ok := gci.Fields.(Condition); ok {
+				updatedGC0Conditions = append(updatedGC0Conditions, c)
+			}
+		}
+	}
+	assert.Contains(updatedGC0Conditions, Condition{Type: conditionType, Field: field4, Operator: updatedOperator4, Value: updatedValue4})
+	assert.Contains(updatedGC0Conditions, Condition{Type: conditionType, Field: field5, Operator: updatedOperator5, Value: updatedValue5})
 
 	// Second group condition
 	assert.Equal(updatedGroupOperator2, updatedGroupConditions[1].GroupOperator)
 	assert.Len(updatedGroupConditions[1].Conditions, 3)
-	assert.Contains(updatedGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field6, Operator: updatedOperator6, Value: updatedValue6})
-	assert.Contains(updatedGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field7, Operator: updatedOperator7, Value: updatedValue7})
-	assert.Contains(updatedGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field8, Operator: updatedOperator8, Value: updatedValue8})
+
+	// Extract conditions from GroupConditionItems
+	var updatedGC1Conditions []Condition
+	for _, gci := range updatedGroupConditions[1].Conditions {
+		if gci.Type == conditionType {
+			if c, ok := gci.Fields.(Condition); ok {
+				updatedGC1Conditions = append(updatedGC1Conditions, c)
+			}
+		}
+	}
+	assert.Contains(updatedGC1Conditions, Condition{Type: conditionType, Field: field6, Operator: updatedOperator6, Value: updatedValue6})
+	assert.Contains(updatedGC1Conditions, Condition{Type: conditionType, Field: field7, Operator: updatedOperator7, Value: updatedValue7})
+	assert.Contains(updatedGC1Conditions, Condition{Type: conditionType, Field: field8, Operator: updatedOperator8, Value: updatedValue8})
 
 	// Validate multival conditions
 	var updatedMultivalConditions []MultivalCondition
@@ -935,15 +995,35 @@ func runRateLimitRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 	// First group condition
 	assert.Equal(groupOperator1, groupConditions[0].GroupOperator)
 	assert.Len(groupConditions[0].Conditions, 2)
-	assert.Contains(groupConditions[0].Conditions, Condition{Type: conditionType, Field: field4, Operator: operator4, Value: value4})
-	assert.Contains(groupConditions[0].Conditions, Condition{Type: conditionType, Field: field5, Operator: operator5, Value: value5})
+
+	// Extract conditions from GroupConditionItems
+	var gc0Conditions []Condition
+	for _, gci := range groupConditions[0].Conditions {
+		if gci.Type == conditionType {
+			if c, ok := gci.Fields.(Condition); ok {
+				gc0Conditions = append(gc0Conditions, c)
+			}
+		}
+	}
+	assert.Contains(gc0Conditions, Condition{Type: conditionType, Field: field4, Operator: operator4, Value: value4})
+	assert.Contains(gc0Conditions, Condition{Type: conditionType, Field: field5, Operator: operator5, Value: value5})
 
 	// Second group condition
 	assert.Equal(groupOperator2, groupConditions[1].GroupOperator)
 	assert.Len(groupConditions[1].Conditions, 3)
-	assert.Contains(groupConditions[1].Conditions, Condition{Type: conditionType, Field: field6, Operator: operator6, Value: value6})
-	assert.Contains(groupConditions[1].Conditions, Condition{Type: conditionType, Field: field7, Operator: operator7, Value: value7})
-	assert.Contains(groupConditions[1].Conditions, Condition{Type: conditionType, Field: field8, Operator: operator8, Value: value8})
+
+	// Extract conditions from GroupConditionItems
+	var gc1Conditions []Condition
+	for _, gci := range groupConditions[1].Conditions {
+		if gci.Type == conditionType {
+			if c, ok := gci.Fields.(Condition); ok {
+				gc1Conditions = append(gc1Conditions, c)
+			}
+		}
+	}
+	assert.Contains(gc1Conditions, Condition{Type: conditionType, Field: field6, Operator: operator6, Value: value6})
+	assert.Contains(gc1Conditions, Condition{Type: conditionType, Field: field7, Operator: operator7, Value: value7})
+	assert.Contains(gc1Conditions, Condition{Type: conditionType, Field: field8, Operator: operator8, Value: value8})
 
 	// Validate multival conditions
 	var multivalConditions []MultivalCondition
@@ -1035,15 +1115,35 @@ func runRateLimitRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 	// First group condition
 	assert.Equal(groupOperator1, testRuleGroupConditions[0].GroupOperator)
 	assert.Len(testRuleGroupConditions[0].Conditions, 2)
-	assert.Contains(testRuleGroupConditions[0].Conditions, Condition{Type: conditionType, Field: field4, Operator: operator4, Value: value4})
-	assert.Contains(testRuleGroupConditions[0].Conditions, Condition{Type: conditionType, Field: field5, Operator: operator5, Value: value5})
+
+	// Extract conditions from GroupConditionItems
+	var testRuleGC0Conditions []Condition
+	for _, gci := range testRuleGroupConditions[0].Conditions {
+		if gci.Type == conditionType {
+			if c, ok := gci.Fields.(Condition); ok {
+				testRuleGC0Conditions = append(testRuleGC0Conditions, c)
+			}
+		}
+	}
+	assert.Contains(testRuleGC0Conditions, Condition{Type: conditionType, Field: field4, Operator: operator4, Value: value4})
+	assert.Contains(testRuleGC0Conditions, Condition{Type: conditionType, Field: field5, Operator: operator5, Value: value5})
 
 	// Second group condition
 	assert.Equal(groupOperator2, testRuleGroupConditions[1].GroupOperator)
 	assert.Len(testRuleGroupConditions[1].Conditions, 3)
-	assert.Contains(testRuleGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field6, Operator: operator6, Value: value6})
-	assert.Contains(testRuleGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field7, Operator: operator7, Value: value7})
-	assert.Contains(testRuleGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field8, Operator: operator8, Value: value8})
+
+	// Extract conditions from GroupConditionItems
+	var testRuleGC1Conditions []Condition
+	for _, gci := range testRuleGroupConditions[1].Conditions {
+		if gci.Type == conditionType {
+			if c, ok := gci.Fields.(Condition); ok {
+				testRuleGC1Conditions = append(testRuleGC1Conditions, c)
+			}
+		}
+	}
+	assert.Contains(testRuleGC1Conditions, Condition{Type: conditionType, Field: field6, Operator: operator6, Value: value6})
+	assert.Contains(testRuleGC1Conditions, Condition{Type: conditionType, Field: field7, Operator: operator7, Value: value7})
+	assert.Contains(testRuleGC1Conditions, Condition{Type: conditionType, Field: field8, Operator: operator8, Value: value8})
 
 	// Validate multival conditions
 	var testMultivalConditions []MultivalCondition
@@ -1280,15 +1380,35 @@ func runRateLimitRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 	// First group condition
 	assert.Equal(updatedGroupOperator1, updatedGroupConditions[0].GroupOperator)
 	assert.Len(updatedGroupConditions[0].Conditions, 2)
-	assert.Contains(updatedGroupConditions[0].Conditions, Condition{Type: conditionType, Field: field4, Operator: updatedOperator4, Value: updatedValue4})
-	assert.Contains(updatedGroupConditions[0].Conditions, Condition{Type: conditionType, Field: field5, Operator: updatedOperator5, Value: updatedValue5})
+
+	// Extract conditions from GroupConditionItems
+	var updatedGC0Conditions []Condition
+	for _, gci := range updatedGroupConditions[0].Conditions {
+		if gci.Type == conditionType {
+			if c, ok := gci.Fields.(Condition); ok {
+				updatedGC0Conditions = append(updatedGC0Conditions, c)
+			}
+		}
+	}
+	assert.Contains(updatedGC0Conditions, Condition{Type: conditionType, Field: field4, Operator: updatedOperator4, Value: updatedValue4})
+	assert.Contains(updatedGC0Conditions, Condition{Type: conditionType, Field: field5, Operator: updatedOperator5, Value: updatedValue5})
 
 	// Second group condition
 	assert.Equal(updatedGroupOperator2, updatedGroupConditions[1].GroupOperator)
 	assert.Len(updatedGroupConditions[1].Conditions, 3)
-	assert.Contains(updatedGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field6, Operator: updatedOperator6, Value: updatedValue6})
-	assert.Contains(updatedGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field7, Operator: updatedOperator7, Value: updatedValue7})
-	assert.Contains(updatedGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field8, Operator: updatedOperator8, Value: updatedValue8})
+
+	// Extract conditions from GroupConditionItems
+	var updatedGC1Conditions []Condition
+	for _, gci := range updatedGroupConditions[1].Conditions {
+		if gci.Type == conditionType {
+			if c, ok := gci.Fields.(Condition); ok {
+				updatedGC1Conditions = append(updatedGC1Conditions, c)
+			}
+		}
+	}
+	assert.Contains(updatedGC1Conditions, Condition{Type: conditionType, Field: field6, Operator: updatedOperator6, Value: updatedValue6})
+	assert.Contains(updatedGC1Conditions, Condition{Type: conditionType, Field: field7, Operator: updatedOperator7, Value: updatedValue7})
+	assert.Contains(updatedGC1Conditions, Condition{Type: conditionType, Field: field8, Operator: updatedOperator8, Value: updatedValue8})
 
 	// Validate multival conditions
 	var updatedMultivalConditions []MultivalCondition
@@ -1568,15 +1688,35 @@ func runDeceptionRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 	// First group condition
 	assert.Equal(groupOperator1, groupConditions[0].GroupOperator)
 	assert.Len(groupConditions[0].Conditions, 2)
-	assert.Contains(groupConditions[0].Conditions, Condition{Type: conditionType, Field: field4, Operator: operator4, Value: value4})
-	assert.Contains(groupConditions[0].Conditions, Condition{Type: conditionType, Field: field5, Operator: operator5, Value: value5})
+
+	// Extract conditions from GroupConditionItems
+	var gc0Conditions []Condition
+	for _, gci := range groupConditions[0].Conditions {
+		if gci.Type == conditionType {
+			if c, ok := gci.Fields.(Condition); ok {
+				gc0Conditions = append(gc0Conditions, c)
+			}
+		}
+	}
+	assert.Contains(gc0Conditions, Condition{Type: conditionType, Field: field4, Operator: operator4, Value: value4})
+	assert.Contains(gc0Conditions, Condition{Type: conditionType, Field: field5, Operator: operator5, Value: value5})
 
 	// Second group condition
 	assert.Equal(groupOperator2, groupConditions[1].GroupOperator)
 	assert.Len(groupConditions[1].Conditions, 3)
-	assert.Contains(groupConditions[1].Conditions, Condition{Type: conditionType, Field: field6, Operator: operator6, Value: value6})
-	assert.Contains(groupConditions[1].Conditions, Condition{Type: conditionType, Field: field7, Operator: operator7, Value: value7})
-	assert.Contains(groupConditions[1].Conditions, Condition{Type: conditionType, Field: field8, Operator: operator8, Value: value8})
+
+	// Extract conditions from GroupConditionItems
+	var gc1Conditions []Condition
+	for _, gci := range groupConditions[1].Conditions {
+		if gci.Type == conditionType {
+			if c, ok := gci.Fields.(Condition); ok {
+				gc1Conditions = append(gc1Conditions, c)
+			}
+		}
+	}
+	assert.Contains(gc1Conditions, Condition{Type: conditionType, Field: field6, Operator: operator6, Value: value6})
+	assert.Contains(gc1Conditions, Condition{Type: conditionType, Field: field7, Operator: operator7, Value: value7})
+	assert.Contains(gc1Conditions, Condition{Type: conditionType, Field: field8, Operator: operator8, Value: value8})
 
 	// Validate multival conditions
 	var multivalConditions []MultivalCondition
@@ -1661,15 +1801,35 @@ func runDeceptionRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 	// First group condition
 	assert.Equal(groupOperator1, testRuleGroupConditions[0].GroupOperator)
 	assert.Len(testRuleGroupConditions[0].Conditions, 2)
-	assert.Contains(testRuleGroupConditions[0].Conditions, Condition{Type: conditionType, Field: field4, Operator: operator4, Value: value4})
-	assert.Contains(testRuleGroupConditions[0].Conditions, Condition{Type: conditionType, Field: field5, Operator: operator5, Value: value5})
+
+	// Extract conditions from GroupConditionItems
+	var testRuleGC0Conditions []Condition
+	for _, gci := range testRuleGroupConditions[0].Conditions {
+		if gci.Type == conditionType {
+			if c, ok := gci.Fields.(Condition); ok {
+				testRuleGC0Conditions = append(testRuleGC0Conditions, c)
+			}
+		}
+	}
+	assert.Contains(testRuleGC0Conditions, Condition{Type: conditionType, Field: field4, Operator: operator4, Value: value4})
+	assert.Contains(testRuleGC0Conditions, Condition{Type: conditionType, Field: field5, Operator: operator5, Value: value5})
 
 	// Second group condition
 	assert.Equal(groupOperator2, testRuleGroupConditions[1].GroupOperator)
 	assert.Len(testRuleGroupConditions[1].Conditions, 3)
-	assert.Contains(testRuleGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field6, Operator: operator6, Value: value6})
-	assert.Contains(testRuleGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field7, Operator: operator7, Value: value7})
-	assert.Contains(testRuleGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field8, Operator: operator8, Value: value8})
+
+	// Extract conditions from GroupConditionItems
+	var testRuleGC1Conditions []Condition
+	for _, gci := range testRuleGroupConditions[1].Conditions {
+		if gci.Type == conditionType {
+			if c, ok := gci.Fields.(Condition); ok {
+				testRuleGC1Conditions = append(testRuleGC1Conditions, c)
+			}
+		}
+	}
+	assert.Contains(testRuleGC1Conditions, Condition{Type: conditionType, Field: field6, Operator: operator6, Value: value6})
+	assert.Contains(testRuleGC1Conditions, Condition{Type: conditionType, Field: field7, Operator: operator7, Value: value7})
+	assert.Contains(testRuleGC1Conditions, Condition{Type: conditionType, Field: field8, Operator: operator8, Value: value8})
 
 	// Validate multival conditions
 	var testMultivalConditions []MultivalCondition
@@ -1883,15 +2043,35 @@ func runDeceptionRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 	// First group condition
 	assert.Equal(updatedGroupOperator1, updatedGroupConditions[0].GroupOperator)
 	assert.Len(updatedGroupConditions[0].Conditions, 2)
-	assert.Contains(updatedGroupConditions[0].Conditions, Condition{Type: conditionType, Field: field4, Operator: updatedOperator4, Value: updatedValue4})
-	assert.Contains(updatedGroupConditions[0].Conditions, Condition{Type: conditionType, Field: field5, Operator: updatedOperator5, Value: updatedValue5})
+
+	// Extract conditions from GroupConditionItems
+	var updatedGC0Conditions []Condition
+	for _, gci := range updatedGroupConditions[0].Conditions {
+		if gci.Type == conditionType {
+			if c, ok := gci.Fields.(Condition); ok {
+				updatedGC0Conditions = append(updatedGC0Conditions, c)
+			}
+		}
+	}
+	assert.Contains(updatedGC0Conditions, Condition{Type: conditionType, Field: field4, Operator: updatedOperator4, Value: updatedValue4})
+	assert.Contains(updatedGC0Conditions, Condition{Type: conditionType, Field: field5, Operator: updatedOperator5, Value: updatedValue5})
 
 	// Second group condition
 	assert.Equal(updatedGroupOperator2, updatedGroupConditions[1].GroupOperator)
 	assert.Len(updatedGroupConditions[1].Conditions, 3)
-	assert.Contains(updatedGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field6, Operator: updatedOperator6, Value: updatedValue6})
-	assert.Contains(updatedGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field7, Operator: updatedOperator7, Value: updatedValue7})
-	assert.Contains(updatedGroupConditions[1].Conditions, Condition{Type: conditionType, Field: field8, Operator: updatedOperator8, Value: updatedValue8})
+
+	// Extract conditions from GroupConditionItems
+	var updatedGC1Conditions []Condition
+	for _, gci := range updatedGroupConditions[1].Conditions {
+		if gci.Type == conditionType {
+			if c, ok := gci.Fields.(Condition); ok {
+				updatedGC1Conditions = append(updatedGC1Conditions, c)
+			}
+		}
+	}
+	assert.Contains(updatedGC1Conditions, Condition{Type: conditionType, Field: field6, Operator: updatedOperator6, Value: updatedValue6})
+	assert.Contains(updatedGC1Conditions, Condition{Type: conditionType, Field: field7, Operator: updatedOperator7, Value: updatedValue7})
+	assert.Contains(updatedGC1Conditions, Condition{Type: conditionType, Field: field8, Operator: updatedOperator8, Value: updatedValue8})
 
 	// Validate multival conditions
 	var updatedMultivalConditions []MultivalCondition
