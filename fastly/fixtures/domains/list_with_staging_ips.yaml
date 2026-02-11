@@ -1,0 +1,41 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/73/domain?include=staging_ips
+    method: GET
+  response:
+    body: '[{"created_at":"2022-11-04T17:36:56Z","service_id":"kKJb5bOFI47uHeBVluGfX1","name":"integ-test-20221104.go-fastly-1.com","version":73,"updated_at":"2022-11-04T17:36:56Z","comment":"comment","deleted_at":null,"staging_ip":"167.82.81.194"},{"comment":"comment","deleted_at":null,"created_at":"2022-11-04T17:36:56Z","service_id":"kKJb5bOFI47uHeBVluGfX1","name":"integ-test-20221104.go-fastly-2.com","updated_at":"2022-11-04T17:36:56Z","version":73,"staging_ip":"167.82.81.194"}]'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 04 Nov 2022 17:36:57 GMT
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4127-MAN
+      X-Timer:
+      - S1667583417.040261,VS0,VE334
+    status: 200 OK
+    code: 200
+    duration: ""
