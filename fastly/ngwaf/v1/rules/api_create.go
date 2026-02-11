@@ -107,11 +107,14 @@ type CreateGroupCondition struct {
 	// GroupOperator is the logical operator used to evaluate the
 	// conditions ("any" or "all") (required).
 	GroupOperator *string `json:"group_operator"`
-	// Conditions is the list of single conditions to evaluate
-	// within the group.
+	// Conditions is the list of single conditions within the group.
+	// Note: this field is not marshaled directly. It is merged with
+	// MultivalConditions into the JSON "conditions" array when building
+	// the request body.
 	Conditions []*CreateCondition `json:"-"`
-	// MultivalConditions is the list of multival conditions to evaluate
-	// within the group.
+	// MultivalConditions is the list of multival conditions within the group.
+	// Note: this field is not marshaled directly. It is merged with
+	// Conditions into the JSON "conditions" array when building the request body.
 	MultivalConditions []*CreateMultivalCondition `json:"-"`
 }
 
