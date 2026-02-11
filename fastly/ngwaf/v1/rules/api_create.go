@@ -107,9 +107,15 @@ type CreateGroupCondition struct {
 	// GroupOperator is the logical operator used to evaluate the
 	// conditions ("any" or "all") (required).
 	GroupOperator *string `json:"group_operator"`
-	// Conditions is the list of single conditions to evaluate
-	// within the group (required).
-	Conditions []*CreateCondition `json:"conditions"`
+	// Conditions is the list of single conditions within the group.
+	// Note: this field is not marshaled directly. It is merged with
+	// MultivalConditions into the JSON "conditions" array when building
+	// the request body.
+	Conditions []*CreateCondition `json:"-"`
+	// MultivalConditions is the list of multival conditions within the group.
+	// Note: this field is not marshaled directly. It is merged with
+	// Conditions into the JSON "conditions" array when building the request body.
+	MultivalConditions []*CreateMultivalCondition `json:"-"`
 }
 
 // CreateMultivalCondition defines a multival of conditions with a logical
@@ -169,9 +175,9 @@ type privateCreateConditionMult struct {
 }
 
 type privateCreateGroupCondition struct {
-	Type          *string                   `json:"type"`
-	GroupOperator *string                   `json:"group_operator"`
-	Conditions    []*privateCreateCondition `json:"conditions"`
+	Type          *string `json:"type"`
+	GroupOperator *string `json:"group_operator"`
+	Conditions    []any   `json:"conditions"`
 }
 
 type privateCreateMultivalCondition struct {
@@ -205,13 +211,31 @@ func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Rule, error
 		mergedConditions = append(mergedConditions, privateCondition)
 	}
 	for _, gc := range i.GroupConditions {
-		var privateSubConditions []*privateCreateCondition
+		var privateSubConditions []any
 		for _, subCond := range gc.Conditions {
 			privateSubConditions = append(privateSubConditions, &privateCreateCondition{
 				Type:     fastly.ToPointer("single"),
 				Field:    subCond.Field,
 				Operator: subCond.Operator,
 				Value:    subCond.Value,
+			})
+		}
+		for _, mc := range gc.MultivalConditions {
+			var privateMultivalSubConditions []*privateCreateConditionMult
+			for _, subCond := range mc.Conditions {
+				privateMultivalSubConditions = append(privateMultivalSubConditions, &privateCreateConditionMult{
+					Type:     fastly.ToPointer("single"),
+					Field:    subCond.Field,
+					Operator: subCond.Operator,
+					Value:    subCond.Value,
+				})
+			}
+			privateSubConditions = append(privateSubConditions, &privateCreateMultivalCondition{
+				Type:          fastly.ToPointer("multival"),
+				Field:         mc.Field,
+				Operator:      mc.Operator,
+				GroupOperator: mc.GroupOperator,
+				Conditions:    privateMultivalSubConditions,
 			})
 		}
 		privateGroupCondition := &privateCreateGroupCondition{

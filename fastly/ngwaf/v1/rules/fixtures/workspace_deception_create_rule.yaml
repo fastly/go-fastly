@@ -10,12 +10,12 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/11.3.1 (+github.com/fastly/go-fastly; go1.24.2)
+      - FastlyGo/12.1.2 (+github.com/fastly/go-fastly; go1.25.5)
     url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/rules
     method: POST
   response:
     body: |
-      {"id":"68c84d40257100e60cc1e07a","type":"request","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]},"enabled":true,"description":"deception_test","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"ip","operator":"equals","value":"127.0.0.1"},{"type":"single","field":"path","operator":"equals","value":"/login"},{"type":"single","field":"agent_name","operator":"equals","value":"host-001"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AD"},{"type":"single","field":"method","operator":"equals","value":"POST"}]},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"protocol_version","operator":"equals","value":"HTTP/1.0"},{"type":"single","field":"method","operator":"equals","value":"HEAD"},{"type":"single","field":"domain","operator":"equals","value":"example.com"}]},{"type":"multival","field":"request_cookie","operator":"exists","group_operator":"any","conditions":[{"type":"single","field":"name","operator":"equals","value":"fooCookie"},{"type":"single","field":"value","operator":"equals","value":"barCookie"}]}],"actions":[{"type":"deception","deception_type":"invalid_login_response"}],"created_at":"2025-09-15T17:30:40Z","updated_at":"2025-09-15T17:30:40Z"}
+      {"id":"69865071268a2f5776722a4a","type":"request","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]},"enabled":true,"description":"deception_test","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"ip","operator":"equals","value":"127.0.0.1"},{"type":"single","field":"path","operator":"equals","value":"/login"},{"type":"single","field":"agent_name","operator":"equals","value":"host-001"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AD"},{"type":"single","field":"method","operator":"equals","value":"POST"}]},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"protocol_version","operator":"equals","value":"HTTP/1.0"},{"type":"single","field":"method","operator":"equals","value":"HEAD"},{"type":"single","field":"domain","operator":"equals","value":"example.com"}]},{"type":"multival","field":"request_cookie","operator":"exists","group_operator":"any","conditions":[{"type":"single","field":"name","operator":"equals","value":"fooCookie"},{"type":"single","field":"value","operator":"equals","value":"barCookie"}]}],"actions":[{"type":"deception","deception_type":"invalid_login_response"}],"created_at":"2026-02-06T20:34:57Z","updated_at":"2026-02-06T20:34:57Z"}
     headers:
       Accept-Ranges:
       - bytes
@@ -26,7 +26,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 15 Sep 2025 17:30:40 GMT
+      - Fri, 06 Feb 2026 20:34:58 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000059-CHI, cache-ewr-kewr1740075-EWR
+      - cache-chi-kigq8000059-CHI, cache-ewr-kewr1740072-EWR
       X-Timer:
-      - S1757957440.258548,VS0,VE590
+      - S1770410097.483728,VS0,VE790
     status: 201 Created
     code: 201
     duration: ""
