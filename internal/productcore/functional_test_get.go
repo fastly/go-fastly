@@ -7,9 +7,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/fastly/go-fastly/v12/fastly"
-	"github.com/fastly/go-fastly/v12/fastly/products"
-	"github.com/fastly/go-fastly/v12/internal/test_utils"
+	"github.com/fastly/go-fastly/v13/fastly"
+	"github.com/fastly/go-fastly/v13/fastly/products"
+	"github.com/fastly/go-fastly/v13/internal/test_utils"
 )
 
 // GetTestInput specifies the information needed for the NewGetTest

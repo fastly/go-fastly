@@ -34,7 +34,7 @@ service with SID `1234abcd` might look like this:
 ```go
   import (
 	"context"
-	"github.com/fastly/go-fastly/v12/fastly"
+	"github.com/fastly/go-fastly/v13/fastly"
   )
 
   client := fastly.DefaultClient()
