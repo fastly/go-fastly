@@ -2,7 +2,19 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v12.1.1...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v13.0.0...)
+
+### Breaking:
+
+### Enhancements:
+
+### Bug fixes:
+
+### Dependencies:
+
+## [v13.0.0](https://github.com/fastly/go-fastly/releases/tag/v13.0.0) (2026-02-012)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v12.1.2...v13.0.0)
 
 ### Breaking:
 - breaking(ngwaf/rules): add support for multival type conditions in group operators. The `GroupCondition.Conditions` field type changed from `[]Condition` to `[]GroupConditionItem` to support mixed single and multival conditions. ([#781](https://github.com/fastly/go-fastly/pull/781))
@@ -11,9 +23,8 @@
 
 - feat(products/staging): Add support for Staging IP addresses ([#780](https://github.com/fastly/go-fastly/pull/780))
 
-### Bug fixes:
-
 ### Dependencies:
+
 - build(deps): `golang.org/x/crypto` from 0.47.0 to 0.48.0 ([#782](https://github.com/fastly/go-fastly/pull/782))
 - build(deps): `golang.org/x/sys` from 0.40.0 to 0.41.0 ([#782](https://github.com/fastly/go-fastly/pull/782))
 
@@ -53,15 +64,9 @@
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v12.0.0...v12.1.0)
 
-### Breaking:
-
 ### Enhancements:
 
 - feat(products/apidiscovery): Add enable/disable support for API Discovery ([#760](https://github.com/fastly/go-fastly/pull/760))
-
-### Bug fixes:
-
-### Dependencies:
 
 ## [v12.0.0](https://github.com/fastly/go-fastly/releases/tag/v12.0.0) (2025-09-17)
 
