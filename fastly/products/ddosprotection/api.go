@@ -3,9 +3,9 @@ package ddosprotection
 import (
 	"context"
 
-	"github.com/fastly/go-fastly/v12/fastly"
-	"github.com/fastly/go-fastly/v12/fastly/products"
-	"github.com/fastly/go-fastly/v12/internal/productcore"
+	"github.com/fastly/go-fastly/v13/fastly"
+	"github.com/fastly/go-fastly/v13/fastly/products"
+	"github.com/fastly/go-fastly/v13/internal/productcore"
 )
 
 const (

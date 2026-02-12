@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/fastly/go-fastly/v12/fastly"
+	"github.com/fastly/go-fastly/v13/fastly"
 )
 
 func ExampleClient_RateLimitRemaining() {

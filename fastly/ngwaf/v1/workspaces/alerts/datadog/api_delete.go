@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/fastly/go-fastly/v12/fastly"
+	"github.com/fastly/go-fastly/v13/fastly"
 )
 
 // DeleteInput specifies the information needed for the Delete() function to perform

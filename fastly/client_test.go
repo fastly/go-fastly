@@ -9,7 +9,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/fastly/go-fastly/v12/fastly/impersonation"
+	"github.com/fastly/go-fastly/v13/fastly/impersonation"
 )
 
 func TestClient_RawRequest(t *testing.T) {

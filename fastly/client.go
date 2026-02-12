@@ -24,7 +24,7 @@ import (
 	"github.com/hashicorp/go-cleanhttp"
 	"github.com/mitchellh/mapstructure"
 
-	"github.com/fastly/go-fastly/v12/fastly/impersonation"
+	"github.com/fastly/go-fastly/v13/fastly/impersonation"
 )
 
 // APIKeyEnvVar is the name of the environment variable where the Fastly API
@@ -64,7 +64,7 @@ const UserAgentEnvVar = "FASTLY_USER_AGENT"
 var ProjectURL = "github.com/fastly/go-fastly"
 
 // ProjectVersion is the version of this library.
-var ProjectVersion = "12.1.2"
+var ProjectVersion = "13.0.0"
 
 // UserAgent is the user agent for this particular client.
 var UserAgent = fmt.Sprintf("FastlyGo/%s (+%s; %s)",
