@@ -10,6 +10,8 @@
 
 ### Bug fixes:
 
+- fix(ngwaf/rules): add MarshalJSON for condition unions and fix UpdateRateLimit json tags. ([#784](https://github.com/fastly/go-fastly/pull/784))
+
 ### Dependencies:
 
 ## [v13.0.0](https://github.com/fastly/go-fastly/releases/tag/v13.0.0) (2026-02-012)
@@ -17,6 +19,7 @@
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v12.1.2...v13.0.0)
 
 ### Breaking:
+
 - breaking(ngwaf/rules): add support for multival type conditions in group operators. The `GroupCondition.Conditions` field type changed from `[]Condition` to `[]GroupConditionItem` to support mixed single and multival conditions. ([#781](https://github.com/fastly/go-fastly/pull/781))
 
 ### Enhancements:

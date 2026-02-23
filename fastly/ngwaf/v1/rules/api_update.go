@@ -140,15 +140,15 @@ type UpdateMultivalCondition struct {
 // UpdateRateLimit defines how rate limit rules are enforced.
 type UpdateRateLimit struct {
 	// List of client identifiers used for rate limiting. Can only be length 1 or 2.
-	ClientIdentifiers []*UpdateClientIdentifier
+	ClientIdentifiers []*UpdateClientIdentifier `json:"client_identifiers,omitempty"`
 	// Duration in seconds for the rate limit.
-	Duration *int
+	Duration *int `json:"duration,omitempty"`
 	// Time interval for the rate limit in seconds (60, 600, or 3600 minutes).
-	Interval *int
+	Interval *int `json:"interval,omitempty"`
 	// The signal used to count requests.
-	Signal *string
+	Signal *string `json:"signal,omitempty"`
 	// Rate limit threshold (between 1 and 10000).
-	Threshold *int
+	Threshold *int `json:"threshold,omitempty"`
 }
 
 // UpdateClientIdentifier is the client identifier for rate limit rules.
