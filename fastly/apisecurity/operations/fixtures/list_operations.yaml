@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/13.0.0 (+github.com/fastly/go-fastly; go1.25.4)
+    url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/operations?domain=example.com&method=GET&path=%2Ftest
+    method: GET
+  response:
+    body: |
+      {"data":[{"id":"-T6YjeTHQ76VxUUqdWVM3Q","method":"GET","domain":"example.com","path":"/test","description":"updated","tag_ids":["I8TSFtYUQFe3m9TkAW9tjw"],"updated_at":"2026-02-27T02:36:56Z","created_at":"2026-02-27T02:36:55Z"},{"id":"n7CSe4itRq2bq6xvuYnSgw","method":"DELETE","domain":"www.foo.com","path":"/api/v1/users/{var1}","description":"Retrieve user information","updated_at":"2026-02-02T14:33:19Z","created_at":"2026-02-02T14:27:16Z"}],"meta":{"total":2,"limit":100}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "477"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 27 Feb 2026 02:36:56 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000098-CHI, cache-pdk-katl1840026-PDK
+      X-Timer:
+      - S1772159816.294024,VS0,VE472
+    status: 200 OK
+    code: 200
+    duration: ""

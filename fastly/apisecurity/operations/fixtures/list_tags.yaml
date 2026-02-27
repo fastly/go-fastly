@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/13.0.0 (+github.com/fastly/go-fastly; go1.25.4)
+    url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/tags?limit=100&page=0
+    method: GET
+  response:
+    body: |
+      {"data":[{"id":"EAMd6o7_SnSXJWWTNX6brg","name":"foo","description":"Retrieve user information","created_at":"2026-02-26T01:13:34Z","updated_at":"2026-02-26T01:13:34Z"},{"id":"LhK0mzgzS2SBhipc7JgqdQ","name":"test-tag-tags","description":"updated","created_at":"2026-02-27T02:36:58Z","updated_at":"2026-02-27T02:36:59Z"},{"id":"PfsDScj7THG8EyKtn1ICiA","name":"foobar","description":"Retrieve user information","created_at":"2026-02-26T01:13:25Z","updated_at":"2026-02-26T01:13:25Z"},{"id":"UeBK15hUQH610naMeuOY_Q","name":"boom","description":"Retrieve user information","created_at":"2026-02-26T15:49:09Z","updated_at":"2026-02-26T15:49:09Z"},{"id":"l-61qHIPTEywiP2keGKaxA","name":"bar","description":"Retrieve user information","created_at":"2026-02-26T01:13:39Z","updated_at":"2026-02-26T01:13:39Z"}],"meta":{"total":5}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "821"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 27 Feb 2026 02:37:00 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000071-CHI, cache-pdk-katl1840026-PDK
+      X-Timer:
+      - S1772159820.707376,VS0,VE604
+    status: 200 OK
+    code: 200
+    duration: ""
