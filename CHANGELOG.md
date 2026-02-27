@@ -8,13 +8,15 @@
 
 ### Enhancements:
 
+- feat(apisecurity/operations): add API Security Operations API support ([#785](https://github.com/fastly/go-fastly/pull/785))
+
 ### Bug fixes:
 
 - fix(ngwaf/rules): add MarshalJSON for condition unions and fix UpdateRateLimit json tags. ([#784](https://github.com/fastly/go-fastly/pull/784))
 
 ### Dependencies:
 
-## [v13.0.0](https://github.com/fastly/go-fastly/releases/tag/v13.0.0) (2026-02-012)
+## [v13.0.0](https://github.com/fastly/go-fastly/releases/tag/v13.0.0) (2026-02-12)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v12.1.2...v13.0.0)
 
