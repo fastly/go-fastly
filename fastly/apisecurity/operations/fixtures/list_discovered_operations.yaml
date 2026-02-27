@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/13.0.1 (+github.com/fastly/go-fastly; go1.25.4)
+    url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/discovered-operations?domain=example.com&method=GET&path=%2Ftest&status=SAVED
+    method: GET
+  response:
+    body: |
+      {"data":[{"id":"fDbbMJtKRtSBozjV1HCZUA","method":"GET","domain":"example.com","path":"/test","status":"SAVED","rps":0,"updated_at":"2026-03-09T16:57:37Z"}],"meta":{"total":1,"limit":100}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "188"
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 09 Mar 2026 16:57:38 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000170-CHI, cache-pdk-katl1840078-PDK
+      X-Timer:
+      - S1773075458.949514,VS0,VE533
+    status: 200 OK
+    code: 200
+    duration: ""

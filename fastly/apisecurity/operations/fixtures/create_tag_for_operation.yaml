@@ -1,0 +1,50 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"name":"test-tag-operations","description":"go-fastly test tag"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/13.0.1 (+github.com/fastly/go-fastly; go1.25.4)
+    url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/tags
+    method: POST
+  response:
+    body: |
+      {"id":"Ox4NMs8SRJujO1ouCXq3EA","name":"test-tag-operations","description":"go-fastly test tag","created_at":"2026-03-09T16:57:35Z","updated_at":"2026-03-09T16:57:35Z"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "168"
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 09 Mar 2026 16:57:35 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100130-CHI, cache-pdk-katl1840078-PDK
+      X-Timer:
+      - S1773075454.477408,VS0,VE1344
+    status: 201 Created
+    code: 201
+    duration: ""
