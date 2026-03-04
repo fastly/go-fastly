@@ -14,7 +14,7 @@ type Elasticsearch struct {
 	FormatVersion     *int       `mapstructure:"format_version"`
 	Index             *string    `mapstructure:"index"`
 	Name              *string    `mapstructure:"name"`
-	Password          *string    `mapstructure:"password"`
+	Password          *string    `mapstructure:"password"` //gosec:disable G117 -- This is a false positive
 	Pipeline          *string    `mapstructure:"pipeline"`
 	Placement         *string    `mapstructure:"placement"`
 	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
@@ -74,7 +74,7 @@ type CreateElasticsearchInput struct {
 	// Name is the name for the real-time logging configuration.
 	Name *string `url:"name,omitempty"`
 	// Password is basic Auth password.
-	Password *string `url:"password,omitempty"`
+	Password *string `url:"password,omitempty"` //gosec:disable G117 -- This is a false positive
 	// Pipeline is the ID of the Elasticsearch ingest pipeline to apply pre-process transformations to before indexing.
 	Pipeline *string `url:"pipeline,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
@@ -179,7 +179,7 @@ type UpdateElasticsearchInput struct {
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Password is basic Auth password.
-	Password *string `url:"password,omitempty"`
+	Password *string `url:"password,omitempty"` //gosec:disable G117 -- This is a false positive
 	// Pipeline is the ID of the Elasticsearch ingest pipeline to apply pre-process transformations to before indexing.
 	Pipeline *string `url:"pipeline,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.

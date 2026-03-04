@@ -17,7 +17,7 @@ type FTP struct {
 	GzipLevel         *int       `mapstructure:"gzip_level"`
 	MessageType       *string    `mapstructure:"message_type"`
 	Name              *string    `mapstructure:"name"`
-	Password          *string    `mapstructure:"password"`
+	Password          *string    `mapstructure:"password"` //gosec:disable G117 -- This is a false positive
 	Path              *string    `mapstructure:"path"`
 	Period            *int       `mapstructure:"period"`
 	Placement         *string    `mapstructure:"placement"`
@@ -80,7 +80,7 @@ type CreateFTPInput struct {
 	// Name is the name for the real-time logging configuration.
 	Name *string `url:"name,omitempty"`
 	// Password is the password for the server. For anonymous use an email address.
-	Password *string `url:"password,omitempty"`
+	Password *string `url:"password,omitempty"` //gosec:disable G117 -- This is a false positive
 	// Path is the path to upload log files to. If the path ends in / then it is treated as a directory.
 	Path *string `url:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
@@ -183,7 +183,7 @@ type UpdateFTPInput struct {
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Password is the password for the server. For anonymous use an email address.
-	Password *string `url:"password,omitempty"`
+	Password *string `url:"password,omitempty"` //gosec:disable G117 -- This is a false positive
 	// Path is the path to upload log files to. If the path ends in / then it is treated as a directory.
 	Path *string `url:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).

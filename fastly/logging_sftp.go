@@ -17,7 +17,7 @@ type SFTP struct {
 	GzipLevel         *int       `mapstructure:"gzip_level"`
 	MessageType       *string    `mapstructure:"message_type"`
 	Name              *string    `mapstructure:"name"`
-	Password          *string    `mapstructure:"password"`
+	Password          *string    `mapstructure:"password"` //gosec:disable G117 -- This is a false positive
 	Path              *string    `mapstructure:"path"`
 	Period            *int       `mapstructure:"period"`
 	Placement         *string    `mapstructure:"placement"`
@@ -82,7 +82,7 @@ type CreateSFTPInput struct {
 	// Name is the name of the loggly to update.
 	Name *string `url:"name,omitempty"`
 	// Password is the password for the server.
-	Password *string `url:"password,omitempty"`
+	Password *string `url:"password,omitempty"` //gosec:disable G117 -- This is a false positive
 	// Path is the path to upload logs to.
 	Path *string `url:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
@@ -189,7 +189,7 @@ type UpdateSFTPInput struct {
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Password is the password for the server.
-	Password *string `url:"password,omitempty"`
+	Password *string `url:"password,omitempty"` //gosec:disable G117 -- This is a false positive
 	// Path is the path to upload logs to.
 	Path *string `url:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).

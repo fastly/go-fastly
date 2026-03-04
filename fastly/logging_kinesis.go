@@ -8,7 +8,7 @@ import (
 
 // Kinesis represents a Kinesis response from the Fastly API.
 type Kinesis struct {
-	AccessKey         *string    `mapstructure:"access_key"`
+	AccessKey         *string    `mapstructure:"access_key"` //gosec:disable G117 -- This is a false positive
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            *string    `mapstructure:"format"`
@@ -60,7 +60,7 @@ func (c *Client) ListKinesis(ctx context.Context, i *ListKinesisInput) ([]*Kines
 // CreateKinesisInput is used as input to the CreateKinesis function.
 type CreateKinesisInput struct {
 	// AccessKey is the access key associated with the target Amazon Kinesis stream. Not required if iam_role is specified.
-	AccessKey *string `url:"access_key,omitempty"`
+	AccessKey *string `url:"access_key,omitempty"` //gosec:disable G117 -- This is a false positive
 	// Format is a Fastly log format string. Must produce valid JSON that Kinesis can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -149,7 +149,7 @@ func (c *Client) GetKinesis(ctx context.Context, i *GetKinesisInput) (*Kinesis, 
 // UpdateKinesisInput is used as input to the UpdateKinesis function.
 type UpdateKinesisInput struct {
 	// AccessKey is the access key associated with the target Amazon Kinesis stream. Not required if iam_role is specified.
-	AccessKey *string `url:"access_key,omitempty"`
+	AccessKey *string `url:"access_key,omitempty"` //gosec:disable G117 -- This is a false positive
 	// Format is a Fastly log format string. Must produce valid JSON that Kinesis can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
