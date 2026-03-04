@@ -187,7 +187,7 @@ type Secret struct {
 // CreateSecretInput is used as input to the CreateSecret function.
 type CreateSecretInput struct {
 	// ClientKey is the public key used to encrypt the secret with.
-	ClientKey []byte
+	ClientKey []byte //gosec:disable G117 -- This is a false positive
 	// Method is the HTTP request method used to create the secret.
 	//
 	// Secret names must be unique within a store.
@@ -204,7 +204,7 @@ type CreateSecretInput struct {
 	// Secret is the plaintext secret to be stored (required).
 	// The value will be base64-encoded when delivered to the API, which is the
 	// required format.
-	Secret []byte
+	Secret []byte //gosec:disable G117 -- This is a false positive
 	// StoreID of the Secret Store (required).
 	StoreID string
 }
@@ -226,8 +226,8 @@ func (c *Client) CreateSecret(ctx context.Context, i *CreateSecretInput) (*Secre
 	var body bytes.Buffer
 	err := json.NewEncoder(&body).Encode(struct {
 		Name      string `json:"name"`
-		Secret    []byte `json:"secret"`
-		ClientKey []byte `json:"client_key,omitempty"`
+		Secret    []byte `json:"secret"`               //gosec:disable G117 -- This is a false positive
+		ClientKey []byte `json:"client_key,omitempty"` //gosec:disable G117 -- This is a false positive
 	}{
 		Name:      i.Name,
 		Secret:    i.Secret,

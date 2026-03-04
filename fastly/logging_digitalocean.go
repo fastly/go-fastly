@@ -8,7 +8,7 @@ import (
 
 // DigitalOcean represents a DigitalOcean response from the Fastly API.
 type DigitalOcean struct {
-	AccessKey         *string    `mapstructure:"access_key"`
+	AccessKey         *string    `mapstructure:"access_key"` //gosec:disable G117 -- This is a false positive
 	BucketName        *string    `mapstructure:"bucket_name"`
 	CompressionCodec  *string    `mapstructure:"compression_codec"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
@@ -66,7 +66,7 @@ func (c *Client) ListDigitalOceans(ctx context.Context, i *ListDigitalOceansInpu
 // CreateDigitalOceanInput is used as input to the CreateDigitalOcean function.
 type CreateDigitalOceanInput struct {
 	// AccessKey is your DigitalOcean Spaces account access key.
-	AccessKey *string `url:"access_key,omitempty"`
+	AccessKey *string `url:"access_key,omitempty"` //gosec:disable G117 -- This is a false positive
 	// BucketName is the name of the DigitalOcean Space.
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
@@ -167,7 +167,7 @@ func (c *Client) GetDigitalOcean(ctx context.Context, i *GetDigitalOceanInput) (
 // UpdateDigitalOceanInput is used as input to the UpdateDigitalOcean function.
 type UpdateDigitalOceanInput struct {
 	// AccessKey is your DigitalOcean Spaces account access key.
-	AccessKey *string `url:"access_key,omitempty"`
+	AccessKey *string `url:"access_key,omitempty"` //gosec:disable G117 -- This is a false positive
 	// BucketName is the name of the DigitalOcean Space.
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).

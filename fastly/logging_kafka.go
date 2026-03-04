@@ -17,7 +17,7 @@ type Kafka struct {
 	FormatVersion     *int       `mapstructure:"format_version"`
 	Name              *string    `mapstructure:"name"`
 	ParseLogKeyvals   *bool      `mapstructure:"parse_log_keyvals"`
-	Password          *string    `mapstructure:"password"`
+	Password          *string    `mapstructure:"password"` //gosec:disable G117 -- This is a false positive
 	Placement         *string    `mapstructure:"placement"`
 	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	RequestMaxBytes   *int       `mapstructure:"request_max_bytes"`
@@ -83,7 +83,7 @@ type CreateKafkaInput struct {
 	// ParseLogKeyvals enables parsing of key=value tuples from the beginning of a logline, turning them into record headers.
 	ParseLogKeyvals *Compatibool `url:"parse_log_keyvals,omitempty"`
 	// Password is the SASL password.
-	Password *string `url:"password,omitempty"`
+	Password *string `url:"password,omitempty"` //gosec:disable G117 -- This is a false positive
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
 	// ProcessingRegion is the region where logs will be processed before streaming to Kafka.
@@ -192,7 +192,7 @@ type UpdateKafkaInput struct {
 	// ParseLogKeyvals enables parsing of key=value tuples from the beginning of a logline, turning them into record headers.
 	ParseLogKeyvals *Compatibool `url:"parse_log_keyvals,omitempty"`
 	// Password is the SASL password.
-	Password *string `url:"password,omitempty"`
+	Password *string `url:"password,omitempty"` //gosec:disable G117 -- This is a false positive
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
 	// ProcessingRegion is the region where logs will be processed before streaming to Kafka.

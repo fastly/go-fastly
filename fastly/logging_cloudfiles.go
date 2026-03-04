@@ -8,7 +8,7 @@ import (
 
 // Cloudfiles represents a Cloudfiles response from the Fastly API.
 type Cloudfiles struct {
-	AccessKey         *string    `mapstructure:"access_key"`
+	AccessKey         *string    `mapstructure:"access_key"` //gosec:disable G117 -- This is a false positive
 	BucketName        *string    `mapstructure:"bucket_name"`
 	CompressionCodec  *string    `mapstructure:"compression_codec"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
@@ -66,7 +66,7 @@ func (c *Client) ListCloudfiles(ctx context.Context, i *ListCloudfilesInput) ([]
 // CreateCloudfilesInput is used as input to the CreateCloudfiles function.
 type CreateCloudfilesInput struct {
 	// AccessKey is your Cloud Files account access key.
-	AccessKey *string `url:"access_key,omitempty"`
+	AccessKey *string `url:"access_key,omitempty"` //gosec:disable G117 -- This is a false positive
 	// BucketName is the name of your Cloud Files container.
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
@@ -167,7 +167,7 @@ func (c *Client) GetCloudfiles(ctx context.Context, i *GetCloudfilesInput) (*Clo
 // UpdateCloudfilesInput is used as input to the UpdateCloudfiles function.
 type UpdateCloudfilesInput struct {
 	// AccessKey is your Cloud Files account access key.
-	AccessKey *string `url:"access_key,omitempty"`
+	AccessKey *string `url:"access_key,omitempty"` //gosec:disable G117 -- This is a false positive
 	// BucketName is the name of your Cloud Files container.
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
