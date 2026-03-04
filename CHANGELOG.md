@@ -10,6 +10,8 @@
 
 ### Bug fixes:
 
+- refactor(MAKEFILE): Upgrade golangci lint to 2.10.1. ([#787](https://github.com/fastly/go-fastly/pull/787))
+
 ### Dependencies:
 - build(deps): `golang.org/x/sys` from 0.41.0 to 0.42.0 ([#788](https://github.com/fastly/go-fastly/pull/788))
 
