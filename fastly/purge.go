@@ -118,6 +118,7 @@ func (c *Client) PurgeKey(ctx context.Context, i *PurgeKeyInput) (*Purge, error)
 		req.Header.Set("Fastly-Soft-Purge", "1")
 	}
 
+	// #nosec G704 -- Request uses client's configured endpoint with validated service ID and key
 	resp, err := checkResp(c.HTTPClient.Do(req))
 	if err != nil {
 		return nil, err
@@ -170,6 +171,7 @@ func (c *Client) PurgeKeys(ctx context.Context, i *PurgeKeysInput) (map[string]s
 
 	req.Header.Set("Surrogate-Key", strings.Join(i.Keys, " "))
 
+	// #nosec G704 -- Request uses client's configured endpoint with validated service ID and keys
 	resp, err := checkResp(c.HTTPClient.Do(req))
 	if err != nil {
 		return nil, err
@@ -207,6 +209,7 @@ func (c *Client) PurgeAll(ctx context.Context, i *PurgeAllInput) (*Purge, error)
 		return nil, err
 	}
 
+	// #nosec G704 -- Request uses client's configured endpoint with validated service ID
 	resp, err := checkResp(c.HTTPClient.Do(req))
 	if err != nil {
 		return nil, err
