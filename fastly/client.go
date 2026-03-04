@@ -357,6 +357,7 @@ func (c *Client) Request(ctx context.Context, verb, p string, ro RequestOptions)
 	}
 
 	// nosemgrep: trailofbits.go.invalid-usage-of-modified-variable.invalid-usage-of-modified-variable
+	// #nosec G704 -- URL is constructed from client's configured endpoint and validated path
 	resp, err := checkResp(c.HTTPClient.Do(req))
 
 	if c.DebugMode && resp != nil {
@@ -489,6 +490,7 @@ func (c *Client) SimpleGet(ctx context.Context, target string) (*http.Response, 
 	request.Header.Set("User-Agent", UserAgent)
 
 	// nosemgrep: trailofbits.go.invalid-usage-of-modified-variable.invalid-usage-of-modified-variable
+	// #nosec G704 -- URL is parsed and validated before use; only allows properly formatted URLs
 	return checkResp(c.HTTPClient.Do(request))
 }
 
