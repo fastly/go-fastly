@@ -391,6 +391,10 @@ var ErrMissingKind = NewFieldError("Kind")
 // requires a "URL" key, but one was not set.
 var ErrMissingURL = NewFieldError("URL")
 
+// ErrInvalidURL is an error that is returned when an input struct
+// has a "URL" key, but the one provided is invalid.
+var ErrInvalidURL = NewFieldError("URL").Message("invalid")
+
 // ErrMissingUsername is an error that is returned when an input struct
 // requires a "Username" key, but one was not set.
 var ErrMissingUsername = NewFieldError("Username")

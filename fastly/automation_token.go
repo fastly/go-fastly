@@ -39,7 +39,7 @@ type AutomationTokenPaginatorMeta struct {
 // AutomationToken represents an API token which allows non-human clients to
 // authenticate requests to the Fastly API.
 type AutomationToken struct {
-	AccessToken *string              `mapstructure:"access_token"` //gosec:disable G117 -- This is a false positive
+	AccessToken *string              `mapstructure:"access_token"` //gosec:disable G117 -- This is the name of the field returned from the API
 	CreatedAt   *time.Time           `mapstructure:"created_at"`
 	ExpiresAt   *time.Time           `mapstructure:"expires_at"`
 	IP          *string              `mapstructure:"ip"`
