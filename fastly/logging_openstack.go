@@ -8,7 +8,7 @@ import (
 
 // Openstack represents a Openstack response from the Fastly API.
 type Openstack struct {
-	AccessKey         *string    `mapstructure:"access_key"`
+	AccessKey         *string    `mapstructure:"access_key"` //gosec:disable G117 -- This is the name of the field returned from the API
 	BucketName        *string    `mapstructure:"bucket_name"`
 	CompressionCodec  *string    `mapstructure:"compression_codec"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
@@ -66,7 +66,7 @@ func (c *Client) ListOpenstack(ctx context.Context, i *ListOpenstackInput) ([]*O
 // CreateOpenstackInput is used as input to the CreateOpenstack function.
 type CreateOpenstackInput struct {
 	// AccessKey is your OpenStack account access key.
-	AccessKey *string `url:"access_key,omitempty"`
+	AccessKey *string `url:"access_key,omitempty"` //gosec:disable G117 -- This is the name of the field expected by the API
 	// BucketName is the name of your OpenStack container.
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is he codec used for compressing your logs (zstd, snappy, gzip).
@@ -167,7 +167,7 @@ func (c *Client) GetOpenstack(ctx context.Context, i *GetOpenstackInput) (*Opens
 // UpdateOpenstackInput is used as input to the UpdateOpenstack function.
 type UpdateOpenstackInput struct {
 	// AccessKey is your OpenStack account access key.
-	AccessKey *string `url:"access_key,omitempty"`
+	AccessKey *string `url:"access_key,omitempty"` //gosec:disable G117 -- This is the name of the field expected by the API
 	// BucketName is the name of your OpenStack container.
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is he codec used for compressing your logs (zstd, snappy, gzip).
