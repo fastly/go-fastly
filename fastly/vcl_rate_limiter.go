@@ -10,7 +10,7 @@ import (
 // ERL models the response from the Fastly API.
 type ERL struct {
 	Action             *ERLAction     `mapstructure:"action"`
-	ClientKey          []*string      `mapstructure:"client_key"` //gosec:disable G117 -- This is a false positive
+	ClientKey          []*string      `mapstructure:"client_key"` //gosec:disable G117 -- This is the name of the field returned from the the API
 	CreatedAt          *time.Time     `mapstructure:"created_at"`
 	DeletedAt          *time.Time     `mapstructure:"deleted_at"`
 	FeatureRevision    *int           `mapstructure:"feature_revision"` // 1..
