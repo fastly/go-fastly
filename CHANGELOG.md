@@ -8,6 +8,8 @@
 
 ### Enhancements:
 
+- feat(apisecurity/operations): add API Security Operations API support ([#785](https://github.com/fastly/go-fastly/pull/785))
+
 ### Bug fixes:
 
 ### Dependencies:

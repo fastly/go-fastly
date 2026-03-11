@@ -1,0 +1,51 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"operation_ids":["fDbbMJtKRtSBozjV1HCZUA"],"status":"IGNORED"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/13.0.1 (+github.com/fastly/go-fastly; go1.25.4)
+    url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/discovered-operations-bulk
+    method: PATCH
+  response:
+    body: |
+      {"data":[{"id":"fDbbMJtKRtSBozjV1HCZUA","status_code":200}]}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "61"
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 09 Mar 2026 16:57:39 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000172-CHI, cache-pdk-katl1840078-PDK
+      X-Timer:
+      - S1773075459.903170,VS0,VE337
+    status: 207 Multi-Status
+    code: 207
+    duration: ""
+

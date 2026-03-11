@@ -657,7 +657,13 @@ func checkResp(resp *http.Response, err error) (*http.Response, error) {
 	}
 
 	switch resp.StatusCode {
-	case http.StatusOK, http.StatusCreated, http.StatusAccepted, http.StatusNoContent, http.StatusResetContent, http.StatusPartialContent:
+	case http.StatusOK,
+		http.StatusCreated,
+		http.StatusAccepted,
+		http.StatusNoContent,
+		http.StatusResetContent,
+		http.StatusPartialContent,
+		http.StatusMultiStatus:
 		return resp, nil
 	default:
 		return resp, NewHTTPError(resp)

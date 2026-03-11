@@ -1,0 +1,51 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"operations":[{"method":"GET","domain":"example.com","path":"/bulk-test-1","description":"bulk
+      test 1"}]}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/13.0.1 (+github.com/fastly/go-fastly; go1.25.4)
+    url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/operations-bulk
+    method: POST
+  response:
+    body: |
+      {"data":[{"id":"VgcOgUxvSwSNadkO-ViBBg","status_code":201,"operation":{"id":"VgcOgUxvSwSNadkO-ViBBg","method":"GET","domain":"example.com","path":"/bulk-test-1","description":"bulk test 1","rps":0,"updated_at":"2026-03-11T12:55:57Z","created_at":"2026-03-11T12:55:57Z"}}]}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "273"
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 11 Mar 2026 12:55:57 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000140-CHI, cache-mia-kmia1760077-MIA
+      X-Timer:
+      - S1773233758.607340,VS0,VE296
+    status: 207 Multi-Status
+    code: 207
+    duration: ""

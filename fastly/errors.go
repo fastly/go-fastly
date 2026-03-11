@@ -486,6 +486,18 @@ var ErrMissingVirtualPatchID = NewFieldError("Virtual Patch")
 // requires a "Mode" key, but one was not set.
 var ErrMissingMode = NewFieldError("Mode")
 
+// ErrMissingMethod is an error that is returned when an input struct
+// requires a "Method" key, but one was not set.
+var ErrMissingMethod = NewFieldError("Method")
+
+// ErrMissingPath is an error that is returned when an input struct
+// requires a "Path" key, but one was not set.
+var ErrMissingPath = NewFieldError("Path")
+
+// ErrMissingStatus is an error that is returned when an input struct
+// requires a "Status" key, but one was not set.
+var ErrMissingStatus = NewFieldError("Status")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 
