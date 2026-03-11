@@ -14,7 +14,7 @@ type Elasticsearch struct {
 	FormatVersion     *int       `mapstructure:"format_version"`
 	Index             *string    `mapstructure:"index"`
 	Name              *string    `mapstructure:"name"`
-	Password          *string    `mapstructure:"password"` //gosec:disable G117 -- This is the name of the field returned from the API
+	Password          *string    `mapstructure:"password"`
 	Pipeline          *string    `mapstructure:"pipeline"`
 	Placement         *string    `mapstructure:"placement"`
 	ProcessingRegion  *string    `mapstructure:"log_processing_region"`

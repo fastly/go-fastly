@@ -57,7 +57,7 @@ const (
 // S3 represents a S3 response from the Fastly API.
 type S3 struct {
 	ACL                          *S3AccessControlList    `mapstructure:"acl"`
-	AccessKey                    *string                 `mapstructure:"access_key"` //gosec:disable G117 -- This is the name of the field returned from the API
+	AccessKey                    *string                 `mapstructure:"access_key"`
 	BucketName                   *string                 `mapstructure:"bucket_name"`
 	CompressionCodec             *string                 `mapstructure:"compression_codec"`
 	CreatedAt                    *time.Time              `mapstructure:"created_at"`

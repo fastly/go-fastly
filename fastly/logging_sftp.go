@@ -17,7 +17,7 @@ type SFTP struct {
 	GzipLevel         *int       `mapstructure:"gzip_level"`
 	MessageType       *string    `mapstructure:"message_type"`
 	Name              *string    `mapstructure:"name"`
-	Password          *string    `mapstructure:"password"` //gosec:disable G117 -- This is the name of the field returned from the API
+	Password          *string    `mapstructure:"password"`
 	Path              *string    `mapstructure:"path"`
 	Period            *int       `mapstructure:"period"`
 	Placement         *string    `mapstructure:"placement"`
