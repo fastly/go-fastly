@@ -103,27 +103,10 @@ func TestClient_ListOperations_validation(t *testing.T) {
 func TestClient_ListDiscovered_validation(t *testing.T) {
 	ctx := context.TODO()
 
-	// ServiceID required.
 	_, err := ListDiscovered(ctx, fastly.TestClient, &ListDiscoveredInput{
 		ServiceID: nil,
-		Status:    fastly.ToPointer("DISCOVERED"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingServiceID)
-
-	// Status required.
-	_, err = ListDiscovered(ctx, fastly.TestClient, &ListDiscoveredInput{
-		ServiceID: fastly.ToPointer("svc"),
-		Status:    nil,
-	})
-	require.ErrorIs(t, err, fastly.ErrMissingStatus)
-
-	// Empty status is also invalid.
-	empty := ""
-	_, err = ListDiscovered(ctx, fastly.TestClient, &ListDiscoveredInput{
-		ServiceID: fastly.ToPointer("svc"),
-		Status:    &empty,
-	})
-	require.ErrorIs(t, err, fastly.ErrMissingStatus)
 }
 
 func TestClient_Tags_validation(t *testing.T) {

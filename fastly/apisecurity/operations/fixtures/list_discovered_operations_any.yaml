@@ -7,22 +7,22 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/13.0.1 (+github.com/fastly/go-fastly; go1.25.4)
-    url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/tags/mt6oFlJkScCH37C9QgHeaw
+    url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/discovered-operations?limit=1&page=0
     method: GET
   response:
     body: |
-      {"id":"mt6oFlJkScCH37C9QgHeaw","name":"test-tag-tags","description":"go-fastly test tag","created_at":"2026-03-11T12:55:59Z","updated_at":"2026-03-11T12:55:59Z"}
+      {"data":[],"meta":{"total":0,"limit":1}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "162"
+      - "41"
       Content-Type:
       - application/json
       Date:
-      - Wed, 11 Mar 2026 12:56:00 GMT
+      - Wed, 11 Mar 2026 13:58:31 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100144-CHI, cache-mia-kmia1760077-MIA
+      - cache-chi-klot8100179-CHI, cache-pdk-katl1840096-PDK
       X-Timer:
-      - S1773233760.881756,VS0,VE702
+      - S1773237511.751678,VS0,VE481
     status: 200 OK
     code: 200
     duration: ""

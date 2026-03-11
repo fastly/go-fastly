@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"description":"updated","tag_ids":["Ox4NMs8SRJujO1ouCXq3EA"]}'
+    body: '{"description":"updated","tag_ids":["uLiFDnWcQ9agyy3pLMw4fQ"]}'
     form: {}
     headers:
       Accept:
@@ -11,11 +11,11 @@ interactions:
       - application/json
       User-Agent:
       - FastlyGo/13.0.1 (+github.com/fastly/go-fastly; go1.25.4)
-    url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/operations/fDbbMJtKRtSBozjV1HCZUA
+    url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/operations/D1sqABnCSFC-YjsRjnuZVA
     method: PATCH
   response:
     body: |
-      {"id":"fDbbMJtKRtSBozjV1HCZUA","method":"GET","domain":"example.com","path":"/test","description":"updated","tag_ids":["Ox4NMs8SRJujO1ouCXq3EA"],"rps":0,"updated_at":"2026-03-09T16:57:37Z","created_at":"2026-03-09T16:57:36Z"}
+      {"id":"D1sqABnCSFC-YjsRjnuZVA","method":"GET","domain":"example.com","path":"/test","description":"updated","tag_ids":["uLiFDnWcQ9agyy3pLMw4fQ"],"rps":0,"updated_at":"2026-03-11T12:55:56Z","created_at":"2026-03-11T12:55:55Z"}
     headers:
       Accept-Ranges:
       - bytes
@@ -26,7 +26,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 09 Mar 2026 16:57:37 GMT
+      - Wed, 11 Mar 2026 12:55:56 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000165-CHI, cache-pdk-katl1840078-PDK
+      - cache-chi-klot8100063-CHI, cache-mia-kmia1760077-MIA
       X-Timer:
-      - S1773075457.949756,VS0,VE466
+      - S1773233756.068983,VS0,VE477
     status: 200 OK
     code: 200
     duration: ""

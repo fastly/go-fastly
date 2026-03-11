@@ -15,7 +15,7 @@ import (
 type ListDiscoveredInput struct {
 	// ServiceID is the unique identifier of the service (required).
 	ServiceID *string
-	// Status filters discovered operations by status (required).
+	// Status filters discovered operations by status (optional).
 	Status *string
 	// Method filters operations by HTTP method. If multiple values are provided,
 	// they will be sent as a comma-separated string (e.g. "GET,POST").
@@ -32,19 +32,16 @@ type ListDiscoveredInput struct {
 }
 
 // ListDiscovered lists discovered operations associated with a service.
-//
-// The API requires the "status" query parameter to be set for this endpoint.
 func ListDiscovered(ctx context.Context, c *fastly.Client, i *ListDiscoveredInput) (*DiscoveredOperations, error) {
 	if i.ServiceID == nil {
 		return nil, fastly.ErrMissingServiceID
 	}
-	if i.Status == nil || *i.Status == "" {
-		return nil, fastly.ErrMissingStatus
-	}
 
 	opts := fastly.CreateRequestOptions()
-	opts.Params["status"] = *i.Status
 
+	if i.Status != nil && *i.Status != "" {
+		opts.Params["status"] = *i.Status
+	}
 	if len(i.Method) > 0 {
 		opts.Params["method"] = strings.Join(i.Method, ",")
 	}
