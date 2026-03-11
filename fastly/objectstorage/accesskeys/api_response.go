@@ -5,7 +5,7 @@ import "time"
 // AccessKey is the API response structure for the create and describe operations.
 type AccessKey struct {
 	// AccessKey is an AccessKey identifier.
-	AccessKeyID string `json:"access_key"` //gosec:disable G117 -- This is the name of the field returned from the the API
+	AccessKeyID string `json:"access_key"`
 	// SecretKey is the secret for the access key
 	SecretKey string `json:"secret_key"`
 	// Description is human readable description for the access key.

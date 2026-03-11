@@ -23,7 +23,7 @@ const (
 // Token represents an API token which are used to authenticate requests to the
 // Fastly API.
 type Token struct {
-	AccessToken *string     `mapstructure:"access_token"` //gosec:disable G117 -- This is the name of the field returned from the the API
+	AccessToken *string     `mapstructure:"access_token"`
 	CreatedAt   *time.Time  `mapstructure:"created_at"`
 	ExpiresAt   *time.Time  `mapstructure:"expires_at"`
 	IP          *string     `mapstructure:"ip"`
@@ -108,7 +108,7 @@ type CreateTokenInput struct {
 	// Name is the name of the token.
 	Name *string `url:"name,omitempty"`
 	// Password is the token password.
-	Password *string `url:"password,omitempty"` //gosec:disable G117 -- This is the name of the field expected by the the API
+	Password *string `url:"password,omitempty"`
 	// Scope is a space-delimited list of authorization scope (global, purge_select, purge_all, global).
 	Scope *TokenScope `url:"scope,omitempty"`
 	// Services is a list of alphanumeric strings identifying services. If no services are specified, the token will have access to all services on the account.

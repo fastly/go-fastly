@@ -66,7 +66,7 @@ func (c *Client) ListDigitalOceans(ctx context.Context, i *ListDigitalOceansInpu
 // CreateDigitalOceanInput is used as input to the CreateDigitalOcean function.
 type CreateDigitalOceanInput struct {
 	// AccessKey is your DigitalOcean Spaces account access key.
-	AccessKey *string `url:"access_key,omitempty"` //gosec:disable G117 -- This is the name of the field expected by the the API
+	AccessKey *string `url:"access_key,omitempty"`
 	// BucketName is the name of the DigitalOcean Space.
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
@@ -167,7 +167,7 @@ func (c *Client) GetDigitalOcean(ctx context.Context, i *GetDigitalOceanInput) (
 // UpdateDigitalOceanInput is used as input to the UpdateDigitalOcean function.
 type UpdateDigitalOceanInput struct {
 	// AccessKey is your DigitalOcean Spaces account access key.
-	AccessKey *string `url:"access_key,omitempty"` //gosec:disable G117 -- This is the name of the field expected by the the API
+	AccessKey *string `url:"access_key,omitempty"`
 	// BucketName is the name of the DigitalOcean Space.
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).

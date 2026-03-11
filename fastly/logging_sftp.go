@@ -82,7 +82,7 @@ type CreateSFTPInput struct {
 	// Name is the name of the loggly to update.
 	Name *string `url:"name,omitempty"`
 	// Password is the password for the server.
-	Password *string `url:"password,omitempty"` //gosec:disable G117 -- This is the name of the field expected by the the API
+	Password *string `url:"password,omitempty"`
 	// Path is the path to upload logs to.
 	Path *string `url:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
@@ -189,7 +189,7 @@ type UpdateSFTPInput struct {
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Password is the password for the server.
-	Password *string `url:"password,omitempty"` //gosec:disable G117 -- This is the name of the field expected by the the API
+	Password *string `url:"password,omitempty"`
 	// Path is the path to upload logs to.
 	Path *string `url:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).

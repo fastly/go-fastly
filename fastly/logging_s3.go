@@ -122,7 +122,7 @@ type CreateS3Input struct {
 	// ACL is the access control list (ACL) specific request header.
 	ACL *S3AccessControlList `url:"acl,omitempty"`
 	//  AccessKey is the access key for your S3 account. Not required if iam_role is provided.
-	AccessKey *string `url:"access_key,omitempty"` //gosec:disable G117 -- This is the name of the field expected by the the API
+	AccessKey *string `url:"access_key,omitempty"`
 	// BucketName is the bucket name for S3 account.
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.
@@ -241,7 +241,7 @@ type UpdateS3Input struct {
 	// ACL is the access control list (ACL) specific request header.
 	ACL *S3AccessControlList `url:"acl,omitempty"`
 	//  AccessKey is the access key for your S3 account. Not required if iam_role is provided.
-	AccessKey *string `url:"access_key,omitempty"` //gosec:disable G117 -- This is the name of the field expected by the the API
+	AccessKey *string `url:"access_key,omitempty"`
 	// BucketName is the bucket name for S3 account.
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.

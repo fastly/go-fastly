@@ -74,7 +74,7 @@ type CreateElasticsearchInput struct {
 	// Name is the name for the real-time logging configuration.
 	Name *string `url:"name,omitempty"`
 	// Password is basic Auth password.
-	Password *string `url:"password,omitempty"` //gosec:disable G117 -- This is the name of the field expected by the the API
+	Password *string `url:"password,omitempty"`
 	// Pipeline is the ID of the Elasticsearch ingest pipeline to apply pre-process transformations to before indexing.
 	Pipeline *string `url:"pipeline,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
@@ -179,7 +179,7 @@ type UpdateElasticsearchInput struct {
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Password is basic Auth password.
-	Password *string `url:"password,omitempty"` //gosec:disable G117 -- This is the name of the field expected by the the API
+	Password *string `url:"password,omitempty"`
 	// Pipeline is the ID of the Elasticsearch ingest pipeline to apply pre-process transformations to before indexing.
 	Pipeline *string `url:"pipeline,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
