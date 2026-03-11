@@ -2,7 +2,19 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v13.0.1...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v13.1.0...)
+
+### Breaking:
+
+### Enhancements:
+
+### Bug fixes:
+
+### Dependencies:
+
+## [v13.1.0](https://github.com/fastly/go-fastly/releases/tag/v13.1.0) (2026-03-11)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v13.0.1...v13.1.0)
 
 ### Breaking:
 
@@ -10,9 +22,8 @@
 
 - feat(apisecurity/operations): add API Security Operations API support ([#785](https://github.com/fastly/go-fastly/pull/785))
 
-### Bug fixes:
-
 ### Dependencies:
+
 - build(deps): `golang.org/x/sys` from 0.41.0 to 0.42.0 ([#788](https://github.com/fastly/go-fastly/pull/788))
 
 ## [v13.0.1](https://github.com/fastly/go-fastly/releases/tag/v13.0.1) (2026-03-04)
