@@ -10,6 +10,8 @@
 
 ### Bug fixes:
 
+- refactor(MAKEFILE): Upgrade golangci lint to 2.10.1. ([#787](https://github.com/fastly/go-fastly/pull/787))
+
 ### Dependencies:
 
 ## [v13.1.0](https://github.com/fastly/go-fastly/releases/tag/v13.1.0) (2026-03-11)
