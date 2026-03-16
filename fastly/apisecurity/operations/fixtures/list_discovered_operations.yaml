@@ -6,7 +6,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/13.0.1 (+github.com/fastly/go-fastly; go1.25.4)
+      - FastlyGo/13.1.0 (+github.com/fastly/go-fastly; go1.25.4)
     url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/discovered-operations?domain=example.com&method=GET&path=%2Ftest
     method: GET
   response:
@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 11 Mar 2026 12:55:57 GMT
+      - Mon, 16 Mar 2026 16:41:59 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100102-CHI, cache-mia-kmia1760077-MIA
+      - cache-chi-klot8100102-CHI, cache-mia-kfll1870076-MIA
       X-Timer:
-      - S1773233757.117404,VS0,VE456
+      - S1773679319.381321,VS0,VE509
     status: 200 OK
     code: 200
     duration: ""

@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"strconv"
 	"strings"
 
 	"github.com/fastly/go-fastly/v13/fastly"
@@ -55,13 +54,8 @@ func ListOperations(ctx context.Context, c *fastly.Client, i *ListOperationsInpu
 		opts.Params["path"] = *i.Path
 	}
 
-	if i.Page != nil {
-		opts.Params["page"] = strconv.Itoa(*i.Page)
-	}
-
-	if i.Limit != nil {
-		opts.Params["limit"] = strconv.Itoa(*i.Limit)
-	}
+	// Pagination (page/limit)
+	applyPaginationParams(&opts, i.Page, i.Limit)
 
 	path := fastly.ToSafeURL("api-security", "v1", "services", *i.ServiceID, "operations")
 

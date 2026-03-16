@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"operation_ids":["VgcOgUxvSwSNadkO-ViBBg"],"tag_ids":["uLiFDnWcQ9agyy3pLMw4fQ"]}'
+    body: '{"operation_ids":["sWofay8oQUOccPUiKwisyA"],"tag_ids":["1Dtse3nGTRGBfQUTPIeFWw"]}'
     form: {}
     headers:
       Accept:
@@ -10,12 +10,12 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/13.0.1 (+github.com/fastly/go-fastly; go1.25.4)
+      - FastlyGo/13.1.0 (+github.com/fastly/go-fastly; go1.25.4)
     url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/operations-bulk-tags
     method: POST
   response:
     body: |
-      {"data":[{"id":"VgcOgUxvSwSNadkO-ViBBg","status_code":200}]}
+      {"data":[{"id":"sWofay8oQUOccPUiKwisyA","status_code":200}]}
     headers:
       Accept-Ranges:
       - bytes
@@ -26,7 +26,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 11 Mar 2026 12:55:58 GMT
+      - Mon, 16 Mar 2026 16:42:01 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000058-CHI, cache-mia-kmia1760077-MIA
+      - cache-chi-kigq8000058-CHI, cache-mia-kfll1870076-MIA
       X-Timer:
-      - S1773233758.939562,VS0,VE300
+      - S1773679321.971158,VS0,VE340
     status: 207 Multi-Status
     code: 207
     duration: ""
