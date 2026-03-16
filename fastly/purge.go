@@ -31,6 +31,20 @@ func (c *Client) Purge(ctx context.Context, i *PurgeInput) (*Purge, error) {
 		return nil, ErrMissingURL
 	}
 
+	// Validate URL to prevent SSRF attacks
+	parsedURL, err := url.Parse(i.URL)
+	if err != nil {
+		return nil, err
+	}
+	// Ensure the URL uses an acceptable scheme
+	if parsedURL.Scheme != "" && parsedURL.Scheme != "http" && parsedURL.Scheme != "https" {
+		return nil, ErrInvalidURL
+	}
+	// Ensure the URL has a host component for absolute URLs
+	if parsedURL.Scheme != "" && parsedURL.Host == "" {
+		return nil, ErrInvalidURL
+	}
+
 	requestOptions := CreateRequestOptions()
 	requestOptions.Parallel = true
 	if i.Soft {
@@ -39,7 +53,6 @@ func (c *Client) Purge(ctx context.Context, i *PurgeInput) (*Purge, error) {
 		}
 	}
 
-	var err error
 	// nosemgrep: trailofbits.go.questionable-assignment.questionable-assignment
 	requestOptions.Params, err = constructRequestOptionsParam(i.URL)
 	if err != nil {
@@ -118,6 +131,7 @@ func (c *Client) PurgeKey(ctx context.Context, i *PurgeKeyInput) (*Purge, error)
 		req.Header.Set("Fastly-Soft-Purge", "1")
 	}
 
+	// #nosec G704 -- req is constructed from RawRequest with sanitized path via ToSafeURL
 	resp, err := checkResp(c.HTTPClient.Do(req))
 	if err != nil {
 		return nil, err
@@ -170,6 +184,7 @@ func (c *Client) PurgeKeys(ctx context.Context, i *PurgeKeysInput) (map[string]s
 
 	req.Header.Set("Surrogate-Key", strings.Join(i.Keys, " "))
 
+	// #nosec G704 -- req is constructed from RawRequest with sanitized path via ToSafeURL
 	resp, err := checkResp(c.HTTPClient.Do(req))
 	if err != nil {
 		return nil, err
@@ -207,6 +222,7 @@ func (c *Client) PurgeAll(ctx context.Context, i *PurgeAllInput) (*Purge, error)
 		return nil, err
 	}
 
+	// #nosec G704 -- req is constructed from RawRequest with sanitized path via ToSafeURL
 	resp, err := checkResp(c.HTTPClient.Do(req))
 	if err != nil {
 		return nil, err
