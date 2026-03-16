@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"description":"updated","tag_ids":["uLiFDnWcQ9agyy3pLMw4fQ"]}'
+    body: '{"description":"updated","tag_ids":["1Dtse3nGTRGBfQUTPIeFWw"]}'
     form: {}
     headers:
       Accept:
@@ -10,23 +10,23 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/13.0.1 (+github.com/fastly/go-fastly; go1.25.4)
-    url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/operations/D1sqABnCSFC-YjsRjnuZVA
+      - FastlyGo/13.1.0 (+github.com/fastly/go-fastly; go1.25.4)
+    url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/operations/j0xdcKMURt2IuYUgXCbCSw
     method: PATCH
   response:
     body: |
-      {"id":"D1sqABnCSFC-YjsRjnuZVA","method":"GET","domain":"example.com","path":"/test","description":"updated","tag_ids":["uLiFDnWcQ9agyy3pLMw4fQ"],"rps":0,"updated_at":"2026-03-11T12:55:56Z","created_at":"2026-03-11T12:55:55Z"}
+      {"id":"j0xdcKMURt2IuYUgXCbCSw","method":"GET","domain":"example.com","path":"/test","description":"updated","tag_ids":["1Dtse3nGTRGBfQUTPIeFWw"],"rps":0,"updated_at":"2026-03-16T16:41:57Z","created_at":"2026-03-16T16:41:55Z","status":"SAVED"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "226"
+      - "243"
       Content-Type:
       - application/json
       Date:
-      - Wed, 11 Mar 2026 12:55:56 GMT
+      - Mon, 16 Mar 2026 16:41:57 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100063-CHI, cache-mia-kmia1760077-MIA
+      - cache-chi-kigq8000145-CHI, cache-mia-kfll1870076-MIA
       X-Timer:
-      - S1773233756.068983,VS0,VE477
+      - S1773679317.817749,VS0,VE497
     status: 200 OK
     code: 200
     duration: ""

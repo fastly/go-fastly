@@ -10,6 +10,7 @@
 
 ### Bug fixes:
 
+- fix(apisecurity/operations): support page-based pagination for list endpoints ([#790](https://github.com/fastly/go-fastly/pull/790))
 - refactor(MAKEFILE): Upgrade golangci lint to 2.10.1. ([#787](https://github.com/fastly/go-fastly/pull/787))
 
 ### Dependencies:

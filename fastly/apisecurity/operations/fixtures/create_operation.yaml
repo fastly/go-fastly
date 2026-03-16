@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"method":"GET","domain":"example.com","path":"/test","tag_ids":["uLiFDnWcQ9agyy3pLMw4fQ"]}'
+    body: '{"method":"GET","domain":"example.com","path":"/test","tag_ids":["1Dtse3nGTRGBfQUTPIeFWw"]}'
     form: {}
     headers:
       Accept:
@@ -10,23 +10,23 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/13.0.1 (+github.com/fastly/go-fastly; go1.25.4)
+      - FastlyGo/13.1.0 (+github.com/fastly/go-fastly; go1.25.4)
     url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/operations
     method: POST
   response:
     body: |
-      {"id":"D1sqABnCSFC-YjsRjnuZVA","method":"GET","domain":"example.com","path":"/test","tag_ids":["uLiFDnWcQ9agyy3pLMw4fQ"],"rps":0,"updated_at":"2026-03-11T12:55:55Z","created_at":"2026-03-11T12:55:55Z"}
+      {"id":"j0xdcKMURt2IuYUgXCbCSw","method":"GET","domain":"example.com","path":"/test","tag_ids":["1Dtse3nGTRGBfQUTPIeFWw"],"rps":0,"updated_at":"2026-03-16T16:41:55Z","created_at":"2026-03-16T16:41:55Z","status":"SAVED"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "202"
+      - "219"
       Content-Type:
       - application/json
       Date:
-      - Wed, 11 Mar 2026 12:55:55 GMT
+      - Mon, 16 Mar 2026 16:41:55 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100131-CHI, cache-mia-kmia1760077-MIA
+      - cache-chi-klot8100131-CHI, cache-mia-kfll1870076-MIA
       X-Timer:
-      - S1773233755.753231,VS0,VE741
+      - S1773679315.898829,VS0,VE810
     status: 201 Created
     code: 201
     duration: ""

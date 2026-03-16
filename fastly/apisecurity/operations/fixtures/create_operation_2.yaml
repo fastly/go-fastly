@@ -2,8 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"operations":[{"method":"GET","domain":"example.com","path":"/bulk-test-1","description":"bulk
-      test 1"}]}'
+    body: '{"method":"GET","domain":"example.com","path":"/test-pagination","tag_ids":["1Dtse3nGTRGBfQUTPIeFWw"]}'
     form: {}
     headers:
       Accept:
@@ -12,22 +11,22 @@ interactions:
       - application/json
       User-Agent:
       - FastlyGo/13.1.0 (+github.com/fastly/go-fastly; go1.25.4)
-    url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/operations-bulk
+    url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/operations
     method: POST
   response:
     body: |
-      {"data":[{"id":"sWofay8oQUOccPUiKwisyA","status_code":201,"operation":{"id":"sWofay8oQUOccPUiKwisyA","method":"GET","domain":"example.com","path":"/bulk-test-1","description":"bulk test 1","rps":0,"updated_at":"2026-03-16T16:42:00Z","created_at":"2026-03-16T16:42:00Z","status":"SAVED"}}]}
+      {"id":"sLTULjIBSV6SA1DHpnWTvQ","method":"GET","domain":"example.com","path":"/test-pagination","tag_ids":["1Dtse3nGTRGBfQUTPIeFWw"],"rps":0,"updated_at":"2026-03-16T16:41:56Z","created_at":"2026-03-16T16:41:56Z","status":"SAVED"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "290"
+      - "230"
       Content-Type:
       - application/json
       Date:
-      - Mon, 16 Mar 2026 16:42:00 GMT
+      - Mon, 16 Mar 2026 16:41:56 GMT
       Pragma:
       - no-cache
       Server:
@@ -43,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000140-CHI, cache-mia-kfll1870076-MIA
+      - cache-chi-klot8100131-CHI, cache-mia-kfll1870076-MIA
       X-Timer:
-      - S1773679321.544408,VS0,VE397
-    status: 207 Multi-Status
-    code: 207
+      - S1773679316.736734,VS0,VE619
+    status: 201 Created
+    code: 201
     duration: ""
