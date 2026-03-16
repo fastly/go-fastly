@@ -2,7 +2,7 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v13.1.0...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v13.1.1...)
 
 ### Breaking:
 
@@ -10,16 +10,19 @@
 
 ### Bug fixes:
 
-- fix(apisecurity/operations): support page-based pagination for list endpoints ([#790](https://github.com/fastly/go-fastly/pull/790))
-- refactor(MAKEFILE): Upgrade golangci lint to 2.10.1. ([#787](https://github.com/fastly/go-fastly/pull/787))
-
 ### Dependencies:
+
+## [v13.1.1](https://github.com/fastly/go-fastly/releases/tag/v13.1.1) (2026-03-16)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v13.1.0...v13.1.1)
+
+### Bug fixes:
+
+- fix(apisecurity/operations): support page-based pagination for list endpoints ([#790](https://github.com/fastly/go-fastly/pull/790))
 
 ## [v13.1.0](https://github.com/fastly/go-fastly/releases/tag/v13.1.0) (2026-03-11)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v13.0.1...v13.1.0)
-
-### Breaking:
 
 ### Enhancements:
 
