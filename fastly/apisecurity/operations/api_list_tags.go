@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"strconv"
 
 	"github.com/fastly/go-fastly/v13/fastly"
 )
@@ -27,12 +26,9 @@ func ListTags(ctx context.Context, c *fastly.Client, i *ListTagsInput) (*Operati
 	}
 
 	opts := fastly.CreateRequestOptions()
-	if i.Limit != nil {
-		opts.Params["limit"] = strconv.Itoa(*i.Limit)
-	}
-	if i.Page != nil {
-		opts.Params["page"] = strconv.Itoa(*i.Page)
-	}
+
+	// Pagination (page/limit)
+	applyPaginationParams(&opts, i.Page, i.Limit)
 
 	path := fastly.ToSafeURL("api-security", "v1", "services", *i.ServiceID, "tags")
 
