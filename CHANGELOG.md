@@ -2,11 +2,19 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v13.1.1...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v13.1.2...)
 
 ### Breaking:
 
 ### Enhancements:
+
+### Bug fixes:
+
+### Dependencies:
+
+## [v13.1.2](https://github.com/fastly/go-fastly/releases/tag/v13.1.2) (2026-03-17)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v13.1.1...v13.1.2)
 
 ### Bug fixes:
 
