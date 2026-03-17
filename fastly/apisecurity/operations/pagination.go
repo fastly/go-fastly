@@ -114,7 +114,7 @@ func (p *Paginator[T]) GetNext() ([]T, error) {
 	return items, nil
 }
 
-// ---- Typed wrappers for API Security Operations ----
+// ---- Typed wrappers for API Security: Operations (/operations and /discovered-operations) ----
 
 // OperationPaginator paginates GET /operations using page+limit.
 type OperationPaginator = Paginator[Operation]
@@ -189,6 +189,48 @@ func NewDiscoveredOperationPaginator(ctx context.Context, c *fastly.Client, i *L
 func ListDiscoveredAll(ctx context.Context, c *fastly.Client, i *ListDiscoveredInput) ([]DiscoveredOperation, error) {
 	p := NewDiscoveredOperationPaginator(ctx, c, i)
 	var out []DiscoveredOperation
+	for p.HasNext() {
+		pageData, err := p.GetNext()
+		if err != nil {
+			return nil, err
+		}
+		out = append(out, pageData...)
+	}
+	return out, nil
+}
+
+// ---- Typed wrappers for API Security: Tags (/tags) ----
+
+// TagPaginator paginates GET /tags using page+limit.
+type TagPaginator = Paginator[OperationTag]
+
+// NewTagPaginator returns a paginator that iterates over tag pages.
+func NewTagPaginator(ctx context.Context, c *fastly.Client, i *ListTagsInput) *TagPaginator {
+	page, limit := normalizePageLimit(i.Page, i.Limit)
+
+	cp := *i
+	cp.Page = nil
+	cp.Limit = nil
+
+	fetch := func(ctx context.Context, c *fastly.Client, page, limit int) ([]OperationTag, int, error) {
+		req := cp
+		req.Page = &page
+		req.Limit = &limit
+
+		resp, err := ListTags(ctx, c, &req)
+		if err != nil {
+			return nil, 0, err
+		}
+		return resp.Data, resp.Meta.Total, nil
+	}
+
+	return newPaginator[OperationTag](ctx, c, page, limit, fetch)
+}
+
+// ListTagsAll retrieves all tags across pages.
+func ListTagsAll(ctx context.Context, c *fastly.Client, i *ListTagsInput) ([]OperationTag, error) {
+	p := NewTagPaginator(ctx, c, i)
+	var out []OperationTag
 	for p.HasNext() {
 		pageData, err := p.GetNext()
 		if err != nil {

@@ -2,7 +2,7 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v13.1.1...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v13.1.2...)
 
 ### Breaking:
 
@@ -13,13 +13,25 @@
 ### Dependencies:
 - build(deps): `actions/create-github-app-token` from 2 to 3 ([#793](https://github.com/fastly/go-fastly/pull/793))
 
+## [v13.1.2](https://github.com/fastly/go-fastly/releases/tag/v13.1.2) (2026-03-17)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v13.1.1...v13.1.2)
+
+### Bug fixes:
+
+- fix(apisecurity/operations): support page-based pagination for tags ([#794](https://github.com/fastly/go-fastly/pull/794))
+
+### Dependencies:
+
+- build(deps): `golang.org/x/crypto` from 0.48.0 to 0.49.0 ([#792](https://github.com/fastly/go-fastly/pull/792))
+
 ## [v13.1.1](https://github.com/fastly/go-fastly/releases/tag/v13.1.1) (2026-03-16)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v13.1.0...v13.1.1)
 
 ### Bug fixes:
 
-- fix(apisecurity/operations): support page-based pagination for list endpoints ([#790](https://github.com/fastly/go-fastly/pull/790))
+- fix(apisecurity/operations): support page-based pagination for operations and discovered-operations ([#790](https://github.com/fastly/go-fastly/pull/790))
 
 ## [v13.1.0](https://github.com/fastly/go-fastly/releases/tag/v13.1.0) (2026-03-11)
 
