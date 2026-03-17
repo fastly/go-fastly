@@ -11,6 +11,7 @@
 ### Bug fixes:
 
 ### Dependencies:
+- build(deps): `actions/create-github-app-token` from 2 to 3 ([#793](https://github.com/fastly/go-fastly/pull/793))
 
 ## [v13.1.2](https://github.com/fastly/go-fastly/releases/tag/v13.1.2) (2026-03-17)
 
