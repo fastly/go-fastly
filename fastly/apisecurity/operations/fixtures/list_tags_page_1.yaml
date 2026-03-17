@@ -2,31 +2,27 @@
 version: 1
 interactions:
 - request:
-    body: '{"name":"test-tag-tags","description":"updated"}'
+    body: ""
     form: {}
     headers:
-      Accept:
-      - application/json
-      Content-Type:
-      - application/json
       User-Agent:
       - FastlyGo/13.1.1 (+github.com/fastly/go-fastly; go1.25.4)
-    url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/tags/3NpbbGo5ShePXxg8MjWKYQ
-    method: PATCH
+    url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/tags?limit=1&page=1
+    method: GET
   response:
     body: |
-      {"id":"3NpbbGo5ShePXxg8MjWKYQ","name":"test-tag-tags","description":"updated","created_at":"2026-03-17T11:31:13Z","updated_at":"2026-03-17T11:31:14Z"}
+      {"data":[{"id":"EAMd6o7_SnSXJWWTNX6brg","name":"foo","description":"Retrieve user information","created_at":"2026-02-26T01:13:34Z","updated_at":"2026-02-26T01:13:34Z"}],"meta":{"total":7,"limit":1}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "151"
+      - "199"
       Content-Type:
       - application/json
       Date:
-      - Tue, 17 Mar 2026 11:31:14 GMT
+      - Tue, 17 Mar 2026 11:31:16 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100124-CHI, cache-mia-kmia1760108-MIA
+      - cache-chi-klot8100169-CHI, cache-mia-kmia1760108-MIA
       X-Timer:
-      - S1773747074.787363,VS0,VE443
+      - S1773747076.796169,VS0,VE449
     status: 200 OK
     code: 200
     duration: ""
