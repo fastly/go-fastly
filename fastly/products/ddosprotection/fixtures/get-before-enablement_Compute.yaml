@@ -8,7 +8,7 @@ interactions:
       Accept:
       - application/json
       User-Agent:
-      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+      - FastlyGo/13.1.2 (+github.com/fastly/go-fastly; go1.25.7)
     url: https://api.fastly.com/enabled-products/v1/ddos_protection/services/XsjdElScZGjmfCcTwsYRC1
     method: GET
   response:
@@ -24,7 +24,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 08 Sep 2025 15:39:19 GMT
+      - Fri, 27 Mar 2026 19:01:38 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100156-CHI, cache-ewr-kewr1740095-EWR
+      - cache-chi-klot8100172-CHI, cache-ewr-kewr1740037-EWR
       X-Timer:
-      - S1757345959.196357,VS0,VE128
+      - S1774638099.634770,VS0,VE211
     status: 400 Bad Request
     code: 400
     duration: ""

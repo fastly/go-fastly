@@ -13,6 +13,12 @@ const (
 	ProductName = "DDoS Protection"
 )
 
+// EnableInput holds the details required by the API's 'Enable'
+// operation.
+type EnableInput struct {
+	Mode string `json:"mode,omitempty"`
+}
+
 // EnableOutput holds the details returned by the API from 'Get' and
 // 'Enable' operations; this alias exists to ensure that users of this
 // package will have a stable name to reference.
@@ -50,11 +56,12 @@ func Get(ctx context.Context, c *fastly.Client, serviceID string) (EnableOutput,
 }
 
 // Enable enables the DDoS Protection product on the service.
-func Enable(ctx context.Context, c *fastly.Client, serviceID string) (EnableOutput, error) {
-	return productcore.Put[EnableOutput](ctx, &productcore.PutInput[products.NullInput]{
+func Enable(ctx context.Context, c *fastly.Client, serviceID string, i EnableInput) (EnableOutput, error) {
+	return productcore.Put[EnableOutput](ctx, &productcore.PutInput[EnableInput]{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,
+		Input:     i,
 	})
 }
 

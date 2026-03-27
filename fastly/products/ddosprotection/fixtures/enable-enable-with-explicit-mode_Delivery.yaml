@@ -11,22 +11,22 @@ interactions:
       - application/json
       User-Agent:
       - FastlyGo/13.1.2 (+github.com/fastly/go-fastly; go1.25.7)
-    url: https://api.fastly.com/enabled-products/v1/ddos_protection/services/XsjdElScZGjmfCcTwsYRC1/configuration
-    method: PATCH
+    url: https://api.fastly.com/enabled-products/v1/ddos_protection/services/kKJb5bOFI47uHeBVluGfX1
+    method: PUT
   response:
     body: |
-      {"product":{"id":"ddos_protection","object":"product"},"service":{"id":"XsjdElScZGjmfCcTwsYRC1","object":"service"},"configuration":{"mode":"block"},"_links":{"self":"/enabled-products/v1/ddos_protection/services/XsjdElScZGjmfCcTwsYRC1/configuration"}}
+      {"product":{"id":"ddos_protection","object":"product"},"service":{"id":"kKJb5bOFI47uHeBVluGfX1","object":"service"},"_links":{"self":"/enabled-products/v1/ddos_protection/services/kKJb5bOFI47uHeBVluGfX1"}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "253"
+      - "206"
       Content-Type:
       - application/json
       Date:
-      - Fri, 27 Mar 2026 19:01:42 GMT
+      - Fri, 27 Mar 2026 19:01:47 GMT
       Pragma:
       - no-cache
       Server:
@@ -44,9 +44,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100079-CHI, cache-ewr-kewr1740037-EWR
+      - cache-chi-klot8100094-CHI, cache-ewr-kewr1740037-EWR
       X-Timer:
-      - S1774638102.808811,VS0,VE1124
+      - S1774638106.224994,VS0,VE1411
     status: 200 OK
     code: 200
     duration: ""

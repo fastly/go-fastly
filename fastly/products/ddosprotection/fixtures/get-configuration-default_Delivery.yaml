@@ -8,7 +8,7 @@ interactions:
       Accept:
       - application/json
       User-Agent:
-      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+      - FastlyGo/13.1.2 (+github.com/fastly/go-fastly; go1.25.7)
     url: https://api.fastly.com/enabled-products/v1/ddos_protection/services/kKJb5bOFI47uHeBVluGfX1/configuration
     method: GET
   response:
@@ -24,7 +24,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 08 Sep 2025 15:39:23 GMT
+      - Fri, 27 Mar 2026 19:01:40 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100168-CHI, cache-ewr-kewr1740095-EWR
+      - cache-chi-kigq8000108-CHI, cache-ewr-kewr1740037-EWR
       X-Timer:
-      - S1757345963.250757,VS0,VE198
+      - S1774638100.802432,VS0,VE305
     status: 200 OK
     code: 200
     duration: ""
