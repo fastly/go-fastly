@@ -7,6 +7,7 @@
 ### Breaking:
 
 ### Enhancements:
+- feat(products/ddosprotection): add support for the 'mode' parameter when enabling DDoS Protection ([#796](https://github.com/fastly/go-fastly/pull/796))
 
 ### Bug fixes:
 
