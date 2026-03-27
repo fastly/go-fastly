@@ -55,8 +55,16 @@ func Get(ctx context.Context, c *fastly.Client, serviceID string) (EnableOutput,
 	})
 }
 
-// Enable enables the DDoS Protection product on the service.
-func Enable(ctx context.Context, c *fastly.Client, serviceID string, i EnableInput) (EnableOutput, error) {
+// Enable enables the DDoS Protection product on the service with default settings.
+// The product will be enabled in 'log' mode by default.
+// Use EnableWithInput to specify a specific mode.
+func Enable(ctx context.Context, c *fastly.Client, serviceID string) (EnableOutput, error) {
+	return EnableWithInput(ctx, c, serviceID, EnableInput{})
+}
+
+// EnableWithInput enables the DDoS Protection product on the service with the specified configuration.
+// The mode parameter in EnableInput is optional; if not specified, defaults to 'log' mode.
+func EnableWithInput(ctx context.Context, c *fastly.Client, serviceID string, i EnableInput) (EnableOutput, error) {
 	return productcore.Put[EnableOutput](ctx, &productcore.PutInput[EnableInput]{
 		Client:    c,
 		ProductID: ProductID,
