@@ -5,7 +5,6 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v13/fastly"
-	"github.com/fastly/go-fastly/v13/fastly/products"
 	"github.com/fastly/go-fastly/v13/fastly/products/ddosprotection"
 	"github.com/fastly/go-fastly/v13/internal/productcore"
 	"github.com/fastly/go-fastly/v13/internal/test_utils"
@@ -35,9 +34,10 @@ var functionalTests = []*test_utils.FunctionalTest{
 		ProductID:     ddosprotection.ProductID,
 		ExpectFailure: true,
 	}),
-	productcore.NewEnableTest(&productcore.EnableTestInput[ddosprotection.EnableOutput, products.NullInput]{
-		OpNoInputFn: ddosprotection.Enable,
-		ProductID:   ddosprotection.ProductID,
+	productcore.NewEnableTest(&productcore.EnableTestInput[ddosprotection.EnableOutput, ddosprotection.EnableInput]{
+		OpWithInputFn: ddosprotection.Enable,
+		Input:         ddosprotection.EnableInput{},
+		ProductID:     ddosprotection.ProductID,
 	}),
 	productcore.NewGetTest(&productcore.GetTestInput[ddosprotection.EnableOutput]{
 		Phase:     "after enablement",
@@ -82,7 +82,7 @@ var functionalTests = []*test_utils.FunctionalTest{
 	}),
 	productcore.NewEnableTest(&productcore.EnableTestInput[ddosprotection.EnableOutput, ddosprotection.EnableInput]{
 		Phase:         "enable with explicit mode",
-		OpWithInputFn: ddosprotection.EnableWithInput,
+		OpWithInputFn: ddosprotection.Enable,
 		Input:         ddosprotection.EnableInput{Mode: "block"},
 		ProductID:     ddosprotection.ProductID,
 	}),
