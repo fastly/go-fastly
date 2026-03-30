@@ -5,7 +5,6 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v13/fastly"
-	"github.com/fastly/go-fastly/v13/fastly/products"
 	"github.com/fastly/go-fastly/v13/fastly/products/ddosprotection"
 	"github.com/fastly/go-fastly/v13/internal/productcore"
 	"github.com/fastly/go-fastly/v13/internal/test_utils"
@@ -35,9 +34,10 @@ var functionalTests = []*test_utils.FunctionalTest{
 		ProductID:     ddosprotection.ProductID,
 		ExpectFailure: true,
 	}),
-	productcore.NewEnableTest(&productcore.EnableTestInput[ddosprotection.EnableOutput, products.NullInput]{
-		OpNoInputFn: ddosprotection.Enable,
-		ProductID:   ddosprotection.ProductID,
+	productcore.NewEnableTest(&productcore.EnableTestInput[ddosprotection.EnableOutput, ddosprotection.EnableInput]{
+		OpWithInputFn: ddosprotection.Enable,
+		Input:         ddosprotection.EnableInput{},
+		ProductID:     ddosprotection.ProductID,
 	}),
 	productcore.NewGetTest(&productcore.GetTestInput[ddosprotection.EnableOutput]{
 		Phase:     "after enablement",
@@ -79,6 +79,25 @@ var functionalTests = []*test_utils.FunctionalTest{
 		OpFn:          ddosprotection.Get,
 		ProductID:     ddosprotection.ProductID,
 		ExpectFailure: true,
+	}),
+	productcore.NewEnableTest(&productcore.EnableTestInput[ddosprotection.EnableOutput, ddosprotection.EnableInput]{
+		Phase:         "enable with explicit mode",
+		OpWithInputFn: ddosprotection.Enable,
+		Input:         ddosprotection.EnableInput{Mode: "block"},
+		ProductID:     ddosprotection.ProductID,
+	}),
+	productcore.NewGetConfigurationTest(&productcore.GetConfigurationTestInput[ddosprotection.ConfigureOutput]{
+		Phase:     "verify mode parameter",
+		OpFn:      ddosprotection.GetConfiguration,
+		ProductID: ddosprotection.ProductID,
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTest, o ddosprotection.ConfigureOutput) {
+			require.NotNilf(t, o.Configuration.Mode, "test '%s'", tc.Name)
+			require.Equalf(t, "block", *o.Configuration.Mode, "test '%s'", tc.Name)
+		},
+	}),
+	productcore.NewDisableTest(&productcore.DisableTestInput{
+		Phase: "cleanup after mode test",
+		OpFn:  ddosprotection.Disable,
 	}),
 }
 

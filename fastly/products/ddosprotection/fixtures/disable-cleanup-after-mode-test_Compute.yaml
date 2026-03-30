@@ -2,37 +2,30 @@
 version: 1
 interactions:
 - request:
-    body: '{}'
+    body: ""
     form: {}
     headers:
-      Accept:
-      - application/json
-      Content-Type:
-      - application/json
       User-Agent:
       - FastlyGo/13.1.2 (+github.com/fastly/go-fastly; go1.25.7)
     url: https://api.fastly.com/enabled-products/v1/ddos_protection/services/XsjdElScZGjmfCcTwsYRC1
-    method: PUT
+    method: DELETE
   response:
-    body: |
-      {"product":{"id":"ddos_protection","object":"product"},"service":{"id":"XsjdElScZGjmfCcTwsYRC1","object":"service"},"_links":{"self":"/enabled-products/v1/ddos_protection/services/XsjdElScZGjmfCcTwsYRC1"}}
+    body: ""
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
-      Content-Length:
-      - "206"
       Content-Type:
       - application/json
       Date:
-      - Fri, 27 Mar 2026 19:01:40 GMT
+      - Fri, 27 Mar 2026 19:01:52 GMT
       Pragma:
       - no-cache
       Server:
       - fastly
       Status:
-      - 200 OK
+      - 204 No Content
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -46,7 +39,7 @@ interactions:
       X-Served-By:
       - cache-chi-klot8100172-CHI, cache-ewr-kewr1740037-EWR
       X-Timer:
-      - S1774638100.614510,VS0,VE1089
-    status: 200 OK
-    code: 200
+      - S1774638111.468505,VS0,VE737
+    status: 204 No Content
+    code: 204
     duration: ""
