@@ -5,7 +5,7 @@
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v13.1.2...)
 
 ### Breaking:
-- breaking(products/ddosprotection): the 'mode' parameter is now accepted when calling `EnableInput` for DDoS Protection enablement ([#796](https://github.com/fastly/go-fastly/pull/796))
+- breaking(products/ddosprotection): the 'mode' parameter is now required when calling `EnableInput` for DDoS Protection enablement ([#796](https://github.com/fastly/go-fastly/pull/796))
 
 
 ### Enhancements:
