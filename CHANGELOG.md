@@ -10,7 +10,7 @@
 
 ### Enhancements:
 
--feat(products/botmanagement): add `GET` and `PATCH` for the configuration of the `bot_management` product as well as support for the `contentguard` parameter ([#797](https://github.com/fastly/go-fastly/pull/797))
+- feat(products/botmanagement): Add configuration management support for `bot_management` product with `contentguard` parameter ([#797](https://github.com/fastly/go-fastly/pull/797))
 
 
 ### Bug fixes:
