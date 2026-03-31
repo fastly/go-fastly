@@ -9,28 +9,28 @@ interactions:
       - application/json
       User-Agent:
       - FastlyGo/13.1.2 (+github.com/fastly/go-fastly; go1.25.7)
-    url: https://api.fastly.com/enabled-products/v1/bot_management/services/kKJb5bOFI47uHeBVluGfX1
+    url: https://api.fastly.com/enabled-products/v1/bot_management/services/kKJb5bOFI47uHeBVluGfX1/configuration
     method: GET
   response:
     body: |
-      {"type":"","title":"no product on service","status":400,"errors":null,"detail":""}
+      {"product":{"id":"bot_management","object":"product"},"service":{"id":"kKJb5bOFI47uHeBVluGfX1","object":"service"},"configuration":{"contentguard":"off"},"_links":{"self":"/enabled-products/v1/bot_management/services/kKJb5bOFI47uHeBVluGfX1/configuration"}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "83"
+      - "257"
       Content-Type:
       - application/json
       Date:
-      - Tue, 31 Mar 2026 19:51:07 GMT
+      - Tue, 31 Mar 2026 19:51:02 GMT
       Pragma:
       - no-cache
       Server:
       - fastly
       Status:
-      - 400 Bad Request
+      - 200 OK
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100072-CHI, cache-ewr-kewr1740058-EWR
+      - cache-chi-klot8100045-CHI, cache-ewr-kewr1740058-EWR
       X-Timer:
-      - S1774986667.127298,VS0,VE216
-    status: 400 Bad Request
-    code: 400
+      - S1774986663.766785,VS0,VE197
+    status: 200 OK
+    code: 200
     duration: ""

@@ -5,10 +5,13 @@
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v13.1.2...)
 
 ### Breaking:
+
 - breaking(products/ddosprotection): the 'mode' parameter is now required when calling `EnableInput` for DDoS Protection enablement ([#796](https://github.com/fastly/go-fastly/pull/796))
 
-
 ### Enhancements:
+
+- feat(products/botmanagement): Add configuration management support for `bot_management` product with `contentguard` parameter ([#797](https://github.com/fastly/go-fastly/pull/797))
+
 
 ### Bug fixes:
 
