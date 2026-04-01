@@ -2,7 +2,15 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v13.1.2...)
+### Breaking:
+
+### Enhancements:
+
+### Bug fixes:
+
+## [v14.0.-](https://github.com/fastly/go-fastly/releases/tag/v14.0.0) (2026-04-01)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v13.1.2...v14.0.0)
 
 ### Breaking:
 
@@ -11,9 +19,6 @@
 ### Enhancements:
 
 - feat(products/botmanagement): Add configuration management support for `bot_management` product with `contentguard` parameter ([#797](https://github.com/fastly/go-fastly/pull/797))
-
-
-### Bug fixes:
 
 ### Dependencies:
 - build(deps): `actions/create-github-app-token` from 2 to 3 ([#793](https://github.com/fastly/go-fastly/pull/793))

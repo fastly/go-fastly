@@ -3,7 +3,7 @@ package scope
 import (
 	"fmt"
 
-	"github.com/fastly/go-fastly/v13/fastly"
+	"github.com/fastly/go-fastly/v14/fastly"
 )
 
 // BuildPath generates the appropriate API path based on the given scope,
