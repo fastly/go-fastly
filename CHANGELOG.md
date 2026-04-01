@@ -6,6 +6,8 @@
 
 ### Enhancements:
 
+### Dependencies:
+
 ### Bug fixes:
 
 ## [v14.0.-](https://github.com/fastly/go-fastly/releases/tag/v14.0.0) (2026-04-01)
