@@ -6,6 +6,8 @@
 
 ### Enhancements:
 
+- feat(observability/loggingendpointerrors): add support for `Logging Endpoint Errors` `GET` operation ([#800](https://github.com/fastly/go-fastly/pull/800))
+
 ### Dependencies:
 
 ### Bug fixes:
