@@ -6,13 +6,19 @@
 
 ### Enhancements:
 
-- feat(observability/loggingendpointerrors): add support for `Logging Endpoint Errors` `GET` operation ([#800](https://github.com/fastly/go-fastly/pull/800))
-
 ### Dependencies:
 
 ### Bug fixes:
 
-## [v14.0.-](https://github.com/fastly/go-fastly/releases/tag/v14.0.0) (2026-04-01)
+## [v14.1.0](https://github.com/fastly/go-fastly/releases/tag/v14.1.0) (2026-04-08)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v14.0.0...v14.1.0)
+
+### Enhancements:
+
+- feat(observability/loggingendpointerrors): add support for `Logging Endpoint Errors` `GET` operation ([#800](https://github.com/fastly/go-fastly/pull/800))
+
+## [v14.0.0](https://github.com/fastly/go-fastly/releases/tag/v14.0.0) (2026-04-01)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v13.1.2...v14.0.0)
 
