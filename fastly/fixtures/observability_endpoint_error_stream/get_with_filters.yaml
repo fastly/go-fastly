@@ -7,30 +7,27 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/14.0.0 (+github.com/fastly/go-fastly; go1.25.7)
-    url: https://api.fastly.com/observability/service/kKJb5bOFI47uHeBVluGfX1/logging/errors?filter%5Bendpoint%5D=Broken+Log&from=1775587245&to=1775587545
+    url: https://api.fastly.com/observability/service/kKJb5bOFI47uHeBVluGfX1/logging/errors?filter%5Bendpoint%5D=Broken+Log&from=1775668708&to=1775669008
     method: GET
   response:
     body: |
-      {"s":27,"t":1775587254943532,"o":"logging_error","r":"","m":"request failed","e":"Broken Log","details":"{\"level\":\"error\",\"error\":\"non-temporary request err: Get \\\"https://my-broken.logging.org/.well-known/fastly/logging/challenge\\\": lookup my-broken.logging.org. on 127.0.0.1:53: no such host\",\"name\":\"prebatch http challenge check\"}"}
-      {"s":18,"t":1775587256981715,"o":"logging_error","r":"","m":"request failed","e":"Broken Log","details":"{\"level\":\"error\",\"error\":\"non-temporary request err: Get \\\"https://my-broken.logging.org/.well-known/fastly/logging/challenge\\\": lookup my-broken.logging.org. on 127.0.0.1:53: no such host\",\"name\":\"prebatch http challenge check\"}"}
-      {"s":28,"t":1775587292616056,"o":"logging_error","r":"","m":"request failed","e":"Broken Log","details":"{\"level\":\"error\",\"error\":\"non-temporary request err: Get \\\"https://my-broken.logging.org/.well-known/fastly/logging/challenge\\\": lookup my-broken.logging.org. on 127.0.0.1:53: no such host\",\"name\":\"prebatch http challenge check\"}"}
-      {"s":19,"t":1775587315723327,"o":"logging_error","r":"","m":"request failed","e":"Broken Log","details":"{\"level\":\"error\",\"error\":\"non-temporary request err: Get \\\"https://my-broken.logging.org/.well-known/fastly/logging/challenge\\\": lookup my-broken.logging.org. on 127.0.0.1:53: no such host\",\"name\":\"prebatch http challenge check\"}"}
-      {"s":18,"t":1775587343917296,"o":"logging_error","r":"","m":"request failed","e":"Broken Log","details":"{\"level\":\"error\",\"error\":\"non-temporary request err: Get \\\"https://my-broken.logging.org/.well-known/fastly/logging/challenge\\\": lookup my-broken.logging.org. on 127.0.0.1:53: no such host\",\"name\":\"prebatch http challenge check\"}"}
-      {"s":18,"t":1775587383921446,"o":"logging_error","r":"","m":"request failed","e":"Broken Log","details":"{\"level\":\"error\",\"error\":\"non-temporary request err: Get \\\"https://my-broken.logging.org/.well-known/fastly/logging/challenge\\\": lookup my-broken.logging.org. on 127.0.0.1:53: no such host\",\"name\":\"prebatch http challenge check\"}"}
-      {"s":16,"t":1775587403717981,"o":"logging_error","r":"","m":"request failed","e":"Broken Log","details":"{\"level\":\"error\",\"error\":\"non-temporary request err: Get \\\"https://my-broken.logging.org/.well-known/fastly/logging/challenge\\\": lookup my-broken.logging.org. on 127.0.0.1:53: no such host\",\"name\":\"prebatch http challenge check\"}"}
-      {"s":18,"t":1775587437645880,"o":"logging_error","r":"","m":"request failed","e":"Broken Log","details":"{\"level\":\"error\",\"error\":\"non-temporary request err: Get \\\"https://my-broken.logging.org/.well-known/fastly/logging/challenge\\\": lookup my-broken.logging.org. on 127.0.0.1:53: no such host\",\"name\":\"prebatch http challenge check\"}"}
-      {"s":15,"t":1775587465219462,"o":"logging_error","r":"","m":"request failed","e":"Broken Log","details":"{\"level\":\"error\",\"error\":\"non-temporary request err: Get \\\"https://my-broken.logging.org/.well-known/fastly/logging/challenge\\\": lookup my-broken.logging.org. on 127.0.0.1:53: no such host\",\"name\":\"prebatch http challenge check\"}"}
-      {"s":15,"t":1775587529106194,"o":"logging_error","r":"","m":"request failed","e":"Broken Log","details":"{\"level\":\"error\",\"error\":\"non-temporary request err: Get \\\"https://my-broken.logging.org/.well-known/fastly/logging/challenge\\\": lookup my-broken.logging.org. on 127.0.0.1:53: no such host\",\"name\":\"prebatch http challenge check\"}"}
+      {"sequence_number":71,"error_time_us":1775668766119058,"stream":"logging_error","message":"request failed","endpoint":"Broken Log","details":"{\"level\":\"error\",\"error\":\"non-temporary request err: Get \\\"https://my-broken.logging.org/.well-known/fastly/logging/challenge\\\": lookup my-broken.logging.org. on 127.0.0.1:53: no such host\",\"name\":\"prebatch http challenge check\"}"}
+      {"sequence_number":68,"error_time_us":1775668798631058,"stream":"logging_error","message":"request failed","endpoint":"Broken Log","details":"{\"level\":\"error\",\"error\":\"non-temporary request err: Get \\\"https://my-broken.logging.org/.well-known/fastly/logging/challenge\\\": lookup my-broken.logging.org. on 127.0.0.1:53: no such host\",\"name\":\"prebatch http challenge check\"}"}
+      {"sequence_number":67,"error_time_us":1775668825364809,"stream":"logging_error","message":"request failed","endpoint":"Broken Log","details":"{\"level\":\"error\",\"error\":\"non-temporary request err: Get \\\"https://my-broken.logging.org/.well-known/fastly/logging/challenge\\\": lookup my-broken.logging.org. on 127.0.0.1:53: no such host\",\"name\":\"prebatch http challenge check\"}"}
+      {"sequence_number":78,"error_time_us":1775668842623139,"stream":"logging_error","message":"request failed","endpoint":"Broken Log","details":"{\"level\":\"error\",\"error\":\"non-temporary request err: Get \\\"https://my-broken.logging.org/.well-known/fastly/logging/challenge\\\": lookup my-broken.logging.org. on 127.0.0.1:53: no such host\",\"name\":\"prebatch http challenge check\"}"}
+      {"sequence_number":80,"error_time_us":1775668886383537,"stream":"logging_error","message":"request failed","endpoint":"Broken Log","details":"{\"level\":\"error\",\"error\":\"non-temporary request err: Get \\\"https://my-broken.logging.org/.well-known/fastly/logging/challenge\\\": lookup my-broken.logging.org. on 127.0.0.1:53: no such host\",\"name\":\"prebatch http challenge check\"}"}
+      {"sequence_number":71,"error_time_us":1775668948458569,"stream":"logging_error","message":"request failed","endpoint":"Broken Log","details":"{\"level\":\"error\",\"error\":\"non-temporary request err: Get \\\"https://my-broken.logging.org/.well-known/fastly/logging/challenge\\\": lookup my-broken.logging.org. on 127.0.0.1:53: no such host\",\"name\":\"prebatch http challenge check\"}"}
+      {"sequence_number":62,"error_time_us":1775668979579772,"stream":"logging_error","message":"request failed","endpoint":"Broken Log","details":"{\"level\":\"error\",\"error\":\"non-temporary request err: Get \\\"https://my-broken.logging.org/.well-known/fastly/logging/challenge\\\": lookup my-broken.logging.org. on 127.0.0.1:53: no such host\",\"name\":\"prebatch http challenge check\"}"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Date:
-      - Tue, 07 Apr 2026 18:56:02 GMT
+      - Wed, 08 Apr 2026 17:29:12 GMT
       Link:
-      - </observability/service/kKJb5bOFI47uHeBVluGfX1/logging/errors%3Ffrom=1775587250>;
-        rel="next", </observability/service/kKJb5bOFI47uHeBVluGfX1/logging/errors%3Ffrom=1775587230>;
+      - </observability/service/kKJb5bOFI47uHeBVluGfX1/logging/errors%3Ffrom=1775668710>;
+        rel="next", </observability/service/kKJb5bOFI47uHeBVluGfX1/logging/errors%3Ffrom=1775668690>;
         rel="prev"
       Pragma:
       - no-cache
@@ -47,9 +44,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100057-CHI, cache-ewr-kewr1740068-EWR
+      - cache-chi-klot8100054-CHI, cache-ewr-kewr1740054-EWR
       X-Timer:
-      - S1775588162.232007,VS0,VE91
+      - S1775669353.882944,VS0,VE63
     status: 200 OK
     code: 200
     duration: ""

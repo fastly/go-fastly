@@ -28,8 +28,8 @@ func TestClient_GetLoggingEndpointErrors(t *testing.T) {
 			ServiceID: TestDeliveryServiceID,
 			// Timestamps will need to be updated here if you wish to record the API response
 			// body. Streamed errors are only maintained for a given period of time.
-			From: ToPointer(uint64(1775587245)),
-			To:   ToPointer(uint64(1775587545)),
+			From: ToPointer(uint64(1775668708)),
+			To:   ToPointer(uint64(1775669008)),
 		})
 	})
 	if err != nil {
@@ -53,8 +53,8 @@ func TestClient_GetLoggingEndpointErrors_with_filters(t *testing.T) {
 			ServiceID: TestDeliveryServiceID,
 			// Timestamps will need to be updated here if you wish to record the API response
 			// body. Streamed errors are only maintained for a given period of time.
-			From:   ToPointer(uint64(1775587245)),
-			To:     ToPointer(uint64(1775587545)),
+			From:   ToPointer(uint64(1775668708)),
+			To:     ToPointer(uint64(1775669008)),
 			Filter: []string{"Broken Log"},
 		})
 	})

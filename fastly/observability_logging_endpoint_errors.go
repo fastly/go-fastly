@@ -26,12 +26,11 @@ type LoggingEndpointErrorsResponse struct {
 }
 
 type LoggingEndpointError struct {
-	SequenceNumber uint64 `json:"s"`
-	Timestamp      uint64 `json:"t"`
-	Stream         string `json:"o"`
-	RequestID      string `json:"r"`
-	Message        string `json:"m"`
-	Endpoint       string `json:"e"`
+	SequenceNumber uint64 `json:"sequence_number"`
+	Timestamp      uint64 `json:"error_time_us"`
+	Stream         string `json:"stream"`
+	Message        string `json:"message"`
+	Endpoint       string `json:"endpoint"`
 	Details        string `json:"details"`
 }
 
