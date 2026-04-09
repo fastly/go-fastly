@@ -22,7 +22,9 @@ type LoggingEndpointErrorsInput struct {
 }
 
 type LoggingEndpointErrorsResponse struct {
-	Errors []LoggingEndpointError
+	Errors   []LoggingEndpointError
+	NextLink string
+	PrevLink string
 }
 
 type LoggingEndpointError struct {
@@ -59,6 +61,12 @@ func (c *Client) GetLoggingEndpointErrors(ctx context.Context, i *LoggingEndpoin
 	defer resp.Body.Close()
 
 	var result LoggingEndpointErrorsResponse
+
+	// Parse Link header for pagination
+	if linkHeader := resp.Header.Get("Link"); linkHeader != "" {
+		result.NextLink, result.PrevLink = parseLinkHeader(linkHeader)
+	}
+
 	scanner := bufio.NewScanner(resp.Body)
 	for scanner.Scan() {
 		var errorLog LoggingEndpointError
@@ -73,4 +81,44 @@ func (c *Client) GetLoggingEndpointErrors(ctx context.Context, i *LoggingEndpoin
 	}
 
 	return &result, nil
+}
+
+// parseLinkHeader parses the Link header and extracts the 'from' parameter from next and prev URLs.
+// Format: </path?from=123>; rel="next", </path?from=456>; rel="prev"
+func parseLinkHeader(header string) (next, prev string) {
+	links := strings.Split(header, ",")
+	for _, link := range links {
+		link = strings.TrimSpace(link)
+		parts := strings.Split(link, ";")
+		if len(parts) != 2 {
+			continue
+		}
+
+		url := strings.Trim(strings.TrimSpace(parts[0]), "<>")
+		rel := strings.TrimSpace(parts[1])
+
+		// Extract 'from' parameter from URL
+		fromValue := extractFromParam(url)
+
+		if strings.Contains(rel, `rel="next"`) {
+			next = fromValue
+		} else if strings.Contains(rel, `rel="prev"`) {
+			prev = fromValue
+		}
+	}
+	return next, prev
+}
+
+// extractFromParam extracts the 'from' parameter value from a URL or URL-encoded string.
+func extractFromParam(url string) string {
+	// Handle both encoded (%3Ffrom=) and unencoded (?from=) formats
+	if idx := strings.Index(url, "from="); idx != -1 {
+		fromStr := url[idx+5:]
+		// Take until the next & or end of string
+		if endIdx := strings.Index(fromStr, "&"); endIdx != -1 {
+			fromStr = fromStr[:endIdx]
+		}
+		return fromStr
+	}
+	return ""
 }

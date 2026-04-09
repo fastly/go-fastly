@@ -28,8 +28,8 @@ func TestClient_GetLoggingEndpointErrors(t *testing.T) {
 			ServiceID: TestDeliveryServiceID,
 			// Timestamps will need to be updated here if you wish to record the API response
 			// body. Streamed errors are only maintained for a given period of time.
-			From: ToPointer(uint64(1775668708)),
-			To:   ToPointer(uint64(1775669008)),
+			From: ToPointer(uint64(1775741900)),
+			To:   ToPointer(uint64(1775741920)),
 		})
 	})
 	if err != nil {
@@ -38,6 +38,14 @@ func TestClient_GetLoggingEndpointErrors(t *testing.T) {
 
 	if result == nil {
 		t.Fatal("expected non-nil result")
+	}
+
+	// Verify pagination links are extracted from Link header
+	if result.NextLink == "" {
+		t.Error("expected NextLink to be populated from Link header")
+	}
+	if result.PrevLink == "" {
+		t.Error("expected PrevLink to be populated from Link header")
 	}
 }
 
@@ -53,8 +61,8 @@ func TestClient_GetLoggingEndpointErrors_with_filters(t *testing.T) {
 			ServiceID: TestDeliveryServiceID,
 			// Timestamps will need to be updated here if you wish to record the API response
 			// body. Streamed errors are only maintained for a given period of time.
-			From:   ToPointer(uint64(1775668708)),
-			To:     ToPointer(uint64(1775669008)),
+			From:   ToPointer(uint64(1775741900)),
+			To:     ToPointer(uint64(1775741920)),
 			Filter: []string{"Broken Log"},
 		})
 	})
@@ -64,5 +72,53 @@ func TestClient_GetLoggingEndpointErrors_with_filters(t *testing.T) {
 
 	if result == nil {
 		t.Fatal("expected non-nil result")
+	}
+
+	// Verify pagination links are extracted from Link header
+	if result.NextLink == "" {
+		t.Error("expected NextLink to be populated from Link header")
+	}
+	if result.PrevLink == "" {
+		t.Error("expected PrevLink to be populated from Link header")
+	}
+}
+
+func TestParseLinkHeader(t *testing.T) {
+	tests := []struct {
+		name     string
+		header   string
+		wantNext string
+		wantPrev string
+	}{
+		{
+			name:     "both next and prev links",
+			header:   `</observability/service/ziOYQTjIzCKDucniRRwqbq/logging/errors%3Ffrom=1775741920>; rel="next", </observability/service/ziOYQTjIzCKDucniRRwqbq/logging/errors%3Ffrom=1775741900>; rel="prev"`,
+			wantNext: "1775741910",
+			wantPrev: "1775741890",
+		},
+		{
+			name:     "only next link",
+			header:   `</observability/service/test/logging/errors?from=123>; rel="next"`,
+			wantNext: "123",
+			wantPrev: "",
+		},
+		{
+			name:     "empty header",
+			header:   "",
+			wantNext: "",
+			wantPrev: "",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			gotNext, gotPrev := parseLinkHeader(tt.header)
+			if gotNext != tt.wantNext {
+				t.Errorf("parseLinkHeader() gotNext = %v, want %v", gotNext, tt.wantNext)
+			}
+			if gotPrev != tt.wantPrev {
+				t.Errorf("parseLinkHeader() gotPrev = %v, want %v", gotPrev, tt.wantPrev)
+			}
+		})
 	}
 }
