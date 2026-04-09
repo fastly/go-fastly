@@ -6,6 +6,8 @@
 
 ### Enhancements:
 
+- feat(observability/loggingendpointerrors): add support for pagination via 'NextLink' and 'PrevLink' ([#802](https://github.com/fastly/go-fastly/pull/802))
+
 ### Dependencies:
 
 ### Bug fixes:
