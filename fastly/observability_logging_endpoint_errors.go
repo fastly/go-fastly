@@ -4,8 +4,12 @@ import (
 	"bufio"
 	"context"
 	"encoding/json"
+	"net/http"
+	"net/url"
 	"strconv"
 	"strings"
+
+	"github.com/peterhellberg/link"
 )
 
 type LoggingEndpointErrorsInput struct {
@@ -22,7 +26,9 @@ type LoggingEndpointErrorsInput struct {
 }
 
 type LoggingEndpointErrorsResponse struct {
-	Errors []LoggingEndpointError
+	Errors   []LoggingEndpointError
+	NextFrom string
+	PrevFrom string
 }
 
 type LoggingEndpointError struct {
@@ -59,6 +65,10 @@ func (c *Client) GetLoggingEndpointErrors(ctx context.Context, i *LoggingEndpoin
 	defer resp.Body.Close()
 
 	var result LoggingEndpointErrorsResponse
+
+	// Parse Link header for pagination
+	result.NextFrom, result.PrevFrom = parseLinkHeader(resp)
+
 	scanner := bufio.NewScanner(resp.Body)
 	for scanner.Scan() {
 		var errorLog LoggingEndpointError
@@ -73,4 +83,32 @@ func (c *Client) GetLoggingEndpointErrors(ctx context.Context, i *LoggingEndpoin
 	}
 
 	return &result, nil
+}
+
+// parseLinkHeader parses the Link header from the HTTP response and extracts the 'from'
+// parameter from next and prev URLs using the link package and net/url for robustness.
+func parseLinkHeader(resp *http.Response) (next, prev string) {
+	for _, l := range link.ParseResponse(resp) {
+		// Unescape the URI to handle URL-encoded query separators like %3F
+		unescaped, err := url.PathUnescape(l.URI)
+		if err != nil {
+			unescaped = l.URI
+		}
+
+		u, err := url.Parse(unescaped)
+		if err != nil {
+			continue
+		}
+
+		query := u.Query()
+		fromValue := query.Get("from")
+
+		switch l.Rel {
+		case "next":
+			next = fromValue
+		case "prev":
+			prev = fromValue
+		}
+	}
+	return next, prev
 }
