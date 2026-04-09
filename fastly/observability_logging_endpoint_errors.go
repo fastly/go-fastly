@@ -4,8 +4,12 @@ import (
 	"bufio"
 	"context"
 	"encoding/json"
+	"net/http"
+	"net/url"
 	"strconv"
 	"strings"
+
+	"github.com/peterhellberg/link"
 )
 
 type LoggingEndpointErrorsInput struct {
@@ -23,8 +27,8 @@ type LoggingEndpointErrorsInput struct {
 
 type LoggingEndpointErrorsResponse struct {
 	Errors   []LoggingEndpointError
-	NextLink string
-	PrevLink string
+	NextFrom string
+	PrevFrom string
 }
 
 type LoggingEndpointError struct {
@@ -63,9 +67,7 @@ func (c *Client) GetLoggingEndpointErrors(ctx context.Context, i *LoggingEndpoin
 	var result LoggingEndpointErrorsResponse
 
 	// Parse Link header for pagination
-	if linkHeader := resp.Header.Get("Link"); linkHeader != "" {
-		result.NextLink, result.PrevLink = parseLinkHeader(linkHeader)
-	}
+	result.NextFrom, result.PrevFrom = parseLinkHeader(resp)
 
 	scanner := bufio.NewScanner(resp.Body)
 	for scanner.Scan() {
@@ -83,42 +85,30 @@ func (c *Client) GetLoggingEndpointErrors(ctx context.Context, i *LoggingEndpoin
 	return &result, nil
 }
 
-// parseLinkHeader parses the Link header and extracts the 'from' parameter from next and prev URLs.
-// Format: </path?from=123>; rel="next", </path?from=456>; rel="prev".
-func parseLinkHeader(header string) (next, prev string) {
-	links := strings.Split(header, ",")
-	for _, link := range links {
-		link = strings.TrimSpace(link)
-		parts := strings.Split(link, ";")
-		if len(parts) != 2 {
+// parseLinkHeader parses the Link header from the HTTP response and extracts the 'from'
+// parameter from next and prev URLs using the link package and net/url for robustness.
+func parseLinkHeader(resp *http.Response) (next, prev string) {
+	for _, l := range link.ParseResponse(resp) {
+		// Unescape the URI to handle URL-encoded query separators like %3F
+		unescaped, err := url.PathUnescape(l.URI)
+		if err != nil {
+			unescaped = l.URI
+		}
+
+		u, err := url.Parse(unescaped)
+		if err != nil {
 			continue
 		}
 
-		url := strings.Trim(strings.TrimSpace(parts[0]), "<>")
-		rel := strings.TrimSpace(parts[1])
+		query := u.Query()
+		fromValue := query.Get("from")
 
-		// Extract 'from' parameter from URL
-		fromValue := extractFromParam(url)
-
-		if strings.Contains(rel, `rel="next"`) {
+		switch l.Rel {
+		case "next":
 			next = fromValue
-		} else if strings.Contains(rel, `rel="prev"`) {
+		case "prev":
 			prev = fromValue
 		}
 	}
 	return next, prev
-}
-
-// extractFromParam extracts the 'from' parameter value from a URL or URL-encoded string.
-func extractFromParam(url string) string {
-	// Handle both encoded (%3Ffrom=) and unencoded (?from=) formats
-	if idx := strings.Index(url, "from="); idx != -1 {
-		fromStr := url[idx+5:]
-		// Take until the next & or end of string
-		if endIdx := strings.Index(fromStr, "&"); endIdx != -1 {
-			fromStr = fromStr[:endIdx]
-		}
-		return fromStr
-	}
-	return ""
 }

@@ -3,6 +3,7 @@ package fastly
 import (
 	"context"
 	"errors"
+	"net/http"
 	"testing"
 )
 
@@ -41,11 +42,11 @@ func TestClient_GetLoggingEndpointErrors(t *testing.T) {
 	}
 
 	// Verify pagination links are extracted from Link header
-	if result.NextLink == "" {
-		t.Error("expected NextLink to be populated from Link header")
+	if result.NextFrom == "" {
+		t.Error("expected NextFrom to be populated from Link header")
 	}
-	if result.PrevLink == "" {
-		t.Error("expected PrevLink to be populated from Link header")
+	if result.PrevFrom == "" {
+		t.Error("expected PrevFrom to be populated from Link header")
 	}
 }
 
@@ -75,11 +76,11 @@ func TestClient_GetLoggingEndpointErrors_with_filters(t *testing.T) {
 	}
 
 	// Verify pagination links are extracted from Link header
-	if result.NextLink == "" {
-		t.Error("expected NextLink to be populated from Link header")
+	if result.NextFrom == "" {
+		t.Error("expected NextFrom to be populated from Link header")
 	}
-	if result.PrevLink == "" {
-		t.Error("expected PrevLink to be populated from Link header")
+	if result.PrevFrom == "" {
+		t.Error("expected PrevFrom to be populated from Link header")
 	}
 }
 
@@ -112,7 +113,15 @@ func TestParseLinkHeader(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			gotNext, gotPrev := parseLinkHeader(tt.header)
+			// Create a mock HTTP response with the Link header
+			resp := &http.Response{
+				Header: http.Header{},
+			}
+			if tt.header != "" {
+				resp.Header.Set("Link", tt.header)
+			}
+
+			gotNext, gotPrev := parseLinkHeader(resp)
 			if gotNext != tt.wantNext {
 				t.Errorf("parseLinkHeader() gotNext = %v, want %v", gotNext, tt.wantNext)
 			}
