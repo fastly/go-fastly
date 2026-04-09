@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/14.1.0 (+github.com/fastly/go-fastly; go1.25.7)
-    url: https://api.fastly.com/observability/service/ziOYQTjIzCKDucniRRwqbq/logging/errors?filter%5Bendpoint%5D=Broken+Log&from=1775741900&to=1775741920
+    url: https://api.fastly.com/observability/service/kKJb5bOFI47uHeBVluGfX1/logging/errors?filter%5Bendpoint%5D=Broken+Log&from=1775741900&to=1775741920
     method: GET
   response:
     body: |
@@ -22,8 +22,8 @@ interactions:
       Date:
       - Thu, 09 Apr 2026 13:50:09 GMT
       Link:
-      - </observability/service/ziOYQTjIzCKDucniRRwqbq/logging/errors%3Ffrom=1775741910>;
-        rel="next", </observability/service/ziOYQTjIzCKDucniRRwqbq/logging/errors%3Ffrom=1775741890>;
+      - </observability/service/kKJb5bOFI47uHeBVluGfX1/logging/errors%3Ffrom=1775741910>;
+        rel="next", </observability/service/kKJb5bOFI47uHeBVluGfX1/logging/errors%3Ffrom=1775741890>;
         rel="prev"
       Pragma:
       - no-cache

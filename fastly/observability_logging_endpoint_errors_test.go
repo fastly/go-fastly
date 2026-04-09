@@ -92,7 +92,7 @@ func TestParseLinkHeader(t *testing.T) {
 	}{
 		{
 			name:     "both next and prev links",
-			header:   `</observability/service/ziOYQTjIzCKDucniRRwqbq/logging/errors%3Ffrom=1775741920>; rel="next", </observability/service/ziOYQTjIzCKDucniRRwqbq/logging/errors%3Ffrom=1775741900>; rel="prev"`,
+			header:   `</observability/service/kKJb5bOFI47uHeBVluGfX1/logging/errors%3Ffrom=1775741910>; rel="next", </observability/service/kKJb5bOFI47uHeBVluGfX1/logging/errors%3Ffrom=1775741890>; rel="prev"`,
 			wantNext: "1775741910",
 			wantPrev: "1775741890",
 		},

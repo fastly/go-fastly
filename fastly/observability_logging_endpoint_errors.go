@@ -84,7 +84,7 @@ func (c *Client) GetLoggingEndpointErrors(ctx context.Context, i *LoggingEndpoin
 }
 
 // parseLinkHeader parses the Link header and extracts the 'from' parameter from next and prev URLs.
-// Format: </path?from=123>; rel="next", </path?from=456>; rel="prev"
+// Format: </path?from=123>; rel="next", </path?from=456>; rel="prev".
 func parseLinkHeader(header string) (next, prev string) {
 	links := strings.Split(header, ",")
 	for _, link := range links {
