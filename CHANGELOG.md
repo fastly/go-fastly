@@ -6,11 +6,17 @@
 
 ### Enhancements:
 
-- feat(observability/loggingendpointerrors): add support for pagination via 'NextFrom' and 'PrevFrom' fields extracted from Link headers ([#802](https://github.com/fastly/go-fastly/pull/802))
-
 ### Dependencies:
 
 ### Bug fixes:
+
+## [v14.2.0](https://github.com/fastly/go-fastly/releases/tag/v14.2.0) (2026-04-09)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v14.1.0...v14.2.0)
+
+### Enhancements:
+
+- feat(observability/loggingendpointerrors): add support for pagination via 'NextFrom' and 'PrevFrom' fields extracted from Link headers ([#802](https://github.com/fastly/go-fastly/pull/802))
 
 ## [v14.1.0](https://github.com/fastly/go-fastly/releases/tag/v14.1.0) (2026-04-08)
 
