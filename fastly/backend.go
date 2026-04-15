@@ -22,6 +22,8 @@ type Backend struct {
 	Hostname            *string    `mapstructure:"hostname"`
 	KeepAliveTime       *int       `mapstructure:"keepalive_time"`
 	MaxConn             *int       `mapstructure:"max_conn"`
+	MaxLifetime         *int       `mapstructure:"max_lifetime"`
+	MaxUse              *int       `mapstructure:"max_use"`
 	MaxTLSVersion       *string    `mapstructure:"max_tls_version"`
 	MinTLSVersion       *string    `mapstructure:"min_tls_version"`
 	Name                *string    `mapstructure:"name"`
@@ -103,6 +105,10 @@ type CreateBackendInput struct {
 	KeepAliveTime *int `url:"keepalive_time,omitempty"`
 	// MaxConn is the maximum number of concurrent connections this backend will accept.
 	MaxConn *int `url:"max_conn,omitempty"`
+	// MaxLifetime is the maximum backend connection lifetime in milliseconds.
+	MaxLifetime *int `url:"max_lifetime,omitempty"`
+	// MaxUse is the maximum number of requests allowed for a single backend connection.
+	MaxUse *int `url:"max_use,omitempty"`
 	// MaxTLSVersion is the maximum allowed TLS version on SSL connections to this backend.
 	MaxTLSVersion *string `url:"max_tls_version,omitempty"`
 	// MinTLSVersion is the minimum allowed TLS version on SSL connections to this backend.
@@ -236,6 +242,10 @@ type UpdateBackendInput struct {
 	KeepAliveTime *int `url:"keepalive_time,omitempty"`
 	// MaxConn is the maximum number of concurrent connections this backend will accept.
 	MaxConn *int `url:"max_conn,omitempty"`
+	// MaxLifetime is the maximum backend connection lifetime in milliseconds.
+	MaxLifetime *int `url:"max_lifetime,omitempty"`
+	// MaxUse is the maximum number of requests allowed for a single backend connection.
+	MaxUse *int `url:"max_use,omitempty"`
 	// MaxTLSVersion is the maximum allowed TLS version on SSL connections to this backend.
 	MaxTLSVersion *string `url:"max_tls_version,omitempty"`
 	// MinTLSVersion is the minimum allowed TLS version on SSL connections to this backend.
