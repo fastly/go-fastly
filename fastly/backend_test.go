@@ -24,6 +24,8 @@ func TestClient_Backends_Compute(t *testing.T) {
 			Name:           ToPointer("test-backend-compute"),
 			Address:        ToPointer("integ-test.go-fastly.com"),
 			ConnectTimeout: ToPointer(1500),
+			MaxUse:         ToPointer(100),
+			MaxLifetime:    ToPointer(60000),
 			OverrideHost:   ToPointer("origin.example.com"),
 			SSLCheckCert:   ToPointer(Compatibool(false)),
 			SSLCiphers:     ToPointer("DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384"),
@@ -62,6 +64,12 @@ func TestClient_Backends_Compute(t *testing.T) {
 	}
 	if *b.ConnectTimeout != 1500 {
 		t.Errorf("bad connect_timeout: %d", *b.ConnectTimeout)
+	}
+	if *b.MaxUse != 100 {
+		t.Errorf("bad max_use: %d", *b.MaxUse)
+	}
+	if *b.MaxLifetime != 60000 {
+		t.Errorf("bad max_lifetime: %d", *b.MaxLifetime)
 	}
 	if *b.OverrideHost != "origin.example.com" {
 		t.Errorf("bad override_host: %q", *b.OverrideHost)
@@ -127,6 +135,8 @@ func TestClient_Backends_Compute(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-backend-compute",
 			NewName:        ToPointer("new-test-backend-compute"),
+			MaxUse:         ToPointer(200),
+			MaxLifetime:    ToPointer(120000),
 			OverrideHost:   ToPointer("www.example.com"),
 			Port:           ToPointer(1234),
 			PreferIPv6:     ToPointer(Compatibool(true)),
@@ -141,6 +151,12 @@ func TestClient_Backends_Compute(t *testing.T) {
 	}
 	if *ub.Name != "new-test-backend-compute" {
 		t.Errorf("bad name: %q", *ub.Name)
+	}
+	if *ub.MaxUse != 200 {
+		t.Errorf("bad max_use: %d", *ub.MaxUse)
+	}
+	if *ub.MaxLifetime != 120000 {
+		t.Errorf("bad max_lifetime: %d", *ub.MaxLifetime)
 	}
 	if *ub.OverrideHost != "www.example.com" {
 		t.Errorf("bad override_host: %q", *ub.OverrideHost)
@@ -234,6 +250,8 @@ func TestClient_Backends(t *testing.T) {
 			Name:           ToPointer("test-backend"),
 			Address:        ToPointer("integ-test.go-fastly.com"),
 			ConnectTimeout: ToPointer(1500),
+			MaxUse:         ToPointer(100),
+			MaxLifetime:    ToPointer(60000),
 			OverrideHost:   ToPointer("origin.example.com"),
 			SSLCheckCert:   ToPointer(Compatibool(false)),
 			SSLCiphers:     ToPointer("DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384"),
@@ -272,6 +290,12 @@ func TestClient_Backends(t *testing.T) {
 	}
 	if *b.ConnectTimeout != 1500 {
 		t.Errorf("bad connect_timeout: %d", *b.ConnectTimeout)
+	}
+	if *b.MaxUse != 100 {
+		t.Errorf("bad max_use: %d", *b.MaxUse)
+	}
+	if *b.MaxLifetime != 60000 {
+		t.Errorf("bad max_lifetime: %d", *b.MaxLifetime)
 	}
 	if *b.OverrideHost != "origin.example.com" {
 		t.Errorf("bad override_host: %q", *b.OverrideHost)
@@ -337,6 +361,8 @@ func TestClient_Backends(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-backend",
 			NewName:        ToPointer("new-test-backend"),
+			MaxUse:         ToPointer(200),
+			MaxLifetime:    ToPointer(120000),
 			OverrideHost:   ToPointer("www.example.com"),
 			Port:           ToPointer(1234),
 			PreferIPv6:     ToPointer(Compatibool(true)),
@@ -351,6 +377,12 @@ func TestClient_Backends(t *testing.T) {
 	}
 	if *ub.Name != "new-test-backend" {
 		t.Errorf("bad name: %q", *ub.Name)
+	}
+	if *ub.MaxUse != 200 {
+		t.Errorf("bad max_use: %d", *ub.MaxUse)
+	}
+	if *ub.MaxLifetime != 120000 {
+		t.Errorf("bad max_lifetime: %d", *ub.MaxLifetime)
 	}
 	if *ub.OverrideHost != "www.example.com" {
 		t.Errorf("bad override_host: %q", *ub.OverrideHost)
