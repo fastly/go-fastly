@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/14.2.0 (+github.com/fastly/go-fastly; go1.26.2)
+    url: https://api.fastly.com/dns/v1/zones?limit=1
+    method: GET
+  response:
+    body: |
+      {"data":[{"id":"9jta3ggzjN0fG3R7o1iMbp","name":"mytestdomain.com.","description":"Sample domain","type":"secondary","created_at":"2026-04-29T15:15:39Z","updated_at":"2026-04-29T15:15:39Z"}],"meta":{"next_cursor":"XZTIsvDc3e3WQg9GWnmqKi6lU1z8Vnoi","limit":1,"sort":"created_at"}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "279"
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 30 Apr 2026 20:25:54 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000088-CHI, cache-ewr-kewr1740034-EWR
+      X-Timer:
+      - S1777580755.504226,VS0,VE97
+    status: 200 OK
+    code: 200
+    duration: ""

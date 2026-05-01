@@ -1,0 +1,49 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"name":"go-fastly-test.com","type":"secondary","description":"go-fastly
+      test zone"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/14.2.0 (+github.com/fastly/go-fastly; go1.26.2)
+    url: https://api.fastly.com/dns/v1/zones
+    method: POST
+  response:
+    body: |
+      {"id":"kKVK334pQIR5SXSnamIf49","name":"go-fastly-test.com.","description":"go-fastly test zone","type":"secondary","nameservers":["walnut.fastlydns.com.","walnut.fastlydns.dev.","walnut.fastlydns.net.","walnut.fastlydns.org."],"serial":"0","xfr_config_inbound":{"primaries":[],"notify_ip_addresses":{"ipv4":["157.52.78.7","157.52.79.7","167.82.228.7","167.82.229.7"]}},"created_at":"2026-04-30T20:25:52Z","updated_at":"2026-04-30T20:25:52Z"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "442"
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 30 Apr 2026 20:25:53 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000088-CHI, cache-ewr-kewr1740034-EWR
+      X-Timer:
+      - S1777580753.766623,VS0,VE619
+    status: 201 Created
+    code: 201
+    duration: ""
