@@ -25,7 +25,6 @@ type ListInput struct {
 
 // List retrieves a paginated list of DNS Zones.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Zones, error) {
-
 	path := fastly.ToSafeURL("dns", "v1", "zones")
 
 	requestOptions := fastly.CreateRequestOptions()
@@ -54,5 +53,4 @@ func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Zones, error) {
 	}
 
 	return zones, nil
-
 }

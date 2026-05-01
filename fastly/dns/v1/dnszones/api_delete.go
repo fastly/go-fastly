@@ -2,8 +2,6 @@ package dnszones
 
 import (
 	"context"
-	"encoding/json"
-	"fmt"
 
 	"github.com/fastly/go-fastly/v14/fastly"
 )
@@ -16,25 +14,18 @@ type DeleteInput struct {
 }
 
 // Delete deletes a specified DNS Zone.
-func Delete(ctx context.Context, c *fastly.Client, i *DeleteInput) (*Zone, error) {
-
+func Delete(ctx context.Context, c *fastly.Client, i *DeleteInput) error {
 	if i.ZoneID == nil {
-		return nil, fastly.ErrMissingID
+		return fastly.ErrMissingID
 	}
 
 	path := fastly.ToSafeURL("dns", "v1", "zones", *i.ZoneID)
 
 	resp, err := c.Delete(ctx, path, fastly.CreateRequestOptions())
 	if err != nil {
-		return nil, err
+		return err
 	}
 	defer resp.Body.Close()
 
-	var zone *Zone
-	if err := json.NewDecoder(resp.Body).Decode(&zone); err != nil {
-		return nil, fmt.Errorf("failed to decode json response: %w", err)
-	}
-
-	return zone, nil
-
+	return nil
 }

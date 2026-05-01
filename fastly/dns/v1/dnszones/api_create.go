@@ -22,7 +22,6 @@ type CreateInput struct {
 
 // Create creates a new DNS Zone.
 func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Zone, error) {
-
 	if i.Name == nil {
 		return nil, fastly.ErrMissingName
 	}
@@ -42,5 +41,4 @@ func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Zone, error
 	}
 
 	return zone, nil
-
 }

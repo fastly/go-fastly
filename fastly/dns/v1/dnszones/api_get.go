@@ -14,9 +14,8 @@ type GetInput struct {
 	ZoneID *string `json:"-"`
 }
 
-// Gete retrieves a specified DNS Zone.
+// Get retrieves a specified DNS Zone.
 func Get(ctx context.Context, c *fastly.Client, i *GetInput) (*Zone, error) {
-
 	if i.ZoneID == nil {
 		return nil, fastly.ErrMissingID
 	}
@@ -35,5 +34,4 @@ func Get(ctx context.Context, c *fastly.Client, i *GetInput) (*Zone, error) {
 	}
 
 	return zone, nil
-
 }

@@ -33,7 +33,7 @@ func TestZones(t *testing.T) {
 
 	defer func() {
 		fastly.Record(t, "delete_zone", func(c *fastly.Client) {
-			_, _ = Delete(ctx, c, &DeleteInput{
+			_ = Delete(ctx, c, &DeleteInput{
 				ZoneID: zone.ID,
 			})
 		})
@@ -78,7 +78,7 @@ func TestZones(t *testing.T) {
 
 	defer func() {
 		fastly.Record(t, "delete_zone_2", func(c *fastly.Client) {
-			_, _ = Delete(ctx, c, &DeleteInput{
+			_ = Delete(ctx, c, &DeleteInput{
 				ZoneID: zone2.ID,
 			})
 		})
@@ -129,6 +129,6 @@ func TestZones_validation(t *testing.T) {
 	_, err = Update(ctx, fastly.TestClient, &UpdateInput{ZoneID: nil})
 	require.ErrorIs(t, err, fastly.ErrMissingID)
 
-	_, err = Delete(ctx, fastly.TestClient, &DeleteInput{ZoneID: nil})
+	err = Delete(ctx, fastly.TestClient, &DeleteInput{ZoneID: nil})
 	require.ErrorIs(t, err, fastly.ErrMissingID)
 }

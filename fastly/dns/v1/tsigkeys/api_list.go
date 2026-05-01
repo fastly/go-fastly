@@ -25,7 +25,6 @@ type ListInput struct {
 
 // List retrieves a paginated list of TSIG keys.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) (*TSIGKeys, error) {
-
 	path := fastly.ToSafeURL("dns", "v1", "tsig-keys")
 
 	requestOptions := fastly.CreateRequestOptions()
@@ -54,5 +53,4 @@ func List(ctx context.Context, c *fastly.Client, i *ListInput) (*TSIGKeys, error
 	}
 
 	return tsigKeys, nil
-
 }

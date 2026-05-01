@@ -1,6 +1,6 @@
 package dnszones
 
-// Zone is the API response structure for the create, update and get opeations.
+// Zone is the API response structure for the create, update and get operations.
 type Zone struct {
 	// ID is the zone identifier (UUID).
 	ID *string `json:"id"`

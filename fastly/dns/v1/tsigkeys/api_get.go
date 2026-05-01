@@ -16,7 +16,6 @@ type GetInput struct {
 
 // Get retrieves a specified TSIG key.
 func Get(ctx context.Context, c *fastly.Client, i *GetInput) (*TSIGKey, error) {
-
 	if i.TSIGKeyID == nil {
 		return nil, fastly.ErrMissingID
 	}
@@ -35,5 +34,4 @@ func Get(ctx context.Context, c *fastly.Client, i *GetInput) (*TSIGKey, error) {
 	}
 
 	return tsigKey, nil
-
 }

@@ -22,7 +22,6 @@ type CreateInput struct {
 
 // Create creates a new TSIG key.
 func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*TSIGKey, error) {
-
 	if i.Name == nil {
 		return nil, fastly.ErrMissingName
 	}
@@ -45,5 +44,4 @@ func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*TSIGKey, er
 	}
 
 	return tsigKey, nil
-
 }

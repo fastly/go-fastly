@@ -15,7 +15,6 @@ type DeleteInput struct {
 
 // Delete deletes a specified TSIG key.
 func Delete(ctx context.Context, c *fastly.Client, i *DeleteInput) error {
-
 	if i.TSIGKeyID == nil {
 		return fastly.ErrMissingID
 	}
@@ -29,5 +28,4 @@ func Delete(ctx context.Context, c *fastly.Client, i *DeleteInput) error {
 	defer resp.Body.Close()
 
 	return nil
-
 }

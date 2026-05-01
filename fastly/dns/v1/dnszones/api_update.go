@@ -20,7 +20,6 @@ type UpdateInput struct {
 
 // Update updates an existing DNS Zone.
 func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Zone, error) {
-
 	if i.ZoneID == nil {
 		return nil, fastly.ErrMissingID
 	}
@@ -39,5 +38,4 @@ func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Zone, error
 	}
 
 	return zone, nil
-
 }

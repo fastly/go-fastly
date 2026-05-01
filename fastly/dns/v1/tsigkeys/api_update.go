@@ -24,7 +24,6 @@ type UpdateInput struct {
 
 // Update updates an existing TSIG key.
 func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*TSIGKey, error) {
-
 	if i.TSIGKeyID == nil {
 		return nil, fastly.ErrMissingID
 	}
@@ -43,5 +42,4 @@ func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*TSIGKey, er
 	}
 
 	return tsigKey, nil
-
 }
