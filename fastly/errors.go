@@ -83,13 +83,13 @@ var ErrMissingACLID = NewFieldError("ACLID")
 // requires a "Address" key, but one was not set.
 var ErrMissingAddress = NewFieldError("Address")
 
-// ErrMissingAlgorithm is an error that is returned when an input struct
-// requires a "Algorithm" key, but one was not set.
-var ErrMissingAlgorithm = NewFieldError("Algorithm")
-
 // ErrMissingAlertID is an error that is returned when an input struct
 // requires a "AlertID" key, but one was not set.
 var ErrMissingAlertID = NewFieldError("AlertID")
+
+// ErrMissingAlgorithm is an error that is returned when an input struct
+// requires a "Algorithm" key, but one was not set.
+var ErrMissingAlgorithm = NewFieldError("Algorithm")
 
 // ErrMissingBackend is an error that is returned when an input struct
 // requires a "Backend" key, but one was not set.
