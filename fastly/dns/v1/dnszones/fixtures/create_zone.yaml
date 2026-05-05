@@ -3,7 +3,8 @@ version: 1
 interactions:
 - request:
     body: '{"name":"go-fastly-test.com","type":"secondary","description":"go-fastly
-      test zone"}'
+      test zone","xfr_config_inbound":{"primaries":[{"address":"1.2.3.4","description":"primary
+      DNS server"}],"inbound_tsig_key_id":"Dz6PEojvJfhSciERW50SLv"}}'
     form: {}
     headers:
       Accept:
@@ -16,18 +17,18 @@ interactions:
     method: POST
   response:
     body: |
-      {"id":"DC4aBLD0K3tg4PMXDgtlp5","name":"go-fastly-test.com.","description":"go-fastly test zone","type":"secondary","nameservers":["alder.fastlydns.com.","alder.fastlydns.dev.","alder.fastlydns.net.","alder.fastlydns.org."],"serial":"0","xfr_config_inbound":{"primaries":[],"notify_ip_addresses":{"ipv4":["157.52.78.1","157.52.79.1","167.82.228.1","167.82.229.1"]}},"created_at":"2026-05-01T14:29:54Z","updated_at":"2026-05-01T14:29:54Z"}
+      {"id":"SixzqOcXbQTYhAcVa3MBAM","name":"go-fastly-test.com.","description":"go-fastly test zone","type":"secondary","nameservers":["elm.fastlydns.com.","elm.fastlydns.dev.","elm.fastlydns.net.","elm.fastlydns.org."],"serial":"0","xfr_config_inbound":{"primaries":[{"description":"primary DNS server","address":"1.2.3.4"}],"inbound_tsig_key_id":"Dz6PEojvJfhSciERW50SLv","notify_ip_addresses":{"ipv4":["157.52.78.3","157.52.79.3","167.82.228.3","167.82.229.3"]}},"created_at":"2026-05-05T19:41:52Z","updated_at":"2026-05-05T19:41:52Z"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "438"
+      - "533"
       Content-Type:
       - application/json
       Date:
-      - Fri, 01 May 2026 14:29:54 GMT
+      - Tue, 05 May 2026 19:41:52 GMT
       Pragma:
       - no-cache
       Server:
@@ -41,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000088-CHI, cache-ewr-kewr1740029-EWR
+      - cache-chi-kigq8000088-CHI, cache-ewr-kewr1740089-EWR
       X-Timer:
-      - S1777645794.081071,VS0,VE681
+      - S1778010112.812885,VS0,VE586
     status: 201 Created
     code: 201
     duration: ""

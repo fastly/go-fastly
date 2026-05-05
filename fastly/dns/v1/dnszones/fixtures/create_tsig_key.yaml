@@ -2,29 +2,31 @@
 version: 1
 interactions:
 - request:
-    body: ""
+    body: '{"name":"go-fastly-test-key","algorithm":"hmac-sha256","secret":"dGVzdHNlY3JldA=="}'
     form: {}
     headers:
       Accept:
       - application/json
+      Content-Type:
+      - application/json
       User-Agent:
       - FastlyGo/14.2.0 (+github.com/fastly/go-fastly; go1.26.2)
-    url: https://api.fastly.com/dns/v1/zones?limit=1
-    method: GET
+    url: https://api.fastly.com/dns/v1/tsig-keys
+    method: POST
   response:
     body: |
-      {"data":[{"id":"9jta3ggzjN0fG3R7o1iMbp","name":"mytestdomain.com.","description":"Sample domain","type":"secondary","created_at":"2026-04-29T15:15:39Z","updated_at":"2026-04-29T15:15:39Z"}],"meta":{"next_cursor":"XZTIsvDc3e3WQg9GWnmqKi6lU1z8Vnoi","limit":1,"sort":"created_at"}}
+      {"id":"Dz6PEojvJfhSciERW50SLv","name":"go-fastly-test-key","algorithm":"hmac-sha256","created_at":"2026-05-05T19:41:51Z","updated_at":"2026-05-05T19:41:51Z"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "279"
+      - "158"
       Content-Type:
       - application/json
       Date:
-      - Tue, 05 May 2026 19:41:53 GMT
+      - Tue, 05 May 2026 19:41:51 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +40,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000088-CHI, cache-ewr-kewr1740089-EWR
+      - cache-chi-kigq8000100-CHI, cache-ewr-kewr1740089-EWR
       X-Timer:
-      - S1778010114.715364,VS0,VE118
-    status: 200 OK
-    code: 200
+      - S1778010112.503587,VS0,VE296
+    status: 201 Created
+    code: 201
     duration: ""

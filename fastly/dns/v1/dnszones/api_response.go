@@ -1,5 +1,7 @@
 package dnszones
 
+import "github.com/fastly/go-fastly/v14/fastly"
+
 // Zone is the API response structure for the create, update and get operations.
 type Zone struct {
 	// ID is the zone identifier (UUID).
@@ -37,7 +39,7 @@ type XfrConfigInboundInput struct {
 	// Primaries is an array of primary DNS server objects for inbound zone transfers.
 	Primaries []Primary `json:"primaries,omitempty"`
 	// InboundTSIGKeyID is the ID of the TSIG key used to secure inbound zone transfers.
-	InboundTSIGKeyID *string `json:"inbound_tsig_key_id,omitempty"`
+	InboundTSIGKeyID *fastly.Nullable[string] `json:"inbound_tsig_key_id,omitempty"`
 }
 
 // Primary represents a primary DNS server for inbound zone transfers.

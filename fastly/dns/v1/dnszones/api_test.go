@@ -7,6 +7,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/fastly/go-fastly/v14/fastly"
+	"github.com/fastly/go-fastly/v14/fastly/dns/v1/tsigkeys"
 )
 
 func TestZones(t *testing.T) {
@@ -14,13 +15,43 @@ func TestZones(t *testing.T) {
 
 	var err error
 
-	// Create dns zone.
+	// Create a TSIG key to associate with the zone.
+	var key *tsigkeys.TSIGKey
+	fastly.Record(t, "create_tsig_key", func(c *fastly.Client) {
+		key, err = tsigkeys.Create(ctx, c, &tsigkeys.CreateInput{
+			Name:      fastly.ToPointer("go-fastly-test-key"),
+			Algorithm: fastly.ToPointer("hmac-sha256"),
+			Secret:    fastly.ToPointer("dGVzdHNlY3JldA=="),
+		})
+	})
+	require.NoError(t, err)
+	require.NotNil(t, key)
+	require.NotNil(t, key.ID)
+
+	defer func() {
+		fastly.Record(t, "delete_tsig_key", func(c *fastly.Client) {
+			_ = tsigkeys.Delete(ctx, c, &tsigkeys.DeleteInput{
+				TSIGKeyID: key.ID,
+			})
+		})
+	}()
+
+	// Create dns zone with all fields populated.
 	var zone *Zone
 	fastly.Record(t, "create_zone", func(c *fastly.Client) {
 		zone, err = Create(ctx, c, &CreateInput{
 			Name:        fastly.ToPointer("go-fastly-test.com"),
 			Type:        fastly.ToPointer("secondary"),
 			Description: fastly.ToPointer("go-fastly test zone"),
+			XfrConfigInbound: &XfrConfigInboundInput{
+				Primaries: []Primary{
+					{
+						Address:     fastly.ToPointer("1.2.3.4"),
+						Description: fastly.ToPointer("primary DNS server"),
+					},
+				},
+				InboundTSIGKeyID: fastly.NewNullable(*key.ID),
+			},
 		})
 	})
 	require.NoError(t, err)
@@ -30,6 +61,8 @@ func TestZones(t *testing.T) {
 	require.Equal(t, "go-fastly-test.com.", *zone.Name)
 	require.Equal(t, "secondary", *zone.Type)
 	require.Equal(t, "go-fastly test zone", *zone.Description)
+	require.NotNil(t, zone.XfrConfigInbound)
+	require.Equal(t, *key.ID, *zone.XfrConfigInbound.InboundTSIGKeyID)
 
 	defer func() {
 		fastly.Record(t, "delete_zone", func(c *fastly.Client) {
@@ -51,7 +84,7 @@ func TestZones(t *testing.T) {
 	require.Equal(t, *zone.ID, *got.ID)
 	require.Equal(t, *zone.Name, *got.Name)
 
-	// Update
+	// Update zone description.
 	var updated *Zone
 	fastly.Record(t, "update_zone", func(c *fastly.Client) {
 		updated, err = Update(ctx, c, &UpdateInput{
@@ -63,6 +96,19 @@ func TestZones(t *testing.T) {
 	require.NotNil(t, updated)
 	require.Equal(t, *zone.ID, *updated.ID)
 	require.Equal(t, "updated description", *updated.Description)
+
+	// Update zone, unsetting the inbound TSIG key ID.
+	fastly.Record(t, "update_zone_null_tsig_key", func(c *fastly.Client) {
+		updated, err = Update(ctx, c, &UpdateInput{
+			ZoneID: zone.ID,
+			XfrConfigInbound: &XfrConfigInboundInput{
+				InboundTSIGKeyID: fastly.NullValue[string](),
+			},
+		})
+	})
+	require.NoError(t, err)
+	require.NotNil(t, updated)
+	require.Nil(t, updated.XfrConfigInbound.InboundTSIGKeyID)
 
 	// Create a second dns zone for pagination testing.
 	var zone2 *Zone

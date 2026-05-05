@@ -38,6 +38,31 @@ func NullString(v string) *string {
 	return &v
 }
 
+// -- Nullable helpers --
+
+// Nullable represents a value that can be explicitly set to null in JSON output.
+type Nullable[T any] struct {
+	value *T
+}
+
+// NullValue returns a *Nullable that serializes to null.
+func NullValue[T any]() *Nullable[T] {
+	return &Nullable[T]{}
+}
+
+// NewNullable returns a *Nullable that serializes to the given value.
+func NewNullable[T any](v T) *Nullable[T] {
+	return &Nullable[T]{value: &v}
+}
+
+// MarshalJSON implements the json.Marshaler interface.
+func (n Nullable[T]) MarshalJSON() ([]byte, error) {
+	if n.value == nil {
+		return []byte("null"), nil
+	}
+	return json.Marshal(*n.value)
+}
+
 // ToSafeURL produces a safe (no path traversal, no unsafe characters) URL
 // from the path components passed in.
 //
