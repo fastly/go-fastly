@@ -13,18 +13,18 @@ interactions:
     method: GET
   response:
     body: |
-      {"data":[{"id":"RadTpgCoEqpAnQG4h7emSW","description":"updated description","name":"go-fastly-test-key","algorithm":"hmac-sha256","created_at":"2026-05-01T14:29:54Z","updated_at":"2026-05-01T14:29:55Z"}],"meta":{"next_cursor":"886bzjpFW0XQweUXIo9OqzWFMNa91jo","limit":1,"sort":"created_at"}}
+      {"data":[{"id":"RYBr6YBWLEKD39rxBmcLhq","description":"test desc","name":"test","algorithm":"hmac-sha256","created_at":"2026-05-05T16:38:18Z","updated_at":"2026-05-05T16:41:10Z"}],"meta":{"next_cursor":"886bzjpFW0XQx5wLsI3YL905IQx83jK","limit":1,"sort":"created_at"}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "292"
+      - "268"
       Content-Type:
       - application/json
       Date:
-      - Fri, 01 May 2026 14:29:54 GMT
+      - Tue, 05 May 2026 20:28:04 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100044-CHI, cache-ewr-kewr1740035-EWR
+      - cache-chi-klot8100044-CHI, cache-ewr-kewr1740052-EWR
       X-Timer:
-      - S1777645795.896048,VS0,VE89
+      - S1778012885.667954,VS0,VE121
     status: 200 OK
     code: 200
     duration: ""

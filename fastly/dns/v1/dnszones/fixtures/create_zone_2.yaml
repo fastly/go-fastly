@@ -16,7 +16,7 @@ interactions:
     method: POST
   response:
     body: |
-      {"id":"1Yw5a5KUBp1KB1GU8siQzy","name":"go-fastly-test-2.com.","description":"go-fastly test zone 2","type":"secondary","nameservers":["elm.fastlydns.com.","elm.fastlydns.dev.","elm.fastlydns.net.","elm.fastlydns.org."],"serial":"0","xfr_config_inbound":{"primaries":[],"notify_ip_addresses":{"ipv4":["157.52.78.3","157.52.79.3","167.82.228.3","167.82.229.3"]}},"created_at":"2026-05-05T19:41:53Z","updated_at":"2026-05-05T19:41:53Z"}
+      {"id":"tFZCBOSgmvjJPIaLVC8qAk","name":"go-fastly-test-2.com.","description":"go-fastly test zone 2","type":"secondary","nameservers":["oak.fastlydns.com.","oak.fastlydns.dev.","oak.fastlydns.net.","oak.fastlydns.org."],"serial":"0","xfr_config_inbound":{"primaries":[],"notify_ip_addresses":{"ipv4":["157.52.78.5","157.52.79.5","167.82.228.5","167.82.229.5"]}},"created_at":"2026-05-05T20:28:41Z","updated_at":"2026-05-05T20:28:41Z"}
     headers:
       Accept-Ranges:
       - bytes
@@ -27,7 +27,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 05 May 2026 19:41:53 GMT
+      - Tue, 05 May 2026 20:28:41 GMT
       Pragma:
       - no-cache
       Server:
@@ -41,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000088-CHI, cache-ewr-kewr1740089-EWR
+      - cache-chi-kigq8000088-CHI, cache-ewr-kewr1740044-EWR
       X-Timer:
-      - S1778010113.164963,VS0,VE538
+      - S1778012921.172374,VS0,VE521
     status: 201 Created
     code: 201
     duration: ""

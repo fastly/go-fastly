@@ -57,13 +57,24 @@ func TestTSIGKeys(t *testing.T) {
 	fastly.Record(t, "update_tsig_key", func(c *fastly.Client) {
 		updated, err = Update(ctx, c, &UpdateInput{
 			TSIGKeyID:   key.ID,
-			Description: fastly.ToPointer("updated description"),
+			Description: fastly.NewNullable("updated description"),
 		})
 	})
 	require.NoError(t, err)
 	require.NotNil(t, updated)
 	require.Equal(t, *key.ID, *updated.ID)
 	require.Equal(t, "updated description", *updated.Description)
+
+	// Update TSIG key, unsetting the description.
+	fastly.Record(t, "update_tsig_key_null_description", func(c *fastly.Client) {
+		updated, err = Update(ctx, c, &UpdateInput{
+			TSIGKeyID:   key.ID,
+			Description: fastly.NullValue[string](),
+		})
+	})
+	require.NoError(t, err)
+	require.NotNil(t, updated)
+	require.Nil(t, updated.Description)
 
 	// Create a second TSIG key for pagination testing.
 	var key2 *TSIGKey

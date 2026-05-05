@@ -89,13 +89,24 @@ func TestZones(t *testing.T) {
 	fastly.Record(t, "update_zone", func(c *fastly.Client) {
 		updated, err = Update(ctx, c, &UpdateInput{
 			ZoneID:      zone.ID,
-			Description: fastly.ToPointer("updated description"),
+			Description: fastly.NewNullable("updated description"),
 		})
 	})
 	require.NoError(t, err)
 	require.NotNil(t, updated)
 	require.Equal(t, *zone.ID, *updated.ID)
 	require.Equal(t, "updated description", *updated.Description)
+
+	// Update zone, unsetting the description.
+	fastly.Record(t, "update_zone_null_description", func(c *fastly.Client) {
+		updated, err = Update(ctx, c, &UpdateInput{
+			ZoneID:      zone.ID,
+			Description: fastly.NullValue[string](),
+		})
+	})
+	require.NoError(t, err)
+	require.NotNil(t, updated)
+	require.Nil(t, updated.Description)
 
 	// Update zone, unsetting the inbound TSIG key ID.
 	fastly.Record(t, "update_zone_null_tsig_key", func(c *fastly.Client) {

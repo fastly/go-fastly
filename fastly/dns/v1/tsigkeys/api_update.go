@@ -15,7 +15,7 @@ type UpdateInput struct {
 	// Name is the name of the TSIG key.
 	Name *string `json:"name,omitempty"`
 	// Description is a freeform descriptive note.
-	Description *string `json:"description,omitempty"`
+	Description *fastly.Nullable[string] `json:"description,omitempty"`
 	// Algorithm is the algorithm of the TSIG key.
 	Algorithm *string `json:"algorithm,omitempty"`
 	// Secret is the Base64 encoded secret key.

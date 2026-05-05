@@ -13,7 +13,7 @@ type UpdateInput struct {
 	// ZoneID is the Zone Identifier (UUID) (required).
 	ZoneID *string `json:"-"`
 	// Description is a freeform descriptive note.
-	Description *string `json:"description,omitempty"`
+	Description *fastly.Nullable[string] `json:"description,omitempty"`
 	// XfrConfigInbound contains attributes associated with inbound zone transfers.
 	XfrConfigInbound *XfrConfigInboundInput `json:"xfr_config_inbound,omitempty"`
 }

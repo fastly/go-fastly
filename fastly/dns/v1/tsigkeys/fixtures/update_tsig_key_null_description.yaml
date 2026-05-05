@@ -2,24 +2,31 @@
 version: 1
 interactions:
 - request:
-    body: ""
+    body: '{"description":null}'
     form: {}
     headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
       User-Agent:
       - FastlyGo/14.2.0 (+github.com/fastly/go-fastly; go1.26.2)
     url: https://api.fastly.com/dns/v1/tsig-keys/HsMx159hywVk51rc2t2zqd
-    method: DELETE
+    method: PATCH
   response:
-    body: ""
+    body: |
+      {"id":"HsMx159hywVk51rc2t2zqd","name":"go-fastly-test-key","algorithm":"hmac-sha256","created_at":"2026-05-05T20:28:03Z","updated_at":"2026-05-05T20:28:04Z"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
+      Content-Length:
+      - "158"
       Content-Type:
       - application/json
       Date:
-      - Tue, 05 May 2026 20:28:05 GMT
+      - Tue, 05 May 2026 20:28:04 GMT
       Pragma:
       - no-cache
       Server:
@@ -35,7 +42,7 @@ interactions:
       X-Served-By:
       - cache-chi-klot8100085-CHI, cache-ewr-kewr1740052-EWR
       X-Timer:
-      - S1778012885.168309,VS0,VE235
-    status: 204 No Content
-    code: 204
+      - S1778012884.360248,VS0,VE136
+    status: 200 OK
+    code: 200
     duration: ""
