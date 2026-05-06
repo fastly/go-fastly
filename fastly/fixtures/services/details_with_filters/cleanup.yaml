@@ -1,0 +1,49 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/14.2.0 (+github.com/fastly/go-fastly; go1.25.5)
+    url: https://api.fastly.com/service/DCsx1c14IixEK8PqF0TvqK
+    method: DELETE
+  response:
+    body: '{"msg":"Bad request","detail":"Service ''DCsx1c14IixEK8PqF0TvqK'' is deleted"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 06 May 2026 18:11:01 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9997"
+      Fastly-Ratelimit-Reset:
+      - "1778094000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 400 Bad Request
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000176-CHI, cache-ewr-kewr1740073-EWR
+      X-Timer:
+      - S1778091062.607509,VS0,VE204
+    status: 400 Bad Request
+    code: 400
+    duration: ""

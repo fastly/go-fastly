@@ -4,6 +4,8 @@
 
 ### Breaking:
 
+- feat(service_details): Add support for filters in GetServiceDetails ([#806](https://github.com/fastly/go-fastly/pull/806))
+
 ### Enhancements:
 - feat(dns): add support for DNS Zones and TSIG Keys ([#805](https://github.com/fastly/go-fastly/pull/805))
 - feat(backend): add support for the 'max_use' and 'max_lifetime' fields ([#807](https://github.com/fastly/go-fastly/pull/807))

@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/14.2.0 (+github.com/fastly/go-fastly; go1.25.5)
+    url: https://api.fastly.com/service/DCsx1c14IixEK8PqF0TvqK/details?version=1
+    method: GET
+  response:
+    body: '{"created_at":"2026-05-06T18:10:59Z","type":"vcl","updated_at":"2026-05-06T18:10:59Z","id":"DCsx1c14IixEK8PqF0TvqK","environments":[],"customer_id":"4dOhK7xEkULiabovMyhRBu","versions":[{"service_id":"DCsx1c14IixEK8PqF0TvqK","comment":"","locked":false,"active":false,"staging":false,"updated_at":"2026-05-06T18:10:59Z","deployed":false,"deleted_at":null,"testing":false,"number":1,"environments":[],"created_at":"2026-05-06T18:10:59Z"}],"name":"test-service-filters","deleted_at":null,"comment":"test
+      filters","version":{"updated_at":"2026-05-06T18:10:59Z","locked":false,"number":1,"staging":false,"deployed":false,"environments":[],"created_at":"2026-05-06T18:10:59Z","testing":false,"service_id":"DCsx1c14IixEK8PqF0TvqK","comment":"","active":false,"deleted_at":null,"acls":[],"backends":[],"cache_settings":[],"conditions":[],"dictionaries":[],"directors":[],"domains":[],"gzips":[],"headers":[],"healthchecks":[],"request_settings":[],"response_objects":[],"snippets":[],"vcls":[],"wordpress":[],"settings":{"general.default_host":"","general.stale_if_error":false,"general.default_ttl":3600,"general.stale_if_error_ttl":43200,"general.default_pci":0}},"active_version":null}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 06 May 2026 18:11:01 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000135-CHI, cache-ewr-kewr1740073-EWR
+      X-Timer:
+      - S1778091061.644428,VS0,VE399
+    status: 200 OK
+    code: 200
+    duration: ""
