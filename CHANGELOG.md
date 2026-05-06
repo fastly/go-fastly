@@ -10,6 +10,14 @@
 
 ### Bug fixes:
 
+## [v15.0.1](https://github.com/fastly/go-fastly/releases/tag/v15.0.1) (2026-05-06)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v15.0.0...v15.0.1)
+
+### Dependencies:
+
+- build(deps): incremented `go-fastly` references to `v15` ([#810](https://github.com/fastly/go-fastly/pull/810))
+
 ## [v15.0.0](https://github.com/fastly/go-fastly/releases/tag/v15.0.0) (2026-05-06)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v14.2.0...v15.0.0)
