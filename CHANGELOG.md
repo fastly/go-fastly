@@ -4,18 +4,6 @@
 
 ### Breaking:
 
-### Enhancements:
-
-### Dependencies:
-
-### Bug fixes:
-
-## [v15.0.0](https://github.com/fastly/go-fastly/releases/tag/v15.0.0) (2026-05-06)
-
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v14.2.0...v15.0.0)
-
-### Breaking:
-
 - feat(service_details): Add support for filters in GetServiceDetails ([#806](https://github.com/fastly/go-fastly/pull/806))
 
 ### Enhancements:
@@ -25,6 +13,8 @@
 ### Dependencies:
 - build(deps): `golang.org/x/crypto` from 0.49.0 to 0.50.0 ([#804](https://github.com/fastly/go-fastly/pull/804))
 - build(deps): `golang.org/x/sys` from 0.42.0 to 0.43.0 ([#804](https://github.com/fastly/go-fastly/pull/804))
+
+### Bug fixes:
 
 ## [v14.2.0](https://github.com/fastly/go-fastly/releases/tag/v14.2.0) (2026-04-09)
 
