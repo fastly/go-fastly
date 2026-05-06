@@ -11,11 +11,7 @@ import (
 
 // ListInput specifies the information needed to list zones.
 type ListInput struct {
-	// Cursor is the value from the next_cursor field of a previous
-	// response, used to retrieve the next page. To request the first
-	// page, this should be empty.
-	Cursor *string
-	// Limit is how many results are returned.
+	// Limit is how many results are returned per page.
 	Limit *int
 	// Name filters the list to return only zones that contain the provided name.
 	Name *string
@@ -23,13 +19,33 @@ type ListInput struct {
 	Sort *string
 }
 
-// List retrieves a paginated list of DNS Zones.
-func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Zones, error) {
+// List retrieves all DNS zones, automatically paginating through all pages.
+func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]Zone, error) {
+	var (
+		out    []Zone
+		cursor *string
+	)
+	for {
+		page, err := listPage(ctx, c, i, cursor)
+		if err != nil {
+			return nil, err
+		}
+		out = append(out, page.Data...)
+		if page.Meta.NextCursor == nil || *page.Meta.NextCursor == "" {
+			break
+		}
+		cursor = page.Meta.NextCursor
+	}
+	return out, nil
+}
+
+// listPage retrieves a single page of DNS zones.
+func listPage(ctx context.Context, c *fastly.Client, i *ListInput, cursor *string) (*Zones, error) {
 	path := fastly.ToSafeURL("dns", "v1", "zones")
 
 	requestOptions := fastly.CreateRequestOptions()
-	if i.Cursor != nil {
-		requestOptions.Params["cursor"] = *i.Cursor
+	if cursor != nil {
+		requestOptions.Params["cursor"] = *cursor
 	}
 	if i.Limit != nil {
 		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)

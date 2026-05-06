@@ -16,7 +16,7 @@ interactions:
     method: POST
   response:
     body: |
-      {"id":"HsMx159hywVk51rc2t2zqd","description":"go-fastly test TSIG key","name":"go-fastly-test-key","algorithm":"hmac-sha256","created_at":"2026-05-05T20:28:03Z","updated_at":"2026-05-05T20:28:03Z"}
+      {"id":"AYL0wC9TkHwa2XaV6K6J9K","description":"go-fastly test TSIG key","name":"go-fastly-test-key","algorithm":"hmac-sha256","created_at":"2026-05-05T21:21:03Z","updated_at":"2026-05-05T21:21:03Z"}
     headers:
       Accept-Ranges:
       - bytes
@@ -27,7 +27,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 05 May 2026 20:28:04 GMT
+      - Tue, 05 May 2026 21:21:03 GMT
       Pragma:
       - no-cache
       Server:
@@ -41,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000100-CHI, cache-ewr-kewr1740052-EWR
+      - cache-chi-kigq8000100-CHI, cache-ewr-kewr1740055-EWR
       X-Timer:
-      - S1778012884.878145,VS0,VE181
+      - S1778016064.785733,VS0,VE195
     status: 201 Created
     code: 201
     duration: ""

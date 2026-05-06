@@ -11,11 +11,7 @@ import (
 
 // ListInput specifies the information needed to list TSIG keys.
 type ListInput struct {
-	// Cursor is the value from the next_cursor field of a previous
-	// response, used to retrieve the next page. To request the first
-	// page, this should be empty.
-	Cursor *string
-	// Limit is how many results are returned.
+	// Limit is how many results are returned per page.
 	Limit *int
 	// Name filters the list to return only TSIG keys that contain the provided name.
 	Name *string
@@ -23,13 +19,33 @@ type ListInput struct {
 	Sort *string
 }
 
-// List retrieves a paginated list of TSIG keys.
-func List(ctx context.Context, c *fastly.Client, i *ListInput) (*TSIGKeys, error) {
+// List retrieves all TSIG keys, automatically paginating through all pages.
+func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]TSIGKey, error) {
+	var (
+		out    []TSIGKey
+		cursor *string
+	)
+	for {
+		page, err := listPage(ctx, c, i, cursor)
+		if err != nil {
+			return nil, err
+		}
+		out = append(out, page.Data...)
+		if page.Meta.NextCursor == nil || *page.Meta.NextCursor == "" {
+			break
+		}
+		cursor = page.Meta.NextCursor
+	}
+	return out, nil
+}
+
+// listPage retrieves a single page of TSIG keys.
+func listPage(ctx context.Context, c *fastly.Client, i *ListInput, cursor *string) (*TSIGKeys, error) {
 	path := fastly.ToSafeURL("dns", "v1", "tsig-keys")
 
 	requestOptions := fastly.CreateRequestOptions()
-	if i.Cursor != nil {
-		requestOptions.Params["cursor"] = *i.Cursor
+	if cursor != nil {
+		requestOptions.Params["cursor"] = *cursor
 	}
 	if i.Limit != nil {
 		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)

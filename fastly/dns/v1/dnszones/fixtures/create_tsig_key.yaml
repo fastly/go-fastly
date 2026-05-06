@@ -15,7 +15,7 @@ interactions:
     method: POST
   response:
     body: |
-      {"id":"jfFcULQREkL4RC31L03kCR","name":"go-fastly-test-key","algorithm":"hmac-sha256","created_at":"2026-05-05T20:28:39Z","updated_at":"2026-05-05T20:28:39Z"}
+      {"id":"4u2NL6ggameOuRa7p4trcD","name":"go-fastly-test-key","algorithm":"hmac-sha256","created_at":"2026-05-05T21:21:26Z","updated_at":"2026-05-05T21:21:26Z"}
     headers:
       Accept-Ranges:
       - bytes
@@ -26,7 +26,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 05 May 2026 20:28:39 GMT
+      - Tue, 05 May 2026 21:21:26 GMT
       Pragma:
       - no-cache
       Server:
@@ -40,9 +40,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000100-CHI, cache-ewr-kewr1740044-EWR
+      - cache-chi-kigq8000100-CHI, cache-ewr-kewr1740076-EWR
       X-Timer:
-      - S1778012919.456140,VS0,VE170
+      - S1778016086.262180,VS0,VE156
     status: 201 Created
     code: 201
     duration: ""

@@ -9,18 +9,18 @@ interactions:
       - application/json
       User-Agent:
       - FastlyGo/14.2.0 (+github.com/fastly/go-fastly; go1.26.2)
-    url: https://api.fastly.com/dns/v1/tsig-keys/AYL0wC9TkHwa2XaV6K6J9K
+    url: https://api.fastly.com/dns/v1/tsig-keys
     method: GET
   response:
     body: |
-      {"id":"AYL0wC9TkHwa2XaV6K6J9K","description":"go-fastly test TSIG key","name":"go-fastly-test-key","algorithm":"hmac-sha256","created_at":"2026-05-05T21:21:03Z","updated_at":"2026-05-05T21:21:03Z"}
+      {"data":[{"id":"RYBr6YBWLEKD39rxBmcLhq","description":"test desc","name":"test","algorithm":"hmac-sha256","created_at":"2026-05-05T16:38:18Z","updated_at":"2026-05-05T16:41:10Z"},{"id":"AYL0wC9TkHwa2XaV6K6J9K","name":"go-fastly-test-key","algorithm":"hmac-sha256","created_at":"2026-05-05T21:21:03Z","updated_at":"2026-05-05T21:21:04Z"},{"id":"gdZJ99dwDbEGwLL81HJkDJ","name":"go-fastly-test-key-2","algorithm":"hmac-sha256","created_at":"2026-05-05T21:21:04Z","updated_at":"2026-05-05T21:21:04Z"}],"meta":{"limit":10,"sort":"created_at"}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "198"
+      - "539"
       Content-Type:
       - application/json
       Date:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100045-CHI, cache-ewr-kewr1740055-EWR
+      - cache-chi-kigq8000100-CHI, cache-ewr-kewr1740055-EWR
       X-Timer:
-      - S1778016064.993678,VS0,VE141
+      - S1778016065.733464,VS0,VE109
     status: 200 OK
     code: 200
     duration: ""

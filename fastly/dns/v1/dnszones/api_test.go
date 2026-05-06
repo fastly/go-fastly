@@ -141,30 +141,13 @@ func TestZones(t *testing.T) {
 		})
 	}()
 
-	// List dns zones — page 1.
-	var page1 *Zones
-	fastly.Record(t, "list_zones_page_1", func(c *fastly.Client) {
-		page1, err = List(ctx, c, &ListInput{
-			Limit: fastly.ToPointer(1),
-		})
+	// List dns zones — should return both zones via auto-pagination.
+	var zones []Zone
+	fastly.Record(t, "list_zones", func(c *fastly.Client) {
+		zones, err = List(ctx, c, &ListInput{})
 	})
 	require.NoError(t, err)
-	require.NotNil(t, page1)
-	require.Len(t, page1.Data, 1)
-	require.NotNil(t, page1.Meta.NextCursor, "expected a next_cursor for page 2")
-
-	// List dns zones — page 2, using cursor from page 1.
-	var page2 *Zones
-	fastly.Record(t, "list_zones_page_2", func(c *fastly.Client) {
-		page2, err = List(ctx, c, &ListInput{
-			Limit:  fastly.ToPointer(1),
-			Cursor: page1.Meta.NextCursor,
-		})
-	})
-	require.NoError(t, err)
-	require.NotNil(t, page2)
-	require.Len(t, page2.Data, 1)
-	require.NotEqual(t, *page1.Data[0].ID, *page2.Data[0].ID, "pages should return different zones")
+	require.GreaterOrEqual(t, len(zones), 2, "expected at least both test zones")
 }
 
 func TestZones_validation(t *testing.T) {

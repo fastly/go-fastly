@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/14.2.0 (+github.com/fastly/go-fastly; go1.26.2)
+    url: https://api.fastly.com/dns/v1/zones
+    method: GET
+  response:
+    body: |
+      {"data":[{"id":"9jta3ggzjN0fG3R7o1iMbp","name":"mytestdomain.com.","description":"Sample domain","type":"secondary","created_at":"2026-04-29T15:15:39Z","updated_at":"2026-04-29T15:15:39Z"},{"id":"HTaq6GsWneHpkQmDZFOuhp","name":"go-fastly-test.com.","description":"go-fastly test zone","type":"secondary","created_at":"2026-04-30T20:00:35Z","updated_at":"2026-04-30T20:00:35Z"},{"id":"BvQ2gWfaLlXtLZjEhILVKm","name":"abc.com.","description":"test","type":"secondary","created_at":"2026-04-30T20:04:46Z","updated_at":"2026-04-30T20:04:46Z"},{"id":"EdxpqhEVi36sdAq2MfmEGO","name":"go-fastly-test.com.","type":"secondary","created_at":"2026-05-05T21:21:26Z","updated_at":"2026-05-05T21:21:28Z"},{"id":"EHlXIOnrXFbTik5BJw06Nk","name":"go-fastly-test-2.com.","description":"go-fastly test zone 2","type":"secondary","created_at":"2026-05-05T21:21:28Z","updated_at":"2026-05-05T21:21:28Z"}],"meta":{"limit":10,"sort":"created_at"}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "925"
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 05 May 2026 21:21:28 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000088-CHI, cache-ewr-kewr1740076-EWR
+      X-Timer:
+      - S1778016089.817898,VS0,VE119
+    status: 200 OK
+    code: 200
+    duration: ""

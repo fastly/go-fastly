@@ -97,30 +97,13 @@ func TestTSIGKeys(t *testing.T) {
 		require.NoError(t, err)
 	}()
 
-	// List TSIG keys — page 1.
-	var page1 *TSIGKeys
-	fastly.Record(t, "list_tsig_keys_page_1", func(c *fastly.Client) {
-		page1, err = List(ctx, c, &ListInput{
-			Limit: fastly.ToPointer(1),
-		})
+	// List TSIG keys — should return both keys via auto-pagination.
+	var keys []TSIGKey
+	fastly.Record(t, "list_tsig_keys", func(c *fastly.Client) {
+		keys, err = List(ctx, c, &ListInput{})
 	})
 	require.NoError(t, err)
-	require.NotNil(t, page1)
-	require.Len(t, page1.Data, 1)
-	require.NotNil(t, page1.Meta.NextCursor, "expected a next_cursor for page 2")
-
-	// List TSIG keys — page 2, using cursor from page 1.
-	var page2 *TSIGKeys
-	fastly.Record(t, "list_tsig_keys_page_2", func(c *fastly.Client) {
-		page2, err = List(ctx, c, &ListInput{
-			Limit:  fastly.ToPointer(1),
-			Cursor: page1.Meta.NextCursor,
-		})
-	})
-	require.NoError(t, err)
-	require.NotNil(t, page2)
-	require.Len(t, page2.Data, 1)
-	require.NotEqual(t, *page1.Data[0].ID, *page2.Data[0].ID, "pages should return different TSIG keys")
+	require.GreaterOrEqual(t, len(keys), 2, "expected at least both test keys")
 }
 
 func TestTSIGKeys_validation(t *testing.T) {
