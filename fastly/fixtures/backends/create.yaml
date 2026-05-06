@@ -2,12 +2,16 @@
 version: 1
 interactions:
 - request:
-    body: address=integ-test.go-fastly.com&connect_timeout=1500&name=test-backend&override_host=origin.example.com&ssl_check_cert=0&ssl_ciphers=DHE-RSA-AES256-SHA%3ADHE-RSA-CAMELLIA256-SHA%3AAES256-GCM-SHA384&ssl_sni_hostname=ssl-hostname.com
+    body: address=integ-test.go-fastly.com&connect_timeout=1500&max_lifetime=60000&max_use=100&name=test-backend&override_host=origin.example.com&ssl_check_cert=0&ssl_ciphers=DHE-RSA-AES256-SHA%3ADHE-RSA-CAMELLIA256-SHA%3AAES256-GCM-SHA384&ssl_sni_hostname=ssl-hostname.com
     form:
       address:
       - integ-test.go-fastly.com
       connect_timeout:
       - "1500"
+      max_lifetime:
+      - "60000"
+      max_use:
+      - "100"
       name:
       - test-backend
       override_host:
@@ -22,11 +26,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/10.0.1 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/102/backend
+      - FastlyGo/12.1.0 (+github.com/fastly/go-fastly; go1.26.2)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/145/backend
     method: POST
   response:
-    body: '{"address":"integ-test.go-fastly.com","connect_timeout":1500,"name":"test-backend","override_host":"origin.example.com","ssl_check_cert":false,"ssl_ciphers":"DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384","ssl_sni_hostname":"ssl-hostname.com","service_id":"kKJb5bOFI47uHeBVluGfX1","version":102,"ssl_hostname":null,"deleted_at":null,"ssl_client_key":null,"between_bytes_timeout":10000,"healthcheck":null,"client_cert":null,"ssl_cert_hostname":null,"ssl_ca_cert":null,"error_threshold":0,"comment":"","keepalive_time":null,"prefer_ipv6":null,"hostname":"integ-test.go-fastly.com","shield":null,"weight":100,"use_ssl":false,"tcp_keepalive_time":null,"tcp_keepalive_probes":null,"created_at":"2025-05-07T15:03:13Z","ssl_client_cert":null,"tcp_keepalive_interval":null,"max_tls_version":null,"share_key":null,"request_condition":"","ipv4":null,"max_conn":200,"min_tls_version":null,"ipv6":null,"auto_loadbalance":false,"updated_at":"2025-05-07T15:03:13Z","tcp_keepalive_enable":null,"port":80,"first_byte_timeout":15000}'
+    body: '{"address":"integ-test.go-fastly.com","connect_timeout":1500,"max_lifetime":60000,"max_use":100,"name":"test-backend","override_host":"origin.example.com","ssl_check_cert":false,"ssl_ciphers":"DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384","ssl_sni_hostname":"ssl-hostname.com","service_id":"kKJb5bOFI47uHeBVluGfX1","version":145,"ssl_ca_cert":null,"updated_at":"2026-05-06T18:11:06Z","shield":null,"ssl_hostname":null,"error_threshold":0,"healthcheck":null,"max_tls_version":null,"ipv4":null,"between_bytes_timeout":10000,"keepalive_time":null,"tcp_keepalive_interval":null,"weight":100,"ssl_cert_hostname":null,"use_ssl":false,"min_tls_version":null,"auto_loadbalance":false,"share_key":null,"client_cert":null,"prefer_ipv6":false,"request_condition":"","hostname":"integ-test.go-fastly.com","port":80,"created_at":"2026-05-06T18:11:06Z","ipv6":null,"first_byte_timeout":15000,"max_conn":200,"ssl_client_key":null,"tcp_keepalive_enable":null,"tcp_keepalive_probes":null,"comment":"","tcp_keepalive_time":null,"ssl_client_cert":null,"deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -35,15 +39,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 07 May 2025 15:03:13 GMT
+      - Wed, 06 May 2026 18:11:07 GMT
       Fastly-Ratelimit-Remaining:
-      - "9993"
+      - "9998"
       Fastly-Ratelimit-Reset:
-      - "1746633600"
+      - "1778094000"
       Pragma:
       - no-cache
       Server:
-      - fastly control-gateway
+      - fastly
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -57,9 +61,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000133-CHI, cache-ewr-kewr1740090-EWR
+      - cache-chi-kigq8000094-CHI, cache-ewr-kewr1740088-EWR
       X-Timer:
-      - S1746630193.043190,VS0,VE255
+      - S1778091066.402562,VS0,VE674
     status: 200 OK
     code: 200
     duration: ""
