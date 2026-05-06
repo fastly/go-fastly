@@ -24,7 +24,7 @@ import (
 	"github.com/hashicorp/go-cleanhttp"
 	"github.com/mitchellh/mapstructure"
 
-	"github.com/fastly/go-fastly/v14/fastly/impersonation"
+	"github.com/fastly/go-fastly/v15/fastly/impersonation"
 )
 
 // APIKeyEnvVar is the name of the environment variable where the Fastly API

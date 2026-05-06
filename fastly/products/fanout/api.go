@@ -3,9 +3,9 @@ package fanout
 import (
 	"context"
 
-	"github.com/fastly/go-fastly/v14/fastly"
-	"github.com/fastly/go-fastly/v14/fastly/products"
-	"github.com/fastly/go-fastly/v14/internal/productcore"
+	"github.com/fastly/go-fastly/v15/fastly"
+	"github.com/fastly/go-fastly/v15/fastly/products"
+	"github.com/fastly/go-fastly/v15/internal/productcore"
 )
 
 const (

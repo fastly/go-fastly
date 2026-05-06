@@ -17,7 +17,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/fastly/go-fastly/v14/fastly"
+	"github.com/fastly/go-fastly/v15/fastly"
 )
 
 func main() {
