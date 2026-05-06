@@ -6,6 +6,7 @@
 
 ### Enhancements:
 - feat(dns): add support for DNS Zones and TSIG Keys ([#805](https://github.com/fastly/go-fastly/pull/805))
+- feat(backend): add support for the 'max_use' and 'max_lifetime' fields ([#807](https://github.com/fastly/go-fastly/pull/807))
 
 ### Dependencies:
 - build(deps): `golang.org/x/crypto` from 0.49.0 to 0.50.0 ([#804](https://github.com/fastly/go-fastly/pull/804))
