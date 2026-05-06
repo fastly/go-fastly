@@ -113,7 +113,7 @@ func TestClient_Services(t *testing.T) {
 	// Get Details
 	var nsd *ServiceDetail
 	Record(t, "services/details", func(c *Client) {
-		nsd, err = c.GetServiceDetails(context.TODO(), &GetServiceInput{
+		nsd, err = c.GetServiceDetails(context.TODO(), &GetServiceDetailsInput{
 			ServiceID: *s.ServiceID,
 		})
 	})
@@ -299,7 +299,7 @@ func TestClient_Services_Compute(t *testing.T) {
 	// Get Details
 	var nsd *ServiceDetail
 	Record(t, "services/compute/details", func(c *Client) {
-		nsd, err = c.GetServiceDetails(context.TODO(), &GetServiceInput{
+		nsd, err = c.GetServiceDetails(context.TODO(), &GetServiceDetailsInput{
 			ServiceID: *s.ServiceID,
 		})
 	})
@@ -390,6 +390,112 @@ func TestClient_UpdateService_validation(t *testing.T) {
 
 func TestClient_DeleteService_validation(t *testing.T) {
 	err := TestClient.DeleteService(context.TODO(), &DeleteServiceInput{})
+	if !errors.Is(err, ErrMissingServiceID) {
+		t.Errorf("bad error: %s", err)
+	}
+}
+
+func TestClient_GetServiceDetails_WithFilters(t *testing.T) {
+	t.Parallel()
+
+	var err error
+
+	// Create
+	var s *Service
+	Record(t, "services/details_with_filters/create", func(c *Client) {
+		s, err = c.CreateService(context.TODO(), &CreateServiceInput{
+			Name:    ToPointer("test-service-filters"),
+			Comment: ToPointer("test filters"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Ensure deleted
+	defer func() {
+		Record(t, "services/details_with_filters/cleanup", func(c *Client) {
+			_ = c.DeleteService(context.TODO(), &DeleteServiceInput{
+				ServiceID: *s.ServiceID,
+			})
+		})
+	}()
+
+	// Get Details with versions.active filter
+	var nsd *ServiceDetail
+	Record(t, "services/details_with_filters/active", func(c *Client) {
+		nsd, err = c.GetServiceDetails(context.TODO(), &GetServiceDetailsInput{
+			ServiceID: *s.ServiceID,
+			Filters: []ServiceDetailsFilter{
+				{Key: "versions.active", Value: true},
+			},
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if *s.Name != *nsd.Name {
+		t.Errorf("bad name: %q (%q)", *s.Name, *nsd.Name)
+	}
+	if *s.Comment != *nsd.Comment {
+		t.Errorf("bad comment: %q (%q)", *s.Comment, *nsd.Comment)
+	}
+	if nsd.Version == nil {
+		t.Fatal("Service Detail Version is nil")
+	}
+	if *nsd.Version.Number == 0 {
+		t.Errorf("Service Detail Version is empty: (%#v)", nsd)
+	}
+
+	// Get Details with multiple filters
+	var nsd2 *ServiceDetail
+	Record(t, "services/details_with_filters/multiple", func(c *Client) {
+		nsd2, err = c.GetServiceDetails(context.TODO(), &GetServiceDetailsInput{
+			ServiceID: *s.ServiceID,
+			Filters: []ServiceDetailsFilter{
+				{Key: "versions.active", Value: true},
+				{Key: "versions.staged", Value: true},
+			},
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if *s.Name != *nsd2.Name {
+		t.Errorf("bad name: %q (%q)", *s.Name, *nsd2.Name)
+	}
+
+	// Get Details with version parameter
+	var nsd3 *ServiceDetail
+	Record(t, "services/details_with_filters/version", func(c *Client) {
+		nsd3, err = c.GetServiceDetails(context.TODO(), &GetServiceDetailsInput{
+			ServiceID: *s.ServiceID,
+			Version:   ToPointer(1),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if *s.Name != *nsd3.Name {
+		t.Errorf("bad name: %q (%q)", *s.Name, *nsd3.Name)
+	}
+
+	// Delete
+	Record(t, "services/details_with_filters/delete", func(c *Client) {
+		err = c.DeleteService(context.TODO(), &DeleteServiceInput{
+			ServiceID: *s.ServiceID,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestClient_GetServiceDetails_validation(t *testing.T) {
+	_, err := TestClient.GetServiceDetails(context.TODO(), &GetServiceDetailsInput{})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}

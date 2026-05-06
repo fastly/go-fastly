@@ -174,17 +174,47 @@ func (c *Client) GetService(ctx context.Context, i *GetServiceInput) (*Service, 
 	return s, nil
 }
 
+// ServiceDetailsFilter represents a filter parameter for GetServiceDetails.
+type ServiceDetailsFilter struct {
+	// Key is the filter key (e.g., "versions.active").
+	Key string
+	// Value is the boolean value for the filter.
+	Value bool
+}
+
+// GetServiceDetailsInput is used as input to the GetServiceDetails function.
+type GetServiceDetailsInput struct {
+	// ServiceID is an alphanumeric string identifying the service (required).
+	ServiceID string
+	// Filters is an array of filter key-value pairs.
+	// Each filter (e.g., {Key: "versions.active", Value: true}) will be sent as filter[versions.active]=true.
+	// Available filter keys are versions.active, versions.staged, and versions.latest_draft
+	Filters []ServiceDetailsFilter
+	// Version is the number identifying a version of the service.
+	Version *int
+}
+
 // GetServiceDetails retrieves the specified resource.
 //
 // If no service exists for the given id, the API returns a 400 response not 404.
-func (c *Client) GetServiceDetails(ctx context.Context, i *GetServiceInput) (*ServiceDetail, error) {
+func (c *Client) GetServiceDetails(ctx context.Context, i *GetServiceDetailsInput) (*ServiceDetail, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "details")
 
-	resp, err := c.Get(ctx, path, CreateRequestOptions())
+	requestOptions := CreateRequestOptions()
+	if len(i.Filters) > 0 {
+		for _, filter := range i.Filters {
+			requestOptions.Params["filter["+filter.Key+"]"] = fmt.Sprintf("%t", filter.Value)
+		}
+	}
+	if i.Version != nil {
+		requestOptions.Params["version"] = fmt.Sprintf("%d", *i.Version)
+	}
+
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}

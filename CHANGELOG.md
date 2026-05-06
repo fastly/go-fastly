@@ -4,6 +4,8 @@
 
 ### Breaking:
 
+- feat(service_details): creates getservicedetailsinput with filters array and version field to support query parameters per fastly api specification ([#806](https://github.com/fastly/go-fastly/pull/806))
+
 ### Enhancements:
 - feat(dns): add support for DNS Zones and TSIG Keys ([#805](https://github.com/fastly/go-fastly/pull/805))
 
