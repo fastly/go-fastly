@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/url"
 )
@@ -53,6 +54,17 @@ func NullValue[T any]() *Nullable[T] {
 // NewNullable returns a *Nullable that serializes to the given value.
 func NewNullable[T any](v T) *Nullable[T] {
 	return &Nullable[T]{value: &v}
+}
+
+// EncodeValues implements the query.Encoder interface for form encoding.
+// A nil value encodes as an empty string (resets the field to null).
+func (n Nullable[T]) EncodeValues(key string, v *url.Values) error {
+	if n.value == nil {
+		v.Set(key, "")
+		return nil
+	}
+	v.Set(key, fmt.Sprintf("%v", *n.value))
+	return nil
 }
 
 // MarshalJSON implements the json.Marshaler interface.

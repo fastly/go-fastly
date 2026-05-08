@@ -135,8 +135,8 @@ func TestClient_Backends_Compute(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-backend-compute",
 			NewName:        ToPointer("new-test-backend-compute"),
-			MaxUse:         ToPointer(200),
-			MaxLifetime:    ToPointer(120000),
+			MaxUse:         NewNullable(200),
+			MaxLifetime:    NewNullable(120000),
 			OverrideHost:   ToPointer("www.example.com"),
 			Port:           ToPointer(1234),
 			PreferIPv6:     ToPointer(Compatibool(true)),
@@ -217,6 +217,45 @@ func TestClient_Backends_Compute(t *testing.T) {
 	}
 	if *ub.Port != 0 {
 		t.Errorf("bad port: %d", *ub.Port)
+	}
+
+	// NOTE: The following test validates null values are sent to explicitly reset
+	// specific nullable fields alongside standard field updates.
+	Record(t, "backends/compute/update_null_values", func(c *Client) {
+		ub, err = c.UpdateBackend(context.TODO(), &UpdateBackendInput{
+			ServiceID:      TestComputeServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-backend-compute",
+			Address:        ToPointer("integ-test.go-fastly.com"),
+			ConnectTimeout: ToPointer(1500),
+			MaxUse:         NullValue[int](),
+			MaxLifetime:    NullValue[int](),
+			OverrideHost:   ToPointer("origin.example.com"),
+			SSLCheckCert:   ToPointer(Compatibool(false)),
+			SSLCiphers:     ToPointer("DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384"),
+			SSLSNIHostname: ToPointer("ssl-hostname.com"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if ub.MaxUse != nil {
+		t.Errorf("bad max_use: expected nil, got %d", *ub.MaxUse)
+	}
+	if ub.MaxLifetime != nil {
+		t.Errorf("bad max_lifetime: expected nil, got %d", *ub.MaxLifetime)
+	}
+	if *ub.Address != "integ-test.go-fastly.com" {
+		t.Errorf("bad address: %q", *ub.Address)
+	}
+	if *ub.ConnectTimeout != 1500 {
+		t.Errorf("bad connect_timeout: %d", *ub.ConnectTimeout)
+	}
+	if *ub.OverrideHost != "origin.example.com" {
+		t.Errorf("bad override_host: %q", *ub.OverrideHost)
+	}
+	if *ub.SSLSNIHostname != "ssl-hostname.com" {
+		t.Errorf("bad ssl_sni_hostname: %q", *ub.SSLSNIHostname)
 	}
 
 	// Delete
@@ -361,8 +400,8 @@ func TestClient_Backends(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-backend",
 			NewName:        ToPointer("new-test-backend"),
-			MaxUse:         ToPointer(200),
-			MaxLifetime:    ToPointer(120000),
+			MaxUse:         NewNullable(200),
+			MaxLifetime:    NewNullable(120000),
 			OverrideHost:   ToPointer("www.example.com"),
 			Port:           ToPointer(1234),
 			PreferIPv6:     ToPointer(Compatibool(true)),
@@ -443,6 +482,45 @@ func TestClient_Backends(t *testing.T) {
 	}
 	if *ub.Port != 0 {
 		t.Errorf("bad port: %d", *ub.Port)
+	}
+
+	// NOTE: The following test validates null values are sent to explicitly reset
+	// specific nullable fields alongside standard field updates.
+	Record(t, "backends/update_null_values", func(c *Client) {
+		ub, err = c.UpdateBackend(context.TODO(), &UpdateBackendInput{
+			ServiceID:      TestDeliveryServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-backend",
+			Address:        ToPointer("integ-test.go-fastly.com"),
+			ConnectTimeout: ToPointer(1500),
+			MaxUse:         NullValue[int](),
+			MaxLifetime:    NullValue[int](),
+			OverrideHost:   ToPointer("origin.example.com"),
+			SSLCheckCert:   ToPointer(Compatibool(false)),
+			SSLCiphers:     ToPointer("DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384"),
+			SSLSNIHostname: ToPointer("ssl-hostname.com"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if ub.MaxUse != nil {
+		t.Errorf("bad max_use: expected nil, got %d", *ub.MaxUse)
+	}
+	if ub.MaxLifetime != nil {
+		t.Errorf("bad max_lifetime: expected nil, got %d", *ub.MaxLifetime)
+	}
+	if *ub.Address != "integ-test.go-fastly.com" {
+		t.Errorf("bad address: %q", *ub.Address)
+	}
+	if *ub.ConnectTimeout != 1500 {
+		t.Errorf("bad connect_timeout: %d", *ub.ConnectTimeout)
+	}
+	if *ub.OverrideHost != "origin.example.com" {
+		t.Errorf("bad override_host: %q", *ub.OverrideHost)
+	}
+	if *ub.SSLSNIHostname != "ssl-hostname.com" {
+		t.Errorf("bad ssl_sni_hostname: %q", *ub.SSLSNIHostname)
 	}
 
 	// Delete

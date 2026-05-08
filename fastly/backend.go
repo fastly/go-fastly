@@ -243,9 +243,9 @@ type UpdateBackendInput struct {
 	// MaxConn is the maximum number of concurrent connections this backend will accept.
 	MaxConn *int `url:"max_conn,omitempty"`
 	// MaxUse is the maximum number of times an HTTP keepalive connection can be used. `0` is unlimited.
-	MaxUse *int `url:"max_use,omitempty"`
+	MaxUse *Nullable[int] `url:"max_use,omitempty"`
 	// MaxLifetime is the upper bound in milliseconds for how long an HTTP keepalive connection can be open before it is no longer used. `0` is unlimited.
-	MaxLifetime *int `url:"max_lifetime,omitempty"`
+	MaxLifetime *Nullable[int] `url:"max_lifetime,omitempty"`
 	// MaxTLSVersion is the maximum allowed TLS version on SSL connections to this backend.
 	MaxTLSVersion *string `url:"max_tls_version,omitempty"`
 	// MinTLSVersion is the minimum allowed TLS version on SSL connections to this backend.
