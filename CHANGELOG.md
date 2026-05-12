@@ -7,6 +7,8 @@
 ### Enhancements:
 
 ### Dependencies:
+- build(deps): `golang.org/x/crypto` from 0.50.0 to 0.51.0 ([#812](https://github.com/fastly/go-fastly/pull/812))
+- build(deps): `golang.org/x/sys` from 0.43.0 to 0.44.0 ([#812](https://github.com/fastly/go-fastly/pull/812))
 
 ### Bug fixes:
 
