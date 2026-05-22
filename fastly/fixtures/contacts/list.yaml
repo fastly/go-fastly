@@ -1,0 +1,52 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/vnd.api+json
+      User-Agent:
+      - FastlyGo/15.0.1 (+github.com/fastly/go-fastly; go1.25.4)
+    url: https://api.fastly.com/customer/7i6ZbMEdjnTUNyk75XgWO0/contacts
+    method: GET
+  response:
+    body: '{"data":[{"id":"2GpZ8C5uI5jnIS6HHyytP1","type":"customer_contact","attributes":{"created_at":"2026-05-22T12:39:08Z","updated_at":"2026-05-22T12:39:08Z","deleted_at":null,"contact_type":"emergency","phone":null,"name":"guard
+      contact","email":"go-fastly-test+contact-guard+20260522@example.com"}},{"id":"1aaaaaaaaaaaaaaaaaaaaa","type":"customer_contact","attributes":{"created_at":"2026-05-20T09:06:19Z","updated_at":"2026-05-20T09:06:19Z","deleted_at":null,"contact_type":"primary","phone":"0000000000","name":"Cloud
+      Team","email":"pre-existing-primary@example.com"}},{"id":"4CMF0j77IO1EYQjmoSqU6S","type":"customer_contact","attributes":{"created_at":"2026-05-22T12:37:38Z","updated_at":"2026-05-22T12:37:38Z","deleted_at":null,"contact_type":"billing","phone":null,"name":"test
+      contact","email":"go-fastly-test+contact+20260522@example.com"}},{"id":"5Wvd5Mi5Gm6LLW7yIQ8a4y","type":"customer_contact","attributes":{"created_at":"2026-05-22T12:39:57Z","updated_at":"2026-05-22T12:39:57Z","deleted_at":null,"contact_type":"emergency","phone":null,"name":"test
+      contact","email":"go-fastly-test+contact+20260522@example.com"}},{"id":"6ojdEaGJGBQHW5RJzwswwy","type":"customer_contact","attributes":{"created_at":"2026-05-22T12:39:57Z","updated_at":"2026-05-22T12:39:57Z","deleted_at":null,"contact_type":"emergency","phone":null,"name":"guard
+      contact","email":"go-fastly-test+contact-guard+20260522@example.com"}}]}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/vnd.api+json
+      Date:
+      - Fri, 22 May 2026 12:39:57 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100080-CHI, cache-par-lfpg1960084-PAR
+      X-Timer:
+      - S1779453598.586119,VS0,VE202
+    status: 200 OK
+    code: 200
+    duration: ""

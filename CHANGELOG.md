@@ -5,6 +5,7 @@
 ### Breaking:
 
 ### Enhancements:
+- feat(contact): add support for customer contacts (list/create/delete)
 
 ### Dependencies:
 - build(deps): `golang.org/x/crypto` from 0.50.0 to 0.51.0 ([#812](https://github.com/fastly/go-fastly/pull/812))
