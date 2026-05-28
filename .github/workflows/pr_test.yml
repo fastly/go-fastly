@@ -10,24 +10,38 @@ on:
       - unlabeled
     branches:
       - main
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
 jobs:
   changelog:
-    if: github.actor != 'dependabot[bot]'
+    if: github.event.pull_request.user.login != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: dangoslen/changelog-enforcer@204e7d3ef26579f4cd0fd759c57032656fdf23c7 # v3.6.1
+
   golangci:
     name: lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
       - uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: 1.25.x
+
       - name: golangci-lint
         uses: golangci/golangci-lint-action@82606bf257cbaff209d206a39f5134f0cfbfd2ee # v9.2.1
         with:
           version: v2.10.1
+
   golangci-latest:
     name: lint-latest (informational)
     runs-on: ubuntu-latest
@@ -35,23 +49,31 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
       - name: Setup Go
         uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: 1.25.x
+
       - name: Run golangci-lint@latest
         id: lint
         uses: golangci/golangci-lint-action@82606bf257cbaff209d206a39f5134f0cfbfd2ee # v9.2.1
         with:
           version: latest
         continue-on-error: true
+
       - name: Report lint summary
+        env:
+          LINT_OUTCOME: ${{ steps.lint.outcome }}
         run: |
-          if [ "${{ steps.lint.outcome }}" == "success" ]; then
+          if [ "${LINT_OUTCOME}" == "success" ]; then
             echo "✅ golangci-lint@latest passed." >> $GITHUB_STEP_SUMMARY
           else
             echo "⚠️ golangci-lint@latest failed (informational only)." >> $GITHUB_STEP_SUMMARY
           fi
+
   test:
     strategy:
       matrix:
@@ -61,10 +83,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
       - name: Install Go
         uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: ${{ matrix.go-version }}
+
       - name: Test
         run: make test
-        shell: bash

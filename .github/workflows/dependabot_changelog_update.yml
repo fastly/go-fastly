@@ -6,6 +6,11 @@ on:
       - opened
       - synchronize
       - reopened
+
+defaults:
+  run:
+    shell: bash
+
 jobs:
   dependabot-changelog-update:
     if: github.event.pull_request.user.login == 'dependabot[bot]'
