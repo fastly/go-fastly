@@ -191,6 +191,10 @@ var ErrMissingCustomerID = NewFieldError("CustomerID")
 // requires a "AccessKeyID" key, but one was not set.
 var ErrMissingAccessKeyID = NewFieldError("AccessKeyID")
 
+// ErrMissingContactID is an error that is returned when an input struct
+// requires a "ContactID" key, but one was not set.
+var ErrMissingContactID = NewFieldError("ContactID")
+
 // ErrMissingDescription is an error that is returned when an input struct
 // requires a "Description" key, but one was not set.
 var ErrMissingDescription = NewFieldError("Description")
