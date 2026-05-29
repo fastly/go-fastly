@@ -58,13 +58,13 @@ func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Contact, er
 	path := fastly.ToSafeURL("customer", *i.CustomerID, "contacts")
 
 	payload := &createPayload{
-		UserID:      deref(i.UserID),
-		ContactType: deref(i.ContactType),
-		Name:        deref(i.Name),
-		FirstName:   deref(i.FirstName),
-		LastName:    deref(i.LastName),
-		Email:       deref(i.Email),
-		Phone:       deref(i.Phone),
+		UserID:      fastly.ToValue(i.UserID),
+		ContactType: fastly.ToValue(i.ContactType),
+		Name:        fastly.ToValue(i.Name),
+		FirstName:   fastly.ToValue(i.FirstName),
+		LastName:    fastly.ToValue(i.LastName),
+		Email:       fastly.ToValue(i.Email),
+		Phone:       fastly.ToValue(i.Phone),
 	}
 
 	resp, err := c.PostJSONAPI(ctx, path, payload, fastly.CreateRequestOptions())
@@ -78,11 +78,4 @@ func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Contact, er
 		return nil, err
 	}
 	return &co, nil
-}
-
-func deref(s *string) string {
-	if s == nil {
-		return ""
-	}
-	return *s
 }
