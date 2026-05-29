@@ -12,19 +12,11 @@ import (
 func TestClient_Contacts(t *testing.T) {
 	ctx := context.TODO()
 
-	var (
-		err        error
-		customerID string
-	)
-	fastly.Record(t, "get_current_user", func(c *fastly.Client) {
-		var u *fastly.User
-		u, err = c.GetCurrentUser(ctx)
-		if err == nil && u != nil && u.CustomerID != nil {
-			customerID = *u.CustomerID
-		}
-	})
-	require.NoError(t, err)
-	require.NotEmpty(t, customerID)
+	var err error
+
+	// The customer ID is an opaque identifier that is only replayed against the
+	// recorded fixtures; its exact value does not matter for the test.
+	customerID := "7i6ZbMEdjnTUNyk75XgWO0"
 
 	// Fastly refuses to delete the last contact of a given type, so we
 	// create a guard contact first that we leave in place for the duration
