@@ -7,12 +7,19 @@
 ### Enhancements:
 
 ### Dependencies:
+
+### Bug fixes:
+
+## [v15.0.2](https://github.com/fastly/go-fastly/releases/tag/v15.0.2) (2026-06-03)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v15.0.1...v15.0.2)
+
+### Dependencies:
+
 - build(deps): `golang.org/x/crypto` from 0.50.0 to 0.51.0 ([#812](https://github.com/fastly/go-fastly/pull/812))
 - build(deps): `golang.org/x/sys` from 0.43.0 to 0.44.0 ([#812](https://github.com/fastly/go-fastly/pull/812))
 - build(deps): `golang.org/x/crypto` from 0.51.0 to 0.52.0 ([#814](https://github.com/fastly/go-fastly/pull/814))
 - build(deps): `golang.org/x/sys` from 0.44.0 to 0.45.0 ([#814](https://github.com/fastly/go-fastly/pull/814))
-
-### Bug fixes:
 
 ## [v15.0.1](https://github.com/fastly/go-fastly/releases/tag/v15.0.1) (2026-05-06)
 
