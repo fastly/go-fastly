@@ -2,10 +2,17 @@ name: Generate changelog entry for Dependabot
 
 on:
   pull_request:
+    # This job should only run when the PR is first opened, not when
+    # additional commits are pushed to its branch (which is done by
+    # this workflow, or by someone using the GitHub web interface
+    # 'Update Branch' button). Thus the 'types' list here contains
+    # only 'opened', and does not contain 'synchronize' or 'labeled'.
     types:
       - opened
-      - synchronize
-      - reopened
+
+# All steps in this workflow use a generated token for permissions,
+# not GITHUB_TOKEN, so no permissions should be granted to that token.
+permissions: {}
 
 defaults:
   run:
@@ -15,9 +22,6 @@ jobs:
   dependabot-changelog-update:
     if: github.event.pull_request.user.login == 'dependabot[bot]'
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write # add the Skip-Changelog label when the PR doesn't need an entry
     steps:
       - name: Generate a GitHub token
         id: github-token
@@ -26,16 +30,13 @@ jobs:
           client-id: ${{ vars.GH_APP_ID }}
           private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
-          repositories: "go-fastly"
+          repositories: ${{ github.repository }}
           permission-contents: write
-          permission-pull-requests: write
 
       - name: Checkout code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           token: ${{ steps.github-token.outputs.token }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.pull_request.head.ref }}
           persist-credentials: true
 
       - name: Generate changelog entry
@@ -48,4 +49,4 @@ jobs:
       - name: Commit changelog entry
         uses: stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9 # v7.1.0
         with:
-          commit_message: "docs(CHANGELOG.md): add dependency bump from dependabot"
+          commit_message: "docs(CHANGELOG.md): add dependency bump from Dependabot"
