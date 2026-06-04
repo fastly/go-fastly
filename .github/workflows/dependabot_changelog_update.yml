@@ -10,8 +10,8 @@ on:
     types:
       - opened
 
-# All steps in this workflow use a generated token for permissions,
-# not GITHUB_TOKEN, so no permissions should be granted to that token.
+# Jobs in this workflow which require GITHUB_TOKEN to have permissions
+# specify that at the job level.
 permissions: {}
 
 defaults:
@@ -19,15 +19,42 @@ defaults:
     shell: bash
 
 jobs:
-  dependabot-changelog-update:
+  check-labels:
     if: github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write # add the Skip-Changelog label when the PR doesn't need an entry
+    outputs:
+      need_changelog_entry: ${{ steps.check.outputs.result == 'true' }}
+    steps:
+      - name: Check labels
+        id: check
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const labels = context.payload.pull_request.labels.map(l => l.name);
+            const skip = labels.includes('github_actions');
+            if (skip) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                labels: ['Skip-Changelog']
+              });
+            }
+            return !skip;
+          result-encoding: string
+
+  dependabot-changelog-update:
+    needs: check-labels
+    if: needs.check-labels.outputs.need_changelog_entry == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Generate a GitHub token
         id: github-token
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         with:
-          client-id: ${{ vars.GH_APP_ID }}
+          app-id: ${{ vars.GH_APP_ID }}
           private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
           repositories: ${{ github.repository }}
@@ -40,7 +67,7 @@ jobs:
           persist-credentials: true
 
       - name: Generate changelog entry
-        uses: dangoslen/dependabot-changelog-helper@50a0884d19a0e4aa379a69c96a82b5e8d6c46d63 # v4.2.1
+        uses: dangoslen/dependabot-changelog-helper@291c8cb629d7cd7b57ea065782c435ec2bedb138 # v4.3.0
         with:
           activationLabels: dependencies
           changelogPath: './CHANGELOG.md'
