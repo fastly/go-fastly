@@ -7,6 +7,9 @@
 ### Enhancements:
 
 ### Dependencies:
+- build(deps): `actions/checkout` from 6.0.2 to 6.0.3 ([#821](https://github.com/fastly/go-fastly/pull/821))
+- build(deps): `dangoslen/dependabot-changelog-helper` from 4.2.1 to 4.3.0 ([#821](https://github.com/fastly/go-fastly/pull/821))
+- build(deps): `dangoslen/changelog-enforcer` from 3.6.1 to 3.7.0 ([#821](https://github.com/fastly/go-fastly/pull/821))
 
 ### Bug fixes:
 
