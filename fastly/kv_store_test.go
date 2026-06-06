@@ -7,12 +7,34 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
+// wait for generation marker of testKey to change
+func waitForItemGeneration(t *testing.T, storeID, key string, generation uint64) {
+	// these API operations are intentionally not wrapped in Record()
+	require.EventuallyWithT(
+		t,
+		func(c *assert.CollectT) {
+			updatedItem, err := DefaultClient().GetKVStoreItem(&GetKVStoreItemInput{
+				StoreID: storeID,
+				Key:     key,
+			})
+			assert.NoErrorf(c, err, "fetching key %q", key)
+			assert.NotEqual(c, generation, updatedItem.Generation, "generation marker change")
+		},
+		3*time.Second,
+		1*time.Second,
+		"updated item is not readable",
+	)
+}
+
 func TestClient_KVStore(t *testing.T) {
+	// wrapper objects to simplify invocation of functions in the
+	// 'assert' and 'require' modules
 	assert := assert.New(t)
 	require := require.New(t)
 
@@ -189,6 +211,8 @@ func TestClient_KVStore(t *testing.T) {
 		expectedMetadata = "meta"
 	})
 
+	waitForItemGeneration(t, kvStore.StoreID, testKey, item.Generation)
+
 	Record(t, "kv_store/get-item-round-2", func(c *Client) {
 		updatedItem, err := c.GetKVStoreItem(context.TODO(), &GetKVStoreItemInput{
 			StoreID: kvStore.StoreID,
@@ -229,6 +253,8 @@ func TestClient_KVStore(t *testing.T) {
 
 		expectedValue += "suffix"
 	})
+
+	waitForItemGeneration(t, kvStore.StoreID, testKey, item.Generation)
 
 	Record(t, "kv_store/get-item-round-3", func(c *Client) {
 		updatedItem, err := c.GetKVStoreItem(context.TODO(), &GetKVStoreItemInput{
