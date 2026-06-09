@@ -5,14 +5,22 @@
 ### Breaking:
 
 ### Enhancements:
+
+### Dependencies:
+
+### Bug fixes:
+
+## [v15.0.3](https://github.com/fastly/go-fastly/releases/tag/v15.0.3) (2026-06-09)
+
+### Enhancements:
+
 - feat(helpers): add NullInt helper to return nil when an int value is zero ([#824](https://github.com/fastly/go-fastly/pull/824))
 
 ### Dependencies:
+
 - build(deps): `actions/checkout` from 6.0.2 to 6.0.3 ([#821](https://github.com/fastly/go-fastly/pull/821))
 - build(deps): `dangoslen/dependabot-changelog-helper` from 4.2.1 to 4.3.0 ([#821](https://github.com/fastly/go-fastly/pull/821))
 - build(deps): `dangoslen/changelog-enforcer` from 3.6.1 to 3.7.0 ([#821](https://github.com/fastly/go-fastly/pull/821))
-
-### Bug fixes:
 
 ## [v15.0.2](https://github.com/fastly/go-fastly/releases/tag/v15.0.2) (2026-06-03)
 
@@ -42,10 +50,12 @@
 - feat(service_details): Add support for filters in GetServiceDetails ([#806](https://github.com/fastly/go-fastly/pull/806))
 
 ### Enhancements:
+
 - feat(dns): add support for DNS Zones and TSIG Keys ([#805](https://github.com/fastly/go-fastly/pull/805))
 - feat(backend): add support for the 'max_use' and 'max_lifetime' fields ([#807](https://github.com/fastly/go-fastly/pull/807))
 
 ### Dependencies:
+
 - build(deps): `golang.org/x/crypto` from 0.49.0 to 0.50.0 ([#804](https://github.com/fastly/go-fastly/pull/804))
 - build(deps): `golang.org/x/sys` from 0.42.0 to 0.43.0 ([#804](https://github.com/fastly/go-fastly/pull/804))
 
