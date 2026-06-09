@@ -5,6 +5,7 @@
 ### Breaking:
 
 ### Enhancements:
+- feat(helpers): add NullInt helper to return nil when an int value is zero
 
 ### Dependencies:
 - build(deps): `actions/checkout` from 6.0.2 to 6.0.3 ([#821](https://github.com/fastly/go-fastly/pull/821))
