@@ -38,6 +38,15 @@ func NullString(v string) *string {
 	return &v
 }
 
+// NullInt is a helper that returns a pointer to the int value passed in
+// or nil if the int is zero.
+func NullInt(v int) *int {
+	if v == 0 {
+		return nil
+	}
+	return &v
+}
+
 // -- Nullable helpers --
 
 // Nullable represents a value that can be explicitly set to null in JSON output.
