@@ -5,6 +5,7 @@
 ### Breaking:
 
 ### Enhancements:
+- feat(customer/contacts): add support for customer contacts (list/create/delete) ([#813](https://github.com/fastly/go-fastly/pull/813))
 
 ### Dependencies:
 
