@@ -30,11 +30,11 @@ type ListInput struct {
 
 // List retrieves timeseries metrics for Next-Gen WAF.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Timeseries, error) {
-	if i.Metrics == nil {
+	if i.Metrics == nil || *i.Metrics == "" {
 		return nil, fastly.ErrMissingMetrics
 	}
 
-	if i.From == nil {
+	if i.From == nil || *i.From == "" {
 		return nil, fastly.ErrMissingFrom
 	}
 
