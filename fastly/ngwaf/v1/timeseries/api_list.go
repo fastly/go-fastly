@@ -9,48 +9,45 @@ import (
 	"github.com/fastly/go-fastly/v15/fastly"
 )
 
-// GetInput specifies the information needed for the Get() function to
+// ListInput specifies the information needed for the List() function to
 // perform the operation.
-type GetInput struct {
-	// End is the end of a date-time range, expressed in RFC 3339 format.
-	End *string
+type ListInput struct {
+	// Dimensions is a comma-separated list of grouping dimensions to be
+	// included in the timeseries. Allowed values are workspaces and time.
+	// Default is time.
+	Dimensions *string
+	// From is the start of a date-time range, expressed in RFC 3339 format (required).
+	From *string
 	// Granularity is the level of detail of the sample size in seconds.
 	Granularity *int
 	// Metrics is a comma-separated list of metrics to be included in the
 	// timeseries. Metrics can be XSS, SQLI, HTTP404, requests_total,
 	// requests_attack, requests_total_blocked, or any custom metric (required).
 	Metrics *string
-	// Start is the start of a date-time range, expressed in RFC 3339 format (required).
-	Start *string
-	// WorkspaceID is the workspace identifier (required).
-	WorkspaceID *string
+	// To is the end of a date-time range, expressed in RFC 3339 format.
+	To *string
 }
 
-// Get retrieves the specified timeseries.
-func Get(ctx context.Context, c *fastly.Client, i *GetInput) (*TimeSeries, error) {
-	if i.WorkspaceID == nil {
-		return nil, fastly.ErrMissingWorkspaceID
-	}
-
+// List retrieves timeseries metrics for Next-Gen WAF.
+func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Timeseries, error) {
 	if i.Metrics == nil {
 		return nil, fastly.ErrMissingMetrics
 	}
 
-	if i.Start == nil {
-		return nil, fastly.ErrMissingStart
+	if i.From == nil {
+		return nil, fastly.ErrMissingFrom
 	}
 
-	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "timeseries")
+	path := fastly.ToSafeURL("ngwaf", "v1", "timeseries")
 
 	requestOptions := fastly.CreateRequestOptions()
-	if i.Start != nil {
-		requestOptions.Params["start"] = *i.Start
+	requestOptions.Params["metrics"] = *i.Metrics
+	requestOptions.Params["from"] = *i.From
+	if i.To != nil {
+		requestOptions.Params["to"] = *i.To
 	}
-	if i.End != nil {
-		requestOptions.Params["end"] = *i.End
-	}
-	if i.Metrics != nil {
-		requestOptions.Params["metrics"] = *i.Metrics
+	if i.Dimensions != nil {
+		requestOptions.Params["dimensions"] = *i.Dimensions
 	}
 	if i.Granularity != nil {
 		requestOptions.Params["granularity"] = strconv.Itoa(*i.Granularity)
@@ -62,7 +59,7 @@ func Get(ctx context.Context, c *fastly.Client, i *GetInput) (*TimeSeries, error
 	}
 	defer resp.Body.Close()
 
-	var ts *TimeSeries
+	var ts *Timeseries
 	if err := json.NewDecoder(resp.Body).Decode(&ts); err != nil {
 		return nil, fmt.Errorf("failed to decode json response: %w", err)
 	}
