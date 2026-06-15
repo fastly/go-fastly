@@ -6,7 +6,7 @@
 
 ### Enhancements:
 
-- feat(ngwaf/timeseries): add support for list time series metrics ([#827](https://github.com/fastly/go-fastly/pull/827))
+- feat(ngwaf/timeseries): add support for listing time series metrics ([#827](https://github.com/fastly/go-fastly/pull/827))
 
 ### Dependencies:
 
