@@ -9,7 +9,7 @@ interactions:
       - application/json
       User-Agent:
       - FastlyGo/15.0.3 (+github.com/fastly/go-fastly; go1.26.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/QhkuQnVHamyBPi0e9ixPUq/timeseries?end=2025-06-06T00%3A00%3A00Z&granularity=60&metrics=XSS%2CSQLI%2CHTTP404&start=2025-06-04T00%3A00%3A00Z
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/timeseries?end=2025-06-06T00%3A00%3A00Z&granularity=60&metrics=XSS%2CSQLI%2CHTTP404&start=2025-06-04T00%3A00%3A00Z
     method: GET
   response:
     body: |
