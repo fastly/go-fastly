@@ -4,6 +4,8 @@
 
 ### Breaking:
 
+- breaking(ngwaf/timeseries): fix workspace timeseries endpoint returning empty data points ([#828](https://github.com/fastly/go-fastly/pull/828))
+
 ### Enhancements:
 
 - feat(ngwaf/timeseries): add support for listing time series metrics ([#827](https://github.com/fastly/go-fastly/pull/827))
