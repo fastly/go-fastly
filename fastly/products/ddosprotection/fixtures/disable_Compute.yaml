@@ -6,7 +6,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+      - FastlyGo/13.1.2 (+github.com/fastly/go-fastly; go1.25.7)
     url: https://api.fastly.com/enabled-products/v1/ddos_protection/services/XsjdElScZGjmfCcTwsYRC1
     method: DELETE
   response:
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 08 Sep 2025 15:39:26 GMT
+      - Fri, 27 Mar 2026 19:01:46 GMT
       Pragma:
       - no-cache
       Server:
@@ -37,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100156-CHI, cache-ewr-kewr1740095-EWR
+      - cache-chi-klot8100172-CHI, cache-ewr-kewr1740037-EWR
       X-Timer:
-      - S1757345966.266507,VS0,VE590
+      - S1774638105.429614,VS0,VE783
     status: 204 No Content
     code: 204
     duration: ""

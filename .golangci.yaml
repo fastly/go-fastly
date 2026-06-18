@@ -22,6 +22,10 @@ linters:
     - unparam
     - unused
   settings:
+    gosec:
+      excludes:
+        # Potential exposure of secrets via JSON/YAML/XML/TOML marshaling (AST) disabled because many fields are named in conflict of that on the API
+        - G117
     govet:
       enable:
         - nilness

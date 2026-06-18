@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/fastly/go-fastly/v12/fastly"
-	"github.com/fastly/go-fastly/v12/fastly/ngwaf/v1/scope"
+	"github.com/fastly/go-fastly/v15/fastly"
+	"github.com/fastly/go-fastly/v15/fastly/ngwaf/v1/scope"
 )
 
 // UpdateInput specifies the information needed for the Update()
@@ -109,9 +109,15 @@ type UpdateGroupCondition struct {
 	// GroupOperator is the logical operator used to evaluate the
 	// conditions ("any" or "all") (required).
 	GroupOperator *string `json:"group_operator"`
-	// Conditions is the list of single conditions to evaluate
-	// within the group (required).
-	Conditions []*UpdateCondition `json:"conditions"`
+	// Conditions is the list of single conditions within the group.
+	// Note: this field is not marshaled directly. It is merged with
+	// MultivalConditions into the JSON "conditions" array when building
+	// the request body.
+	Conditions []*UpdateCondition `json:"-"`
+	// MultivalConditions is the list of multival conditions within the group.
+	// Note: this field is not marshaled directly. It is merged with
+	// Conditions into the JSON "conditions" array when building the request body.
+	MultivalConditions []*UpdateMultivalCondition `json:"-"`
 }
 
 // UpdateMultivalCondition defines a multival conditions with a logical
@@ -134,15 +140,15 @@ type UpdateMultivalCondition struct {
 // UpdateRateLimit defines how rate limit rules are enforced.
 type UpdateRateLimit struct {
 	// List of client identifiers used for rate limiting. Can only be length 1 or 2.
-	ClientIdentifiers []*UpdateClientIdentifier
+	ClientIdentifiers []*UpdateClientIdentifier `json:"client_identifiers,omitempty"`
 	// Duration in seconds for the rate limit.
-	Duration *int
+	Duration *int `json:"duration,omitempty"`
 	// Time interval for the rate limit in seconds (60, 600, or 3600 minutes).
-	Interval *int
+	Interval *int `json:"interval,omitempty"`
 	// The signal used to count requests.
-	Signal *string
+	Signal *string `json:"signal,omitempty"`
 	// Rate limit threshold (between 1 and 10000).
-	Threshold *int
+	Threshold *int `json:"threshold,omitempty"`
 }
 
 // UpdateClientIdentifier is the client identifier for rate limit rules.
@@ -171,9 +177,9 @@ type privateUpdateConditionMult struct {
 }
 
 type privateUpdateGroupCondition struct {
-	Type          *string                   `json:"type"`
-	GroupOperator *string                   `json:"group_operator"`
-	Conditions    []*privateUpdateCondition `json:"conditions"`
+	Type          *string `json:"type"`
+	GroupOperator *string `json:"group_operator"`
+	Conditions    []any   `json:"conditions"`
 }
 
 type privateUpdateMultivalCondition struct {
@@ -204,13 +210,31 @@ func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Rule, error
 		mergedConditions = append(mergedConditions, privateCondition)
 	}
 	for _, gc := range i.GroupConditions {
-		var privateSubConditions []*privateUpdateCondition
+		var privateSubConditions []any
 		for _, subCond := range gc.Conditions {
 			privateSubConditions = append(privateSubConditions, &privateUpdateCondition{
 				Type:     fastly.ToPointer("single"),
 				Field:    subCond.Field,
 				Operator: subCond.Operator,
 				Value:    subCond.Value,
+			})
+		}
+		for _, mc := range gc.MultivalConditions {
+			var privateMultivalSubConditions []*privateUpdateConditionMult
+			for _, subCond := range mc.Conditions {
+				privateMultivalSubConditions = append(privateMultivalSubConditions, &privateUpdateConditionMult{
+					Type:     fastly.ToPointer("single"),
+					Field:    subCond.Field,
+					Operator: subCond.Operator,
+					Value:    subCond.Value,
+				})
+			}
+			privateSubConditions = append(privateSubConditions, &privateUpdateMultivalCondition{
+				Type:          fastly.ToPointer("multival"),
+				Field:         mc.Field,
+				Operator:      mc.Operator,
+				GroupOperator: mc.GroupOperator,
+				Conditions:    privateMultivalSubConditions,
 			})
 		}
 		privateGroupCondition := &privateUpdateGroupCondition{

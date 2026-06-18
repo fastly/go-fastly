@@ -2,15 +2,152 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v12.1.1...)
-
 ### Breaking:
 
 ### Enhancements:
 
-### Bug fixes:
+- feat(ngwaf/timeseries): add support for listing time series metrics ([#827](https://github.com/fastly/go-fastly/pull/827))
 
 ### Dependencies:
+
+### Bug fixes:
+
+## [v15.0.3](https://github.com/fastly/go-fastly/releases/tag/v15.0.3) (2026-06-09)
+
+### Enhancements:
+
+- feat(helpers): add NullInt helper to return nil when an int value is zero ([#824](https://github.com/fastly/go-fastly/pull/824))
+
+### Dependencies:
+
+- build(deps): `actions/checkout` from 6.0.2 to 6.0.3 ([#821](https://github.com/fastly/go-fastly/pull/821))
+- build(deps): `dangoslen/dependabot-changelog-helper` from 4.2.1 to 4.3.0 ([#821](https://github.com/fastly/go-fastly/pull/821))
+- build(deps): `dangoslen/changelog-enforcer` from 3.6.1 to 3.7.0 ([#821](https://github.com/fastly/go-fastly/pull/821))
+
+## [v15.0.2](https://github.com/fastly/go-fastly/releases/tag/v15.0.2) (2026-06-03)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v15.0.1...v15.0.2)
+
+### Dependencies:
+
+- build(deps): `golang.org/x/crypto` from 0.50.0 to 0.51.0 ([#812](https://github.com/fastly/go-fastly/pull/812))
+- build(deps): `golang.org/x/sys` from 0.43.0 to 0.44.0 ([#812](https://github.com/fastly/go-fastly/pull/812))
+- build(deps): `golang.org/x/crypto` from 0.51.0 to 0.52.0 ([#814](https://github.com/fastly/go-fastly/pull/814))
+- build(deps): `golang.org/x/sys` from 0.44.0 to 0.45.0 ([#814](https://github.com/fastly/go-fastly/pull/814))
+
+## [v15.0.1](https://github.com/fastly/go-fastly/releases/tag/v15.0.1) (2026-05-06)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v15.0.0...v15.0.1)
+
+### Dependencies:
+
+- build(deps): incremented `go-fastly` references to `v15` ([#810](https://github.com/fastly/go-fastly/pull/810))
+
+## [v15.0.0](https://github.com/fastly/go-fastly/releases/tag/v15.0.0) (2026-05-06)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v14.2.0...v15.0.0)
+
+### Breaking:
+
+- feat(service_details): Add support for filters in GetServiceDetails ([#806](https://github.com/fastly/go-fastly/pull/806))
+
+### Enhancements:
+
+- feat(dns): add support for DNS Zones and TSIG Keys ([#805](https://github.com/fastly/go-fastly/pull/805))
+- feat(backend): add support for the 'max_use' and 'max_lifetime' fields ([#807](https://github.com/fastly/go-fastly/pull/807))
+
+### Dependencies:
+
+- build(deps): `golang.org/x/crypto` from 0.49.0 to 0.50.0 ([#804](https://github.com/fastly/go-fastly/pull/804))
+- build(deps): `golang.org/x/sys` from 0.42.0 to 0.43.0 ([#804](https://github.com/fastly/go-fastly/pull/804))
+
+## [v14.2.0](https://github.com/fastly/go-fastly/releases/tag/v14.2.0) (2026-04-09)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v14.1.0...v14.2.0)
+
+### Enhancements:
+
+- feat(observability/loggingendpointerrors): add support for pagination via 'NextFrom' and 'PrevFrom' fields extracted from Link headers ([#802](https://github.com/fastly/go-fastly/pull/802))
+
+## [v14.1.0](https://github.com/fastly/go-fastly/releases/tag/v14.1.0) (2026-04-08)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v14.0.0...v14.1.0)
+
+### Enhancements:
+
+- feat(observability/loggingendpointerrors): add support for `Logging Endpoint Errors` `GET` operation ([#800](https://github.com/fastly/go-fastly/pull/800))
+
+## [v14.0.0](https://github.com/fastly/go-fastly/releases/tag/v14.0.0) (2026-04-01)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v13.1.2...v14.0.0)
+
+### Breaking:
+
+- breaking(products/ddosprotection): the 'mode' parameter is now required when calling `EnableInput` for DDoS Protection enablement ([#796](https://github.com/fastly/go-fastly/pull/796))
+
+### Enhancements:
+
+- feat(products/botmanagement): Add configuration management support for `bot_management` product with `contentguard` parameter ([#797](https://github.com/fastly/go-fastly/pull/797))
+
+### Dependencies:
+- build(deps): `actions/create-github-app-token` from 2 to 3 ([#793](https://github.com/fastly/go-fastly/pull/793))
+
+## [v13.1.2](https://github.com/fastly/go-fastly/releases/tag/v13.1.2) (2026-03-17)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v13.1.1...v13.1.2)
+
+### Bug fixes:
+
+- fix(apisecurity/operations): support page-based pagination for tags ([#794](https://github.com/fastly/go-fastly/pull/794))
+
+### Dependencies:
+
+- build(deps): `golang.org/x/crypto` from 0.48.0 to 0.49.0 ([#792](https://github.com/fastly/go-fastly/pull/792))
+
+## [v13.1.1](https://github.com/fastly/go-fastly/releases/tag/v13.1.1) (2026-03-16)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v13.1.0...v13.1.1)
+
+### Bug fixes:
+
+- fix(apisecurity/operations): support page-based pagination for operations and discovered-operations ([#790](https://github.com/fastly/go-fastly/pull/790))
+
+## [v13.1.0](https://github.com/fastly/go-fastly/releases/tag/v13.1.0) (2026-03-11)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v13.0.1...v13.1.0)
+
+### Enhancements:
+
+- feat(apisecurity/operations): add API Security Operations API support ([#785](https://github.com/fastly/go-fastly/pull/785))
+
+### Dependencies:
+
+- build(deps): `golang.org/x/sys` from 0.41.0 to 0.42.0 ([#788](https://github.com/fastly/go-fastly/pull/788))
+
+## [v13.0.1](https://github.com/fastly/go-fastly/releases/tag/v13.0.1) (2026-03-04)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v13.0.0...v13.0.1)
+
+### Bug fixes:
+
+- fix(ngwaf/rules): add MarshalJSON for condition unions and fix UpdateRateLimit json tags. ([#784](https://github.com/fastly/go-fastly/pull/784))
+
+## [v13.0.0](https://github.com/fastly/go-fastly/releases/tag/v13.0.0) (2026-02-12)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v12.1.2...v13.0.0)
+
+### Breaking:
+
+- breaking(ngwaf/rules): add support for multival type conditions in group operators. The `GroupCondition.Conditions` field type changed from `[]Condition` to `[]GroupConditionItem` to support mixed single and multival conditions. ([#781](https://github.com/fastly/go-fastly/pull/781))
+
+### Enhancements:
+
+- feat(products/staging): Add support for Staging IP addresses ([#780](https://github.com/fastly/go-fastly/pull/780))
+
+### Dependencies:
+
+- build(deps): `golang.org/x/crypto` from 0.47.0 to 0.48.0 ([#782](https://github.com/fastly/go-fastly/pull/782))
+- build(deps): `golang.org/x/sys` from 0.40.0 to 0.41.0 ([#782](https://github.com/fastly/go-fastly/pull/782))
 
 ## [v12.1.2](https://github.com/fastly/go-fastly/releases/tag/v12.1.2) (2026-02-04)
 
@@ -48,15 +185,9 @@
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v12.0.0...v12.1.0)
 
-### Breaking:
-
 ### Enhancements:
 
 - feat(products/apidiscovery): Add enable/disable support for API Discovery ([#760](https://github.com/fastly/go-fastly/pull/760))
-
-### Bug fixes:
-
-### Dependencies:
 
 ## [v12.0.0](https://github.com/fastly/go-fastly/releases/tag/v12.0.0) (2025-09-17)
 

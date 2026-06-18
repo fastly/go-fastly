@@ -3,6 +3,7 @@ package rules
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"time"
 )
 
@@ -44,14 +45,23 @@ type GroupCondition struct {
 	// GroupOperator specifies how to evaluate the conditions
 	// (e.g., `any`, `all`).
 	GroupOperator string `json:"group_operator"`
-	// Conditions lists the nested single conditions within this
+	// Conditions lists the nested single or multival conditions within this
 	// group.
-	Conditions []Condition `json:"conditions"`
+	Conditions []GroupConditionItem `json:"conditions"`
+}
+
+// GroupConditionItem represents a condition within a group, which can be
+// either single or multival (but not a nested group).
+type GroupConditionItem struct {
+	// Type indicates whether the condition is "single" or "multival".
+	Type string `json:"type"`
+	// Fields contains the condition-specific details, either
+	// Condition or MultivalCondition.
+	Fields any
 }
 
 // MultivalCondition defines a set of conditions and how they are
 // logically grouped.
-
 type MultivalCondition struct {
 	// Field is the request attribute to evaluate (e.g., "post_parameter",
 	// "signal").
@@ -206,6 +216,148 @@ func (ci *ConditionItem) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+// MarshalJSON serializes ConditionItem into the API "union" shape,
+// not the Go-internal {"type": "...", "Fields": ...} wrapper.
+func (ci ConditionItem) MarshalJSON() ([]byte, error) {
+	switch ci.Type {
+	case "single":
+		sc, ok := asSingleCondition(ci.Fields)
+		if !ok {
+			return nil, fmt.Errorf("rules: ConditionItem.Fields is not SingleCondition for type=%q (got %T)", ci.Type, ci.Fields)
+		}
+		type payload struct {
+			Type     string `json:"type"`
+			Field    string `json:"field"`
+			Operator string `json:"operator"`
+			Value    string `json:"value"`
+		}
+		return json.Marshal(payload{
+			Type:     "single",
+			Field:    sc.Field,
+			Operator: sc.Operator,
+			Value:    sc.Value,
+		})
+
+	case "group":
+		gc, ok := asGroupCondition(ci.Fields)
+		if !ok {
+			return nil, fmt.Errorf("rules: ConditionItem.Fields is not GroupCondition for type=%q (got %T)", ci.Type, ci.Fields)
+		}
+		type payload struct {
+			Type          string               `json:"type"`
+			GroupOperator string               `json:"group_operator"`
+			Conditions    []GroupConditionItem `json:"conditions"`
+		}
+		return json.Marshal(payload{
+			Type:          "group",
+			GroupOperator: gc.GroupOperator,
+			Conditions:    gc.Conditions,
+		})
+
+	case "multival":
+		mc, ok := asMultivalCondition(ci.Fields)
+		if !ok {
+			return nil, fmt.Errorf("rules: ConditionItem.Fields is not MultivalCondition for type=%q (got %T)", ci.Type, ci.Fields)
+		}
+		type payload struct {
+			Type          string         `json:"type"`
+			Field         string         `json:"field"`
+			Operator      string         `json:"operator"`
+			GroupOperator string         `json:"group_operator"`
+			Conditions    []ConditionMul `json:"conditions"`
+		}
+		return json.Marshal(payload{
+			Type:          "multival",
+			Field:         mc.Field,
+			Operator:      mc.Operator,
+			GroupOperator: mc.GroupOperator,
+			Conditions:    mc.Conditions,
+		})
+
+	default:
+		return nil, fmt.Errorf("rules: unknown ConditionItem.Type %q", ci.Type)
+	}
+}
+
+// UnmarshalJSON handles deserialization of GroupConditionItem,
+// distinguishing between single and multival conditions (not groups).
+func (gci *GroupConditionItem) UnmarshalJSON(data []byte) error {
+	type alias struct {
+		Type string `json:"type"`
+	}
+	var a alias
+	if err := json.Unmarshal(data, &a); err != nil {
+		return err
+	}
+	gci.Type = a.Type
+
+	switch a.Type {
+	case "single":
+		var c Condition
+		if err := json.Unmarshal(data, &c); err != nil {
+			return err
+		}
+		gci.Fields = c
+	case "multival":
+		var mc MultivalCondition
+		if err := json.Unmarshal(data, &mc); err != nil {
+			return err
+		}
+		gci.Fields = mc
+	default:
+		return errors.New("unknown condition type in group: " + a.Type)
+	}
+
+	return nil
+}
+
+// MarshalJSON serializes GroupConditionItem into the API "union" shape,
+// not the Go-internal {"type": "...", "Fields": ...} wrapper.
+func (gci GroupConditionItem) MarshalJSON() ([]byte, error) {
+	switch gci.Type {
+	case "single":
+		c, ok := asCondition(gci.Fields)
+		if !ok {
+			return nil, fmt.Errorf("rules: GroupConditionItem.Fields is not Condition for type=%q (got %T)", gci.Type, gci.Fields)
+		}
+		type payload struct {
+			Type     string `json:"type"`
+			Field    string `json:"field"`
+			Operator string `json:"operator"`
+			Value    string `json:"value"`
+		}
+		return json.Marshal(payload{
+			Type:     "single",
+			Field:    c.Field,
+			Operator: c.Operator,
+			Value:    c.Value,
+		})
+
+	case "multival":
+		mc, ok := asMultivalCondition(gci.Fields)
+		if !ok {
+			return nil, fmt.Errorf("rules: GroupConditionItem.Fields is not MultivalCondition for type=%q (got %T)", gci.Type, gci.Fields)
+		}
+		type payload struct {
+			Type          string         `json:"type"`
+			Field         string         `json:"field"`
+			Operator      string         `json:"operator"`
+			GroupOperator string         `json:"group_operator"`
+			Conditions    []ConditionMul `json:"conditions"`
+		}
+		return json.Marshal(payload{
+			Type:          "multival",
+			Field:         mc.Field,
+			Operator:      mc.Operator,
+			GroupOperator: mc.GroupOperator,
+			Conditions:    mc.Conditions,
+		})
+
+	default:
+		return nil, fmt.Errorf("rules: unknown GroupConditionItem.Type %q", gci.Type)
+	}
+}
+
 // Rules is the response returned when listing multiple rules.
 type Rules struct {
 	// Data is the list of rules.
@@ -220,4 +372,60 @@ type MetaRules struct {
 	Limit int `json:"limit"`
 	// Total is the total number of rules available.
 	Total int `json:"total"`
+}
+
+func asSingleCondition(v any) (SingleCondition, bool) {
+	switch t := v.(type) {
+	case SingleCondition:
+		return t, true
+	case *SingleCondition:
+		if t == nil {
+			return SingleCondition{}, false
+		}
+		return *t, true
+	default:
+		return SingleCondition{}, false
+	}
+}
+
+func asGroupCondition(v any) (GroupCondition, bool) {
+	switch t := v.(type) {
+	case GroupCondition:
+		return t, true
+	case *GroupCondition:
+		if t == nil {
+			return GroupCondition{}, false
+		}
+		return *t, true
+	default:
+		return GroupCondition{}, false
+	}
+}
+
+func asMultivalCondition(v any) (MultivalCondition, bool) {
+	switch t := v.(type) {
+	case MultivalCondition:
+		return t, true
+	case *MultivalCondition:
+		if t == nil {
+			return MultivalCondition{}, false
+		}
+		return *t, true
+	default:
+		return MultivalCondition{}, false
+	}
+}
+
+func asCondition(v any) (Condition, bool) {
+	switch t := v.(type) {
+	case Condition:
+		return t, true
+	case *Condition:
+		if t == nil {
+			return Condition{}, false
+		}
+		return *t, true
+	default:
+		return Condition{}, false
+	}
 }

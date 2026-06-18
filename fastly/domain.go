@@ -17,11 +17,14 @@ type Domain struct {
 	Name           *string    `mapstructure:"name"`
 	ServiceID      *string    `mapstructure:"service_id"`
 	ServiceVersion *int       `mapstructure:"version"`
+	StagingIP      *string    `mapstructure:"staging_ip"`
 	UpdatedAt      *time.Time `mapstructure:"updated_at"`
 }
 
 // ListDomainsInput is used as input to the ListDomains function.
 type ListDomainsInput struct {
+	// IncludeStagingIPs controls whether to include staging IP addresses in the response.
+	IncludeStagingIPs bool
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -39,7 +42,12 @@ func (c *Client) ListDomains(ctx context.Context, i *ListDomainsInput) ([]*Domai
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "domain")
 
-	resp, err := c.Get(ctx, path, CreateRequestOptions())
+	ro := CreateRequestOptions()
+	if i.IncludeStagingIPs {
+		ro.Params["include"] = "staging_ips"
+	}
+
+	resp, err := c.Get(ctx, path, ro)
 	if err != nil {
 		return nil, err
 	}

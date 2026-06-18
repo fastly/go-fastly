@@ -24,7 +24,7 @@ import (
 	"github.com/hashicorp/go-cleanhttp"
 	"github.com/mitchellh/mapstructure"
 
-	"github.com/fastly/go-fastly/v12/fastly/impersonation"
+	"github.com/fastly/go-fastly/v15/fastly/impersonation"
 )
 
 // APIKeyEnvVar is the name of the environment variable where the Fastly API
@@ -64,7 +64,7 @@ const UserAgentEnvVar = "FASTLY_USER_AGENT"
 var ProjectURL = "github.com/fastly/go-fastly"
 
 // ProjectVersion is the version of this library.
-var ProjectVersion = "12.1.2"
+var ProjectVersion = "15.0.3"
 
 // UserAgent is the user agent for this particular client.
 var UserAgent = fmt.Sprintf("FastlyGo/%s (+%s; %s)",
@@ -357,6 +357,7 @@ func (c *Client) Request(ctx context.Context, verb, p string, ro RequestOptions)
 	}
 
 	// nosemgrep: trailofbits.go.invalid-usage-of-modified-variable.invalid-usage-of-modified-variable
+	// #nosec G704 -- req is constructed from RawRequest using client's trusted endpoint
 	resp, err := checkResp(c.HTTPClient.Do(req))
 
 	if c.DebugMode && resp != nil {
@@ -489,6 +490,7 @@ func (c *Client) SimpleGet(ctx context.Context, target string) (*http.Response, 
 	request.Header.Set("User-Agent", UserAgent)
 
 	// nosemgrep: trailofbits.go.invalid-usage-of-modified-variable.invalid-usage-of-modified-variable
+	// #nosec G704 -- URL is validated and comes from trusted Fastly API responses (pagination links)
 	return checkResp(c.HTTPClient.Do(request))
 }
 
@@ -657,7 +659,13 @@ func checkResp(resp *http.Response, err error) (*http.Response, error) {
 	}
 
 	switch resp.StatusCode {
-	case http.StatusOK, http.StatusCreated, http.StatusAccepted, http.StatusNoContent, http.StatusResetContent, http.StatusPartialContent:
+	case http.StatusOK,
+		http.StatusCreated,
+		http.StatusAccepted,
+		http.StatusNoContent,
+		http.StatusResetContent,
+		http.StatusPartialContent,
+		http.StatusMultiStatus:
 		return resp, nil
 	default:
 		return resp, NewHTTPError(resp)

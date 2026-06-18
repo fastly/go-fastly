@@ -1,0 +1,48 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/14.1.0 (+github.com/fastly/go-fastly; go1.25.7)
+    url: https://api.fastly.com/observability/service/kKJb5bOFI47uHeBVluGfX1/logging/errors?from=1775741900&to=1775741920
+    method: GET
+  response:
+    body: |
+      {"sequence_number":483,"error_time_us":1775741902711006,"stream":"logging_error","message":"request failed","endpoint":"Broken Log","details":"{\"level\":\"error\",\"error\":\"non-temporary request err: Get \\\"https://my-broken.logging.org/.well-known/fastly/logging/challenge\\\": lookup my-broken.logging.org. on 127.0.0.1:53: no such host\",\"name\":\"prebatch http challenge check\"}"}
+      {"sequence_number":497,"error_time_us":1775741905723969,"stream":"logging_error","message":"request failed","endpoint":"Broken Log","details":"{\"level\":\"error\",\"error\":\"non-temporary request err: Get \\\"https://my-broken.logging.org/.well-known/fastly/logging/challenge\\\": lookup my-broken.logging.org. on 127.0.0.1:53: no such host\",\"name\":\"prebatch http challenge check\"}"}
+      {"sequence_number":474,"error_time_us":1775741912263519,"stream":"logging_error","message":"request failed","endpoint":"Broken Log","details":"{\"level\":\"error\",\"error\":\"non-temporary request err: Get \\\"https://my-broken.logging.org/.well-known/fastly/logging/challenge\\\": lookup my-broken.logging.org. on 127.0.0.1:53: no such host\",\"name\":\"prebatch http challenge check\"}"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Date:
+      - Thu, 09 Apr 2026 13:50:09 GMT
+      Link:
+      - </observability/service/kKJb5bOFI47uHeBVluGfX1/logging/errors%3Ffrom=1775741910>;
+        rel="next", </observability/service/kKJb5bOFI47uHeBVluGfX1/logging/errors%3Ffrom=1775741890>;
+        rel="prev"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Fastly-Key,Accept-Encoding,Accept
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100109-CHI, cache-ewr-kewr1740082-EWR
+      X-Timer:
+      - S1775742610.940263,VS0,VE41
+    status: 200 OK
+    code: 200
+    duration: ""

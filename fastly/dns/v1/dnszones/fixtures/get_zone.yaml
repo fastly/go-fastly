@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/14.2.0 (+github.com/fastly/go-fastly; go1.26.2)
+    url: https://api.fastly.com/dns/v1/zones/EdxpqhEVi36sdAq2MfmEGO
+    method: GET
+  response:
+    body: |
+      {"id":"EdxpqhEVi36sdAq2MfmEGO","name":"go-fastly-test.com.","description":"go-fastly test zone","type":"secondary","nameservers":["oak.fastlydns.com.","oak.fastlydns.dev.","oak.fastlydns.net.","oak.fastlydns.org."],"serial":"0","xfr_config_inbound":{"primaries":[{"description":"primary DNS server","address":"1.2.3.4"}],"inbound_tsig_key_id":"4u2NL6ggameOuRa7p4trcD","notify_ip_addresses":{"ipv4":["157.52.78.5","157.52.79.5","167.82.228.5","167.82.229.5"]}},"created_at":"2026-05-05T21:21:26Z","updated_at":"2026-05-05T21:21:26Z"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "533"
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 05 May 2026 21:21:27 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000048-CHI, cache-ewr-kewr1740076-EWR
+      X-Timer:
+      - S1778016087.195917,VS0,VE180
+    status: 200 OK
+    code: 200
+    duration: ""

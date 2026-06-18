@@ -1,0 +1,49 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"name":"go-fastly-test-key","algorithm":"hmac-sha256","secret":"dGVzdHNlY3JldA==","description":"go-fastly
+      test TSIG key"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/14.2.0 (+github.com/fastly/go-fastly; go1.26.2)
+    url: https://api.fastly.com/dns/v1/tsig-keys
+    method: POST
+  response:
+    body: |
+      {"id":"AYL0wC9TkHwa2XaV6K6J9K","description":"go-fastly test TSIG key","name":"go-fastly-test-key","algorithm":"hmac-sha256","created_at":"2026-05-05T21:21:03Z","updated_at":"2026-05-05T21:21:03Z"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "198"
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 05 May 2026 21:21:03 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000100-CHI, cache-ewr-kewr1740055-EWR
+      X-Timer:
+      - S1778016064.785733,VS0,VE195
+    status: 201 Created
+    code: 201
+    duration: ""

@@ -87,6 +87,10 @@ var ErrMissingAddress = NewFieldError("Address")
 // requires a "AlertID" key, but one was not set.
 var ErrMissingAlertID = NewFieldError("AlertID")
 
+// ErrMissingAlgorithm is an error that is returned when an input struct
+// requires a "Algorithm" key, but one was not set.
+var ErrMissingAlgorithm = NewFieldError("Algorithm")
+
 // ErrMissingBackend is an error that is returned when an input struct
 // requires a "Backend" key, but one was not set.
 var ErrMissingBackend = NewFieldError("Backend")
@@ -391,6 +395,10 @@ var ErrMissingKind = NewFieldError("Kind")
 // requires a "URL" key, but one was not set.
 var ErrMissingURL = NewFieldError("URL")
 
+// ErrInvalidURL is an error that is returned when an input struct
+// has a "URL" key, but the one provided is invalid.
+var ErrInvalidURL = NewFieldError("URL").Message("invalid")
+
 // ErrMissingUsername is an error that is returned when an input struct
 // requires a "Username" key, but one was not set.
 var ErrMissingUsername = NewFieldError("Username")
@@ -489,6 +497,18 @@ var ErrMissingMode = NewFieldError("Mode")
 // ErrMissingHTTPProtocols is an error that is returned when an input struct
 // requires an "HTTPProtocols" key, but one was not set.
 var ErrMissingHTTPProtocols = NewFieldError("HTTPProtocols")
+
+// ErrMissingMethod is an error that is returned when an input struct
+// requires a "Method" key, but one was not set.
+var ErrMissingMethod = NewFieldError("Method")
+
+// ErrMissingPath is an error that is returned when an input struct
+// requires a "Path" key, but one was not set.
+var ErrMissingPath = NewFieldError("Path")
+
+// ErrMissingStatus is an error that is returned when an input struct
+// requires a "Status" key, but one was not set.
+var ErrMissingStatus = NewFieldError("Status")
 
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
