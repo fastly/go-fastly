@@ -7,6 +7,9 @@
 ### Enhancements:
 
 - feat(ngwaf/timeseries): add support for listing time series metrics ([#827](https://github.com/fastly/go-fastly/pull/827))
+- feat(tls/custom-configuration): add `CreateCustomTLSConfiguration` and `DeleteCustomTLSConfiguration`, and surface `default_certificate`, `default_ecdsa_certificate`, `tls_1_2_cipher_suite_profile`, `tls_1_3_cipher_suite_profile`, and `vipspace` on the configuration resource. Create input also accepts `cipher_suites`.
+
+### Bug fixes:
 
 ### Dependencies:
 
