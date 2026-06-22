@@ -44,6 +44,12 @@ func TestTime_Series(t *testing.T) {
 	if ts == nil {
 		t.Fatal("expected timeseries response, got nil")
 	}
+	if len(ts.Data) == 0 {
+		t.Fatal("expected data points, got none")
+	}
+	if _, ok := ts.Data[0]["timestamp"]; !ok {
+		t.Fatal("expected first data point to contain a 'timestamp' key")
+	}
 }
 
 func TestClient_GetVirtualPatch_validation(t *testing.T) {
