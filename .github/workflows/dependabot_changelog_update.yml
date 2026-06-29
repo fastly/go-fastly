@@ -10,8 +10,6 @@ on:
     types:
       - opened
 
-# Jobs in this workflow which require GITHUB_TOKEN to have permissions
-# specify that at the job level.
 permissions: {}
 
 defaults:
@@ -19,35 +17,8 @@ defaults:
     shell: bash
 
 jobs:
-  check-labels:
-    if: github.event.pull_request.user.login == 'dependabot[bot]'
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write # add the Skip-Changelog label when the PR doesn't need an entry
-    outputs:
-      need_changelog_entry: ${{ steps.check.outputs.result == 'true' }}
-    steps:
-      - name: Check labels
-        id: check
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        with:
-          script: |
-            const labels = context.payload.pull_request.labels.map(l => l.name);
-            const skip = labels.includes('github_actions');
-            if (skip) {
-              await github.rest.issues.addLabels({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.payload.pull_request.number,
-                labels: ['Skip-Changelog']
-              });
-            }
-            return !skip;
-          result-encoding: string
-
   dependabot-changelog-update:
-    needs: check-labels
-    if: needs.check-labels.outputs.need_changelog_entry == 'true'
+    if: contains(github.event.pull_request.labels.*.name, 'Auto-Changelog')
     runs-on: ubuntu-latest
     steps:
       - name: Generate a GitHub token
