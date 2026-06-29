@@ -7,6 +7,10 @@ updates:
     allow:
       # Allow both direct and indirect updates for all packages.
       - dependency-type: "all"
+    labels:
+      - dependencies
+      - go
+      - Auto-Changelog
     groups:
       go-dependencies:
         patterns:
@@ -15,6 +19,10 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    labels:
+      - dependencies
+      - github_actions
+      - Skip-Changelog
     groups:
       gha-dependencies:
         patterns:
