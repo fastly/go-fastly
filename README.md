@@ -32,7 +32,7 @@ fixes available.
 ## Usage
 
 ```go
-import "github.com/fastly/go-fastly/v15/fastly"
+import "github.com/fastly/go-fastly/v16/fastly"
 ```
 
 ## Reference
@@ -42,4 +42,4 @@ import "github.com/fastly/go-fastly/v15/fastly"
 - [EXAMPLES.md](./EXAMPLES.md)
 - [TESTING.md](./TESTING.md)
 
-[latest]: https://pkg.go.dev/github.com/fastly/go-fastly/v15/fastly
+[latest]: https://pkg.go.dev/github.com/fastly/go-fastly/v16/fastly

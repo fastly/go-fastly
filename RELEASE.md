@@ -14,7 +14,7 @@ tell Git about your signing key.
 4. Open a new PR to update CHANGELOG ([example](https://github.com/fastly/go-fastly/pull/272)).
    - We utilize [semantic versioning](https://semver.org/) and only include relevant/significant changes within the CHANGELOG.
    - Also bump `ProjectVersion` in `fastly/client.go`.
-   - If a major version change, then update references to the version in `go.mod` and `README.md` (also in code example tests, `./fastly/example_*_test.go`).
+   - If a major version change, then update references to the version in `go.mod` and `README.md`.
 5. Merge CHANGELOG.
 6. Rebase latest remote main branch locally: `git pull --rebase origin main`
 7. Create a new signed tag (replace `{{remote}}` with the remote pointing to the official repository i.e. `origin` or `upstream` depending on your Git workflow): `tag=vX.Y.Z && git tag -s $tag -m $tag && git push {{remote}} $tag`

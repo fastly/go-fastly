@@ -4,15 +4,21 @@
 
 ### Breaking:
 
+### Enhancements:
+
+### Dependencies:
+
+### Bug fixes:
+
+## [v16.0.0](https://github.com/fastly/go-fastly/releases/tag/v16.0.0) (2026-07-01)
+
+### Breaking:
+
 - breaking(ngwaf/timeseries): fix workspace timeseries endpoint returning empty data points ([#828](https://github.com/fastly/go-fastly/pull/828))
 
 ### Enhancements:
 
 - feat(ngwaf/timeseries): add support for listing time series metrics ([#827](https://github.com/fastly/go-fastly/pull/827))
-
-### Dependencies:
-
-### Bug fixes:
 
 ## [v15.0.3](https://github.com/fastly/go-fastly/releases/tag/v15.0.3) (2026-06-09)
 
