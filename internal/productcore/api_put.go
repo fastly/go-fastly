@@ -3,8 +3,8 @@ package productcore
 import (
 	"context"
 
-	"github.com/fastly/go-fastly/v15/fastly"
-	"github.com/fastly/go-fastly/v15/fastly/products"
+	"github.com/fastly/go-fastly/v16/fastly"
+	"github.com/fastly/go-fastly/v16/fastly/products"
 )
 
 // PutInput specifies the information needed for the Put()

@@ -4,10 +4,10 @@ import (
 	"context"
 	"testing"
 
-	"github.com/fastly/go-fastly/v15/fastly"
-	"github.com/fastly/go-fastly/v15/fastly/products/ngwaf"
-	"github.com/fastly/go-fastly/v15/internal/productcore"
-	"github.com/fastly/go-fastly/v15/internal/test_utils"
+	"github.com/fastly/go-fastly/v16/fastly"
+	"github.com/fastly/go-fastly/v16/fastly/products/ngwaf"
+	"github.com/fastly/go-fastly/v16/internal/productcore"
+	"github.com/fastly/go-fastly/v16/internal/test_utils"
 
 	"github.com/stretchr/testify/require"
 )

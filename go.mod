@@ -1,4 +1,4 @@
-module github.com/fastly/go-fastly/v15
+module github.com/fastly/go-fastly/v16
 
 go 1.25.0
 

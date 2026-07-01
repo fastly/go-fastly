@@ -4,7 +4,7 @@ import (
 	"context"
 	"strconv"
 
-	"github.com/fastly/go-fastly/v15/fastly"
+	"github.com/fastly/go-fastly/v16/fastly"
 )
 
 const defaultPageLimit = 100
@@ -141,7 +141,7 @@ func NewOperationPaginator(ctx context.Context, c *fastly.Client, i *ListOperati
 		return resp.Data, resp.Meta.Total, nil
 	}
 
-	return newPaginator[Operation](ctx, c, page, limit, fetch)
+	return newPaginator(ctx, c, page, limit, fetch)
 }
 
 // ListOperationsAll retrieves all operations across pages.
@@ -182,7 +182,7 @@ func NewDiscoveredOperationPaginator(ctx context.Context, c *fastly.Client, i *L
 		return resp.Data, resp.Meta.Total, nil
 	}
 
-	return newPaginator[DiscoveredOperation](ctx, c, page, limit, fetch)
+	return newPaginator(ctx, c, page, limit, fetch)
 }
 
 // ListDiscoveredAll retrieves all discovered operations across pages.
@@ -224,7 +224,7 @@ func NewTagPaginator(ctx context.Context, c *fastly.Client, i *ListTagsInput) *T
 		return resp.Data, resp.Meta.Total, nil
 	}
 
-	return newPaginator[OperationTag](ctx, c, page, limit, fetch)
+	return newPaginator(ctx, c, page, limit, fetch)
 }
 
 // ListTagsAll retrieves all tags across pages.

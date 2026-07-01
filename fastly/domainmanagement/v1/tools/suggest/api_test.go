@@ -6,7 +6,7 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/fastly/go-fastly/v15/fastly"
+	"github.com/fastly/go-fastly/v16/fastly"
 )
 
 func TestClient_DomainToolsSuggestion(t *testing.T) {
