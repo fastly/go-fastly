@@ -494,6 +494,10 @@ var ErrMissingVirtualPatchID = NewFieldError("Virtual Patch")
 // requires a "Mode" key, but one was not set.
 var ErrMissingMode = NewFieldError("Mode")
 
+// ErrMissingHTTPProtocols is an error that is returned when an input struct
+// requires an "HTTPProtocols" key, but one was not set.
+var ErrMissingHTTPProtocols = NewFieldError("HTTPProtocols")
+
 // ErrMissingMethod is an error that is returned when an input struct
 // requires a "Method" key, but one was not set.
 var ErrMissingMethod = NewFieldError("Method")

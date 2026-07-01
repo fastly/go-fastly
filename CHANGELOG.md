@@ -9,6 +9,9 @@
 ### Enhancements:
 
 - feat(ngwaf/timeseries): add support for listing time series metrics ([#827](https://github.com/fastly/go-fastly/pull/827))
+- feat(tls/custom-configuration): add `CreateCustomTLSConfiguration`, `DeleteCustomTLSConfiguration`, and additional supported fields. ([#829](https://github.com/fastly/go-fastly/pull/829))
+
+### Bug fixes:
 
 ### Dependencies:
 
