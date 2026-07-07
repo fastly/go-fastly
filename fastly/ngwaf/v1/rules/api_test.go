@@ -2094,6 +2094,58 @@ func runDeceptionRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 	assert.Contains(updatedMultivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: updatedField10, Operator: updatedOperator10, Value: updatedValue10})
 }
 
+func TestClient_TemplatedSignalRule_WorkspaceScope(t *testing.T) {
+	assert := require.New(t)
+
+	var err error
+
+	enabled := true
+	ruleType := "templated_signal"
+	groupOperator := "all"
+	actionType := "templated_signal"
+	actionSignal := "AWS-SSRF"
+
+	var rule *Rule
+	fastly.Record(t, "workspace_templated_signal_create_rule", func(c *fastly.Client) {
+		rule, err = Create(context.TODO(), c, &CreateInput{
+			Scope: &scope.Scope{
+				Type:      scope.ScopeTypeWorkspace,
+				AppliesTo: []string{fastly.TestNGWAFWorkspaceID},
+			},
+			Type:          &ruleType,
+			Enabled:       &enabled,
+			GroupOperator: &groupOperator,
+			Actions: []*CreateAction{
+				{
+					Type:   &actionType,
+					Signal: &actionSignal,
+				},
+			},
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	defer func() {
+		fastly.Record(t, "workspace_templated_signal_delete_rule", func(c *fastly.Client) {
+			err = Delete(context.TODO(), c, &DeleteInput{
+				RuleID: fastly.ToPointer(rule.RuleID),
+				Scope: &scope.Scope{
+					Type:      scope.ScopeTypeWorkspace,
+					AppliesTo: []string{fastly.TestNGWAFWorkspaceID},
+				},
+			})
+		})
+		if err != nil {
+			t.Errorf("error during templated_signal rule cleanup: %v", err)
+		}
+	}()
+
+	assert.Equal(ruleType, rule.Type)
+	assert.Empty(rule.Conditions)
+}
+
 func TestClient_CreateRule_validation(t *testing.T) {
 	var err error
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
@@ -2103,32 +2155,11 @@ func TestClient_CreateRule_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingType: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Type:        fastly.ToPointer("request"),
-		Description: nil,
-	})
-	if !errors.Is(err, fastly.ErrMissingDescription) {
-		t.Errorf("expected ErrMissingDescription: got %s", err)
-	}
-	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Type:        fastly.ToPointer("request"),
-		Description: fastly.ToPointer("test"),
-		Scope:       nil,
+		Type:  fastly.ToPointer("request"),
+		Scope: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingScope) {
 		t.Errorf("expected ErrMissingScope: got %s", err)
-	}
-	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Type:        fastly.ToPointer("request"),
-		Description: fastly.ToPointer("test"),
-		Scope: &scope.Scope{
-			Type:      scope.ScopeTypeWorkspace,
-			AppliesTo: []string{"123"},
-		},
-		Conditions:      []*CreateCondition{},
-		GroupConditions: []*CreateGroupCondition{},
-	})
-	if !errors.Is(err, fastly.ErrMissingConditions) {
-		t.Errorf("expected ErrMissingConditions: got %s", err)
 	}
 }
 

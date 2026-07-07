@@ -20,7 +20,7 @@ type CreateInput struct {
 	// criteria.
 	Conditions []*CreateCondition
 	// Description provides a human-readable explanation of what
-	// the rule does (required).
+	// the rule does.
 	Description *string
 	// Enabled determines if the rule is active. If false or
 	// omitted, the rule is disabled by default.
@@ -193,14 +193,11 @@ func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Rule, error
 	if i.Type == nil {
 		return nil, fastly.ErrMissingType
 	}
-	if i.Description == nil {
-		return nil, fastly.ErrMissingDescription
-	}
 	if i.Scope == nil {
 		return nil, fastly.ErrMissingScope
 	}
 
-	var mergedConditions []any
+	mergedConditions := []any{}
 	for _, c := range i.Conditions {
 		privateCondition := &privateCreateCondition{
 			Type:     fastly.ToPointer("single"),
@@ -264,14 +261,10 @@ func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Rule, error
 		}
 		mergedConditions = append(mergedConditions, privateMultivalCondition)
 	}
-	if len(mergedConditions) == 0 {
-		return nil, fastly.ErrMissingConditions
-	}
-
 	v := struct {
 		Actions        []*CreateAction  `json:"actions,omitempty"`
 		Conditions     []any            `json:"conditions"`
-		Description    *string          `json:"description"`
+		Description    *string          `json:"description,omitempty"`
 		Enabled        *bool            `json:"enabled,omitempty"`
 		ExpiresAt      *time.Time       `json:"expires_at,omitempty"`
 		GroupOperator  *string          `json:"group_operator,omitempty"`
