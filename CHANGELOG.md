@@ -10,6 +10,10 @@
 
 ### Bug fixes:
 
+## [v16.0.1](https://github.com/fastly/go-fastly/releases/tag/v16.0.1) (2026-07-08)
+
+### Bug fixes:
+
 - fix(ngwaf/rules): allow `templated_signal` rules to be created without conditions ([#834](https://github.com/fastly/go-fastly/pull/834))
 
 ## [v16.0.0](https://github.com/fastly/go-fastly/releases/tag/v16.0.0) (2026-07-01)
