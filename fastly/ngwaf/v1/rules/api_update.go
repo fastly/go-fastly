@@ -20,7 +20,7 @@ type UpdateInput struct {
 	// criteria.
 	Conditions []*UpdateCondition
 	// Description provides a human-readable explanation of what
-	// the rule does (required).
+	// the rule does.
 	Description *string
 	// Enabled determines if the rule is active. If false or
 	// omitted, the rule is disabled by default.
