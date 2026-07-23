@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"testing"
 )
@@ -295,6 +296,59 @@ func TestClient_NewRelicOTLP_Compute(t *testing.T) {
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+}
+
+func TestUpdateNewRelicOTLPInput_MarshalJSON(t *testing.T) {
+	t.Parallel()
+
+	cases := []struct {
+		name     string
+		input    UpdateNewRelicOTLPInput
+		wantJSON string
+	}{
+		{
+			name: "nil placement is omitted",
+			input: UpdateNewRelicOTLPInput{
+				Name:           "test-newrelicotlp",
+				ServiceID:      "foo",
+				ServiceVersion: 1,
+				NewName:        ToPointer("new-test-newrelicotlp"),
+			},
+			wantJSON: `{"name":"new-test-newrelicotlp"}`,
+		},
+		{
+			name: "empty placement serializes as null",
+			input: UpdateNewRelicOTLPInput{
+				Name:           "test-newrelicotlp",
+				ServiceID:      "foo",
+				ServiceVersion: 1,
+				Placement:      ToPointer(""),
+			},
+			wantJSON: `{"placement":null}`,
+		},
+		{
+			name: "non-empty placement serializes as its value",
+			input: UpdateNewRelicOTLPInput{
+				Name:           "test-newrelicotlp",
+				ServiceID:      "foo",
+				ServiceVersion: 1,
+				Placement:      ToPointer("none"),
+			},
+			wantJSON: `{"placement":"none"}`,
+		},
+	}
+
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			got, err := json.Marshal(&c.input)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if string(got) != c.wantJSON {
+				t.Errorf("bad JSON: got %s, want %s", got, c.wantJSON)
+			}
+		})
 	}
 }
 

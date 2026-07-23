@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"context"
+	"encoding/json"
 	"strconv"
 	"time"
 )
@@ -145,30 +146,55 @@ func (c *Client) GetNewRelicOTLP(ctx context.Context, i *GetNewRelicOTLPInput) (
 // UpdateNewRelicOTLPInput is used as input to the UpdateNewRelicOTLP function.
 type UpdateNewRelicOTLPInput struct {
 	// Format is a Fastly log format string. Must produce valid JSON that New Relic Logs can ingest.
-	Format *string `url:"format,omitempty"`
+	Format *string `json:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *int `url:"format_version,omitempty"`
+	FormatVersion *int `json:"format_version,omitempty"`
 	// Name is the name of the newrelic to update (required).
-	Name string `url:"-"`
+	Name string `json:"-"`
 	// NewName is the new name for the resource.
-	NewName *string `url:"name,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
+	NewName *string `json:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed. Set to an
+	// empty string to reset the endpoint to automatic placement (serialized as JSON null).
+	Placement *string `json:"placement,omitempty"`
 	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
-	ProcessingRegion *string `url:"log_processing_region,omitempty"`
+	ProcessingRegion *string `json:"log_processing_region,omitempty"`
 	// Region is the region to which to stream logs.
-	Region *string `url:"region,omitempty"`
+	Region *string `json:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition *string `url:"response_condition,omitempty"`
+	ResponseCondition *string `json:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string `url:"-"`
+	ServiceID string `json:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int `url:"-"`
+	ServiceVersion int `json:"-"`
 	// Token is the Insert API key from the Account page of your New Relic account.
-	Token *string `url:"token,omitempty"`
+	Token *string `json:"token,omitempty"`
 	// URL is the optional URL of a New Relic trace observer to send logs
 	// to. Must be a New Relic domain name.
-	URL *string `url:"url,omitempty"`
+	URL *string `json:"url,omitempty"`
+}
+
+// MarshalJSON implements the json.Marshaler interface. A Placement pointing at
+// an empty string is serialized as an explicit JSON null, which the API
+// requires to reset the endpoint to automatic placement (omitting the field
+// leaves the current placement unchanged).
+func (i UpdateNewRelicOTLPInput) MarshalJSON() ([]byte, error) {
+	type alias UpdateNewRelicOTLPInput
+	aux := struct {
+		alias
+		Placement json.RawMessage `json:"placement,omitempty"`
+	}{alias: alias(i)}
+	if i.Placement != nil {
+		if *i.Placement == "" {
+			aux.Placement = json.RawMessage("null")
+		} else {
+			p, err := json.Marshal(*i.Placement)
+			if err != nil {
+				return nil, err
+			}
+			aux.Placement = p
+		}
+	}
+	return json.Marshal(aux)
 }
 
 // UpdateNewRelicOTLP updates a specific newrelic.
@@ -184,7 +210,7 @@ func (c *Client) UpdateNewRelicOTLP(ctx context.Context, i *UpdateNewRelicOTLPIn
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "newrelicotlp", i.Name)
-	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
+	resp, err := c.PutJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
