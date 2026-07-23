@@ -34,7 +34,7 @@ func TestClient_GCSs(t *testing.T) {
 			Format:           ToPointer("format"),
 			MessageType:      ToPointer("blank"),
 			TimestampFormat:  ToPointer("%Y"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 		})
 	})
 	if err != nil {
@@ -57,7 +57,7 @@ func TestClient_GCSs(t *testing.T) {
 			Format:          ToPointer("format"),
 			MessageType:     ToPointer("blank"),
 			TimestampFormat: ToPointer("%Y"),
-			Placement:       ToPointer("waf_debug"),
+			Placement:       ToPointer("none"),
 		})
 	})
 	if err != nil {
@@ -80,7 +80,7 @@ func TestClient_GCSs(t *testing.T) {
 			Format:           ToPointer("format"),
 			MessageType:      ToPointer("blank"),
 			TimestampFormat:  ToPointer("%Y"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 		})
 	})
 	if err != nil {
@@ -106,7 +106,7 @@ func TestClient_GCSs(t *testing.T) {
 			Format:           ToPointer("format"),
 			MessageType:      ToPointer("blank"),
 			TimestampFormat:  ToPointer("%Y"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 		})
 	})
 	if err == nil {
@@ -184,7 +184,7 @@ func TestClient_GCSs(t *testing.T) {
 	if *gcsCreateResp1.MessageType != "blank" {
 		t.Errorf("bad message_type: %q", *gcsCreateResp1.MessageType)
 	}
-	if *gcsCreateResp1.Placement != "waf_debug" {
+	if *gcsCreateResp1.Placement != "none" {
 		t.Errorf("bad placement: %q", *gcsCreateResp1.Placement)
 	}
 	if gcsCreateResp2.CompressionCodec != nil {
@@ -281,10 +281,14 @@ func TestClient_GCSs(t *testing.T) {
 			MessageType:      ToPointer("classic"),
 			GzipLevel:        ToPointer(9),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if gcsUpdateResp1.Placement != nil {
+		t.Errorf("bad placement: %q", *gcsUpdateResp1.Placement)
 	}
 
 	Record(t, "gcses/update2", func(c *Client) {
@@ -293,10 +297,14 @@ func TestClient_GCSs(t *testing.T) {
 			ServiceVersion:   *tv.Number,
 			Name:             "test-gcs-2",
 			CompressionCodec: ToPointer("zstd"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if gcsUpdateResp2.Placement != nil {
+		t.Errorf("bad placement: %q", *gcsUpdateResp2.Placement)
 	}
 
 	Record(t, "gcses/update3", func(c *Client) {
@@ -305,10 +313,14 @@ func TestClient_GCSs(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-gcs-3",
 			GzipLevel:      ToPointer(9),
+			Placement:      NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if gcsUpdateResp3.Placement != nil {
+		t.Errorf("bad placement: %q", *gcsUpdateResp3.Placement)
 	}
 
 	if *gcsUpdateResp1.Name != "new-test-gcs" {
@@ -627,10 +639,14 @@ func TestClient_GCSs_Compute(t *testing.T) {
 			MessageType:      ToPointer("classic"),
 			GzipLevel:        ToPointer(9),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *gcsUpdateResp1.Placement != "none" {
+		t.Errorf("bad placement: %q", *gcsUpdateResp1.Placement)
 	}
 
 	Record(t, "gcses/compute/update2", func(c *Client) {
@@ -639,10 +655,14 @@ func TestClient_GCSs_Compute(t *testing.T) {
 			ServiceVersion:   *tv.Number,
 			Name:             "test-gcs-2",
 			CompressionCodec: ToPointer("zstd"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *gcsUpdateResp2.Placement != "none" {
+		t.Errorf("bad placement: %q", *gcsUpdateResp2.Placement)
 	}
 
 	Record(t, "gcses/compute/update3", func(c *Client) {
@@ -651,10 +671,14 @@ func TestClient_GCSs_Compute(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-gcs-3",
 			GzipLevel:      ToPointer(9),
+			Placement:      NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *gcsUpdateResp3.Placement != "none" {
+		t.Errorf("bad placement: %q", *gcsUpdateResp3.Placement)
 	}
 
 	if *gcsUpdateResp1.Name != "new-test-gcs" {

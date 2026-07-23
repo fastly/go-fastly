@@ -2,21 +2,19 @@
 version: 1
 interactions:
 - request:
-    body: log_processing_region=eu&name=new-test-sumologic
-    form:
-      log_processing_region:
-      - eu
-      name:
-      - new-test-sumologic
+    body: '{"name":"new-test-sumologic","placement":null,"log_processing_region":"eu"}'
+    form: {}
     headers:
+      Accept:
+      - application/json
       Content-Type:
-      - application/x-www-form-urlencoded
+      - application/json
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/131/logging/sumologic/test-sumologic
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/171/logging/sumologic/test-sumologic
     method: PUT
   response:
-    body: '{"url":"https://foo.sumologic.com","placement":"waf_debug","message_type":"classic","response_condition":"","log_processing_region":"eu","service_id":"kKJb5bOFI47uHeBVluGfX1","name":"new-test-sumologic","deleted_at":null,"format_version":"1","created_at":"2025-06-04T15:33:02Z","updated_at":"2025-06-04T15:33:02Z","version":"131","format":"format"}'
+    body: '{"service_id":"kKJb5bOFI47uHeBVluGfX1","deleted_at":null,"version":"171","format":"format","url":"https://foo.sumologic.com","message_type":"classic","name":"new-test-sumologic","updated_at":"2026-07-23T19:30:50Z","placement":null,"log_processing_region":"eu","created_at":"2026-07-23T19:30:50Z","format_version":"1","response_condition":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -25,15 +23,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:33:03 GMT
+      - Thu, 23 Jul 2026 19:30:55 GMT
       Fastly-Ratelimit-Remaining:
-      - "9787"
+      - "9659"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -46,10 +44,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "605"
       X-Served-By:
-      - cache-chi-kigq8000113-CHI, cache-nyc-kteb1890063-NYC
+      - cache-chi-klot8100072-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749051183.476976,VS0,VE378
+      - S1784835054.386699,VS0,VE654
     status: 200 OK
     code: 200
     duration: ""

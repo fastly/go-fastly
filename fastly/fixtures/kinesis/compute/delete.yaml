@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/25/logging/kinesis/new-test-kinesis
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/111/logging/kinesis/new-test-kinesis
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -19,15 +19,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 02 Sep 2025 17:16:49 GMT
+      - Thu, 23 Jul 2026 19:39:41 GMT
       Fastly-Ratelimit-Remaining:
-      - "9927"
+      - "9390"
       Fastly-Ratelimit-Reset:
-      - "1756836000"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -40,10 +40,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "421"
       X-Served-By:
-      - cache-chi-klot8100133-CHI, cache-ewr-kewr1740046-EWR
+      - cache-chi-kmdw8640081-CHI, cache-iad-kiad7000025-IAD
       X-Timer:
-      - S1756833409.018373,VS0,VE287
+      - S1784835582.500928,VS0,VE458
     status: 200 OK
     code: 200
     duration: ""

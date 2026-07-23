@@ -26,7 +26,7 @@ func TestClient_Sumologics(t *testing.T) {
 			Format:         ToPointer("format"),
 			FormatVersion:  ToPointer(1),
 			MessageType:    ToPointer("classic"),
-			Placement:      ToPointer("waf_debug"),
+			Placement:      ToPointer("none"),
 		})
 	})
 	if err != nil {
@@ -65,7 +65,7 @@ func TestClient_Sumologics(t *testing.T) {
 	if *s.MessageType != "classic" {
 		t.Errorf("bad message type: %q", *s.MessageType)
 	}
-	if *s.Placement != "waf_debug" {
+	if *s.Placement != "none" {
 		t.Errorf("bad placement: %q", *s.Placement)
 	}
 
@@ -124,10 +124,14 @@ func TestClient_Sumologics(t *testing.T) {
 			Name:             "test-sumologic",
 			NewName:          ToPointer("new-test-sumologic"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if us.Placement != nil {
+		t.Errorf("bad placement: %q", *us.Placement)
 	}
 	if *us.Name != "new-test-sumologic" {
 		t.Errorf("bad name: %q", *us.Name)
@@ -267,10 +271,14 @@ func TestClient_Sumologics_Compute(t *testing.T) {
 			Name:             "test-sumologic",
 			NewName:          ToPointer("new-test-sumologic"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *us.Placement != "none" {
+		t.Errorf("bad placement: %q", *us.Placement)
 	}
 	if *us.Name != "new-test-sumologic" {
 		t.Errorf("bad name: %q", *us.Name)

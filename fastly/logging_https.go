@@ -183,55 +183,56 @@ func (c *Client) GetHTTPS(ctx context.Context, i *GetHTTPSInput) (*HTTPS, error)
 // UpdateHTTPSInput is the input parameter to the UpdateHTTPS function.
 type UpdateHTTPSInput struct {
 	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.
-	CompressionCodec *string `url:"compression_codec,omitempty"`
+	CompressionCodec *string `json:"compression_codec,omitempty"`
 	// ContentType is the content type of the header sent with the request.
-	ContentType *string `url:"content_type,omitempty"`
+	ContentType *string `json:"content_type,omitempty"`
 	// Format is a Fastly log format string.
-	Format *string `url:"format,omitempty"`
+	Format *string `json:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *int `url:"format_version,omitempty"`
+	FormatVersion *int `json:"format_version,omitempty"`
 	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
-	GzipLevel *int `url:"gzip_level,omitempty"`
+	GzipLevel *int `json:"gzip_level,omitempty"`
 	// HeaderName is the name of the custom header sent with the request.
-	HeaderName *string `url:"header_name,omitempty"`
+	HeaderName *string `json:"header_name,omitempty"`
 	// HeaderValue is the value of the custom header sent with the request.
-	HeaderValue *string `url:"header_value,omitempty"`
+	HeaderValue *string `json:"header_value,omitempty"`
 	// JSONFormat enforces valid JSON formatting for log entries (0: disabled, 1: array of JSON, 2: newline delimited JSON).
-	JSONFormat *string `url:"json_format,omitempty"`
+	JSONFormat *string `json:"json_format,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
-	MessageType *string `url:"message_type,omitempty"`
+	MessageType *string `json:"message_type,omitempty"`
 	// Method is the HTTP method used for request (POST, PUT).
-	Method *string `url:"method,omitempty"`
+	Method *string `json:"method,omitempty"`
 	// Name is the name of the HTTPS endpoint to fetch (required).
-	Name string `url:"-"`
+	Name string `json:"-"`
 	// NewName is the new name for the resource.
-	NewName *string `url:"name,omitempty"`
+	NewName *string `json:"name,omitempty"`
 	// Period is the time interval (in seconds) for log flushing, defaults to 5 seconds.
-	Period *int `url:"period,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
+	Period *int `json:"period,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed. Use
+	// NullValue[string]() to reset the endpoint to automatic placement.
+	Placement *Nullable[string] `json:"placement,omitempty"`
 	// ProcessingRegion is the region where logs will be processed before streaming to the HTTPS server.
-	ProcessingRegion *string `url:"log_processing_region,omitempty"`
+	ProcessingRegion *string `json:"log_processing_region,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request. Defaults 0 (100MB).
-	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
+	RequestMaxBytes *int `json:"request_max_bytes,omitempty"`
 	// RequestMaxEntries is the maximum number of logs sent in one request. Defaults 0 (10k).
-	RequestMaxEntries *int `url:"request_max_entries,omitempty"`
+	RequestMaxEntries *int `json:"request_max_entries,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition *string `url:"response_condition,omitempty"`
+	ResponseCondition *string `json:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string `url:"-"`
+	ServiceID string `json:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int `url:"-"`
+	ServiceVersion int `json:"-"`
 	// TLSCACert is a secure certificate to authenticate a server with. Must be in PEM format.
-	TLSCACert *string `url:"tls_ca_cert,omitempty"`
+	TLSCACert *string `json:"tls_ca_cert,omitempty"`
 	// TLSClientCert is the client certificate used to make authenticated requests. Must be in PEM format.
-	TLSClientCert *string `url:"tls_client_cert,omitempty"`
+	TLSClientCert *string `json:"tls_client_cert,omitempty"`
 	// TLSClientKey is the client private key used to make authenticated requests. Must be in PEM format.
-	TLSClientKey *string `url:"tls_client_key,omitempty"`
+	TLSClientKey *string `json:"tls_client_key,omitempty"`
 	// TLSHostname is the hostname to verify the server's certificate. This should be one of the Subject Alternative Name (SAN) fields for the certificate. Common Names (CN) are not supported.
-	TLSHostname *string `url:"tls_hostname,omitempty"`
+	TLSHostname *string `json:"tls_hostname,omitempty"`
 	// URL is the URL to send logs to. Must use HTTPS
-	URL *string `url:"url,omitempty"`
+	URL *string `json:"url,omitempty"`
 }
 
 // UpdateHTTPS updates the specified resource.
@@ -247,7 +248,7 @@ func (c *Client) UpdateHTTPS(ctx context.Context, i *UpdateHTTPSInput) (*HTTPS, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "https", i.Name)
-	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
+	resp, err := c.PutJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

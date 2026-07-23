@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/108/logging/datadog/test-datadog
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/149/logging/datadog/test-datadog
     method: GET
   response:
-    body: '{"name":"test-datadog","format_version":"2","region":"US","format":"format","created_at":"2025-06-04T15:04:12Z","token":"abcd1234","deleted_at":null,"placement":"waf_debug","updated_at":"2025-06-04T15:04:12Z","response_condition":"","service_id":"kKJb5bOFI47uHeBVluGfX1","log_processing_region":"none","version":"108"}'
+    body: '{"format":"format","version":"149","response_condition":"","name":"test-datadog","region":"US","service_id":"kKJb5bOFI47uHeBVluGfX1","token":"abcd1234","log_processing_region":"none","created_at":"2026-07-23T19:26:04Z","format_version":"2","updated_at":"2026-07-23T19:26:04Z","deleted_at":null,"placement":"none"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,11 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:04:13 GMT
+      - Thu, 23 Jul 2026 19:26:05 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -36,10 +36,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "106"
       X-Served-By:
-      - cache-chi-klot8100061-CHI, cache-nyc-kteb1890088-NYC
+      - cache-chi-klot8100049-CHI, cache-iad-kiad7000128-IAD
       X-Timer:
-      - S1749049453.362599,VS0,VE181
+      - S1784834765.275602,VS0,VE213
     status: 200 OK
     code: 200
     duration: ""

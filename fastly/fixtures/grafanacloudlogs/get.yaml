@@ -6,12 +6,12 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/113/logging/grafanacloudlogs/test-grafanacloudlogs
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/165/logging/grafanacloudlogs/test-grafanacloudlogs
     method: GET
   response:
-    body: '{"service_id":"kKJb5bOFI47uHeBVluGfX1","name":"test-grafanacloudlogs","placement":"waf_debug","format_version":"2","created_at":"2025-06-04T15:09:27Z","user":"123456","format":"format","updated_at":"2025-06-04T15:09:27Z","deleted_at":null,"response_condition":"","url":"https://test123.grafana.net","index":"{\"env\":
-      \"prod\"}","token":"abcd1234","version":"113","log_processing_region":"none"}'
+    body: '{"placement":"none","version":"165","service_id":"kKJb5bOFI47uHeBVluGfX1","deleted_at":null,"format_version":"2","user":"123456","response_condition":"","updated_at":"2026-07-23T19:29:42Z","token":"abcd1234","index":"{\"env\":
+      \"prod\"}","format":"format","name":"test-grafanacloudlogs","created_at":"2026-07-23T19:29:42Z","url":"https://test123.grafana.net","log_processing_region":"none"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -20,11 +20,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:09:28 GMT
+      - Thu, 23 Jul 2026 19:29:43 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -37,10 +37,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "107"
       X-Served-By:
-      - cache-chi-kigq8000066-CHI, cache-nyc-kteb1890054-NYC
+      - cache-chi-klot8100053-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749049768.006014,VS0,VE137
+      - S1784834983.352778,VS0,VE143
     status: 200 OK
     code: 200
     duration: ""

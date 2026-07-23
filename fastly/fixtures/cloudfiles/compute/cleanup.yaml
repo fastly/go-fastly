@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/12/logging/cloudfiles/test-cloudfiles
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/94/logging/cloudfiles/test-cloudfiles
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-cloudfiles, service =\u003e XsjdElScZGjmfCcTwsYRC1,
-      version =\u003e 12 }''"}'
+      version =\u003e 94 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,15 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 29 Aug 2025 19:49:54 GMT
+      - Thu, 23 Jul 2026 19:38:17 GMT
       Fastly-Ratelimit-Remaining:
-      - "9925"
+      - "9542"
       Fastly-Ratelimit-Reset:
-      - "1756497600"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -42,10 +42,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "680"
       X-Served-By:
-      - cache-chi-kigq8000100-CHI, cache-ewr-kewr1740086-EWR
+      - cache-chi-kmdw8640020-CHI, cache-iad-kiad7000025-IAD
       X-Timer:
-      - S1756496994.111898,VS0,VE147
+      - S1784835497.020899,VS0,VE718
     status: 404 Not Found
     code: 404
     duration: ""
@@ -54,8 +56,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/12/logging/cloudfiles/test-cloudfiles-2
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/94/logging/cloudfiles/test-cloudfiles-2
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -67,15 +69,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 29 Aug 2025 19:49:54 GMT
+      - Thu, 23 Jul 2026 19:38:18 GMT
       Fastly-Ratelimit-Remaining:
-      - "9924"
+      - "9540"
       Fastly-Ratelimit-Reset:
-      - "1756497600"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -88,10 +90,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "403"
       X-Served-By:
-      - cache-chi-klot8100105-CHI, cache-ewr-kewr1740086-EWR
+      - cache-chi-kigq8000108-CHI, cache-iad-kiad7000025-IAD
       X-Timer:
-      - S1756496994.278960,VS0,VE258
+      - S1784835498.078054,VS0,VE435
     status: 200 OK
     code: 200
     duration: ""
@@ -100,8 +104,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/12/logging/cloudfiles/test-cloudfiles-3
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/94/logging/cloudfiles/test-cloudfiles-3
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -113,15 +117,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 29 Aug 2025 19:49:54 GMT
+      - Thu, 23 Jul 2026 19:38:19 GMT
       Fastly-Ratelimit-Remaining:
-      - "9923"
+      - "9538"
       Fastly-Ratelimit-Reset:
-      - "1756497600"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -134,10 +138,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "427"
       X-Served-By:
-      - cache-chi-klot8100047-CHI, cache-ewr-kewr1740086-EWR
+      - cache-chi-kmdw8640054-CHI, cache-iad-kiad7000025-IAD
       X-Timer:
-      - S1756496995.560308,VS0,VE279
+      - S1784835499.076505,VS0,VE465
     status: 200 OK
     code: 200
     duration: ""
@@ -146,13 +152,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/12/logging/cloudfiles/new-test-cloudfiles
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/94/logging/cloudfiles/new-test-cloudfiles
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-cloudfiles, service =\u003e XsjdElScZGjmfCcTwsYRC1,
-      version =\u003e 12 }''"}'
+      version =\u003e 94 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -161,15 +167,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 29 Aug 2025 19:49:54 GMT
+      - Thu, 23 Jul 2026 19:38:20 GMT
       Fastly-Ratelimit-Remaining:
-      - "9922"
+      - "9536"
       Fastly-Ratelimit-Reset:
-      - "1756497600"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -182,10 +188,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "90"
       X-Served-By:
-      - cache-chi-klot8100091-CHI, cache-ewr-kewr1740086-EWR
+      - cache-chi-kmdw8640092-CHI, cache-iad-kiad7000025-IAD
       X-Timer:
-      - S1756496995.857111,VS0,VE126
+      - S1784835500.073306,VS0,VE124
     status: 404 Not Found
     code: 404
     duration: ""

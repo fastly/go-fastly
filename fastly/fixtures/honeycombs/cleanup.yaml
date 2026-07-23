@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/115/logging/honeycomb/test-honeycomb
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/163/logging/honeycomb/test-honeycomb
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-honeycomb, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 115 }''"}'
+      version =\u003e 163 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,15 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:10:37 GMT
+      - Thu, 23 Jul 2026 19:29:39 GMT
       Fastly-Ratelimit-Remaining:
-      - "9910"
+      - "9797"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -42,10 +42,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "101"
       X-Served-By:
-      - cache-chi-klot8100042-CHI, cache-nyc-kteb1890025-NYC
+      - cache-chi-kigq8000148-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749049837.164591,VS0,VE122
+      - S1784834979.422828,VS0,VE171
     status: 404 Not Found
     code: 404
     duration: ""
@@ -54,13 +56,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/115/logging/honeycomb/new-test-honeycomb
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/163/logging/honeycomb/new-test-honeycomb
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-honeycomb, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 115 }''"}'
+      version =\u003e 163 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -69,15 +71,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:10:37 GMT
+      - Thu, 23 Jul 2026 19:29:44 GMT
       Fastly-Ratelimit-Remaining:
-      - "9909"
+      - "9787"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -90,10 +92,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "114"
       X-Served-By:
-      - cache-chi-klot8100145-CHI, cache-nyc-kteb1890025-NYC
+      - cache-chi-kigq8000080-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749049837.292471,VS0,VE129
+      - S1784834984.184868,VS0,VE149
     status: 404 Not Found
     code: 404
     duration: ""

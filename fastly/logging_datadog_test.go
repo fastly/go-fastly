@@ -122,10 +122,14 @@ func TestClient_Datadog_Compute(t *testing.T) {
 			Region:           ToPointer("EU"),
 			FormatVersion:    ToPointer(2),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *ud.Placement != "none" {
+		t.Errorf("bad placement: %q", *ud.Placement)
 	}
 	if *ud.Name != "new-test-datadog" {
 		t.Errorf("bad name: %q", *ud.Name)
@@ -172,7 +176,7 @@ func TestClient_Datadog(t *testing.T) {
 			Region:         ToPointer("US"),
 			Token:          ToPointer("abcd1234"),
 			Format:         ToPointer("format"),
-			Placement:      ToPointer("waf_debug"),
+			Placement:      ToPointer("none"),
 		})
 	})
 	if err != nil {
@@ -211,7 +215,7 @@ func TestClient_Datadog(t *testing.T) {
 	if *d.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *d.FormatVersion)
 	}
-	if *d.Placement != "waf_debug" {
+	if *d.Placement != "none" {
 		t.Errorf("bad placement: %q", *d.Placement)
 	}
 
@@ -269,10 +273,14 @@ func TestClient_Datadog(t *testing.T) {
 			Region:           ToPointer("EU"),
 			FormatVersion:    ToPointer(2),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if ud.Placement != nil {
+		t.Errorf("bad placement: %q", *ud.Placement)
 	}
 	if *ud.Name != "new-test-datadog" {
 		t.Errorf("bad name: %q", *ud.Name)

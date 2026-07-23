@@ -2,21 +2,21 @@
 version: 1
 interactions:
 - request:
-    body: compression_codec=zstd
-    form:
-      compression_codec:
-      - zstd
+    body: '{"compression_codec":"zstd","placement":null}'
+    form: {}
     headers:
+      Accept:
+      - application/json
       Content-Type:
-      - application/x-www-form-urlencoded
+      - application/json
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/124/logging/openstack/test-openstack-2
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/154/logging/openstack/test-openstack-2
     method: PUT
   response:
-    body: '{"log_processing_region":"none","version":"124","timestamp_format":"%Y","service_id":"kKJb5bOFI47uHeBVluGfX1","response_condition":"","updated_at":"2025-06-04T15:27:06Z","message_type":"classic","placement":"waf_debug","deleted_at":null,"bucket_name":"bucket-name","access_key":"secret-key","compression_codec":"zstd","created_at":"2025-06-04T15:27:06Z","format":"format","url":"https://logs.example.com/v1.0","format_version":"2","public_key":"-----BEGIN
+    body: '{"format":"format","gzip_level":0,"updated_at":"2026-07-23T19:30:44Z","path":"/path","response_condition":"","message_type":"classic","timestamp_format":"%Y","service_id":"kKJb5bOFI47uHeBVluGfX1","compression_codec":"zstd","bucket_name":"bucket-name","period":"12","format_version":"2","public_key":"-----BEGIN
       PGP PUBLIC KEY BLOCK-----\n\nmQENBFyUD8sBCACyFnB39AuuTygseek+eA4fo0cgwva6/FSjnWq7riouQee8GgQ/\nibXTRyv4iVlwI12GswvMTIy7zNvs1R54i0qvsLr+IZ4GVGJqs6ZJnvQcqe3xPoR4\n8AnBfw90o32r/LuHf6QCJXi+AEu35koNlNAvLJ2B+KACaNB7N0EeWmqpV/1V2k9p\nlDYk+th7LcCuaFNGqKS/PrMnnMqR6VDLCjHhNx4KR79b0Twm/2qp6an3hyNRu8Gn\ndwxpf1/BUu3JWf+LqkN4Y3mbOmSUL3MaJNvyQguUzTfS0P0uGuBDHrJCVkMZCzDB\n89ag55jCPHyGeHBTd02gHMWzsg3WMBWvCsrzABEBAAG0JXRlcnJhZm9ybSAodGVz\ndCkgPHRlc3RAdGVycmFmb3JtLmNvbT6JAU4EEwEIADgWIQSHYyc6Kj9l6HzQsau6\nvFFc9jxV/wUCXJQPywIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRC6vFFc\n9jxV/815CAClb32OxV7wG01yF97TzlyTl8TnvjMtoG29Mw4nSyg+mjM3b8N7iXm9\nOLX59fbDAWtBSldSZE22RXd3CvlFOG/EnKBXSjBtEqfyxYSnyOPkMPBYWGL/ApkX\nSvPYJ4LKdvipYToKFh3y9kk2gk1DcDBDyaaHvR+3rv1u3aoy7/s2EltAfDS3ZQIq\n7/cWTLJml/lleeB/Y6rPj8xqeCYhE5ahw9gsV/Mdqatl24V9Tks30iijx0Hhw+Gx\nkATUikMGr2GDVqoIRga5kXI7CzYff4rkc0Twn47fMHHHe/KY9M2yVnMHUXmAZwbG\nM1cMI/NH1DjevCKdGBLcRJlhuLPKF/anuQENBFyUD8sBCADIpd7r7GuPd6n/Ikxe\nu6h7umV6IIPoAm88xCYpTbSZiaK30Svh6Ywra9jfE2KlU9o6Y/art8ip0VJ3m07L\n4RSfSpnzqgSwdjSq5hNour2Fo/BzYhK7yaz2AzVSbe33R0+RYhb4b/6N+bKbjwGF\nftCsqVFMH+PyvYkLbvxyQrHlA9woAZaNThI1ztO5rGSnGUR8xt84eup28WIFKg0K\nUEGUcTzz+8QGAwAra+0ewPXo/AkO+8BvZjDidP417u6gpBHOJ9qYIcO9FxHeqFyu\nYrjlrxowEgXn5wO8xuNz6Vu1vhHGDHGDsRbZF8pv1d5O+0F1G7ttZ2GRRgVBZPwi\nkiyRABEBAAGJATYEGAEIACAWIQSHYyc6Kj9l6HzQsau6vFFc9jxV/wUCXJQPywIb\nDAAKCRC6vFFc9jxV/9YOCACe8qmOSnKQpQfW+PqYOqo3dt7JyweTs3FkD6NT8Zml\ndYy/vkstbTjPpX6aTvUZjkb46BVi7AOneVHpD5GBqvRsZ9iVgDYHaehmLCdKiG5L\n3Tp90NN+QY5WDbsGmsyk6+6ZMYejb4qYfweQeduOj27aavCJdLkCYMoRKfcFYI8c\nFaNmEfKKy/r1PO20NXEG6t9t05K/frHy6ZG8bCNYdpagfFVot47r9JaQqWlTNtIR\n5+zkkSq/eG9BEtRij3a6cTdQbktdBzx2KBeI0PYc1vlZR0LpuFKZqY9vlE6vTGLR\nwMfrTEOvx0NxUM3rpaCgEmuWbB1G1Hu371oyr4srrr+N\n=28dr\n-----END
-      PGP PUBLIC KEY BLOCK-----\n","path":"/path","gzip_level":0,"user":"user","period":"12","name":"test-openstack-2"}'
+      PGP PUBLIC KEY BLOCK-----\n","user":"user","access_key":"secret-key","name":"test-openstack-2","deleted_at":null,"version":"154","placement":null,"created_at":"2026-07-23T19:30:44Z","url":"https://logs.example.com/v1.0","log_processing_region":"none"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -25,15 +25,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:27:08 GMT
+      - Thu, 23 Jul 2026 19:31:05 GMT
       Fastly-Ratelimit-Remaining:
-      - "9852"
+      - "9646"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -46,10 +46,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "595"
       X-Served-By:
-      - cache-chi-klot8100105-CHI, cache-nyc-kteb1890033-NYC
+      - cache-chi-kmdw8640085-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749050828.103843,VS0,VE360
+      - S1784835065.543261,VS0,VE651
     status: 200 OK
     code: 200
     duration: ""

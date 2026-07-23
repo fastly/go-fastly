@@ -150,33 +150,34 @@ func (c *Client) GetGrafanaCloudLogs(ctx context.Context, i *GetGrafanaCloudLogs
 // UpdateGrafanaCloudLogsInput is used as input to the UpdateGrafanaCloudLogs function.
 type UpdateGrafanaCloudLogsInput struct {
 	// Format is a Fastly log format string. Must produce valid JSON that GrafanaCloudLogs can ingest.
-	Format *string `url:"format,omitempty"`
+	Format *string `json:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *int `url:"format_version,omitempty"`
+	FormatVersion *int `json:"format_version,omitempty"`
 	// Name is the name of the GrafanaCloudLogs to update (required).
-	Name string `url:"-"`
+	Name string `json:"-"`
 	// NewName is the new name for the resource.
-	NewName *string `url:"name,omitempty"`
+	NewName *string `json:"name,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
-	MessageType *string `url:"message_type,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
+	MessageType *string `json:"message_type,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed. Use
+	// NullValue[string]() to reset the endpoint to automatic placement.
+	Placement *Nullable[string] `json:"placement,omitempty"`
 	// ProcessingRegion is the region where logs will be processed before streaming to Grafana Cloud Logs.
-	ProcessingRegion *string `url:"log_processing_region,omitempty"`
+	ProcessingRegion *string `json:"log_processing_region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition *string `url:"response_condition,omitempty"`
+	ResponseCondition *string `json:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string `url:"-"`
+	ServiceID string `json:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int `url:"-"`
+	ServiceVersion int `json:"-"`
 	// Grafana User ID
-	User *string `url:"user,omitempty"`
+	User *string `json:"user,omitempty"`
 	// Token is the API key from your GrafanaCloudLogs account.
-	Token *string `url:"token,omitempty"`
+	Token *string `json:"token,omitempty"`
 	// URL is the URL to stream logs to. Must use HTTPS.
-	URL *string `url:"url,omitempty"`
+	URL *string `json:"url,omitempty"`
 	// Index is the stream identifier
-	Index *string `url:"index,omitempty"`
+	Index *string `json:"index,omitempty"`
 }
 
 // UpdateGrafanaCloudLogs updates the specified resource.
@@ -192,7 +193,7 @@ func (c *Client) UpdateGrafanaCloudLogs(ctx context.Context, i *UpdateGrafanaClo
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "grafanacloudlogs", i.Name)
-	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
+	resp, err := c.PutJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

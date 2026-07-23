@@ -26,7 +26,7 @@ func TestClient_Papertrails(t *testing.T) {
 			Port:           ToPointer(1234),
 			FormatVersion:  ToPointer(2),
 			Format:         ToPointer("format"),
-			Placement:      ToPointer("waf_debug"),
+			Placement:      ToPointer("none"),
 		})
 	})
 	if err != nil {
@@ -65,7 +65,7 @@ func TestClient_Papertrails(t *testing.T) {
 	if *p.Format != "format" {
 		t.Errorf("bad format: %q", *p.Format)
 	}
-	if *p.Placement != "waf_debug" {
+	if *p.Placement != "none" {
 		t.Errorf("bad placement: %q", *p.Placement)
 	}
 
@@ -124,10 +124,14 @@ func TestClient_Papertrails(t *testing.T) {
 			Name:             "test-papertrail",
 			NewName:          ToPointer("new-test-papertrail"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if up.Placement != nil {
+		t.Errorf("bad placement: %q", *up.Placement)
 	}
 	if *up.Name != "new-test-papertrail" {
 		t.Errorf("bad name: %q", *up.Name)
@@ -267,10 +271,14 @@ func TestClient_Papertrails_Compute(t *testing.T) {
 			Name:             "test-papertrail",
 			NewName:          ToPointer("new-test-papertrail"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *up.Placement != "none" {
+		t.Errorf("bad placement: %q", *up.Placement)
 	}
 	if *up.Name != "new-test-papertrail" {
 		t.Errorf("bad name: %q", *up.Name)

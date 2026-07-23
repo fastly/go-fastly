@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/117/logging/kafka/test-kafka
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/161/logging/kafka/test-kafka
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-kafka, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 117 }''"}'
+      version =\u003e 161 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,15 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:16:35 GMT
+      - Thu, 23 Jul 2026 19:29:22 GMT
       Fastly-Ratelimit-Remaining:
-      - "9898"
+      - "9827"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -42,10 +42,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "166"
       X-Served-By:
-      - cache-chi-kigq8000064-CHI, cache-ewr-kewr1740069-EWR
+      - cache-chi-klot8100140-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749050195.356838,VS0,VE128
+      - S1784834963.619395,VS0,VE201
     status: 404 Not Found
     code: 404
     duration: ""
@@ -54,13 +56,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/117/logging/kafka/new-test-kafka
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/161/logging/kafka/new-test-kafka
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-kafka, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 117 }''"}'
+      version =\u003e 161 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -69,15 +71,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:16:35 GMT
+      - Thu, 23 Jul 2026 19:29:28 GMT
       Fastly-Ratelimit-Remaining:
-      - "9897"
+      - "9819"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -90,10 +92,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "92"
       X-Served-By:
-      - cache-chi-klot8100171-CHI, cache-ewr-kewr1740069-EWR
+      - cache-chi-kmdw8640042-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749050195.490691,VS0,VE136
+      - S1784834968.062882,VS0,VE132
     status: 404 Not Found
     code: 404
     duration: ""

@@ -30,7 +30,7 @@ func TestClient_Pubsubs(t *testing.T) {
 			ProjectID:      ToPointer("project-id"),
 			FormatVersion:  ToPointer(2),
 			Format:         ToPointer("format"),
-			Placement:      ToPointer("waf_debug"),
+			Placement:      ToPointer("none"),
 		})
 	})
 	if err != nil {
@@ -105,7 +105,7 @@ bv1KwcKoQbNVXwauH79JKc0=
 	if *pubsub.Format != "format" {
 		t.Errorf("bad format: %q", *pubsub.Format)
 	}
-	if *pubsub.Placement != "waf_debug" {
+	if *pubsub.Placement != "none" {
 		t.Errorf("bad placement: %q", *pubsub.Placement)
 	}
 
@@ -171,10 +171,14 @@ bv1KwcKoQbNVXwauH79JKc0=
 			NewName:          ToPointer("new-test-pubsub"),
 			Topic:            ToPointer("new-topic"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if upubsub.Placement != nil {
+		t.Errorf("bad placement: %q", *upubsub.Placement)
 	}
 	if *upubsub.Name != "new-test-pubsub" {
 		t.Errorf("bad name: %q", *upubsub.Name)
@@ -363,10 +367,14 @@ bv1KwcKoQbNVXwauH79JKc0=
 			NewName:          ToPointer("new-test-pubsub"),
 			Topic:            ToPointer("new-topic"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *upubsub.Placement != "none" {
+		t.Errorf("bad placement: %q", *upubsub.Placement)
 	}
 	if *upubsub.Name != "new-test-pubsub" {
 		t.Errorf("bad name: %q", *upubsub.Name)

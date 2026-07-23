@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"testing"
 )
@@ -25,7 +26,7 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 			Token:          ToPointer("abcd1234"),
 			URL:            ToPointer("https://example.nr-data.net"),
 			Format:         ToPointer("format"),
-			Placement:      ToPointer("waf_debug"),
+			Placement:      ToPointer("none"),
 		})
 	})
 	if err != nil {
@@ -64,7 +65,7 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 	if *n.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *n.FormatVersion)
 	}
-	if *n.Placement != "waf_debug" {
+	if *n.Placement != "none" {
 		t.Errorf("bad placement: %q", *n.Placement)
 	}
 
@@ -124,10 +125,14 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 			NewName:          ToPointer("new-test-newrelicotlp"),
 			FormatVersion:    ToPointer(2),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if un.Placement != nil {
+		t.Errorf("bad placement: %q", *un.Placement)
 	}
 	if *un.Name != "new-test-newrelicotlp" {
 		t.Errorf("bad name: %q", *un.Name)
@@ -270,10 +275,14 @@ func TestClient_NewRelicOTLP_Compute(t *testing.T) {
 			NewName:          ToPointer("new-test-newrelicotlp"),
 			FormatVersion:    ToPointer(2),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *un.Placement != "none" {
+		t.Errorf("bad placement: %q", *un.Placement)
 	}
 	if *un.Name != "new-test-newrelicotlp" {
 		t.Errorf("bad name: %q", *un.Name)
@@ -295,6 +304,59 @@ func TestClient_NewRelicOTLP_Compute(t *testing.T) {
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+}
+
+func TestUpdateNewRelicOTLPInput_MarshalJSON(t *testing.T) {
+	t.Parallel()
+
+	cases := []struct {
+		name     string
+		input    UpdateNewRelicOTLPInput
+		wantJSON string
+	}{
+		{
+			name: "nil placement is omitted",
+			input: UpdateNewRelicOTLPInput{
+				Name:           "test-newrelicotlp",
+				ServiceID:      "foo",
+				ServiceVersion: 1,
+				NewName:        ToPointer("new-test-newrelicotlp"),
+			},
+			wantJSON: `{"name":"new-test-newrelicotlp"}`,
+		},
+		{
+			name: "null placement serializes as null",
+			input: UpdateNewRelicOTLPInput{
+				Name:           "test-newrelicotlp",
+				ServiceID:      "foo",
+				ServiceVersion: 1,
+				Placement:      NullValue[string](),
+			},
+			wantJSON: `{"placement":null}`,
+		},
+		{
+			name: "non-null placement serializes as its value",
+			input: UpdateNewRelicOTLPInput{
+				Name:           "test-newrelicotlp",
+				ServiceID:      "foo",
+				ServiceVersion: 1,
+				Placement:      NewNullable("none"),
+			},
+			wantJSON: `{"placement":"none"}`,
+		},
+	}
+
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			got, err := json.Marshal(&c.input)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if string(got) != c.wantJSON {
+				t.Errorf("bad JSON: got %s, want %s", got, c.wantJSON)
+			}
+		})
 	}
 }
 

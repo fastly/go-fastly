@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/130/logging/splunk/new-test-splunk
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/172/logging/splunk/new-test-splunk
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -19,15 +19,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:32:34 GMT
+      - Thu, 23 Jul 2026 19:31:08 GMT
       Fastly-Ratelimit-Remaining:
-      - "9792"
+      - "9641"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -40,10 +40,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "353"
       X-Served-By:
-      - cache-chi-kigq8000041-CHI, cache-nyc-kteb1890058-NYC
+      - cache-chi-klot8100178-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749051154.850424,VS0,VE254
+      - S1784835068.790577,VS0,VE396
     status: 200 OK
     code: 200
     duration: ""

@@ -167,45 +167,46 @@ func (c *Client) GetBlobStorage(ctx context.Context, i *GetBlobStorageInput) (*B
 // UpdateBlobStorageInput is used as input to the UpdateBlobStorage function.
 type UpdateBlobStorageInput struct {
 	// AccountName is the unique Azure Blob Storage namespace in which your data objects are stored.
-	AccountName *string `url:"account_name,omitempty"`
+	AccountName *string `json:"account_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (valid values are zstd, snappy, and gzip).
-	CompressionCodec *string `url:"compression_codec,omitempty"`
+	CompressionCodec *string `json:"compression_codec,omitempty"`
 	// Container is the name of the Azure Blob Storage container in which to store logs.
-	Container *string `url:"container,omitempty"`
+	Container *string `json:"container,omitempty"`
 	// FileMaxBytes is the maximum number of bytes for each uploaded file. A value of 0 can be used to indicate there is no limit on the size of uploaded files, otherwise the minimum value is 1048576 bytes (1 MiB.).
-	FileMaxBytes *int `url:"file_max_bytes,omitempty"`
+	FileMaxBytes *int `json:"file_max_bytes,omitempty"`
 	// Format is a Fastly log format string.
-	Format *string `url:"format,omitempty"`
+	Format *string `json:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *int `url:"format_version,omitempty"`
+	FormatVersion *int `json:"format_version,omitempty"`
 	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
-	GzipLevel *int `url:"gzip_level,omitempty"`
+	GzipLevel *int `json:"gzip_level,omitempty"`
 	// MessageType is how the message should be formatted.
-	MessageType *string `url:"message_type,omitempty"`
+	MessageType *string `json:"message_type,omitempty"`
 	// Name is the name of the blob storage to update (required).
-	Name string `url:"-"`
+	Name string `json:"-"`
 	// NewName is the new name for the resource.
-	NewName *string `url:"name,omitempty"`
+	NewName *string `json:"name,omitempty"`
 	// Path is the path to upload logs to.
-	Path *string `url:"path,omitempty"`
+	Path *string `json:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
-	Period *int `url:"period,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
+	Period *int `json:"period,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed. Use
+	// NullValue[string]() to reset the endpoint to automatic placement.
+	Placement *Nullable[string] `json:"placement,omitempty"`
 	// ProcessingRegion is the region where logs will be processed before streaming to Azure Blob Storage.
-	ProcessingRegion *string `url:"log_processing_region,omitempty"`
+	ProcessingRegion *string `json:"log_processing_region,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
-	PublicKey *string `url:"public_key,omitempty"`
+	PublicKey *string `json:"public_key,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition *string `url:"response_condition,omitempty"`
+	ResponseCondition *string `json:"response_condition,omitempty"`
 	// SASToken is the Azure shared access signature providing write access to the blob service objects.
-	SASToken *string `url:"sas_token,omitempty"`
+	SASToken *string `json:"sas_token,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string `url:"-"`
+	ServiceID string `json:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int `url:"-"`
+	ServiceVersion int `json:"-"`
 	// TimestampFormat is a timestamp format.
-	TimestampFormat *string `url:"timestamp_format,omitempty"`
+	TimestampFormat *string `json:"timestamp_format,omitempty"`
 }
 
 // UpdateBlobStorage updates the specified resource.
@@ -221,7 +222,7 @@ func (c *Client) UpdateBlobStorage(ctx context.Context, i *UpdateBlobStorageInpu
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "azureblob", i.Name)
-	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
+	resp, err := c.PutJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

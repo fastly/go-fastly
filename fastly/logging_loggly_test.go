@@ -24,7 +24,7 @@ func TestClient_Loggly(t *testing.T) {
 			Name:           ToPointer("test-loggly"),
 			Token:          ToPointer("abcd1234"),
 			Format:         ToPointer("format"),
-			Placement:      ToPointer("waf_debug"),
+			Placement:      ToPointer("none"),
 		})
 	})
 	if err != nil {
@@ -60,7 +60,7 @@ func TestClient_Loggly(t *testing.T) {
 	if *lg.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *lg.FormatVersion)
 	}
-	if *lg.Placement != "waf_debug" {
+	if *lg.Placement != "none" {
 		t.Errorf("bad placement: %q", *lg.Placement)
 	}
 
@@ -117,10 +117,14 @@ func TestClient_Loggly(t *testing.T) {
 			NewName:          ToPointer("new-test-loggly"),
 			FormatVersion:    ToPointer(2),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if ulg.Placement != nil {
+		t.Errorf("bad placement: %q", *ulg.Placement)
 	}
 	if *ulg.Name != "new-test-loggly" {
 		t.Errorf("bad name: %q", *ulg.Name)
@@ -256,10 +260,14 @@ func TestClient_Loggly_Compute(t *testing.T) {
 			NewName:          ToPointer("new-test-loggly"),
 			FormatVersion:    ToPointer(2),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *ulg.Placement != "none" {
+		t.Errorf("bad placement: %q", *ulg.Placement)
 	}
 	if *ulg.Name != "new-test-loggly" {
 		t.Errorf("bad name: %q", *ulg.Name)

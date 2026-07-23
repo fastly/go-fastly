@@ -156,37 +156,38 @@ func (c *Client) GetBigQuery(ctx context.Context, i *GetBigQueryInput) (*BigQuer
 // UpdateBigQueryInput is used as input to the UpdateBigQuery function.
 type UpdateBigQueryInput struct {
 	// AccountName is the name of the Google Cloud Platform service account associated with the target log collection service.
-	AccountName *string `url:"account_name,omitempty"`
+	AccountName *string `json:"account_name,omitempty"`
 	// Dataset is your BigQuery dataset.
-	Dataset *string `url:"dataset,omitempty"`
+	Dataset *string `json:"dataset,omitempty"`
 	// Format is a Fastly log format string. Must produce JSON that matches the schema of your BigQuery table.
-	Format *string `url:"format,omitempty"`
+	Format *string `json:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *int `url:"format_version,omitempty"`
+	FormatVersion *int `json:"format_version,omitempty"`
 	// Name is the name of the BigQuery to update (required).
-	Name string `url:"-"`
+	Name string `json:"-"`
 	// NewName is the new name for the resource.
-	NewName *string `url:"name,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
+	NewName *string `json:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed. Use
+	// NullValue[string]() to reset the endpoint to automatic placement.
+	Placement *Nullable[string] `json:"placement,omitempty"`
 	// ProcessingRegion is the region where logs will be processed before streaming to BigQuery.
-	ProcessingRegion *string `url:"log_processing_region,omitempty"`
+	ProcessingRegion *string `json:"log_processing_region,omitempty"`
 	// ProjectID is your Google Cloud Platform project ID.
-	ProjectID *string `url:"project_id,omitempty"`
+	ProjectID *string `json:"project_id,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition *string `url:"response_condition,omitempty"`
+	ResponseCondition *string `json:"response_condition,omitempty"`
 	// SecretKey is your Google Cloud Platform account secret key. The private_key field in your service account authentication JSON. Not required if account_name is specified.
-	SecretKey *string `url:"secret_key,omitempty"`
+	SecretKey *string `json:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string `url:"-"`
+	ServiceID string `json:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int `url:"-"`
+	ServiceVersion int `json:"-"`
 	// Table is your BigQuery table.
-	Table *string `url:"table,omitempty"`
+	Table *string `json:"table,omitempty"`
 	// Template is a BigQuery table name suffix template.
-	Template *string `url:"template_suffix,omitempty"`
+	Template *string `json:"template_suffix,omitempty"`
 	// User is your Google Cloud Platform service account email address. The client_email field in your service account authentication JSON. Not required if account_name is specified.
-	User *string `url:"user,omitempty"`
+	User *string `json:"user,omitempty"`
 }
 
 // UpdateBigQuery updates the specified resource.
@@ -202,7 +203,7 @@ func (c *Client) UpdateBigQuery(ctx context.Context, i *UpdateBigQueryInput) (*B
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "bigquery", i.Name)
-	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
+	resp, err := c.PutJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

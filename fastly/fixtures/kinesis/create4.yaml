@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: format=format&format_version=2&iam_role=badarn&name=test-kinesis-3&placement=waf_debug&region=us-east-1&topic=stream-name
+    body: format=format&format_version=2&iam_role=badarn&name=test-kinesis-3&placement=none&region=us-east-1&topic=stream-name
     form:
       format:
       - format
@@ -13,7 +13,7 @@ interactions:
       name:
       - test-kinesis-3
       placement:
-      - waf_debug
+      - none
       region:
       - us-east-1
       topic:
@@ -22,8 +22,8 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/118/logging/kinesis
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/160/logging/kinesis
     method: POST
   response:
     body: '{"msg":"Bad request","detail":"invalid IAM Role ARN badarn: ARNs must have
@@ -36,15 +36,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:17:27 GMT
+      - Thu, 23 Jul 2026 19:29:13 GMT
       Fastly-Ratelimit-Remaining:
-      - "9892"
+      - "9842"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 400 Bad Request
       Strict-Transport-Security:
@@ -57,10 +57,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "314"
       X-Served-By:
-      - cache-chi-klot8100111-CHI, cache-ewr-kewr1740070-EWR
+      - cache-chi-kigq8000057-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749050248.549674,VS0,VE307
+      - S1784834953.784651,VS0,VE354
     status: 400 Bad Request
     code: 400
     duration: ""

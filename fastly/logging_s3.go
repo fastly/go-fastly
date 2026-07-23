@@ -239,57 +239,58 @@ func (c *Client) GetS3(ctx context.Context, i *GetS3Input) (*S3, error) {
 // UpdateS3Input is used as input to the UpdateS3 function.
 type UpdateS3Input struct {
 	// ACL is the access control list (ACL) specific request header.
-	ACL *S3AccessControlList `url:"acl,omitempty"`
+	ACL *S3AccessControlList `json:"acl,omitempty"`
 	//  AccessKey is the access key for your S3 account. Not required if iam_role is provided.
-	AccessKey *string `url:"access_key,omitempty"`
+	AccessKey *string `json:"access_key,omitempty"`
 	// BucketName is the bucket name for S3 account.
-	BucketName *string `url:"bucket_name,omitempty"`
+	BucketName *string `json:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.
-	CompressionCodec *string `url:"compression_codec,omitempty"`
+	CompressionCodec *string `json:"compression_codec,omitempty"`
 	// Domain is the domain of the Amazon S3 endpoint.
-	Domain *string `url:"domain,omitempty"`
+	Domain *string `json:"domain,omitempty"`
 	// FileMaxBytes is the maximum number of bytes for each uploaded file. A value of 0 can be used to indicate there is no limit on the size of uploaded files, otherwise the minimum value is 1048576 bytes (1 MiB.).
-	FileMaxBytes *int `url:"file_max_bytes,omitempty"`
+	FileMaxBytes *int `json:"file_max_bytes,omitempty"`
 	// Format is a Fastly log format string.
-	Format *string `url:"format,omitempty"`
+	Format *string `json:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *int `url:"format_version,omitempty"`
+	FormatVersion *int `json:"format_version,omitempty"`
 	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
-	GzipLevel *int `url:"gzip_level,omitempty"`
+	GzipLevel *int `json:"gzip_level,omitempty"`
 	// IAMRole is the Amazon Resource Name (ARN) for the IAM role granting Fastly access to S3. Not required if access_key and secret_key are provided.
-	IAMRole *string `url:"iam_role,omitempty"`
+	IAMRole *string `json:"iam_role,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
-	MessageType *string `url:"message_type,omitempty"`
+	MessageType *string `json:"message_type,omitempty"`
 	// Name is the name of the S3 to update (required).
-	Name string `url:"-"`
+	Name string `json:"-"`
 	// NewName is the new name for the resource.
-	NewName *string `url:"name,omitempty"`
+	NewName *string `json:"name,omitempty"`
 	// Path is the path to upload logs to.
-	Path *string `url:"path,omitempty"`
+	Path *string `json:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
-	Period *int `url:"period,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
+	Period *int `json:"period,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed. Use
+	// NullValue[string]() to reset the endpoint to automatic placement.
+	Placement *Nullable[string] `json:"placement,omitempty"`
 	// ProcessingRegion is the region where logs will be processed before streaming to S3.
-	ProcessingRegion *string `url:"log_processing_region,omitempty"`
+	ProcessingRegion *string `json:"log_processing_region,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
-	PublicKey *string `url:"public_key,omitempty"`
+	PublicKey *string `json:"public_key,omitempty"`
 	// Redundancy is the S3 redundancy level.
-	Redundancy *S3Redundancy `url:"redundancy,omitempty"`
+	Redundancy *S3Redundancy `json:"redundancy,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition *string `url:"response_condition,omitempty"`
+	ResponseCondition *string `json:"response_condition,omitempty"`
 	// SecretKey is the secret key for your S3 account. Not required if iam_role is provided.
-	SecretKey *string `url:"secret_key,omitempty"`
+	SecretKey *string `json:"secret_key,omitempty"`
 	// ServerSideEncryption should be set to AES256 or aws:kms to enable S3 Server Side Encryption.
-	ServerSideEncryption *S3ServerSideEncryption `url:"server_side_encryption,omitempty"`
+	ServerSideEncryption *S3ServerSideEncryption `json:"server_side_encryption,omitempty"`
 	// ServerSideEncryptionKMSKeyID is an optional server-side KMS Key ID. Must be set if ServerSideEncryption is set to aws:kms or AES256.
-	ServerSideEncryptionKMSKeyID *string `url:"server_side_encryption_kms_key_id,omitempty"`
+	ServerSideEncryptionKMSKeyID *string `json:"server_side_encryption_kms_key_id,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string `url:"-"`
+	ServiceID string `json:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int `url:"-"`
+	ServiceVersion int `json:"-"`
 	// TimestampFormat is a timestamp format.
-	TimestampFormat *string `url:"timestamp_format,omitempty"`
+	TimestampFormat *string `json:"timestamp_format,omitempty"`
 }
 
 // UpdateS3 updates the specified resource.
@@ -311,7 +312,7 @@ func (c *Client) UpdateS3(ctx context.Context, i *UpdateS3Input) (*S3, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "s3", i.Name)
-	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
+	resp, err := c.PutJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

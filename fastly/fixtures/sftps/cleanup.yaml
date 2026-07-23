@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/129/logging/sftp/test-sftp
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/174/logging/sftp/test-sftp
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-sftp, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 129 }''"}'
+      version =\u003e 174 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,15 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:32:04 GMT
+      - Thu, 23 Jul 2026 19:31:37 GMT
       Fastly-Ratelimit-Remaining:
-      - "9799"
+      - "9587"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -42,10 +42,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "136"
       X-Served-By:
-      - cache-chi-kigq8000105-CHI, cache-nyc-kteb1890089-NYC
+      - cache-chi-klot8100094-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749051124.118939,VS0,VE111
+      - S1784835098.587940,VS0,VE173
     status: 404 Not Found
     code: 404
     duration: ""
@@ -54,8 +56,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/129/logging/sftp/test-sftp-2
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/174/logging/sftp/test-sftp-2
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -67,15 +69,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:32:04 GMT
+      - Thu, 23 Jul 2026 19:31:41 GMT
       Fastly-Ratelimit-Remaining:
-      - "9798"
+      - "9582"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -88,10 +90,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "448"
       X-Served-By:
-      - cache-chi-kigq8000122-CHI, cache-nyc-kteb1890089-NYC
+      - cache-chi-kmdw8640099-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749051124.235834,VS0,VE288
+      - S1784835101.667050,VS0,VE482
     status: 200 OK
     code: 200
     duration: ""
@@ -100,8 +104,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/129/logging/sftp/test-sftp-3
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/174/logging/sftp/test-sftp-3
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -113,15 +117,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:32:04 GMT
+      - Thu, 23 Jul 2026 19:31:43 GMT
       Fastly-Ratelimit-Remaining:
-      - "9797"
+      - "9578"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -134,10 +138,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "488"
       X-Served-By:
-      - cache-chi-kigq8000065-CHI, cache-nyc-kteb1890089-NYC
+      - cache-chi-klot8100161-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749051125.530775,VS0,VE256
+      - S1784835103.508524,VS0,VE526
     status: 200 OK
     code: 200
     duration: ""
@@ -146,13 +152,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/129/logging/sftp/new-test-sftp
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/174/logging/sftp/new-test-sftp
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-sftp, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 129 }''"}'
+      version =\u003e 174 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -161,15 +167,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:32:04 GMT
+      - Thu, 23 Jul 2026 19:31:43 GMT
       Fastly-Ratelimit-Remaining:
-      - "9796"
+      - "9576"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -182,10 +188,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "101"
       X-Served-By:
-      - cache-chi-kigq8000172-CHI, cache-nyc-kteb1890089-NYC
+      - cache-chi-kmdw8640041-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749051125.792337,VS0,VE129
+      - S1784835103.333078,VS0,VE135
     status: 404 Not Found
     code: 404
     duration: ""

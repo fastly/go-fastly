@@ -2,14 +2,14 @@
 version: 1
 interactions:
 - request:
-    body: format=format&name=test-newrelicotlp&placement=waf_debug&token=abcd1234&url=https%3A%2F%2Fexample.nr-data.net
+    body: format=format&name=test-newrelicotlp&placement=none&token=abcd1234&url=https%3A%2F%2Fexample.nr-data.net
     form:
       format:
       - format
       name:
       - test-newrelicotlp
       placement:
-      - waf_debug
+      - none
       token:
       - abcd1234
       url:
@@ -18,11 +18,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/122/logging/newrelicotlp
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/175/logging/newrelicotlp
     method: POST
   response:
-    body: '{"format":"format","name":"test-newrelicotlp","placement":"waf_debug","token":"abcd1234","url":"https://example.nr-data.net","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"122","format_version":"2","created_at":"2025-06-04T15:25:36Z","updated_at":"2025-06-04T15:25:36Z","region":null,"log_processing_region":"none","deleted_at":null,"response_condition":""}'
+    body: '{"format":"format","name":"test-newrelicotlp","placement":"none","token":"abcd1234","url":"https://example.nr-data.net","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"175","updated_at":"2026-07-23T19:31:25Z","region":null,"response_condition":"","format_version":"2","created_at":"2026-07-23T19:31:25Z","deleted_at":null,"log_processing_region":"none"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -31,15 +31,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:25:36 GMT
+      - Thu, 23 Jul 2026 19:31:25 GMT
       Fastly-Ratelimit-Remaining:
-      - "9868"
+      - "9609"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -52,10 +52,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "515"
       X-Served-By:
-      - cache-chi-kigq8000160-CHI, cache-nyc-kteb1890088-NYC
+      - cache-chi-klot8100161-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749050737.523659,VS0,VE312
+      - S1784835085.890987,VS0,VE552
     status: 200 OK
     code: 200
     duration: ""

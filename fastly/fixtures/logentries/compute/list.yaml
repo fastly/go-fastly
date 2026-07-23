@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/26/logging/logentries
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/110/logging/logentries
     method: GET
   response:
-    body: '[{"format_version":"2","log_processing_region":"none","placement":"none","created_at":"2025-09-02T17:18:03Z","public_key":null,"version":"26","token":"abcd1234","name":"test-logentries","use_tls":"1","format":"format","updated_at":"2025-09-02T17:18:03Z","hostname":null,"response_condition":"","service_id":"XsjdElScZGjmfCcTwsYRC1","deleted_at":null,"port":"0","region":"us"}]'
+    body: '[{"format":"format","token":"abcd1234","use_tls":"1","port":"0","updated_at":"2026-07-23T19:39:16Z","log_processing_region":"none","created_at":"2026-07-23T19:39:16Z","name":"test-logentries","region":"us","service_id":"XsjdElScZGjmfCcTwsYRC1","version":"110","public_key":null,"placement":"none","response_condition":"","hostname":null,"format_version":"2","deleted_at":null}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,11 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 02 Sep 2025 17:18:03 GMT
+      - Thu, 23 Jul 2026 19:39:17 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -36,10 +36,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "132"
       X-Served-By:
-      - cache-chi-kigq8000159-CHI, cache-nyc-kteb1890053-NYC
+      - cache-chi-klot8100157-CHI, cache-iad-kiad7000025-IAD
       X-Timer:
-      - S1756833483.401625,VS0,VE144
+      - S1784835558.664219,VS0,VE170
     status: 200 OK
     code: 200
     duration: ""

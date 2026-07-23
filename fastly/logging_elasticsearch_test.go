@@ -51,7 +51,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			Password:          ToPointer("password"),
 			RequestMaxEntries: ToPointer(1),
 			RequestMaxBytes:   ToPointer(1000),
-			Placement:         ToPointer("waf_debug"),
+			Placement:         ToPointer("none"),
 			TLSCACert:         ToPointer(caCert),
 			TLSClientCert:     ToPointer(clientCert),
 			TLSClientKey:      ToPointer(clientKey),
@@ -108,7 +108,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	if *es.RequestMaxBytes != 1000 {
 		t.Errorf("bad request_max_bytes: %q", *es.RequestMaxBytes)
 	}
-	if *es.Placement != "waf_debug" {
+	if *es.Placement != "none" {
 		t.Errorf("bad placement: %q", *es.Placement)
 	}
 	if *es.TLSCACert != caCert {
@@ -210,10 +210,14 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			NewName:          ToPointer("new-test-elasticsearch"),
 			Pipeline:         ToPointer("my_new_pipeline_id"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if ues.Placement != nil {
+		t.Errorf("bad placement: %q", *ues.Placement)
 	}
 	if *ues.Name != "new-test-elasticsearch" {
 		t.Errorf("bad name: %q", *ues.Name)
@@ -441,10 +445,14 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			NewName:          ToPointer("new-test-elasticsearch"),
 			Pipeline:         ToPointer("my_new_pipeline_id"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *ues.Placement != "none" {
+		t.Errorf("bad placement: %q", *ues.Placement)
 	}
 	if *ues.Name != "new-test-elasticsearch" {
 		t.Errorf("bad name: %q", *ues.Name)

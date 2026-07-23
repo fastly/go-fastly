@@ -32,7 +32,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			TimestampFormat:  ToPointer("%Y"),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 			PublicKey:        ToPointer(pgpPublicKey()),
 			CompressionCodec: ToPointer("snappy"),
 		})
@@ -57,7 +57,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 			FormatVersion:   ToPointer(2),
 			TimestampFormat: ToPointer("%Y"),
 			MessageType:     ToPointer("classic"),
-			Placement:       ToPointer("waf_debug"),
+			Placement:       ToPointer("none"),
 			PublicKey:       ToPointer(pgpPublicKey()),
 		})
 	})
@@ -80,7 +80,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			TimestampFormat:  ToPointer("%Y"),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 			PublicKey:        ToPointer(pgpPublicKey()),
 			CompressionCodec: ToPointer("snappy"),
 		})
@@ -107,7 +107,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			TimestampFormat:  ToPointer("%Y"),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 			PublicKey:        ToPointer(pgpPublicKey()),
 			CompressionCodec: ToPointer("snappy"),
 		})
@@ -181,7 +181,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	if *digitaloceanCreateResp1.MessageType != "classic" {
 		t.Errorf("bad message_type: %q", *digitaloceanCreateResp1.MessageType)
 	}
-	if *digitaloceanCreateResp1.Placement != "waf_debug" {
+	if *digitaloceanCreateResp1.Placement != "none" {
 		t.Errorf("bad placement: %q", *digitaloceanCreateResp1.Placement)
 	}
 	if *digitaloceanCreateResp1.PublicKey != pgpPublicKey() {
@@ -281,10 +281,14 @@ func TestClient_DigitalOceans(t *testing.T) {
 			Domain:           ToPointer("nyc3.digitaloceanspaces.com"),
 			CompressionCodec: ToPointer("zstd"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if digitaloceanUpdateResp1.Placement != nil {
+		t.Errorf("bad placement: %q", *digitaloceanUpdateResp1.Placement)
 	}
 
 	Record(t, "digitaloceans/update2", func(c *Client) {
@@ -293,10 +297,14 @@ func TestClient_DigitalOceans(t *testing.T) {
 			ServiceVersion:   *tv.Number,
 			Name:             "test-digitalocean-2",
 			CompressionCodec: ToPointer("zstd"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if digitaloceanUpdateResp2.Placement != nil {
+		t.Errorf("bad placement: %q", *digitaloceanUpdateResp2.Placement)
 	}
 
 	Record(t, "digitaloceans/update3", func(c *Client) {
@@ -305,10 +313,14 @@ func TestClient_DigitalOceans(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-digitalocean-3",
 			GzipLevel:      ToPointer(9),
+			Placement:      NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if digitaloceanUpdateResp3.Placement != nil {
+		t.Errorf("bad placement: %q", *digitaloceanUpdateResp3.Placement)
 	}
 
 	if *digitaloceanUpdateResp1.Name != "new-test-digitalocean" {
@@ -627,10 +639,14 @@ func TestClient_DigitalOceans_Compute(t *testing.T) {
 			Domain:           ToPointer("nyc3.digitaloceanspaces.com"),
 			CompressionCodec: ToPointer("zstd"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *digitaloceanUpdateResp1.Placement != "none" {
+		t.Errorf("bad placement: %q", *digitaloceanUpdateResp1.Placement)
 	}
 
 	Record(t, "digitaloceans/compute/update2", func(c *Client) {
@@ -639,10 +655,14 @@ func TestClient_DigitalOceans_Compute(t *testing.T) {
 			ServiceVersion:   *tv.Number,
 			Name:             "test-digitalocean-2",
 			CompressionCodec: ToPointer("zstd"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *digitaloceanUpdateResp2.Placement != "none" {
+		t.Errorf("bad placement: %q", *digitaloceanUpdateResp2.Placement)
 	}
 
 	Record(t, "digitaloceans/compute/update3", func(c *Client) {
@@ -651,10 +671,14 @@ func TestClient_DigitalOceans_Compute(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-digitalocean-3",
 			GzipLevel:      ToPointer(9),
+			Placement:      NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *digitaloceanUpdateResp3.Placement != "none" {
+		t.Errorf("bad placement: %q", *digitaloceanUpdateResp3.Placement)
 	}
 
 	if *digitaloceanUpdateResp1.Name != "new-test-digitalocean" {

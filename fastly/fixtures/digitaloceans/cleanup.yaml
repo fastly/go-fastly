@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/109/logging/digitalocean/test-digitalocean
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/169/logging/digitalocean/test-digitalocean
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-digitalocean, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 109 }''"}'
+      version =\u003e 169 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,15 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:06:02 GMT
+      - Thu, 23 Jul 2026 19:30:40 GMT
       Fastly-Ratelimit-Remaining:
-      - "9960"
+      - "9686"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -42,10 +42,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "119"
       X-Served-By:
-      - cache-chi-kigq8000165-CHI, cache-nyc-kteb1890038-NYC
+      - cache-chi-kigq8000060-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749049562.061737,VS0,VE128
+      - S1784835040.261627,VS0,VE151
     status: 404 Not Found
     code: 404
     duration: ""
@@ -54,8 +56,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/109/logging/digitalocean/test-digitalocean-2
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/169/logging/digitalocean/test-digitalocean-2
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -67,15 +69,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:06:02 GMT
+      - Thu, 23 Jul 2026 19:30:41 GMT
       Fastly-Ratelimit-Remaining:
-      - "9959"
+      - "9684"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -88,10 +90,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "472"
       X-Served-By:
-      - cache-chi-klot8100031-CHI, cache-nyc-kteb1890038-NYC
+      - cache-chi-kigq8000083-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749049562.198655,VS0,VE280
+      - S1784835041.251511,VS0,VE506
     status: 200 OK
     code: 200
     duration: ""
@@ -100,8 +104,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/109/logging/digitalocean/test-digitalocean-3
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/169/logging/digitalocean/test-digitalocean-3
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -113,15 +117,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:06:02 GMT
+      - Thu, 23 Jul 2026 19:30:42 GMT
       Fastly-Ratelimit-Remaining:
-      - "9958"
+      - "9682"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -134,10 +138,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "400"
       X-Served-By:
-      - cache-chi-klot8100024-CHI, cache-nyc-kteb1890038-NYC
+      - cache-chi-kigq8000047-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749049562.487959,VS0,VE251
+      - S1784835042.111847,VS0,VE434
     status: 200 OK
     code: 200
     duration: ""
@@ -146,13 +152,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/109/logging/digitalocean/new-test-digitalocean
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/169/logging/digitalocean/new-test-digitalocean
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-digitalocean, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 109 }''"}'
+      version =\u003e 169 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -161,15 +167,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:06:02 GMT
+      - Thu, 23 Jul 2026 19:30:42 GMT
       Fastly-Ratelimit-Remaining:
-      - "9957"
+      - "9681"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -182,10 +188,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "116"
       X-Served-By:
-      - cache-chi-kigq8000114-CHI, cache-nyc-kteb1890038-NYC
+      - cache-chi-klot8100062-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749049563.743947,VS0,VE122
+      - S1784835043.681676,VS0,VE163
     status: 404 Not Found
     code: 404
     duration: ""

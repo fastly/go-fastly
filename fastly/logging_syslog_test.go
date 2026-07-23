@@ -55,7 +55,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			Format:         ToPointer("format"),
 			FormatVersion:  ToPointer(2),
 			MessageType:    ToPointer("classic"),
-			Placement:      ToPointer("waf_debug"),
+			Placement:      ToPointer("none"),
 		})
 	})
 	if err != nil {
@@ -118,7 +118,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	if *s.MessageType != "classic" {
 		t.Errorf("bad message_type: %s", *s.MessageType)
 	}
-	if *s.Placement != "waf_debug" {
+	if *s.Placement != "none" {
 		t.Errorf("bad placement: %q", *s.Placement)
 	}
 
@@ -202,10 +202,14 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			NewName:          ToPointer("new-test-syslog"),
 			FormatVersion:    ToPointer(2),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if us.Placement != nil {
+		t.Errorf("bad placement: %q", *us.Placement)
 	}
 	if *us.Name != "new-test-syslog" {
 		t.Errorf("bad name: %q", *us.Name)
@@ -427,10 +431,14 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			NewName:          ToPointer("new-test-syslog"),
 			FormatVersion:    ToPointer(2),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *us.Placement != "none" {
+		t.Errorf("bad placement: %q", *us.Placement)
 	}
 	if *us.Name != "new-test-syslog" {
 		t.Errorf("bad name: %q", *us.Name)

@@ -34,7 +34,7 @@ func TestClient_Kafkas(t *testing.T) {
 			Name:             ToPointer("test-kafka"),
 			ParseLogKeyvals:  ToPointer(Compatibool(true)),
 			Password:         ToPointer("deadbeef"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 			RequestMaxBytes:  ToPointer(requestMaxBytes),
 			RequiredACKs:     ToPointer("-1"),
 			ServiceID:        TestDeliveryServiceID,
@@ -93,7 +93,7 @@ func TestClient_Kafkas(t *testing.T) {
 	if *k.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *k.FormatVersion)
 	}
-	if *k.Placement != "waf_debug" {
+	if *k.Placement != "none" {
 		t.Errorf("bad placement: %q", *k.Placement)
 	}
 	if *k.TLSCACert != caCert {
@@ -216,10 +216,14 @@ func TestClient_Kafkas(t *testing.T) {
 			NewName:          ToPointer("new-test-kafka"),
 			Topic:            ToPointer("new-kafka-topic"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if uk.Placement != nil {
+		t.Errorf("bad placement: %q", *uk.Placement)
 	}
 	if *uk.Name != "new-test-kafka" {
 		t.Errorf("bad name: %q", *uk.Name)
@@ -451,10 +455,14 @@ func TestClient_Kafkas_Compute(t *testing.T) {
 			NewName:          ToPointer("new-test-kafka"),
 			Topic:            ToPointer("new-kafka-topic"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *uk.Placement != "none" {
+		t.Errorf("bad placement: %q", *uk.Placement)
 	}
 	if *uk.Name != "new-test-kafka" {
 		t.Errorf("bad name: %q", *uk.Name)

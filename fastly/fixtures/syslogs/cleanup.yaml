@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/132/logging/syslog/test-syslog
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/170/logging/syslog/test-syslog
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-syslog, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 132 }''"}'
+      version =\u003e 170 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,15 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:33:35 GMT
+      - Thu, 23 Jul 2026 19:31:04 GMT
       Fastly-Ratelimit-Remaining:
-      - "9779"
+      - "9649"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -42,10 +42,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "138"
       X-Served-By:
-      - cache-chi-kigq8000146-CHI, cache-nyc-kteb1890026-NYC
+      - cache-chi-kigq8000131-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749051215.859513,VS0,VE147
+      - S1784835064.907000,VS0,VE176
     status: 404 Not Found
     code: 404
     duration: ""
@@ -54,13 +56,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/132/logging/syslog/new-test-syslog
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/170/logging/syslog/new-test-syslog
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-syslog, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 132 }''"}'
+      version =\u003e 170 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -69,15 +71,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:33:35 GMT
+      - Thu, 23 Jul 2026 19:31:08 GMT
       Fastly-Ratelimit-Remaining:
-      - "9778"
+      - "9640"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -90,10 +92,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "134"
       X-Served-By:
-      - cache-chi-klot8100066-CHI, cache-nyc-kteb1890026-NYC
+      - cache-chi-klot8100094-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749051215.013917,VS0,VE111
+      - S1784835068.307388,VS0,VE200
     status: 404 Not Found
     code: 404
     duration: ""

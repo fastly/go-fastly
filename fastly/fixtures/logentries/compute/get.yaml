@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/26/logging/logentries/test-logentries
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/110/logging/logentries/test-logentries
     method: GET
   response:
-    body: '{"token":"abcd1234","updated_at":"2025-09-02T17:18:03Z","format":"format","created_at":"2025-09-02T17:18:03Z","service_id":"XsjdElScZGjmfCcTwsYRC1","format_version":"2","public_key":null,"region":"us","log_processing_region":"none","deleted_at":null,"placement":"none","name":"test-logentries","version":"26","port":"0","response_condition":"","hostname":null,"use_tls":"1"}'
+    body: '{"placement":"none","format_version":"2","log_processing_region":"none","region":"us","version":"110","deleted_at":null,"service_id":"XsjdElScZGjmfCcTwsYRC1","name":"test-logentries","hostname":null,"use_tls":"1","port":"0","updated_at":"2026-07-23T19:39:16Z","public_key":null,"token":"abcd1234","created_at":"2026-07-23T19:39:16Z","response_condition":"","format":"format"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,11 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 02 Sep 2025 17:18:03 GMT
+      - Thu, 23 Jul 2026 19:39:18 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -36,10 +36,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "178"
       X-Served-By:
-      - cache-chi-klot8100121-CHI, cache-nyc-kteb1890053-NYC
+      - cache-chi-kigq8000064-CHI, cache-iad-kiad7000025-IAD
       X-Timer:
-      - S1756833484.562510,VS0,VE143
+      - S1784835558.894278,VS0,VE214
     status: 200 OK
     code: 200
     duration: ""

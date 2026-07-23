@@ -24,7 +24,7 @@ func TestClient_NewRelic(t *testing.T) {
 			Name:           ToPointer("test-newrelic"),
 			Token:          ToPointer("abcd1234"),
 			Format:         ToPointer("format"),
-			Placement:      ToPointer("waf_debug"),
+			Placement:      ToPointer("none"),
 			Region:         ToPointer("us"),
 		})
 	})
@@ -39,7 +39,7 @@ func TestClient_NewRelic(t *testing.T) {
 			Name:           ToPointer("test-newrelic-2"),
 			Token:          ToPointer("abcd1234"),
 			Format:         ToPointer("format"),
-			Placement:      ToPointer("waf_debug"),
+			Placement:      ToPointer("none"),
 			Region:         ToPointer("eu"),
 		})
 	})
@@ -55,7 +55,7 @@ func TestClient_NewRelic(t *testing.T) {
 			Name:           ToPointer("test-newrelic-3"),
 			Token:          ToPointer("abcd1234"),
 			Format:         ToPointer("format"),
-			Placement:      ToPointer("waf_debug"),
+			Placement:      ToPointer("none"),
 			Region:         ToPointer("abc"),
 		})
 	})
@@ -98,7 +98,7 @@ func TestClient_NewRelic(t *testing.T) {
 	if *newRelicResp1.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *newRelicResp1.FormatVersion)
 	}
-	if *newRelicResp1.Placement != "waf_debug" {
+	if *newRelicResp1.Placement != "none" {
 		t.Errorf("bad placement: %q", *newRelicResp1.Placement)
 	}
 	if *newRelicResp1.Region != "us" {
@@ -116,7 +116,7 @@ func TestClient_NewRelic(t *testing.T) {
 	if *newRelicResp2.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *newRelicResp2.FormatVersion)
 	}
-	if *newRelicResp2.Placement != "waf_debug" {
+	if *newRelicResp2.Placement != "none" {
 		t.Errorf("bad placement: %q", *newRelicResp2.Placement)
 	}
 	if *newRelicResp2.Region != "eu" {
@@ -210,10 +210,14 @@ func TestClient_NewRelic(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			Region:           ToPointer("eu"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if newRelicUpdateResp1.Placement != nil {
+		t.Errorf("bad placement: %q", *newRelicUpdateResp1.Placement)
 	}
 
 	// This case is expected to fail due to an invalid region.
@@ -223,6 +227,7 @@ func TestClient_NewRelic(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-newrelic",
 			Region:         ToPointer("zz"),
+			Placement:      NullValue[string](),
 		})
 	})
 	if err == nil {
@@ -459,10 +464,14 @@ func TestClient_NewRelic_Compute(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			Region:           ToPointer("eu"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *newRelicUpdateResp1.Placement != "none" {
+		t.Errorf("bad placement: %q", *newRelicUpdateResp1.Placement)
 	}
 
 	// This case is expected to fail due to an invalid region.
@@ -472,6 +481,7 @@ func TestClient_NewRelic_Compute(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-newrelic",
 			Region:         ToPointer("zz"),
+			Placement:      NewNullable("none"),
 		})
 	})
 	if err == nil {

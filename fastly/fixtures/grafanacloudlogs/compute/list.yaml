@@ -6,12 +6,12 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/31/logging/grafanacloudlogs
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/116/logging/grafanacloudlogs
     method: GET
   response:
-    body: '[{"version":"31","updated_at":"2025-09-02T17:24:08Z","index":"{\"env\":
-      \"prod\"}","response_condition":"","created_at":"2025-09-02T17:24:08Z","format":"format","log_processing_region":"none","deleted_at":null,"user":"123456","service_id":"XsjdElScZGjmfCcTwsYRC1","format_version":"2","placement":"none","token":"abcd1234","url":"https://test123.grafana.net","name":"test-grafanacloudlogs"}]'
+    body: '[{"url":"https://test123.grafana.net","response_condition":"","log_processing_region":"none","name":"test-grafanacloudlogs","created_at":"2026-07-23T19:39:42Z","user":"123456","token":"abcd1234","service_id":"XsjdElScZGjmfCcTwsYRC1","placement":"none","format_version":"2","index":"{\"env\":
+      \"prod\"}","version":"116","updated_at":"2026-07-23T19:39:42Z","deleted_at":null,"format":"format"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -20,11 +20,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 02 Sep 2025 17:24:08 GMT
+      - Thu, 23 Jul 2026 19:39:42 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -37,10 +37,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "103"
       X-Served-By:
-      - cache-chi-kigq8000059-CHI, cache-nyc-kteb1890087-NYC
+      - cache-chi-klot8100100-CHI, cache-iad-kiad7000025-IAD
       X-Timer:
-      - S1756833849.721812,VS0,VE142
+      - S1784835583.695701,VS0,VE147
     status: 200 OK
     code: 200
     duration: ""

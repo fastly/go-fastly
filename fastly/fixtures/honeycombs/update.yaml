@@ -2,26 +2,20 @@
 version: 1
 interactions:
 - request:
-    body: dataset=newDataset&log_processing_region=eu&name=new-test-honeycomb&token=new-token
-    form:
-      dataset:
-      - newDataset
-      log_processing_region:
-      - eu
-      name:
-      - new-test-honeycomb
-      token:
-      - new-token
+    body: '{"dataset":"newDataset","name":"new-test-honeycomb","placement":null,"log_processing_region":"eu","token":"new-token"}'
+    form: {}
     headers:
+      Accept:
+      - application/json
       Content-Type:
-      - application/x-www-form-urlencoded
+      - application/json
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/115/logging/honeycomb/test-honeycomb
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/163/logging/honeycomb/test-honeycomb
     method: PUT
   response:
-    body: '{"placement":"waf_debug","log_processing_region":"eu","created_at":"2025-06-04T15:10:36Z","response_condition":"","dataset":"newDataset","updated_at":"2025-06-04T15:10:36Z","name":"new-test-honeycomb","format_version":"2","version":"115","token":"new-token","deleted_at":null,"format":"%h
-      %l %u %t \"%r\" %\u003es %b","service_id":"kKJb5bOFI47uHeBVluGfX1"}'
+    body: '{"token":"new-token","dataset":"newDataset","format":"%h %l %u %t \"%r\"
+      %\u003es %b","deleted_at":null,"log_processing_region":"eu","created_at":"2026-07-23T19:29:23Z","format_version":"2","name":"new-test-honeycomb","updated_at":"2026-07-23T19:29:23Z","service_id":"kKJb5bOFI47uHeBVluGfX1","response_condition":"","version":"163","placement":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -30,15 +24,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:10:36 GMT
+      - Thu, 23 Jul 2026 19:29:30 GMT
       Fastly-Ratelimit-Remaining:
-      - "9912"
+      - "9815"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -51,10 +45,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "647"
       X-Served-By:
-      - cache-chi-klot8100042-CHI, cache-nyc-kteb1890025-NYC
+      - cache-chi-kigq8000148-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749049837.546568,VS0,VE355
+      - S1784834970.043697,VS0,VE681
     status: 200 OK
     code: 200
     duration: ""

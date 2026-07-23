@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: format=format&format_version=1&message_type=classic&name=test-sumologic&placement=waf_debug&url=https%3A%2F%2Ffoo.sumologic.com
+    body: format=format&format_version=1&message_type=classic&name=test-sumologic&placement=none&url=https%3A%2F%2Ffoo.sumologic.com
     form:
       format:
       - format
@@ -13,18 +13,18 @@ interactions:
       name:
       - test-sumologic
       placement:
-      - waf_debug
+      - none
       url:
       - https://foo.sumologic.com
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/131/logging/sumologic
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/171/logging/sumologic
     method: POST
   response:
-    body: '{"format":"format","format_version":"1","message_type":"classic","name":"test-sumologic","placement":"waf_debug","url":"https://foo.sumologic.com","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"131","response_condition":"","deleted_at":null,"created_at":"2025-06-04T15:33:02Z","updated_at":"2025-06-04T15:33:02Z","log_processing_region":"none"}'
+    body: '{"format":"format","format_version":"1","message_type":"classic","name":"test-sumologic","placement":"none","url":"https://foo.sumologic.com","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"171","created_at":"2026-07-23T19:30:50Z","deleted_at":null,"log_processing_region":"none","response_condition":"","updated_at":"2026-07-23T19:30:50Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -33,15 +33,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:33:03 GMT
+      - Thu, 23 Jul 2026 19:30:50 GMT
       Fastly-Ratelimit-Remaining:
-      - "9788"
+      - "9667"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -54,10 +54,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "679"
       X-Served-By:
-      - cache-chi-klot8100078-CHI, cache-nyc-kteb1890063-NYC
+      - cache-chi-kmdw8640046-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749051183.774219,VS0,VE447
+      - S1784835050.086390,VS0,VE717
     status: 200 OK
     code: 200
     duration: ""

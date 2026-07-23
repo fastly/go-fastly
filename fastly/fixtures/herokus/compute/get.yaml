@@ -6,12 +6,12 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/21/logging/heroku/test-heroku
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/115/logging/heroku/test-heroku
     method: GET
   response:
-    body: '{"service_id":"XsjdElScZGjmfCcTwsYRC1","created_at":"2025-09-02T17:09:59Z","response_condition":"","url":"https://1.us.logplex.io/logs","deleted_at":null,"updated_at":"2025-09-02T17:09:59Z","placement":"none","token":"super-secure-token","format_version":"2","log_processing_region":"none","name":"test-heroku","version":"21","format":"%h
-      %l %u %t \"%r\" %\u003es %b"}'
+    body: '{"created_at":"2026-07-23T19:39:38Z","log_processing_region":"none","url":"https://1.us.logplex.io/logs","name":"test-heroku","token":"super-secure-token","format":"%h
+      %l %u %t \"%r\" %\u003es %b","updated_at":"2026-07-23T19:39:38Z","response_condition":"","deleted_at":null,"format_version":"2","service_id":"XsjdElScZGjmfCcTwsYRC1","placement":"none","version":"115"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -20,11 +20,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 02 Sep 2025 17:10:00 GMT
+      - Thu, 23 Jul 2026 19:39:39 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -37,10 +37,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "102"
       X-Served-By:
-      - cache-chi-kigq8000148-CHI, cache-ewr-kewr1740062-EWR
+      - cache-chi-kigq8000142-CHI, cache-iad-kiad7000025-IAD
       X-Timer:
-      - S1756833000.360445,VS0,VE117
+      - S1784835579.286332,VS0,VE134
     status: 200 OK
     code: 200
     duration: ""

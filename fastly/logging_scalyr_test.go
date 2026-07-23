@@ -24,7 +24,7 @@ func TestClient_Scalyrs(t *testing.T) {
 			Name:           ToPointer("test-scalyr"),
 			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
 			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("waf_debug"),
+			Placement:      ToPointer("none"),
 			ProjectID:      ToPointer("logplex"),
 			Region:         ToPointer("US"),
 			Token:          ToPointer("super-secure-token"),
@@ -60,7 +60,7 @@ func TestClient_Scalyrs(t *testing.T) {
 	if *s.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *s.FormatVersion)
 	}
-	if *s.Placement != "waf_debug" {
+	if *s.Placement != "none" {
 		t.Errorf("bad placement: %q", *s.Placement)
 	}
 	if *s.ProjectID != "logplex" {
@@ -134,10 +134,14 @@ func TestClient_Scalyrs(t *testing.T) {
 			Region:           ToPointer("EU"),
 			Token:            ToPointer("new-token"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if us.Placement != nil {
+		t.Errorf("bad placement: %q", *us.Placement)
 	}
 	if *us.Name != "new-test-scalyr" {
 		t.Errorf("bad name: %q", *us.Name)
@@ -296,10 +300,14 @@ func TestClient_Scalyrs_Compute(t *testing.T) {
 			Region:           ToPointer("EU"),
 			Token:            ToPointer("new-token"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *us.Placement != "none" {
+		t.Errorf("bad placement: %q", *us.Placement)
 	}
 	if *us.Name != "new-test-scalyr" {
 		t.Errorf("bad name: %q", *us.Name)

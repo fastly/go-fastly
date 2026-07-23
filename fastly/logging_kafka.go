@@ -176,51 +176,52 @@ func (c *Client) GetKafka(ctx context.Context, i *GetKafkaInput) (*Kafka, error)
 // UpdateKafkaInput is used as input to the UpdateKafka function.
 type UpdateKafkaInput struct {
 	// AuthMethod is the SASL authentication method (plain, scram-sha-256, scram-sha-512).
-	AuthMethod *string `url:"auth_method,omitempty"`
+	AuthMethod *string `json:"auth_method,omitempty"`
 	// Brokers is a comma-separated list of IP addresses or hostnames of Kafka brokers.
-	Brokers *string `url:"brokers,omitempty"`
+	Brokers *string `json:"brokers,omitempty"`
 	// CompressionCodec is the codec used for compression of your logs (gzip, snappy, lz4, null).
-	CompressionCodec *string `url:"compression_codec,omitempty"`
+	CompressionCodec *string `json:"compression_codec,omitempty"`
 	// Format is a Fastly log format string.
-	Format *string `url:"format,omitempty"`
+	Format *string `json:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *int `url:"format_version,omitempty"`
+	FormatVersion *int `json:"format_version,omitempty"`
 	// Name is the name of the kafka to update (required).
-	Name string `url:"-"`
+	Name string `json:"-"`
 	// NewName is the new name for the resource.
-	NewName *string `url:"name,omitempty"`
+	NewName *string `json:"name,omitempty"`
 	// ParseLogKeyvals enables parsing of key=value tuples from the beginning of a logline, turning them into record headers.
-	ParseLogKeyvals *Compatibool `url:"parse_log_keyvals,omitempty"`
+	ParseLogKeyvals *Compatibool `json:"parse_log_keyvals,omitempty"`
 	// Password is the SASL password.
-	Password *string `url:"password,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
+	Password *string `json:"password,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed. Use
+	// NullValue[string]() to reset the endpoint to automatic placement.
+	Placement *Nullable[string] `json:"placement,omitempty"`
 	// ProcessingRegion is the region where logs will be processed before streaming to Kafka.
-	ProcessingRegion *string `url:"log_processing_region,omitempty"`
+	ProcessingRegion *string `json:"log_processing_region,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request. Defaults 0 (no limit).
-	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
+	RequestMaxBytes *int `json:"request_max_bytes,omitempty"`
 	// RequiredACKs is the number of acknowledgements a leader must receive before a write is considered successful.
-	RequiredACKs *string `url:"required_acks,omitempty"`
+	RequiredACKs *string `json:"required_acks,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition *string `url:"response_condition,omitempty"`
+	ResponseCondition *string `json:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string `url:"-"`
+	ServiceID string `json:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int `url:"-"`
+	ServiceVersion int `json:"-"`
 	// TLSCACert is a secure certificate to authenticate a server with. Must be in PEM format.
-	TLSCACert *string `url:"tls_ca_cert,omitempty"`
+	TLSCACert *string `json:"tls_ca_cert,omitempty"`
 	// TLSClientCert is the client certificate used to make authenticated requests. Must be in PEM format.
-	TLSClientCert *string `url:"tls_client_cert,omitempty"`
+	TLSClientCert *string `json:"tls_client_cert,omitempty"`
 	// TLSClientKey is the client private key used to make authenticated requests. Must be in PEM format.
-	TLSClientKey *string `url:"tls_client_key,omitempty"`
+	TLSClientKey *string `json:"tls_client_key,omitempty"`
 	// TLSHostname is the hostname to verify the server's certificate. This should be one of the Subject Alternative Name (SAN) fields for the certificate. Common Names (CN) are not supported.
-	TLSHostname *string `url:"tls_hostname,omitempty"`
+	TLSHostname *string `json:"tls_hostname,omitempty"`
 	// Topic is the Kafka topic to send logs to.
-	Topic *string `url:"topic,omitempty"`
+	Topic *string `json:"topic,omitempty"`
 	// UseTLS is whether to use TLS (0: do not use, 1: use).
-	UseTLS *Compatibool `url:"use_tls,omitempty"`
+	UseTLS *Compatibool `json:"use_tls,omitempty"`
 	// User is the SASL user.
-	User *string `url:"user,omitempty"`
+	User *string `json:"user,omitempty"`
 }
 
 // UpdateKafka updates the specified resource.
@@ -236,7 +237,7 @@ func (c *Client) UpdateKafka(ctx context.Context, i *UpdateKafkaInput) (*Kafka, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kafka", i.Name)
-	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
+	resp, err := c.PutJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

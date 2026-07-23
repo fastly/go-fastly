@@ -33,7 +33,7 @@ func TestClient_Openstack(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			TimestampFormat:  ToPointer("%Y"),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 			PublicKey:        ToPointer(pgpPublicKey()),
 		})
 	})
@@ -57,7 +57,7 @@ func TestClient_Openstack(t *testing.T) {
 			FormatVersion:   ToPointer(2),
 			TimestampFormat: ToPointer("%Y"),
 			MessageType:     ToPointer("classic"),
-			Placement:       ToPointer("waf_debug"),
+			Placement:       ToPointer("none"),
 			PublicKey:       ToPointer(pgpPublicKey()),
 		})
 	})
@@ -81,7 +81,7 @@ func TestClient_Openstack(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			TimestampFormat:  ToPointer("%Y"),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 			PublicKey:        ToPointer(pgpPublicKey()),
 		})
 	})
@@ -108,7 +108,7 @@ func TestClient_Openstack(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			TimestampFormat:  ToPointer("%Y"),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 			PublicKey:        ToPointer(pgpPublicKey()),
 		})
 	})
@@ -184,7 +184,7 @@ func TestClient_Openstack(t *testing.T) {
 	if *osCreateResp1.MessageType != "classic" {
 		t.Errorf("bad message_type: %q", *osCreateResp1.MessageType)
 	}
-	if *osCreateResp1.Placement != "waf_debug" {
+	if *osCreateResp1.Placement != "none" {
 		t.Errorf("bad placement: %q", *osCreateResp1.Placement)
 	}
 	if *osCreateResp1.PublicKey != pgpPublicKey() {
@@ -287,10 +287,14 @@ func TestClient_Openstack(t *testing.T) {
 			NewName:          ToPointer("new-test-openstack"),
 			CompressionCodec: ToPointer("zstd"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if osUpdateResp1.Placement != nil {
+		t.Errorf("bad placement: %q", *osUpdateResp1.Placement)
 	}
 
 	Record(t, "openstack/update2", func(c *Client) {
@@ -299,10 +303,14 @@ func TestClient_Openstack(t *testing.T) {
 			ServiceVersion:   *tv.Number,
 			Name:             "test-openstack-2",
 			CompressionCodec: ToPointer("zstd"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if osUpdateResp2.Placement != nil {
+		t.Errorf("bad placement: %q", *osUpdateResp2.Placement)
 	}
 
 	Record(t, "openstack/update3", func(c *Client) {
@@ -311,10 +319,14 @@ func TestClient_Openstack(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-openstack-3",
 			GzipLevel:      ToPointer(9),
+			Placement:      NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if osUpdateResp3.Placement != nil {
+		t.Errorf("bad placement: %q", *osUpdateResp3.Placement)
 	}
 
 	if *osUpdateResp1.Name != "new-test-openstack" {
@@ -639,10 +651,14 @@ func TestClient_Openstack_Compute(t *testing.T) {
 			NewName:          ToPointer("new-test-openstack"),
 			CompressionCodec: ToPointer("zstd"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *osUpdateResp1.Placement != "none" {
+		t.Errorf("bad placement: %q", *osUpdateResp1.Placement)
 	}
 
 	Record(t, "openstack/compute/update2", func(c *Client) {
@@ -651,10 +667,14 @@ func TestClient_Openstack_Compute(t *testing.T) {
 			ServiceVersion:   *tv.Number,
 			Name:             "test-openstack-2",
 			CompressionCodec: ToPointer("zstd"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *osUpdateResp2.Placement != "none" {
+		t.Errorf("bad placement: %q", *osUpdateResp2.Placement)
 	}
 
 	Record(t, "openstack/compute/update3", func(c *Client) {
@@ -663,10 +683,14 @@ func TestClient_Openstack_Compute(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-openstack-3",
 			GzipLevel:      ToPointer(9),
+			Placement:      NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *osUpdateResp3.Placement != "none" {
+		t.Errorf("bad placement: %q", *osUpdateResp3.Placement)
 	}
 
 	if *osUpdateResp1.Name != "new-test-openstack" {

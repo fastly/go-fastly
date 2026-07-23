@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/118/logging/kinesis/test-kinesis
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/160/logging/kinesis/test-kinesis
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-kinesis, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 118 }''"}'
+      version =\u003e 160 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,15 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:17:29 GMT
+      - Thu, 23 Jul 2026 19:29:40 GMT
       Fastly-Ratelimit-Remaining:
-      - "9886"
+      - "9794"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -42,10 +42,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "116"
       X-Served-By:
-      - cache-chi-kigq8000067-CHI, cache-ewr-kewr1740070-EWR
+      - cache-chi-kigq8000048-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749050250.881313,VS0,VE116
+      - S1784834981.762716,VS0,VE163
     status: 404 Not Found
     code: 404
     duration: ""
@@ -54,8 +56,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/118/logging/kinesis/test-kinesis-2
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/160/logging/kinesis/test-kinesis-2
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -67,15 +69,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:17:30 GMT
+      - Thu, 23 Jul 2026 19:29:46 GMT
       Fastly-Ratelimit-Remaining:
-      - "9885"
+      - "9784"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -88,10 +90,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "462"
       X-Served-By:
-      - cache-chi-klot8100099-CHI, cache-ewr-kewr1740070-EWR
+      - cache-chi-kigq8000126-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749050250.003670,VS0,VE447
+      - S1784834986.575750,VS0,VE503
     status: 200 OK
     code: 200
     duration: ""
@@ -100,13 +104,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/118/logging/kinesis/new-test-kinesis
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/160/logging/kinesis/new-test-kinesis
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-kinesis, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 118 }''"}'
+      version =\u003e 160 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -115,15 +119,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:17:30 GMT
+      - Thu, 23 Jul 2026 19:29:51 GMT
       Fastly-Ratelimit-Remaining:
-      - "9884"
+      - "9775"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -136,10 +140,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "111"
       X-Served-By:
-      - cache-chi-klot8100020-CHI, cache-ewr-kewr1740070-EWR
+      - cache-chi-klot8100119-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749050250.460108,VS0,VE114
+      - S1784834992.503922,VS0,VE148
     status: 404 Not Found
     code: 404
     duration: ""

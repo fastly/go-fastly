@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/126/logging/pubsub/test-pubsub
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/151/logging/pubsub/test-pubsub
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-pubsub, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 126 }''"}'
+      version =\u003e 151 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,15 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:29:09 GMT
+      - Thu, 23 Jul 2026 19:26:23 GMT
       Fastly-Ratelimit-Remaining:
-      - "9835"
+      - "9966"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -42,10 +42,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "144"
       X-Served-By:
-      - cache-chi-kigq8000134-CHI, cache-nyc-kteb1890061-NYC
+      - cache-chi-kmdw8640041-CHI, cache-iad-kiad7000128-IAD
       X-Timer:
-      - S1749050949.968487,VS0,VE101
+      - S1784834784.690821,VS0,VE181
     status: 404 Not Found
     code: 404
     duration: ""
@@ -54,13 +56,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/126/logging/pubsub/new-test-pubsub
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/151/logging/pubsub/new-test-pubsub
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-pubsub, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 126 }''"}'
+      version =\u003e 151 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -69,15 +71,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:29:09 GMT
+      - Thu, 23 Jul 2026 19:26:27 GMT
       Fastly-Ratelimit-Remaining:
-      - "9834"
+      - "9959"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -90,10 +92,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "89"
       X-Served-By:
-      - cache-chi-klot8100077-CHI, cache-nyc-kteb1890061-NYC
+      - cache-chi-kigq8000090-CHI, cache-iad-kiad7000128-IAD
       X-Timer:
-      - S1749050949.078721,VS0,VE111
+      - S1784834787.313415,VS0,VE123
     status: 404 Not Found
     code: 404
     duration: ""
