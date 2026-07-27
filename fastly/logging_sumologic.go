@@ -141,29 +141,30 @@ func (c *Client) GetSumologic(ctx context.Context, i *GetSumologicInput) (*Sumol
 // UpdateSumologicInput is used as input to the UpdateSumologic function.
 type UpdateSumologicInput struct {
 	// Address is a hostname or IPv4 address.
-	Address *string `url:"address,omitempty"`
+	Address *string `json:"address,omitempty"`
 	// Format is a Fastly log format string.
-	Format *string `url:"format,omitempty"`
+	Format *string `json:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *int `url:"format_version,omitempty"`
+	FormatVersion *int `json:"format_version,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
-	MessageType *string `url:"message_type,omitempty"`
+	MessageType *string `json:"message_type,omitempty"`
 	// Name is the name of the sumologic to update (required).
-	Name string `url:"-"`
+	Name string `json:"-"`
 	// NewName is the new name for the resource.
-	NewName *string `url:"name,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
+	NewName *string `json:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed. Use
+	// NullValue[string]() to reset the endpoint to automatic placement.
+	Placement *Nullable[string] `json:"placement,omitempty"`
 	// ProcessingRegion is the region where logs will be processed before streaming to Sumologic.
-	ProcessingRegion *string `url:"log_processing_region,omitempty"`
+	ProcessingRegion *string `json:"log_processing_region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition *string `url:"response_condition,omitempty"`
+	ResponseCondition *string `json:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string `url:"-"`
+	ServiceID string `json:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int `url:"-"`
+	ServiceVersion int `json:"-"`
 	// URL is the URL to post logs to.
-	URL *string `url:"url,omitempty"`
+	URL *string `json:"url,omitempty"`
 }
 
 // UpdateSumologic updates the specified resource.
@@ -179,7 +180,7 @@ func (c *Client) UpdateSumologic(ctx context.Context, i *UpdateSumologicInput) (
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "sumologic", i.Name)
-	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
+	resp, err := c.PutJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

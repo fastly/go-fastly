@@ -286,10 +286,14 @@ func TestClient_Cloudfiles_Compute(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			CompressionCodec: ToPointer("zstd"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *cloudfilesUpdateResp1.Placement != "none" {
+		t.Errorf("bad placement: %q", *cloudfilesUpdateResp1.Placement)
 	}
 
 	Record(t, "cloudfiles/compute/update2", func(c *Client) {
@@ -298,10 +302,14 @@ func TestClient_Cloudfiles_Compute(t *testing.T) {
 			ServiceVersion:   *tv.Number,
 			Name:             "test-cloudfiles-2",
 			CompressionCodec: ToPointer("zstd"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *cloudfilesUpdateResp2.Placement != "none" {
+		t.Errorf("bad placement: %q", *cloudfilesUpdateResp2.Placement)
 	}
 
 	Record(t, "cloudfiles/compute/update3", func(c *Client) {
@@ -310,10 +318,14 @@ func TestClient_Cloudfiles_Compute(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-cloudfiles-3",
 			GzipLevel:      ToPointer(9),
+			Placement:      NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *cloudfilesUpdateResp3.Placement != "none" {
+		t.Errorf("bad placement: %q", *cloudfilesUpdateResp3.Placement)
 	}
 
 	if *cloudfilesUpdateResp1.Name != "new-test-cloudfiles" {
@@ -392,7 +404,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 			FormatVersion:    ToPointer(1),
 			TimestampFormat:  ToPointer("%Y"),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 			PublicKey:        ToPointer(pgpPublicKey()),
 			CompressionCodec: ToPointer("snappy"),
 		})
@@ -417,7 +429,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 			FormatVersion:   ToPointer(1),
 			TimestampFormat: ToPointer("%Y"),
 			MessageType:     ToPointer("classic"),
-			Placement:       ToPointer("waf_debug"),
+			Placement:       ToPointer("none"),
 			PublicKey:       ToPointer(pgpPublicKey()),
 		})
 	})
@@ -440,7 +452,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 			FormatVersion:    ToPointer(1),
 			TimestampFormat:  ToPointer("%Y"),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 			PublicKey:        ToPointer(pgpPublicKey()),
 			CompressionCodec: ToPointer("snappy"),
 		})
@@ -467,7 +479,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 			FormatVersion:    ToPointer(1),
 			TimestampFormat:  ToPointer("%Y"),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 			PublicKey:        ToPointer(pgpPublicKey()),
 			CompressionCodec: ToPointer("snappy"),
 		})
@@ -541,7 +553,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	if *cloudfilesCreateResp1.MessageType != "classic" {
 		t.Errorf("bad message_type: %q", *cloudfilesCreateResp1.MessageType)
 	}
-	if *cloudfilesCreateResp1.Placement != "waf_debug" {
+	if *cloudfilesCreateResp1.Placement != "none" {
 		t.Errorf("bad placement: %q", *cloudfilesCreateResp1.Placement)
 	}
 	if *cloudfilesCreateResp1.PublicKey != pgpPublicKey() {
@@ -646,10 +658,14 @@ func TestClient_Cloudfiles(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			CompressionCodec: ToPointer("zstd"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if cloudfilesUpdateResp1.Placement != nil {
+		t.Errorf("bad placement: %q", *cloudfilesUpdateResp1.Placement)
 	}
 
 	Record(t, "cloudfiles/update2", func(c *Client) {
@@ -658,10 +674,14 @@ func TestClient_Cloudfiles(t *testing.T) {
 			ServiceVersion:   *tv.Number,
 			Name:             "test-cloudfiles-2",
 			CompressionCodec: ToPointer("zstd"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if cloudfilesUpdateResp2.Placement != nil {
+		t.Errorf("bad placement: %q", *cloudfilesUpdateResp2.Placement)
 	}
 
 	Record(t, "cloudfiles/update3", func(c *Client) {
@@ -670,10 +690,14 @@ func TestClient_Cloudfiles(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-cloudfiles-3",
 			GzipLevel:      ToPointer(9),
+			Placement:      NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if cloudfilesUpdateResp3.Placement != nil {
+		t.Errorf("bad placement: %q", *cloudfilesUpdateResp3.Placement)
 	}
 
 	if *cloudfilesUpdateResp1.Name != "new-test-cloudfiles" {

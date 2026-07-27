@@ -36,7 +36,7 @@ func TestClient_S3s(t *testing.T) {
 			TimestampFormat:              ToPointer("%Y"),
 			MessageType:                  ToPointer("classic"),
 			Redundancy:                   ToPointer(S3RedundancyReduced),
-			Placement:                    ToPointer("waf_debug"),
+			Placement:                    ToPointer("none"),
 			PublicKey:                    ToPointer(pgpPublicKey()),
 			ServerSideEncryptionKMSKeyID: ToPointer("1234"),
 			ServerSideEncryption:         ToPointer(S3ServerSideEncryptionKMS),
@@ -65,7 +65,7 @@ func TestClient_S3s(t *testing.T) {
 			TimestampFormat:              ToPointer("%Y"),
 			MessageType:                  ToPointer("classic"),
 			Redundancy:                   ToPointer(S3RedundancyOneZoneIA),
-			Placement:                    ToPointer("waf_debug"),
+			Placement:                    ToPointer("none"),
 			PublicKey:                    ToPointer(pgpPublicKey()),
 			ServerSideEncryptionKMSKeyID: ToPointer("1234"),
 			ServerSideEncryption:         ToPointer(S3ServerSideEncryptionKMS),
@@ -93,7 +93,7 @@ func TestClient_S3s(t *testing.T) {
 			TimestampFormat:              ToPointer("%Y"),
 			MessageType:                  ToPointer("classic"),
 			Redundancy:                   ToPointer(S3RedundancyStandardIA),
-			Placement:                    ToPointer("waf_debug"),
+			Placement:                    ToPointer("none"),
 			PublicKey:                    ToPointer(pgpPublicKey()),
 			ServerSideEncryptionKMSKeyID: ToPointer("1234"),
 			ServerSideEncryption:         ToPointer(S3ServerSideEncryptionKMS),
@@ -119,7 +119,7 @@ func TestClient_S3s(t *testing.T) {
 			FormatVersion:                ToPointer(2),
 			TimestampFormat:              ToPointer("%Y"),
 			MessageType:                  ToPointer("classic"),
-			Placement:                    ToPointer("waf_debug"),
+			Placement:                    ToPointer("none"),
 			Redundancy:                   ToPointer(S3RedundancyStandard),
 			PublicKey:                    ToPointer(pgpPublicKey()),
 			ServerSideEncryptionKMSKeyID: ToPointer("1234"),
@@ -150,7 +150,7 @@ func TestClient_S3s(t *testing.T) {
 			TimestampFormat:              ToPointer("%Y"),
 			MessageType:                  ToPointer("classic"),
 			Redundancy:                   ToPointer(S3RedundancyReduced),
-			Placement:                    ToPointer("waf_debug"),
+			Placement:                    ToPointer("none"),
 			PublicKey:                    ToPointer(pgpPublicKey()),
 			ServerSideEncryptionKMSKeyID: ToPointer("1234"),
 			ServerSideEncryption:         ToPointer(S3ServerSideEncryptionKMS),
@@ -177,7 +177,7 @@ func TestClient_S3s(t *testing.T) {
 			TimestampFormat:              ToPointer("%Y"),
 			MessageType:                  ToPointer("classic"),
 			Redundancy:                   ToPointer(S3RedundancyReduced),
-			Placement:                    ToPointer("waf_debug"),
+			Placement:                    ToPointer("none"),
 			PublicKey:                    ToPointer(pgpPublicKey()),
 			ServerSideEncryptionKMSKeyID: ToPointer("1234"),
 			ServerSideEncryption:         ToPointer(S3ServerSideEncryptionKMS),
@@ -207,7 +207,7 @@ func TestClient_S3s(t *testing.T) {
 			TimestampFormat:              ToPointer("%Y"),
 			MessageType:                  ToPointer("classic"),
 			Redundancy:                   ToPointer(S3RedundancyReduced),
-			Placement:                    ToPointer("waf_debug"),
+			Placement:                    ToPointer("none"),
 			PublicKey:                    ToPointer(pgpPublicKey()),
 			ServerSideEncryptionKMSKeyID: ToPointer("1234"),
 			ServerSideEncryption:         ToPointer(S3ServerSideEncryptionKMS),
@@ -291,7 +291,7 @@ func TestClient_S3s(t *testing.T) {
 	if *s3CreateResp1.MessageType != "classic" {
 		t.Errorf("bad message_type: %q", *s3CreateResp1.MessageType)
 	}
-	if *s3CreateResp1.Placement != "waf_debug" {
+	if *s3CreateResp1.Placement != "none" {
 		t.Errorf("bad placement: %q", *s3CreateResp1.Placement)
 	}
 	if *s3CreateResp1.ResponseCondition != "" {
@@ -477,10 +477,14 @@ func TestClient_S3s(t *testing.T) {
 			CompressionCodec: ToPointer("zstd"),
 			FileMaxBytes:     ToPointer(5 * MiB),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if s3UpdateResp1.Placement != nil {
+		t.Errorf("bad placement: %q", *s3UpdateResp1.Placement)
 	}
 
 	// Test that CompressionCodec can be set for a an endpoint where
@@ -491,10 +495,14 @@ func TestClient_S3s(t *testing.T) {
 			ServiceVersion:   *tv.Number,
 			Name:             "test-s3-2",
 			CompressionCodec: ToPointer("zstd"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if s3UpdateResp2.Placement != nil {
+		t.Errorf("bad placement: %q", *s3UpdateResp2.Placement)
 	}
 
 	// Test that GzipLevel can be set for an endpoint where CompressionCodec
@@ -505,10 +513,14 @@ func TestClient_S3s(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-s3-3",
 			GzipLevel:      ToPointer(9),
+			Placement:      NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if s3UpdateResp3.Placement != nil {
+		t.Errorf("bad placement: %q", *s3UpdateResp3.Placement)
 	}
 
 	// Test that a configuration using an access key/secret key can be
@@ -521,10 +533,14 @@ func TestClient_S3s(t *testing.T) {
 			AccessKey:      ToPointer(""),
 			SecretKey:      ToPointer(""),
 			IAMRole:        ToPointer("arn:aws:iam::123456789012:role/S3Access"),
+			Placement:      NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if s3UpdateResp4.Placement != nil {
+		t.Errorf("bad placement: %q", *s3UpdateResp4.Placement)
 	}
 
 	// Test that a configuration using an IAM role can be updated to use
@@ -537,10 +553,14 @@ func TestClient_S3s(t *testing.T) {
 			AccessKey:      ToPointer("AKIAIOSFODNN7EXAMPLE"),
 			SecretKey:      ToPointer("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
 			IAMRole:        ToPointer(""),
+			Placement:      NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if s3UpdateResp5.Placement != nil {
+		t.Errorf("bad placement: %q", *s3UpdateResp5.Placement)
 	}
 
 	// Test that an invalid IAM role ARN is rejected. This case is expected
@@ -551,6 +571,7 @@ func TestClient_S3s(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-s3",
 			IAMRole:        ToPointer("badarn"),
+			Placement:      NullValue[string](),
 		})
 	})
 	if err == nil {
@@ -1090,10 +1111,14 @@ func TestClient_S3s_Compute(t *testing.T) {
 			CompressionCodec: ToPointer("zstd"),
 			FileMaxBytes:     ToPointer(5 * MiB),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *s3UpdateResp1.Placement != "none" {
+		t.Errorf("bad placement: %q", *s3UpdateResp1.Placement)
 	}
 
 	// Test that CompressionCodec can be set for a an endpoint where
@@ -1104,10 +1129,14 @@ func TestClient_S3s_Compute(t *testing.T) {
 			ServiceVersion:   *tv.Number,
 			Name:             "test-s3-2",
 			CompressionCodec: ToPointer("zstd"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *s3UpdateResp2.Placement != "none" {
+		t.Errorf("bad placement: %q", *s3UpdateResp2.Placement)
 	}
 
 	// Test that GzipLevel can be set for an endpoint where CompressionCodec
@@ -1118,10 +1147,14 @@ func TestClient_S3s_Compute(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-s3-3",
 			GzipLevel:      ToPointer(9),
+			Placement:      NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *s3UpdateResp3.Placement != "none" {
+		t.Errorf("bad placement: %q", *s3UpdateResp3.Placement)
 	}
 
 	// Test that a configuration using an access key/secret key can be
@@ -1134,10 +1167,14 @@ func TestClient_S3s_Compute(t *testing.T) {
 			AccessKey:      ToPointer(""),
 			SecretKey:      ToPointer(""),
 			IAMRole:        ToPointer("arn:aws:iam::123456789012:role/S3Access"),
+			Placement:      NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *s3UpdateResp4.Placement != "none" {
+		t.Errorf("bad placement: %q", *s3UpdateResp4.Placement)
 	}
 
 	// Test that a configuration using an IAM role can be updated to use
@@ -1150,10 +1187,14 @@ func TestClient_S3s_Compute(t *testing.T) {
 			AccessKey:      ToPointer("AKIAIOSFODNN7EXAMPLE"),
 			SecretKey:      ToPointer("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
 			IAMRole:        ToPointer(""),
+			Placement:      NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *s3UpdateResp5.Placement != "none" {
+		t.Errorf("bad placement: %q", *s3UpdateResp5.Placement)
 	}
 
 	// Test that an invalid IAM role ARN is rejected. This case is expected
@@ -1164,6 +1205,7 @@ func TestClient_S3s_Compute(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-s3",
 			IAMRole:        ToPointer("badarn"),
+			Placement:      NewNullable("none"),
 		})
 	})
 	if err == nil {

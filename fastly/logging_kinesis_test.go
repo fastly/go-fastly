@@ -30,7 +30,7 @@ func TestClient_Kinesis(t *testing.T) {
 			SecretKey:      ToPointer("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
 			Format:         ToPointer("format"),
 			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("waf_debug"),
+			Placement:      ToPointer("none"),
 		})
 	})
 	if err != nil {
@@ -47,7 +47,7 @@ func TestClient_Kinesis(t *testing.T) {
 			IAMRole:        ToPointer("arn:aws:iam::123456789012:role/S3Access"),
 			Format:         ToPointer("format"),
 			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("waf_debug"),
+			Placement:      ToPointer("none"),
 		})
 	})
 	if err != nil {
@@ -67,7 +67,7 @@ func TestClient_Kinesis(t *testing.T) {
 			IAMRole:        ToPointer("arn:aws:iam::123456789012:role/S3Access"),
 			Format:         ToPointer("format"),
 			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("waf_debug"),
+			Placement:      ToPointer("none"),
 		})
 	})
 	if err == nil {
@@ -85,7 +85,7 @@ func TestClient_Kinesis(t *testing.T) {
 			IAMRole:        ToPointer("badarn"),
 			Format:         ToPointer("format"),
 			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("waf_debug"),
+			Placement:      ToPointer("none"),
 		})
 	})
 	if err == nil {
@@ -139,7 +139,7 @@ func TestClient_Kinesis(t *testing.T) {
 	if *kinesisCreateResp1.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *kinesisCreateResp1.FormatVersion)
 	}
-	if *kinesisCreateResp1.Placement != "waf_debug" {
+	if *kinesisCreateResp1.Placement != "none" {
 		t.Errorf("bad placement: %q", *kinesisCreateResp1.Placement)
 	}
 	if *kinesisCreateResp1.ResponseCondition != "" {
@@ -249,10 +249,14 @@ func TestClient_Kinesis(t *testing.T) {
 			Name:             "test-kinesis",
 			NewName:          ToPointer("new-test-kinesis"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if kinesisUpdateResp1.Placement != nil {
+		t.Errorf("bad placement: %q", *kinesisUpdateResp1.Placement)
 	}
 
 	// Test that a configuration using an access key/secret key can be
@@ -265,10 +269,14 @@ func TestClient_Kinesis(t *testing.T) {
 			AccessKey:      ToPointer(""),
 			SecretKey:      ToPointer(""),
 			IAMRole:        ToPointer("arn:aws:iam::123456789012:role/S3Access"),
+			Placement:      NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if kinesisUpdateResp2.Placement != nil {
+		t.Errorf("bad placement: %q", *kinesisUpdateResp2.Placement)
 	}
 
 	// Test that a configuration using an IAM role can be updated to use
@@ -281,10 +289,14 @@ func TestClient_Kinesis(t *testing.T) {
 			AccessKey:      ToPointer("AKIAIOSFODNN7EXAMPLE"),
 			SecretKey:      ToPointer("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
 			IAMRole:        ToPointer(""),
+			Placement:      NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if kinesisUpdateResp3.Placement != nil {
+		t.Errorf("bad placement: %q", *kinesisUpdateResp3.Placement)
 	}
 
 	// Test that an invalid IAM role ARN is rejected. This case is expected
@@ -295,6 +307,7 @@ func TestClient_Kinesis(t *testing.T) {
 			ServiceVersion: *v.Number,
 			Name:           "test-kinesis",
 			IAMRole:        ToPointer("badarn"),
+			Placement:      NullValue[string](),
 		})
 	})
 	if err == nil {
@@ -582,10 +595,14 @@ func TestClient_Kinesis_Compute(t *testing.T) {
 			Name:             "test-kinesis",
 			NewName:          ToPointer("new-test-kinesis"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *kinesisUpdateResp1.Placement != "none" {
+		t.Errorf("bad placement: %q", *kinesisUpdateResp1.Placement)
 	}
 
 	// Test that a configuration using an access key/secret key can be
@@ -598,10 +615,14 @@ func TestClient_Kinesis_Compute(t *testing.T) {
 			AccessKey:      ToPointer(""),
 			SecretKey:      ToPointer(""),
 			IAMRole:        ToPointer("arn:aws:iam::123456789012:role/S3Access"),
+			Placement:      NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *kinesisUpdateResp2.Placement != "none" {
+		t.Errorf("bad placement: %q", *kinesisUpdateResp2.Placement)
 	}
 
 	// Test that a configuration using an IAM role can be updated to use
@@ -614,10 +635,14 @@ func TestClient_Kinesis_Compute(t *testing.T) {
 			AccessKey:      ToPointer("AKIAIOSFODNN7EXAMPLE"),
 			SecretKey:      ToPointer("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
 			IAMRole:        ToPointer(""),
+			Placement:      NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *kinesisUpdateResp3.Placement != "none" {
+		t.Errorf("bad placement: %q", *kinesisUpdateResp3.Placement)
 	}
 
 	// Test that an invalid IAM role ARN is rejected. This case is expected
@@ -628,6 +653,7 @@ func TestClient_Kinesis_Compute(t *testing.T) {
 			ServiceVersion: *v.Number,
 			Name:           "test-kinesis",
 			IAMRole:        ToPointer("badarn"),
+			Placement:      NewNullable("none"),
 		})
 	})
 	if err == nil {

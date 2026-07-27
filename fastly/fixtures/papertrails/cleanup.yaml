@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/125/logging/papertrail/test-papertrail
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/177/logging/papertrail/test-papertrail
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-papertrail, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 125 }''"}'
+      version =\u003e 177 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,15 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:28:36 GMT
+      - Thu, 23 Jul 2026 19:38:42 GMT
       Fastly-Ratelimit-Remaining:
-      - "9841"
+      - "9495"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -42,10 +42,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "98"
       X-Served-By:
-      - cache-chi-kigq8000052-CHI, cache-nyc-kteb1890093-NYC
+      - cache-chi-klot8100115-CHI, cache-iad-kiad7000025-IAD
       X-Timer:
-      - S1749050917.794625,VS0,VE122
+      - S1784835522.451901,VS0,VE138
     status: 404 Not Found
     code: 404
     duration: ""
@@ -54,13 +56,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/125/logging/papertrail/new-test-papertrail
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/177/logging/papertrail/new-test-papertrail
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-papertrail, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 125 }''"}'
+      version =\u003e 177 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -69,15 +71,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:28:37 GMT
+      - Thu, 23 Jul 2026 19:38:45 GMT
       Fastly-Ratelimit-Remaining:
-      - "9840"
+      - "9489"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -90,10 +92,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "127"
       X-Served-By:
-      - cache-chi-kigq8000083-CHI, cache-nyc-kteb1890093-NYC
+      - cache-chi-kmdw8640025-CHI, cache-iad-kiad7000025-IAD
       X-Timer:
-      - S1749050917.922662,VS0,VE120
+      - S1784835526.708581,VS0,VE161
     status: 404 Not Found
     code: 404
     duration: ""

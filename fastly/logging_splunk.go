@@ -161,41 +161,42 @@ func (c *Client) GetSplunk(ctx context.Context, i *GetSplunkInput) (*Splunk, err
 // UpdateSplunkInput is used as input to the UpdateSplunk function.
 type UpdateSplunkInput struct {
 	// Format is a Fastly log format string.
-	Format *string `url:"format,omitempty"`
+	Format *string `json:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *int `url:"format_version,omitempty"`
+	FormatVersion *int `json:"format_version,omitempty"`
 	// Name is the name of the splunk to update (required).
-	Name string `url:"-"`
+	Name string `json:"-"`
 	// NewName is the new name for the resource.
-	NewName *string `url:"name,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
+	NewName *string `json:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed. Use
+	// NullValue[string]() to reset the endpoint to automatic placement.
+	Placement *Nullable[string] `json:"placement,omitempty"`
 	// ProcessingRegion is the region where logs will be processed before streaming to Splunk.
-	ProcessingRegion *string `url:"log_processing_region,omitempty"`
+	ProcessingRegion *string `json:"log_processing_region,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request. Defaults 0 for unbounded.
-	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
+	RequestMaxBytes *int `json:"request_max_bytes,omitempty"`
 	// RequestMaxEntries is the maximum number of logs sent in one request. Defaults 0 for unbounded.
-	RequestMaxEntries *int `url:"request_max_entries,omitempty"`
+	RequestMaxEntries *int `json:"request_max_entries,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition *string `url:"response_condition,omitempty"`
+	ResponseCondition *string `json:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string `url:"-"`
+	ServiceID string `json:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int `url:"-"`
+	ServiceVersion int `json:"-"`
 	// TLSCACert is a secure certificate to authenticate a server with. Must be in PEM format.
-	TLSCACert *string `url:"tls_ca_cert,omitempty"`
+	TLSCACert *string `json:"tls_ca_cert,omitempty"`
 	// TLSClientCert is the client certificate used to make authenticated requests. Must be in PEM format.
-	TLSClientCert *string `url:"tls_client_cert,omitempty"`
+	TLSClientCert *string `json:"tls_client_cert,omitempty"`
 	// TLSClientKey is the client private key used to make authenticated requests. Must be in PEM format.
-	TLSClientKey *string `url:"tls_client_key,omitempty"`
+	TLSClientKey *string `json:"tls_client_key,omitempty"`
 	// TLSHostname is the hostname to verify the server's certificate. This should be one of the Subject Alternative Name (SAN) fields for the certificate. Common Names (CN) are not supported.
-	TLSHostname *string `url:"tls_hostname,omitempty"`
+	TLSHostname *string `json:"tls_hostname,omitempty"`
 	// Token is a Splunk token for use in posting logs over HTTP to your collector.
-	Token *string `url:"token,omitempty"`
+	Token *string `json:"token,omitempty"`
 	// URL is the URL to post logs to.
-	URL *string `url:"url,omitempty"`
+	URL *string `json:"url,omitempty"`
 	// UseTLS is whether to use TLS (0: do not use, 1: use).
-	UseTLS *Compatibool `url:"use_tls,omitempty"`
+	UseTLS *Compatibool `json:"use_tls,omitempty"`
 }
 
 // UpdateSplunk updates the specified resource.
@@ -211,7 +212,7 @@ func (c *Client) UpdateSplunk(ctx context.Context, i *UpdateSplunkInput) (*Splun
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "splunk", i.Name)
-	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
+	resp, err := c.PutJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

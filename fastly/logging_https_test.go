@@ -54,7 +54,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			Method:            ToPointer(http.MethodPut),
 			JSONFormat:        ToPointer("2"),
 			Period:            ToPointer(5),
-			Placement:         ToPointer("waf_debug"),
+			Placement:         ToPointer("none"),
 			TLSCACert:         ToPointer(caCert),
 			TLSClientCert:     ToPointer(clientCert),
 			TLSClientKey:      ToPointer(clientKey),
@@ -82,7 +82,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			Method:            ToPointer(http.MethodPut),
 			JSONFormat:        ToPointer("2"),
 			Period:            ToPointer(5),
-			Placement:         ToPointer("waf_debug"),
+			Placement:         ToPointer("none"),
 			TLSCACert:         ToPointer(caCert),
 			TLSClientCert:     ToPointer(clientCert),
 			TLSClientKey:      ToPointer(clientKey),
@@ -111,7 +111,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			Method:            ToPointer(http.MethodPut),
 			JSONFormat:        ToPointer("2"),
 			Period:            ToPointer(5),
-			Placement:         ToPointer("waf_debug"),
+			Placement:         ToPointer("none"),
 			TLSCACert:         ToPointer(caCert),
 			TLSClientCert:     ToPointer(clientCert),
 			TLSClientKey:      ToPointer(clientKey),
@@ -142,7 +142,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			Method:            ToPointer(http.MethodPut),
 			JSONFormat:        ToPointer("2"),
 			Period:            ToPointer(5),
-			Placement:         ToPointer("waf_debug"),
+			Placement:         ToPointer("none"),
 			TLSCACert:         ToPointer(caCert),
 			TLSClientCert:     ToPointer(clientCert),
 			TLSClientKey:      ToPointer(clientKey),
@@ -218,7 +218,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	if *httpsCreateResp1.Period != 5 {
 		t.Errorf("bad period: %q", *httpsCreateResp1.Period)
 	}
-	if *httpsCreateResp1.Placement != "waf_debug" {
+	if *httpsCreateResp1.Placement != "none" {
 		t.Errorf("bad placement: %q", *httpsCreateResp1.Placement)
 	}
 	if *httpsCreateResp1.TLSCACert != caCert {
@@ -345,10 +345,14 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			Method:           ToPointer(http.MethodPost),
 			ProcessingRegion: ToPointer("eu"),
 			CompressionCodec: ToPointer("zstd"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if uh.Placement != nil {
+		t.Errorf("bad placement: %q", *uh.Placement)
 	}
 	if *uh.Name != "new-test-https" {
 		t.Errorf("bad name: %q", *uh.Name)
@@ -371,10 +375,14 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-https",
 			GzipLevel:      ToPointer(3),
+			Placement:      NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if uh2.Placement != nil {
+		t.Errorf("bad placement: %q", *uh2.Placement)
 	}
 	if *uh2.GzipLevel != 3 {
 		t.Errorf("bad gzip_level: %q", *uh2.GzipLevel)
@@ -719,10 +727,14 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			NewName:          ToPointer("new-test-https"),
 			Method:           ToPointer(http.MethodPost),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *uh.Placement != "none" {
+		t.Errorf("bad placement: %q", *uh.Placement)
 	}
 	if *uh.Name != "new-test-https" {
 		t.Errorf("bad name: %q", *uh.Name)

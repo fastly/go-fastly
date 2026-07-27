@@ -24,7 +24,7 @@ func TestClient_Honeycombs(t *testing.T) {
 			Name:           ToPointer("test-honeycomb"),
 			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
 			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("waf_debug"),
+			Placement:      ToPointer("none"),
 			Token:          ToPointer("super-secure-token"),
 			Dataset:        ToPointer("testDataset"),
 		})
@@ -59,7 +59,7 @@ func TestClient_Honeycombs(t *testing.T) {
 	if *h.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *h.FormatVersion)
 	}
-	if *h.Placement != "waf_debug" {
+	if *h.Placement != "none" {
 		t.Errorf("bad placement: %q", *h.Placement)
 	}
 	if *h.Token != "super-secure-token" {
@@ -126,10 +126,14 @@ func TestClient_Honeycombs(t *testing.T) {
 			Token:            ToPointer("new-token"),
 			Dataset:          ToPointer("newDataset"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if us.Placement != nil {
+		t.Errorf("bad placement: %q", *us.Placement)
 	}
 	if *us.Name != "new-test-honeycomb" {
 		t.Errorf("bad name: %q", *us.Name)
@@ -277,10 +281,14 @@ func TestClient_Honeycombs_Compute(t *testing.T) {
 			Token:            ToPointer("new-token"),
 			Dataset:          ToPointer("newDataset"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *us.Placement != "none" {
+		t.Errorf("bad placement: %q", *us.Placement)
 	}
 	if *us.Name != "new-test-honeycomb" {
 		t.Errorf("bad name: %q", *us.Name)

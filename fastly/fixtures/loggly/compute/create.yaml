@@ -16,11 +16,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/27/logging/loggly
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/109/logging/loggly
     method: POST
   response:
-    body: '{"format":"format","name":"test-loggly","placement":"none","token":"abcd1234","service_id":"XsjdElScZGjmfCcTwsYRC1","version":"27","public_key":null,"format_version":"2","created_at":"2025-09-02T17:19:21Z","updated_at":"2025-09-02T17:19:21Z","response_condition":"","log_processing_region":"none","deleted_at":null}'
+    body: '{"format":"format","name":"test-loggly","placement":"none","token":"abcd1234","service_id":"XsjdElScZGjmfCcTwsYRC1","version":"109","deleted_at":null,"public_key":null,"response_condition":"","format_version":"2","log_processing_region":"none","created_at":"2026-07-23T19:39:12Z","updated_at":"2026-07-23T19:39:12Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -29,15 +29,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 02 Sep 2025 17:19:21 GMT
+      - Thu, 23 Jul 2026 19:39:13 GMT
       Fastly-Ratelimit-Remaining:
-      - "9918"
+      - "9441"
       Fastly-Ratelimit-Reset:
-      - "1756836000"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -50,10 +50,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "550"
       X-Served-By:
-      - cache-chi-kigq8000174-CHI, cache-ewr-kewr1740091-EWR
+      - cache-chi-klot8100172-CHI, cache-iad-kiad7000025-IAD
       X-Timer:
-      - S1756833561.159017,VS0,VE394
+      - S1784835553.553470,VS0,VE585
     status: 200 OK
     code: 200
     duration: ""

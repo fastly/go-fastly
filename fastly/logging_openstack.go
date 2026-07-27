@@ -167,45 +167,46 @@ func (c *Client) GetOpenstack(ctx context.Context, i *GetOpenstackInput) (*Opens
 // UpdateOpenstackInput is used as input to the UpdateOpenstack function.
 type UpdateOpenstackInput struct {
 	// AccessKey is your OpenStack account access key.
-	AccessKey *string `url:"access_key,omitempty"`
+	AccessKey *string `json:"access_key,omitempty"`
 	// BucketName is the name of your OpenStack container.
-	BucketName *string `url:"bucket_name,omitempty"`
+	BucketName *string `json:"bucket_name,omitempty"`
 	// CompressionCodec is he codec used for compressing your logs (zstd, snappy, gzip).
-	CompressionCodec *string `url:"compression_codec,omitempty"`
+	CompressionCodec *string `json:"compression_codec,omitempty"`
 	// Format is a Fastly log format string.
-	Format *string `url:"format,omitempty"`
+	Format *string `json:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *int `url:"format_version,omitempty"`
+	FormatVersion *int `json:"format_version,omitempty"`
 	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
-	GzipLevel *int `url:"gzip_level,omitempty"`
+	GzipLevel *int `json:"gzip_level,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
-	MessageType *string `url:"message_type,omitempty"`
+	MessageType *string `json:"message_type,omitempty"`
 	// Name is the name of the Openstack to update (required).
-	Name string `url:"-"`
+	Name string `json:"-"`
 	// NewName is the new name for the resource.
-	NewName *string `url:"name,omitempty"`
+	NewName *string `json:"name,omitempty"`
 	// Path is the path to upload logs to.
-	Path *string `url:"path,omitempty"`
+	Path *string `json:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
-	Period *int `url:"period,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
+	Period *int `json:"period,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed. Use
+	// NullValue[string]() to reset the endpoint to automatic placement.
+	Placement *Nullable[string] `json:"placement,omitempty"`
 	// ProcessingRegion is the region where logs will be processed before streaming to OpenStack.
-	ProcessingRegion *string `url:"log_processing_region,omitempty"`
+	ProcessingRegion *string `json:"log_processing_region,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
-	PublicKey *string `url:"public_key,omitempty"`
+	PublicKey *string `json:"public_key,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition *string `url:"response_condition,omitempty"`
+	ResponseCondition *string `json:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string `url:"-"`
+	ServiceID string `json:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int `url:"-"`
+	ServiceVersion int `json:"-"`
 	// TimestampFormat is a timestamp format.
-	TimestampFormat *string `url:"timestamp_format,omitempty"`
+	TimestampFormat *string `json:"timestamp_format,omitempty"`
 	// URL is your OpenStack auth url.
-	URL *string `url:"url,omitempty"`
+	URL *string `json:"url,omitempty"`
 	// User is the username for your OpenStack account.
-	User *string `url:"user,omitempty"`
+	User *string `json:"user,omitempty"`
 }
 
 // UpdateOpenstack updates the specified resource.
@@ -221,7 +222,7 @@ func (c *Client) UpdateOpenstack(ctx context.Context, i *UpdateOpenstackInput) (
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "openstack", i.Name)
-	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
+	resp, err := c.PutJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

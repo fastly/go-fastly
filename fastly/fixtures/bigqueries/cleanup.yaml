@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/105/logging/bigquery/test-bigquery
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/157/logging/bigquery/test-bigquery
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-bigquery, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 105 }''"}'
+      version =\u003e 157 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,15 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 14:41:22 GMT
+      - Thu, 23 Jul 2026 19:28:43 GMT
       Fastly-Ratelimit-Remaining:
-      - "9989"
+      - "9903"
       Fastly-Ratelimit-Reset:
-      - "1749049200"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -42,10 +42,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "120"
       X-Served-By:
-      - cache-chi-klot8100058-CHI, cache-nyc-kteb1890040-NYC
+      - cache-chi-kigq8000145-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749048082.898942,VS0,VE108
+      - S1784834923.131053,VS0,VE151
     status: 404 Not Found
     code: 404
     duration: ""
@@ -54,13 +56,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/105/logging/bigquery/new-test-bigquery
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/157/logging/bigquery/new-test-bigquery
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-bigquery, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 105 }''"}'
+      version =\u003e 157 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -69,15 +71,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 14:41:22 GMT
+      - Thu, 23 Jul 2026 19:28:47 GMT
       Fastly-Ratelimit-Remaining:
-      - "9988"
+      - "9894"
       Fastly-Ratelimit-Reset:
-      - "1749049200"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -90,10 +92,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "115"
       X-Served-By:
-      - cache-chi-klot8100083-CHI, cache-nyc-kteb1890040-NYC
+      - cache-chi-kmdw8640066-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749048082.015866,VS0,VE132
+      - S1784834928.823465,VS0,VE156
     status: 404 Not Found
     code: 404
     duration: ""

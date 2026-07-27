@@ -294,10 +294,14 @@ func TestClient_BlobStorages_Compute(t *testing.T) {
 			CompressionCodec: ToPointer("zstd"),
 			FileMaxBytes:     ToPointer(5 * MiB),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *bsUpdateResp1.Placement != "none" {
+		t.Errorf("bad placement: %q", *bsUpdateResp1.Placement)
 	}
 
 	// Test that CompressionCodec can be set for a an endpoint where
@@ -308,10 +312,14 @@ func TestClient_BlobStorages_Compute(t *testing.T) {
 			ServiceVersion:   *tv.Number,
 			Name:             "test-blobstorage-2",
 			CompressionCodec: ToPointer("zstd"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *bsUpdateResp2.Placement != "none" {
+		t.Errorf("bad placement: %q", *bsUpdateResp2.Placement)
 	}
 
 	// Test that GzipLevel can be set for an endpoint where CompressionCodec
@@ -322,10 +330,14 @@ func TestClient_BlobStorages_Compute(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-blobstorage-3",
 			GzipLevel:      ToPointer(9),
+			Placement:      NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *bsUpdateResp3.Placement != "none" {
+		t.Errorf("bad placement: %q", *bsUpdateResp3.Placement)
 	}
 
 	if *bsUpdateResp1.Name != "new-test-blobstorage" {
@@ -417,7 +429,7 @@ func TestClient_BlobStorages(t *testing.T) {
 			Format:          ToPointer("%h %l %u %{now}V %{req.method}V %{req.url}V %>s %{resp.http.Content-Length}V"),
 			FormatVersion:   ToPointer(2),
 			MessageType:     ToPointer("classic"),
-			Placement:       ToPointer("waf_debug"),
+			Placement:       ToPointer("none"),
 			FileMaxBytes:    ToPointer(10 * MiB),
 		})
 	})
@@ -441,7 +453,7 @@ func TestClient_BlobStorages(t *testing.T) {
 			Format:           ToPointer("%h %l %u %{now}V %{req.method}V %{req.url}V %>s %{resp.http.Content-Length}V"),
 			FormatVersion:    ToPointer(2),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 		})
 	})
 	if err != nil {
@@ -467,7 +479,7 @@ func TestClient_BlobStorages(t *testing.T) {
 			Format:           ToPointer("%h %l %u %{now}V %{req.method}V %{req.url}V %>s %{resp.http.Content-Length}V"),
 			FormatVersion:    ToPointer(2),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 			FileMaxBytes:     ToPointer(10 * MiB),
 		})
 	})
@@ -543,7 +555,7 @@ func TestClient_BlobStorages(t *testing.T) {
 	if *bsCreateResp1.MessageType != "classic" {
 		t.Errorf("bad message_type: %q", *bsCreateResp1.MessageType)
 	}
-	if *bsCreateResp1.Placement != "waf_debug" {
+	if *bsCreateResp1.Placement != "none" {
 		t.Errorf("bad placement: %q", *bsCreateResp1.Placement)
 	}
 	if *bsCreateResp1.FileMaxBytes != MiB {
@@ -649,10 +661,14 @@ func TestClient_BlobStorages(t *testing.T) {
 			CompressionCodec: ToPointer("zstd"),
 			FileMaxBytes:     ToPointer(5 * MiB),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if bsUpdateResp1.Placement != nil {
+		t.Errorf("bad placement: %q", *bsUpdateResp1.Placement)
 	}
 
 	// Test that CompressionCodec can be set for a an endpoint where
@@ -663,10 +679,14 @@ func TestClient_BlobStorages(t *testing.T) {
 			ServiceVersion:   *tv.Number,
 			Name:             "test-blobstorage-2",
 			CompressionCodec: ToPointer("zstd"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if bsUpdateResp2.Placement != nil {
+		t.Errorf("bad placement: %q", *bsUpdateResp2.Placement)
 	}
 
 	// Test that GzipLevel can be set for an endpoint where CompressionCodec
@@ -677,10 +697,14 @@ func TestClient_BlobStorages(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-blobstorage-3",
 			GzipLevel:      ToPointer(9),
+			Placement:      NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if bsUpdateResp3.Placement != nil {
+		t.Errorf("bad placement: %q", *bsUpdateResp3.Placement)
 	}
 
 	if *bsUpdateResp1.Name != "new-test-blobstorage" {

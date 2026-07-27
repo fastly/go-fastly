@@ -149,33 +149,34 @@ func (c *Client) GetKinesis(ctx context.Context, i *GetKinesisInput) (*Kinesis, 
 // UpdateKinesisInput is used as input to the UpdateKinesis function.
 type UpdateKinesisInput struct {
 	// AccessKey is the access key associated with the target Amazon Kinesis stream. Not required if iam_role is specified.
-	AccessKey *string `url:"access_key,omitempty"`
+	AccessKey *string `json:"access_key,omitempty"`
 	// Format is a Fastly log format string. Must produce valid JSON that Kinesis can ingest.
-	Format *string `url:"format,omitempty"`
+	Format *string `json:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *int `url:"format_version,omitempty"`
+	FormatVersion *int `json:"format_version,omitempty"`
 	// IAMRole is the ARN for an IAM role granting Fastly access to the target Amazon Kinesis stream.
-	IAMRole *string `url:"iam_role,omitempty"`
+	IAMRole *string `json:"iam_role,omitempty"`
 	// Name is the name of the Kinesis logging object to update (required).
-	Name string `url:"-"`
+	Name string `json:"-"`
 	// NewName is the new name for the resource.
-	NewName *string `url:"name,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
+	NewName *string `json:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed. Use
+	// NullValue[string]() to reset the endpoint to automatic placement.
+	Placement *Nullable[string] `json:"placement,omitempty"`
 	// ProcessingRegion is the region where logs will be processed before streaming to Kinesis.
-	ProcessingRegion *string `url:"log_processing_region,omitempty"`
+	ProcessingRegion *string `json:"log_processing_region,omitempty"`
 	// Region is the region where logs are received and stored by Kinesis.
-	Region *string `url:"region,omitempty"`
+	Region *string `json:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition *string `url:"response_condition,omitempty"`
+	ResponseCondition *string `json:"response_condition,omitempty"`
 	// SecretKey is the secret key associated with the target Amazon Kinesis stream. Not required if iam_role is specified.
-	SecretKey *string `url:"secret_key,omitempty"`
+	SecretKey *string `json:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string `url:"-"`
+	ServiceID string `json:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int `url:"-"`
+	ServiceVersion int `json:"-"`
 	// StreamName is the Amazon Kinesis stream to send logs to.
-	StreamName *string `url:"topic,omitempty"`
+	StreamName *string `json:"topic,omitempty"`
 }
 
 // UpdateKinesis updates the specified resource.
@@ -191,7 +192,7 @@ func (c *Client) UpdateKinesis(ctx context.Context, i *UpdateKinesisInput) (*Kin
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kinesis", i.Name)
-	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
+	resp, err := c.PutJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

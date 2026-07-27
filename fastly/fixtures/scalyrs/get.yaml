@@ -6,12 +6,12 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/128/logging/scalyr/test-scalyr
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/173/logging/scalyr/test-scalyr
     method: GET
   response:
-    body: '{"name":"test-scalyr","token":"super-secure-token","created_at":"2025-06-04T15:31:11Z","deleted_at":null,"format_version":"2","region":"US","format":"%h
-      %l %u %t \"%r\" %\u003es %b","response_condition":"","service_id":"kKJb5bOFI47uHeBVluGfX1","placement":"waf_debug","updated_at":"2025-06-04T15:31:11Z","log_processing_region":"none","version":"128","project_id":"logplex"}'
+    body: '{"service_id":"kKJb5bOFI47uHeBVluGfX1","placement":"none","format_version":"2","name":"test-scalyr","created_at":"2026-07-23T19:31:01Z","token":"super-secure-token","region":"US","response_condition":"","log_processing_region":"none","project_id":"logplex","format":"%h
+      %l %u %t \"%r\" %\u003es %b","version":"173","updated_at":"2026-07-23T19:31:01Z","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -20,11 +20,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:31:12 GMT
+      - Thu, 23 Jul 2026 19:31:03 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -37,10 +37,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "449"
       X-Served-By:
-      - cache-chi-klot8100022-CHI, cache-nyc-kteb1890056-NYC
+      - cache-chi-kigq8000061-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749051072.058328,VS0,VE150
+      - S1784835063.665414,VS0,VE489
     status: 200 OK
     code: 200
     duration: ""

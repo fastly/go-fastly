@@ -24,7 +24,7 @@ func TestClient_Logshuttles(t *testing.T) {
 			Name:           ToPointer("test-logshuttle"),
 			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
 			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("waf_debug"),
+			Placement:      ToPointer("none"),
 			Token:          ToPointer("super-secure-token"),
 			URL:            ToPointer("https://logs.example.com"),
 		})
@@ -59,7 +59,7 @@ func TestClient_Logshuttles(t *testing.T) {
 	if *l.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *l.FormatVersion)
 	}
-	if *l.Placement != "waf_debug" {
+	if *l.Placement != "none" {
 		t.Errorf("bad placement: %q", *l.Placement)
 	}
 	if *l.Token != "super-secure-token" {
@@ -126,10 +126,14 @@ func TestClient_Logshuttles(t *testing.T) {
 			Token:            ToPointer("new-token"),
 			URL:              ToPointer("https://logs2.example.com"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if ul.Placement != nil {
+		t.Errorf("bad placement: %q", *ul.Placement)
 	}
 	if *ul.Name != "new-test-logshuttle" {
 		t.Errorf("bad name: %q", *ul.Name)
@@ -277,10 +281,14 @@ func TestClient_Logshuttles_Compute(t *testing.T) {
 			Token:            ToPointer("new-token"),
 			URL:              ToPointer("https://logs2.example.com"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *ul.Placement != "none" {
+		t.Errorf("bad placement: %q", *ul.Placement)
 	}
 	if *ul.Name != "new-test-logshuttle" {
 		t.Errorf("bad name: %q", *ul.Name)

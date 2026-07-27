@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/122/logging/newrelicotlp
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/175/logging/newrelicotlp
     method: GET
   response:
-    body: '[{"format":"format","format_version":"2","region":null,"log_processing_region":"none","response_condition":"","url":"https://example.nr-data.net","service_id":"kKJb5bOFI47uHeBVluGfX1","placement":"waf_debug","name":"test-newrelicotlp","created_at":"2025-06-04T15:25:36Z","version":"122","updated_at":"2025-06-04T15:25:36Z","deleted_at":null,"token":"abcd1234"}]'
+    body: '[{"version":"175","response_condition":"","format":"format","service_id":"kKJb5bOFI47uHeBVluGfX1","token":"abcd1234","name":"test-newrelicotlp","region":null,"created_at":"2026-07-23T19:31:25Z","log_processing_region":"none","updated_at":"2026-07-23T19:31:25Z","placement":"none","deleted_at":null,"url":"https://example.nr-data.net","format_version":"2"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,11 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:25:36 GMT
+      - Thu, 23 Jul 2026 19:31:25 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -36,10 +36,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "101"
       X-Served-By:
-      - cache-chi-kigq8000160-CHI, cache-nyc-kteb1890088-NYC
+      - cache-chi-klot8100161-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749050737.846462,VS0,VE133
+      - S1784835085.494537,VS0,VE135
     status: 200 OK
     code: 200
     duration: ""

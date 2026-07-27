@@ -2,21 +2,21 @@
 version: 1
 interactions:
 - request:
-    body: iam_role=badarn
-    form:
-      iam_role:
-      - badarn
+    body: '{"iam_role":"badarn","placement":"none"}'
+    form: {}
     headers:
+      Accept:
+      - application/json
       Content-Type:
-      - application/x-www-form-urlencoded
+      - application/json
       User-Agent:
-      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/25/logging/kinesis/test-kinesis
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/111/logging/kinesis/test-kinesis
     method: PUT
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-kinesis, service =\u003e XsjdElScZGjmfCcTwsYRC1,
-      version =\u003e 25 }''"}'
+      version =\u003e 111 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -25,15 +25,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 02 Sep 2025 17:16:48 GMT
+      - Thu, 23 Jul 2026 19:39:39 GMT
       Fastly-Ratelimit-Remaining:
-      - "9928"
+      - "9395"
       Fastly-Ratelimit-Reset:
-      - "1756836000"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -46,10 +46,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "134"
       X-Served-By:
-      - cache-chi-klot8100122-CHI, cache-ewr-kewr1740046-EWR
+      - cache-chi-klot8100156-CHI, cache-iad-kiad7000025-IAD
       X-Timer:
-      - S1756833409.879625,VS0,VE118
+      - S1784835579.295458,VS0,VE170
     status: 404 Not Found
     code: 404
     duration: ""

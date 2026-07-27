@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: access_key=AKIAIOSFODNN7EXAMPLE&format=format&format_version=2&iam_role=arn%3Aaws%3Aiam%3A%3A123456789012%3Arole%2FS3Access&name=test-kinesis-3&placement=waf_debug&region=us-east-1&secret_key=wJalrXUtnFEMI%2FK7MDENG%2FbPxRfiCYEXAMPLEKEY&topic=stream-name
+    body: access_key=AKIAIOSFODNN7EXAMPLE&format=format&format_version=2&iam_role=arn%3Aaws%3Aiam%3A%3A123456789012%3Arole%2FS3Access&name=test-kinesis-3&placement=none&region=us-east-1&secret_key=wJalrXUtnFEMI%2FK7MDENG%2FbPxRfiCYEXAMPLEKEY&topic=stream-name
     form:
       access_key:
       - AKIAIOSFODNN7EXAMPLE
@@ -15,7 +15,7 @@ interactions:
       name:
       - test-kinesis-3
       placement:
-      - waf_debug
+      - none
       region:
       - us-east-1
       secret_key:
@@ -26,8 +26,8 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/118/logging/kinesis
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/160/logging/kinesis
     method: POST
   response:
     body: '{"msg":"''iam_role'' can''t be used when ''access_key'' or ''secret_key''
@@ -40,15 +40,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:17:27 GMT
+      - Thu, 23 Jul 2026 19:29:10 GMT
       Fastly-Ratelimit-Remaining:
-      - "9893"
+      - "9848"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 400 Bad Request
       Strict-Transport-Security:
@@ -61,10 +61,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "94"
       X-Served-By:
-      - cache-chi-klot8100111-CHI, cache-ewr-kewr1740070-EWR
+      - cache-chi-kigq8000057-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749050247.449891,VS0,VE95
+      - S1784834950.171498,VS0,VE134
     status: 400 Bad Request
     code: 400
     duration: ""

@@ -169,45 +169,46 @@ func (c *Client) GetElasticsearch(ctx context.Context, i *GetElasticsearchInput)
 // function.
 type UpdateElasticsearchInput struct {
 	// Format is a Fastly log format string. Must produce valid JSON that Elasticsearch can ingest.
-	Format *string `url:"format,omitempty"`
+	Format *string `json:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *int `url:"format_version,omitempty"`
+	FormatVersion *int `json:"format_version,omitempty"`
 	// Index is the name of the Elasticsearch index to send documents (logs) to.
-	Index *string `url:"index,omitempty"`
+	Index *string `json:"index,omitempty"`
 	// Name is the name of the Elasticsearch endpoint to fetch (required).
-	Name string `url:"-"`
+	Name string `json:"-"`
 	// NewName is the new name for the resource.
-	NewName *string `url:"name,omitempty"`
+	NewName *string `json:"name,omitempty"`
 	// Password is basic Auth password.
-	Password *string `url:"password,omitempty"`
+	Password *string `json:"password,omitempty"`
 	// Pipeline is the ID of the Elasticsearch ingest pipeline to apply pre-process transformations to before indexing.
-	Pipeline *string `url:"pipeline,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
+	Pipeline *string `json:"pipeline,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed. Use
+	// NullValue[string]() to reset the endpoint to automatic placement.
+	Placement *Nullable[string] `json:"placement,omitempty"`
 	// ProcessingRegion is the region where logs will be processed before streaming to Elasticsearch.
-	ProcessingRegion *string `url:"log_processing_region,omitempty"`
+	ProcessingRegion *string `json:"log_processing_region,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request.
-	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
+	RequestMaxBytes *int `json:"request_max_bytes,omitempty"`
 	// RequestMaxEntries is the maximum number of logs sent in one request.
-	RequestMaxEntries *int `url:"request_max_entries,omitempty"`
+	RequestMaxEntries *int `json:"request_max_entries,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition *string `url:"response_condition,omitempty"`
+	ResponseCondition *string `json:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string `url:"-"`
+	ServiceID string `json:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int `url:"-"`
+	ServiceVersion int `json:"-"`
 	// TLSCACert is a secure certificate to authenticate a server with. Must be in PEM format.
-	TLSCACert *string `url:"tls_ca_cert,omitempty"`
+	TLSCACert *string `json:"tls_ca_cert,omitempty"`
 	// TLSClientCert is the client certificate used to make authenticated requests. Must be in PEM format.
-	TLSClientCert *string `url:"tls_client_cert,omitempty"`
+	TLSClientCert *string `json:"tls_client_cert,omitempty"`
 	// TLSClientKey is the client private key used to make authenticated requests. Must be in PEM format.
-	TLSClientKey *string `url:"tls_client_key,omitempty"`
+	TLSClientKey *string `json:"tls_client_key,omitempty"`
 	// TLSHostname is the hostname to verify the server's certificate. This should be one of the Subject Alternative Name (SAN) fields for the certificate. Common Names (CN) are not supported.
-	TLSHostname *string `url:"tls_hostname,omitempty"`
+	TLSHostname *string `json:"tls_hostname,omitempty"`
 	// URL is the URL to stream logs to. Must use HTTPS.
-	URL *string `url:"url,omitempty"`
+	URL *string `json:"url,omitempty"`
 	// User is basic Auth username.
-	User *string `url:"user,omitempty"`
+	User *string `json:"user,omitempty"`
 }
 
 // UpdateElasticsearch updates the specified resource.
@@ -223,7 +224,7 @@ func (c *Client) UpdateElasticsearch(ctx context.Context, i *UpdateElasticsearch
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "elasticsearch", i.Name)
-	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
+	resp, err := c.PutJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

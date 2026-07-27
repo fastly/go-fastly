@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: format=format&index=%7B%22env%22%3A+%22prod%22%7D&name=test-grafanacloudlogs&placement=waf_debug&token=abcd1234&url=https%3A%2F%2Ftest123.grafana.net&user=123456
+    body: format=format&index=%7B%22env%22%3A+%22prod%22%7D&name=test-grafanacloudlogs&placement=none&token=abcd1234&url=https%3A%2F%2Ftest123.grafana.net&user=123456
     form:
       format:
       - format
@@ -11,7 +11,7 @@ interactions:
       name:
       - test-grafanacloudlogs
       placement:
-      - waf_debug
+      - none
       token:
       - abcd1234
       url:
@@ -22,11 +22,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/113/logging/grafanacloudlogs
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/165/logging/grafanacloudlogs
     method: POST
   response:
-    body: '{"format":"format","index":"{\"env\": \"prod\"}","name":"test-grafanacloudlogs","placement":"waf_debug","token":"abcd1234","url":"https://test123.grafana.net","user":"123456","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"113","log_processing_region":"none","created_at":"2025-06-04T15:09:27Z","updated_at":"2025-06-04T15:09:27Z","response_condition":"","format_version":"2","deleted_at":null}'
+    body: '{"format":"format","index":"{\"env\": \"prod\"}","name":"test-grafanacloudlogs","placement":"none","token":"abcd1234","url":"https://test123.grafana.net","user":"123456","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"165","updated_at":"2026-07-23T19:29:42Z","created_at":"2026-07-23T19:29:42Z","format_version":"2","response_condition":"","deleted_at":null,"log_processing_region":"none"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -35,15 +35,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:09:27 GMT
+      - Thu, 23 Jul 2026 19:29:43 GMT
       Fastly-Ratelimit-Remaining:
-      - "9923"
+      - "9791"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -56,10 +56,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "612"
       X-Served-By:
-      - cache-chi-klot8100039-CHI, cache-nyc-kteb1890054-NYC
+      - cache-chi-klot8100090-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749049767.487698,VS0,VE362
+      - S1784834982.421385,VS0,VE647
     status: 200 OK
     code: 200
     duration: ""

@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/19/logging/gcs/test-gcs
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/117/logging/gcs/test-gcs
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-gcs, service =\u003e XsjdElScZGjmfCcTwsYRC1,
-      version =\u003e 19 }''"}'
+      version =\u003e 117 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,15 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 02 Sep 2025 17:06:54 GMT
+      - Thu, 23 Jul 2026 19:40:04 GMT
       Fastly-Ratelimit-Remaining:
-      - "9973"
+      - "9346"
       Fastly-Ratelimit-Reset:
-      - "1756836000"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -42,10 +42,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "118"
       X-Served-By:
-      - cache-chi-kigq8000106-CHI, cache-nyc-kteb1890061-NYC
+      - cache-chi-kmdw8640052-CHI, cache-iad-kiad7000025-IAD
       X-Timer:
-      - S1756832814.285340,VS0,VE144
+      - S1784835604.184572,VS0,VE153
     status: 404 Not Found
     code: 404
     duration: ""
@@ -54,8 +56,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/19/logging/gcs/test-gcs-2
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/117/logging/gcs/test-gcs-2
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -67,15 +69,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 02 Sep 2025 17:06:54 GMT
+      - Thu, 23 Jul 2026 19:40:06 GMT
       Fastly-Ratelimit-Remaining:
-      - "9972"
+      - "9343"
       Fastly-Ratelimit-Reset:
-      - "1756836000"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -88,10 +90,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "399"
       X-Served-By:
-      - cache-chi-klot8100129-CHI, cache-nyc-kteb1890061-NYC
+      - cache-chi-klot8100173-CHI, cache-iad-kiad7000025-IAD
       X-Timer:
-      - S1756832814.451212,VS0,VE260
+      - S1784835606.702592,VS0,VE439
     status: 200 OK
     code: 200
     duration: ""
@@ -100,8 +104,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/19/logging/gcs/test-gcs-3
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/117/logging/gcs/test-gcs-3
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -113,15 +117,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 02 Sep 2025 17:06:54 GMT
+      - Thu, 23 Jul 2026 19:40:07 GMT
       Fastly-Ratelimit-Remaining:
-      - "9971"
+      - "9340"
       Fastly-Ratelimit-Reset:
-      - "1756836000"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -134,10 +138,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "403"
       X-Served-By:
-      - cache-chi-klot8100071-CHI, cache-nyc-kteb1890061-NYC
+      - cache-chi-klot8100102-CHI, cache-iad-kiad7000025-IAD
       X-Timer:
-      - S1756832815.733423,VS0,VE222
+      - S1784835607.103620,VS0,VE441
     status: 200 OK
     code: 200
     duration: ""
@@ -146,13 +152,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/19/logging/gcs/new-test-gcs
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/117/logging/gcs/new-test-gcs
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-gcs, service =\u003e XsjdElScZGjmfCcTwsYRC1,
-      version =\u003e 19 }''"}'
+      version =\u003e 117 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -161,15 +167,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 02 Sep 2025 17:06:55 GMT
+      - Thu, 23 Jul 2026 19:40:08 GMT
       Fastly-Ratelimit-Remaining:
-      - "9970"
+      - "9337"
       Fastly-Ratelimit-Reset:
-      - "1756836000"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -182,10 +188,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "113"
       X-Served-By:
-      - cache-chi-klot8100117-CHI, cache-nyc-kteb1890061-NYC
+      - cache-chi-klot8100167-CHI, cache-iad-kiad7000025-IAD
       X-Timer:
-      - S1756832815.972919,VS0,VE119
+      - S1784835608.438546,VS0,VE150
     status: 404 Not Found
     code: 404
     duration: ""

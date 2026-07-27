@@ -4,6 +4,8 @@
 
 ### Breaking:
 
+- breaking(logging): `placement` can now be reset to `null` on update, restoring automatic placement ([#839](https://github.com/fastly/go-fastly/pull/839))
+
 ### Enhancements:
 
 ### Dependencies:

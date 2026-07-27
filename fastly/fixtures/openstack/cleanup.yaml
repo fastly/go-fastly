@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/124/logging/openstack/test-openstack
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/154/logging/openstack/test-openstack
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-openstack, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 124 }''"}'
+      version =\u003e 154 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,15 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:27:09 GMT
+      - Thu, 23 Jul 2026 19:31:17 GMT
       Fastly-Ratelimit-Remaining:
-      - "9849"
+      - "9623"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -42,10 +42,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "115"
       X-Served-By:
-      - cache-chi-klot8100135-CHI, cache-nyc-kteb1890033-NYC
+      - cache-chi-kmdw8640031-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749050829.092606,VS0,VE120
+      - S1784835078.627693,VS0,VE149
     status: 404 Not Found
     code: 404
     duration: ""
@@ -54,8 +56,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/124/logging/openstack/test-openstack-2
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/154/logging/openstack/test-openstack-2
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -67,15 +69,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:27:09 GMT
+      - Thu, 23 Jul 2026 19:31:20 GMT
       Fastly-Ratelimit-Remaining:
-      - "9848"
+      - "9617"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -88,10 +90,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "381"
       X-Served-By:
-      - cache-chi-klot8100105-CHI, cache-nyc-kteb1890033-NYC
+      - cache-chi-kmdw8640085-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749050829.220690,VS0,VE240
+      - S1784835080.274805,VS0,VE416
     status: 200 OK
     code: 200
     duration: ""
@@ -100,8 +104,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/124/logging/openstack/test-openstack-3
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/154/logging/openstack/test-openstack-3
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -113,15 +117,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:27:09 GMT
+      - Thu, 23 Jul 2026 19:31:24 GMT
       Fastly-Ratelimit-Remaining:
-      - "9847"
+      - "9611"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -134,10 +138,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "474"
       X-Served-By:
-      - cache-chi-klot8100118-CHI, cache-nyc-kteb1890033-NYC
+      - cache-chi-klot8100072-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749050829.465449,VS0,VE243
+      - S1784835084.744963,VS0,VE509
     status: 200 OK
     code: 200
     duration: ""
@@ -146,13 +152,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/124/logging/openstack/new-test-openstack
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/154/logging/openstack/new-test-openstack
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-openstack, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 124 }''"}'
+      version =\u003e 154 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -161,15 +167,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:27:09 GMT
+      - Thu, 23 Jul 2026 19:31:26 GMT
       Fastly-Ratelimit-Remaining:
-      - "9846"
+      - "9605"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -182,10 +188,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "94"
       X-Served-By:
-      - cache-chi-kigq8000112-CHI, cache-nyc-kteb1890033-NYC
+      - cache-chi-kmdw8640040-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749050830.715925,VS0,VE122
+      - S1784835087.847182,VS0,VE130
     status: 404 Not Found
     code: 404
     duration: ""

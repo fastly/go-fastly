@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-scalyr&placement=waf_debug&project_id=logplex&region=US&token=super-secure-token
+    body: format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-scalyr&placement=none&project_id=logplex&region=US&token=super-secure-token
     form:
       format:
       - '%h %l %u %t "%r" %>s %b'
@@ -11,7 +11,7 @@ interactions:
       name:
       - test-scalyr
       placement:
-      - waf_debug
+      - none
       project_id:
       - logplex
       region:
@@ -22,11 +22,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/128/logging/scalyr
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/173/logging/scalyr
     method: POST
   response:
-    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-scalyr","placement":"waf_debug","project_id":"logplex","region":"US","token":"super-secure-token","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"128","response_condition":"","log_processing_region":"none","created_at":"2025-06-04T15:31:11Z","deleted_at":null,"updated_at":"2025-06-04T15:31:11Z"}'
+    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-scalyr","placement":"none","project_id":"logplex","region":"US","token":"super-secure-token","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"173","deleted_at":null,"log_processing_region":"none","updated_at":"2026-07-23T19:31:01Z","response_condition":"","created_at":"2026-07-23T19:31:01Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -35,15 +35,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:31:11 GMT
+      - Thu, 23 Jul 2026 19:31:02 GMT
       Fastly-Ratelimit-Remaining:
-      - "9813"
+      - "9652"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -56,10 +56,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "1755"
       X-Served-By:
-      - cache-chi-kigq8000176-CHI, cache-nyc-kteb1890056-NYC
+      - cache-chi-kigq8000116-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749051071.206043,VS0,VE729
+      - S1784835061.630456,VS0,VE1789
     status: 200 OK
     code: 200
     duration: ""

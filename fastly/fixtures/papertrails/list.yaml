@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/125/logging/papertrail
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/177/logging/papertrail
     method: GET
   response:
-    body: '[{"deleted_at":null,"name":"test-papertrail","service_id":"kKJb5bOFI47uHeBVluGfX1","address":"integ-test.go-fastly.com","public_key":null,"port":"1234","updated_at":"2025-06-04T15:28:35Z","created_at":"2025-06-04T15:28:35Z","format_version":"2","format":"format","version":"125","placement":"waf_debug","log_processing_region":"none","response_condition":""}]'
+    body: '[{"format":"format","port":"1234","updated_at":"2026-07-23T19:38:34Z","response_condition":"","service_id":"kKJb5bOFI47uHeBVluGfX1","format_version":"2","public_key":null,"name":"test-papertrail","address":"integ-test.go-fastly.com","deleted_at":null,"version":"177","placement":"none","created_at":"2026-07-23T19:38:34Z","log_processing_region":"none"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,11 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:28:36 GMT
+      - Thu, 23 Jul 2026 19:38:35 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -36,10 +36,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "139"
       X-Served-By:
-      - cache-chi-klot8100063-CHI, cache-nyc-kteb1890093-NYC
+      - cache-chi-kigq8000176-CHI, cache-iad-kiad7000025-IAD
       X-Timer:
-      - S1749050916.865238,VS0,VE151
+      - S1784835515.025948,VS0,VE171
     status: 200 OK
     code: 200
     duration: ""

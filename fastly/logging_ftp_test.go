@@ -32,7 +32,7 @@ func TestClient_FTPs(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			Format:           ToPointer("format"),
 			TimestampFormat:  ToPointer("%Y"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 			MessageType:      ToPointer("classic"),
 		})
 	})
@@ -56,7 +56,7 @@ func TestClient_FTPs(t *testing.T) {
 			FormatVersion:   ToPointer(2),
 			Format:          ToPointer("format"),
 			TimestampFormat: ToPointer("%Y"),
-			Placement:       ToPointer("waf_debug"),
+			Placement:       ToPointer("none"),
 			MessageType:     ToPointer("classic"),
 		})
 	})
@@ -80,7 +80,7 @@ func TestClient_FTPs(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			Format:           ToPointer("format"),
 			TimestampFormat:  ToPointer("%Y"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 			MessageType:      ToPointer("classic"),
 		})
 	})
@@ -107,7 +107,7 @@ func TestClient_FTPs(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			Format:           ToPointer("format"),
 			TimestampFormat:  ToPointer("%Y"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 			MessageType:      ToPointer("classic"),
 		})
 	})
@@ -183,7 +183,7 @@ func TestClient_FTPs(t *testing.T) {
 	if *ftpCreateResp1.TimestampFormat != "%Y" {
 		t.Errorf("bad timestamp_format: %q", *ftpCreateResp1.TimestampFormat)
 	}
-	if *ftpCreateResp1.Placement != "waf_debug" {
+	if *ftpCreateResp1.Placement != "none" {
 		t.Errorf("bad placement: %q", *ftpCreateResp1.Placement)
 	}
 	if *ftpCreateResp1.MessageType != "classic" {
@@ -285,10 +285,14 @@ func TestClient_FTPs(t *testing.T) {
 			NewName:          ToPointer("new-test-ftp"),
 			CompressionCodec: ToPointer("zstd"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if ftpUpdateResp1.Placement != nil {
+		t.Errorf("bad placement: %q", *ftpUpdateResp1.Placement)
 	}
 
 	Record(t, "ftps/update2", func(c *Client) {
@@ -297,10 +301,14 @@ func TestClient_FTPs(t *testing.T) {
 			ServiceVersion:   *tv.Number,
 			Name:             "test-ftp-2",
 			CompressionCodec: ToPointer("zstd"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if ftpUpdateResp2.Placement != nil {
+		t.Errorf("bad placement: %q", *ftpUpdateResp2.Placement)
 	}
 
 	Record(t, "ftps/update3", func(c *Client) {
@@ -309,10 +317,14 @@ func TestClient_FTPs(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-ftp-3",
 			GzipLevel:      ToPointer(9),
+			Placement:      NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if ftpUpdateResp3.Placement != nil {
+		t.Errorf("bad placement: %q", *ftpUpdateResp3.Placement)
 	}
 
 	if *ftpUpdateResp1.Name != "new-test-ftp" {
@@ -632,10 +644,14 @@ func TestClient_FTPs_Compute(t *testing.T) {
 			NewName:          ToPointer("new-test-ftp"),
 			CompressionCodec: ToPointer("zstd"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *ftpUpdateResp1.Placement != "none" {
+		t.Errorf("bad placement: %q", *ftpUpdateResp1.Placement)
 	}
 
 	Record(t, "ftps/compute/update2", func(c *Client) {
@@ -644,10 +660,14 @@ func TestClient_FTPs_Compute(t *testing.T) {
 			ServiceVersion:   *tv.Number,
 			Name:             "test-ftp-2",
 			CompressionCodec: ToPointer("zstd"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *ftpUpdateResp2.Placement != "none" {
+		t.Errorf("bad placement: %q", *ftpUpdateResp2.Placement)
 	}
 
 	Record(t, "ftps/compute/update3", func(c *Client) {
@@ -656,10 +676,14 @@ func TestClient_FTPs_Compute(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-ftp-3",
 			GzipLevel:      ToPointer(9),
+			Placement:      NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *ftpUpdateResp3.Placement != "none" {
+		t.Errorf("bad placement: %q", *ftpUpdateResp3.Placement)
 	}
 
 	if *ftpUpdateResp1.Name != "new-test-ftp" {

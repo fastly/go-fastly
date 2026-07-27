@@ -2,24 +2,20 @@
 version: 1
 interactions:
 - request:
-    body: log_processing_region=eu&name=new-test-heroku&token=new-token
-    form:
-      log_processing_region:
-      - eu
-      name:
-      - new-test-heroku
-      token:
-      - new-token
+    body: '{"name":"new-test-heroku","placement":null,"log_processing_region":"eu","token":"new-token"}'
+    form: {}
     headers:
+      Accept:
+      - application/json
       Content-Type:
-      - application/x-www-form-urlencoded
+      - application/json
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/114/logging/heroku/test-heroku
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/164/logging/heroku/test-heroku
     method: PUT
   response:
-    body: '{"created_at":"2025-06-04T15:10:03Z","token":"new-token","updated_at":"2025-06-04T15:10:03Z","response_condition":"","format":"%h
-      %l %u %t \"%r\" %\u003es %b","service_id":"kKJb5bOFI47uHeBVluGfX1","deleted_at":null,"placement":"waf_debug","log_processing_region":"eu","version":"114","format_version":"2","url":"https://1.us.logplex.io/logs","name":"new-test-heroku"}'
+    body: '{"updated_at":"2026-07-23T19:29:32Z","deleted_at":null,"placement":null,"url":"https://1.us.logplex.io/logs","format_version":"2","created_at":"2026-07-23T19:29:32Z","log_processing_region":"eu","service_id":"kKJb5bOFI47uHeBVluGfX1","token":"new-token","name":"new-test-heroku","version":"164","response_condition":"","format":"%h
+      %l %u %t \"%r\" %\u003es %b"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -28,15 +24,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:10:04 GMT
+      - Thu, 23 Jul 2026 19:29:39 GMT
       Fastly-Ratelimit-Remaining:
-      - "9918"
+      - "9798"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -49,10 +45,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "597"
       X-Served-By:
-      - cache-chi-kigq8000136-CHI, cache-nyc-kteb1890056-NYC
+      - cache-chi-klot8100145-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749049804.158772,VS0,VE377
+      - S1784834979.704388,VS0,VE637
     status: 200 OK
     code: 200
     duration: ""

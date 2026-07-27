@@ -2,25 +2,19 @@
 version: 1
 interactions:
 - request:
-    body: format_version=2&log_processing_region=eu&name=new-test-newrelic&region=eu
-    form:
-      format_version:
-      - "2"
-      log_processing_region:
-      - eu
-      name:
-      - new-test-newrelic
-      region:
-      - eu
+    body: '{"format_version":2,"name":"new-test-newrelic","placement":"none","log_processing_region":"eu","region":"eu"}'
+    form: {}
     headers:
+      Accept:
+      - application/json
       Content-Type:
-      - application/x-www-form-urlencoded
+      - application/json
       User-Agent:
-      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/30/logging/newrelic/test-newrelic
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/102/logging/newrelic/test-newrelic
     method: PUT
   response:
-    body: '{"name":"new-test-newrelic","log_processing_region":"eu","format_version":"2","token":"abcd1234","placement":"none","version":"30","deleted_at":null,"response_condition":"","created_at":"2025-09-02T17:23:24Z","format":"format","updated_at":"2025-09-02T17:23:24Z","service_id":"XsjdElScZGjmfCcTwsYRC1","region":"eu"}'
+    body: '{"response_condition":"","service_id":"XsjdElScZGjmfCcTwsYRC1","placement":"none","version":"102","name":"new-test-newrelic","format_version":"2","updated_at":"2026-07-23T19:38:39Z","created_at":"2026-07-23T19:38:39Z","log_processing_region":"eu","token":"abcd1234","deleted_at":null,"region":"eu","format":"format"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -29,15 +23,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 02 Sep 2025 17:23:26 GMT
+      - Thu, 23 Jul 2026 19:38:49 GMT
       Fastly-Ratelimit-Remaining:
-      - "9898"
+      - "9484"
       Fastly-Ratelimit-Reset:
-      - "1756836000"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -50,10 +44,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "707"
       X-Served-By:
-      - cache-chi-kigq8000167-CHI, cache-ewr-kewr1740063-EWR
+      - cache-chi-klot8100096-CHI, cache-iad-kiad7000025-IAD
       X-Timer:
-      - S1756833806.771867,VS0,VE458
+      - S1784835528.391968,VS0,VE745
     status: 200 OK
     code: 200
     duration: ""

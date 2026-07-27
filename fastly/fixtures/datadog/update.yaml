@@ -2,25 +2,19 @@
 version: 1
 interactions:
 - request:
-    body: format_version=2&log_processing_region=eu&name=new-test-datadog&region=EU
-    form:
-      format_version:
-      - "2"
-      log_processing_region:
-      - eu
-      name:
-      - new-test-datadog
-      region:
-      - EU
+    body: '{"format_version":2,"name":"new-test-datadog","placement":null,"log_processing_region":"eu","region":"EU"}'
+    form: {}
     headers:
+      Accept:
+      - application/json
       Content-Type:
-      - application/x-www-form-urlencoded
+      - application/json
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/108/logging/datadog/test-datadog
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/149/logging/datadog/test-datadog
     method: PUT
   response:
-    body: '{"version":"108","format_version":"2","token":"abcd1234","created_at":"2025-06-04T15:04:12Z","format":"format","name":"new-test-datadog","placement":"waf_debug","service_id":"kKJb5bOFI47uHeBVluGfX1","log_processing_region":"eu","region":"EU","updated_at":"2025-06-04T15:04:12Z","deleted_at":null,"response_condition":""}'
+    body: '{"version":"149","placement":null,"created_at":"2026-07-23T19:26:04Z","log_processing_region":"eu","format_version":"2","region":"EU","token":"abcd1234","name":"new-test-datadog","deleted_at":null,"service_id":"kKJb5bOFI47uHeBVluGfX1","format":"format","updated_at":"2026-07-23T19:26:04Z","response_condition":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -29,15 +23,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:04:13 GMT
+      - Thu, 23 Jul 2026 19:26:06 GMT
       Fastly-Ratelimit-Remaining:
-      - "9971"
+      - "9995"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -50,10 +44,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "837"
       X-Served-By:
-      - cache-chi-klot8100061-CHI, cache-nyc-kteb1890088-NYC
+      - cache-chi-klot8100049-CHI, cache-iad-kiad7000128-IAD
       X-Timer:
-      - S1749049454.547369,VS0,VE407
+      - S1784834766.115083,VS0,VE874
     status: 200 OK
     code: 200
     duration: ""

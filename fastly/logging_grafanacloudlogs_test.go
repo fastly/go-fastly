@@ -26,7 +26,7 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 			User:           ToPointer("123456"),
 			Token:          ToPointer("abcd1234"),
 			Format:         ToPointer("format"),
-			Placement:      ToPointer("waf_debug"),
+			Placement:      ToPointer("none"),
 			Index:          ToPointer("{\"env\": \"prod\"}"),
 		})
 	})
@@ -69,7 +69,7 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 	if *d.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *d.FormatVersion)
 	}
-	if *d.Placement != "waf_debug" {
+	if *d.Placement != "none" {
 		t.Errorf("bad placement: %q", *d.Placement)
 	}
 
@@ -127,13 +127,16 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			URL:              ToPointer("https://test456.grafana.net"),
 			Token:            ToPointer("abcd6789"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        NullValue[string](),
 			Index:            ToPointer("{\"env\": \"staging\"}"),
 			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if ud.Placement != nil {
+		t.Errorf("bad placement: %q", *ud.Placement)
 	}
 	if *ud.Name != "new-test-grafanacloudlogs" {
 		t.Errorf("bad name: %q", *ud.Name)
@@ -285,13 +288,16 @@ func TestClient_GrafanaCloudLogs_Compute(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			URL:              ToPointer("https://test456.grafana.net"),
 			Token:            ToPointer("abcd6789"),
-			Placement:        ToPointer("none"),
+			Placement:        NewNullable("none"),
 			Index:            ToPointer("{\"env\": \"staging\"}"),
 			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *ud.Placement != "none" {
+		t.Errorf("bad placement: %q", *ud.Placement)
 	}
 	if *ud.Name != "new-test-grafanacloudlogs" {
 		t.Errorf("bad name: %q", *ud.Name)

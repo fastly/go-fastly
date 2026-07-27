@@ -2,14 +2,14 @@
 version: 1
 interactions:
 - request:
-    body: format=format&name=test-newrelic&placement=waf_debug&region=us&token=abcd1234
+    body: format=format&name=test-newrelic&placement=none&region=us&token=abcd1234
     form:
       format:
       - format
       name:
       - test-newrelic
       placement:
-      - waf_debug
+      - none
       region:
       - us
       token:
@@ -18,11 +18,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/123/logging/newrelic
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/176/logging/newrelic
     method: POST
   response:
-    body: '{"format":"format","name":"test-newrelic","placement":"waf_debug","region":"us","token":"abcd1234","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"123","format_version":"2","created_at":"2025-06-04T15:26:20Z","response_condition":"","updated_at":"2025-06-04T15:26:20Z","deleted_at":null,"log_processing_region":"none"}'
+    body: '{"format":"format","name":"test-newrelic","placement":"none","region":"us","token":"abcd1234","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"176","log_processing_region":"none","format_version":"2","deleted_at":null,"created_at":"2026-07-23T19:31:37Z","updated_at":"2026-07-23T19:31:37Z","response_condition":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -31,15 +31,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:26:20 GMT
+      - Thu, 23 Jul 2026 19:31:37 GMT
       Fastly-Ratelimit-Remaining:
-      - "9864"
+      - "9588"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -52,10 +52,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "564"
       X-Served-By:
-      - cache-chi-kigq8000150-CHI, cache-nyc-kteb1890058-NYC
+      - cache-chi-klot8100060-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749050780.100279,VS0,VE800
+      - S1784835097.944786,VS0,VE600
     status: 200 OK
     code: 200
     duration: ""

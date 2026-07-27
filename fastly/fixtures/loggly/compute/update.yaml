@@ -2,23 +2,19 @@
 version: 1
 interactions:
 - request:
-    body: format_version=2&log_processing_region=eu&name=new-test-loggly
-    form:
-      format_version:
-      - "2"
-      log_processing_region:
-      - eu
-      name:
-      - new-test-loggly
+    body: '{"format_version":2,"name":"new-test-loggly","placement":"none","log_processing_region":"eu"}'
+    form: {}
     headers:
+      Accept:
+      - application/json
       Content-Type:
-      - application/x-www-form-urlencoded
+      - application/json
       User-Agent:
-      - FastlyGo/11.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/27/logging/loggly/test-loggly
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/109/logging/loggly/test-loggly
     method: PUT
   response:
-    body: '{"name":"new-test-loggly","format":"format","service_id":"XsjdElScZGjmfCcTwsYRC1","token":"abcd1234","format_version":"2","updated_at":"2025-09-02T17:19:21Z","public_key":null,"created_at":"2025-09-02T17:19:21Z","deleted_at":null,"placement":"none","response_condition":"","version":"27","log_processing_region":"eu"}'
+    body: '{"public_key":null,"name":"new-test-loggly","service_id":"XsjdElScZGjmfCcTwsYRC1","created_at":"2026-07-23T19:39:12Z","token":"abcd1234","format_version":"2","format":"format","updated_at":"2026-07-23T19:39:12Z","log_processing_region":"eu","response_condition":"","placement":"none","version":"109","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -27,15 +23,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 02 Sep 2025 17:19:22 GMT
+      - Thu, 23 Jul 2026 19:39:15 GMT
       Fastly-Ratelimit-Remaining:
-      - "9917"
+      - "9437"
       Fastly-Ratelimit-Reset:
-      - "1756836000"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -48,10 +44,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "624"
       X-Served-By:
-      - cache-chi-kigq8000174-CHI, cache-ewr-kewr1740091-EWR
+      - cache-chi-kigq8000055-CHI, cache-iad-kiad7000025-IAD
       X-Timer:
-      - S1756833562.970958,VS0,VE460
+      - S1784835555.089011,VS0,VE655
     status: 200 OK
     code: 200
     duration: ""

@@ -38,7 +38,7 @@ func TestClient_SFTPs(t *testing.T) {
 			Format:           ToPointer("format"),
 			MessageType:      ToPointer("blank"),
 			TimestampFormat:  ToPointer("%Y"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 		})
 	})
 	if err != nil {
@@ -64,7 +64,7 @@ func TestClient_SFTPs(t *testing.T) {
 			Format:          ToPointer("format"),
 			MessageType:     ToPointer("blank"),
 			TimestampFormat: ToPointer("%Y"),
-			Placement:       ToPointer("waf_debug"),
+			Placement:       ToPointer("none"),
 		})
 	})
 	if err != nil {
@@ -90,7 +90,7 @@ func TestClient_SFTPs(t *testing.T) {
 			Format:           ToPointer("format"),
 			MessageType:      ToPointer("blank"),
 			TimestampFormat:  ToPointer("%Y"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 		})
 	})
 	if err != nil {
@@ -119,7 +119,7 @@ func TestClient_SFTPs(t *testing.T) {
 			Format:           ToPointer("format"),
 			MessageType:      ToPointer("blank"),
 			TimestampFormat:  ToPointer("%Y"),
-			Placement:        ToPointer("waf_debug"),
+			Placement:        ToPointer("none"),
 		})
 	})
 	if err == nil {
@@ -203,7 +203,7 @@ func TestClient_SFTPs(t *testing.T) {
 	if *sftpCreateResp1.MessageType != "blank" {
 		t.Errorf("bad message_type: %q", *sftpCreateResp1.MessageType)
 	}
-	if *sftpCreateResp1.Placement != "waf_debug" {
+	if *sftpCreateResp1.Placement != "none" {
 		t.Errorf("bad placement: %q", *sftpCreateResp1.Placement)
 	}
 	if sftpCreateResp2.CompressionCodec != nil {
@@ -310,10 +310,14 @@ func TestClient_SFTPs(t *testing.T) {
 			GzipLevel:        ToPointer(8),
 			MessageType:      ToPointer("classic"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if sftpUpdateResp1.Placement != nil {
+		t.Errorf("bad placement: %q", *sftpUpdateResp1.Placement)
 	}
 
 	Record(t, "sftps/update2", func(c *Client) {
@@ -322,10 +326,14 @@ func TestClient_SFTPs(t *testing.T) {
 			ServiceVersion:   *tv.Number,
 			Name:             "test-sftp-2",
 			CompressionCodec: ToPointer("zstd"),
+			Placement:        NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if sftpUpdateResp2.Placement != nil {
+		t.Errorf("bad placement: %q", *sftpUpdateResp2.Placement)
 	}
 
 	Record(t, "sftps/update3", func(c *Client) {
@@ -334,10 +342,14 @@ func TestClient_SFTPs(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-sftp-3",
 			GzipLevel:      ToPointer(9),
+			Placement:      NullValue[string](),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if sftpUpdateResp3.Placement != nil {
+		t.Errorf("bad placement: %q", *sftpUpdateResp3.Placement)
 	}
 
 	if *sftpUpdateResp1.Name != "new-test-sftp" {
@@ -684,10 +696,14 @@ func TestClient_SFTPs_Compute(t *testing.T) {
 			GzipLevel:        ToPointer(8),
 			MessageType:      ToPointer("classic"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *sftpUpdateResp1.Placement != "none" {
+		t.Errorf("bad placement: %q", *sftpUpdateResp1.Placement)
 	}
 
 	Record(t, "sftps/compute/update2", func(c *Client) {
@@ -696,10 +712,14 @@ func TestClient_SFTPs_Compute(t *testing.T) {
 			ServiceVersion:   *tv.Number,
 			Name:             "test-sftp-2",
 			CompressionCodec: ToPointer("zstd"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *sftpUpdateResp2.Placement != "none" {
+		t.Errorf("bad placement: %q", *sftpUpdateResp2.Placement)
 	}
 
 	Record(t, "sftps/compute/update3", func(c *Client) {
@@ -708,10 +728,14 @@ func TestClient_SFTPs_Compute(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-sftp-3",
 			GzipLevel:      ToPointer(9),
+			Placement:      NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *sftpUpdateResp3.Placement != "none" {
+		t.Errorf("bad placement: %q", *sftpUpdateResp3.Placement)
 	}
 
 	if *sftpUpdateResp1.Name != "new-test-sftp" {

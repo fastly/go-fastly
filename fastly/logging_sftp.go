@@ -173,49 +173,50 @@ func (c *Client) GetSFTP(ctx context.Context, i *GetSFTPInput) (*SFTP, error) {
 // UpdateSFTPInput is used as input to the UpdateSFTP function.
 type UpdateSFTPInput struct {
 	// Address is a hostname or IPv4 address.
-	Address *string `url:"address,omitempty"`
+	Address *string `json:"address,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.
-	CompressionCodec *string `url:"compression_codec,omitempty"`
+	CompressionCodec *string `json:"compression_codec,omitempty"`
 	// Format is a Fastly log format string.
-	Format *string `url:"format,omitempty"`
+	Format *string `json:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *int `url:"format_version,omitempty"`
+	FormatVersion *int `json:"format_version,omitempty"`
 	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
-	GzipLevel *int `url:"gzip_level,omitempty"`
+	GzipLevel *int `json:"gzip_level,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
-	MessageType *string `url:"message_type,omitempty"`
+	MessageType *string `json:"message_type,omitempty"`
 	// Name is the name of the SFTP to update (required).
-	Name string `url:"-"`
+	Name string `json:"-"`
 	// NewName is the new name for the resource.
-	NewName *string `url:"name,omitempty"`
+	NewName *string `json:"name,omitempty"`
 	// Password is the password for the server.
-	Password *string `url:"password,omitempty"`
+	Password *string `json:"password,omitempty"`
 	// Path is the path to upload logs to.
-	Path *string `url:"path,omitempty"`
+	Path *string `json:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
-	Period *int `url:"period,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
+	Period *int `json:"period,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed. Use
+	// NullValue[string]() to reset the endpoint to automatic placement.
+	Placement *Nullable[string] `json:"placement,omitempty"`
 	// Port is the port number.
-	Port *int `url:"port,omitempty"`
+	Port *int `json:"port,omitempty"`
 	// ProcessingRegion is the region where logs will be processed before streaming to SFTP server.
-	ProcessingRegion *string `url:"log_processing_region,omitempty"`
+	ProcessingRegion *string `json:"log_processing_region,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
-	PublicKey *string `url:"public_key,omitempty"`
+	PublicKey *string `json:"public_key,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition *string `url:"response_condition,omitempty"`
+	ResponseCondition *string `json:"response_condition,omitempty"`
 	// SSHKnownHosts is a list of host keys for all hosts we can connect to over SFTP.
-	SSHKnownHosts *string `url:"ssh_known_hosts,omitempty"`
+	SSHKnownHosts *string `json:"ssh_known_hosts,omitempty"`
 	// SecretKey is the SSH private key for the server.
-	SecretKey *string `url:"secret_key,omitempty"`
+	SecretKey *string `json:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string `url:"-"`
+	ServiceID string `json:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int `url:"-"`
+	ServiceVersion int `json:"-"`
 	// TimestampFormat is a timestamp format.
-	TimestampFormat *string `url:"timestamp_format,omitempty"`
+	TimestampFormat *string `json:"timestamp_format,omitempty"`
 	// User is the username for the server.
-	User *string `url:"user,omitempty"`
+	User *string `json:"user,omitempty"`
 }
 
 // UpdateSFTP updates the specified resource.
@@ -231,7 +232,7 @@ func (c *Client) UpdateSFTP(ctx context.Context, i *UpdateSFTPInput) (*SFTP, err
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "sftp", i.Name)
-	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
+	resp, err := c.PutJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

@@ -2,23 +2,19 @@
 version: 1
 interactions:
 - request:
-    body: access_key=&iam_role=arn%3Aaws%3Aiam%3A%3A123456789012%3Arole%2FS3Access&secret_key=
-    form:
-      access_key:
-      - ""
-      iam_role:
-      - arn:aws:iam::123456789012:role/S3Access
-      secret_key:
-      - ""
+    body: '{"access_key":"","iam_role":"arn:aws:iam::123456789012:role/S3Access","placement":null,"secret_key":""}'
+    form: {}
     headers:
+      Accept:
+      - application/json
       Content-Type:
-      - application/x-www-form-urlencoded
+      - application/json
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/118/logging/kinesis/new-test-kinesis
+      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/160/logging/kinesis/new-test-kinesis
     method: PUT
   response:
-    body: '{"service_id":"kKJb5bOFI47uHeBVluGfX1","format":"format","iam_role":"arn:aws:iam::123456789012:role/S3Access","updated_at":"2025-06-04T15:17:28Z","name":"new-test-kinesis","log_processing_region":"eu","version":"118","placement":"waf_debug","topic":"stream-name","deleted_at":null,"created_at":"2025-06-04T15:17:26Z","format_version":"2","access_key":"","secret_key":"","response_condition":"","region":"us-east-1"}'
+    body: '{"iam_role":"arn:aws:iam::123456789012:role/S3Access","format_version":"2","log_processing_region":"eu","deleted_at":null,"version":"160","format":"format","service_id":"kKJb5bOFI47uHeBVluGfX1","created_at":"2026-07-23T19:29:04Z","name":"new-test-kinesis","region":"us-east-1","topic":"stream-name","updated_at":"2026-07-23T19:29:17Z","response_condition":"","access_key":"","placement":null,"secret_key":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -27,15 +23,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Jun 2025 15:17:29 GMT
+      - Thu, 23 Jul 2026 19:29:22 GMT
       Fastly-Ratelimit-Remaining:
-      - "9890"
+      - "9828"
       Fastly-Ratelimit-Reset:
-      - "1749052800"
+      - "1784836800"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -48,10 +44,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "545"
       X-Served-By:
-      - cache-chi-klot8100020-CHI, cache-ewr-kewr1740070-EWR
+      - cache-chi-klot8100119-CHI, cache-iad-kiad7000135-IAD
       X-Timer:
-      - S1749050249.697739,VS0,VE412
+      - S1784834962.989866,VS0,VE583
     status: 200 OK
     code: 200
     duration: ""

@@ -26,7 +26,7 @@ func TestClient_Logentries(t *testing.T) {
 			UseTLS:         ToPointer(Compatibool(true)),
 			Token:          ToPointer("abcd1234"),
 			Format:         ToPointer("format"),
-			Placement:      ToPointer("waf_debug"),
+			Placement:      ToPointer("none"),
 			Region:         ToPointer("us"),
 		})
 	})
@@ -69,7 +69,7 @@ func TestClient_Logentries(t *testing.T) {
 	if *le.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *le.FormatVersion)
 	}
-	if *le.Placement != "waf_debug" {
+	if *le.Placement != "none" {
 		t.Errorf("bad placement: %q", *le.Placement)
 	}
 	if *le.Region != "us" {
@@ -136,10 +136,15 @@ func TestClient_Logentries(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			Region:           ToPointer("ap"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NullValue[string](),
+			UseTLS:           ToPointer(Compatibool(false)),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if ule.Placement != nil {
+		t.Errorf("bad placement: %q", *ule.Placement)
 	}
 	if *ule.Name != "new-test-logentries" {
 		t.Errorf("bad name: %q", *ule.Name)
@@ -152,6 +157,9 @@ func TestClient_Logentries(t *testing.T) {
 	}
 	if *ule.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *ule.ProcessingRegion)
+	}
+	if *ule.UseTLS {
+		t.Errorf("bad use_tls: %t", *ule.UseTLS)
 	}
 
 	// Delete
@@ -297,10 +305,14 @@ func TestClient_Logentries_Compute(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			Region:           ToPointer("ap"),
 			ProcessingRegion: ToPointer("eu"),
+			Placement:        NewNullable("none"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if *ule.Placement != "none" {
+		t.Errorf("bad placement: %q", *ule.Placement)
 	}
 	if *ule.Name != "new-test-logentries" {
 		t.Errorf("bad name: %q", *ule.Name)
