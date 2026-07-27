@@ -26,7 +26,7 @@ interactions:
     url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/159/logging/logentries
     method: POST
   response:
-    body: '{"format":"format","name":"test-logentries","placement":"none","port":"0","region":"us","token":"abcd1234","use_tls":"1","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"159","hostname":null,"created_at":"2026-07-23T19:28:58Z","updated_at":"2026-07-23T19:28:58Z","public_key":null,"response_condition":"","log_processing_region":"none","format_version":"2","deleted_at":null}'
+    body: '{"format":"format","name":"test-logentries","placement":"none","port":"0","region":"us","token":"abcd1234","use_tls":"1","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"159","hostname":null,"created_at":"2026-07-27T16:12:55Z","log_processing_region":"none","deleted_at":null,"format_version":"2","public_key":null,"response_condition":"","updated_at":"2026-07-27T16:12:55Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -35,11 +35,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:28:59 GMT
+      - Mon, 27 Jul 2026 16:12:56 GMT
       Fastly-Ratelimit-Remaining:
-      - "9872"
+      - "9991"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1785171600"
       Pragma:
       - no-cache
       Server:
@@ -57,11 +57,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "515"
+      - "594"
       X-Served-By:
-      - cache-chi-klot8100089-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-klot8100089-CHI, cache-ewr-kewr1740060-EWR
       X-Timer:
-      - S1784834939.642402,VS0,VE552
+      - S1785168776.523798,VS0,VE627
     status: 200 OK
     code: 200
     duration: ""

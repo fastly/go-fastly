@@ -137,6 +137,7 @@ func TestClient_Logentries(t *testing.T) {
 			Region:           ToPointer("ap"),
 			ProcessingRegion: ToPointer("eu"),
 			Placement:        NullValue[string](),
+			UseTLS:           ToPointer(Compatibool(false)),
 		})
 	})
 	if err != nil {
@@ -156,6 +157,9 @@ func TestClient_Logentries(t *testing.T) {
 	}
 	if *ule.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *ule.ProcessingRegion)
+	}
+	if *ule.UseTLS {
+		t.Errorf("bad use_tls: %t", *ule.UseTLS)
 	}
 
 	// Delete

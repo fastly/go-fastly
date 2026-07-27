@@ -217,6 +217,8 @@ func TestClient_Kafkas(t *testing.T) {
 			Topic:            ToPointer("new-kafka-topic"),
 			ProcessingRegion: ToPointer("eu"),
 			Placement:        NullValue[string](),
+			ParseLogKeyvals:  ToPointer(Compatibool(false)),
+			UseTLS:           ToPointer(Compatibool(false)),
 		})
 	})
 	if err != nil {
@@ -233,6 +235,12 @@ func TestClient_Kafkas(t *testing.T) {
 	}
 	if *uk.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *uk.ProcessingRegion)
+	}
+	if *uk.ParseLogKeyvals {
+		t.Errorf("bad parse_log_keyvals: %t", *uk.ParseLogKeyvals)
+	}
+	if *uk.UseTLS {
+		t.Errorf("bad use_tls: %t", *uk.UseTLS)
 	}
 
 	// Delete

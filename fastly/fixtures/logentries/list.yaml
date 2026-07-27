@@ -10,7 +10,7 @@ interactions:
     url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/159/logging/logentries
     method: GET
   response:
-    body: '[{"updated_at":"2026-07-23T19:28:58Z","format":"format","region":"us","format_version":"2","hostname":null,"version":"159","token":"abcd1234","created_at":"2026-07-23T19:28:58Z","name":"test-logentries","response_condition":"","log_processing_region":"none","service_id":"kKJb5bOFI47uHeBVluGfX1","use_tls":"1","placement":"none","public_key":null,"deleted_at":null,"port":"0"}]'
+    body: '[{"format_version":"2","port":"0","log_processing_region":"none","public_key":null,"region":"us","updated_at":"2026-07-27T16:12:55Z","deleted_at":null,"use_tls":"1","version":"159","placement":"none","token":"abcd1234","name":"test-logentries","format":"format","service_id":"kKJb5bOFI47uHeBVluGfX1","created_at":"2026-07-27T16:12:55Z","response_condition":"","hostname":null}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:28:59 GMT
+      - Mon, 27 Jul 2026 16:12:56 GMT
       Pragma:
       - no-cache
       Server:
@@ -37,11 +37,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "124"
+      - "118"
       X-Served-By:
-      - cache-chi-klot8100089-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-klot8100089-CHI, cache-ewr-kewr1740060-EWR
       X-Timer:
-      - S1784834939.279666,VS0,VE157
+      - S1785168776.167108,VS0,VE151
     status: 200 OK
     code: 200
     duration: ""

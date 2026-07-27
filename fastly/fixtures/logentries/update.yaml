@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"format_version":2,"name":"new-test-logentries","placement":null,"log_processing_region":"eu","region":"ap"}'
+    body: '{"format_version":2,"name":"new-test-logentries","placement":null,"log_processing_region":"eu","region":"ap","use_tls":"0"}'
     form: {}
     headers:
       Accept:
@@ -14,7 +14,7 @@ interactions:
     url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/159/logging/logentries/test-logentries
     method: PUT
   response:
-    body: '{"hostname":"","service_id":"kKJb5bOFI47uHeBVluGfX1","token":"abcd1234","deleted_at":null,"public_key":null,"use_tls":"1","region":"ap","updated_at":"2026-07-23T19:28:58Z","log_processing_region":"eu","format":"format","format_version":"2","port":0,"placement":null,"name":"new-test-logentries","version":"159","created_at":"2026-07-23T19:28:58Z","response_condition":""}'
+    body: '{"updated_at":"2026-07-27T16:12:55Z","format":"format","region":"ap","use_tls":"0","log_processing_region":"eu","service_id":"kKJb5bOFI47uHeBVluGfX1","token":"abcd1234","created_at":"2026-07-27T16:12:55Z","port":0,"name":"new-test-logentries","version":"159","hostname":"","placement":null,"public_key":null,"response_condition":"","deleted_at":null,"format_version":"2"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -23,11 +23,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:29:00 GMT
+      - Mon, 27 Jul 2026 16:12:58 GMT
       Fastly-Ratelimit-Remaining:
-      - "9867"
+      - "9989"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1785171600"
       Pragma:
       - no-cache
       Server:
@@ -45,11 +45,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "555"
+      - "635"
       X-Served-By:
-      - cache-chi-kigq8000054-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-kigq8000054-CHI, cache-ewr-kewr1740060-EWR
       X-Timer:
-      - S1784834940.309288,VS0,VE592
+      - S1785168778.109315,VS0,VE665
     status: 200 OK
     code: 200
     duration: ""

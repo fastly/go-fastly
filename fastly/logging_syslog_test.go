@@ -203,6 +203,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			FormatVersion:    ToPointer(2),
 			ProcessingRegion: ToPointer("eu"),
 			Placement:        NullValue[string](),
+			UseTLS:           ToPointer(Compatibool(false)),
 		})
 	})
 	if err != nil {
@@ -221,6 +222,10 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 
 	if *us.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *us.ProcessingRegion)
+	}
+
+	if *us.UseTLS {
+		t.Errorf("bad use_tls: %t", *us.UseTLS)
 	}
 
 	// Delete
