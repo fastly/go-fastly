@@ -6,8 +6,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/fastly/go-fastly/v16/fastly"
-	"github.com/fastly/go-fastly/v16/fastly/dns/v1/tsigkeys"
+	"github.com/fastly/go-fastly/v17/fastly"
+	"github.com/fastly/go-fastly/v17/fastly/dns/v1/tsigkeys"
 )
 
 func TestZones(t *testing.T) {

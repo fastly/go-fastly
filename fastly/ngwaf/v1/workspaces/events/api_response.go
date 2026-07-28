@@ -3,7 +3,7 @@ package events
 import (
 	"time"
 
-	"github.com/fastly/go-fastly/v16/fastly/ngwaf/v1/workspaces/requests"
+	"github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/workspaces/requests"
 )
 
 // Event is the API response structure for the get, list, and expire

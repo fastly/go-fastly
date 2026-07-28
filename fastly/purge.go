@@ -6,7 +6,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/fastly/go-fastly/v16/fastly/impersonation"
+	"github.com/fastly/go-fastly/v17/fastly/impersonation"
 )
 
 // Purge is a response from a purge request.

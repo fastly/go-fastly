@@ -8,9 +8,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/fastly/go-fastly/v16/fastly"
-	"github.com/fastly/go-fastly/v16/fastly/ngwaf/v1/scope"
-	"github.com/fastly/go-fastly/v16/fastly/ngwaf/v1/signals"
+	"github.com/fastly/go-fastly/v17/fastly"
+	"github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/scope"
+	"github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/signals"
 )
 
 func TestClient_Rule_WorkspaceScope(t *testing.T) {
