@@ -1,6 +1,6 @@
 package dnszones
 
-import "github.com/fastly/go-fastly/v16/fastly"
+import "github.com/fastly/go-fastly/v17/fastly"
 
 // Zone is the API response structure for the create, update and get operations.
 type Zone struct {

@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/fastly/go-fastly/v16/fastly"
+	"github.com/fastly/go-fastly/v17/fastly"
 )
 
 // CreateConfig is the config object for integration type mailinglist.

@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/fastly/go-fastly/v16/fastly"
+	"github.com/fastly/go-fastly/v17/fastly"
 )
 
 // ListDiscoveredInput specifies the information needed for the ListDiscovered()

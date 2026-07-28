@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/fastly/go-fastly/v16/fastly"
+	"github.com/fastly/go-fastly/v17/fastly"
 )
 
 // RotateKeyInput specifies the information needed for the rotate signing key

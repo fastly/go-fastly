@@ -4,15 +4,21 @@
 
 ### Breaking:
 
-- breaking(logging): `placement` can now be reset to `null` on update, restoring automatic placement ([#839](https://github.com/fastly/go-fastly/pull/839))
-
 ### Enhancements:
+
+### Dependencies:
+
+### Bug fixes:
+
+## [v17.0.0](https://github.com/fastly/go-fastly/releases/tag/v17.0.0) (2026-07-28)
+
+### Breaking:
+
+- breaking(logging): `placement` can now be reset to `null` on update, restoring automatic placement ([#839](https://github.com/fastly/go-fastly/pull/839))
 
 ### Dependencies:
 - build(deps): `golang.org/x/crypto` from 0.53.0 to 0.54.0 ([#836](https://github.com/fastly/go-fastly/pull/836))
 - build(deps): `golang.org/x/sys` from 0.46.0 to 0.47.0 ([#836](https://github.com/fastly/go-fastly/pull/836))
-
-### Bug fixes:
 
 ## [v16.0.1](https://github.com/fastly/go-fastly/releases/tag/v16.0.1) (2026-07-08)
 
