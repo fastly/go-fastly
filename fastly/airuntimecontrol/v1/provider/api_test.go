@@ -33,3 +33,10 @@ func TestClient_Providers(t *testing.T) {
 	require.NoError(t, err)
 	require.NotNil(t, models)
 }
+
+func TestClient_ListModels_validation(t *testing.T) {
+	ctx := context.TODO()
+
+	_, err := ListModels(ctx, fastly.TestClient, &ListModelsInput{ProviderID: nil})
+	require.ErrorIs(t, err, fastly.ErrMissingProviderID)
+}
