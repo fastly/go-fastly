@@ -502,6 +502,38 @@ var ErrMissingPath = NewFieldError("Path")
 // requires a "Status" key, but one was not set.
 var ErrMissingStatus = NewFieldError("Status")
 
+// ErrMissingModel is an error that is returned when an input struct
+// requires a "Model" key, but one was not set.
+var ErrMissingModel = NewFieldError("Model")
+
+// ErrMissingModels is an error that is returned when an input struct
+// requires a "Models" key, but one was not set.
+var ErrMissingModels = NewFieldError("Models")
+
+// ErrMissingProvider is an error that is returned when an input struct
+// requires a "Provider" key, but one was not set.
+var ErrMissingProvider = NewFieldError("Provider")
+
+// ErrMissingProviderID is an error that is returned when an input struct
+// requires a "ProviderID" key, but one was not set.
+var ErrMissingProviderID = NewFieldError("ProviderID")
+
+// ErrMissingKeyID is an error that is returned when an input struct
+// requires a "KeyID" key, but one was not set.
+var ErrMissingKeyID = NewFieldError("KeyID")
+
+// ErrMissingBaseURL is an error that is returned when an input struct
+// requires a "BaseURL" key, but one was not set.
+var ErrMissingBaseURL = NewFieldError("BaseURL")
+
+// ErrMissingAPIKey is an error that is returned when an input struct
+// requires an "APIKey" key, but one was not set.
+var ErrMissingAPIKey = NewFieldError("APIKey")
+
+// ErrMissingExpiresAt is an error that is returned when an input struct
+// requires an "ExpiresAt" key, but one was not set.
+var ErrMissingExpiresAt = NewFieldError("ExpiresAt")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 

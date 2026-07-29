@@ -1,0 +1,50 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"expires_at":"2026-07-31T16:22:36Z"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/17.0.0 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/ai-runtime-control/v1/keys/75352aad10d9828b8de7/rotate
+    method: POST
+  response:
+    body: |
+      {"id":"75352aad10d9828b8de7","name":"go-fastly-test-key-updated","user_id":"6YHKQR3CxW7dGb67TNV4IB","user_name":"Richard Carillo","customer_id":"4dOhK7xEkULiabovMyhRBu","model":"claude-sonnet-4-20250514","provider":"Anthropic","expires_at":"2026-07-31T16:22:36Z","created_at":"2026-07-29T16:22:37Z","updated_at":"2026-07-29T16:22:37Z","access_token":"arc_sk_go-fastly-test-rotated"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "400"
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 29 Jul 2026 16:22:36 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "38"
+      X-Served-By:
+      - cache-chi-kmdw8640066-CHI, cache-ewr-kewr1740069-EWR
+      X-Timer:
+      - S1785342157.924217,VS0,VE72
+    status: 201 Created
+    code: 201
+    duration: ""
