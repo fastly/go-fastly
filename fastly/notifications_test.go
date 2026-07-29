@@ -225,8 +225,8 @@ func TestClient_Notifications(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
-		if newCir.ID == nil {
-			t.Errorf("missing id for %s integration", nti.fixture)
+		if newCir == nil || newCir.ID == nil {
+			t.Fatalf("missing response or integration id for %s integration", nti.fixture)
 		}
 
 		// Get integration
