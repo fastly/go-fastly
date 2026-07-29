@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/17.0.0 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/ai-runtime-control/v1/providers/groq/models
+    method: GET
+  response:
+    body: |
+      {"data":[{"id":"allam-2-7b","display_name":"ALLaM 2 7B","provider_id":"groq"},{"id":"canopylabs/orpheus-arabic-saudi","display_name":"Orpheus Arabic (Saudi)","provider_id":"groq"},{"id":"canopylabs/orpheus-v1-english","display_name":"Orpheus v1 English","provider_id":"groq"},{"id":"groq/compound","display_name":"Compound","provider_id":"groq"},{"id":"groq/compound-mini","display_name":"Compound Mini","provider_id":"groq"},{"id":"llama-3.1-8b-instant","display_name":"Llama 3.1 8B Instant","provider_id":"groq"},{"id":"llama-3.3-70b-versatile","display_name":"Llama 3.3 70B Versatile","provider_id":"groq"},{"id":"meta-llama/llama-4-scout-17b-16e-instruct","display_name":"Llama 4 Scout 17B","provider_id":"groq"},{"id":"meta-llama/llama-prompt-guard-2-22m","display_name":"Llama Prompt Guard 2 22M","provider_id":"groq"},{"id":"meta-llama/llama-prompt-guard-2-86m","display_name":"Llama Prompt Guard 2 86M","provider_id":"groq"},{"id":"openai/gpt-oss-120b","display_name":"GPT OSS 120B","provider_id":"groq"},{"id":"openai/gpt-oss-20b","display_name":"GPT OSS 20B","provider_id":"groq"},{"id":"openai/gpt-oss-safeguard-20b","display_name":"GPT OSS Safeguard 20B","provider_id":"groq"},{"id":"qwen/qwen3-32b","display_name":"Qwen 3 32B","provider_id":"groq"},{"id":"whisper-large-v3","display_name":"Whisper Large v3","provider_id":"groq"},{"id":"whisper-large-v3-turbo","display_name":"Whisper Large v3 Turbo","provider_id":"groq"}],"meta":{"total":16}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "1458"
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 29 Jul 2026 16:22:36 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "27"
+      X-Served-By:
+      - cache-chi-klot8100067-CHI, cache-ewr-kewr1740081-EWR
+      X-Timer:
+      - S1785342157.533532,VS0,VE71
+    status: 200 OK
+    code: 200
+    duration: ""

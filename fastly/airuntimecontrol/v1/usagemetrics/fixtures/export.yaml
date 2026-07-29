@@ -1,0 +1,59 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - text/csv
+      User-Agent:
+      - FastlyGo/17.0.0 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/ai-runtime-control/v1/usage-metrics/export?limit=10
+    method: GET
+  response:
+    body: |
+      date,usage_type,quantity,virtual_key_id,virtual_key_name,provider,model
+      2026-07-29T00:00:00Z,requests,1,ea477ab192ae1f8cb713,test,anthropic,claude-opus-4-6
+      2026-07-29T00:00:00Z,input_tokens,0,ea477ab192ae1f8cb713,test,anthropic,claude-opus-4-6
+      2026-07-29T00:00:00Z,output_tokens,0,ea477ab192ae1f8cb713,test,anthropic,claude-opus-4-6
+      2026-07-29T00:00:00Z,requests,1,ea477ab192ae1f8cb713,test,anthropic,claude-opus-4-7
+      2026-07-29T00:00:00Z,input_tokens,0,ea477ab192ae1f8cb713,test,anthropic,claude-opus-4-7
+      2026-07-29T00:00:00Z,output_tokens,0,ea477ab192ae1f8cb713,test,anthropic,claude-opus-4-7
+      2026-07-29T00:00:00Z,requests,1,fbdf3c51010403a7eabd,opus-6,anthropic,claude-opus-4-6
+      2026-07-29T00:00:00Z,input_tokens,0,fbdf3c51010403a7eabd,opus-6,anthropic,claude-opus-4-6
+      2026-07-29T00:00:00Z,output_tokens,0,fbdf3c51010403a7eabd,opus-6,anthropic,claude-opus-4-6
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Disposition:
+      - attachment; filename=usage_metrics.csv
+      Content-Length:
+      - "861"
+      Content-Type:
+      - text/csv
+      Date:
+      - Wed, 29 Jul 2026 17:04:51 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "22"
+      X-Served-By:
+      - cache-chi-kmdw8640059-CHI, cache-ewr-kewr1740093-EWR
+      X-Timer:
+      - S1785344691.942094,VS0,VE72
+    status: 200 OK
+    code: 200
+    duration: ""
