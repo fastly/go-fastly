@@ -6,12 +6,12 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.2.1 (+github.com/fastly/go-fastly; go1.22.0)
-    url: https://api.fastly.com/notifications/integrations/2KYt9p4Y1KPhSjwThWG08E/rotateSigningKey
+      - FastlyGo/17.0.0 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/notifications/integrations/1oThZkDLabGDYitZ7ecfBh/rotateSigningKey
     method: POST
   response:
     body: |
-      {"signingKey":"372f476c-d02b-41fd-a275-c06a17c44f81"}
+      {"signingKey":"da18e0d5-0c6a-41e7-806e-8826560a242d"}
     headers:
       Accept-Ranges:
       - bytes
@@ -22,11 +22,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 16 Apr 2024 15:52:43 GMT
+      - Tue, 28 Jul 2026 21:20:40 GMT
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -34,15 +34,17 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "370"
       X-Served-By:
-      - cache-pao-kpao1770026-PAO
+      - cache-chi-kmdw8640094-CHI, cache-ewr-kewr1740020-EWR
       X-Timer:
-      - S1713282762.185656,VS0,VE907
+      - S1785273640.652629,VS0,VE400
     status: 200 OK
     code: 200
     duration: ""

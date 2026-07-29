@@ -6,6 +6,8 @@
 
 ### Enhancements:
 
+- feat(notifications): add typed constants and config helpers for the Datadog, Jira Issue, Jira Service Management, OpsGenie, and Splunk On-Call integration types ([#842](https://github.com/fastly/go-fastly/pull/842))
+
 ### Dependencies:
 
 ### Bug fixes:

@@ -11,12 +11,12 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/9.2.1 (+github.com/fastly/go-fastly; go1.22.0)
+      - FastlyGo/17.0.0 (+github.com/fastly/go-fastly; go1.26.4)
     url: https://api.fastly.com/notifications/integrations
     method: POST
   response:
     body: |
-      {"integration_id":"2KYt9p4Y1KPhSjwThWG08E"}
+      {"integration_id":"1oThZkDLabGDYitZ7ecfBh"}
     headers:
       Accept-Ranges:
       - bytes
@@ -27,11 +27,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 16 Apr 2024 15:52:40 GMT
+      - Tue, 28 Jul 2026 21:20:38 GMT
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -39,15 +39,17 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "238"
       X-Served-By:
-      - cache-pao-kpao1770026-PAO
+      - cache-chi-kigq8000109-CHI, cache-ewr-kewr1740020-EWR
       X-Timer:
-      - S1713282760.713037,VS0,VE365
+      - S1785273638.338999,VS0,VE269
     status: 200 OK
     code: 200
     duration: ""

@@ -8,6 +8,20 @@ import (
 	"time"
 )
 
+// Integration type values for the "type" field of an Integration.
+const (
+	// IntegrationTypeDatadog is the type value for a Datadog integration.
+	IntegrationTypeDatadog = "datadog"
+	// IntegrationTypeJiraIssue is the type value for a Jira Issue integration.
+	IntegrationTypeJiraIssue = "jiraissue"
+	// IntegrationTypeJSM is the type value for a Jira Service Management integration.
+	IntegrationTypeJSM = "jsm"
+	// IntegrationTypeOpsGenie is the type value for an OpsGenie integration.
+	IntegrationTypeOpsGenie = "opsgenie"
+	// IntegrationTypeSplunkOnCall is the type value for a Splunk On-Call integration.
+	IntegrationTypeSplunkOnCall = "splunkoncall"
+)
+
 // Integration holds the configuration for one integration.
 type Integration struct {
 	CreatedAt   *time.Time        `json:"created_at"`
@@ -311,4 +325,89 @@ func (c *Client) CreateMailinglistConfirmation(ctx context.Context, i *CreateMai
 	}
 
 	return nil
+}
+
+// DatadogConfig holds the configuration fields for an integration of type
+// IntegrationTypeDatadog.
+type DatadogConfig struct {
+	// APIKey is the Datadog API key (required).
+	APIKey string
+	// Site is the Datadog site, e.g. "datadoghq.eu" (optional, defaults to the US site).
+	Site string
+}
+
+// ToMap converts c into the map[string]string expected by the Config field of
+// CreateIntegrationInput and UpdateIntegrationInput.
+func (c DatadogConfig) ToMap() map[string]string {
+	m := map[string]string{"apikey": c.APIKey}
+	if c.Site != "" {
+		m["site"] = c.Site
+	}
+	return m
+}
+
+// JiraIssueConfig holds the configuration fields for an integration of type
+// IntegrationTypeJiraIssue.
+type JiraIssueConfig struct {
+	// BaseURL is the base URL of the Jira instance (required).
+	BaseURL string
+	// Username is the Jira username (email address) used to authenticate (required).
+	Username string
+	// Token is the Jira API token (required).
+	Token string
+	// ProjectKey is the key of the Jira project where issues will be created (required).
+	ProjectKey string
+	// IssueType is the type of Jira issue to create (required).
+	IssueType string
+}
+
+// ToMap converts c into the map[string]string expected by the Config field of
+// CreateIntegrationInput and UpdateIntegrationInput.
+func (c JiraIssueConfig) ToMap() map[string]string {
+	return map[string]string{
+		"baseurl":    c.BaseURL,
+		"username":   c.Username,
+		"token":      c.Token,
+		"projectkey": c.ProjectKey,
+		"issuetype":  c.IssueType,
+	}
+}
+
+// JSMConfig holds the configuration fields for an integration of type
+// IntegrationTypeJSM.
+type JSMConfig struct {
+	// APIKey is the Jira Service Management API key (required).
+	APIKey string
+}
+
+// ToMap converts c into the map[string]string expected by the Config field of
+// CreateIntegrationInput and UpdateIntegrationInput.
+func (c JSMConfig) ToMap() map[string]string {
+	return map[string]string{"apikey": c.APIKey}
+}
+
+// OpsGenieConfig holds the configuration fields for an integration of type
+// IntegrationTypeOpsGenie.
+type OpsGenieConfig struct {
+	// APIKey is the OpsGenie API key (required).
+	APIKey string
+}
+
+// ToMap converts c into the map[string]string expected by the Config field of
+// CreateIntegrationInput and UpdateIntegrationInput.
+func (c OpsGenieConfig) ToMap() map[string]string {
+	return map[string]string{"apikey": c.APIKey}
+}
+
+// SplunkOnCallConfig holds the configuration fields for an integration of type
+// IntegrationTypeSplunkOnCall.
+type SplunkOnCallConfig struct {
+	// URL is the Splunk On-Call webhook URL (required).
+	URL string
+}
+
+// ToMap converts c into the map[string]string expected by the Config field of
+// CreateIntegrationInput and UpdateIntegrationInput.
+func (c SplunkOnCallConfig) ToMap() map[string]string {
+	return map[string]string{"url": c.URL}
 }

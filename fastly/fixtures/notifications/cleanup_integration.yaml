@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.2.1 (+github.com/fastly/go-fastly; go1.22.0)
-    url: https://api.fastly.com/notifications/integrations/2KYt9p4Y1KPhSjwThWG08E
+      - FastlyGo/17.0.0 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/notifications/integrations/1oThZkDLabGDYitZ7ecfBh
     method: DELETE
   response:
     body: |
@@ -22,11 +22,11 @@ interactions:
       Content-Type:
       - application/problem+json
       Date:
-      - Tue, 16 Apr 2024 15:52:44 GMT
+      - Tue, 28 Jul 2026 21:20:43 GMT
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -34,15 +34,17 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "21"
       X-Served-By:
-      - cache-pao-kpao1770026-PAO
+      - cache-chi-kmdw8640067-CHI, cache-ewr-kewr1740020-EWR
       X-Timer:
-      - S1713282764.911079,VS0,VE212
+      - S1785273644.768990,VS0,VE50
     status: 404 Not Found
     code: 404
     duration: ""
