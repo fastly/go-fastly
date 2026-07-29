@@ -7,22 +7,22 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/17.0.0 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/notifications/integrations/1oThZkDLabGDYitZ7ecfBh
+    url: https://api.fastly.com/notifications/integrations/1sa0xb5OlebwIbCZ0YIQpB
     method: GET
   response:
     body: |
-      {"id":"1oThZkDLabGDYitZ7ecfBh","name":"test name","description":"test description","type":"mailinglist","created_at":"2026-07-28T21:20:39Z","updated_at":"2026-07-28T21:20:39Z","status":"confirmation_pending","config":{"address":"noreply@fastly.com"}}
+      {"id":"1sa0xb5OlebwIbCZ0YIQpB","name":"test jiraissue name","description":"test jiraissue description","type":"jiraissue","created_at":"2026-07-28T21:20:41Z","updated_at":"2026-07-28T21:20:41Z","config":{"baseurl":"https://your-org.atlassian.net","issuetype":"Bug","projectkey":"PROJ","username":"user@example.com"}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "251"
+      - "317"
       Content-Type:
       - application/json
       Date:
-      - Tue, 28 Jul 2026 21:20:39 GMT
+      - Tue, 28 Jul 2026 21:20:41 GMT
       Pragma:
       - no-cache
       Server:
@@ -40,11 +40,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "97"
+      - "149"
       X-Served-By:
-      - cache-chi-kmdw8640067-CHI, cache-ewr-kewr1740020-EWR
+      - cache-chi-kigq8000114-CHI, cache-ewr-kewr1740020-EWR
       X-Timer:
-      - S1785273639.878468,VS0,VE131
+      - S1785273642.535450,VS0,VE184
     status: 200 OK
     code: 200
     duration: ""
