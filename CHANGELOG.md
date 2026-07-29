@@ -8,6 +8,8 @@
 
 - feat(notifications): add typed constants and config helpers for the Datadog, Jira Issue, Jira Service Management, OpsGenie, and Splunk On-Call integration types ([#842](https://github.com/fastly/go-fastly/pull/842))
 
+- feat(airuntimecontrol): add support for usage monitoring, session logging, and virtual key management for AI services for the AI Runtime Control feature ([#843](https://github.com/fastly/go-fastly/pull/843))
+
 ### Dependencies:
 
 ### Bug fixes:
