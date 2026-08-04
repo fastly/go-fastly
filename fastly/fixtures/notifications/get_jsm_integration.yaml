@@ -6,12 +6,12 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/17.0.0 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/notifications/integrations/1sZoqRMehJcs3JSuSjuSZ5
+      - FastlyGo/17.1.0 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/notifications/integrations/4qCpnWiUYmyFzPonplsrd1
     method: GET
   response:
     body: |
-      {"id":"1sZoqRMehJcs3JSuSjuSZ5","name":"test jsm name","description":"test jsm description","type":"jsm","created_at":"2026-07-28T21:20:42Z","updated_at":"2026-07-28T21:20:42Z"}
+      {"id":"4qCpnWiUYmyFzPonplsrd1","name":"test jsm name","description":"test jsm description","type":"jsm","created_at":"2026-08-04T16:57:26Z","updated_at":"2026-08-04T16:57:26Z"}
     headers:
       Accept-Ranges:
       - bytes
@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 28 Jul 2026 21:20:42 GMT
+      - Tue, 04 Aug 2026 16:57:25 GMT
       Pragma:
       - no-cache
       Server:
@@ -40,11 +40,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "28"
+      - "27"
       X-Served-By:
-      - cache-chi-kmdw8640081-CHI, cache-ewr-kewr1740020-EWR
+      - cache-chi-klot8100071-CHI, cache-ewr-kewr1740096-EWR
       X-Timer:
-      - S1785273642.277512,VS0,VE58
+      - S1785862646.556751,VS0,VE59
     status: 200 OK
     code: 200
     duration: ""

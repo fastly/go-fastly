@@ -7,22 +7,22 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/17.1.0 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/notifications/integrations/4lFjsCDHJsxi3pUK3pcJ6H
+    url: https://api.fastly.com/notifications/v1/event-mappings?scope_type=account
     method: GET
   response:
     body: |
-      {"id":"4lFjsCDHJsxi3pUK3pcJ6H","name":"test name","description":"test description","type":"mailinglist","created_at":"2026-08-04T16:57:21Z","updated_at":"2026-08-04T16:57:21Z","status":"confirmation_expired","config":{"address":"noreply@fastly.com"}}
+      {"meta":{"total":1,"limit":20,"sort":"created_at"},"data":[{"id":"2jNMhKrgVBYj88bY4ecDmP","customer_id":"4dOhK7xEkULiabovMyhRBu","name":"go-fastly-test-mapping","description":"Sends a notification when any user logs in","scope_type":"account","scope_ids":[],"event_types":["user.login"],"integration_ids":["7znp3LzS0yF0jiNU9FuQxW"],"mapping_status":"active","created_at":"2026-08-04T16:55:29Z","updated_at":"2026-08-04T16:55:29Z"}]}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "251"
+      - "433"
       Content-Type:
       - application/json
       Date:
-      - Tue, 04 Aug 2026 16:57:21 GMT
+      - Tue, 04 Aug 2026 16:55:29 GMT
       Pragma:
       - no-cache
       Server:
@@ -40,11 +40,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "145"
+      - "131"
       X-Served-By:
-      - cache-chi-kmdw8640091-CHI, cache-ewr-kewr1740096-EWR
+      - cache-chi-kigq8000161-CHI, cache-ewr-kewr1740031-EWR
       X-Timer:
-      - S1785862641.458446,VS0,VE176
+      - S1785862530.603916,VS0,VE163
     status: 200 OK
     code: 200
     duration: ""

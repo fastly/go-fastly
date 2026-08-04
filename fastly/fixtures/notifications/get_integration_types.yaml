@@ -6,7 +6,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/17.0.0 (+github.com/fastly/go-fastly; go1.26.4)
+      - FastlyGo/17.1.0 (+github.com/fastly/go-fastly; go1.26.4)
     url: https://api.fastly.com/notifications/integration-types
     method: GET
   response:
@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 28 Jul 2026 21:20:38 GMT
+      - Tue, 04 Aug 2026 16:57:20 GMT
       Pragma:
       - no-cache
       Server:
@@ -40,11 +40,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "76"
+      - "62"
       X-Served-By:
-      - cache-chi-kmdw8640020-CHI, cache-ewr-kewr1740020-EWR
+      - cache-chi-kigq8000048-CHI, cache-ewr-kewr1740096-EWR
       X-Timer:
-      - S1785273638.204905,VS0,VE109
+      - S1785862641.701081,VS0,VE128
     status: 200 OK
     code: 200
     duration: ""

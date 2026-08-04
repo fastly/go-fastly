@@ -6,12 +6,12 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/17.0.0 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/notifications/integrations/1rno9PjY2gML151lMmISgH
+      - FastlyGo/17.1.0 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/notifications/integrations/4oQXGNaVt2yKjZDuDpmiT9
     method: GET
   response:
     body: |
-      {"id":"1rno9PjY2gML151lMmISgH","name":"test datadog name","description":"test datadog description","type":"datadog","created_at":"2026-07-28T21:20:41Z","updated_at":"2026-07-28T21:20:41Z","config":{"site":"datadoghq.eu"}}
+      {"id":"4oQXGNaVt2yKjZDuDpmiT9","name":"test datadog name","description":"test datadog description","type":"datadog","created_at":"2026-08-04T16:57:24Z","updated_at":"2026-08-04T16:57:24Z","config":{"site":"datadoghq.eu"}}
     headers:
       Accept-Ranges:
       - bytes
@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 28 Jul 2026 21:20:41 GMT
+      - Tue, 04 Aug 2026 16:57:24 GMT
       Pragma:
       - no-cache
       Server:
@@ -40,11 +40,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "162"
+      - "170"
       X-Served-By:
-      - cache-chi-kmdw8640079-CHI, cache-ewr-kewr1740020-EWR
+      - cache-chi-kigq8000136-CHI, cache-ewr-kewr1740096-EWR
       X-Timer:
-      - S1785273641.845098,VS0,VE192
+      - S1785862644.989921,VS0,VE201
     status: 200 OK
     code: 200
     duration: ""

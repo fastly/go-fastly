@@ -534,6 +534,22 @@ var ErrMissingAPIKey = NewFieldError("APIKey")
 // requires an "ExpiresAt" key, but one was not set.
 var ErrMissingExpiresAt = NewFieldError("ExpiresAt")
 
+// ErrMissingMappingID is an error that is returned when an input struct
+// requires a "MappingID" key, but one was not set.
+var ErrMissingMappingID = NewFieldError("MappingID")
+
+// ErrMissingScopeType is an error that is returned when an input struct
+// requires a "ScopeType" key, but one was not set.
+var ErrMissingScopeType = NewFieldError("ScopeType")
+
+// ErrMissingEventTypes is an error that is returned when an input struct
+// requires an "EventTypes" key, but one was not set.
+var ErrMissingEventTypes = NewFieldError("EventTypes")
+
+// ErrMissingIntegrationIDs is an error that is returned when an input struct
+// requires an "IntegrationIDs" key, but one was not set.
+var ErrMissingIntegrationIDs = NewFieldError("IntegrationIDs")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 

@@ -6,6 +6,8 @@
 
 ### Enhancements:
 
+- feat(notifications): add support for creating, listing, getting, updating, and deleting audit log event mappings, and for discovering supported event types and scope types
+
 ### Dependencies:
 
 ### Bug fixes:

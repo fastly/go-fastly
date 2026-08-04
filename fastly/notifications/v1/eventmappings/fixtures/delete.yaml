@@ -7,28 +7,25 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/17.1.0 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/notifications/integrations/4lFjsCDHJsxi3pUK3pcJ6H
-    method: GET
+    url: https://api.fastly.com/notifications/v1/event-mappings/2jNMhKrgVBYj88bY4ecDmP
+    method: DELETE
   response:
-    body: |
-      {"id":"4lFjsCDHJsxi3pUK3pcJ6H","name":"test name","description":"test description","type":"mailinglist","created_at":"2026-08-04T16:57:21Z","updated_at":"2026-08-04T16:57:21Z","status":"confirmation_expired","config":{"address":"noreply@fastly.com"}}
+    body: ""
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
-      Content-Length:
-      - "251"
       Content-Type:
       - application/json
       Date:
-      - Tue, 04 Aug 2026 16:57:21 GMT
+      - Tue, 04 Aug 2026 16:55:30 GMT
       Pragma:
       - no-cache
       Server:
       - fastly istio-envoy
       Status:
-      - 200 OK
+      - 204 No Content
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -40,11 +37,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "145"
+      - "46"
       X-Served-By:
-      - cache-chi-kmdw8640091-CHI, cache-ewr-kewr1740096-EWR
+      - cache-chi-kmdw8640098-CHI, cache-ewr-kewr1740031-EWR
       X-Timer:
-      - S1785862641.458446,VS0,VE176
-    status: 200 OK
-    code: 200
+      - S1785862530.134595,VS0,VE74
+    status: 204 No Content
+    code: 204
     duration: ""
