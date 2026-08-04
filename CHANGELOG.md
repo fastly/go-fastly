@@ -6,7 +6,7 @@
 
 ### Enhancements:
 
-- feat(notifications): add support for creating, listing, getting, updating, and deleting audit log event mappings, and for discovering supported event types and scope types
+- feat(notifications): add support for creating, listing, getting, updating, and deleting audit log event mappings, and for discovering supported event types and scope types ([#846](https://github.com/fastly/go-fastly/pull/846))
 
 ### Dependencies:
 
