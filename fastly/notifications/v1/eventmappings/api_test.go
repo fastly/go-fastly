@@ -52,15 +52,14 @@ func TestClient_EventMappings(t *testing.T) {
 	require.Equal(t, mappingID, fetched.ID)
 
 	// List event mappings.
-	var mappings *Collection
+	var mappings []EventMapping
 	fastly.Record(t, "list", func(c *fastly.Client) {
 		mappings, err = List(ctx, c, &ListInput{
 			ScopeType: fastly.ToPointer(ScopeTypeAccount),
 		})
 	})
 	require.NoError(t, err)
-	require.NotNil(t, mappings)
-	require.NotEmpty(t, mappings.Data)
+	require.NotEmpty(t, mappings)
 
 	// Update the event mapping.
 	var updated *EventMapping

@@ -56,7 +56,8 @@ type EventMapping struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// Collection is the API response structure for the list operation.
+// Collection is the API response structure for a single page of the list
+// operation.
 type Collection struct {
 	// Data is the list of returned event mappings.
 	Data []EventMapping `json:"data"`
@@ -73,8 +74,8 @@ type Meta struct {
 	// Sort is the sort order applied to the results.
 	Sort string `json:"sort"`
 	// NextCursor is the cursor used to retrieve the next page of results.
-	// Omitted when the results are the last page.
-	NextCursor string `json:"next_cursor,omitempty"`
+	// Nil when the results are the last page.
+	NextCursor *string `json:"next_cursor,omitempty"`
 	// PreviousCursor is the cursor used to retrieve the previous page of
 	// results. Omitted when the results are the first page.
 	PreviousCursor string `json:"previous_cursor,omitempty"`

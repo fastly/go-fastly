@@ -11,11 +11,11 @@ interactions:
       - application/json
       User-Agent:
       - FastlyGo/17.1.0 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/notifications/v1/event-mappings/2jNMhKrgVBYj88bY4ecDmP
+    url: https://api.fastly.com/notifications/v1/event-mappings/1PUwL9Z5W199GofgvTwbPd
     method: PUT
   response:
     body: |
-      {"id":"2jNMhKrgVBYj88bY4ecDmP","customer_id":"4dOhK7xEkULiabovMyhRBu","name":"go-fastly-test-mapping-updated","description":"Updated description","scope_type":"account","scope_ids":[],"event_types":["user.login","user.create"],"integration_ids":["7znp3LzS0yF0jiNU9FuQxW"],"mapping_status":"active","created_at":"2026-08-04T16:55:29Z","updated_at":"2026-08-04T16:55:30Z"}
+      {"id":"1PUwL9Z5W199GofgvTwbPd","customer_id":"4dOhK7xEkULiabovMyhRBu","name":"go-fastly-test-mapping-updated","description":"Updated description","scope_type":"account","scope_ids":[],"event_types":["user.login","user.create"],"integration_ids":["7znp3LzS0yF0jiNU9FuQxW"],"mapping_status":"active","created_at":"2026-08-05T14:37:51Z","updated_at":"2026-08-05T14:37:51Z"}
     headers:
       Accept-Ranges:
       - bytes
@@ -26,7 +26,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 04 Aug 2026 16:55:30 GMT
+      - Wed, 05 Aug 2026 14:37:51 GMT
       Pragma:
       - no-cache
       Server:
@@ -44,11 +44,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "232"
+      - "72"
       X-Served-By:
-      - cache-chi-kmdw8640098-CHI, cache-ewr-kewr1740031-EWR
+      - cache-chi-kigq8000124-CHI, cache-ewr-kewr1740053-EWR
       X-Timer:
-      - S1785862530.856156,VS0,VE260
+      - S1785940671.344902,VS0,VE104
     status: 200 OK
     code: 200
     duration: ""
