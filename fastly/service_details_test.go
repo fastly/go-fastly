@@ -494,6 +494,89 @@ func TestClient_GetServiceDetails_WithFilters(t *testing.T) {
 	}
 }
 
+// TestClient_GetServiceDetails_StagedFilter asserts that
+// filter[versions.staged]=true populates the singular "version" field with
+// the staged version, mirroring how filter[versions.active]=true populates
+// it with the active version. The "versions" array is always the full,
+// unfiltered list of versions.
+func TestClient_GetServiceDetails_StagedFilter(t *testing.T) {
+	var err error
+
+	var s *Service
+	Record(t, "services/details_staged_filter/create", func(c *Client) {
+		s, err = c.CreateService(context.TODO(), &CreateServiceInput{
+			Name:    ToPointer("test-service-staged-filter"),
+			Comment: ToPointer("test staged filter"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	defer func() {
+		Record(t, "services/details_staged_filter/cleanup", func(c *Client) {
+			_, _ = c.DeactivateVersion(context.TODO(), &DeactivateVersionInput{
+				ServiceID:      *s.ServiceID,
+				ServiceVersion: 1,
+			})
+			_ = c.DeleteService(context.TODO(), &DeleteServiceInput{
+				ServiceID: *s.ServiceID,
+			})
+		})
+	}()
+
+	var v2 *Version
+	Record(t, "services/details_staged_filter/create_version", func(c *Client) {
+		v2, err = c.CreateVersion(context.TODO(), &CreateVersionInput{
+			ServiceID: *s.ServiceID,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	Record(t, "services/details_staged_filter/activate_production", func(c *Client) {
+		_, err = c.ActivateVersion(context.TODO(), &ActivateVersionInput{
+			ServiceID:      *s.ServiceID,
+			ServiceVersion: 1,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	Record(t, "services/details_staged_filter/activate_staging", func(c *Client) {
+		_, err = c.ActivateVersion(context.TODO(), &ActivateVersionInput{
+			ServiceID:      *s.ServiceID,
+			ServiceVersion: *v2.Number,
+			Environment:    "staging",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	var stagedFiltered *ServiceDetail
+	Record(t, "services/details_staged_filter/staged_filter", func(c *Client) {
+		stagedFiltered, err = c.GetServiceDetails(context.TODO(), &GetServiceDetailsInput{
+			ServiceID: *s.ServiceID,
+			Filters: []ServiceDetailsFilter{
+				{Key: "versions.staged", Value: true},
+			},
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if stagedFiltered.Version == nil {
+		t.Fatal("Service Detail Version is nil")
+	}
+	if *stagedFiltered.Version.Number != 2 || !*stagedFiltered.Version.Staging {
+		t.Errorf("expected the staged version (2) back, got: %#v", stagedFiltered.Version)
+	}
+}
+
 func TestClient_GetServiceDetails_validation(t *testing.T) {
 	_, err := TestClient.GetServiceDetails(context.TODO(), &GetServiceDetailsInput{})
 	if !errors.Is(err, ErrMissingServiceID) {
