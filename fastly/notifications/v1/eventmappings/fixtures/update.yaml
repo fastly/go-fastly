@@ -2,8 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"Config":{"baseurl":"https://your-org.atlassian.net","issuetype":"Bug","projectkey":"PROJ","token":"AbCdEfGhIjKlMnOpQrStUvWx","username":"user@example.com"},"Description":"test
-      jiraissue description","Name":"test jiraissue name","Type":"jiraissue"}'
+    body: '{"name":"go-fastly-test-mapping-updated","description":"Updated description","scope_type":"account","event_types":["user.login","user.create"],"integration_ids":["7znp3LzS0yF0jiNU9FuQxW"]}'
     form: {}
     headers:
       Accept:
@@ -12,22 +11,22 @@ interactions:
       - application/json
       User-Agent:
       - FastlyGo/17.1.0 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/notifications/integrations
-    method: POST
+    url: https://api.fastly.com/notifications/v1/event-mappings/1PUwL9Z5W199GofgvTwbPd
+    method: PUT
   response:
     body: |
-      {"integration_id":"4pNDOWAg0bsV1TmQqWVxiH"}
+      {"id":"1PUwL9Z5W199GofgvTwbPd","customer_id":"4dOhK7xEkULiabovMyhRBu","name":"go-fastly-test-mapping-updated","description":"Updated description","scope_type":"account","scope_ids":[],"event_types":["user.login","user.create"],"integration_ids":["7znp3LzS0yF0jiNU9FuQxW"],"mapping_status":"active","created_at":"2026-08-05T14:37:51Z","updated_at":"2026-08-05T14:37:51Z"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "44"
+      - "371"
       Content-Type:
       - application/json
       Date:
-      - Tue, 04 Aug 2026 16:57:24 GMT
+      - Wed, 05 Aug 2026 14:37:51 GMT
       Pragma:
       - no-cache
       Server:
@@ -45,11 +44,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "306"
+      - "72"
       X-Served-By:
-      - cache-chi-kigq8000136-CHI, cache-ewr-kewr1740096-EWR
+      - cache-chi-kigq8000124-CHI, cache-ewr-kewr1740053-EWR
       X-Timer:
-      - S1785862644.489843,VS0,VE334
+      - S1785940671.344902,VS0,VE104
     status: 200 OK
     code: 200
     duration: ""

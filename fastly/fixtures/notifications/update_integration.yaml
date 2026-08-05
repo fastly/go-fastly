@@ -3,7 +3,7 @@ version: 1
 interactions:
 - request:
     body: '{"Config":{"webhook":"https://foo.com/bar"},"Description":"test description
-      updated","ID":"1oThZkDLabGDYitZ7ecfBh","Name":"test name updated","Type":"webhook"}'
+      updated","ID":"4lFjsCDHJsxi3pUK3pcJ6H","Name":"test name updated","Type":"webhook"}'
     form: {}
     headers:
       Accept:
@@ -11,8 +11,8 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/17.0.0 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/notifications/integrations/1oThZkDLabGDYitZ7ecfBh
+      - FastlyGo/17.1.0 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/notifications/integrations/4lFjsCDHJsxi3pUK3pcJ6H
     method: PATCH
   response:
     body: ""
@@ -24,7 +24,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 28 Jul 2026 21:20:39 GMT
+      - Tue, 04 Aug 2026 16:57:22 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,11 +42,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "232"
+      - "264"
       X-Served-By:
-      - cache-chi-kmdw8640067-CHI, cache-ewr-kewr1740020-EWR
+      - cache-chi-kmdw8640091-CHI, cache-ewr-kewr1740096-EWR
       X-Timer:
-      - S1785273639.372652,VS0,VE262
+      - S1785862642.122939,VS0,VE301
     status: 204 No Content
     code: 204
     duration: ""

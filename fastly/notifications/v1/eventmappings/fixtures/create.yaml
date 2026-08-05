@@ -1,0 +1,57 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"name":"go-fastly-test-mapping","description":"Sends a notification when
+      any user logs in","scope_type":"account","event_types":["user.login"],"integration_ids":["7znp3LzS0yF0jiNU9FuQxW"]}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/17.1.0 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/notifications/v1/event-mappings
+    method: POST
+  response:
+    body: |
+      {"id":"1PUwL9Z5W199GofgvTwbPd","customer_id":"4dOhK7xEkULiabovMyhRBu","name":"go-fastly-test-mapping","description":"Sends a notification when any user logs in","scope_type":"account","scope_ids":[],"event_types":["user.login"],"integration_ids":["7znp3LzS0yF0jiNU9FuQxW"],"mapping_status":"active","created_at":"2026-08-05T14:37:51Z","updated_at":"2026-08-05T14:37:51Z"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "372"
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 05 Aug 2026 14:37:51 GMT
+      Location:
+      - /notifications/v1/event-mappings/1PUwL9Z5W199GofgvTwbPd
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Status:
+      - 201 Created
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "236"
+      X-Served-By:
+      - cache-chi-kigq8000128-CHI, cache-ewr-kewr1740053-EWR
+      X-Timer:
+      - S1785940671.795130,VS0,VE268
+    status: 201 Created
+    code: 201
+    duration: ""
