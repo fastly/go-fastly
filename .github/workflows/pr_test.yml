@@ -75,6 +75,7 @@ jobs:
           fi
 
   test:
+    name: Test (${{ matrix.platform }})
     strategy:
       matrix:
         go-version: [1.26.x]
