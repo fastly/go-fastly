@@ -175,7 +175,7 @@ func TestClient_requests(t *testing.T) {
 		t.Fatal(err)
 	}
 	if request.AgentResponseCode != testRequest.AgentResponseCode {
-		t.Errorf("unexpected request AgentResponseCode: got %q, expected %q", request.AgentResponseCode, testRequest.AgentResponseCode)
+		t.Errorf("unexpected request AgentResponseCode: got %d, expected %d", request.AgentResponseCode, testRequest.AgentResponseCode)
 	}
 	if request.Country != testRequest.Country {
 		t.Errorf("unexpected request Country: got %q, expected %q", request.Country, testRequest.Country)
@@ -200,14 +200,14 @@ func TestClient_requests(t *testing.T) {
 	}
 	assert.ElementsMatch(t, request.RequestHeaders, testRequest.RequestHeaders)
 	if request.ResponseCode != testRequest.ResponseCode {
-		t.Errorf("unexpected request ResponseCode: got %q, expected %q", request.ResponseCode, testRequest.ResponseCode)
+		t.Errorf("unexpected request ResponseCode: got %d, expected %d", request.ResponseCode, testRequest.ResponseCode)
 	}
 	assert.ElementsMatch(t, request.ResponseHeaders, testRequest.ResponseHeaders)
 	if request.ResponseSize != testRequest.ResponseSize {
-		t.Errorf("unexpected request ResponseSize: got %q, expected %q", request.ResponseSize, testRequest.ResponseSize)
+		t.Errorf("unexpected request ResponseSize: got %d, expected %d", request.ResponseSize, testRequest.ResponseSize)
 	}
 	if request.ResponseTime != testRequest.ResponseTime {
-		t.Errorf("unexpected request ResponseTime: got %q, expected %q", request.ResponseTime, testRequest.ResponseTime)
+		t.Errorf("unexpected request ResponseTime: got %d, expected %d", request.ResponseTime, testRequest.ResponseTime)
 	}
 	if request.Scheme != testRequest.Scheme {
 		t.Errorf("unexpected request Scheme: got %q, expected %q", request.Scheme, testRequest.Scheme)
@@ -250,7 +250,7 @@ func TestClient_requests(t *testing.T) {
 		t.Fatal(err)
 	}
 	if request.AgentResponseCode != testRequest.AgentResponseCode {
-		t.Errorf("unexpected request AgentResponseCode: got %q, expected %q", request.AgentResponseCode, testRequest.AgentResponseCode)
+		t.Errorf("unexpected request AgentResponseCode: got %d, expected %d", request.AgentResponseCode, testRequest.AgentResponseCode)
 	}
 	if request.Country != testRequest.Country {
 		t.Errorf("unexpected request Country: got %q, expected %q", request.Country, testRequest.Country)
@@ -275,14 +275,14 @@ func TestClient_requests(t *testing.T) {
 	}
 	assert.ElementsMatch(t, request.RequestHeaders, testRequest.RequestHeaders)
 	if request.ResponseCode != testRequest.ResponseCode {
-		t.Errorf("unexpected request ResponseCode: got %q, expected %q", request.ResponseCode, testRequest.ResponseCode)
+		t.Errorf("unexpected request ResponseCode: got %d, expected %d", request.ResponseCode, testRequest.ResponseCode)
 	}
 	assert.ElementsMatch(t, request.ResponseHeaders, testRequest.ResponseHeaders)
 	if request.ResponseSize != testRequest.ResponseSize {
-		t.Errorf("unexpected request ResponseSize: got %q, expected %q", request.ResponseSize, testRequest.ResponseSize)
+		t.Errorf("unexpected request ResponseSize: got %d, expected %d", request.ResponseSize, testRequest.ResponseSize)
 	}
 	if request.ResponseTime != testRequest.ResponseTime {
-		t.Errorf("unexpected request ResponseTime: got %q, expected %q", request.ResponseTime, testRequest.ResponseTime)
+		t.Errorf("unexpected request ResponseTime: got %d, expected %d", request.ResponseTime, testRequest.ResponseTime)
 	}
 	if request.Scheme != testRequest.Scheme {
 		t.Errorf("unexpected request Scheme: got %q, expected %q", request.Scheme, testRequest.Scheme)

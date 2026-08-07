@@ -118,10 +118,10 @@ func TestClient_Backends_Compute(t *testing.T) {
 		t.Errorf("bad address: %q (%q)", *b.Address, *nb.Address)
 	}
 	if *b.Port != *nb.Port {
-		t.Errorf("bad port: %q (%q)", *b.Port, *nb.Port)
+		t.Errorf("bad port: %d (%d)", *b.Port, *nb.Port)
 	}
 	if *b.ConnectTimeout != *nb.ConnectTimeout {
-		t.Errorf("bad connect_timeout: %q (%q)", *b.ConnectTimeout, *nb.ConnectTimeout)
+		t.Errorf("bad connect_timeout: %d (%d)", *b.ConnectTimeout, *nb.ConnectTimeout)
 	}
 	if *b.OverrideHost != *nb.OverrideHost {
 		t.Errorf("bad override_host: %q (%q)", *b.OverrideHost, *nb.OverrideHost)
@@ -344,10 +344,10 @@ func TestClient_Backends(t *testing.T) {
 		t.Errorf("bad address: %q (%q)", *b.Address, *nb.Address)
 	}
 	if *b.Port != *nb.Port {
-		t.Errorf("bad port: %q (%q)", *b.Port, *nb.Port)
+		t.Errorf("bad port: %d (%d)", *b.Port, *nb.Port)
 	}
 	if *b.ConnectTimeout != *nb.ConnectTimeout {
-		t.Errorf("bad connect_timeout: %q (%q)", *b.ConnectTimeout, *nb.ConnectTimeout)
+		t.Errorf("bad connect_timeout: %d (%d)", *b.ConnectTimeout, *nb.ConnectTimeout)
 	}
 	if *b.OverrideHost != *nb.OverrideHost {
 		t.Errorf("bad override_host: %q (%q)", *b.OverrideHost, *nb.OverrideHost)

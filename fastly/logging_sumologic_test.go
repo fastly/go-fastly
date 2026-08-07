@@ -60,7 +60,7 @@ func TestClient_Sumologics(t *testing.T) {
 		t.Errorf("bad format: %q", *s.Format)
 	}
 	if *s.FormatVersion != 1 {
-		t.Errorf("bad format version: %q", *s.FormatVersion)
+		t.Errorf("bad format version: %d", *s.FormatVersion)
 	}
 	if *s.MessageType != "classic" {
 		t.Errorf("bad message type: %q", *s.MessageType)
@@ -106,7 +106,7 @@ func TestClient_Sumologics(t *testing.T) {
 		t.Errorf("bad format: %q", *s.Format)
 	}
 	if *s.FormatVersion != *ns.FormatVersion {
-		t.Errorf("bad format version: %q", *s.FormatVersion)
+		t.Errorf("bad format version: %d", *s.FormatVersion)
 	}
 	if *s.MessageType != *ns.MessageType {
 		t.Errorf("bad message type: %q", *s.MessageType)
@@ -207,7 +207,7 @@ func TestClient_Sumologics_Compute(t *testing.T) {
 		t.Errorf("bad format: %q", *s.Format)
 	}
 	if *s.FormatVersion != 1 {
-		t.Errorf("bad format version: %q", *s.FormatVersion)
+		t.Errorf("bad format version: %d", *s.FormatVersion)
 	}
 	if *s.MessageType != "classic" {
 		t.Errorf("bad message type: %q", *s.MessageType)
@@ -253,7 +253,7 @@ func TestClient_Sumologics_Compute(t *testing.T) {
 		t.Errorf("bad format: %q", *s.Format)
 	}
 	if *s.FormatVersion != *ns.FormatVersion {
-		t.Errorf("bad format version: %q", *s.FormatVersion)
+		t.Errorf("bad format version: %d", *s.FormatVersion)
 	}
 	if *s.MessageType != *ns.MessageType {
 		t.Errorf("bad message type: %q", *s.MessageType)

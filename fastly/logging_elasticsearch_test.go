@@ -103,10 +103,10 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad password: %q", *es.Password)
 	}
 	if *es.RequestMaxEntries != 1 {
-		t.Errorf("bad request_max_entries: %q", *es.RequestMaxEntries)
+		t.Errorf("bad request_max_entries: %d", *es.RequestMaxEntries)
 	}
 	if *es.RequestMaxBytes != 1000 {
-		t.Errorf("bad request_max_bytes: %q", *es.RequestMaxBytes)
+		t.Errorf("bad request_max_bytes: %d", *es.RequestMaxBytes)
 	}
 	if *es.Placement != "none" {
 		t.Errorf("bad placement: %q", *es.Placement)
@@ -176,10 +176,10 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad password: %q", *es.Password)
 	}
 	if *es.RequestMaxEntries != *nes.RequestMaxEntries {
-		t.Errorf("bad request_max_entries: %q", *es.RequestMaxEntries)
+		t.Errorf("bad request_max_entries: %d", *es.RequestMaxEntries)
 	}
 	if *es.RequestMaxBytes != *nes.RequestMaxBytes {
-		t.Errorf("bad request_max_bytes: %q", *es.RequestMaxBytes)
+		t.Errorf("bad request_max_bytes: %d", *es.RequestMaxBytes)
 	}
 	if *es.Placement != *nes.Placement {
 		t.Errorf("bad placement: %q", *es.Placement)
@@ -338,10 +338,10 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad password: %q", *es.Password)
 	}
 	if *es.RequestMaxEntries != 1 {
-		t.Errorf("bad request_max_entries: %q", *es.RequestMaxEntries)
+		t.Errorf("bad request_max_entries: %d", *es.RequestMaxEntries)
 	}
 	if *es.RequestMaxBytes != 1000 {
-		t.Errorf("bad request_max_bytes: %q", *es.RequestMaxBytes)
+		t.Errorf("bad request_max_bytes: %d", *es.RequestMaxBytes)
 	}
 	if *es.Placement != "none" {
 		t.Errorf("bad placement: %q", *es.Placement)
@@ -411,10 +411,10 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad password: %q", *es.Password)
 	}
 	if *es.RequestMaxEntries != *nes.RequestMaxEntries {
-		t.Errorf("bad request_max_entries: %q", *es.RequestMaxEntries)
+		t.Errorf("bad request_max_entries: %d", *es.RequestMaxEntries)
 	}
 	if *es.RequestMaxBytes != *nes.RequestMaxBytes {
-		t.Errorf("bad request_max_bytes: %q", *es.RequestMaxBytes)
+		t.Errorf("bad request_max_bytes: %d", *es.RequestMaxBytes)
 	}
 	if *es.Placement != *nes.Placement {
 		t.Errorf("bad placement: %q", *es.Placement)

@@ -57,7 +57,7 @@ func TestClient_Honeycombs(t *testing.T) {
 		t.Errorf("bad format: %q", *h.Format)
 	}
 	if *h.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *h.FormatVersion)
+		t.Errorf("bad format_version: %d", *h.FormatVersion)
 	}
 	if *h.Placement != "none" {
 		t.Errorf("bad placement: %q", *h.Placement)
@@ -103,7 +103,7 @@ func TestClient_Honeycombs(t *testing.T) {
 		t.Errorf("bad format: %q", *h.Format)
 	}
 	if *h.FormatVersion != *nh.FormatVersion {
-		t.Errorf("bad format_version: %q", *h.FormatVersion)
+		t.Errorf("bad format_version: %d", *h.FormatVersion)
 	}
 	if *h.Placement != *nh.Placement {
 		t.Errorf("bad placement: %q", *h.Placement)
@@ -212,7 +212,7 @@ func TestClient_Honeycombs_Compute(t *testing.T) {
 		t.Errorf("bad format: %q", *h.Format)
 	}
 	if *h.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *h.FormatVersion)
+		t.Errorf("bad format_version: %d", *h.FormatVersion)
 	}
 	if *h.Placement != "none" {
 		t.Errorf("bad placement: %q", *h.Placement)
@@ -258,7 +258,7 @@ func TestClient_Honeycombs_Compute(t *testing.T) {
 		t.Errorf("bad format: %q", *h.Format)
 	}
 	if *h.FormatVersion != *nh.FormatVersion {
-		t.Errorf("bad format_version: %q", *h.FormatVersion)
+		t.Errorf("bad format_version: %d", *h.FormatVersion)
 	}
 	if *h.Placement != *nh.Placement {
 		t.Errorf("bad placement: %q", *h.Placement)

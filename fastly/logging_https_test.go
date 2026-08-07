@@ -195,10 +195,10 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad url: %q", *httpsCreateResp1.URL)
 	}
 	if *httpsCreateResp1.RequestMaxEntries != 1 {
-		t.Errorf("bad request_max_entries: %q", *httpsCreateResp1.RequestMaxEntries)
+		t.Errorf("bad request_max_entries: %d", *httpsCreateResp1.RequestMaxEntries)
 	}
 	if *httpsCreateResp1.RequestMaxBytes != 1000 {
-		t.Errorf("bad request_max_bytes: %q", *httpsCreateResp1.RequestMaxBytes)
+		t.Errorf("bad request_max_bytes: %d", *httpsCreateResp1.RequestMaxBytes)
 	}
 	if *httpsCreateResp1.ContentType != JSONMimeType {
 		t.Errorf("bad content_type: %q", *httpsCreateResp1.ContentType)
@@ -216,7 +216,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad json_format: %q", *httpsCreateResp1.JSONFormat)
 	}
 	if *httpsCreateResp1.Period != 5 {
-		t.Errorf("bad period: %q", *httpsCreateResp1.Period)
+		t.Errorf("bad period: %d", *httpsCreateResp1.Period)
 	}
 	if *httpsCreateResp1.Placement != "none" {
 		t.Errorf("bad placement: %q", *httpsCreateResp1.Placement)
@@ -243,13 +243,13 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad compression_codec: %q", *httpsCreateResp2.CompressionCodec)
 	}
 	if *httpsCreateResp2.GzipLevel != 8 {
-		t.Errorf("bad gzip_level: %q", *httpsCreateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *httpsCreateResp2.GzipLevel)
 	}
 	if *httpsCreateResp3.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", *httpsCreateResp3.CompressionCodec)
 	}
 	if *httpsCreateResp3.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *httpsCreateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *httpsCreateResp3.GzipLevel)
 	}
 
 	// List
@@ -289,10 +289,10 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad url: %q", *httpsCreateResp1.URL)
 	}
 	if *httpsCreateResp1.RequestMaxEntries != *nh.RequestMaxEntries {
-		t.Errorf("bad request_max_entries: %q", *httpsCreateResp1.RequestMaxEntries)
+		t.Errorf("bad request_max_entries: %d", *httpsCreateResp1.RequestMaxEntries)
 	}
 	if *httpsCreateResp1.RequestMaxBytes != *nh.RequestMaxBytes {
-		t.Errorf("bad request_max_bytes: %q", *httpsCreateResp1.RequestMaxBytes)
+		t.Errorf("bad request_max_bytes: %d", *httpsCreateResp1.RequestMaxBytes)
 	}
 	if *httpsCreateResp1.ContentType != *nh.ContentType {
 		t.Errorf("bad content_type: %q", *httpsCreateResp1.ContentType)
@@ -310,7 +310,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad json_format: %q", *httpsCreateResp1.JSONFormat)
 	}
 	if *httpsCreateResp1.Period != *nh.Period {
-		t.Errorf("bad period: %q", *httpsCreateResp1.Period)
+		t.Errorf("bad period: %d", *httpsCreateResp1.Period)
 	}
 	if *httpsCreateResp1.Placement != *nh.Placement {
 		t.Errorf("bad placement: %q", *httpsCreateResp1.Placement)
@@ -385,7 +385,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad placement: %q", *uh2.Placement)
 	}
 	if *uh2.GzipLevel != 3 {
-		t.Errorf("bad gzip_level: %q", *uh2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *uh2.GzipLevel)
 	}
 
 	// Delete
@@ -584,10 +584,10 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad url: %q", *httpsCreateResp1.URL)
 	}
 	if *httpsCreateResp1.RequestMaxEntries != 1 {
-		t.Errorf("bad request_max_entries: %q", *httpsCreateResp1.RequestMaxEntries)
+		t.Errorf("bad request_max_entries: %d", *httpsCreateResp1.RequestMaxEntries)
 	}
 	if *httpsCreateResp1.RequestMaxBytes != 1000 {
-		t.Errorf("bad request_max_bytes: %q", *httpsCreateResp1.RequestMaxBytes)
+		t.Errorf("bad request_max_bytes: %d", *httpsCreateResp1.RequestMaxBytes)
 	}
 	if *httpsCreateResp1.ContentType != JSONMimeType {
 		t.Errorf("bad content_type: %q", *httpsCreateResp1.ContentType)
@@ -629,13 +629,13 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad compression_codec: %q", *httpsCreateResp2.CompressionCodec)
 	}
 	if *httpsCreateResp2.GzipLevel != 8 {
-		t.Errorf("bad gzip_level: %q", *httpsCreateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *httpsCreateResp2.GzipLevel)
 	}
 	if *httpsCreateResp3.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", *httpsCreateResp3.CompressionCodec)
 	}
 	if *httpsCreateResp3.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *httpsCreateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *httpsCreateResp3.GzipLevel)
 	}
 
 	// List
@@ -675,10 +675,10 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad url: %q", *httpsCreateResp1.URL)
 	}
 	if *httpsCreateResp1.RequestMaxEntries != *nh.RequestMaxEntries {
-		t.Errorf("bad request_max_entries: %q", *httpsCreateResp1.RequestMaxEntries)
+		t.Errorf("bad request_max_entries: %d", *httpsCreateResp1.RequestMaxEntries)
 	}
 	if *httpsCreateResp1.RequestMaxBytes != *nh.RequestMaxBytes {
-		t.Errorf("bad request_max_bytes: %q", *httpsCreateResp1.RequestMaxBytes)
+		t.Errorf("bad request_max_bytes: %d", *httpsCreateResp1.RequestMaxBytes)
 	}
 	if *httpsCreateResp1.ContentType != *nh.ContentType {
 		t.Errorf("bad content_type: %q", *httpsCreateResp1.ContentType)

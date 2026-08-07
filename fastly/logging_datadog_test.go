@@ -62,7 +62,7 @@ func TestClient_Datadog_Compute(t *testing.T) {
 		t.Errorf("bad format: %q", *d.Format)
 	}
 	if *d.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *d.FormatVersion)
+		t.Errorf("bad format_version: %d", *d.FormatVersion)
 	}
 	if *d.Placement != "none" {
 		t.Errorf("bad placement: %q", *d.Placement)
@@ -105,7 +105,7 @@ func TestClient_Datadog_Compute(t *testing.T) {
 		t.Errorf("bad format: %q", *d.Format)
 	}
 	if *d.FormatVersion != *nd.FormatVersion {
-		t.Errorf("bad format_version: %q", *d.FormatVersion)
+		t.Errorf("bad format_version: %d", *d.FormatVersion)
 	}
 	if *d.Placement != *nd.Placement {
 		t.Errorf("bad placement: %q", *d.Placement)
@@ -135,7 +135,7 @@ func TestClient_Datadog_Compute(t *testing.T) {
 		t.Errorf("bad name: %q", *ud.Name)
 	}
 	if *ud.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *ud.FormatVersion)
+		t.Errorf("bad format_version: %d", *ud.FormatVersion)
 	}
 	if *ud.Region != "EU" {
 		t.Errorf("bad region: %q", *ud.Region)
@@ -213,7 +213,7 @@ func TestClient_Datadog(t *testing.T) {
 		t.Errorf("bad format: %q", *d.Format)
 	}
 	if *d.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *d.FormatVersion)
+		t.Errorf("bad format_version: %d", *d.FormatVersion)
 	}
 	if *d.Placement != "none" {
 		t.Errorf("bad placement: %q", *d.Placement)
@@ -256,7 +256,7 @@ func TestClient_Datadog(t *testing.T) {
 		t.Errorf("bad format: %q", *d.Format)
 	}
 	if *d.FormatVersion != *nd.FormatVersion {
-		t.Errorf("bad format_version: %q", *d.FormatVersion)
+		t.Errorf("bad format_version: %d", *d.FormatVersion)
 	}
 	if *d.Placement != *nd.Placement {
 		t.Errorf("bad placement: %q", *d.Placement)
@@ -286,7 +286,7 @@ func TestClient_Datadog(t *testing.T) {
 		t.Errorf("bad name: %q", *ud.Name)
 	}
 	if *ud.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *ud.FormatVersion)
+		t.Errorf("bad format_version: %d", *ud.FormatVersion)
 	}
 	if *ud.Region != "EU" {
 		t.Errorf("bad region: %q", *ud.Region)

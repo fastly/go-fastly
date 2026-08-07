@@ -164,19 +164,19 @@ func TestClient_Openstack(t *testing.T) {
 		t.Errorf("bad url: %q", *osCreateResp1.URL)
 	}
 	if *osCreateResp1.Period != 12 {
-		t.Errorf("bad period: %q", *osCreateResp1.Period)
+		t.Errorf("bad period: %d", *osCreateResp1.Period)
 	}
 	if *osCreateResp1.CompressionCodec != "snappy" {
 		t.Errorf("bad comprssion_codec: %q", *osCreateResp1.CompressionCodec)
 	}
 	if *osCreateResp1.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *osCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *osCreateResp1.GzipLevel)
 	}
 	if *osCreateResp1.Format != "format" {
 		t.Errorf("bad format: %q", *osCreateResp1.Format)
 	}
 	if *osCreateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *osCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *osCreateResp1.FormatVersion)
 	}
 	if *osCreateResp1.TimestampFormat != "%Y" {
 		t.Errorf("bad timestamp_format: %q", *osCreateResp1.TimestampFormat)
@@ -194,13 +194,13 @@ func TestClient_Openstack(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *osCreateResp2.CompressionCodec)
 	}
 	if *osCreateResp2.GzipLevel != 8 {
-		t.Errorf("bad gzip_level: %q", *osCreateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *osCreateResp2.GzipLevel)
 	}
 	if *osCreateResp3.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", *osCreateResp3.CompressionCodec)
 	}
 	if *osCreateResp3.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *osCreateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *osCreateResp3.GzipLevel)
 	}
 
 	// List
@@ -249,19 +249,19 @@ func TestClient_Openstack(t *testing.T) {
 		t.Errorf("bad url: %q", *osCreateResp1.URL)
 	}
 	if *osCreateResp1.Period != *osGetResp.Period {
-		t.Errorf("bad period: %q", *osCreateResp1.Period)
+		t.Errorf("bad period: %d", *osCreateResp1.Period)
 	}
 	if *osCreateResp1.CompressionCodec != *osGetResp.CompressionCodec {
 		t.Errorf("bad compression_codec: %q", *osCreateResp1.CompressionCodec)
 	}
 	if *osCreateResp1.GzipLevel != *osGetResp.GzipLevel {
-		t.Errorf("bad gzip_level: %q", *osCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *osCreateResp1.GzipLevel)
 	}
 	if *osCreateResp1.Format != *osGetResp.Format {
 		t.Errorf("bad format: %q", *osCreateResp1.Format)
 	}
 	if *osCreateResp1.FormatVersion != *osGetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", *osCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *osCreateResp1.FormatVersion)
 	}
 	if *osCreateResp1.TimestampFormat != *osGetResp.TimestampFormat {
 		t.Errorf("bad timestamp_format: %q", *osCreateResp1.TimestampFormat)
@@ -339,7 +339,7 @@ func TestClient_Openstack(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *osUpdateResp1.CompressionCodec)
 	}
 	if osUpdateResp1.GzipLevel != nil {
-		t.Errorf("bad gzip_level: %q", *osUpdateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *osUpdateResp1.GzipLevel)
 	}
 	if *osUpdateResp1.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *osUpdateResp1.ProcessingRegion)
@@ -348,13 +348,13 @@ func TestClient_Openstack(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *osUpdateResp2.CompressionCodec)
 	}
 	if *osUpdateResp2.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *osUpdateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *osUpdateResp2.GzipLevel)
 	}
 	if osUpdateResp3.CompressionCodec != nil {
 		t.Errorf("bad compression_codec: %q", *osUpdateResp3.CompressionCodec)
 	}
 	if *osUpdateResp3.GzipLevel != 9 {
-		t.Errorf("bad gzip_level: %q", *osUpdateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *osUpdateResp3.GzipLevel)
 	}
 
 	// Delete
@@ -528,19 +528,19 @@ func TestClient_Openstack_Compute(t *testing.T) {
 		t.Errorf("bad url: %q", *osCreateResp1.URL)
 	}
 	if *osCreateResp1.Period != 12 {
-		t.Errorf("bad period: %q", *osCreateResp1.Period)
+		t.Errorf("bad period: %d", *osCreateResp1.Period)
 	}
 	if *osCreateResp1.CompressionCodec != "snappy" {
 		t.Errorf("bad comprssion_codec: %q", *osCreateResp1.CompressionCodec)
 	}
 	if *osCreateResp1.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *osCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *osCreateResp1.GzipLevel)
 	}
 	if *osCreateResp1.Format != "format" {
 		t.Errorf("bad format: %q", *osCreateResp1.Format)
 	}
 	if *osCreateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *osCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *osCreateResp1.FormatVersion)
 	}
 	if *osCreateResp1.TimestampFormat != "%Y" {
 		t.Errorf("bad timestamp_format: %q", *osCreateResp1.TimestampFormat)
@@ -558,13 +558,13 @@ func TestClient_Openstack_Compute(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *osCreateResp2.CompressionCodec)
 	}
 	if *osCreateResp2.GzipLevel != 8 {
-		t.Errorf("bad gzip_level: %q", *osCreateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *osCreateResp2.GzipLevel)
 	}
 	if *osCreateResp3.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", *osCreateResp3.CompressionCodec)
 	}
 	if *osCreateResp3.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *osCreateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *osCreateResp3.GzipLevel)
 	}
 
 	// List
@@ -613,19 +613,19 @@ func TestClient_Openstack_Compute(t *testing.T) {
 		t.Errorf("bad url: %q", *osCreateResp1.URL)
 	}
 	if *osCreateResp1.Period != *osGetResp.Period {
-		t.Errorf("bad period: %q", *osCreateResp1.Period)
+		t.Errorf("bad period: %d", *osCreateResp1.Period)
 	}
 	if *osCreateResp1.CompressionCodec != *osGetResp.CompressionCodec {
 		t.Errorf("bad compression_codec: %q", *osCreateResp1.CompressionCodec)
 	}
 	if *osCreateResp1.GzipLevel != *osGetResp.GzipLevel {
-		t.Errorf("bad gzip_level: %q", *osCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *osCreateResp1.GzipLevel)
 	}
 	if *osCreateResp1.Format != *osGetResp.Format {
 		t.Errorf("bad format: %q", *osCreateResp1.Format)
 	}
 	if *osCreateResp1.FormatVersion != *osGetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", *osCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *osCreateResp1.FormatVersion)
 	}
 	if *osCreateResp1.TimestampFormat != *osGetResp.TimestampFormat {
 		t.Errorf("bad timestamp_format: %q", *osCreateResp1.TimestampFormat)
@@ -703,7 +703,7 @@ func TestClient_Openstack_Compute(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *osUpdateResp1.CompressionCodec)
 	}
 	if osUpdateResp1.GzipLevel != nil {
-		t.Errorf("bad gzip_level: %q", *osUpdateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *osUpdateResp1.GzipLevel)
 	}
 	if *osUpdateResp1.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *osUpdateResp1.ProcessingRegion)
@@ -712,13 +712,13 @@ func TestClient_Openstack_Compute(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *osUpdateResp2.CompressionCodec)
 	}
 	if *osUpdateResp2.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *osUpdateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *osUpdateResp2.GzipLevel)
 	}
 	if osUpdateResp3.CompressionCodec != nil {
 		t.Errorf("bad compression_codec: %q", *osUpdateResp3.CompressionCodec)
 	}
 	if *osUpdateResp3.GzipLevel != 9 {
-		t.Errorf("bad gzip_level: %q", *osUpdateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *osUpdateResp3.GzipLevel)
 	}
 
 	// Delete

@@ -151,7 +151,7 @@ func TestClient_FTPs(t *testing.T) {
 		t.Errorf("bad address: %q", *ftpCreateResp1.Address)
 	}
 	if *ftpCreateResp1.Port != 1234 {
-		t.Errorf("bad port: %q", *ftpCreateResp1.Port)
+		t.Errorf("bad port: %d", *ftpCreateResp1.Port)
 	}
 	if *ftpCreateResp1.PublicKey != pgpPublicKey() {
 		t.Errorf("bad public_key: %q", *ftpCreateResp1.PublicKey)
@@ -166,16 +166,16 @@ func TestClient_FTPs(t *testing.T) {
 		t.Errorf("bad path: %q", *ftpCreateResp1.Path)
 	}
 	if *ftpCreateResp1.Period != 12 {
-		t.Errorf("bad period: %q", *ftpCreateResp1.Period)
+		t.Errorf("bad period: %d", *ftpCreateResp1.Period)
 	}
 	if *ftpCreateResp1.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", *ftpCreateResp1.CompressionCodec)
 	}
 	if *ftpCreateResp1.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *ftpCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *ftpCreateResp1.GzipLevel)
 	}
 	if *ftpCreateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *ftpCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *ftpCreateResp1.FormatVersion)
 	}
 	if *ftpCreateResp1.Format != "format" {
 		t.Errorf("bad format: %q", *ftpCreateResp1.Format)
@@ -193,13 +193,13 @@ func TestClient_FTPs(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *ftpCreateResp2.CompressionCodec)
 	}
 	if *ftpCreateResp2.GzipLevel != 8 {
-		t.Errorf("bad gzip_level: %q", *ftpCreateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *ftpCreateResp2.GzipLevel)
 	}
 	if *ftpCreateResp3.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", *ftpCreateResp3.CompressionCodec)
 	}
 	if *ftpCreateResp3.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *ftpCreateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *ftpCreateResp3.GzipLevel)
 	}
 
 	// List
@@ -236,7 +236,7 @@ func TestClient_FTPs(t *testing.T) {
 		t.Errorf("bad address: %q", *ftpCreateResp1.Address)
 	}
 	if *ftpCreateResp1.Port != *ftpGetResp.Port {
-		t.Errorf("bad port: %q", *ftpCreateResp1.Port)
+		t.Errorf("bad port: %d", *ftpCreateResp1.Port)
 	}
 	if *ftpCreateResp1.PublicKey != *ftpGetResp.PublicKey {
 		t.Errorf("bad public_key: %q", *ftpCreateResp1.PublicKey)
@@ -251,16 +251,16 @@ func TestClient_FTPs(t *testing.T) {
 		t.Errorf("bad path: %q", *ftpCreateResp1.Path)
 	}
 	if *ftpCreateResp1.Period != *ftpGetResp.Period {
-		t.Errorf("bad period: %q", *ftpCreateResp1.Period)
+		t.Errorf("bad period: %d", *ftpCreateResp1.Period)
 	}
 	if *ftpCreateResp1.CompressionCodec != *ftpGetResp.CompressionCodec {
 		t.Errorf("bad compression_codec: %q", *ftpCreateResp1.CompressionCodec)
 	}
 	if *ftpCreateResp1.GzipLevel != *ftpGetResp.GzipLevel {
-		t.Errorf("bad gzip_level: %q", *ftpCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *ftpCreateResp1.GzipLevel)
 	}
 	if *ftpCreateResp1.FormatVersion != *ftpGetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", *ftpCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *ftpCreateResp1.FormatVersion)
 	}
 	if *ftpCreateResp1.Format != *ftpGetResp.Format {
 		t.Errorf("bad format: %q", *ftpCreateResp1.Format)
@@ -334,7 +334,7 @@ func TestClient_FTPs(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *ftpUpdateResp1.CompressionCodec)
 	}
 	if ftpUpdateResp1.GzipLevel != nil {
-		t.Errorf("bad gzip_level: %q", *ftpUpdateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *ftpUpdateResp1.GzipLevel)
 	}
 	if *ftpUpdateResp1.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *ftpUpdateResp1.ProcessingRegion)
@@ -343,13 +343,13 @@ func TestClient_FTPs(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *ftpUpdateResp2.CompressionCodec)
 	}
 	if *ftpUpdateResp2.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *ftpUpdateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *ftpUpdateResp2.GzipLevel)
 	}
 	if ftpUpdateResp3.CompressionCodec != nil {
 		t.Errorf("bad compression_codec: %q", *ftpUpdateResp3.CompressionCodec)
 	}
 	if *ftpUpdateResp3.GzipLevel != 9 {
-		t.Errorf("bad gzip_level: %q", *ftpUpdateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *ftpUpdateResp3.GzipLevel)
 	}
 
 	// Delete
@@ -510,7 +510,7 @@ func TestClient_FTPs_Compute(t *testing.T) {
 		t.Errorf("bad address: %q", *ftpCreateResp1.Address)
 	}
 	if *ftpCreateResp1.Port != 1234 {
-		t.Errorf("bad port: %q", *ftpCreateResp1.Port)
+		t.Errorf("bad port: %d", *ftpCreateResp1.Port)
 	}
 	if *ftpCreateResp1.PublicKey != pgpPublicKey() {
 		t.Errorf("bad public_key: %q", *ftpCreateResp1.PublicKey)
@@ -525,16 +525,16 @@ func TestClient_FTPs_Compute(t *testing.T) {
 		t.Errorf("bad path: %q", *ftpCreateResp1.Path)
 	}
 	if *ftpCreateResp1.Period != 12 {
-		t.Errorf("bad period: %q", *ftpCreateResp1.Period)
+		t.Errorf("bad period: %d", *ftpCreateResp1.Period)
 	}
 	if *ftpCreateResp1.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", *ftpCreateResp1.CompressionCodec)
 	}
 	if *ftpCreateResp1.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *ftpCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *ftpCreateResp1.GzipLevel)
 	}
 	if *ftpCreateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *ftpCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *ftpCreateResp1.FormatVersion)
 	}
 	if *ftpCreateResp1.Format != "format" {
 		t.Errorf("bad format: %q", *ftpCreateResp1.Format)
@@ -552,13 +552,13 @@ func TestClient_FTPs_Compute(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *ftpCreateResp2.CompressionCodec)
 	}
 	if *ftpCreateResp2.GzipLevel != 8 {
-		t.Errorf("bad gzip_level: %q", *ftpCreateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *ftpCreateResp2.GzipLevel)
 	}
 	if *ftpCreateResp3.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", *ftpCreateResp3.CompressionCodec)
 	}
 	if *ftpCreateResp3.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *ftpCreateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *ftpCreateResp3.GzipLevel)
 	}
 
 	// List
@@ -595,7 +595,7 @@ func TestClient_FTPs_Compute(t *testing.T) {
 		t.Errorf("bad address: %q", *ftpCreateResp1.Address)
 	}
 	if *ftpCreateResp1.Port != *ftpGetResp.Port {
-		t.Errorf("bad port: %q", *ftpCreateResp1.Port)
+		t.Errorf("bad port: %d", *ftpCreateResp1.Port)
 	}
 	if *ftpCreateResp1.PublicKey != *ftpGetResp.PublicKey {
 		t.Errorf("bad public_key: %q", *ftpCreateResp1.PublicKey)
@@ -610,16 +610,16 @@ func TestClient_FTPs_Compute(t *testing.T) {
 		t.Errorf("bad path: %q", *ftpCreateResp1.Path)
 	}
 	if *ftpCreateResp1.Period != *ftpGetResp.Period {
-		t.Errorf("bad period: %q", *ftpCreateResp1.Period)
+		t.Errorf("bad period: %d", *ftpCreateResp1.Period)
 	}
 	if *ftpCreateResp1.CompressionCodec != *ftpGetResp.CompressionCodec {
 		t.Errorf("bad compression_codec: %q", *ftpCreateResp1.CompressionCodec)
 	}
 	if *ftpCreateResp1.GzipLevel != *ftpGetResp.GzipLevel {
-		t.Errorf("bad gzip_level: %q", *ftpCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *ftpCreateResp1.GzipLevel)
 	}
 	if *ftpCreateResp1.FormatVersion != *ftpGetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", *ftpCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *ftpCreateResp1.FormatVersion)
 	}
 	if *ftpCreateResp1.Format != *ftpGetResp.Format {
 		t.Errorf("bad format: %q", *ftpCreateResp1.Format)
@@ -693,7 +693,7 @@ func TestClient_FTPs_Compute(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *ftpUpdateResp1.CompressionCodec)
 	}
 	if ftpUpdateResp1.GzipLevel != nil {
-		t.Errorf("bad gzip_level: %q", *ftpUpdateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *ftpUpdateResp1.GzipLevel)
 	}
 	if *ftpUpdateResp1.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *ftpUpdateResp1.ProcessingRegion)
@@ -702,13 +702,13 @@ func TestClient_FTPs_Compute(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *ftpUpdateResp2.CompressionCodec)
 	}
 	if *ftpUpdateResp2.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *ftpUpdateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *ftpUpdateResp2.GzipLevel)
 	}
 	if ftpUpdateResp3.CompressionCodec != nil {
 		t.Errorf("bad compression_codec: %q", *ftpUpdateResp3.CompressionCodec)
 	}
 	if *ftpUpdateResp3.GzipLevel != 9 {
-		t.Errorf("bad gzip_level: %q", *ftpUpdateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *ftpUpdateResp3.GzipLevel)
 	}
 
 	// Delete

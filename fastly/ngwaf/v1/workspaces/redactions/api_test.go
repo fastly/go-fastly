@@ -100,7 +100,7 @@ func TestClient_Redactions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if len(listedRedactions.Data) != 1 {
-		t.Errorf("unexpected redaction list length: got %q, expected %q", len(listedRedactions.Data), 1)
+		t.Errorf("unexpected redaction list length: got %d, expected %d", len(listedRedactions.Data), 1)
 	}
 	if listedRedactions.Data[0].Type != updatedRedactionType {
 		t.Errorf("unexpected redaction type: got %q, expected %q", listedRedactions.Data[0].Type, updatedRedactionType)

@@ -85,16 +85,16 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad url: %q", *s.URL)
 	}
 	if *s.RequestMaxEntries != 1 {
-		t.Errorf("bad request_max_entries: %q", *s.RequestMaxEntries)
+		t.Errorf("bad request_max_entries: %d", *s.RequestMaxEntries)
 	}
 	if *s.RequestMaxBytes != 1000 {
-		t.Errorf("bad request_max_bytes: %q", *s.RequestMaxBytes)
+		t.Errorf("bad request_max_bytes: %d", *s.RequestMaxBytes)
 	}
 	if *s.Format != "%h %l %u %t \"%r\" %>s %b" {
 		t.Errorf("bad format: %q", *s.Format)
 	}
 	if *s.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *s.FormatVersion)
+		t.Errorf("bad format_version: %d", *s.FormatVersion)
 	}
 	if *s.Placement != "none" {
 		t.Errorf("bad placement: %q", *s.Placement)
@@ -152,16 +152,16 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad url: %q", *s.URL)
 	}
 	if *s.RequestMaxEntries != *ns.RequestMaxEntries {
-		t.Errorf("bad request_max_entries: %q", *s.RequestMaxEntries)
+		t.Errorf("bad request_max_entries: %d", *s.RequestMaxEntries)
 	}
 	if *s.RequestMaxBytes != *ns.RequestMaxBytes {
-		t.Errorf("bad request_max_bytes: %q", *s.RequestMaxBytes)
+		t.Errorf("bad request_max_bytes: %d", *s.RequestMaxBytes)
 	}
 	if *s.Format != *ns.Format {
 		t.Errorf("bad format: %q", *s.Format)
 	}
 	if *s.FormatVersion != *ns.FormatVersion {
-		t.Errorf("bad format_version: %q", *s.FormatVersion)
+		t.Errorf("bad format_version: %d", *s.FormatVersion)
 	}
 	if *s.Placement != *ns.Placement {
 		t.Errorf("bad placement: %q", *s.Placement)
@@ -305,16 +305,16 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad url: %q", *s.URL)
 	}
 	if *s.RequestMaxEntries != 1 {
-		t.Errorf("bad request_max_entries: %q", *s.RequestMaxEntries)
+		t.Errorf("bad request_max_entries: %d", *s.RequestMaxEntries)
 	}
 	if *s.RequestMaxBytes != 1000 {
-		t.Errorf("bad request_max_bytes: %q", *s.RequestMaxBytes)
+		t.Errorf("bad request_max_bytes: %d", *s.RequestMaxBytes)
 	}
 	if *s.Format != "%h %l %u %t \"%r\" %>s %b" {
 		t.Errorf("bad format: %q", *s.Format)
 	}
 	if *s.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *s.FormatVersion)
+		t.Errorf("bad format_version: %d", *s.FormatVersion)
 	}
 	if *s.Placement != "none" {
 		t.Errorf("bad placement: %q", *s.Placement)
@@ -372,16 +372,16 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad url: %q", *s.URL)
 	}
 	if *s.RequestMaxEntries != *ns.RequestMaxEntries {
-		t.Errorf("bad request_max_entries: %q", *s.RequestMaxEntries)
+		t.Errorf("bad request_max_entries: %d", *s.RequestMaxEntries)
 	}
 	if *s.RequestMaxBytes != *ns.RequestMaxBytes {
-		t.Errorf("bad request_max_bytes: %q", *s.RequestMaxBytes)
+		t.Errorf("bad request_max_bytes: %d", *s.RequestMaxBytes)
 	}
 	if *s.Format != *ns.Format {
 		t.Errorf("bad format: %q", *s.Format)
 	}
 	if *s.FormatVersion != *ns.FormatVersion {
-		t.Errorf("bad format_version: %q", *s.FormatVersion)
+		t.Errorf("bad format_version: %d", *s.FormatVersion)
 	}
 	if *s.Placement != *ns.Placement {
 		t.Errorf("bad placement: %q", *s.Placement)

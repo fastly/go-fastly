@@ -130,7 +130,7 @@ func runSignalsTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 		t.Fatal(err)
 	}
 	if len(listedSignals.Data) != 1 {
-		t.Errorf("unexpected signal list length: got %q, expected %q", len(listedSignals.Data), 1)
+		t.Errorf("unexpected signal list length: got %d, expected %d", len(listedSignals.Data), 1)
 	}
 	if listedSignals.Data[0].Description != updatedSignalDescription {
 		t.Errorf("unexpected signal type: got %q, expected %q", listedSignals.Data[0].Description, updatedSignalDescription)

@@ -57,10 +57,10 @@ func TestClient_Papertrails(t *testing.T) {
 		t.Errorf("bad address: %q", *p.Address)
 	}
 	if *p.Port != 1234 {
-		t.Errorf("bad port: %q", *p.Port)
+		t.Errorf("bad port: %d", *p.Port)
 	}
 	if *p.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *p.FormatVersion)
+		t.Errorf("bad format_version: %d", *p.FormatVersion)
 	}
 	if *p.Format != "format" {
 		t.Errorf("bad format: %q", *p.Format)
@@ -103,10 +103,10 @@ func TestClient_Papertrails(t *testing.T) {
 		t.Errorf("bad address: %q", *p.Address)
 	}
 	if *p.Port != *np.Port {
-		t.Errorf("bad port: %q", *p.Port)
+		t.Errorf("bad port: %d", *p.Port)
 	}
 	if *p.FormatVersion != *np.FormatVersion {
-		t.Errorf("bad format_version: %q", *p.FormatVersion)
+		t.Errorf("bad format_version: %d", *p.FormatVersion)
 	}
 	if *p.Format != *np.Format {
 		t.Errorf("bad format: %q", *p.Format)
@@ -204,10 +204,10 @@ func TestClient_Papertrails_Compute(t *testing.T) {
 		t.Errorf("bad address: %q", *p.Address)
 	}
 	if *p.Port != 1234 {
-		t.Errorf("bad port: %q", *p.Port)
+		t.Errorf("bad port: %d", *p.Port)
 	}
 	if *p.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *p.FormatVersion)
+		t.Errorf("bad format_version: %d", *p.FormatVersion)
 	}
 	if *p.Format != "format" {
 		t.Errorf("bad format: %q", *p.Format)
@@ -250,10 +250,10 @@ func TestClient_Papertrails_Compute(t *testing.T) {
 		t.Errorf("bad address: %q", *p.Address)
 	}
 	if *p.Port != *np.Port {
-		t.Errorf("bad port: %q", *p.Port)
+		t.Errorf("bad port: %d", *p.Port)
 	}
 	if *p.FormatVersion != *np.FormatVersion {
-		t.Errorf("bad format_version: %q", *p.FormatVersion)
+		t.Errorf("bad format_version: %d", *p.FormatVersion)
 	}
 	if *p.Format != *np.Format {
 		t.Errorf("bad format: %q", *p.Format)

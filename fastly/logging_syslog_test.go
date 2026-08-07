@@ -89,7 +89,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad hostname: %q", *s.Hostname)
 	}
 	if *s.Port != 1234 {
-		t.Errorf("bad port: %q", *s.Port)
+		t.Errorf("bad port: %d", *s.Port)
 	}
 	if !*s.UseTLS {
 		t.Errorf("bad use_tls: %t", *s.UseTLS)
@@ -159,7 +159,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad hostname: %q", *s.Hostname)
 	}
 	if *s.Port != *ns.Port {
-		t.Errorf("bad port: %q", *s.Port)
+		t.Errorf("bad port: %d", *s.Port)
 	}
 	if *s.UseTLS != *ns.UseTLS {
 		t.Errorf("bad use_tls: %t", *s.UseTLS)
@@ -183,7 +183,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad format: %q", *s.Format)
 	}
 	if *s.FormatVersion != *ns.FormatVersion {
-		t.Errorf("bad format_version: %q", *s.FormatVersion)
+		t.Errorf("bad format_version: %d", *s.FormatVersion)
 	}
 	if *s.MessageType != *ns.MessageType {
 		t.Errorf("bad message_type: %q", *s.MessageType)
@@ -323,7 +323,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad hostname: %q", *s.Hostname)
 	}
 	if *s.Port != 1234 {
-		t.Errorf("bad port: %q", *s.Port)
+		t.Errorf("bad port: %d", *s.Port)
 	}
 	if !*s.UseTLS {
 		t.Errorf("bad use_tls: %t", *s.UseTLS)
@@ -393,7 +393,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad hostname: %q", *s.Hostname)
 	}
 	if *s.Port != *ns.Port {
-		t.Errorf("bad port: %q", *s.Port)
+		t.Errorf("bad port: %d", *s.Port)
 	}
 	if *s.UseTLS != *ns.UseTLS {
 		t.Errorf("bad use_tls: %t", *s.UseTLS)
@@ -417,7 +417,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad format: %q", *s.Format)
 	}
 	if *s.FormatVersion != *ns.FormatVersion {
-		t.Errorf("bad format_version: %q", *s.FormatVersion)
+		t.Errorf("bad format_version: %d", *s.FormatVersion)
 	}
 	if *s.MessageType != *ns.MessageType {
 		t.Errorf("bad message_type: %q", *s.MessageType)

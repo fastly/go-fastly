@@ -41,10 +41,10 @@ func TestClient_Thresholds(t *testing.T) {
 		t.Errorf("unexpected threshold action: got %q, expected %q", threshold.Action, testAction)
 	}
 	if threshold.Interval != testInterval {
-		t.Errorf("unexpected threshold interval: got %q, expected %q", threshold.Interval, testInterval)
+		t.Errorf("unexpected threshold interval: got %d, expected %d", threshold.Interval, testInterval)
 	}
 	if threshold.Limit != testLimit {
-		t.Errorf("unexpected threshold limit: got %q, expected %q", threshold.Limit, testLimit)
+		t.Errorf("unexpected threshold limit: got %d, expected %d", threshold.Limit, testLimit)
 	}
 	if threshold.Name != testName {
 		t.Errorf("unexpected threshold name: got %q, expected %q", threshold.Name, testName)
@@ -56,7 +56,7 @@ func TestClient_Thresholds(t *testing.T) {
 		t.Errorf("unexpected threshold don't notify: got %t, should default to false", threshold.DontNotify)
 	}
 	if threshold.Duration != 0 {
-		t.Errorf("unexpected threshold duration: got %q, should default to 0", threshold.Duration)
+		t.Errorf("unexpected threshold duration: got %d, should default to 0", threshold.Duration)
 	}
 	if threshold.Enabled {
 		t.Errorf("unexpected threshold enabled: got %t, should default to false", threshold.Enabled)
@@ -91,10 +91,10 @@ func TestClient_Thresholds(t *testing.T) {
 		t.Errorf("unexpected threshold action: got %q, expected %q", getTestThreshold.Action, testAction)
 	}
 	if getTestThreshold.Interval != testInterval {
-		t.Errorf("unexpected threshold interval: got %q, expected %q", getTestThreshold.Interval, testInterval)
+		t.Errorf("unexpected threshold interval: got %d, expected %d", getTestThreshold.Interval, testInterval)
 	}
 	if getTestThreshold.Limit != testLimit {
-		t.Errorf("unexpected threshold limit: got %q, expected %q", getTestThreshold.Limit, testLimit)
+		t.Errorf("unexpected threshold limit: got %d, expected %d", getTestThreshold.Limit, testLimit)
 	}
 	if getTestThreshold.Name != testName {
 		t.Errorf("unexpected threshold name: got %q, expected %q", getTestThreshold.Name, testName)
@@ -106,7 +106,7 @@ func TestClient_Thresholds(t *testing.T) {
 		t.Errorf("unexpected threshold don't notify: got %t, should default to false", getTestThreshold.DontNotify)
 	}
 	if getTestThreshold.Duration != 0 {
-		t.Errorf("unexpected threshold duration: got %q, should default to 0", getTestThreshold.Duration)
+		t.Errorf("unexpected threshold duration: got %d, should default to 0", getTestThreshold.Duration)
 	}
 	if getTestThreshold.Enabled {
 		t.Errorf("unexpected threshold enabled: got %t, should default to false", getTestThreshold.Enabled)
@@ -146,10 +146,10 @@ func TestClient_Thresholds(t *testing.T) {
 		t.Errorf("unexpected threshold action: got %q, expected %q", updatedThreshold.Action, updatedtestAction)
 	}
 	if updatedThreshold.Interval != updatedTestInterval {
-		t.Errorf("unexpected threshold interval: got %q, expected %q", updatedThreshold.Interval, updatedTestInterval)
+		t.Errorf("unexpected threshold interval: got %d, expected %d", updatedThreshold.Interval, updatedTestInterval)
 	}
 	if updatedThreshold.Limit != updateTestLimit {
-		t.Errorf("unexpected threshold limit: got %q, expected %q", updatedThreshold.Limit, updateTestLimit)
+		t.Errorf("unexpected threshold limit: got %d, expected %d", updatedThreshold.Limit, updateTestLimit)
 	}
 	if updatedThreshold.Name != updatedTestName {
 		t.Errorf("unexpected threshold name: got %q, expected %q", updatedThreshold.Name, updatedTestName)
@@ -161,7 +161,7 @@ func TestClient_Thresholds(t *testing.T) {
 		t.Errorf("unexpected threshold don't notify: got %t, expected %t", updatedThreshold.DontNotify, updatedTestDontNotify)
 	}
 	if updatedThreshold.Duration != updatedTestDuration {
-		t.Errorf("unexpected threshold duration: got %q, expected %q", updatedThreshold.Duration, updatedTestDuration)
+		t.Errorf("unexpected threshold duration: got %d, expected %d", updatedThreshold.Duration, updatedTestDuration)
 	}
 	if updatedThreshold.Enabled != updatedTestEnabled {
 		t.Errorf("unexpected threshold enabled: got %t, expected %t", updatedThreshold.Enabled, updatedTestEnabled)
@@ -179,7 +179,7 @@ func TestClient_Thresholds(t *testing.T) {
 		t.Fatal(err)
 	}
 	if len(listedThresholds.Data) != 1 {
-		t.Errorf("unexpected threshold list length: got %q, expected %q", len(listedThresholds.Data), 1)
+		t.Errorf("unexpected threshold list length: got %d, expected %d", len(listedThresholds.Data), 1)
 	}
 	if listedThresholds.Data[0].ThresholdID != thresholdID {
 		t.Errorf("unexpected threshold id: got %q, expected %q", listedThresholds.Data[0].ThresholdID, thresholdID)

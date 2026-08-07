@@ -164,16 +164,16 @@ func TestClient_Cloudfiles_Compute(t *testing.T) {
 		t.Errorf("bad region: %q", *cloudfilesCreateResp1.Region)
 	}
 	if *cloudfilesCreateResp1.Period != 12 {
-		t.Errorf("bad period: %q", *cloudfilesCreateResp1.Period)
+		t.Errorf("bad period: %d", *cloudfilesCreateResp1.Period)
 	}
 	if *cloudfilesCreateResp1.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *cloudfilesCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *cloudfilesCreateResp1.GzipLevel)
 	}
 	if *cloudfilesCreateResp1.Format != "format" {
 		t.Errorf("bad format: %q", *cloudfilesCreateResp1.Format)
 	}
 	if *cloudfilesCreateResp1.FormatVersion != 1 {
-		t.Errorf("bad format_version: %q", *cloudfilesCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *cloudfilesCreateResp1.FormatVersion)
 	}
 	if *cloudfilesCreateResp1.TimestampFormat != "%Y" {
 		t.Errorf("bad timestamp_format: %q", *cloudfilesCreateResp1.TimestampFormat)
@@ -191,13 +191,13 @@ func TestClient_Cloudfiles_Compute(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *cloudfilesCreateResp2.CompressionCodec)
 	}
 	if *cloudfilesCreateResp2.GzipLevel != 8 {
-		t.Errorf("bad gzip_level: %q", *cloudfilesCreateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *cloudfilesCreateResp2.GzipLevel)
 	}
 	if *cloudfilesCreateResp3.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", *cloudfilesCreateResp3.CompressionCodec)
 	}
 	if *cloudfilesCreateResp3.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *cloudfilesCreateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *cloudfilesCreateResp3.GzipLevel)
 	}
 
 	// List
@@ -246,16 +246,16 @@ func TestClient_Cloudfiles_Compute(t *testing.T) {
 		t.Errorf("bad region: %q", *cloudfilesCreateResp1.Region)
 	}
 	if *cloudfilesCreateResp1.Period != *cloudfilesGetResp.Period {
-		t.Errorf("bad period: %q", *cloudfilesCreateResp1.Period)
+		t.Errorf("bad period: %d", *cloudfilesCreateResp1.Period)
 	}
 	if *cloudfilesCreateResp1.GzipLevel != *cloudfilesGetResp.GzipLevel {
-		t.Errorf("bad gzip_level: %q", *cloudfilesCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *cloudfilesCreateResp1.GzipLevel)
 	}
 	if *cloudfilesCreateResp1.Format != *cloudfilesGetResp.Format {
 		t.Errorf("bad format: %q", *cloudfilesCreateResp1.Format)
 	}
 	if *cloudfilesCreateResp1.FormatVersion != *cloudfilesGetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", *cloudfilesCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *cloudfilesCreateResp1.FormatVersion)
 	}
 	if *cloudfilesCreateResp1.TimestampFormat != *cloudfilesGetResp.TimestampFormat {
 		t.Errorf("bad timestamp_format: %q", *cloudfilesCreateResp1.TimestampFormat)
@@ -335,19 +335,19 @@ func TestClient_Cloudfiles_Compute(t *testing.T) {
 		t.Errorf("bad user: %q", *cloudfilesUpdateResp1.User)
 	}
 	if cloudfilesUpdateResp1.GzipLevel != nil {
-		t.Errorf("bad gzip_level: %q", *cloudfilesUpdateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *cloudfilesUpdateResp1.GzipLevel)
 	}
 	if *cloudfilesUpdateResp1.Period != 0 {
-		t.Errorf("bad period: %q", *cloudfilesUpdateResp1.Period)
+		t.Errorf("bad period: %d", *cloudfilesUpdateResp1.Period)
 	}
 	if *cloudfilesUpdateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *cloudfilesUpdateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *cloudfilesUpdateResp1.FormatVersion)
 	}
 	if *cloudfilesUpdateResp1.CompressionCodec != "zstd" {
 		t.Errorf("bad compression_codec: %q", *cloudfilesUpdateResp1.CompressionCodec)
 	}
 	if cloudfilesUpdateResp1.GzipLevel != nil {
-		t.Errorf("bad gzip_level: %q", *cloudfilesUpdateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *cloudfilesUpdateResp1.GzipLevel)
 	}
 	if *cloudfilesUpdateResp1.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *cloudfilesUpdateResp1.ProcessingRegion)
@@ -356,13 +356,13 @@ func TestClient_Cloudfiles_Compute(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *cloudfilesUpdateResp2.CompressionCodec)
 	}
 	if *cloudfilesUpdateResp2.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *cloudfilesUpdateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *cloudfilesUpdateResp2.GzipLevel)
 	}
 	if cloudfilesUpdateResp3.CompressionCodec != nil {
 		t.Errorf("bad compression_codec: %q", *cloudfilesUpdateResp3.CompressionCodec)
 	}
 	if *cloudfilesUpdateResp3.GzipLevel != 9 {
-		t.Errorf("bad gzip_level: %q", *cloudfilesUpdateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *cloudfilesUpdateResp3.GzipLevel)
 	}
 
 	// Delete
@@ -536,16 +536,16 @@ func TestClient_Cloudfiles(t *testing.T) {
 		t.Errorf("bad region: %q", *cloudfilesCreateResp1.Region)
 	}
 	if *cloudfilesCreateResp1.Period != 12 {
-		t.Errorf("bad period: %q", *cloudfilesCreateResp1.Period)
+		t.Errorf("bad period: %d", *cloudfilesCreateResp1.Period)
 	}
 	if *cloudfilesCreateResp1.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *cloudfilesCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *cloudfilesCreateResp1.GzipLevel)
 	}
 	if *cloudfilesCreateResp1.Format != "format" {
 		t.Errorf("bad format: %q", *cloudfilesCreateResp1.Format)
 	}
 	if *cloudfilesCreateResp1.FormatVersion != 1 {
-		t.Errorf("bad format_version: %q", *cloudfilesCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *cloudfilesCreateResp1.FormatVersion)
 	}
 	if *cloudfilesCreateResp1.TimestampFormat != "%Y" {
 		t.Errorf("bad timestamp_format: %q", *cloudfilesCreateResp1.TimestampFormat)
@@ -563,13 +563,13 @@ func TestClient_Cloudfiles(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *cloudfilesCreateResp2.CompressionCodec)
 	}
 	if *cloudfilesCreateResp2.GzipLevel != 8 {
-		t.Errorf("bad gzip_level: %q", *cloudfilesCreateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *cloudfilesCreateResp2.GzipLevel)
 	}
 	if *cloudfilesCreateResp3.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", *cloudfilesCreateResp3.CompressionCodec)
 	}
 	if *cloudfilesCreateResp3.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *cloudfilesCreateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *cloudfilesCreateResp3.GzipLevel)
 	}
 
 	// List
@@ -618,16 +618,16 @@ func TestClient_Cloudfiles(t *testing.T) {
 		t.Errorf("bad region: %q", *cloudfilesCreateResp1.Region)
 	}
 	if *cloudfilesCreateResp1.Period != *cloudfilesGetResp.Period {
-		t.Errorf("bad period: %q", *cloudfilesCreateResp1.Period)
+		t.Errorf("bad period: %d", *cloudfilesCreateResp1.Period)
 	}
 	if *cloudfilesCreateResp1.GzipLevel != *cloudfilesGetResp.GzipLevel {
-		t.Errorf("bad gzip_level: %q", *cloudfilesCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *cloudfilesCreateResp1.GzipLevel)
 	}
 	if *cloudfilesCreateResp1.Format != *cloudfilesGetResp.Format {
 		t.Errorf("bad format: %q", *cloudfilesCreateResp1.Format)
 	}
 	if *cloudfilesCreateResp1.FormatVersion != *cloudfilesGetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", *cloudfilesCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *cloudfilesCreateResp1.FormatVersion)
 	}
 	if *cloudfilesCreateResp1.TimestampFormat != *cloudfilesGetResp.TimestampFormat {
 		t.Errorf("bad timestamp_format: %q", *cloudfilesCreateResp1.TimestampFormat)
@@ -707,19 +707,19 @@ func TestClient_Cloudfiles(t *testing.T) {
 		t.Errorf("bad user: %q", *cloudfilesUpdateResp1.User)
 	}
 	if cloudfilesUpdateResp1.GzipLevel != nil {
-		t.Errorf("bad gzip_level: %q", *cloudfilesUpdateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *cloudfilesUpdateResp1.GzipLevel)
 	}
 	if *cloudfilesUpdateResp1.Period != 0 {
-		t.Errorf("bad period: %q", *cloudfilesUpdateResp1.Period)
+		t.Errorf("bad period: %d", *cloudfilesUpdateResp1.Period)
 	}
 	if *cloudfilesUpdateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *cloudfilesUpdateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *cloudfilesUpdateResp1.FormatVersion)
 	}
 	if *cloudfilesUpdateResp1.CompressionCodec != "zstd" {
 		t.Errorf("bad compression_codec: %q", *cloudfilesUpdateResp1.CompressionCodec)
 	}
 	if cloudfilesUpdateResp1.GzipLevel != nil {
-		t.Errorf("bad gzip_level: %q", *cloudfilesUpdateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *cloudfilesUpdateResp1.GzipLevel)
 	}
 	if *cloudfilesUpdateResp1.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *cloudfilesUpdateResp1.ProcessingRegion)
@@ -728,13 +728,13 @@ func TestClient_Cloudfiles(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *cloudfilesUpdateResp2.CompressionCodec)
 	}
 	if *cloudfilesUpdateResp2.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *cloudfilesUpdateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *cloudfilesUpdateResp2.GzipLevel)
 	}
 	if cloudfilesUpdateResp3.CompressionCodec != nil {
 		t.Errorf("bad compression_codec: %q", *cloudfilesUpdateResp3.CompressionCodec)
 	}
 	if *cloudfilesUpdateResp3.GzipLevel != 9 {
-		t.Errorf("bad gzip_level: %q", *cloudfilesUpdateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *cloudfilesUpdateResp3.GzipLevel)
 	}
 
 	// Delete

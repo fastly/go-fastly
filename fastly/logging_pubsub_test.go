@@ -100,7 +100,7 @@ bv1KwcKoQbNVXwauH79JKc0=
 		t.Errorf("bad project_id: %q", *pubsub.ProjectID)
 	}
 	if *pubsub.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *pubsub.FormatVersion)
+		t.Errorf("bad format_version: %d", *pubsub.FormatVersion)
 	}
 	if *pubsub.Format != "format" {
 		t.Errorf("bad format: %q", *pubsub.Format)
@@ -152,7 +152,7 @@ bv1KwcKoQbNVXwauH79JKc0=
 		t.Errorf("bad project_id: %q", *pubsub.ProjectID)
 	}
 	if *pubsub.FormatVersion != *npubsub.FormatVersion {
-		t.Errorf("bad format_version: %q", *pubsub.FormatVersion)
+		t.Errorf("bad format_version: %d", *pubsub.FormatVersion)
 	}
 	if *pubsub.Format != *npubsub.Format {
 		t.Errorf("bad format: %q", *pubsub.Format)
@@ -296,7 +296,7 @@ bv1KwcKoQbNVXwauH79JKc0=
 		t.Errorf("bad project_id: %q", *pubsub.ProjectID)
 	}
 	if *pubsub.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *pubsub.FormatVersion)
+		t.Errorf("bad format_version: %d", *pubsub.FormatVersion)
 	}
 	if *pubsub.Format != "format" {
 		t.Errorf("bad format: %q", *pubsub.Format)
@@ -348,7 +348,7 @@ bv1KwcKoQbNVXwauH79JKc0=
 		t.Errorf("bad project_id: %q", *pubsub.ProjectID)
 	}
 	if *pubsub.FormatVersion != *npubsub.FormatVersion {
-		t.Errorf("bad format_version: %q", *pubsub.FormatVersion)
+		t.Errorf("bad format_version: %d", *pubsub.FormatVersion)
 	}
 	if *pubsub.Format != *npubsub.Format {
 		t.Errorf("bad format: %q", *pubsub.Format)
