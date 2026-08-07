@@ -76,22 +76,22 @@ func TestClient_HealthChecks(t *testing.T) {
 		t.Errorf("bad http_version: %q", *hc.HTTPVersion)
 	}
 	if *hc.Timeout != 1500 {
-		t.Errorf("bad timeout: %q", *hc.Timeout)
+		t.Errorf("bad timeout: %d", *hc.Timeout)
 	}
 	if *hc.CheckInterval != 2500 {
-		t.Errorf("bad check_interval: %q", *hc.CheckInterval)
+		t.Errorf("bad check_interval: %d", *hc.CheckInterval)
 	}
 	if *hc.ExpectedResponse != http.StatusOK {
-		t.Errorf("bad timeout: %q", *hc.ExpectedResponse)
+		t.Errorf("bad timeout: %d", *hc.ExpectedResponse)
 	}
 	if *hc.Window != 5000 {
-		t.Errorf("bad window: %q", *hc.Window)
+		t.Errorf("bad window: %d", *hc.Window)
 	}
 	if *hc.Threshold != 10 {
-		t.Errorf("bad threshold: %q", *hc.Threshold)
+		t.Errorf("bad threshold: %d", *hc.Threshold)
 	}
 	if *hc.Initial != 10 {
-		t.Errorf("bad initial: %q", *hc.Initial)
+		t.Errorf("bad initial: %d", *hc.Initial)
 	}
 	if len(hc.Headers) != 2 {
 		t.Errorf("bad headers: %q", hc.Headers)
@@ -140,22 +140,22 @@ func TestClient_HealthChecks(t *testing.T) {
 		t.Errorf("bad http_version: %q", *hc.HTTPVersion)
 	}
 	if *hc.Timeout != *nhc.Timeout {
-		t.Errorf("bad timeout: %q", *hc.Timeout)
+		t.Errorf("bad timeout: %d", *hc.Timeout)
 	}
 	if *hc.CheckInterval != *nhc.CheckInterval {
-		t.Errorf("bad check_interval: %q", *hc.CheckInterval)
+		t.Errorf("bad check_interval: %d", *hc.CheckInterval)
 	}
 	if *hc.ExpectedResponse != *nhc.ExpectedResponse {
-		t.Errorf("bad timeout: %q", *hc.ExpectedResponse)
+		t.Errorf("bad timeout: %d", *hc.ExpectedResponse)
 	}
 	if *hc.Window != *nhc.Window {
-		t.Errorf("bad window: %q", *hc.Window)
+		t.Errorf("bad window: %d", *hc.Window)
 	}
 	if *hc.Threshold != *nhc.Threshold {
-		t.Errorf("bad threshold: %q", *hc.Threshold)
+		t.Errorf("bad threshold: %d", *hc.Threshold)
 	}
 	if *hc.Initial != *nhc.Initial {
-		t.Errorf("bad initial: %q", *hc.Initial)
+		t.Errorf("bad initial: %d", *hc.Initial)
 	}
 	if len(nhc.Headers) != 2 {
 		t.Errorf("bad headers: %q", nhc.Headers)
@@ -266,22 +266,22 @@ func TestClient_HealthChecks_Compute(t *testing.T) {
 		t.Errorf("bad http_version: %q", *hc.HTTPVersion)
 	}
 	if *hc.Timeout != 1500 {
-		t.Errorf("bad timeout: %q", *hc.Timeout)
+		t.Errorf("bad timeout: %d", *hc.Timeout)
 	}
 	if *hc.CheckInterval != 2500 {
-		t.Errorf("bad check_interval: %q", *hc.CheckInterval)
+		t.Errorf("bad check_interval: %d", *hc.CheckInterval)
 	}
 	if *hc.ExpectedResponse != http.StatusOK {
-		t.Errorf("bad timeout: %q", *hc.ExpectedResponse)
+		t.Errorf("bad timeout: %d", *hc.ExpectedResponse)
 	}
 	if *hc.Window != 5000 {
-		t.Errorf("bad window: %q", *hc.Window)
+		t.Errorf("bad window: %d", *hc.Window)
 	}
 	if *hc.Threshold != 10 {
-		t.Errorf("bad threshold: %q", *hc.Threshold)
+		t.Errorf("bad threshold: %d", *hc.Threshold)
 	}
 	if *hc.Initial != 10 {
-		t.Errorf("bad initial: %q", *hc.Initial)
+		t.Errorf("bad initial: %d", *hc.Initial)
 	}
 	if len(hc.Headers) != 2 {
 		t.Errorf("bad headers: %q", hc.Headers)
@@ -330,22 +330,22 @@ func TestClient_HealthChecks_Compute(t *testing.T) {
 		t.Errorf("bad http_version: %q", *hc.HTTPVersion)
 	}
 	if *hc.Timeout != *nhc.Timeout {
-		t.Errorf("bad timeout: %q", *hc.Timeout)
+		t.Errorf("bad timeout: %d", *hc.Timeout)
 	}
 	if *hc.CheckInterval != *nhc.CheckInterval {
-		t.Errorf("bad check_interval: %q", *hc.CheckInterval)
+		t.Errorf("bad check_interval: %d", *hc.CheckInterval)
 	}
 	if *hc.ExpectedResponse != *nhc.ExpectedResponse {
-		t.Errorf("bad timeout: %q", *hc.ExpectedResponse)
+		t.Errorf("bad timeout: %d", *hc.ExpectedResponse)
 	}
 	if *hc.Window != *nhc.Window {
-		t.Errorf("bad window: %q", *hc.Window)
+		t.Errorf("bad window: %d", *hc.Window)
 	}
 	if *hc.Threshold != *nhc.Threshold {
-		t.Errorf("bad threshold: %q", *hc.Threshold)
+		t.Errorf("bad threshold: %d", *hc.Threshold)
 	}
 	if *hc.Initial != *nhc.Initial {
-		t.Errorf("bad initial: %q", *hc.Initial)
+		t.Errorf("bad initial: %d", *hc.Initial)
 	}
 	if len(nhc.Headers) != 2 {
 		t.Errorf("bad headers: %q", nhc.Headers)

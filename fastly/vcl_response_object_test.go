@@ -54,7 +54,7 @@ func TestClient_ResponseObjects(t *testing.T) {
 		t.Errorf("bad name: %q", *ro.Name)
 	}
 	if *ro.Status != http.StatusOK {
-		t.Errorf("bad status: %q", *ro.Status)
+		t.Errorf("bad status: %d", *ro.Status)
 	}
 	if *ro.Response != "Ok" {
 		t.Errorf("bad response: %q", *ro.Response)
@@ -97,7 +97,7 @@ func TestClient_ResponseObjects(t *testing.T) {
 		t.Errorf("bad name: %q", *ro.Name)
 	}
 	if *ro.Status != *nro.Status {
-		t.Errorf("bad status: %q", *ro.Status)
+		t.Errorf("bad status: %d", *ro.Status)
 	}
 	if *ro.Response != *nro.Response {
 		t.Errorf("bad response: %q", *ro.Response)

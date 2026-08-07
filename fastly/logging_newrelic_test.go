@@ -96,7 +96,7 @@ func TestClient_NewRelic(t *testing.T) {
 		t.Errorf("bad format: %q", *newRelicResp1.Format)
 	}
 	if *newRelicResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *newRelicResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *newRelicResp1.FormatVersion)
 	}
 	if *newRelicResp1.Placement != "none" {
 		t.Errorf("bad placement: %q", *newRelicResp1.Placement)
@@ -114,7 +114,7 @@ func TestClient_NewRelic(t *testing.T) {
 		t.Errorf("bad format: %q", *newRelicResp2.Format)
 	}
 	if *newRelicResp2.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *newRelicResp2.FormatVersion)
+		t.Errorf("bad format_version: %d", *newRelicResp2.FormatVersion)
 	}
 	if *newRelicResp2.Placement != "none" {
 		t.Errorf("bad placement: %q", *newRelicResp2.Placement)
@@ -172,7 +172,7 @@ func TestClient_NewRelic(t *testing.T) {
 		t.Errorf("bad format: %q", *newRelicResp1.Format)
 	}
 	if *newRelicResp1.FormatVersion != *newRelicGetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", *newRelicResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *newRelicResp1.FormatVersion)
 	}
 	if *newRelicResp1.Placement != *newRelicGetResp.Placement {
 		t.Errorf("bad placement: %q", *newRelicResp1.Placement)
@@ -190,7 +190,7 @@ func TestClient_NewRelic(t *testing.T) {
 		t.Errorf("bad format: %q", *newRelicResp2.Format)
 	}
 	if *newRelicResp2.FormatVersion != *newRelicGetResp2.FormatVersion {
-		t.Errorf("bad format_version: %q", *newRelicResp2.FormatVersion)
+		t.Errorf("bad format_version: %d", *newRelicResp2.FormatVersion)
 	}
 	if *newRelicResp2.Placement != *newRelicGetResp2.Placement {
 		t.Errorf("bad placement: %q", *newRelicResp2.Placement)
@@ -238,7 +238,7 @@ func TestClient_NewRelic(t *testing.T) {
 		t.Errorf("bad name: %q", *newRelicUpdateResp1.Name)
 	}
 	if *newRelicUpdateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *newRelicUpdateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *newRelicUpdateResp1.FormatVersion)
 	}
 	if *newRelicUpdateResp1.Region != "eu" {
 		t.Errorf("bad region: %q", *newRelicUpdateResp1.Region)
@@ -350,7 +350,7 @@ func TestClient_NewRelic_Compute(t *testing.T) {
 		t.Errorf("bad format: %q", *newRelicResp1.Format)
 	}
 	if *newRelicResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *newRelicResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *newRelicResp1.FormatVersion)
 	}
 	if *newRelicResp1.Placement != "none" {
 		t.Errorf("bad placement: %q", *newRelicResp1.Placement)
@@ -368,7 +368,7 @@ func TestClient_NewRelic_Compute(t *testing.T) {
 		t.Errorf("bad format: %q", *newRelicResp2.Format)
 	}
 	if *newRelicResp2.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *newRelicResp2.FormatVersion)
+		t.Errorf("bad format_version: %d", *newRelicResp2.FormatVersion)
 	}
 	if *newRelicResp2.Placement != "none" {
 		t.Errorf("bad placement: %q", *newRelicResp2.Placement)
@@ -426,7 +426,7 @@ func TestClient_NewRelic_Compute(t *testing.T) {
 		t.Errorf("bad format: %q", *newRelicResp1.Format)
 	}
 	if *newRelicResp1.FormatVersion != *newRelicGetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", *newRelicResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *newRelicResp1.FormatVersion)
 	}
 	if *newRelicResp1.Placement != *newRelicGetResp.Placement {
 		t.Errorf("bad placement: %q", *newRelicResp1.Placement)
@@ -444,7 +444,7 @@ func TestClient_NewRelic_Compute(t *testing.T) {
 		t.Errorf("bad format: %q", *newRelicResp2.Format)
 	}
 	if *newRelicResp2.FormatVersion != *newRelicGetResp2.FormatVersion {
-		t.Errorf("bad format_version: %q", *newRelicResp2.FormatVersion)
+		t.Errorf("bad format_version: %d", *newRelicResp2.FormatVersion)
 	}
 	if *newRelicResp2.Placement != *newRelicGetResp2.Placement {
 		t.Errorf("bad placement: %q", *newRelicResp2.Placement)
@@ -492,7 +492,7 @@ func TestClient_NewRelic_Compute(t *testing.T) {
 		t.Errorf("bad name: %q", *newRelicUpdateResp1.Name)
 	}
 	if *newRelicUpdateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *newRelicUpdateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *newRelicUpdateResp1.FormatVersion)
 	}
 	if *newRelicUpdateResp1.Region != "eu" {
 		t.Errorf("bad region: %q", *newRelicUpdateResp1.Region)

@@ -57,7 +57,7 @@ func TestClient_Logshuttles(t *testing.T) {
 		t.Errorf("bad format: %q", *l.Format)
 	}
 	if *l.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *l.FormatVersion)
+		t.Errorf("bad format_version: %d", *l.FormatVersion)
 	}
 	if *l.Placement != "none" {
 		t.Errorf("bad placement: %q", *l.Placement)
@@ -103,7 +103,7 @@ func TestClient_Logshuttles(t *testing.T) {
 		t.Errorf("bad format: %q", *l.Format)
 	}
 	if *l.FormatVersion != *nl.FormatVersion {
-		t.Errorf("bad format_version: %q", *l.FormatVersion)
+		t.Errorf("bad format_version: %d", *l.FormatVersion)
 	}
 	if *l.Placement != *nl.Placement {
 		t.Errorf("bad placement: %q", *l.Placement)
@@ -212,7 +212,7 @@ func TestClient_Logshuttles_Compute(t *testing.T) {
 		t.Errorf("bad format: %q", *l.Format)
 	}
 	if *l.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *l.FormatVersion)
+		t.Errorf("bad format_version: %d", *l.FormatVersion)
 	}
 	if *l.Placement != "none" {
 		t.Errorf("bad placement: %q", *l.Placement)
@@ -258,7 +258,7 @@ func TestClient_Logshuttles_Compute(t *testing.T) {
 		t.Errorf("bad format: %q", *l.Format)
 	}
 	if *l.FormatVersion != *nl.FormatVersion {
-		t.Errorf("bad format_version: %q", *l.FormatVersion)
+		t.Errorf("bad format_version: %d", *l.FormatVersion)
 	}
 	if *l.Placement != *nl.Placement {
 		t.Errorf("bad placement: %q", *l.Placement)

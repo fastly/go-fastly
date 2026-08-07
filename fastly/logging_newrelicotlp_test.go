@@ -63,7 +63,7 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 		t.Errorf("bad format: %q", *n.Format)
 	}
 	if *n.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *n.FormatVersion)
+		t.Errorf("bad format_version: %d", *n.FormatVersion)
 	}
 	if *n.Placement != "none" {
 		t.Errorf("bad placement: %q", *n.Placement)
@@ -109,7 +109,7 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 		t.Errorf("bad format: %q", *n.Format)
 	}
 	if *n.FormatVersion != *nn.FormatVersion {
-		t.Errorf("bad format_version: %q", *n.FormatVersion)
+		t.Errorf("bad format_version: %d", *n.FormatVersion)
 	}
 	if *n.Placement != *nn.Placement {
 		t.Errorf("bad placement: %q", *n.Placement)
@@ -138,7 +138,7 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 		t.Errorf("bad name: %q", *un.Name)
 	}
 	if *un.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *un.FormatVersion)
+		t.Errorf("bad format_version: %d", *un.FormatVersion)
 	}
 	if *un.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *un.ProcessingRegion)
@@ -213,7 +213,7 @@ func TestClient_NewRelicOTLP_Compute(t *testing.T) {
 		t.Errorf("bad format: %q", *n.Format)
 	}
 	if *n.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *n.FormatVersion)
+		t.Errorf("bad format_version: %d", *n.FormatVersion)
 	}
 	if *n.Placement != "none" {
 		t.Errorf("bad placement: %q", *n.Placement)
@@ -259,7 +259,7 @@ func TestClient_NewRelicOTLP_Compute(t *testing.T) {
 		t.Errorf("bad format: %q", *n.Format)
 	}
 	if *n.FormatVersion != *nn.FormatVersion {
-		t.Errorf("bad format_version: %q", *n.FormatVersion)
+		t.Errorf("bad format_version: %d", *n.FormatVersion)
 	}
 	if *n.Placement != *nn.Placement {
 		t.Errorf("bad placement: %q", *n.Placement)
@@ -288,7 +288,7 @@ func TestClient_NewRelicOTLP_Compute(t *testing.T) {
 		t.Errorf("bad name: %q", *un.Name)
 	}
 	if *un.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *un.FormatVersion)
+		t.Errorf("bad format_version: %d", *un.FormatVersion)
 	}
 	if *un.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *un.ProcessingRegion)

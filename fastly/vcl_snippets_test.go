@@ -50,7 +50,7 @@ func TestClient_Snippets(t *testing.T) {
 		t.Errorf("incorrect Priority: want %v, have %q", defaultPriority, *cs.Priority)
 	}
 	if *cs.Dynamic != defaultDynamic {
-		t.Errorf("incorrect Dynamic: want %v, have %q", defaultDynamic, *cs.Dynamic)
+		t.Errorf("incorrect Dynamic: want %v, have %d", defaultDynamic, *cs.Dynamic)
 	}
 	if *cs.Content != vclContent {
 		t.Errorf("incorrect Content: want %v, have %q", vclContent, *cs.Content)
@@ -87,7 +87,7 @@ func TestClient_Snippets(t *testing.T) {
 		t.Errorf("incorrect Priority: want %v, have %q", priority, *cs.Priority)
 	}
 	if *cs.Dynamic != dynamic {
-		t.Errorf("incorrect Dynamic: want %v, have %q", dynamic, *cs.Dynamic)
+		t.Errorf("incorrect Dynamic: want %v, have %d", dynamic, *cs.Dynamic)
 	}
 	if cs.Content != nil {
 		t.Errorf("incorrect Content: want %v, have %q", "", *cs.Content) // dynamic snippets don't return content
@@ -162,7 +162,7 @@ func TestClient_Snippets(t *testing.T) {
 		t.Errorf("incorrect Priority: want %v, have %q", defaultPriority, *vs.Priority)
 	}
 	if *vs.Dynamic != defaultDynamic {
-		t.Errorf("incorrect Dynamic: want %v, have %q", defaultDynamic, *vs.Dynamic)
+		t.Errorf("incorrect Dynamic: want %v, have %d", defaultDynamic, *vs.Dynamic)
 	}
 	if *vs.Content != vclContent {
 		t.Errorf("incorrect Content: want %v, have %q", vclContent, *vs.Content)
@@ -221,7 +221,7 @@ func TestClient_Snippets(t *testing.T) {
 		t.Errorf("incorrect Priority: want %v, have %q", priority, *vs.Priority)
 	}
 	if *vs.Dynamic != defaultDynamic {
-		t.Errorf("incorrect Dynamic: want %v, have %q", defaultDynamic, *vs.Dynamic)
+		t.Errorf("incorrect Dynamic: want %v, have %d", defaultDynamic, *vs.Dynamic)
 	}
 	if *vs.Content != vclContentUpdated {
 		t.Errorf("incorrect Content: want %v, have %q", vclContentUpdated, *vs.Content)

@@ -305,7 +305,7 @@ func TestResourceJSONRoundtrip(t *testing.T) {
 		t.Errorf("ServiceID: got %q, want %q", got, want)
 	}
 	if got, want := *decoded.ServiceVersion, *r.ServiceVersion; got != want {
-		t.Errorf("ServiceVersion: got %q, want %q", got, want)
+		t.Errorf("ServiceVersion: got %d, want %d", got, want)
 	}
 	if got, want := decoded.CreatedAt, r.CreatedAt; got == nil || !got.Equal(*want) {
 		t.Errorf("CreatedAt: got %s, want %s", got, want)

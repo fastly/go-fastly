@@ -60,7 +60,7 @@ func TestClient_AccessKey(t *testing.T) {
 		t.Errorf("unexpected AccessKey permission: got %q, expected %q", accessKey.Permission, TestAccessKeyPermission)
 	}
 	if len(accessKey.Buckets) != len(TestAccessKeyBuckets) {
-		t.Errorf("unexpected AccessKey buckets length: got %q, expected %q", len(accessKey.Buckets), len(TestAccessKeyBuckets))
+		t.Errorf("unexpected AccessKey buckets length: got %d, expected %d", len(accessKey.Buckets), len(TestAccessKeyBuckets))
 	}
 	if accessKey.Buckets[0] != TestAccessKeyBuckets[0] {
 		t.Errorf("unexpected AccessKey bucket: got %q, expected %q", accessKey.Buckets[0], TestAccessKeyBuckets[0])
@@ -95,7 +95,7 @@ func TestClient_AccessKey(t *testing.T) {
 		t.Errorf("unexpected AccessKey Permissions: got %q, expected %q", ak.Permission, accessKey.Permission)
 	}
 	if len(ak.Buckets) != len(accessKey.Buckets) {
-		t.Errorf("unexpected AccessKey Buckets length: got %q, expected %q", len(ak.Buckets), len(accessKey.Buckets))
+		t.Errorf("unexpected AccessKey Buckets length: got %d, expected %d", len(ak.Buckets), len(accessKey.Buckets))
 	}
 	if ak.Buckets[0] != accessKey.Buckets[0] {
 		t.Errorf("unexpected AccessKey Buckets contents: got %q, expected %q", ak.Buckets[0], accessKey.Buckets[0])

@@ -268,19 +268,19 @@ func TestClient_S3s(t *testing.T) {
 		t.Errorf("bad path: %q", *s3CreateResp1.Path)
 	}
 	if *s3CreateResp1.Period != 12 {
-		t.Errorf("bad period: %q", *s3CreateResp1.Period)
+		t.Errorf("bad period: %d", *s3CreateResp1.Period)
 	}
 	if *s3CreateResp1.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", *s3CreateResp1.CompressionCodec)
 	}
 	if *s3CreateResp1.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *s3CreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *s3CreateResp1.GzipLevel)
 	}
 	if *s3CreateResp1.Format != "format" {
 		t.Errorf("bad format: %q", *s3CreateResp1.Format)
 	}
 	if *s3CreateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *s3CreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *s3CreateResp1.FormatVersion)
 	}
 	if *s3CreateResp1.TimestampFormat != "%Y" {
 		t.Errorf("bad timestamp_format: %q", *s3CreateResp1.TimestampFormat)
@@ -310,16 +310,16 @@ func TestClient_S3s(t *testing.T) {
 		t.Errorf("bad acl: %s", *s3CreateResp1.ACL)
 	}
 	if *s3CreateResp1.FileMaxBytes != MiB {
-		t.Errorf("bad file_max_bytes: %q", *s3CreateResp1.FileMaxBytes)
+		t.Errorf("bad file_max_bytes: %d", *s3CreateResp1.FileMaxBytes)
 	}
 	if *s3CreateResp2.FileMaxBytes != 10*MiB {
-		t.Errorf("bad file_max_bytes: %q", *s3CreateResp2.FileMaxBytes)
+		t.Errorf("bad file_max_bytes: %d", *s3CreateResp2.FileMaxBytes)
 	}
 	if *s3CreateResp3.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", *s3CreateResp1.CompressionCodec)
 	}
 	if *s3CreateResp3.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *s3CreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *s3CreateResp1.GzipLevel)
 	}
 	if *s3CreateResp3.Redundancy != S3RedundancyStandardIA {
 		t.Errorf("bad acl: %s", *s3CreateResp3.Redundancy)
@@ -328,7 +328,7 @@ func TestClient_S3s(t *testing.T) {
 		t.Errorf("bad acl: %s", *s3CreateResp3.ACL)
 	}
 	if *s3CreateResp3.FileMaxBytes != 0 {
-		t.Errorf("bad file_max_bytes: %q", *s3CreateResp3.FileMaxBytes)
+		t.Errorf("bad file_max_bytes: %d", *s3CreateResp3.FileMaxBytes)
 	}
 	if s3CreateResp4.AccessKey != nil {
 		t.Errorf("bad access_key: %q", *s3CreateResp4.AccessKey)
@@ -346,7 +346,7 @@ func TestClient_S3s(t *testing.T) {
 		t.Errorf("bad acl: %s", *s3CreateResp4.ACL)
 	}
 	if *s3CreateResp4.FileMaxBytes != 10*MiB {
-		t.Errorf("bad file_max_bytes: %q", *s3CreateResp4.FileMaxBytes)
+		t.Errorf("bad file_max_bytes: %d", *s3CreateResp4.FileMaxBytes)
 	}
 
 	// List
@@ -411,19 +411,19 @@ func TestClient_S3s(t *testing.T) {
 		t.Errorf("bad path: %q", *s3CreateResp1.Path)
 	}
 	if *s3CreateResp1.Period != *s3GetResp.Period {
-		t.Errorf("bad period: %q", *s3CreateResp1.Period)
+		t.Errorf("bad period: %d", *s3CreateResp1.Period)
 	}
 	if *s3CreateResp1.CompressionCodec != *s3GetResp.CompressionCodec {
 		t.Errorf("bad compression_codec: %q", *s3CreateResp1.CompressionCodec)
 	}
 	if *s3CreateResp1.GzipLevel != *s3GetResp.GzipLevel {
-		t.Errorf("bad gzip_level: %q", *s3CreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *s3CreateResp1.GzipLevel)
 	}
 	if *s3CreateResp1.Format != *s3GetResp.Format {
 		t.Errorf("bad format: %q", *s3CreateResp1.Format)
 	}
 	if *s3CreateResp1.FormatVersion != *s3GetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", *s3CreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *s3CreateResp1.FormatVersion)
 	}
 	if *s3CreateResp1.TimestampFormat != *s3GetResp.TimestampFormat {
 		t.Errorf("bad timestamp_format: %q", *s3CreateResp1.TimestampFormat)
@@ -588,10 +588,10 @@ func TestClient_S3s(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *s3UpdateResp1.CompressionCodec)
 	}
 	if s3UpdateResp1.GzipLevel != nil {
-		t.Errorf("bad gzip_level: %q", *s3UpdateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *s3UpdateResp1.GzipLevel)
 	}
 	if *s3UpdateResp1.FileMaxBytes != 5*MiB {
-		t.Errorf("bad file_max_bytes: %q", *s3UpdateResp1.FileMaxBytes)
+		t.Errorf("bad file_max_bytes: %d", *s3UpdateResp1.FileMaxBytes)
 	}
 	if *s3UpdateResp1.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *s3UpdateResp1.ProcessingRegion)
@@ -600,13 +600,13 @@ func TestClient_S3s(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *s3UpdateResp2.CompressionCodec)
 	}
 	if *s3UpdateResp2.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *s3UpdateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *s3UpdateResp2.GzipLevel)
 	}
 	if s3UpdateResp3.CompressionCodec != nil {
 		t.Errorf("bad compression_codec: %q", *s3UpdateResp3.CompressionCodec)
 	}
 	if *s3UpdateResp3.GzipLevel != 9 {
-		t.Errorf("bad gzip_level: %q", *s3UpdateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *s3UpdateResp3.GzipLevel)
 	}
 	if *s3UpdateResp4.AccessKey != "" {
 		t.Errorf("bad access_key: %q", *s3UpdateResp4.AccessKey)
@@ -902,19 +902,19 @@ func TestClient_S3s_Compute(t *testing.T) {
 		t.Errorf("bad path: %q", *s3CreateResp1.Path)
 	}
 	if *s3CreateResp1.Period != 12 {
-		t.Errorf("bad period: %q", *s3CreateResp1.Period)
+		t.Errorf("bad period: %d", *s3CreateResp1.Period)
 	}
 	if *s3CreateResp1.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", *s3CreateResp1.CompressionCodec)
 	}
 	if *s3CreateResp1.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *s3CreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *s3CreateResp1.GzipLevel)
 	}
 	if *s3CreateResp1.Format != "format" {
 		t.Errorf("bad format: %q", *s3CreateResp1.Format)
 	}
 	if *s3CreateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *s3CreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *s3CreateResp1.FormatVersion)
 	}
 	if *s3CreateResp1.TimestampFormat != "%Y" {
 		t.Errorf("bad timestamp_format: %q", *s3CreateResp1.TimestampFormat)
@@ -944,16 +944,16 @@ func TestClient_S3s_Compute(t *testing.T) {
 		t.Errorf("bad acl: %s", *s3CreateResp1.ACL)
 	}
 	if *s3CreateResp1.FileMaxBytes != MiB {
-		t.Errorf("bad file_max_bytes: %q", *s3CreateResp1.FileMaxBytes)
+		t.Errorf("bad file_max_bytes: %d", *s3CreateResp1.FileMaxBytes)
 	}
 	if *s3CreateResp2.FileMaxBytes != 10*MiB {
-		t.Errorf("bad file_max_bytes: %q", *s3CreateResp2.FileMaxBytes)
+		t.Errorf("bad file_max_bytes: %d", *s3CreateResp2.FileMaxBytes)
 	}
 	if *s3CreateResp3.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", *s3CreateResp1.CompressionCodec)
 	}
 	if *s3CreateResp3.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *s3CreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *s3CreateResp1.GzipLevel)
 	}
 	if *s3CreateResp3.Redundancy != S3RedundancyStandardIA {
 		t.Errorf("bad acl: %s", *s3CreateResp3.Redundancy)
@@ -962,7 +962,7 @@ func TestClient_S3s_Compute(t *testing.T) {
 		t.Errorf("bad acl: %s", *s3CreateResp3.ACL)
 	}
 	if *s3CreateResp3.FileMaxBytes != 0 {
-		t.Errorf("bad file_max_bytes: %q", *s3CreateResp3.FileMaxBytes)
+		t.Errorf("bad file_max_bytes: %d", *s3CreateResp3.FileMaxBytes)
 	}
 	if s3CreateResp4.AccessKey != nil {
 		t.Errorf("bad access_key: %q", *s3CreateResp4.AccessKey)
@@ -980,7 +980,7 @@ func TestClient_S3s_Compute(t *testing.T) {
 		t.Errorf("bad acl: %s", *s3CreateResp4.ACL)
 	}
 	if *s3CreateResp4.FileMaxBytes != 10*MiB {
-		t.Errorf("bad file_max_bytes: %q", *s3CreateResp4.FileMaxBytes)
+		t.Errorf("bad file_max_bytes: %d", *s3CreateResp4.FileMaxBytes)
 	}
 
 	// List
@@ -1045,19 +1045,19 @@ func TestClient_S3s_Compute(t *testing.T) {
 		t.Errorf("bad path: %q", *s3CreateResp1.Path)
 	}
 	if *s3CreateResp1.Period != *s3GetResp.Period {
-		t.Errorf("bad period: %q", *s3CreateResp1.Period)
+		t.Errorf("bad period: %d", *s3CreateResp1.Period)
 	}
 	if *s3CreateResp1.CompressionCodec != *s3GetResp.CompressionCodec {
 		t.Errorf("bad compression_codec: %q", *s3CreateResp1.CompressionCodec)
 	}
 	if *s3CreateResp1.GzipLevel != *s3GetResp.GzipLevel {
-		t.Errorf("bad gzip_level: %q", *s3CreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *s3CreateResp1.GzipLevel)
 	}
 	if *s3CreateResp1.Format != *s3GetResp.Format {
 		t.Errorf("bad format: %q", *s3CreateResp1.Format)
 	}
 	if *s3CreateResp1.FormatVersion != *s3GetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", *s3CreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *s3CreateResp1.FormatVersion)
 	}
 	if *s3CreateResp1.TimestampFormat != *s3GetResp.TimestampFormat {
 		t.Errorf("bad timestamp_format: %q", *s3CreateResp1.TimestampFormat)
@@ -1222,10 +1222,10 @@ func TestClient_S3s_Compute(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *s3UpdateResp1.CompressionCodec)
 	}
 	if s3UpdateResp1.GzipLevel != nil {
-		t.Errorf("bad gzip_level: %q", *s3UpdateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *s3UpdateResp1.GzipLevel)
 	}
 	if *s3UpdateResp1.FileMaxBytes != 5*MiB {
-		t.Errorf("bad file_max_bytes: %q", *s3UpdateResp1.FileMaxBytes)
+		t.Errorf("bad file_max_bytes: %d", *s3UpdateResp1.FileMaxBytes)
 	}
 	if *s3UpdateResp1.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *s3UpdateResp1.ProcessingRegion)
@@ -1234,13 +1234,13 @@ func TestClient_S3s_Compute(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *s3UpdateResp2.CompressionCodec)
 	}
 	if *s3UpdateResp2.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *s3UpdateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *s3UpdateResp2.GzipLevel)
 	}
 	if s3UpdateResp3.CompressionCodec != nil {
 		t.Errorf("bad compression_codec: %q", *s3UpdateResp3.CompressionCodec)
 	}
 	if *s3UpdateResp3.GzipLevel != 9 {
-		t.Errorf("bad gzip_level: %q", *s3UpdateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *s3UpdateResp3.GzipLevel)
 	}
 	if *s3UpdateResp4.AccessKey != "" {
 		t.Errorf("bad access_key: %q", *s3UpdateResp4.AccessKey)

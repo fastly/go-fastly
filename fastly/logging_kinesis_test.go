@@ -137,7 +137,7 @@ func TestClient_Kinesis(t *testing.T) {
 		t.Errorf("bad format: %q", *kinesisCreateResp1.Format)
 	}
 	if *kinesisCreateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *kinesisCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *kinesisCreateResp1.FormatVersion)
 	}
 	if *kinesisCreateResp1.Placement != "none" {
 		t.Errorf("bad placement: %q", *kinesisCreateResp1.Placement)
@@ -218,7 +218,7 @@ func TestClient_Kinesis(t *testing.T) {
 		t.Errorf("bad format: %q", *kinesisCreateResp1.Format)
 	}
 	if *kinesisCreateResp1.FormatVersion != *kinesisGetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", *kinesisCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *kinesisCreateResp1.FormatVersion)
 	}
 	if *kinesisCreateResp1.Placement != *kinesisGetResp.Placement {
 		t.Errorf("bad placement: %q", *kinesisCreateResp1.Placement)
@@ -483,7 +483,7 @@ func TestClient_Kinesis_Compute(t *testing.T) {
 		t.Errorf("bad format: %q", *kinesisCreateResp1.Format)
 	}
 	if *kinesisCreateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *kinesisCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *kinesisCreateResp1.FormatVersion)
 	}
 	if *kinesisCreateResp1.Placement != "none" {
 		t.Errorf("bad placement: %q", *kinesisCreateResp1.Placement)
@@ -564,7 +564,7 @@ func TestClient_Kinesis_Compute(t *testing.T) {
 		t.Errorf("bad format: %q", *kinesisCreateResp1.Format)
 	}
 	if *kinesisCreateResp1.FormatVersion != *kinesisGetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", *kinesisCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *kinesisCreateResp1.FormatVersion)
 	}
 	if *kinesisCreateResp1.Placement != *kinesisGetResp.Placement {
 		t.Errorf("bad placement: %q", *kinesisCreateResp1.Placement)

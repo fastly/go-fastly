@@ -91,7 +91,7 @@ func TestClient_Kafkas(t *testing.T) {
 		t.Errorf("bad format: %q", *k.Format)
 	}
 	if *k.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *k.FormatVersion)
+		t.Errorf("bad format_version: %d", *k.FormatVersion)
 	}
 	if *k.Placement != "none" {
 		t.Errorf("bad placement: %q", *k.Placement)
@@ -112,7 +112,7 @@ func TestClient_Kafkas(t *testing.T) {
 		t.Errorf("bad parse_log_keyvals: %t", *k.ParseLogKeyvals)
 	}
 	if *k.RequestMaxBytes != requestMaxBytes {
-		t.Errorf("bad request_max_bytes: %q", *k.RequestMaxBytes)
+		t.Errorf("bad request_max_bytes: %d", *k.RequestMaxBytes)
 	}
 	if *k.AuthMethod != "scram-sha-512" {
 		t.Errorf("bad auth_method: %q", *k.AuthMethod)
@@ -173,7 +173,7 @@ func TestClient_Kafkas(t *testing.T) {
 		t.Errorf("bad format: %q", *k.Format)
 	}
 	if *k.FormatVersion != *nk.FormatVersion {
-		t.Errorf("bad format_version: %q", *k.FormatVersion)
+		t.Errorf("bad format_version: %d", *k.FormatVersion)
 	}
 	if *k.Placement != *nk.Placement {
 		t.Errorf("bad placement: %q", *k.Placement)
@@ -194,7 +194,7 @@ func TestClient_Kafkas(t *testing.T) {
 		t.Errorf("bad parse_log_keyvals: %t", *k.ParseLogKeyvals)
 	}
 	if *k.RequestMaxBytes != requestMaxBytes {
-		t.Errorf("bad request_max_bytes: %q", *k.RequestMaxBytes)
+		t.Errorf("bad request_max_bytes: %d", *k.RequestMaxBytes)
 	}
 	if *k.AuthMethod != "scram-sha-512" {
 		t.Errorf("bad auth_method: %q", *k.AuthMethod)
@@ -338,7 +338,7 @@ func TestClient_Kafkas_Compute(t *testing.T) {
 		t.Errorf("bad format: %q", *k.Format)
 	}
 	if *k.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *k.FormatVersion)
+		t.Errorf("bad format_version: %d", *k.FormatVersion)
 	}
 	if *k.Placement != "none" {
 		t.Errorf("bad placement: %q", *k.Placement)
@@ -359,7 +359,7 @@ func TestClient_Kafkas_Compute(t *testing.T) {
 		t.Errorf("bad parse_log_keyvals: %t", *k.ParseLogKeyvals)
 	}
 	if *k.RequestMaxBytes != requestMaxBytes {
-		t.Errorf("bad request_max_bytes: %q", *k.RequestMaxBytes)
+		t.Errorf("bad request_max_bytes: %d", *k.RequestMaxBytes)
 	}
 	if *k.AuthMethod != "scram-sha-512" {
 		t.Errorf("bad auth_method: %q", *k.AuthMethod)
@@ -420,7 +420,7 @@ func TestClient_Kafkas_Compute(t *testing.T) {
 		t.Errorf("bad format: %q", *k.Format)
 	}
 	if *k.FormatVersion != *nk.FormatVersion {
-		t.Errorf("bad format_version: %q", *k.FormatVersion)
+		t.Errorf("bad format_version: %d", *k.FormatVersion)
 	}
 	if *k.Placement != *nk.Placement {
 		t.Errorf("bad placement: %q", *k.Placement)
@@ -441,7 +441,7 @@ func TestClient_Kafkas_Compute(t *testing.T) {
 		t.Errorf("bad parse_log_keyvals: %t", *k.ParseLogKeyvals)
 	}
 	if *k.RequestMaxBytes != requestMaxBytes {
-		t.Errorf("bad request_max_bytes: %q", *k.RequestMaxBytes)
+		t.Errorf("bad request_max_bytes: %d", *k.RequestMaxBytes)
 	}
 	if *k.AuthMethod != "scram-sha-512" {
 		t.Errorf("bad auth_method: %q", *k.AuthMethod)

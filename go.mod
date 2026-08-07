@@ -1,8 +1,6 @@
 module github.com/fastly/go-fastly/v17
 
-go 1.25.0
-
-toolchain go1.25.4
+go 1.26.5
 
 require (
 	github.com/dnaeon/go-vcr v1.2.0

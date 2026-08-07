@@ -164,16 +164,16 @@ func TestClient_DigitalOceans(t *testing.T) {
 		t.Errorf("bad path: %q", *digitaloceanCreateResp1.Path)
 	}
 	if *digitaloceanCreateResp1.Period != 12 {
-		t.Errorf("bad period: %q", *digitaloceanCreateResp1.Period)
+		t.Errorf("bad period: %d", *digitaloceanCreateResp1.Period)
 	}
 	if *digitaloceanCreateResp1.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *digitaloceanCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *digitaloceanCreateResp1.GzipLevel)
 	}
 	if *digitaloceanCreateResp1.Format != "format" {
 		t.Errorf("bad format: %q", *digitaloceanCreateResp1.Format)
 	}
 	if *digitaloceanCreateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *digitaloceanCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *digitaloceanCreateResp1.FormatVersion)
 	}
 	if *digitaloceanCreateResp1.TimestampFormat != "%Y" {
 		t.Errorf("bad timestamp_format: %q", *digitaloceanCreateResp1.TimestampFormat)
@@ -191,13 +191,13 @@ func TestClient_DigitalOceans(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *digitaloceanCreateResp2.CompressionCodec)
 	}
 	if *digitaloceanCreateResp2.GzipLevel != 8 {
-		t.Errorf("bad gzip_level: %q", *digitaloceanCreateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *digitaloceanCreateResp2.GzipLevel)
 	}
 	if *digitaloceanCreateResp3.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", *digitaloceanCreateResp3.CompressionCodec)
 	}
 	if *digitaloceanCreateResp3.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *digitaloceanCreateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *digitaloceanCreateResp3.GzipLevel)
 	}
 
 	// List
@@ -246,16 +246,16 @@ func TestClient_DigitalOceans(t *testing.T) {
 		t.Errorf("bad path: %q", *digitaloceanCreateResp1.Path)
 	}
 	if *digitaloceanCreateResp1.Period != *digitaloceanGetResp.Period {
-		t.Errorf("bad period: %q", *digitaloceanCreateResp1.Period)
+		t.Errorf("bad period: %d", *digitaloceanCreateResp1.Period)
 	}
 	if *digitaloceanCreateResp1.GzipLevel != *digitaloceanGetResp.GzipLevel {
-		t.Errorf("bad gzip_level: %q", *digitaloceanCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *digitaloceanCreateResp1.GzipLevel)
 	}
 	if *digitaloceanCreateResp1.Format != *digitaloceanGetResp.Format {
 		t.Errorf("bad format: %q", *digitaloceanCreateResp1.Format)
 	}
 	if *digitaloceanCreateResp1.FormatVersion != *digitaloceanGetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", *digitaloceanCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *digitaloceanCreateResp1.FormatVersion)
 	}
 	if *digitaloceanCreateResp1.TimestampFormat != *digitaloceanGetResp.TimestampFormat {
 		t.Errorf("bad timestamp_format: %q", *digitaloceanCreateResp1.TimestampFormat)
@@ -333,7 +333,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *digitaloceanUpdateResp1.CompressionCodec)
 	}
 	if digitaloceanUpdateResp1.GzipLevel != nil {
-		t.Errorf("bad gzip_level: %q", *digitaloceanUpdateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *digitaloceanUpdateResp1.GzipLevel)
 	}
 	if *digitaloceanUpdateResp1.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *digitaloceanUpdateResp1.ProcessingRegion)
@@ -342,13 +342,13 @@ func TestClient_DigitalOceans(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *digitaloceanUpdateResp2.CompressionCodec)
 	}
 	if *digitaloceanUpdateResp2.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *digitaloceanUpdateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *digitaloceanUpdateResp2.GzipLevel)
 	}
 	if digitaloceanUpdateResp3.CompressionCodec != nil {
 		t.Errorf("bad compression_codec: %q", *digitaloceanUpdateResp3.CompressionCodec)
 	}
 	if *digitaloceanUpdateResp3.GzipLevel != 9 {
-		t.Errorf("bad gzip_level: %q", *digitaloceanUpdateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *digitaloceanUpdateResp3.GzipLevel)
 	}
 
 	// Delete
@@ -522,16 +522,16 @@ func TestClient_DigitalOceans_Compute(t *testing.T) {
 		t.Errorf("bad path: %q", *digitaloceanCreateResp1.Path)
 	}
 	if *digitaloceanCreateResp1.Period != 12 {
-		t.Errorf("bad period: %q", *digitaloceanCreateResp1.Period)
+		t.Errorf("bad period: %d", *digitaloceanCreateResp1.Period)
 	}
 	if *digitaloceanCreateResp1.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *digitaloceanCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *digitaloceanCreateResp1.GzipLevel)
 	}
 	if *digitaloceanCreateResp1.Format != "format" {
 		t.Errorf("bad format: %q", *digitaloceanCreateResp1.Format)
 	}
 	if *digitaloceanCreateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *digitaloceanCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *digitaloceanCreateResp1.FormatVersion)
 	}
 	if *digitaloceanCreateResp1.TimestampFormat != "%Y" {
 		t.Errorf("bad timestamp_format: %q", *digitaloceanCreateResp1.TimestampFormat)
@@ -549,13 +549,13 @@ func TestClient_DigitalOceans_Compute(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *digitaloceanCreateResp2.CompressionCodec)
 	}
 	if *digitaloceanCreateResp2.GzipLevel != 8 {
-		t.Errorf("bad gzip_level: %q", *digitaloceanCreateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *digitaloceanCreateResp2.GzipLevel)
 	}
 	if *digitaloceanCreateResp3.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", *digitaloceanCreateResp3.CompressionCodec)
 	}
 	if *digitaloceanCreateResp3.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *digitaloceanCreateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *digitaloceanCreateResp3.GzipLevel)
 	}
 
 	// List
@@ -604,16 +604,16 @@ func TestClient_DigitalOceans_Compute(t *testing.T) {
 		t.Errorf("bad path: %q", *digitaloceanCreateResp1.Path)
 	}
 	if *digitaloceanCreateResp1.Period != *digitaloceanGetResp.Period {
-		t.Errorf("bad period: %q", *digitaloceanCreateResp1.Period)
+		t.Errorf("bad period: %d", *digitaloceanCreateResp1.Period)
 	}
 	if *digitaloceanCreateResp1.GzipLevel != *digitaloceanGetResp.GzipLevel {
-		t.Errorf("bad gzip_level: %q", *digitaloceanCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *digitaloceanCreateResp1.GzipLevel)
 	}
 	if *digitaloceanCreateResp1.Format != *digitaloceanGetResp.Format {
 		t.Errorf("bad format: %q", *digitaloceanCreateResp1.Format)
 	}
 	if *digitaloceanCreateResp1.FormatVersion != *digitaloceanGetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", *digitaloceanCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *digitaloceanCreateResp1.FormatVersion)
 	}
 	if *digitaloceanCreateResp1.TimestampFormat != *digitaloceanGetResp.TimestampFormat {
 		t.Errorf("bad timestamp_format: %q", *digitaloceanCreateResp1.TimestampFormat)
@@ -691,7 +691,7 @@ func TestClient_DigitalOceans_Compute(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *digitaloceanUpdateResp1.CompressionCodec)
 	}
 	if digitaloceanUpdateResp1.GzipLevel != nil {
-		t.Errorf("bad gzip_level: %q", *digitaloceanUpdateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *digitaloceanUpdateResp1.GzipLevel)
 	}
 	if *digitaloceanUpdateResp1.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *digitaloceanUpdateResp1.ProcessingRegion)
@@ -700,13 +700,13 @@ func TestClient_DigitalOceans_Compute(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *digitaloceanUpdateResp2.CompressionCodec)
 	}
 	if *digitaloceanUpdateResp2.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *digitaloceanUpdateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *digitaloceanUpdateResp2.GzipLevel)
 	}
 	if digitaloceanUpdateResp3.CompressionCodec != nil {
 		t.Errorf("bad compression_codec: %q", *digitaloceanUpdateResp3.CompressionCodec)
 	}
 	if *digitaloceanUpdateResp3.GzipLevel != 9 {
-		t.Errorf("bad gzip_level: %q", *digitaloceanUpdateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *digitaloceanUpdateResp3.GzipLevel)
 	}
 
 	// Delete

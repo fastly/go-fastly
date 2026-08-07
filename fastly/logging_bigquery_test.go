@@ -92,7 +92,7 @@ func TestClient_Bigqueries_Compute(t *testing.T) {
 		t.Errorf("bad placement: %q", *bq.Placement)
 	}
 	if *bq.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *bq.FormatVersion)
+		t.Errorf("bad format_version: %d", *bq.FormatVersion)
 	}
 
 	// List
@@ -153,7 +153,7 @@ func TestClient_Bigqueries_Compute(t *testing.T) {
 		t.Errorf("bad placement: %q", *bq.Placement)
 	}
 	if *bq.FormatVersion != *nbq.FormatVersion {
-		t.Errorf("bad format_version: %q", *bq.FormatVersion)
+		t.Errorf("bad format_version: %d", *bq.FormatVersion)
 	}
 
 	// Update
@@ -279,7 +279,7 @@ func TestClient_Bigqueries(t *testing.T) {
 		t.Errorf("bad placement: %q", *bq.Placement)
 	}
 	if *bq.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *bq.FormatVersion)
+		t.Errorf("bad format_version: %d", *bq.FormatVersion)
 	}
 
 	// List
@@ -340,7 +340,7 @@ func TestClient_Bigqueries(t *testing.T) {
 		t.Errorf("bad placement: %q", *bq.Placement)
 	}
 	if *bq.FormatVersion != *nbq.FormatVersion {
-		t.Errorf("bad format_version: %q", *bq.FormatVersion)
+		t.Errorf("bad format_version: %d", *bq.FormatVersion)
 	}
 
 	// Update

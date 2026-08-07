@@ -26,7 +26,7 @@ func TestClient_Versions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if *v.Number == 0 {
-		t.Errorf("bad number: %q", *v.Number)
+		t.Errorf("bad number: %d", *v.Number)
 	}
 	if *v.Comment != "test comment" {
 		t.Errorf("bad comment: %q", *v.Comment)
@@ -61,7 +61,7 @@ func TestClient_Versions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if *nv.Number == 0 {
-		t.Errorf("bad number: %q", *nv.Number)
+		t.Errorf("bad number: %d", *nv.Number)
 	}
 	if *nv.Comment != *v.Comment {
 		t.Errorf("bad comment: %q", *v.Comment)
@@ -137,7 +137,7 @@ func TestClient_Versions_Compute(t *testing.T) {
 		t.Fatal(err)
 	}
 	if *v.Number == 0 {
-		t.Errorf("bad number: %q", *v.Number)
+		t.Errorf("bad number: %d", *v.Number)
 	}
 	if *v.Comment != "test comment" {
 		t.Errorf("bad comment: %q", *v.Comment)
@@ -172,7 +172,7 @@ func TestClient_Versions_Compute(t *testing.T) {
 		t.Fatal(err)
 	}
 	if *nv.Number == 0 {
-		t.Errorf("bad number: %q", *nv.Number)
+		t.Errorf("bad number: %d", *nv.Number)
 	}
 	if *nv.Comment != *v.Comment {
 		t.Errorf("bad comment: %q", *v.Comment)

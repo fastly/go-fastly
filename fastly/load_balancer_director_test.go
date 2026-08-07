@@ -92,7 +92,7 @@ func TestClient_Directors(t *testing.T) {
 		t.Errorf("bad name: %q", *d.Name)
 	}
 	if *d.Quorum != 50 {
-		t.Errorf("bad quorum: %q", *d.Quorum)
+		t.Errorf("bad quorum: %d", *d.Quorum)
 	}
 	if *d.Type != DirectorTypeRandom {
 		t.Errorf("bad type: %d", *d.Type)
@@ -135,13 +135,13 @@ func TestClient_Directors(t *testing.T) {
 		t.Errorf("bad name: %q (%q)", *d.Name, *nb.Name)
 	}
 	if *d.Quorum != *nb.Quorum {
-		t.Errorf("bad quorum: %q (%q)", *d.Quorum, *nb.Quorum)
+		t.Errorf("bad quorum: %d (%d)", *d.Quorum, *nb.Quorum)
 	}
 	if *d.Type != *nb.Type {
-		t.Errorf("bad type: %q (%q)", *d.Type, *nb.Type)
+		t.Errorf("bad type: %d (%d)", *d.Type, *nb.Type)
 	}
 	if *d.Retries != *nb.Retries {
-		t.Errorf("bad retries: %q (%q)", *d.Retries, *nb.Retries)
+		t.Errorf("bad retries: %d (%d)", *d.Retries, *nb.Retries)
 	}
 	if len(nb.Backends) == 0 || nb.Backends[0] != *b.Name {
 		t.Error("bad backend: expected a backend")
@@ -162,7 +162,7 @@ func TestClient_Directors(t *testing.T) {
 		t.Fatal(err)
 	}
 	if *ub.Quorum != 100 {
-		t.Errorf("bad quorum: %q", *ub.Quorum)
+		t.Errorf("bad quorum: %d", *ub.Quorum)
 	}
 
 	// Delete

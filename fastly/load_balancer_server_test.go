@@ -122,7 +122,7 @@ func TestClient_Servers(t *testing.T) {
 		t.Errorf("bad address: %s", *us.Address)
 	}
 	if *us.Weight != 50 {
-		t.Errorf("bad weight: %q", 50)
+		t.Errorf("bad weight: %d", 50)
 	}
 
 	// Delete

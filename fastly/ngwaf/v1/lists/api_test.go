@@ -54,7 +54,7 @@ func runListsTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 		t.Errorf("unexpected list description: got %q, expected %q", list.Description, listDescription)
 	}
 	if len(list.Entries) != len(listEntries) {
-		t.Errorf("unexpected list entry length: got %q, expected %q", len(list.Entries), len(listEntries))
+		t.Errorf("unexpected list entry length: got %d, expected %d", len(list.Entries), len(listEntries))
 	}
 	if list.Entries[0] != listEntries[0] {
 		t.Errorf("unexpected list entry: got %q, expected %q", list.Entries[0], listEntries[0])
@@ -106,7 +106,7 @@ func runListsTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 		t.Errorf("unexpected list description: got %q, expected %q", getList.Description, listDescription)
 	}
 	if len(getList.Entries) != len(listEntries) {
-		t.Errorf("unexpected list entry length: got %q, expected %q", len(getList.Entries), len(listEntries))
+		t.Errorf("unexpected list entry length: got %d, expected %d", len(getList.Entries), len(listEntries))
 	}
 	if getList.Entries[0] != listEntries[0] {
 		t.Errorf("unexpected list entry: got %q, expected %q", getList.Entries[0], listEntries[0])
@@ -149,7 +149,7 @@ func runListsTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 		t.Errorf("unexpected list description: got %q, expected %q", updateList.Description, updateListDescription)
 	}
 	if len(updateList.Entries) != len(updateListEntries) {
-		t.Errorf("unexpected list entry length: got %q, expected %q", len(updateList.Entries), len(updateListEntries))
+		t.Errorf("unexpected list entry length: got %d, expected %d", len(updateList.Entries), len(updateListEntries))
 	}
 	if updateList.Entries[0] != updateListEntries[0] {
 		t.Errorf("unexpected list entry: got %q, expected %q", updateList.Entries[0], updateListEntries[0])
@@ -182,14 +182,14 @@ func runListsTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 		t.Fatal(err)
 	}
 	if len(lists.Data) != 1 {
-		t.Errorf("unexpected lists length: got %q, expected %q", len(lists.Data), 1)
+		t.Errorf("unexpected lists length: got %d, expected %d", len(lists.Data), 1)
 	}
 	listedList := &lists.Data[0]
 	if listedList.Description != updateListDescription {
 		t.Errorf("unexpected list description: got %q, expected %q", listedList.Description, updateListDescription)
 	}
 	if len(listedList.Entries) != len(updateListEntries) {
-		t.Errorf("unexpected list entry length: got %q, expected %q", len(listedList.Entries), len(updateListEntries))
+		t.Errorf("unexpected list entry length: got %d, expected %d", len(listedList.Entries), len(updateListEntries))
 	}
 	if listedList.Entries[0] != updateListEntries[0] {
 		t.Errorf("unexpected list entry: got %q, expected %q", listedList.Entries[0], updateListEntries[0])

@@ -58,7 +58,7 @@ func TestClient_Scalyrs(t *testing.T) {
 		t.Errorf("bad format: %q", *s.Format)
 	}
 	if *s.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *s.FormatVersion)
+		t.Errorf("bad format_version: %d", *s.FormatVersion)
 	}
 	if *s.Placement != "none" {
 		t.Errorf("bad placement: %q", *s.Placement)
@@ -107,7 +107,7 @@ func TestClient_Scalyrs(t *testing.T) {
 		t.Errorf("bad format: %q", *s.Format)
 	}
 	if *s.FormatVersion != *ns.FormatVersion {
-		t.Errorf("bad format_version: %q", *s.FormatVersion)
+		t.Errorf("bad format_version: %d", *s.FormatVersion)
 	}
 	if *s.Placement != *ns.Placement {
 		t.Errorf("bad placement: %q", *s.Placement)
@@ -224,7 +224,7 @@ func TestClient_Scalyrs_Compute(t *testing.T) {
 		t.Errorf("bad format: %q", *s.Format)
 	}
 	if *s.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *s.FormatVersion)
+		t.Errorf("bad format_version: %d", *s.FormatVersion)
 	}
 	if *s.Placement != "none" {
 		t.Errorf("bad placement: %q", *s.Placement)
@@ -273,7 +273,7 @@ func TestClient_Scalyrs_Compute(t *testing.T) {
 		t.Errorf("bad format: %q", *s.Format)
 	}
 	if *s.FormatVersion != *ns.FormatVersion {
-		t.Errorf("bad format_version: %q", *s.FormatVersion)
+		t.Errorf("bad format_version: %d", *s.FormatVersion)
 	}
 	if *s.Placement != *ns.Placement {
 		t.Errorf("bad placement: %q", *s.Placement)

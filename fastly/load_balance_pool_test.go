@@ -54,7 +54,7 @@ func TestClient_Pools(t *testing.T) {
 		t.Errorf("bad name: %q", *p.Name)
 	}
 	if *p.Quorum != 50 {
-		t.Errorf("bad quorum: %q", *p.Quorum)
+		t.Errorf("bad quorum: %d", *p.Quorum)
 	}
 	if !*p.UseTLS {
 		t.Errorf("bad use_tls: %t", *p.UseTLS)
@@ -97,7 +97,7 @@ func TestClient_Pools(t *testing.T) {
 		t.Errorf("bad name: %q (%q)", *p.Name, *np.Name)
 	}
 	if *p.Quorum != *np.Quorum {
-		t.Errorf("bad quorum: %q (%q)", *p.Quorum, *np.Quorum)
+		t.Errorf("bad quorum: %d (%d)", *p.Quorum, *np.Quorum)
 	}
 	if *p.Type != *np.Type {
 		t.Errorf("bad type: %q (%q)", *p.Type, *np.Type)
@@ -122,7 +122,7 @@ func TestClient_Pools(t *testing.T) {
 		t.Errorf("bad name: %q", *up.Name)
 	}
 	if *up.Quorum != 0 {
-		t.Errorf("bad quorum: %q", *up.Quorum)
+		t.Errorf("bad quorum: %d", *up.Quorum)
 	}
 
 	// Delete

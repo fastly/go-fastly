@@ -164,16 +164,16 @@ func TestClient_GCSs(t *testing.T) {
 		t.Errorf("bad path: %q", *gcsCreateResp1.Path)
 	}
 	if *gcsCreateResp1.Period != 12 {
-		t.Errorf("bad period: %q", *gcsCreateResp1.Period)
+		t.Errorf("bad period: %d", *gcsCreateResp1.Period)
 	}
 	if *gcsCreateResp1.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", *gcsCreateResp1.CompressionCodec)
 	}
 	if *gcsCreateResp1.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *gcsCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *gcsCreateResp1.GzipLevel)
 	}
 	if *gcsCreateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *gcsCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *gcsCreateResp1.FormatVersion)
 	}
 	if *gcsCreateResp1.Format != "format" {
 		t.Errorf("bad format: %q", *gcsCreateResp1.Format)
@@ -191,13 +191,13 @@ func TestClient_GCSs(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *gcsCreateResp1.CompressionCodec)
 	}
 	if *gcsCreateResp2.GzipLevel != 8 {
-		t.Errorf("bad gzip_level: %q", *gcsCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *gcsCreateResp1.GzipLevel)
 	}
 	if *gcsCreateResp3.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", *gcsCreateResp1.CompressionCodec)
 	}
 	if *gcsCreateResp3.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *gcsCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *gcsCreateResp1.GzipLevel)
 	}
 
 	// List
@@ -246,16 +246,16 @@ func TestClient_GCSs(t *testing.T) {
 		t.Errorf("bad path: %q", *gcsCreateResp1.Path)
 	}
 	if *gcsCreateResp1.Period != *gcsGetResp.Period {
-		t.Errorf("bad period: %q", *gcsCreateResp1.Period)
+		t.Errorf("bad period: %d", *gcsCreateResp1.Period)
 	}
 	if *gcsCreateResp1.CompressionCodec != *gcsGetResp.CompressionCodec {
 		t.Errorf("bad compression_codec: %q", *gcsCreateResp1.CompressionCodec)
 	}
 	if *gcsCreateResp1.GzipLevel != *gcsGetResp.GzipLevel {
-		t.Errorf("bad gzip_level: %q", *gcsCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *gcsCreateResp1.GzipLevel)
 	}
 	if *gcsCreateResp1.FormatVersion != *gcsGetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", *gcsCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *gcsCreateResp1.FormatVersion)
 	}
 	if *gcsCreateResp1.Format != *gcsGetResp.Format {
 		t.Errorf("bad format: %q", *gcsCreateResp1.Format)
@@ -333,7 +333,7 @@ func TestClient_GCSs(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *gcsUpdateResp1.CompressionCodec)
 	}
 	if *gcsUpdateResp1.GzipLevel != 9 {
-		t.Errorf("bad gzip_level: %q", *gcsUpdateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *gcsUpdateResp1.GzipLevel)
 	}
 	if *gcsUpdateResp1.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *gcsUpdateResp1.ProcessingRegion)
@@ -342,13 +342,13 @@ func TestClient_GCSs(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *gcsUpdateResp2.CompressionCodec)
 	}
 	if *gcsUpdateResp2.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *gcsUpdateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *gcsUpdateResp2.GzipLevel)
 	}
 	if gcsUpdateResp3.CompressionCodec != nil {
 		t.Errorf("bad compression_codec: %q", *gcsUpdateResp3.CompressionCodec)
 	}
 	if *gcsUpdateResp3.GzipLevel != 9 {
-		t.Errorf("bad gzip_level: %q", *gcsUpdateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *gcsUpdateResp3.GzipLevel)
 	}
 
 	// Delete
@@ -522,16 +522,16 @@ func TestClient_GCSs_Compute(t *testing.T) {
 		t.Errorf("bad path: %q", *gcsCreateResp1.Path)
 	}
 	if *gcsCreateResp1.Period != 12 {
-		t.Errorf("bad period: %q", *gcsCreateResp1.Period)
+		t.Errorf("bad period: %d", *gcsCreateResp1.Period)
 	}
 	if *gcsCreateResp1.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", *gcsCreateResp1.CompressionCodec)
 	}
 	if *gcsCreateResp1.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *gcsCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *gcsCreateResp1.GzipLevel)
 	}
 	if *gcsCreateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", *gcsCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *gcsCreateResp1.FormatVersion)
 	}
 	if *gcsCreateResp1.Format != "format" {
 		t.Errorf("bad format: %q", *gcsCreateResp1.Format)
@@ -549,13 +549,13 @@ func TestClient_GCSs_Compute(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *gcsCreateResp1.CompressionCodec)
 	}
 	if *gcsCreateResp2.GzipLevel != 8 {
-		t.Errorf("bad gzip_level: %q", *gcsCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *gcsCreateResp1.GzipLevel)
 	}
 	if *gcsCreateResp3.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", *gcsCreateResp1.CompressionCodec)
 	}
 	if *gcsCreateResp3.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *gcsCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *gcsCreateResp1.GzipLevel)
 	}
 
 	// List
@@ -604,16 +604,16 @@ func TestClient_GCSs_Compute(t *testing.T) {
 		t.Errorf("bad path: %q", *gcsCreateResp1.Path)
 	}
 	if *gcsCreateResp1.Period != *gcsGetResp.Period {
-		t.Errorf("bad period: %q", *gcsCreateResp1.Period)
+		t.Errorf("bad period: %d", *gcsCreateResp1.Period)
 	}
 	if *gcsCreateResp1.CompressionCodec != *gcsGetResp.CompressionCodec {
 		t.Errorf("bad compression_codec: %q", *gcsCreateResp1.CompressionCodec)
 	}
 	if *gcsCreateResp1.GzipLevel != *gcsGetResp.GzipLevel {
-		t.Errorf("bad gzip_level: %q", *gcsCreateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *gcsCreateResp1.GzipLevel)
 	}
 	if *gcsCreateResp1.FormatVersion != *gcsGetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", *gcsCreateResp1.FormatVersion)
+		t.Errorf("bad format_version: %d", *gcsCreateResp1.FormatVersion)
 	}
 	if *gcsCreateResp1.Format != *gcsGetResp.Format {
 		t.Errorf("bad format: %q", *gcsCreateResp1.Format)
@@ -691,7 +691,7 @@ func TestClient_GCSs_Compute(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *gcsUpdateResp1.CompressionCodec)
 	}
 	if *gcsUpdateResp1.GzipLevel != 9 {
-		t.Errorf("bad gzip_level: %q", *gcsUpdateResp1.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *gcsUpdateResp1.GzipLevel)
 	}
 	if *gcsUpdateResp1.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *gcsUpdateResp1.ProcessingRegion)
@@ -700,13 +700,13 @@ func TestClient_GCSs_Compute(t *testing.T) {
 		t.Errorf("bad compression_codec: %q", *gcsUpdateResp2.CompressionCodec)
 	}
 	if *gcsUpdateResp2.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", *gcsUpdateResp2.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *gcsUpdateResp2.GzipLevel)
 	}
 	if gcsUpdateResp3.CompressionCodec != nil {
 		t.Errorf("bad compression_codec: %q", *gcsUpdateResp3.CompressionCodec)
 	}
 	if *gcsUpdateResp3.GzipLevel != 9 {
-		t.Errorf("bad gzip_level: %q", *gcsUpdateResp3.GzipLevel)
+		t.Errorf("bad gzip_level: %d", *gcsUpdateResp3.GzipLevel)
 	}
 
 	// Delete

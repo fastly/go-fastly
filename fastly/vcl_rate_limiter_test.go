@@ -58,7 +58,7 @@ func TestClient_ERL(t *testing.T) {
 		t.Errorf("bad name: %q", *e.Name)
 	}
 	if *e.RpsLimit != 20 {
-		t.Errorf("wrong value: %q", *e.RpsLimit)
+		t.Errorf("wrong value: %d", *e.RpsLimit)
 	}
 	if *e.Response.ERLContent != "Too many requests" {
 		t.Errorf("want 'Too many requests', got %q", *e.Response.ERLContent)
@@ -67,7 +67,7 @@ func TestClient_ERL(t *testing.T) {
 		t.Errorf("want 'application/json', got %q", *e.Response.ERLContentType)
 	}
 	if *e.Response.ERLStatus != http.StatusTooManyRequests {
-		t.Errorf("want 429, got %q", *e.Response.ERLStatus)
+		t.Errorf("want 429, got %d", *e.Response.ERLStatus)
 	}
 
 	// List
