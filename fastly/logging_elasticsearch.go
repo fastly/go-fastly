@@ -179,9 +179,11 @@ type UpdateElasticsearchInput struct {
 	// NewName is the new name for the resource.
 	NewName *string `json:"name,omitempty"`
 	// Password is basic Auth password.
-	Password *string `json:"password,omitempty"`
+	// Use NullValue[string]() to clear the password.
+	Password *Nullable[string] `json:"password,omitempty"`
 	// Pipeline is the ID of the Elasticsearch ingest pipeline to apply pre-process transformations to before indexing.
-	Pipeline *string `json:"pipeline,omitempty"`
+	// Use NullValue[string]() to clear the ingest pipeline.
+	Pipeline *Nullable[string] `json:"pipeline,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed. Use
 	// NullValue[string]() to reset the endpoint to automatic placement.
 	Placement *Nullable[string] `json:"placement,omitempty"`
@@ -198,17 +200,22 @@ type UpdateElasticsearchInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int `json:"-"`
 	// TLSCACert is a secure certificate to authenticate a server with. Must be in PEM format.
-	TLSCACert *string `json:"tls_ca_cert,omitempty"`
+	// Use NullValue[string]() to clear the certificate.
+	TLSCACert *Nullable[string] `json:"tls_ca_cert,omitempty"`
 	// TLSClientCert is the client certificate used to make authenticated requests. Must be in PEM format.
-	TLSClientCert *string `json:"tls_client_cert,omitempty"`
+	// Use NullValue[string]() to clear the certificate.
+	TLSClientCert *Nullable[string] `json:"tls_client_cert,omitempty"`
 	// TLSClientKey is the client private key used to make authenticated requests. Must be in PEM format.
-	TLSClientKey *string `json:"tls_client_key,omitempty"`
+	// Use NullValue[string]() to clear the key.
+	TLSClientKey *Nullable[string] `json:"tls_client_key,omitempty"`
 	// TLSHostname is the hostname to verify the server's certificate. This should be one of the Subject Alternative Name (SAN) fields for the certificate. Common Names (CN) are not supported.
-	TLSHostname *string `json:"tls_hostname,omitempty"`
+	// Use NullValue[string]() to clear the hostname.
+	TLSHostname *Nullable[string] `json:"tls_hostname,omitempty"`
 	// URL is the URL to stream logs to. Must use HTTPS.
 	URL *string `json:"url,omitempty"`
 	// User is basic Auth username.
-	User *string `json:"user,omitempty"`
+	// Use NullValue[string]() to clear the username.
+	User *Nullable[string] `json:"user,omitempty"`
 }
 
 // UpdateElasticsearch updates the specified resource.

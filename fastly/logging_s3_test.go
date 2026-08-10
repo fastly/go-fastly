@@ -473,7 +473,7 @@ func TestClient_S3s(t *testing.T) {
 			ServiceVersion:   *tv.Number,
 			Name:             "test-s3",
 			NewName:          ToPointer("new-test-s3"),
-			PublicKey:        ToPointer(pgpPublicKeyUpdate()),
+			PublicKey:        NewNullable(pgpPublicKeyUpdate()),
 			CompressionCodec: ToPointer("zstd"),
 			FileMaxBytes:     ToPointer(5 * MiB),
 			ProcessingRegion: ToPointer("eu"),
@@ -532,7 +532,7 @@ func TestClient_S3s(t *testing.T) {
 			Name:           "new-test-s3",
 			AccessKey:      ToPointer(""),
 			SecretKey:      ToPointer(""),
-			IAMRole:        ToPointer("arn:aws:iam::123456789012:role/S3Access"),
+			IAMRole:        NewNullable("arn:aws:iam::123456789012:role/S3Access"),
 			Placement:      NullValue[string](),
 		})
 	})
@@ -552,7 +552,7 @@ func TestClient_S3s(t *testing.T) {
 			Name:           "test-s3-4",
 			AccessKey:      ToPointer("AKIAIOSFODNN7EXAMPLE"),
 			SecretKey:      ToPointer("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
-			IAMRole:        ToPointer(""),
+			IAMRole:        NewNullable(""),
 			Placement:      NullValue[string](),
 		})
 	})
@@ -570,7 +570,7 @@ func TestClient_S3s(t *testing.T) {
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-s3",
-			IAMRole:        ToPointer("badarn"),
+			IAMRole:        NewNullable("badarn"),
 			Placement:      NullValue[string](),
 		})
 	})
@@ -625,6 +625,47 @@ func TestClient_S3s(t *testing.T) {
 	}
 	if *s3UpdateResp5.IAMRole != "" {
 		t.Errorf("bad iam_role: %q", *s3UpdateResp5.IAMRole)
+	}
+
+	// Test that the nullable attributes can be cleared in place by setting
+	// them to null.
+	var s3ClearResp1, s3ClearResp2 *S3
+	Record(t, "s3s/update_null", func(c *Client) {
+		s3ClearResp1, err = c.UpdateS3(context.TODO(), &UpdateS3Input{
+			ServiceID:      TestDeliveryServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "test-s3-4",
+			IAMRole:        NullValue[string](),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if s3ClearResp1.IAMRole != nil {
+		t.Errorf("bad iam_role: %q", *s3ClearResp1.IAMRole)
+	}
+
+	Record(t, "s3s/update_null2", func(c *Client) {
+		s3ClearResp2, err = c.UpdateS3(context.TODO(), &UpdateS3Input{
+			ServiceID:      TestDeliveryServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-s3",
+			Path:           NullValue[string](),
+			PublicKey:      NullValue[string](),
+			Redundancy:     NullValue[S3Redundancy](),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if s3ClearResp2.Path != nil {
+		t.Errorf("bad path: %q", *s3ClearResp2.Path)
+	}
+	if s3ClearResp2.PublicKey != nil {
+		t.Errorf("bad public_key: %q", *s3ClearResp2.PublicKey)
+	}
+	if s3ClearResp2.Redundancy != nil {
+		t.Errorf("bad redundancy: %q", *s3ClearResp2.Redundancy)
 	}
 
 	// Delete
@@ -1107,7 +1148,7 @@ func TestClient_S3s_Compute(t *testing.T) {
 			ServiceVersion:   *tv.Number,
 			Name:             "test-s3",
 			NewName:          ToPointer("new-test-s3"),
-			PublicKey:        ToPointer(pgpPublicKeyUpdate()),
+			PublicKey:        NewNullable(pgpPublicKeyUpdate()),
 			CompressionCodec: ToPointer("zstd"),
 			FileMaxBytes:     ToPointer(5 * MiB),
 			ProcessingRegion: ToPointer("eu"),
@@ -1166,7 +1207,7 @@ func TestClient_S3s_Compute(t *testing.T) {
 			Name:           "new-test-s3",
 			AccessKey:      ToPointer(""),
 			SecretKey:      ToPointer(""),
-			IAMRole:        ToPointer("arn:aws:iam::123456789012:role/S3Access"),
+			IAMRole:        NewNullable("arn:aws:iam::123456789012:role/S3Access"),
 			Placement:      NewNullable("none"),
 		})
 	})
@@ -1186,7 +1227,7 @@ func TestClient_S3s_Compute(t *testing.T) {
 			Name:           "test-s3-4",
 			AccessKey:      ToPointer("AKIAIOSFODNN7EXAMPLE"),
 			SecretKey:      ToPointer("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
-			IAMRole:        ToPointer(""),
+			IAMRole:        NewNullable(""),
 			Placement:      NewNullable("none"),
 		})
 	})
@@ -1204,7 +1245,7 @@ func TestClient_S3s_Compute(t *testing.T) {
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-s3",
-			IAMRole:        ToPointer("badarn"),
+			IAMRole:        NewNullable("badarn"),
 			Placement:      NewNullable("none"),
 		})
 	})

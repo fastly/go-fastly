@@ -26,8 +26,8 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/160/logging/kinesis
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/201/logging/kinesis
     method: POST
   response:
     body: '{"msg":"''iam_role'' can''t be used when ''access_key'' or ''secret_key''
@@ -40,11 +40,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:29:10 GMT
+      - Mon, 10 Aug 2026 19:14:52 GMT
       Fastly-Ratelimit-Remaining:
-      - "9848"
+      - "9728"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -62,11 +62,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "94"
+      - "88"
       X-Served-By:
-      - cache-chi-kigq8000057-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-kigq8000092-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1784834950.171498,VS0,VE134
+      - S1786389292.274956,VS0,VE121
     status: 400 Bad Request
     code: 400
     duration: ""

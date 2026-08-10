@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/156/logging/azureblob/test-blobstorage
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/193/logging/azureblob/test-blobstorage
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-blobstorage, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 156 }''"}'
+      version =\u003e 193 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:28:56 GMT
+      - Mon, 10 Aug 2026 19:14:03 GMT
       Fastly-Ratelimit-Remaining:
-      - "9877"
+      - "9807"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -43,11 +43,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "146"
+      - "97"
       X-Served-By:
-      - cache-chi-klot8100048-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-kmdw8640041-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1784834936.292946,VS0,VE187
+      - S1786389244.625991,VS0,VE127
     status: 404 Not Found
     code: 404
     duration: ""
@@ -56,8 +56,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/156/logging/azureblob/test-blobstorage-2
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/193/logging/azureblob/test-blobstorage-2
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -69,11 +69,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:28:59 GMT
+      - Mon, 10 Aug 2026 19:14:04 GMT
       Fastly-Ratelimit-Remaining:
-      - "9871"
+      - "9806"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -91,11 +91,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "410"
+      - "437"
       X-Served-By:
-      - cache-chi-klot8100086-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-kmdw8640089-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1784834939.279889,VS0,VE445
+      - S1786389244.829632,VS0,VE466
     status: 200 OK
     code: 200
     duration: ""
@@ -104,8 +104,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/156/logging/azureblob/test-blobstorage-3
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/193/logging/azureblob/test-blobstorage-3
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -117,11 +117,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:29:01 GMT
+      - Mon, 10 Aug 2026 19:14:05 GMT
       Fastly-Ratelimit-Remaining:
-      - "9866"
+      - "9804"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -139,11 +139,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "411"
+      - "385"
       X-Served-By:
-      - cache-chi-kigq8000124-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-kmdw8640082-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1784834941.948194,VS0,VE450
+      - S1786389245.945309,VS0,VE417
     status: 200 OK
     code: 200
     duration: ""
@@ -152,13 +152,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/156/logging/azureblob/new-test-blobstorage
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/193/logging/azureblob/new-test-blobstorage
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-blobstorage, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 156 }''"}'
+      version =\u003e 193 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -167,11 +167,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:29:02 GMT
+      - Mon, 10 Aug 2026 19:14:05 GMT
       Fastly-Ratelimit-Remaining:
-      - "9863"
+      - "9802"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -189,11 +189,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "138"
+      - "94"
       X-Served-By:
-      - cache-chi-kmdw8640062-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-kigq8000141-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1784834942.403509,VS0,VE177
+      - S1786389246.672114,VS0,VE126
     status: 404 Not Found
     code: 404
     duration: ""

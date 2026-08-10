@@ -70,8 +70,8 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/152/logging/s3
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/198/logging/s3
     method: POST
   response:
     body: '{"msg":"Duplicate record","detail":"Duplicate logging_syslog: ''test-s3''"}'
@@ -83,11 +83,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:29:16 GMT
+      - Mon, 10 Aug 2026 19:14:29 GMT
       Fastly-Ratelimit-Remaining:
-      - "9836"
+      - "9765"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -105,11 +105,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "193"
+      - "396"
       X-Served-By:
-      - cache-chi-klot8100148-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-klot8100143-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1784834956.185498,VS0,VE243
+      - S1786389269.377369,VS0,VE431
     status: 409 Conflict
     code: 409
     duration: ""

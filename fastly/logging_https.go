@@ -185,7 +185,8 @@ type UpdateHTTPSInput struct {
 	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.
 	CompressionCodec *string `json:"compression_codec,omitempty"`
 	// ContentType is the content type of the header sent with the request.
-	ContentType *string `json:"content_type,omitempty"`
+	// Use NullValue[string]() to clear the content type.
+	ContentType *Nullable[string] `json:"content_type,omitempty"`
 	// Format is a Fastly log format string.
 	Format *string `json:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -193,9 +194,11 @@ type UpdateHTTPSInput struct {
 	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
 	GzipLevel *int `json:"gzip_level,omitempty"`
 	// HeaderName is the name of the custom header sent with the request.
-	HeaderName *string `json:"header_name,omitempty"`
+	// Use NullValue[string]() to clear the header name.
+	HeaderName *Nullable[string] `json:"header_name,omitempty"`
 	// HeaderValue is the value of the custom header sent with the request.
-	HeaderValue *string `json:"header_value,omitempty"`
+	// Use NullValue[string]() to clear the header value.
+	HeaderValue *Nullable[string] `json:"header_value,omitempty"`
 	// JSONFormat enforces valid JSON formatting for log entries (0: disabled, 1: array of JSON, 2: newline delimited JSON).
 	JSONFormat *string `json:"json_format,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
@@ -224,13 +227,17 @@ type UpdateHTTPSInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int `json:"-"`
 	// TLSCACert is a secure certificate to authenticate a server with. Must be in PEM format.
-	TLSCACert *string `json:"tls_ca_cert,omitempty"`
+	// Use NullValue[string]() to clear the certificate.
+	TLSCACert *Nullable[string] `json:"tls_ca_cert,omitempty"`
 	// TLSClientCert is the client certificate used to make authenticated requests. Must be in PEM format.
-	TLSClientCert *string `json:"tls_client_cert,omitempty"`
+	// Use NullValue[string]() to clear the certificate.
+	TLSClientCert *Nullable[string] `json:"tls_client_cert,omitempty"`
 	// TLSClientKey is the client private key used to make authenticated requests. Must be in PEM format.
-	TLSClientKey *string `json:"tls_client_key,omitempty"`
+	// Use NullValue[string]() to clear the key.
+	TLSClientKey *Nullable[string] `json:"tls_client_key,omitempty"`
 	// TLSHostname is the hostname to verify the server's certificate. This should be one of the Subject Alternative Name (SAN) fields for the certificate. Common Names (CN) are not supported.
-	TLSHostname *string `json:"tls_hostname,omitempty"`
+	// Use NullValue[string]() to clear the hostname.
+	TLSHostname *Nullable[string] `json:"tls_hostname,omitempty"`
 	// URL is the URL to send logs to. Must use HTTPS
 	URL *string `json:"url,omitempty"`
 }

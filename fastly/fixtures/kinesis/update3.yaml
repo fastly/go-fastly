@@ -10,11 +10,11 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/160/logging/kinesis/test-kinesis-2
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/201/logging/kinesis/test-kinesis-2
     method: PUT
   response:
-    body: '{"secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","format":"format","response_condition":"","version":"160","name":"test-kinesis-2","region":"us-east-1","service_id":"kKJb5bOFI47uHeBVluGfX1","access_key":"AKIAIOSFODNN7EXAMPLE","log_processing_region":"none","iam_role":"","created_at":"2026-07-23T19:29:07Z","format_version":"2","topic":"stream-name","deleted_at":null,"placement":null,"updated_at":"2026-07-23T19:29:07Z"}'
+    body: '{"secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","format_version":"2","log_processing_region":"none","region":"us-east-1","response_condition":"","topic":"stream-name","version":"201","name":"test-kinesis-2","deleted_at":null,"format":"format","access_key":"AKIAIOSFODNN7EXAMPLE","service_id":"kKJb5bOFI47uHeBVluGfX1","iam_role":"","placement":null,"updated_at":"2026-08-10T19:14:49Z","created_at":"2026-08-10T19:14:49Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -23,11 +23,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:29:27 GMT
+      - Mon, 10 Aug 2026 19:15:09 GMT
       Fastly-Ratelimit-Remaining:
-      - "9821"
+      - "9713"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -45,11 +45,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "693"
+      - "733"
       X-Served-By:
-      - cache-chi-kigq8000126-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-kigq8000122-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1784834967.521271,VS0,VE727
+      - S1786389309.715211,VS0,VE765
     status: 200 OK
     code: 200
     duration: ""

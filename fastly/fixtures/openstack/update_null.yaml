@@ -1,0 +1,55 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"public_key":null}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/199/logging/openstack/new-test-openstack
+    method: PUT
+  response:
+    body: '{"created_at":"2026-08-10T19:14:24Z","format":"format","format_version":"2","response_condition":"","updated_at":"2026-08-10T19:14:33Z","public_key":null,"placement":null,"access_key":"secret-key","service_id":"kKJb5bOFI47uHeBVluGfX1","bucket_name":"bucket-name","period":"12","compression_codec":"zstd","gzip_level":"0","message_type":"classic","log_processing_region":"eu","version":"199","path":"/path","name":"new-test-openstack","url":"https://logs.example.com/v1.0","deleted_at":null,"user":"new-user","timestamp_format":"%Y"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 10 Aug 2026 19:14:39 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9749"
+      Fastly-Ratelimit-Reset:
+      - "1786392000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "727"
+      X-Served-By:
+      - cache-chi-kmdw8640083-CHI, cache-ewr-kewr1740023-EWR
+      X-Timer:
+      - S1786389279.142064,VS0,VE761
+    status: 200 OK
+    code: 200
+    duration: ""

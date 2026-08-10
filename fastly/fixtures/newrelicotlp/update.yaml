@@ -10,11 +10,11 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/175/logging/newrelicotlp/test-newrelicotlp
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/200/logging/newrelicotlp/test-newrelicotlp
     method: PUT
   response:
-    body: '{"log_processing_region":"eu","created_at":"2026-07-23T19:31:25Z","region":null,"format":"format","deleted_at":null,"token":"abcd1234","version":"175","placement":null,"service_id":"kKJb5bOFI47uHeBVluGfX1","url":"https://example.nr-data.net","response_condition":"","updated_at":"2026-07-23T19:31:25Z","format_version":"2","name":"new-test-newrelicotlp"}'
+    body: '{"token":"abcd1234","url":"https://example.nr-data.net","deleted_at":null,"format":"format","updated_at":"2026-08-10T19:14:29Z","region":null,"service_id":"kKJb5bOFI47uHeBVluGfX1","response_condition":"","format_version":"2","version":"200","name":"new-test-newrelicotlp","placement":null,"log_processing_region":"eu","created_at":"2026-08-10T19:14:29Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -23,11 +23,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:31:28 GMT
+      - Mon, 10 Aug 2026 19:14:32 GMT
       Fastly-Ratelimit-Remaining:
-      - "9602"
+      - "9759"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -45,11 +45,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "599"
+      - "807"
       X-Served-By:
-      - cache-chi-klot8100062-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-klot8100135-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1784835088.250539,VS0,VE639
+      - S1786389272.038582,VS0,VE840
     status: 200 OK
     code: 200
     duration: ""

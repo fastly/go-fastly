@@ -18,11 +18,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/175/logging/newrelicotlp
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/200/logging/newrelicotlp
     method: POST
   response:
-    body: '{"format":"format","name":"test-newrelicotlp","placement":"none","token":"abcd1234","url":"https://example.nr-data.net","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"175","updated_at":"2026-07-23T19:31:25Z","region":null,"response_condition":"","format_version":"2","created_at":"2026-07-23T19:31:25Z","deleted_at":null,"log_processing_region":"none"}'
+    body: '{"format":"format","name":"test-newrelicotlp","placement":"none","token":"abcd1234","url":"https://example.nr-data.net","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"200","deleted_at":null,"updated_at":"2026-08-10T19:14:29Z","region":null,"response_condition":"","log_processing_region":"none","format_version":"2","created_at":"2026-08-10T19:14:29Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -31,11 +31,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:31:25 GMT
+      - Mon, 10 Aug 2026 19:14:30 GMT
       Fastly-Ratelimit-Remaining:
-      - "9609"
+      - "9764"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -53,11 +53,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "515"
+      - "651"
       X-Served-By:
-      - cache-chi-klot8100161-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-kmdw8640035-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1784835085.890987,VS0,VE552
+      - S1786389270.841624,VS0,VE682
     status: 200 OK
     code: 200
     duration: ""

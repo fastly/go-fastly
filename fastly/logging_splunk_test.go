@@ -214,6 +214,36 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad use_tls: %t", *us.UseTLS)
 	}
 
+	// Test that the nullable attributes can be cleared in place by setting
+	// them to null.
+	var cs *Splunk
+	Record(t, "splunks/update_null", func(c *Client) {
+		cs, err = c.UpdateSplunk(context.TODO(), &UpdateSplunkInput{
+			ServiceID:      TestDeliveryServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-splunk",
+			TLSCACert:      NullValue[string](),
+			TLSClientCert:  NullValue[string](),
+			TLSClientKey:   NullValue[string](),
+			TLSHostname:    NullValue[string](),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if cs.TLSCACert != nil {
+		t.Errorf("bad tls_ca_cert: %q", *cs.TLSCACert)
+	}
+	if cs.TLSClientCert != nil {
+		t.Errorf("bad tls_client_cert: %q", *cs.TLSClientCert)
+	}
+	if cs.TLSClientKey != nil {
+		t.Errorf("bad tls_client_key: %q", *cs.TLSClientKey)
+	}
+	if cs.TLSHostname != nil {
+		t.Errorf("bad tls_hostname: %q", *cs.TLSHostname)
+	}
+
 	// Delete
 	Record(t, "splunks/delete", func(c *Client) {
 		err = c.DeleteSplunk(context.TODO(), &DeleteSplunkInput{

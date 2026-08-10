@@ -388,6 +388,48 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad gzip_level: %d", *uh2.GzipLevel)
 	}
 
+	// Test that the nullable attributes can be cleared in place by setting
+	// them to null.
+	var httpsClearResp *HTTPS
+	Record(t, "https/update_null", func(c *Client) {
+		httpsClearResp, err = c.UpdateHTTPS(context.TODO(), &UpdateHTTPSInput{
+			ServiceID:      TestDeliveryServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-https",
+			ContentType:    NullValue[string](),
+			HeaderName:     NullValue[string](),
+			HeaderValue:    NullValue[string](),
+			TLSCACert:      NullValue[string](),
+			TLSClientCert:  NullValue[string](),
+			TLSClientKey:   NullValue[string](),
+			TLSHostname:    NullValue[string](),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if httpsClearResp.ContentType != nil {
+		t.Errorf("bad content_type: %q", *httpsClearResp.ContentType)
+	}
+	if httpsClearResp.HeaderName != nil {
+		t.Errorf("bad header_name: %q", *httpsClearResp.HeaderName)
+	}
+	if httpsClearResp.HeaderValue != nil {
+		t.Errorf("bad header_value: %q", *httpsClearResp.HeaderValue)
+	}
+	if httpsClearResp.TLSCACert != nil {
+		t.Errorf("bad tls_ca_cert: %q", *httpsClearResp.TLSCACert)
+	}
+	if httpsClearResp.TLSClientCert != nil {
+		t.Errorf("bad tls_client_cert: %q", *httpsClearResp.TLSClientCert)
+	}
+	if httpsClearResp.TLSClientKey != nil {
+		t.Errorf("bad tls_client_key: %q", *httpsClearResp.TLSClientKey)
+	}
+	if httpsClearResp.TLSHostname != nil {
+		t.Errorf("bad tls_hostname: %q", *httpsClearResp.TLSHostname)
+	}
+
 	// Delete
 	Record(t, "https/delete", func(c *Client) {
 		err = c.DeleteHTTPS(context.TODO(), &DeleteHTTPSInput{

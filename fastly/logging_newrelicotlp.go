@@ -169,7 +169,8 @@ type UpdateNewRelicOTLPInput struct {
 	Token *string `json:"token,omitempty"`
 	// URL is the optional URL of a New Relic trace observer to send logs
 	// to. Must be a New Relic domain name.
-	URL *string `json:"url,omitempty"`
+	// Use NullValue[string]() to clear the URL.
+	URL *Nullable[string] `json:"url,omitempty"`
 }
 
 // UpdateNewRelicOTLP updates a specific newrelic.

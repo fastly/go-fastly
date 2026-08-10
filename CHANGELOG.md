@@ -4,6 +4,8 @@
 
 ### Breaking:
 
+- breaking(logging): optional attributes the API accepts `null` for — `iam_role`, `user`, `password`, TLS material (`tls_ca_cert`, `tls_client_cert`, `tls_client_key`, `tls_hostname`), `token`, `public_key`, `path`, `ipv4`, `content_type`, `header_name`, `header_value`, `pipeline`, `redundancy`, `region`, `compression_codec`, `url` and `template_suffix` — can now be set to `null` on update, allowing them to be cleared in place rather than requiring the endpoint to be recreated ([#XXX](https://github.com/fastly/go-fastly/pull/XXX))
+
 ### Enhancements:
 
 ### Dependencies:

@@ -187,7 +187,8 @@ type UpdateDigitalOceanInput struct {
 	// NewName is the new name for the resource.
 	NewName *string `json:"name,omitempty"`
 	// Path is the path to upload logs to.
-	Path *string `json:"path,omitempty"`
+	// Use NullValue[string]() to clear the path and upload logs to the root of the bucket.
+	Path *Nullable[string] `json:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
 	Period *int `json:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed. Use

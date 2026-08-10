@@ -175,7 +175,8 @@ type UpdateSyslogInput struct {
 	// Hostname is the hostname used for the syslog endpoint.
 	Hostname *string `json:"hostname,omitempty"`
 	// IPV4 is the IPv4 address used for the syslog endpoint.
-	IPV4 *string `json:"ipv4,omitempty"`
+	// Use NullValue[string]() to clear the address.
+	IPV4 *Nullable[string] `json:"ipv4,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
 	MessageType *string `json:"message_type,omitempty"`
 	// Name is the name of the syslog to update (required).
@@ -196,15 +197,20 @@ type UpdateSyslogInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int `json:"-"`
 	// TLSCACert is a secure certificate to authenticate a server with. Must be in PEM format.
-	TLSCACert *string `json:"tls_ca_cert,omitempty"`
+	// Use NullValue[string]() to clear the certificate.
+	TLSCACert *Nullable[string] `json:"tls_ca_cert,omitempty"`
 	// TLSClientCert is the client certificate used to make authenticated requests. Must be in PEM format.
-	TLSClientCert *string `json:"tls_client_cert,omitempty"`
+	// Use NullValue[string]() to clear the certificate.
+	TLSClientCert *Nullable[string] `json:"tls_client_cert,omitempty"`
 	// TLSClientKey is the client private key used to make authenticated requests. Must be in PEM format.
-	TLSClientKey *string `json:"tls_client_key,omitempty"`
+	// Use NullValue[string]() to clear the key.
+	TLSClientKey *Nullable[string] `json:"tls_client_key,omitempty"`
 	// TLSHostname is the hostname to verify the server's certificate. This should be one of the Subject Alternative Name (SAN) fields for the certificate. Common Names (CN) are not supported.
-	TLSHostname *string `json:"tls_hostname,omitempty"`
+	// Use NullValue[string]() to clear the hostname.
+	TLSHostname *Nullable[string] `json:"tls_hostname,omitempty"`
 	// Token is whether to prepend each message with a specific token.
-	Token *string `json:"token,omitempty"`
+	// Use NullValue[string]() to clear the token.
+	Token *Nullable[string] `json:"token,omitempty"`
 	// UseTLS is whether to use TLS (0: do not use, 1: use).
 	UseTLS *Compatibool `json:"use_tls,omitempty"`
 }

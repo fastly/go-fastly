@@ -380,6 +380,24 @@ func TestClient_SFTPs(t *testing.T) {
 		t.Errorf("bad gzip_level: %d", *sftpUpdateResp3.GzipLevel)
 	}
 
+	// Test that the nullable attributes can be cleared in place by setting
+	// them to null.
+	var sftpClearResp *SFTP
+	Record(t, "sftps/update_null", func(c *Client) {
+		sftpClearResp, err = c.UpdateSFTP(context.TODO(), &UpdateSFTPInput{
+			ServiceID:      TestDeliveryServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-sftp",
+			PublicKey:      NullValue[string](),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if sftpClearResp.PublicKey != nil {
+		t.Errorf("bad public_key: %q", *sftpClearResp.PublicKey)
+	}
+
 	// Delete
 	Record(t, "sftps/delete", func(c *Client) {
 		err = c.DeleteSFTP(context.TODO(), &DeleteSFTPInput{

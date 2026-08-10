@@ -351,6 +351,24 @@ func TestClient_DigitalOceans(t *testing.T) {
 		t.Errorf("bad gzip_level: %d", *digitaloceanUpdateResp3.GzipLevel)
 	}
 
+	// Test that the nullable attributes can be cleared in place by setting
+	// them to null.
+	var digitaloceanClearResp *DigitalOcean
+	Record(t, "digitaloceans/update_null", func(c *Client) {
+		digitaloceanClearResp, err = c.UpdateDigitalOcean(context.TODO(), &UpdateDigitalOceanInput{
+			ServiceID:      TestDeliveryServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-digitalocean",
+			Path:           NullValue[string](),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if digitaloceanClearResp.Path != nil {
+		t.Errorf("bad path: %q", *digitaloceanClearResp.Path)
+	}
+
 	// Delete
 	Record(t, "digitaloceans/delete", func(c *Client) {
 		err = c.DeleteDigitalOcean(context.TODO(), &DeleteDigitalOceanInput{

@@ -155,7 +155,8 @@ type UpdateKinesisInput struct {
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
 	FormatVersion *int `json:"format_version,omitempty"`
 	// IAMRole is the ARN for an IAM role granting Fastly access to the target Amazon Kinesis stream.
-	IAMRole *string `json:"iam_role,omitempty"`
+	// Use NullValue[string]() to clear the IAM role, for example when switching to access_key and secret_key authentication.
+	IAMRole *Nullable[string] `json:"iam_role,omitempty"`
 	// Name is the name of the Kinesis logging object to update (required).
 	Name string `json:"-"`
 	// NewName is the new name for the resource.

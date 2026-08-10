@@ -243,6 +243,40 @@ func TestClient_Kafkas(t *testing.T) {
 		t.Errorf("bad use_tls: %t", *uk.UseTLS)
 	}
 
+	// Test that the nullable attributes can be cleared in place by setting
+	// them to null.
+	var ck *Kafka
+	Record(t, "kafkas/update_null", func(c *Client) {
+		ck, err = c.UpdateKafka(context.TODO(), &UpdateKafkaInput{
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "new-test-kafka",
+			CompressionCodec: NullValue[string](),
+			TLSCACert:        NullValue[string](),
+			TLSClientCert:    NullValue[string](),
+			TLSClientKey:     NullValue[string](),
+			TLSHostname:      NullValue[string](),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if ck.CompressionCodec != nil {
+		t.Errorf("bad compression_codec: %q", *ck.CompressionCodec)
+	}
+	if ck.TLSCACert != nil {
+		t.Errorf("bad tls_ca_cert: %q", *ck.TLSCACert)
+	}
+	if ck.TLSClientCert != nil {
+		t.Errorf("bad tls_client_cert: %q", *ck.TLSClientCert)
+	}
+	if ck.TLSClientKey != nil {
+		t.Errorf("bad tls_client_key: %q", *ck.TLSClientKey)
+	}
+	if ck.TLSHostname != nil {
+		t.Errorf("bad tls_hostname: %q", *ck.TLSHostname)
+	}
+
 	// Delete
 	Record(t, "kafkas/delete", func(c *Client) {
 		err = c.DeleteKafka(context.TODO(), &DeleteKafkaInput{

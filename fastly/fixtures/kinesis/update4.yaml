@@ -10,13 +10,13 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/160/logging/kinesis/test-kinesis
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/201/logging/kinesis/test-kinesis
     method: PUT
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-kinesis, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 160 }''"}'
+      version =\u003e 201 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -25,11 +25,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:29:31 GMT
+      - Mon, 10 Aug 2026 19:15:12 GMT
       Fastly-Ratelimit-Remaining:
-      - "9812"
+      - "9711"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -47,11 +47,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "195"
+      - "155"
       X-Served-By:
-      - cache-chi-kigq8000048-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-klot8100141-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1784834971.224768,VS0,VE230
+      - S1786389312.919683,VS0,VE190
     status: 404 Not Found
     code: 404
     duration: ""

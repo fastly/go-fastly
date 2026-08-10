@@ -732,6 +732,28 @@ func TestClient_BlobStorages(t *testing.T) {
 		t.Errorf("bad gzip_level: %d", *bsUpdateResp3.GzipLevel)
 	}
 
+	// Test that the nullable attributes can be cleared in place by setting
+	// them to null.
+	var bsClearResp *BlobStorage
+	Record(t, "blobstorages/update_null", func(c *Client) {
+		bsClearResp, err = c.UpdateBlobStorage(context.TODO(), &UpdateBlobStorageInput{
+			ServiceID:      TestDeliveryServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-blobstorage",
+			Path:           NullValue[string](),
+			PublicKey:      NullValue[string](),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if bsClearResp.Path != nil {
+		t.Errorf("bad path: %q", *bsClearResp.Path)
+	}
+	if bsClearResp.PublicKey != nil {
+		t.Errorf("bad public_key: %q", *bsClearResp.PublicKey)
+	}
+
 	// Delete
 	Record(t, "blobstorages/delete", func(c *Client) {
 		err = c.DeleteBlobStorage(context.TODO(), &DeleteBlobStorageInput{

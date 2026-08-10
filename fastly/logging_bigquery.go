@@ -185,7 +185,8 @@ type UpdateBigQueryInput struct {
 	// Table is your BigQuery table.
 	Table *string `json:"table,omitempty"`
 	// Template is a BigQuery table name suffix template.
-	Template *string `json:"template_suffix,omitempty"`
+	// Use NullValue[string]() to clear the table name suffix template.
+	Template *Nullable[string] `json:"template_suffix,omitempty"`
 	// User is your Google Cloud Platform service account email address. The client_email field in your service account authentication JSON. Not required if account_name is specified.
 	User *string `json:"user,omitempty"`
 }

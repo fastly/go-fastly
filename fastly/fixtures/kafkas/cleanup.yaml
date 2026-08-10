@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/161/logging/kafka/test-kafka
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/202/logging/kafka/test-kafka
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-kafka, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 161 }''"}'
+      version =\u003e 202 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 27 Jul 2026 16:13:00 GMT
+      - Mon, 10 Aug 2026 19:15:00 GMT
       Fastly-Ratelimit-Remaining:
-      - "9985"
+      - "9718"
       Fastly-Ratelimit-Reset:
-      - "1785171600"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -43,11 +43,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "85"
+      - "140"
       X-Served-By:
-      - cache-chi-klot8100140-CHI, cache-ewr-kewr1740060-EWR
+      - cache-chi-kmdw8640029-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1785168781.710489,VS0,VE118
+      - S1786389300.155385,VS0,VE171
     status: 404 Not Found
     code: 404
     duration: ""
@@ -56,13 +56,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/161/logging/kafka/new-test-kafka
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/202/logging/kafka/new-test-kafka
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-kafka, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 161 }''"}'
+      version =\u003e 202 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -71,11 +71,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 27 Jul 2026 16:13:01 GMT
+      - Mon, 10 Aug 2026 19:15:04 GMT
       Fastly-Ratelimit-Remaining:
-      - "9984"
+      - "9715"
       Fastly-Ratelimit-Reset:
-      - "1785171600"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -93,11 +93,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "165"
+      - "1759"
       X-Served-By:
-      - cache-chi-kmdw8640042-CHI, cache-ewr-kewr1740060-EWR
+      - cache-chi-kigq8000047-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1785168781.163074,VS0,VE194
+      - S1786389303.086186,VS0,VE1793
     status: 404 Not Found
     code: 404
     duration: ""

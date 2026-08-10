@@ -268,7 +268,7 @@ func TestClient_Kinesis(t *testing.T) {
 			Name:           "new-test-kinesis",
 			AccessKey:      ToPointer(""),
 			SecretKey:      ToPointer(""),
-			IAMRole:        ToPointer("arn:aws:iam::123456789012:role/S3Access"),
+			IAMRole:        NewNullable("arn:aws:iam::123456789012:role/S3Access"),
 			Placement:      NullValue[string](),
 		})
 	})
@@ -288,7 +288,7 @@ func TestClient_Kinesis(t *testing.T) {
 			Name:           "test-kinesis-2",
 			AccessKey:      ToPointer("AKIAIOSFODNN7EXAMPLE"),
 			SecretKey:      ToPointer("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
-			IAMRole:        ToPointer(""),
+			IAMRole:        NewNullable(""),
 			Placement:      NullValue[string](),
 		})
 	})
@@ -306,7 +306,7 @@ func TestClient_Kinesis(t *testing.T) {
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
 			Name:           "test-kinesis",
-			IAMRole:        ToPointer("badarn"),
+			IAMRole:        NewNullable("badarn"),
 			Placement:      NullValue[string](),
 		})
 	})
@@ -337,6 +337,24 @@ func TestClient_Kinesis(t *testing.T) {
 	}
 	if *kinesisUpdateResp3.IAMRole != "" {
 		t.Errorf("bad iam_role: %q", *kinesisUpdateResp3.IAMRole)
+	}
+
+	// Test that the nullable attributes can be cleared in place by setting
+	// them to null.
+	var kinesisClearResp *Kinesis
+	Record(t, "kinesis/update_null", func(c *Client) {
+		kinesisClearResp, err = c.UpdateKinesis(context.TODO(), &UpdateKinesisInput{
+			ServiceID:      TestDeliveryServiceID,
+			ServiceVersion: *v.Number,
+			Name:           "test-kinesis-2",
+			IAMRole:        NullValue[string](),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if kinesisClearResp.IAMRole != nil {
+		t.Errorf("bad iam_role: %q", *kinesisClearResp.IAMRole)
 	}
 
 	// Delete
@@ -614,7 +632,7 @@ func TestClient_Kinesis_Compute(t *testing.T) {
 			Name:           "new-test-kinesis",
 			AccessKey:      ToPointer(""),
 			SecretKey:      ToPointer(""),
-			IAMRole:        ToPointer("arn:aws:iam::123456789012:role/S3Access"),
+			IAMRole:        NewNullable("arn:aws:iam::123456789012:role/S3Access"),
 			Placement:      NewNullable("none"),
 		})
 	})
@@ -634,7 +652,7 @@ func TestClient_Kinesis_Compute(t *testing.T) {
 			Name:           "test-kinesis-2",
 			AccessKey:      ToPointer("AKIAIOSFODNN7EXAMPLE"),
 			SecretKey:      ToPointer("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
-			IAMRole:        ToPointer(""),
+			IAMRole:        NewNullable(""),
 			Placement:      NewNullable("none"),
 		})
 	})
@@ -652,7 +670,7 @@ func TestClient_Kinesis_Compute(t *testing.T) {
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *v.Number,
 			Name:           "test-kinesis",
-			IAMRole:        ToPointer("badarn"),
+			IAMRole:        NewNullable("badarn"),
 			Placement:      NewNullable("none"),
 		})
 	})

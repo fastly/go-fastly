@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/157/logging/bigquery/test-bigquery
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/194/logging/bigquery/test-bigquery
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-bigquery, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 157 }''"}'
+      version =\u003e 194 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:28:43 GMT
+      - Mon, 10 Aug 2026 19:13:55 GMT
       Fastly-Ratelimit-Remaining:
-      - "9903"
+      - "9819"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -43,11 +43,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "120"
+      - "122"
       X-Served-By:
-      - cache-chi-kigq8000145-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-klot8100105-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1784834923.131053,VS0,VE151
+      - S1786389236.742207,VS0,VE154
     status: 404 Not Found
     code: 404
     duration: ""
@@ -56,13 +56,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/157/logging/bigquery/new-test-bigquery
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/194/logging/bigquery/new-test-bigquery
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-bigquery, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 157 }''"}'
+      version =\u003e 194 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -71,11 +71,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:28:47 GMT
+      - Mon, 10 Aug 2026 19:13:58 GMT
       Fastly-Ratelimit-Remaining:
-      - "9894"
+      - "9816"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -93,11 +93,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "115"
+      - "150"
       X-Served-By:
-      - cache-chi-kmdw8640066-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-kmdw8640072-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1784834928.823465,VS0,VE156
+      - S1786389238.082844,VS0,VE186
     status: 404 Not Found
     code: 404
     duration: ""

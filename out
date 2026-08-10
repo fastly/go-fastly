@@ -1,0 +1,1190 @@
+==> Testing go-fastly
+--- FAIL: TestClient_NewRelicOTLP (0.87s)
+    logging_newrelicotlp_test.go:174: 404 - Not Found:
+        
+            Title:  Record not found
+            Detail: Couldn't find syslog '{ deleted => 0000-00-00 00:00:00, name => new-test-newrelicotlp, service => kKJb5bOFI47uHeBVluGfX1, version => 183 }'
+            RateLimitRemaining: 9920
+            RateLimitReset:     1786392000
+panic: test timed out after 30s
+	running tests:
+		TestClient_Elasticsearch (3s)
+		TestClient_FTPs (2s)
+		TestClient_FTPs_Compute (5s)
+		TestClient_GCSs (3s)
+		TestClient_GCSs_Compute (3s)
+		TestClient_GrafanaCloudLogs (7s)
+		TestClient_GrafanaCloudLogs_Compute (3s)
+		TestClient_Herokus (3s)
+		TestClient_Honeycombs_Compute (3s)
+		TestClient_Kafkas (3s)
+		TestClient_Kafkas_Compute (3s)
+		TestClient_Kinesis (7s)
+		TestClient_Kinesis_Compute (8s)
+		TestClient_NewRelic_Compute (8s)
+		TestClient_Notifications (3s)
+		TestClient_Openstack (8s)
+		TestClient_S3s (8s)
+		TestClient_S3s_Compute (8s)
+		TestClient_SFTPs (8s)
+		TestClient_SFTPs_Compute (9s)
+
+goroutine 945 [running]:
+testing.(*M).startAlarm.func1()
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2802 +0x354
+created by time.goFunc
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/time/sleep.go:215 +0x2d
+
+goroutine 1 [chan receive]:
+testing.tRunner.func1()
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1993 +0x445
+testing.tRunner(0x320abdc906c8, 0x320abdc9dc58)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2042 +0x123
+testing.runTests({0xbe388c, 0x1f}, {0xbeb983, 0x26}, 0x320abdb16108, {0x1104b00, 0x205, 0x205}, {0xc296a5e31ca813bf, 0x6fc2f1704, ...})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2583 +0x505
+testing.(*M).Run(0x320abdbd7720)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2443 +0x6ac
+main.main()
+	_testmain.go:1080 +0x9b
+
+goroutine 676 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abdf426c8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestNullString.func1(0x320abdf426c8)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:180 +0x29
+testing.tRunner(0x320abdf426c8, 0x320abe1b0000)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 134
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 615 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abe2ead88)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestNullInt.func1(0x320abe2ead88)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:230 +0x25
+testing.tRunner(0x320abe2ead88, 0x320abe3261e0)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 135
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 631 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abe2ea488)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestToSafeURL.func1(0x320abe2ea488)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:370 +0x25
+testing.tRunner(0x320abe2ea488, 0x320abdede040)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 137
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 674 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abdf42908)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestNullableMarshalJSON.func1(0x320abdf42908)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:255 +0x27
+testing.tRunner(0x320abdf42908, 0xc08990)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 136
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 622 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abe2eb448)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestToValue.func1(0x320abe2eb448)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:57 +0x27
+testing.tRunner(0x320abe2eb448, 0xc089b8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 133
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 132 [chan receive]:
+testing.tRunner.func1()
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1993 +0x445
+testing.tRunner(0x320abdde5208, 0xc08878)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2042 +0x123
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 133 [chan receive]:
+testing.tRunner.func1()
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1993 +0x445
+testing.tRunner(0x320abdde5448, 0xc08888)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2042 +0x123
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 134 [chan receive]:
+testing.tRunner.func1()
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1993 +0x445
+testing.tRunner(0x320abdde5688, 0xc08830)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2042 +0x123
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 135 [chan receive]:
+testing.tRunner.func1()
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1993 +0x445
+testing.tRunner(0x320abdde58c8, 0xc08828)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2042 +0x123
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 136 [chan receive]:
+testing.tRunner.func1()
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1993 +0x445
+testing.tRunner(0x320abdde5b08, 0xc08838)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2042 +0x123
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 137 [chan receive]:
+testing.tRunner.func1()
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1993 +0x445
+testing.tRunner(0x320abdde5d48, 0xc08880)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2042 +0x123
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 138 [chan receive]:
+testing.tRunner.func1()
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1993 +0x445
+testing.tRunner(0x320abddec008, 0xc08808)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2042 +0x123
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 591 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abde70488)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestGetResponseInfo.func1(0x320abde70488)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:416 +0x36
+testing.tRunner(0x320abde70488, 0x320abde53d20)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 138
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 592 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abde706c8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestGetResponseInfo.func1(0x320abde706c8)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:416 +0x36
+testing.tRunner(0x320abde706c8, 0x320abde53d50)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 138
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 593 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abde70908)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestGetResponseInfo.func2(0x320abde70908)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:437 +0x1b
+testing.tRunner(0x320abde70908, 0xc08968)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 138
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 677 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abdf43688)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestNullString.func1(0x320abdf43688)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:180 +0x29
+testing.tRunner(0x320abdf43688, 0x320abe1b0040)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 134
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 207 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abdf13d48)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestClient_DigitalOceans(0x320abdf13d48)
+	/home/richard/src/fastly/go-fastly/fastly/logging_digitalocean_test.go:10 +0x39
+testing.tRunner(0x320abdf13d48, 0xc07dc8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 208 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abdf2a008)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestClient_DigitalOceans_Compute(0x320abdf2a008)
+	/home/richard/src/fastly/go-fastly/fastly/logging_digitalocean_test.go:386 +0x39
+testing.tRunner(0x320abdf2a008, 0xc07dd0)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 214 [sync.Mutex.Lock]:
+internal/sync.runtime_SemacquireMutex(0x0?, 0x0?, 0x320abde02020?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/sema.go:95 +0x25
+internal/sync.(*Mutex).lockSlow(0x320abde02020)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:149 +0x15d
+internal/sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:70
+sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/sync/mutex.go:46
+github.com/fastly/go-fastly/v17/fastly.(*Client).Request(0x320abde58000, {0xc15128, 0x112b3a0}, {0xbcb724, 0x4}, {0x320abe2d0000, 0x27}, {{0xc10320, 0x320abe2300a0}, 0x0, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:333 +0x215
+github.com/fastly/go-fastly/v17/fastly.(*Client).RequestForm(0x320abde58000, {0xc15128, 0x112b3a0}, {0xbcb724, 0x4}, {0x320abe2d0000, 0x27}, {0xabe3c0, 0x320abdfca000}, {{0xc10320, ...}, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:545 +0x1d7
+github.com/fastly/go-fastly/v17/fastly.(*Client).PostForm(...)
+	/home/richard/src/fastly/go-fastly/fastly/client.go:252
+github.com/fastly/go-fastly/v17/fastly.(*Client).CreateVersion(0x320abde58000, {0xc15128, 0x112b3a0}, 0x320abdfca000)
+	/home/richard/src/fastly/go-fastly/fastly/service_version.go:105 +0x19c
+github.com/fastly/go-fastly/v17/fastly.testVersion(0x320abdf2ad88, 0x320abde58000)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:189 +0xcd
+github.com/fastly/go-fastly/v17/fastly.TestClient_Elasticsearch.func1(0x320abdf2ad88?)
+	/home/richard/src/fastly/go-fastly/fastly/logging_elasticsearch_test.go:16 +0x26
+github.com/fastly/go-fastly/v17/fastly.Record(0x320abdf2ad88, {0xbd849d, 0x15}, 0x320abdd36f40)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:87 +0xf1
+github.com/fastly/go-fastly/v17/fastly.TestClient_Elasticsearch(0x320abdf2ad88)
+	/home/richard/src/fastly/go-fastly/fastly/logging_elasticsearch_test.go:15 +0x90
+testing.tRunner(0x320abdf2ad88, 0xc07e00)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 215 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abdf2afc8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestClient_Elasticsearch_Compute(0x320abdf2afc8)
+	/home/richard/src/fastly/go-fastly/fastly/logging_elasticsearch_test.go:288 +0x39
+testing.tRunner(0x320abdf2afc8, 0xc07e08)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 221 [sync.Mutex.Lock]:
+internal/sync.runtime_SemacquireMutex(0x492086?, 0x8?, 0xb07100?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/sema.go:95 +0x25
+internal/sync.(*Mutex).lockSlow(0x112b4d8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:149 +0x15d
+internal/sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:70
+sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/sync/mutex.go:46
+github.com/fastly/go-fastly/v17/fastly.testVersion(0x320abdf2bd48, 0x320abe0840a0)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:186 +0x58
+github.com/fastly/go-fastly/v17/fastly.TestClient_FTPs.func1(0x320abdf2bd48?)
+	/home/richard/src/fastly/go-fastly/fastly/logging_ftp_test.go:15 +0x26
+github.com/fastly/go-fastly/v17/fastly.Record(0x320abdf2bd48, {0xbcf6b9, 0xc}, 0x320abe357f40)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:87 +0xf1
+github.com/fastly/go-fastly/v17/fastly.TestClient_FTPs(0x320abdf2bd48)
+	/home/richard/src/fastly/go-fastly/fastly/logging_ftp_test.go:14 +0x90
+testing.tRunner(0x320abdf2bd48, 0xc07e10)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 222 [sync.Mutex.Lock]:
+internal/sync.runtime_SemacquireMutex(0x0?, 0x0?, 0x320abde02020?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/sema.go:95 +0x25
+internal/sync.(*Mutex).lockSlow(0x320abde02020)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:149 +0x15d
+internal/sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:70
+sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/sync/mutex.go:46
+github.com/fastly/go-fastly/v17/fastly.(*Client).Request(0x320abe07a140, {0xc15128, 0x112b3a0}, {0xbcb724, 0x4}, {0x320abe16a140, 0x37}, {{0xc10320, 0x320abdbb1100}, 0x85a, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:333 +0x215
+github.com/fastly/go-fastly/v17/fastly.(*Client).RequestForm(0x320abe07a140, {0xc15128, 0x112b3a0}, {0xbcb724, 0x4}, {0x320abe16a140, 0x37}, {0xabca80, 0x320abdfc45a0}, {{0xc10320, ...}, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:545 +0x1d7
+github.com/fastly/go-fastly/v17/fastly.(*Client).PostForm(...)
+	/home/richard/src/fastly/go-fastly/fastly/client.go:252
+github.com/fastly/go-fastly/v17/fastly.(*Client).CreateFTP(0x320abe07a140, {0xc15128, 0x112b3a0}, 0x320abdfc45a0)
+	/home/richard/src/fastly/go-fastly/fastly/logging_ftp.go:118 +0x225
+github.com/fastly/go-fastly/v17/fastly.TestClient_FTPs_Compute.func4(0x320abe07a140)
+	/home/richard/src/fastly/go-fastly/fastly/logging_ftp_test.go:427 +0x3bf
+github.com/fastly/go-fastly/v17/fastly.Record(0x320abdf2e008, {0xbd739d, 0x14}, 0x320abe0d9f20)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:87 +0xf1
+github.com/fastly/go-fastly/v17/fastly.TestClient_FTPs_Compute(0x320abdf2e008)
+	/home/richard/src/fastly/go-fastly/fastly/logging_ftp_test.go:426 +0x27f
+testing.tRunner(0x320abdf2e008, 0xc07e18)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 228 [sync.Mutex.Lock]:
+internal/sync.runtime_SemacquireMutex(0x492086?, 0x8?, 0xb07100?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/sema.go:95 +0x25
+internal/sync.(*Mutex).lockSlow(0x112b4d8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:149 +0x15d
+internal/sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:70
+sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/sync/mutex.go:46
+github.com/fastly/go-fastly/v17/fastly.testVersion(0x320abdf2ed88, 0x320abe30e0f0)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:186 +0x58
+github.com/fastly/go-fastly/v17/fastly.TestClient_GCSs.func1(0x320abdf2ed88?)
+	/home/richard/src/fastly/go-fastly/fastly/logging_gcs_test.go:15 +0x26
+github.com/fastly/go-fastly/v17/fastly.Record(0x320abdf2ed88, {0xbd0417, 0xd}, 0x320abe351f40)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:87 +0xf1
+github.com/fastly/go-fastly/v17/fastly.TestClient_GCSs(0x320abdf2ed88)
+	/home/richard/src/fastly/go-fastly/fastly/logging_gcs_test.go:14 +0x90
+testing.tRunner(0x320abdf2ed88, 0xc07e30)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 229 [sync.Mutex.Lock]:
+internal/sync.runtime_SemacquireMutex(0x492086?, 0x8?, 0xb07100?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/sema.go:95 +0x25
+internal/sync.(*Mutex).lockSlow(0x112b4d8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:149 +0x15d
+internal/sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:70
+sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/sync/mutex.go:46
+github.com/fastly/go-fastly/v17/fastly.testVersionCompute(0x320abdf2efc8, 0x320abe154050)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:200 +0x58
+github.com/fastly/go-fastly/v17/fastly.TestClient_GCSs_Compute.func1(0x320abdf2efc8?)
+	/home/richard/src/fastly/go-fastly/fastly/logging_gcs_test.go:373 +0x26
+github.com/fastly/go-fastly/v17/fastly.Record(0x320abdf2efc8, {0xbd84dc, 0x15}, 0x320abe133f40)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:87 +0xf1
+github.com/fastly/go-fastly/v17/fastly.TestClient_GCSs_Compute(0x320abdf2efc8)
+	/home/richard/src/fastly/go-fastly/fastly/logging_gcs_test.go:372 +0x90
+testing.tRunner(0x320abdf2efc8, 0xc07e38)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 235 [sync.Mutex.Lock]:
+internal/sync.runtime_SemacquireMutex(0x0?, 0x0?, 0x320abde02020?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/sema.go:95 +0x25
+internal/sync.(*Mutex).lockSlow(0x320abde02020)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:149 +0x15d
+internal/sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:70
+sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/sync/mutex.go:46
+github.com/fastly/go-fastly/v17/fastly.(*Client).Request(0x320abdf0c4b0, {0xc15128, 0x112b3a0}, {0xbcbf9e, 0x6}, {0x320abdd9a690, 0x5e}, {{0x0, 0x0}, 0x0, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:333 +0x215
+github.com/fastly/go-fastly/v17/fastly.(*Client).Delete(...)
+	/home/richard/src/fastly/go-fastly/fastly/client.go:302
+github.com/fastly/go-fastly/v17/fastly.(*Client).DeleteGrafanaCloudLogs(0x320abdf0c4b0, {0xc15128, 0x112b3a0}, 0x320abe40fda0)
+	/home/richard/src/fastly/go-fastly/fastly/logging_grafanacloudlogs.go:232 +0x21f
+github.com/fastly/go-fastly/v17/fastly.TestClient_GrafanaCloudLogs.func7(0x320abdf2fd48?)
+	/home/richard/src/fastly/go-fastly/fastly/logging_grafanacloudlogs_test.go:159 +0x85
+github.com/fastly/go-fastly/v17/fastly.Record(0x320abdf2fd48, {0xbda740, 0x17}, 0x320abe40ff20)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:87 +0xf1
+github.com/fastly/go-fastly/v17/fastly.TestClient_GrafanaCloudLogs(0x320abdf2fd48)
+	/home/richard/src/fastly/go-fastly/fastly/logging_grafanacloudlogs_test.go:158 +0xd9b
+testing.tRunner(0x320abdf2fd48, 0xc08110)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 236 [sync.Mutex.Lock]:
+internal/sync.runtime_SemacquireMutex(0x492086?, 0x8?, 0xb07100?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/sema.go:95 +0x25
+internal/sync.(*Mutex).lockSlow(0x112b4d8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:149 +0x15d
+internal/sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:70
+sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/sync/mutex.go:46
+github.com/fastly/go-fastly/v17/fastly.testVersionCompute(0x320abdf3c008, 0x320abde320a0)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:200 +0x58
+github.com/fastly/go-fastly/v17/fastly.TestClient_GrafanaCloudLogs_Compute.func1(0x320abdf3c008?)
+	/home/richard/src/fastly/go-fastly/fastly/logging_grafanacloudlogs_test.go:176 +0x26
+github.com/fastly/go-fastly/v17/fastly.Record(0x320abdf3c008, {0xbe4c56, 0x20}, 0x320abe12fef0)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:87 +0xf1
+github.com/fastly/go-fastly/v17/fastly.TestClient_GrafanaCloudLogs_Compute(0x320abdf3c008)
+	/home/richard/src/fastly/go-fastly/fastly/logging_grafanacloudlogs_test.go:175 +0x8d
+testing.tRunner(0x320abdf3c008, 0xc08118)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 242 [sync.Mutex.Lock]:
+internal/sync.runtime_SemacquireMutex(0x492086?, 0x8?, 0xb07100?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/sema.go:95 +0x25
+internal/sync.(*Mutex).lockSlow(0x112b4d8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:149 +0x15d
+internal/sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:70
+sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/sync/mutex.go:46
+github.com/fastly/go-fastly/v17/fastly.testVersion(0x320abdf3cd88, 0x320abdb280f0)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:186 +0x58
+github.com/fastly/go-fastly/v17/fastly.TestClient_Herokus.func1(0x320abdf3cd88?)
+	/home/richard/src/fastly/go-fastly/fastly/logging_heroku_test.go:15 +0x26
+github.com/fastly/go-fastly/v17/fastly.Record(0x320abdf3cd88, {0xbd20ab, 0xf}, 0x320abe0d5ef0)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:87 +0xf1
+github.com/fastly/go-fastly/v17/fastly.TestClient_Herokus(0x320abdf3cd88)
+	/home/richard/src/fastly/go-fastly/fastly/logging_heroku_test.go:14 +0x8d
+testing.tRunner(0x320abdf3cd88, 0xc08158)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 249 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abdf3dd48)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestClient_Honeycombs(0x320abdf3dd48)
+	/home/richard/src/fastly/go-fastly/fastly/logging_honeycomb_test.go:10 +0x39
+testing.tRunner(0x320abdf3dd48, 0xc08168)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 250 [sync.Mutex.Lock]:
+internal/sync.runtime_SemacquireMutex(0x492086?, 0x8?, 0xb07100?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/sema.go:95 +0x25
+internal/sync.(*Mutex).lockSlow(0x112b4d8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:149 +0x15d
+internal/sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:70
+sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/sync/mutex.go:46
+github.com/fastly/go-fastly/v17/fastly.testVersionCompute(0x320abdf42008, 0x320abe0840f0)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:200 +0x58
+github.com/fastly/go-fastly/v17/fastly.TestClient_Honeycombs_Compute.func1(0x320abdf42008?)
+	/home/richard/src/fastly/go-fastly/fastly/logging_honeycomb_test.go:170 +0x26
+github.com/fastly/go-fastly/v17/fastly.Record(0x320abdf42008, {0xbddde9, 0x1a}, 0x320abe437ef0)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:87 +0xf1
+github.com/fastly/go-fastly/v17/fastly.TestClient_Honeycombs_Compute(0x320abdf42008)
+	/home/richard/src/fastly/go-fastly/fastly/logging_honeycomb_test.go:169 +0x8d
+testing.tRunner(0x320abdf42008, 0xc08170)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 262 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abe08a908)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestClient_HTTPS(0x320abe08a908)
+	/home/richard/src/fastly/go-fastly/fastly/logging_https_test.go:12 +0x39
+testing.tRunner(0x320abe08a908, 0xc08130)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 263 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abe08ab48)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestClient_HTTPS_Compute(0x320abe08ab48)
+	/home/richard/src/fastly/go-fastly/fastly/logging_https_test.go:447 +0x39
+testing.tRunner(0x320abe08ab48, 0xc08138)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 269 [sync.Mutex.Lock]:
+internal/sync.runtime_SemacquireMutex(0x0?, 0x0?, 0x320abde02020?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/sema.go:95 +0x25
+internal/sync.(*Mutex).lockSlow(0x320abde02020)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:149 +0x15d
+internal/sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:70
+sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/sync/mutex.go:46
+github.com/fastly/go-fastly/v17/fastly.(*Client).Request(0x320abde580a0, {0xc15128, 0x112b3a0}, {0xbcb724, 0x4}, {0x320abe1f2000, 0x39}, {{0xc10320, 0x320abdfa04e0}, 0x1a24, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:333 +0x215
+github.com/fastly/go-fastly/v17/fastly.(*Client).RequestForm(0x320abde580a0, {0xc15128, 0x112b3a0}, {0xbcb724, 0x4}, {0x320abe1f2000, 0x39}, {0xabd080, 0x320abdcd80c0}, {{0xc10320, ...}, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:545 +0x1d7
+github.com/fastly/go-fastly/v17/fastly.(*Client).PostForm(...)
+	/home/richard/src/fastly/go-fastly/fastly/client.go:252
+github.com/fastly/go-fastly/v17/fastly.(*Client).CreateKafka(0x320abde580a0, {0xc15128, 0x112b3a0}, 0x320abdcd80c0)
+	/home/richard/src/fastly/go-fastly/fastly/logging_kafka.go:127 +0x21c
+github.com/fastly/go-fastly/v17/fastly.TestClient_Kafkas.func2(0x320abde580a0)
+	/home/richard/src/fastly/go-fastly/fastly/logging_kafka_test.go:28 +0x56e
+github.com/fastly/go-fastly/v17/fastly.Record(0x320abe08b8c8, {0xbd04da, 0xd}, 0x320abdb47ef0)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:87 +0xf1
+github.com/fastly/go-fastly/v17/fastly.TestClient_Kafkas(0x320abe08b8c8)
+	/home/richard/src/fastly/go-fastly/fastly/logging_kafka_test.go:27 +0x1a5
+testing.tRunner(0x320abe08b8c8, 0xc08198)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 270 [sync.Mutex.Lock]:
+internal/sync.runtime_SemacquireMutex(0x0?, 0x0?, 0x320abde02020?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/sema.go:95 +0x25
+internal/sync.(*Mutex).lockSlow(0x320abde02020)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:149 +0x15d
+internal/sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:70
+sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/sync/mutex.go:46
+github.com/fastly/go-fastly/v17/fastly.(*Client).Request(0x320abe154140, {0xc15128, 0x112b3a0}, {0xbcb499, 0x3}, {0x320abe238640, 0x44}, {{0xc10380, 0x320abde12300}, 0x63, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:333 +0x215
+github.com/fastly/go-fastly/v17/fastly.(*Client).RequestJSON(0x320abe154140, {0xc15128, 0x112b3a0}, {0xbcb499, 0x3}, {0x320abe238640, 0x44}, {0xac3ac0, 0x320abdd44c30}, {{0xc10380, ...}, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:628 +0x26f
+github.com/fastly/go-fastly/v17/fastly.(*Client).PutJSON(...)
+	/home/richard/src/fastly/go-fastly/fastly/client.go:292
+github.com/fastly/go-fastly/v17/fastly.(*Client).UpdateKafka(0x320abe154140, {0xc15128, 0x112b3a0}, 0x320abdd44c30)
+	/home/richard/src/fastly/go-fastly/fastly/logging_kafka.go:245 +0x249
+github.com/fastly/go-fastly/v17/fastly.TestClient_Kafkas_Compute.func6(0x320abe154140)
+	/home/richard/src/fastly/go-fastly/fastly/logging_kafka_test.go:493 +0x1ce
+github.com/fastly/go-fastly/v17/fastly.Record(0x320abe08bb08, {0xbd8641, 0x15}, 0x320abdc9bea0)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:87 +0xf1
+github.com/fastly/go-fastly/v17/fastly.TestClient_Kafkas_Compute(0x320abe08bb08)
+	/home/richard/src/fastly/go-fastly/fastly/logging_kafka_test.go:492 +0x1885
+testing.tRunner(0x320abe08bb08, 0xc081a0)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 276 [sync.Mutex.Lock]:
+internal/sync.runtime_SemacquireMutex(0x0?, 0x0?, 0x320abde02020?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/sema.go:95 +0x25
+internal/sync.(*Mutex).lockSlow(0x320abde02020)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:149 +0x15d
+internal/sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:70
+sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/sync/mutex.go:46
+github.com/fastly/go-fastly/v17/fastly.(*Client).Request(0x320abdf0c3c0, {0xc15128, 0x112b3a0}, {0xbcb724, 0x4}, {0x320abe1f2000, 0x3b}, {{0xc10320, 0x320abdb021e0}, 0x74, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:333 +0x215
+github.com/fastly/go-fastly/v17/fastly.(*Client).RequestForm(0x320abdf0c3c0, {0xc15128, 0x112b3a0}, {0xbcb724, 0x4}, {0x320abe1f2000, 0x3b}, {0xabd100, 0x320abe596000}, {{0xc10320, ...}, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:545 +0x1d7
+github.com/fastly/go-fastly/v17/fastly.(*Client).PostForm(...)
+	/home/richard/src/fastly/go-fastly/fastly/client.go:252
+github.com/fastly/go-fastly/v17/fastly.(*Client).CreateKinesis(0x320abdf0c3c0, {0xc15128, 0x112b3a0}, 0x320abe596000)
+	/home/richard/src/fastly/go-fastly/fastly/logging_kinesis.go:100 +0x21c
+github.com/fastly/go-fastly/v17/fastly.TestClient_Kinesis.func5(0x320abdf0c3c0)
+	/home/richard/src/fastly/go-fastly/fastly/logging_kinesis_test.go:79 +0x20a
+github.com/fastly/go-fastly/v17/fastly.Record(0x320abdfb0b48, {0xbd2141, 0xf}, 0x320abdef1ef8)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:87 +0xf1
+github.com/fastly/go-fastly/v17/fastly.TestClient_Kinesis(0x320abdfb0b48)
+	/home/richard/src/fastly/go-fastly/fastly/logging_kinesis_test.go:78 +0x305
+testing.tRunner(0x320abdfb0b48, 0xc081a8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 277 [sync.Mutex.Lock]:
+internal/sync.runtime_SemacquireMutex(0x0?, 0x0?, 0x320abde02020?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/sema.go:95 +0x25
+internal/sync.(*Mutex).lockSlow(0x320abde02020)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:149 +0x15d
+internal/sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:70
+sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/sync/mutex.go:46
+github.com/fastly/go-fastly/v17/fastly.(*Client).Request(0x320abdf0ca00, {0xc15128, 0x112b3a0}, {0xbcb499, 0x3}, {0x320abdb2c5a0, 0x48}, {{0xc10380, 0x320abe29fa10}, 0x4b, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:333 +0x215
+github.com/fastly/go-fastly/v17/fastly.(*Client).RequestJSON(0x320abdf0ca00, {0xc15128, 0x112b3a0}, {0xbcb499, 0x3}, {0x320abdb2c5a0, 0x48}, {0xac3b00, 0x320abdca8980}, {{0xc10380, ...}, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:628 +0x26f
+github.com/fastly/go-fastly/v17/fastly.(*Client).PutJSON(...)
+	/home/richard/src/fastly/go-fastly/fastly/client.go:292
+github.com/fastly/go-fastly/v17/fastly.(*Client).UpdateKinesis(0x320abdf0ca00, {0xc15128, 0x112b3a0}, 0x320abdca8980)
+	/home/richard/src/fastly/go-fastly/fastly/logging_kinesis.go:196 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestClient_Kinesis_Compute.func10(0x320abdf0ca00)
+	/home/richard/src/fastly/go-fastly/fastly/logging_kinesis_test.go:610 +0x194
+github.com/fastly/go-fastly/v17/fastly.Record(0x320abdfb0d88, {0xbd9683, 0x16}, 0x320abe435f20)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:87 +0xf1
+github.com/fastly/go-fastly/v17/fastly.TestClient_Kinesis_Compute(0x320abdfb0d88)
+	/home/richard/src/fastly/go-fastly/fastly/logging_kinesis_test.go:609 +0x147c
+testing.tRunner(0x320abdfb0d88, 0xc081b0)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 305 [sync.Mutex.Lock]:
+internal/sync.runtime_SemacquireMutex(0x0?, 0x0?, 0x320abde02020?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/sema.go:95 +0x25
+internal/sync.(*Mutex).lockSlow(0x320abde02020)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:149 +0x15d
+internal/sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:70
+sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/sync/mutex.go:46
+github.com/fastly/go-fastly/v17/fastly.(*Client).Request(0x320abe07a000, {0xc15128, 0x112b3a0}, {0xbcbf9e, 0x6}, {0x320abe34e1e0, 0x4e}, {{0x0, 0x0}, 0x0, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:333 +0x215
+github.com/fastly/go-fastly/v17/fastly.(*Client).Delete(...)
+	/home/richard/src/fastly/go-fastly/fastly/client.go:302
+github.com/fastly/go-fastly/v17/fastly.(*Client).DeleteNewRelic(0x320abe07a000, {0xc15128, 0x112b3a0}, 0x320abe15dd00)
+	/home/richard/src/fastly/go-fastly/fastly/logging_newrelic.go:216 +0x21f
+github.com/fastly/go-fastly/v17/fastly.TestClient_NewRelic_Compute.func5.1(0x320abe07a000)
+	/home/richard/src/fastly/go-fastly/fastly/logging_newrelic_test.go:335 +0x17d
+github.com/fastly/go-fastly/v17/fastly.Record(0x320abde71448, {0xbda8de, 0x17}, 0x320abe15de10)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:87 +0xf1
+github.com/fastly/go-fastly/v17/fastly.TestClient_NewRelic_Compute.func5()
+	/home/richard/src/fastly/go-fastly/fastly/logging_newrelic_test.go:322 +0x3d
+github.com/fastly/go-fastly/v17/fastly.TestClient_NewRelic_Compute(0x320abde71448)
+	/home/richard/src/fastly/go-fastly/fastly/logging_newrelic_test.go:515 +0x17c2
+testing.tRunner(0x320abde71448, 0xc08420)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 319 [select]:
+net/http.(*http2ClientConn).roundTrip(0x320abdc528c0, 0x320abe294dc0, 0x0)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:8688 +0x525
+net/http.(*http2ClientConn).RoundTrip(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:8603
+net/http.(*http2Transport).RoundTripOpt(0x320abdd183c0, 0x320abe294dc0, {0x80?, 0xaa?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:7901 +0x1ed
+net/http.(*http2Transport).RoundTrip(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:7852
+net/http.http2noDialH2RoundTripper.RoundTrip({0x10ff0c0?}, 0x320abe294dc0?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:10560 +0x1c
+net/http.(*Transport).roundTrip(0x10ff0c0, 0x320abe294dc0)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/transport.go:623 +0x4ff
+net/http.(*Transport).RoundTrip(0x320abe1f0640?, 0xadd6a0?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/roundtrip.go:33 +0x18
+github.com/dnaeon/go-vcr/recorder.requestHandler(0x320abe294dc0, 0x320abdc2eb40, 0x427174?, {0xc10420, 0x10ff0c0})
+	/home/richard/go/pkg/mod/github.com/dnaeon/go-vcr@v1.2.0/recorder/recorder.go:120 +0x426
+github.com/dnaeon/go-vcr/recorder.(*Recorder).RoundTrip(0x320abe1b0080, 0x320abe294dc0)
+	/home/richard/go/pkg/mod/github.com/dnaeon/go-vcr@v1.2.0/recorder/recorder.go:222 +0xe5
+net/http.send(0x320abe294dc0, {0xc103a0, 0x320abe1b0080}, {0x320abe0d77b0?, 0x492086?, 0x0?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/client.go:264 +0x64b
+net/http.(*Client).send(0x320abdd060f0, 0x320abe294dc0, {0x0?, 0x0?, 0x0?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/client.go:185 +0x258
+net/http.(*Client).do(0x320abdd060f0, 0x320abe294dc0)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/client.go:733 +0x9d7
+net/http.(*Client).Do(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/client.go:592
+github.com/fastly/go-fastly/v17/fastly.(*Client).Request(0x320abde32190, {0xc15128, 0x112b3a0}, {0xbcbf9e, 0x6}, {0x320abe1b9740, 0x4e}, {{0x0, 0x0}, 0x0, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:361 +0x37e
+github.com/fastly/go-fastly/v17/fastly.(*Client).Delete(...)
+	/home/richard/src/fastly/go-fastly/fastly/client.go:302
+github.com/fastly/go-fastly/v17/fastly.(*Client).DeleteOpenstack(0x320abde32190, {0xc15128, 0x112b3a0}, 0x320abe0d7d38)
+	/home/richard/src/fastly/go-fastly/fastly/logging_openstack.go:262 +0x21f
+github.com/fastly/go-fastly/v17/fastly.TestClient_Openstack.func6.1(0x320abde32190)
+	/home/richard/src/fastly/go-fastly/fastly/logging_openstack_test.go:134 +0x189
+github.com/fastly/go-fastly/v17/fastly.Record(0x320abde90248, {0xbd404d, 0x11}, 0x320abdef1df8)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:87 +0xf1
+github.com/fastly/go-fastly/v17/fastly.TestClient_Openstack.func6()
+	/home/richard/src/fastly/go-fastly/fastly/logging_openstack_test.go:121 +0x3d
+github.com/fastly/go-fastly/v17/fastly.TestClient_Openstack(0x320abde90248)
+	/home/richard/src/fastly/go-fastly/fastly/logging_openstack_test.go:389 +0x2137
+testing.tRunner(0x320abde90248, 0xc08438)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 340 [sync.Mutex.Lock]:
+internal/sync.runtime_SemacquireMutex(0x0?, 0x0?, 0x320abde02020?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/sema.go:95 +0x25
+internal/sync.(*Mutex).lockSlow(0x320abde02020)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:149 +0x15d
+internal/sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:70
+sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/sync/mutex.go:46
+github.com/fastly/go-fastly/v17/fastly.(*Client).Request(0x320abde58320, {0xc15128, 0x112b3a0}, {0xbcb499, 0x3}, {0x320abe238280, 0x40}, {{0xc10380, 0x320abdd07b30}, 0x2d, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:333 +0x215
+github.com/fastly/go-fastly/v17/fastly.(*Client).RequestJSON(0x320abde58320, {0xc15128, 0x112b3a0}, {0xbcb499, 0x3}, {0x320abe238280, 0x40}, {0xac3ec0, 0x320abdfce1c0}, {{0xc10380, ...}, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:628 +0x26f
+github.com/fastly/go-fastly/v17/fastly.(*Client).PutJSON(...)
+	/home/richard/src/fastly/go-fastly/fastly/client.go:292
+github.com/fastly/go-fastly/v17/fastly.(*Client).UpdateS3(0x320abde58320, {0xc15128, 0x112b3a0}, 0x320abdfce1c0)
+	/home/richard/src/fastly/go-fastly/fastly/logging_s3.go:319 +0x2ea
+github.com/fastly/go-fastly/v17/fastly.TestClient_S3s.func14(0x320abde58320)
+	/home/richard/src/fastly/go-fastly/fastly/logging_s3_test.go:493 +0x11e
+github.com/fastly/go-fastly/v17/fastly.Record(0x320abdde4fc8, {0xbcebf4, 0xb}, 0x320abdb47f20)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:87 +0xf1
+github.com/fastly/go-fastly/v17/fastly.TestClient_S3s(0x320abdde4fc8)
+	/home/richard/src/fastly/go-fastly/fastly/logging_s3_test.go:492 +0x2a54
+testing.tRunner(0x320abdde4fc8, 0xc084f0)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 341 [sync.Mutex.Lock]:
+internal/sync.runtime_SemacquireMutex(0x0?, 0x0?, 0x320abde02020?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/sema.go:95 +0x25
+internal/sync.(*Mutex).lockSlow(0x320abde02020)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:149 +0x15d
+internal/sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:70
+sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/sync/mutex.go:46
+github.com/fastly/go-fastly/v17/fastly.(*Client).Request(0x320abe084230, {0xc15128, 0x112b3a0}, {0xbcb499, 0x3}, {0x320abe2382d0, 0x40}, {{0xc10380, 0x320abe278600}, 0x2f, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:333 +0x215
+github.com/fastly/go-fastly/v17/fastly.(*Client).RequestJSON(0x320abe084230, {0xc15128, 0x112b3a0}, {0xbcb499, 0x3}, {0x320abe2382d0, 0x40}, {0xac3ec0, 0x320abdfce2a0}, {{0xc10380, ...}, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:628 +0x26f
+github.com/fastly/go-fastly/v17/fastly.(*Client).PutJSON(...)
+	/home/richard/src/fastly/go-fastly/fastly/client.go:292
+github.com/fastly/go-fastly/v17/fastly.(*Client).UpdateS3(0x320abe084230, {0xc15128, 0x112b3a0}, 0x320abdfce2a0)
+	/home/richard/src/fastly/go-fastly/fastly/logging_s3.go:319 +0x2ea
+github.com/fastly/go-fastly/v17/fastly.TestClient_S3s_Compute.func14(0x320abe084230)
+	/home/richard/src/fastly/go-fastly/fastly/logging_s3_test.go:1168 +0x165
+github.com/fastly/go-fastly/v17/fastly.Record(0x320abddecb48, {0xbd618b, 0x13}, 0x320abe0dbf20)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:87 +0xf1
+github.com/fastly/go-fastly/v17/fastly.TestClient_S3s_Compute(0x320abddecb48)
+	/home/richard/src/fastly/go-fastly/fastly/logging_s3_test.go:1167 +0x2a65
+testing.tRunner(0x320abddecb48, 0xc084f8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 354 [sync.Mutex.Lock]:
+internal/sync.runtime_SemacquireMutex(0x0?, 0x0?, 0x320abde02020?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/sema.go:95 +0x25
+internal/sync.(*Mutex).lockSlow(0x320abde02020)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:149 +0x15d
+internal/sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:70
+sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/sync/mutex.go:46
+github.com/fastly/go-fastly/v17/fastly.(*Client).Request(0x320abe1540a0, {0xc15128, 0x112b3a0}, {0xbcbf9e, 0x6}, {0x320abde2c410, 0x42}, {{0x0, 0x0}, 0x0, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:333 +0x215
+github.com/fastly/go-fastly/v17/fastly.(*Client).Delete(...)
+	/home/richard/src/fastly/go-fastly/fastly/client.go:302
+github.com/fastly/go-fastly/v17/fastly.(*Client).DeleteSFTP(0x320abe1540a0, {0xc15128, 0x112b3a0}, 0x320abdc9fc80)
+	/home/richard/src/fastly/go-fastly/fastly/logging_sftp.go:272 +0x21f
+github.com/fastly/go-fastly/v17/fastly.TestClient_SFTPs.func6.1(0x320abe1540a0)
+	/home/richard/src/fastly/go-fastly/fastly/logging_sftp_test.go:132 +0x90
+github.com/fastly/go-fastly/v17/fastly.Record(0x320abde34fc8, {0xbd05de, 0xd}, 0x320abdc9fd90)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:87 +0xf1
+github.com/fastly/go-fastly/v17/fastly.TestClient_SFTPs.func6()
+	/home/richard/src/fastly/go-fastly/fastly/logging_sftp_test.go:131 +0x3d
+github.com/fastly/go-fastly/v17/fastly.TestClient_SFTPs(0x320abde34fc8)
+	/home/richard/src/fastly/go-fastly/fastly/logging_sftp_test.go:412 +0x2465
+testing.tRunner(0x320abde34fc8, 0xc08500)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 355 [sync.Mutex.Lock]:
+internal/sync.runtime_SemacquireMutex(0x0?, 0x0?, 0x320abde02020?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/sema.go:95 +0x25
+internal/sync.(*Mutex).lockSlow(0x320abde02020)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:149 +0x15d
+internal/sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:70
+sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/sync/mutex.go:46
+github.com/fastly/go-fastly/v17/fastly.(*Client).Request(0x320abdf0c5a0, {0xc15128, 0x112b3a0}, {0xbcbf9e, 0x6}, {0x320abdb32870, 0x44}, {{0x0, 0x0}, 0x0, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:333 +0x215
+github.com/fastly/go-fastly/v17/fastly.(*Client).Delete(...)
+	/home/richard/src/fastly/go-fastly/fastly/client.go:302
+github.com/fastly/go-fastly/v17/fastly.(*Client).DeleteSFTP(0x320abdf0c5a0, {0xc15128, 0x112b3a0}, 0x320abe159cd8)
+	/home/richard/src/fastly/go-fastly/fastly/logging_sftp.go:272 +0x21f
+github.com/fastly/go-fastly/v17/fastly.TestClient_SFTPs_Compute.func6.1(0x320abdf0c5a0)
+	/home/richard/src/fastly/go-fastly/fastly/logging_sftp_test.go:548 +0x189
+github.com/fastly/go-fastly/v17/fastly.Record(0x320abde35208, {0xbd8791, 0x15}, 0x320abe159d98)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:87 +0xf1
+github.com/fastly/go-fastly/v17/fastly.TestClient_SFTPs_Compute.func6()
+	/home/richard/src/fastly/go-fastly/fastly/logging_sftp_test.go:535 +0x3d
+github.com/fastly/go-fastly/v17/fastly.TestClient_SFTPs_Compute(0x320abde35208)
+	/home/richard/src/fastly/go-fastly/fastly/logging_sftp_test.go:798 +0x2377
+testing.tRunner(0x320abde35208, 0xc08508)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 386 [sync.Mutex.Lock]:
+internal/sync.runtime_SemacquireMutex(0x0?, 0x0?, 0x320abde02020?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/sema.go:95 +0x25
+internal/sync.(*Mutex).lockSlow(0x320abde02020)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:149 +0x15d
+internal/sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/sync/mutex.go:70
+sync.(*Mutex).Lock(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/sync/mutex.go:46
+github.com/fastly/go-fastly/v17/fastly.(*Client).Request(0x320abe0841e0, {0xc15128, 0x112b3a0}, {0xbcb724, 0x4}, {0xbedb5c, 0x28}, {{0xc10380, 0x320abde9c960}, 0x1e, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:333 +0x215
+github.com/fastly/go-fastly/v17/fastly.(*Client).RequestJSON(0x320abe0841e0, {0xc15128, 0x112b3a0}, {0xbcb724, 0x4}, {0xbedb5c, 0x28}, {0xabd300, 0x320abe482200}, {{0xc10380, ...}, ...})
+	/home/richard/src/fastly/go-fastly/fastly/client.go:628 +0x26f
+github.com/fastly/go-fastly/v17/fastly.(*Client).PostJSON(...)
+	/home/richard/src/fastly/go-fastly/fastly/client.go:257
+github.com/fastly/go-fastly/v17/fastly.(*Client).CreateMailinglistConfirmation(0x320abe0841e0, {0xc15128, 0x112b3a0}, 0x320abe482200)
+	/home/richard/src/fastly/go-fastly/fastly/notifications.go:317 +0xee
+github.com/fastly/go-fastly/v17/fastly.TestClient_Notifications.func6(0x320abe0841e0)
+	/home/richard/src/fastly/go-fastly/fastly/notifications_test.go:112 +0x8b
+github.com/fastly/go-fastly/v17/fastly.Record(0x320abdf2b208, {0xbf1940, 0x2d}, 0x320abdef5db0)
+	/home/richard/src/fastly/go-fastly/fastly/fastly_test_utils.go:87 +0xf1
+github.com/fastly/go-fastly/v17/fastly.TestClient_Notifications(0x320abdf2b208)
+	/home/richard/src/fastly/go-fastly/fastly/notifications_test.go:111 +0xba5
+testing.tRunner(0x320abdf2b208, 0xc08428)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 1012 [select]:
+net/http.(*http2clientStream).writeRequest(0x320abdc80180, 0x320abe294dc0, 0x0)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:8857 +0xc88
+net/http.(*http2clientStream).doRequest(0x320abdc80180, 0x77d917?, 0x320abe1f0500?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:8718 +0x18
+created by net/http.(*http2ClientConn).roundTrip in goroutine 319
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:8624 +0x470
+
+goroutine 690 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abe2ebd48)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestToPointer.func2(0x320abe2ebd48?)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:27 +0x13
+testing.tRunner(0x320abe2ebd48, 0xc089a8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 132
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 620 [IO wait]:
+internal/poll.runtime_pollWait(0x724a61289600, 0x72)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/netpoll.go:351 +0x85
+internal/poll.(*pollDesc).wait(0x320abe224680?, 0x320abdd59300?, 0x0)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/poll/fd_poll_runtime.go:84 +0x27
+internal/poll.(*pollDesc).waitRead(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/poll/fd_poll_runtime.go:89
+internal/poll.(*FD).Read(0x320abe224680, {0x320abdd59300, 0x1300, 0x1300})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/poll/fd_unix.go:165 +0x2ae
+net.(*netFD).Read(0x320abe224680, {0x320abdd59300?, 0x320abdba4950?, 0x48cb45?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/fd_posix.go:68 +0x25
+net.(*conn).Read(0x320abdea6210, {0x320abdd59300?, 0x724a1877d8e0?, 0x724a613d41c0?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/net.go:196 +0x45
+crypto/tls.(*atLeastReader).Read(0x320abe3820d8, {0x320abdd59300?, 0x320abe0110e0?, 0x320abdba4a48?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/crypto/tls/conn.go:815 +0x3b
+bytes.(*Buffer).ReadFrom(0x320abdf9c2a8, {0xc11740, 0x320abe3820d8})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/bytes/buffer.go:229 +0x98
+crypto/tls.(*Conn).readFromUntil(0x320abdf9c008, {0xc11860, 0x320abdea6210}, 0x320abdba4c08?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/crypto/tls/conn.go:837 +0xde
+crypto/tls.(*Conn).readRecordOrCCS(0x320abdf9c008, 0x0)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/crypto/tls/conn.go:626 +0x3db
+crypto/tls.(*Conn).readRecord(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/crypto/tls/conn.go:588
+crypto/tls.(*Conn).Read(0x320abdf9c008, {0x320abdbff000, 0x1000, 0x753120?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/crypto/tls/conn.go:1393 +0x145
+bufio.(*Reader).Read(0x320abdc42540, {0x320abdfce044, 0x9, 0x7604ae?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/bufio/bufio.go:245 +0x197
+io.ReadAtLeast({0xc10400, 0x320abdc42540}, {0x320abdfce044, 0x9, 0x9}, 0x9)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/io/io.go:335 +0x8e
+io.ReadFull(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/io/io.go:354
+net/http.http2readFrameHeader({0x320abdfce044, 0x9, 0x320a0000000b?}, {0xc10400?, 0x320abdc42540?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:1805 +0x65
+net/http.(*http2Framer).ReadFrameHeader(0x320abdfce000)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:2071 +0x6b
+net/http.(*http2Framer).ReadFrame(0x320abdfce000)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:2130 +0x18
+net/http.(*http2clientConnReadLoop).run(0x320abdba4fa8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:9550 +0xca
+net/http.(*http2ClientConn).readLoop(0x320abdc52000)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:9419 +0x52
+created by net/http.(*http2Transport).newClientConn in goroutine 619
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:8171 +0xda5
+
+goroutine 675 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abdf42b48)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestNullableMarshalJSON.func2(0x320abdf42b48)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:291 +0x27
+testing.tRunner(0x320abdf42b48, 0xc08998)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 136
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 661 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abde718c8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestToSafeURL.func1(0x320abde718c8)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:370 +0x25
+testing.tRunner(0x320abde718c8, 0x320abdeea480)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 137
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 625 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abe2ebb08)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestToPointer.func1(0x320abe2ebb08?)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:14 +0x13
+testing.tRunner(0x320abe2ebb08, 0xc089a0)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 132
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 617 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abe2eb208)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestNullInt.func1(0x320abe2eb208)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:230 +0x25
+testing.tRunner(0x320abe2eb208, 0x320abe326330)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 135
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 659 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abde70d88)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestToSafeURL.func1(0x320abde70d88)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:370 +0x25
+testing.tRunner(0x320abde70d88, 0x320abdeea400)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 137
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 473 [IO wait]:
+internal/poll.runtime_pollWait(0x724a61289800, 0x72)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/netpoll.go:351 +0x85
+internal/poll.(*pollDesc).wait(0x320abe224480?, 0x320abdd58000?, 0x0)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/poll/fd_poll_runtime.go:84 +0x27
+internal/poll.(*pollDesc).waitRead(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/poll/fd_poll_runtime.go:89
+internal/poll.(*FD).Read(0x320abe224480, {0x320abdd58000, 0x1300, 0x1300})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/poll/fd_unix.go:165 +0x2ae
+net.(*netFD).Read(0x320abe224480, {0x320abdd58000?, 0x131?, 0x80b?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/fd_posix.go:68 +0x25
+net.(*conn).Read(0x320abde1a110, {0x320abdd58000?, 0x724a1877d8e0?, 0x724a613c1bf0?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/net.go:196 +0x45
+crypto/tls.(*atLeastReader).Read(0x320abe3824c8, {0x320abdd58000?, 0x320abe060f00?, 0x320abe415a48?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/crypto/tls/conn.go:815 +0x3b
+bytes.(*Buffer).ReadFrom(0x320abdbf4628, {0xc11740, 0x320abe3824c8})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/bytes/buffer.go:229 +0x98
+crypto/tls.(*Conn).readFromUntil(0x320abdbf4388, {0xc11860, 0x320abde1a110}, 0x320abe415c08?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/crypto/tls/conn.go:837 +0xde
+crypto/tls.(*Conn).readRecordOrCCS(0x320abdbf4388, 0x0)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/crypto/tls/conn.go:626 +0x3db
+crypto/tls.(*Conn).readRecord(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/crypto/tls/conn.go:588
+crypto/tls.(*Conn).Read(0x320abdbf4388, {0x320abdd54000, 0x1000, 0x753120?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/crypto/tls/conn.go:1393 +0x145
+bufio.(*Reader).Read(0x320abe2ac840, {0x320abdd4d1c4, 0x9, 0x7604ae?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/bufio/bufio.go:245 +0x197
+io.ReadAtLeast({0xc10400, 0x320abe2ac840}, {0x320abdd4d1c4, 0x9, 0x9}, 0x9)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/io/io.go:335 +0x8e
+io.ReadFull(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/io/io.go:354
+net/http.http2readFrameHeader({0x320abdd4d1c4, 0x9, 0x320a00000069?}, {0xc10400?, 0x320abe2ac840?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:1805 +0x65
+net/http.(*http2Framer).ReadFrameHeader(0x320abdd4d180)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:2071 +0x6b
+net/http.(*http2Framer).ReadFrame(0x320abdd4d180)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:2130 +0x18
+net/http.(*http2clientConnReadLoop).run(0x320abe415fa8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:9550 +0xca
+net/http.(*http2ClientConn).readLoop(0x320abdc528c0)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:9419 +0x52
+created by net/http.(*http2Transport).newClientConn in goroutine 472
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:8171 +0xda5
+
+goroutine 616 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abe2eafc8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestNullInt.func1(0x320abe2eafc8)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:230 +0x25
+testing.tRunner(0x320abe2eafc8, 0x320abe326270)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 135
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 660 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abde71688)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestToSafeURL.func1(0x320abde71688)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:370 +0x25
+testing.tRunner(0x320abde71688, 0x320abdeea440)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 137
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 658 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abde70b48)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestToSafeURL.func1(0x320abde70b48)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:370 +0x25
+testing.tRunner(0x320abde70b48, 0x320abdeea3c0)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 137
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 624 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abe2eb8c8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestToValue.func3(0x320abe2eb8c8)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:123 +0x27
+testing.tRunner(0x320abe2eb8c8, 0xc089c8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 133
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 691 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abde71b08)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestToPointer.func3(0x320abde71b08?)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:40 +0x13
+testing.tRunner(0x320abde71b08, 0xc089b0)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 132
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 623 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abe2eb688)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestToValue.func2(0x320abe2eb688)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:90 +0x27
+testing.tRunner(0x320abe2eb688, 0xc089c0)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 133
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 632 [chan receive]:
+testing.(*testState).waitParallel(0x320abdb28820)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2220 +0xaa
+testing.(*T).Parallel(0x320abe2ea6c8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:1804 +0x245
+github.com/fastly/go-fastly/v17/fastly.TestToSafeURL.func1(0x320abe2ea6c8)
+	/home/richard/src/fastly/go-fastly/fastly/helpers_test.go:370 +0x25
+testing.tRunner(0x320abe2ea6c8, 0x320abe2d6a00)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 137
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/testing/testing.go:2101 +0x4c5
+
+goroutine 711 [IO wait]:
+internal/poll.runtime_pollWait(0x724a61289400, 0x72)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/runtime/netpoll.go:351 +0x85
+internal/poll.(*pollDesc).wait(0x320abdf22a80?, 0x320abdd5a600?, 0x0)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/poll/fd_poll_runtime.go:84 +0x27
+internal/poll.(*pollDesc).waitRead(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/poll/fd_poll_runtime.go:89
+internal/poll.(*FD).Read(0x320abdf22a80, {0x320abdd5a600, 0x1300, 0x1300})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/internal/poll/fd_unix.go:165 +0x2ae
+net.(*netFD).Read(0x320abdf22a80, {0x320abdd5a600?, 0x49be0b2900?, 0x48cb45?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/fd_posix.go:68 +0x25
+net.(*conn).Read(0x320abe482410, {0x320abdd5a600?, 0x724a1849eca8?, 0x724a613d41c0?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/net.go:196 +0x45
+crypto/tls.(*atLeastReader).Read(0x320abe180048, {0x320abdd5a600?, 0x320abe485a40?, 0x320abe0b2a48?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/crypto/tls/conn.go:815 +0x3b
+bytes.(*Buffer).ReadFrom(0x320abdbf4d28, {0xc11740, 0x320abe180048})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/bytes/buffer.go:229 +0x98
+crypto/tls.(*Conn).readFromUntil(0x320abdbf4a88, {0xc11860, 0x320abe482410}, 0x320abe0b2c08?)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/crypto/tls/conn.go:837 +0xde
+crypto/tls.(*Conn).readRecordOrCCS(0x320abdbf4a88, 0x0)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/crypto/tls/conn.go:626 +0x3db
+crypto/tls.(*Conn).readRecord(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/crypto/tls/conn.go:588
+crypto/tls.(*Conn).Read(0x320abdbf4a88, {0x320abdcc6000, 0x1000, 0x753120?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/crypto/tls/conn.go:1393 +0x145
+bufio.(*Reader).Read(0x320abdbcb6e0, {0x320abdd4c044, 0x9, 0x7604ae?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/bufio/bufio.go:245 +0x197
+io.ReadAtLeast({0xc10400, 0x320abdbcb6e0}, {0x320abdd4c044, 0x9, 0x9}, 0x9)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/io/io.go:335 +0x8e
+io.ReadFull(...)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/io/io.go:354
+net/http.http2readFrameHeader({0x320abdd4c044, 0x9, 0x320a00000001?}, {0xc10400?, 0x320abdbcb6e0?})
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:1805 +0x65
+net/http.(*http2Framer).ReadFrameHeader(0x320abdd4c000)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:2071 +0x6b
+net/http.(*http2Framer).ReadFrame(0x320abdd4c000)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:2130 +0x18
+net/http.(*http2clientConnReadLoop).run(0x320abe0b2fa8)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:9550 +0xca
+net/http.(*http2ClientConn).readLoop(0x320abdd68000)
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:9419 +0x52
+created by net/http.(*http2Transport).newClientConn in goroutine 710
+	/home/richard/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.26.5.linux-amd64/src/net/http/h2_bundle.go:8171 +0xda5
+FAIL	github.com/fastly/go-fastly/v17/fastly	30.022s
+?   	github.com/fastly/go-fastly/v17/fastly/airuntimecontrol	[no test files]
+?   	github.com/fastly/go-fastly/v17/fastly/airuntimecontrol/v1	[no test files]
+ok  	github.com/fastly/go-fastly/v17/fastly/airuntimecontrol/v1/key	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/airuntimecontrol/v1/provider	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/airuntimecontrol/v1/providerconnection	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/airuntimecontrol/v1/session	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/airuntimecontrol/v1/usagemetrics	(cached)
+?   	github.com/fastly/go-fastly/v17/fastly/apisecurity	[no test files]
+ok  	github.com/fastly/go-fastly/v17/fastly/apisecurity/operations	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/computeacls	(cached)
+?   	github.com/fastly/go-fastly/v17/fastly/dns	[no test files]
+?   	github.com/fastly/go-fastly/v17/fastly/dns/v1	[no test files]
+ok  	github.com/fastly/go-fastly/v17/fastly/dns/v1/dnszones	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/dns/v1/tsigkeys	(cached)
+?   	github.com/fastly/go-fastly/v17/fastly/domainmanagement	[no test files]
+?   	github.com/fastly/go-fastly/v17/fastly/domainmanagement/v1	[no test files]
+ok  	github.com/fastly/go-fastly/v17/fastly/domainmanagement/v1/domains	(cached)
+?   	github.com/fastly/go-fastly/v17/fastly/domainmanagement/v1/tools	[no test files]
+ok  	github.com/fastly/go-fastly/v17/fastly/domainmanagement/v1/tools/status	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/domainmanagement/v1/tools/suggest	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/imageoptimizerdefaultsettings	(cached)
+?   	github.com/fastly/go-fastly/v17/fastly/impersonation	[no test files]
+?   	github.com/fastly/go-fastly/v17/fastly/ngwaf	[no test files]
+?   	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1	[no test files]
+ok  	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/lists	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/rules	(cached)
+?   	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/scope	[no test files]
+ok  	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/signals	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/timeseries	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/workspaces	(cached)
+?   	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/workspaces/alerts	[no test files]
+ok  	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/workspaces/alerts/datadog	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/workspaces/alerts/jira	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/workspaces/alerts/mailinglist	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/workspaces/alerts/microsoftteams	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/workspaces/alerts/opsgenie	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/workspaces/alerts/pagerduty	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/workspaces/alerts/slack	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/workspaces/alerts/webhook	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/workspaces/events	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/workspaces/redactions	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/workspaces/requests	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/workspaces/thresholds	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/workspaces/timeseries	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/workspaces/virtualpatches	(cached)
+?   	github.com/fastly/go-fastly/v17/fastly/notifications	[no test files]
+?   	github.com/fastly/go-fastly/v17/fastly/notifications/v1	[no test files]
+ok  	github.com/fastly/go-fastly/v17/fastly/notifications/v1/eventmappings	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/notifications/v1/eventmappings/eventtypes	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/notifications/v1/eventmappings/scopetypes	(cached)
+?   	github.com/fastly/go-fastly/v17/fastly/objectstorage	[no test files]
+ok  	github.com/fastly/go-fastly/v17/fastly/objectstorage/accesskeys	(cached)
+?   	github.com/fastly/go-fastly/v17/fastly/products	[no test files]
+ok  	github.com/fastly/go-fastly/v17/fastly/products/apidiscovery	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/products/botmanagement	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/products/brotlicompression	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/products/ddosprotection	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/products/domaininspector	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/products/fanout	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/products/imageoptimizer	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/products/logexplorerinsights	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/products/ngwaf	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/products/origininspector	(cached)
+ok  	github.com/fastly/go-fastly/v17/fastly/products/websockets	(cached)
+ok  	github.com/fastly/go-fastly/v17/internal/productcore	(cached)
+?   	github.com/fastly/go-fastly/v17/internal/test_utils	[no test files]
+FAIL

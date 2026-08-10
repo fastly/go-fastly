@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/172/logging/splunk/test-splunk
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/196/logging/splunk/test-splunk
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-splunk, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 172 }''"}'
+      version =\u003e 196 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 27 Jul 2026 16:13:05 GMT
+      - Mon, 10 Aug 2026 19:14:17 GMT
       Fastly-Ratelimit-Remaining:
-      - "9976"
+      - "9786"
       Fastly-Ratelimit-Reset:
-      - "1785171600"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -43,11 +43,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "126"
+      - "150"
       X-Served-By:
-      - cache-chi-kmdw8640081-CHI, cache-ewr-kewr1740060-EWR
+      - cache-chi-klot8100117-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1785168785.452997,VS0,VE156
+      - S1786389257.074227,VS0,VE215
     status: 404 Not Found
     code: 404
     duration: ""
@@ -56,13 +56,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/172/logging/splunk/new-test-splunk
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/196/logging/splunk/new-test-splunk
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-splunk, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 172 }''"}'
+      version =\u003e 196 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -71,11 +71,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 27 Jul 2026 16:13:05 GMT
+      - Mon, 10 Aug 2026 19:14:17 GMT
       Fastly-Ratelimit-Remaining:
-      - "9974"
+      - "9783"
       Fastly-Ratelimit-Reset:
-      - "1785171600"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -93,11 +93,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "118"
+      - "104"
       X-Served-By:
-      - cache-chi-klot8100178-CHI, cache-ewr-kewr1740060-EWR
+      - cache-chi-kmdw8640061-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1785168786.777002,VS0,VE150
+      - S1786389258.659135,VS0,VE134
     status: 404 Not Found
     code: 404
     duration: ""

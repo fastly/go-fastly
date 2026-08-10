@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/160/logging/kinesis/test-kinesis-2
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/201/logging/kinesis/test-kinesis-2
     method: GET
   response:
-    body: '{"iam_role":"arn:aws:iam::123456789012:role/S3Access","created_at":"2026-07-23T19:29:07Z","log_processing_region":"none","updated_at":"2026-07-23T19:29:07Z","deleted_at":null,"placement":"none","topic":"stream-name","format_version":"2","version":"160","response_condition":"","secret_key":null,"format":"format","service_id":"kKJb5bOFI47uHeBVluGfX1","access_key":null,"name":"test-kinesis-2","region":"us-east-1"}'
+    body: '{"log_processing_region":"none","topic":"stream-name","response_condition":"","format_version":"2","deleted_at":null,"format":"format","name":"test-kinesis-2","updated_at":"2026-08-10T19:14:49Z","secret_key":null,"iam_role":"arn:aws:iam::123456789012:role/S3Access","access_key":null,"region":"us-east-1","version":"201","created_at":"2026-08-10T19:14:49Z","service_id":"kKJb5bOFI47uHeBVluGfX1","placement":"none"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:29:13 GMT
+      - Mon, 10 Aug 2026 19:14:57 GMT
       Pragma:
       - no-cache
       Server:
@@ -37,11 +37,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "135"
+      - "1142"
       X-Served-By:
-      - cache-chi-kigq8000126-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-kigq8000122-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1784834954.564050,VS0,VE174
+      - S1786389296.461435,VS0,VE1175
     status: 200 OK
     code: 200
     duration: ""

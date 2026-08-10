@@ -144,8 +144,8 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/162/logging/https
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/203/logging/https
     method: POST
   response:
     body: '{"msg":"''compression_codec'' and ''gzip_level'' cannot be set simultaneously"}'
@@ -157,11 +157,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:29:30 GMT
+      - Mon, 10 Aug 2026 19:15:01 GMT
       Fastly-Ratelimit-Remaining:
-      - "9814"
+      - "9717"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -179,11 +179,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "63"
+      - "638"
       X-Served-By:
-      - cache-chi-kigq8000052-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-kigq8000063-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1784834971.780101,VS0,VE96
+      - S1786389300.367698,VS0,VE670
     status: 400 Bad Request
     code: 400
     duration: ""

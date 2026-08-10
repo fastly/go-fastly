@@ -180,7 +180,8 @@ type UpdateKafkaInput struct {
 	// Brokers is a comma-separated list of IP addresses or hostnames of Kafka brokers.
 	Brokers *string `json:"brokers,omitempty"`
 	// CompressionCodec is the codec used for compression of your logs (gzip, snappy, lz4, null).
-	CompressionCodec *string `json:"compression_codec,omitempty"`
+	// Use NullValue[string]() to clear the codec and stop compressing logs.
+	CompressionCodec *Nullable[string] `json:"compression_codec,omitempty"`
 	// Format is a Fastly log format string.
 	Format *string `json:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -209,13 +210,17 @@ type UpdateKafkaInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int `json:"-"`
 	// TLSCACert is a secure certificate to authenticate a server with. Must be in PEM format.
-	TLSCACert *string `json:"tls_ca_cert,omitempty"`
+	// Use NullValue[string]() to clear the certificate.
+	TLSCACert *Nullable[string] `json:"tls_ca_cert,omitempty"`
 	// TLSClientCert is the client certificate used to make authenticated requests. Must be in PEM format.
-	TLSClientCert *string `json:"tls_client_cert,omitempty"`
+	// Use NullValue[string]() to clear the certificate.
+	TLSClientCert *Nullable[string] `json:"tls_client_cert,omitempty"`
 	// TLSClientKey is the client private key used to make authenticated requests. Must be in PEM format.
-	TLSClientKey *string `json:"tls_client_key,omitempty"`
+	// Use NullValue[string]() to clear the key.
+	TLSClientKey *Nullable[string] `json:"tls_client_key,omitempty"`
 	// TLSHostname is the hostname to verify the server's certificate. This should be one of the Subject Alternative Name (SAN) fields for the certificate. Common Names (CN) are not supported.
-	TLSHostname *string `json:"tls_hostname,omitempty"`
+	// Use NullValue[string]() to clear the hostname.
+	TLSHostname *Nullable[string] `json:"tls_hostname,omitempty"`
 	// Topic is the Kafka topic to send logs to.
 	Topic *string `json:"topic,omitempty"`
 	// UseTLS is whether to use TLS (0: do not use, 1: use).

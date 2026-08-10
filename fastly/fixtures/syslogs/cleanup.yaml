@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/170/logging/syslog/test-syslog
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/195/logging/syslog/test-syslog
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-syslog, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 170 }''"}'
+      version =\u003e 195 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 27 Jul 2026 16:13:05 GMT
+      - Mon, 10 Aug 2026 19:14:17 GMT
       Fastly-Ratelimit-Remaining:
-      - "9977"
+      - "9787"
       Fastly-Ratelimit-Reset:
-      - "1785171600"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -43,11 +43,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "95"
+      - "120"
       X-Served-By:
-      - cache-chi-kigq8000131-CHI, cache-ewr-kewr1740060-EWR
+      - cache-chi-kmdw8640043-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1785168785.304921,VS0,VE129
+      - S1786389257.882287,VS0,VE150
     status: 404 Not Found
     code: 404
     duration: ""
@@ -56,13 +56,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/170/logging/syslog/new-test-syslog
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/195/logging/syslog/new-test-syslog
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-syslog, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 170 }''"}'
+      version =\u003e 195 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -71,11 +71,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 27 Jul 2026 16:13:05 GMT
+      - Mon, 10 Aug 2026 19:14:17 GMT
       Fastly-Ratelimit-Remaining:
-      - "9975"
+      - "9784"
       Fastly-Ratelimit-Reset:
-      - "1785171600"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -93,11 +93,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "99"
+      - "112"
       X-Served-By:
-      - cache-chi-klot8100094-CHI, cache-ewr-kewr1740060-EWR
+      - cache-chi-klot8100078-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1785168786.627884,VS0,VE132
+      - S1786389257.483639,VS0,VE147
     status: 404 Not Found
     code: 404
     duration: ""

@@ -208,7 +208,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			ServiceVersion:   *tv.Number,
 			Name:             "test-elasticsearch",
 			NewName:          ToPointer("new-test-elasticsearch"),
-			Pipeline:         ToPointer("my_new_pipeline_id"),
+			Pipeline:         NewNullable("my_new_pipeline_id"),
 			ProcessingRegion: ToPointer("eu"),
 			Placement:        NullValue[string](),
 		})
@@ -227,6 +227,48 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if *ues.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *ues.ProcessingRegion)
+	}
+
+	// Test that the nullable attributes can be cleared in place by setting
+	// them to null.
+	var ces *Elasticsearch
+	Record(t, "elasticsearch/update_null", func(c *Client) {
+		ces, err = c.UpdateElasticsearch(context.TODO(), &UpdateElasticsearchInput{
+			ServiceID:      TestDeliveryServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-elasticsearch",
+			User:           NullValue[string](),
+			Password:       NullValue[string](),
+			Pipeline:       NullValue[string](),
+			TLSCACert:      NullValue[string](),
+			TLSClientCert:  NullValue[string](),
+			TLSClientKey:   NullValue[string](),
+			TLSHostname:    NullValue[string](),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if ces.User != nil {
+		t.Errorf("bad user: %q", *ces.User)
+	}
+	if ces.Password != nil {
+		t.Errorf("bad password: %q", *ces.Password)
+	}
+	if ces.Pipeline != nil {
+		t.Errorf("bad pipeline: %q", *ces.Pipeline)
+	}
+	if ces.TLSCACert != nil {
+		t.Errorf("bad tls_ca_cert: %q", *ces.TLSCACert)
+	}
+	if ces.TLSClientCert != nil {
+		t.Errorf("bad tls_client_cert: %q", *ces.TLSClientCert)
+	}
+	if ces.TLSClientKey != nil {
+		t.Errorf("bad tls_client_key: %q", *ces.TLSClientKey)
+	}
+	if ces.TLSHostname != nil {
+		t.Errorf("bad tls_hostname: %q", *ces.TLSHostname)
 	}
 
 	// Delete
@@ -443,7 +485,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			ServiceVersion:   *tv.Number,
 			Name:             "test-elasticsearch",
 			NewName:          ToPointer("new-test-elasticsearch"),
-			Pipeline:         ToPointer("my_new_pipeline_id"),
+			Pipeline:         NewNullable("my_new_pipeline_id"),
 			ProcessingRegion: ToPointer("eu"),
 			Placement:        NewNullable("none"),
 		})

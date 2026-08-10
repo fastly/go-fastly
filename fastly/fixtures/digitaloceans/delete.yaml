@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/169/logging/digitalocean/new-test-digitalocean
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/205/logging/digitalocean/new-test-digitalocean
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -19,11 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:30:39 GMT
+      - Mon, 10 Aug 2026 19:15:40 GMT
       Fastly-Ratelimit-Remaining:
-      - "9689"
+      - "9683"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -41,11 +41,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "427"
+      - "586"
       X-Served-By:
-      - cache-chi-klot8100062-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-kmdw8640065-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1784835039.121088,VS0,VE479
+      - S1786389340.710883,VS0,VE616
     status: 200 OK
     code: 200
     duration: ""

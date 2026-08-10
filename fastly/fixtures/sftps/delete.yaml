@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/174/logging/sftp/new-test-sftp
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/197/logging/sftp/new-test-sftp
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -19,11 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:31:33 GMT
+      - Mon, 10 Aug 2026 19:14:26 GMT
       Fastly-Ratelimit-Remaining:
-      - "9592"
+      - "9771"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -41,11 +41,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "393"
+      - "620"
       X-Served-By:
-      - cache-chi-kmdw8640041-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-kigq8000136-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1784835093.281921,VS0,VE427
+      - S1786389266.145963,VS0,VE653
     status: 200 OK
     code: 200
     duration: ""

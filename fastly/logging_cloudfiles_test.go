@@ -737,6 +737,32 @@ func TestClient_Cloudfiles(t *testing.T) {
 		t.Errorf("bad gzip_level: %d", *cloudfilesUpdateResp3.GzipLevel)
 	}
 
+	// Test that the nullable attributes can be cleared in place by setting
+	// them to null.
+	var cloudfilesClearResp *Cloudfiles
+	Record(t, "cloudfiles/update_null", func(c *Client) {
+		cloudfilesClearResp, err = c.UpdateCloudfiles(context.TODO(), &UpdateCloudfilesInput{
+			ServiceID:      TestDeliveryServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-cloudfiles",
+			Path:           NullValue[string](),
+			PublicKey:      NullValue[string](),
+			Region:         NullValue[string](),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if cloudfilesClearResp.Path != nil {
+		t.Errorf("bad path: %q", *cloudfilesClearResp.Path)
+	}
+	if cloudfilesClearResp.PublicKey != nil {
+		t.Errorf("bad public_key: %q", *cloudfilesClearResp.PublicKey)
+	}
+	if cloudfilesClearResp.Region != nil {
+		t.Errorf("bad region: %q", *cloudfilesClearResp.Region)
+	}
+
 	// Delete
 	Record(t, "cloudfiles/delete", func(c *Client) {
 		err = c.DeleteCloudfiles(context.TODO(), &DeleteCloudfilesInput{

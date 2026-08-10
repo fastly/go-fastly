@@ -357,6 +357,24 @@ func TestClient_Openstack(t *testing.T) {
 		t.Errorf("bad gzip_level: %d", *osUpdateResp3.GzipLevel)
 	}
 
+	// Test that the nullable attributes can be cleared in place by setting
+	// them to null.
+	var osClearResp *Openstack
+	Record(t, "openstack/update_null", func(c *Client) {
+		osClearResp, err = c.UpdateOpenstack(context.TODO(), &UpdateOpenstackInput{
+			ServiceID:      TestDeliveryServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-openstack",
+			PublicKey:      NullValue[string](),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if osClearResp.PublicKey != nil {
+		t.Errorf("bad public_key: %q", *osClearResp.PublicKey)
+	}
+
 	// Delete
 	Record(t, "openstack/delete", func(c *Client) {
 		err = c.DeleteOpenstack(context.TODO(), &DeleteOpenstackInput{

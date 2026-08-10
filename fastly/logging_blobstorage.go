@@ -187,7 +187,8 @@ type UpdateBlobStorageInput struct {
 	// NewName is the new name for the resource.
 	NewName *string `json:"name,omitempty"`
 	// Path is the path to upload logs to.
-	Path *string `json:"path,omitempty"`
+	// Use NullValue[string]() to clear the path and upload logs to the root of the bucket.
+	Path *Nullable[string] `json:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
 	Period *int `json:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed. Use
@@ -196,7 +197,8 @@ type UpdateBlobStorageInput struct {
 	// ProcessingRegion is the region where logs will be processed before streaming to Azure Blob Storage.
 	ProcessingRegion *string `json:"log_processing_region,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
-	PublicKey *string `json:"public_key,omitempty"`
+	// Use NullValue[string]() to clear the public key and stop encrypting log files.
+	PublicKey *Nullable[string] `json:"public_key,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `json:"response_condition,omitempty"`
 	// SASToken is the Azure shared access signature providing write access to the blob service objects.

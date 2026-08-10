@@ -228,6 +228,44 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad use_tls: %t", *us.UseTLS)
 	}
 
+	// Test that the nullable attributes can be cleared in place by setting
+	// them to null.
+	var cs *Syslog
+	Record(t, "syslogs/update_null", func(c *Client) {
+		cs, err = c.UpdateSyslog(context.TODO(), &UpdateSyslogInput{
+			ServiceID:      TestDeliveryServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-syslog",
+			Token:          NullValue[string](),
+			IPV4:           NullValue[string](),
+			TLSCACert:      NullValue[string](),
+			TLSClientCert:  NullValue[string](),
+			TLSClientKey:   NullValue[string](),
+			TLSHostname:    NullValue[string](),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if cs.Token != nil {
+		t.Errorf("bad token: %q", *cs.Token)
+	}
+	if cs.IPV4 != nil {
+		t.Errorf("bad ipv4: %q", *cs.IPV4)
+	}
+	if cs.TLSCACert != nil {
+		t.Errorf("bad tls_ca_cert: %q", *cs.TLSCACert)
+	}
+	if cs.TLSClientCert != nil {
+		t.Errorf("bad tls_client_cert: %q", *cs.TLSClientCert)
+	}
+	if cs.TLSClientKey != nil {
+		t.Errorf("bad tls_client_key: %q", *cs.TLSClientKey)
+	}
+	if cs.TLSHostname != nil {
+		t.Errorf("bad tls_hostname: %q", *cs.TLSHostname)
+	}
+
 	// Delete
 	Record(t, "syslogs/delete", func(c *Client) {
 		err = c.DeleteSyslog(context.TODO(), &DeleteSyslogInput{

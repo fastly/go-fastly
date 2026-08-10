@@ -368,6 +368,24 @@ func TestClient_Bigqueries(t *testing.T) {
 		t.Errorf("bad log_processing_region: %q", *ubq.ProcessingRegion)
 	}
 
+	// Test that the nullable attributes can be cleared in place by setting
+	// them to null.
+	var cbq *BigQuery
+	Record(t, "bigqueries/update_null", func(c *Client) {
+		cbq, err = c.UpdateBigQuery(context.TODO(), &UpdateBigQueryInput{
+			ServiceID:      TestDeliveryServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-bigquery",
+			Template:       NullValue[string](),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if cbq.Template != nil {
+		t.Errorf("bad template_suffix: %q", *cbq.Template)
+	}
+
 	// Delete
 	Record(t, "bigqueries/delete", func(c *Client) {
 		err = c.DeleteBigQuery(context.TODO(), &DeleteBigQueryInput{

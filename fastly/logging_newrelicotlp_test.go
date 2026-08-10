@@ -144,6 +144,24 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 		t.Errorf("bad log_processing_region: %q", *un.ProcessingRegion)
 	}
 
+	// Test that the nullable attributes can be cleared in place by setting
+	// them to null.
+	var cn *NewRelicOTLP
+	Record(t, "newrelicotlp/update_null", func(c *Client) {
+		cn, err = c.UpdateNewRelicOTLP(context.TODO(), &UpdateNewRelicOTLPInput{
+			ServiceID:      TestDeliveryServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           "new-test-newrelicotlp",
+			URL:            NullValue[string](),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if cn.URL != nil {
+		t.Errorf("bad url: %q", *cn.URL)
+	}
+
 	// Delete
 	Record(t, "newrelicotlp/delete", func(c *Client) {
 		err = c.DeleteNewRelicOTLP(context.TODO(), &DeleteNewRelicOTLPInput{

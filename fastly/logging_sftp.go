@@ -202,7 +202,8 @@ type UpdateSFTPInput struct {
 	// ProcessingRegion is the region where logs will be processed before streaming to SFTP server.
 	ProcessingRegion *string `json:"log_processing_region,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
-	PublicKey *string `json:"public_key,omitempty"`
+	// Use NullValue[string]() to clear the public key and stop encrypting log files.
+	PublicKey *Nullable[string] `json:"public_key,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `json:"response_condition,omitempty"`
 	// SSHKnownHosts is a list of host keys for all hosts we can connect to over SFTP.

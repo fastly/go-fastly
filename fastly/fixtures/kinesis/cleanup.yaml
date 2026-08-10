@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/160/logging/kinesis/test-kinesis
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/201/logging/kinesis/test-kinesis
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-kinesis, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 160 }''"}'
+      version =\u003e 201 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:29:40 GMT
+      - Mon, 10 Aug 2026 19:15:18 GMT
       Fastly-Ratelimit-Remaining:
-      - "9794"
+      - "9702"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -43,11 +43,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "116"
+      - "255"
       X-Served-By:
-      - cache-chi-kigq8000048-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-klot8100141-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1784834981.762716,VS0,VE163
+      - S1786389318.382184,VS0,VE288
     status: 404 Not Found
     code: 404
     duration: ""
@@ -56,8 +56,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/160/logging/kinesis/test-kinesis-2
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/201/logging/kinesis/test-kinesis-2
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -69,11 +69,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:29:46 GMT
+      - Mon, 10 Aug 2026 19:15:24 GMT
       Fastly-Ratelimit-Remaining:
-      - "9784"
+      - "9698"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -91,11 +91,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "462"
+      - "574"
       X-Served-By:
-      - cache-chi-kigq8000126-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-kigq8000122-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1784834986.575750,VS0,VE503
+      - S1786389324.914147,VS0,VE607
     status: 200 OK
     code: 200
     duration: ""
@@ -104,13 +104,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/160/logging/kinesis/new-test-kinesis
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/201/logging/kinesis/new-test-kinesis
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-kinesis, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 160 }''"}'
+      version =\u003e 201 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -119,11 +119,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:29:51 GMT
+      - Mon, 10 Aug 2026 19:15:25 GMT
       Fastly-Ratelimit-Remaining:
-      - "9775"
+      - "9696"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1786392000"
       Pragma:
       - no-cache
       Server:
@@ -141,11 +141,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "111"
+      - "152"
       X-Served-By:
-      - cache-chi-klot8100119-CHI, cache-iad-kiad7000135-IAD
+      - cache-chi-kigq8000104-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1784834992.503922,VS0,VE148
+      - S1786389325.333417,VS0,VE183
     status: 404 Not Found
     code: 404
     duration: ""
