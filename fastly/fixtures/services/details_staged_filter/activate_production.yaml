@@ -1,0 +1,53 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/17.1.0 (+github.com/fastly/go-fastly; go1.26.4)
+    url: https://api.fastly.com/service/yjiS959rX92xW0DLIb3pQ9/version/1/activate
+    method: PUT
+  response:
+    body: '{"service_id":"yjiS959rX92xW0DLIb3pQ9","active":true,"environments":[],"locked":true,"testing":false,"staging":false,"number":1,"updated_at":"2026-08-05T13:59:49Z","comment":"","deleted_at":null,"deployed":false,"created_at":"2026-08-05T13:59:49Z","msg":"Warning:
+      No default director found\nat: (default Line 174 Pos 1)\n       error 550 \"Doesnt
+      exist\";\n--------------------------------"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 05 Aug 2026 13:59:52 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9983"
+      Fastly-Ratelimit-Reset:
+      - "1785938400"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "1819"
+      X-Served-By:
+      - cache-chi-kmdw8640027-CHI, cache-ewr-kewr1740062-EWR
+      X-Timer:
+      - S1785938391.877666,VS0,VE1847
+    status: 200 OK
+    code: 200
+    duration: ""
