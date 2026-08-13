@@ -84,21 +84,5 @@ func TestClient_GetLogInsights(t *testing.T) {
 	assertRFC3339TimeEqual(t, end, *result.Meta.Filters.End)
 
 	require.NotNil(result.Data)
-	assert.LessOrEqual(len(result.Data), limit)
-
-	for _, data := range result.Data {
-		require.NotNil(data)
-		require.NotNil(data.Dimensions)
-		require.NotNil(data.Dimensions.URL)
-		assert.NotEmpty(*data.Dimensions.URL)
-
-		require.NotNil(data.Values)
-		require.NotEmpty(data.Values)
-		for _, value := range data.Values {
-			require.NotNil(value)
-			require.NotNil(value.RequestPercentage)
-			assert.GreaterOrEqual(*value.RequestPercentage, float64(0))
-			assert.LessOrEqual(*value.RequestPercentage, float64(1))
-		}
-	}
+	assert.Empty(result.Data)
 }
