@@ -123,6 +123,10 @@ var ErrMissingWorkspaceID = NewFieldError("WorkspaceID")
 // requires a "ListID" key, but one was not set.
 var ErrMissingListID = NewFieldError("ListID")
 
+// ErrMissingEnd is an error that is returned when an input struct
+// requires an "End" key, but one was not set.
+var ErrMissingEnd = NewFieldError("End")
+
 // ErrMissingEntries is an error that is returned when an input struct
 // requires a "Entries" key, but one was not set.
 var ErrMissingEntries = NewFieldError("Entries")
@@ -402,6 +406,10 @@ var ErrMissingUsername = NewFieldError("Username")
 // ErrMissingValue is an error that is returned when an input struct
 // requires a "Value" key, but one was not set.
 var ErrMissingValue = NewFieldError("Value")
+
+// ErrMissingVisualization is an error that is returned when an input struct
+// requires a "Visualization" key, but one was not set.
+var ErrMissingVisualization = NewFieldError("Visualization")
 
 // ErrMissingWAFActiveRule is an error that is returned when an input struct
 // requires a "Rules" key, but there needs to be at least one WAFActiveRule entry.
