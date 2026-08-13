@@ -67,6 +67,10 @@ const alertTypeDoesNotMatch string = "alert type does not match"
 // but the alert is not of the correct type.
 var ErrInvalidType = NewFieldError("Type").Message(alertTypeDoesNotMatch)
 
+// ErrDuplicateLogExplorerFilter is an error that is returned when Log Explorer
+// filters contain the same field/operator combination with conflicting values.
+var ErrDuplicateLogExplorerFilter = NewFieldError("Filters").Message("duplicate field/operator combination with conflicting values")
+
 // ErrMaxExceededItems is an error that is returned when an input struct
 // specifies an "Items" key value exceeding the maximum allowed.
 var ErrMaxExceededItems = NewFieldError("Items").Message(batchModifyMaxExceeded)

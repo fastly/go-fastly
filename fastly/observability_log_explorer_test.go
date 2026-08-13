@@ -29,6 +29,25 @@ func TestClient_GetLogRecords_validation(t *testing.T) {
 		Start:     "2026-08-12T15:00:00Z",
 	})
 	assert.ErrorIs(err, ErrMissingEnd)
+
+	_, err = TestClient.GetLogRecords(context.TODO(), &GetLogRecordsInput{
+		ServiceID: TestDeliveryServiceID,
+		Start:     "2026-08-12T15:00:00Z",
+		End:       "2026-08-13T15:00:00Z",
+		Filters: []LogExplorerFilter{
+			{
+				Field:    LogExplorerFilterFieldResponseTime,
+				Operator: LogExplorerFilterOperatorGTE,
+				Value:    "0",
+			},
+			{
+				Field:    LogExplorerFilterFieldResponseTime,
+				Operator: LogExplorerFilterOperatorGTE,
+				Value:    "1",
+			},
+		},
+	})
+	assert.ErrorIs(err, ErrDuplicateLogExplorerFilter)
 }
 
 func TestClient_GetLogRecords(t *testing.T) {
