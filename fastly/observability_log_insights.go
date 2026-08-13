@@ -43,25 +43,6 @@ const (
 	LogInsightsVisualizationTop503Responses LogInsightsVisualization = "top-503-responses"
 )
 
-// LogInsightsVisualizations is a list of supported Log Insights visualizations.
-var LogInsightsVisualizations = []LogInsightsVisualization{
-	LogInsightsVisualizationTopURLByBandwidth,
-	LogInsightsVisualizationBottomURLByCacheHitRatio,
-	LogInsightsVisualizationTopURLByCacheHitRatio,
-	LogInsightsVisualizationCountryStatistics,
-	LogInsightsVisualizationTopURLByDurationSum,
-	LogInsightsVisualizationTop4XXURLs,
-	LogInsightsVisualizationTop5XXURLs,
-	LogInsightsVisualizationTopURLByMisses,
-	LogInsightsVisualizationTopURLByRequests,
-	LogInsightsVisualizationTopBrowserByRequests,
-	LogInsightsVisualizationTopContentTypeByRequests,
-	LogInsightsVisualizationTopDeviceByRequests,
-	LogInsightsVisualizationTopOSByRequests,
-	LogInsightsVisualizationResponseStatusCodes,
-	LogInsightsVisualizationTop503Responses,
-}
-
 // LogInsightsDimensions represents the dimensions returned by the Log Insights API.
 type LogInsightsDimensions struct {
 	Browser        *string `json:"browser"`
