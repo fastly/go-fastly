@@ -179,6 +179,10 @@ var ErrMissingRequestID = NewFieldError("RequestID")
 // requires a "Field" key, but one was not set.
 var ErrMissingField = NewFieldError("Field")
 
+// ErrMissingOperator is an error that is returned when an input struct
+// requires an "Operator" key, but one was not set.
+var ErrMissingOperator = NewFieldError("Operator")
+
 // ErrMissingContent is an error that is returned when an input struct
 // requires a "Content" key, but one was not set.
 var ErrMissingContent = NewFieldError("Content")

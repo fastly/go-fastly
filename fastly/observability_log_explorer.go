@@ -162,6 +162,13 @@ func (c *Client) GetLogRecords(ctx context.Context, i *GetLogRecordsInput) (*Log
 	requestOptions.Params["end"] = i.End
 
 	for _, filter := range i.Filters {
+		if filter.Field == "" {
+			return nil, ErrMissingField
+		}
+		if filter.Operator == "" {
+			return nil, ErrMissingOperator
+		}
+
 		key := fmt.Sprintf("filter[%s][%s]", filter.Field, filter.Operator)
 		if value, ok := requestOptions.Params[key]; ok && value != filter.Value {
 			return nil, ErrDuplicateLogExplorerFilter
