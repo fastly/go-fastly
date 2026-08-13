@@ -1,0 +1,49 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/observability/log-explorer?end=2026-08-13T15%3A00%3A00Z&filter%5Bresponse_time%5D%5Bgte%5D=0&limit=5&service_id=kKJb5bOFI47uHeBVluGfX1&start=2026-08-12T15%3A00%3A00Z
+    method: GET
+  response:
+    body: '{"data":null,"meta":{"filters":{"start":"2026-08-12T15:00:00Z","end":"2026-08-13T15:00:00Z","limit":5,"service_id":"kKJb5bOFI47uHeBVluGfX1","field_filters":[{"field":"response_time","operator":"gte","value":0}]}}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "213"
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 13 Aug 2026 16:26:26 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "1539"
+      X-Served-By:
+      - cache-chi-kigq8000110-CHI, cache-lga21980-LGA
+      X-Timer:
+      - S1786638384.464923,VS0,VE1568
+    status: 200 OK
+    code: 200
+    duration: ""

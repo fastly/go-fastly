@@ -67,6 +67,10 @@ const alertTypeDoesNotMatch string = "alert type does not match"
 // but the alert is not of the correct type.
 var ErrInvalidType = NewFieldError("Type").Message(alertTypeDoesNotMatch)
 
+// ErrDuplicateLogExplorerFilter is an error that is returned when Log Explorer
+// filters contain the same field/operator combination with conflicting values.
+var ErrDuplicateLogExplorerFilter = NewFieldError("Filters").Message("duplicate field/operator combination with conflicting values")
+
 // ErrMaxExceededItems is an error that is returned when an input struct
 // specifies an "Items" key value exceeding the maximum allowed.
 var ErrMaxExceededItems = NewFieldError("Items").Message(batchModifyMaxExceeded)
@@ -123,6 +127,10 @@ var ErrMissingWorkspaceID = NewFieldError("WorkspaceID")
 // requires a "ListID" key, but one was not set.
 var ErrMissingListID = NewFieldError("ListID")
 
+// ErrMissingEnd is an error that is returned when an input struct
+// requires an "End" key, but one was not set.
+var ErrMissingEnd = NewFieldError("End")
+
 // ErrMissingEntries is an error that is returned when an input struct
 // requires a "Entries" key, but one was not set.
 var ErrMissingEntries = NewFieldError("Entries")
@@ -170,6 +178,10 @@ var ErrMissingRequestID = NewFieldError("RequestID")
 // ErrMissingField is an error that is returned when an input struct
 // requires a "Field" key, but one was not set.
 var ErrMissingField = NewFieldError("Field")
+
+// ErrMissingOperator is an error that is returned when an input struct
+// requires an "Operator" key, but one was not set.
+var ErrMissingOperator = NewFieldError("Operator")
 
 // ErrMissingContent is an error that is returned when an input struct
 // requires a "Content" key, but one was not set.
@@ -402,6 +414,10 @@ var ErrMissingUsername = NewFieldError("Username")
 // ErrMissingValue is an error that is returned when an input struct
 // requires a "Value" key, but one was not set.
 var ErrMissingValue = NewFieldError("Value")
+
+// ErrMissingVisualization is an error that is returned when an input struct
+// requires a "Visualization" key, but one was not set.
+var ErrMissingVisualization = NewFieldError("Visualization")
 
 // ErrMissingWAFActiveRule is an error that is returned when an input struct
 // requires a "Rules" key, but there needs to be at least one WAFActiveRule entry.
