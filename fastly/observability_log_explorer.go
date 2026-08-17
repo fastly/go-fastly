@@ -35,6 +35,21 @@ const (
 	LogExplorerFilterFieldFastlyIsCacheHit LogExplorerFilterField = "fastly_is_cache_hit"
 )
 
+// LogExplorerFilterFields is a list of supported Log Explorer filter fields.
+var LogExplorerFilterFields = []LogExplorerFilterField{
+	LogExplorerFilterFieldDomain,
+	LogExplorerFilterFieldRequestPath,
+	LogExplorerFilterFieldFastlyPOP,
+	LogExplorerFilterFieldResponseTime,
+	LogExplorerFilterFieldResponseStatus,
+	LogExplorerFilterFieldFastlyIsShield,
+	LogExplorerFilterFieldFastlyIsEdge,
+	LogExplorerFilterFieldClientOSName,
+	LogExplorerFilterFieldClientDeviceType,
+	LogExplorerFilterFieldClientBrowserName,
+	LogExplorerFilterFieldFastlyIsCacheHit,
+}
+
 // LogExplorerFilterOperator represents a comparison operator supported by the Log Explorer API.
 type LogExplorerFilterOperator string
 
@@ -56,6 +71,18 @@ const (
 	// LogExplorerFilterOperatorLTE performs a less-than-or-equal comparison.
 	LogExplorerFilterOperatorLTE LogExplorerFilterOperator = "lte"
 )
+
+// LogExplorerFilterOperators is a list of supported Log Explorer filter operators.
+var LogExplorerFilterOperators = []LogExplorerFilterOperator{
+	LogExplorerFilterOperatorEq,
+	LogExplorerFilterOperatorEndsWith,
+	LogExplorerFilterOperatorIn,
+	LogExplorerFilterOperatorNotIn,
+	LogExplorerFilterOperatorGT,
+	LogExplorerFilterOperatorGTE,
+	LogExplorerFilterOperatorLT,
+	LogExplorerFilterOperatorLTE,
+}
 
 // LogExplorerFilter represents a filter supplied to the Log Explorer API.
 type LogExplorerFilter struct {

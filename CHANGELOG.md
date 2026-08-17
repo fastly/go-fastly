@@ -7,6 +7,7 @@
 ### Enhancements:
 
 - feat(observability): add Log Explorer and Insights API support ([#851](https://github.com/fastly/go-fastly/pull/851))
+- feat(observability): expose supported values and complete Insights response filters ([#853](https://github.com/fastly/go-fastly/pull/853))
 
 ### Dependencies:
 

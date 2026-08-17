@@ -49,8 +49,9 @@ func TestClient_GetLogInsights(t *testing.T) {
 	// NOTE: Update these to a recent time range when regenerating the test
 	// fixture, otherwise the data may be outside Log Insights retention.
 	const (
-		start = "2026-08-12T15:00:00Z"
-		end   = "2026-08-13T15:00:00Z"
+		start  = "2026-08-12T15:00:00Z"
+		end    = "2026-08-13T15:00:00Z"
+		domain = "example.com"
 	)
 	const limit = 10
 
@@ -60,28 +61,35 @@ func TestClient_GetLogInsights(t *testing.T) {
 	)
 	Record(t, "observability_log_insights/get", func(c *Client) {
 		result, err = c.GetLogInsights(context.TODO(), &GetLogInsightsInput{
-			ServiceID:     TestDeliveryServiceID,
-			Start:         start,
-			End:           end,
-			Limit:         ToPointer(limit),
-			Visualization: LogInsightsVisualizationTopURLByRequests,
+			ServiceID:        TestDeliveryServiceID,
+			Start:            start,
+			End:              end,
+			Domain:           ToPointer(domain),
+			DomainExactMatch: ToPointer(true),
+			Limit:            ToPointer(limit),
+			POPs:             []string{"IAD", "DFW"},
+			Visualization:    LogInsightsVisualizationTopURLByRequests,
 		})
 	})
 	require.NoError(err)
 	require.NotNil(result)
 	require.NotNil(result.Meta)
 	require.NotNil(result.Meta.Filters)
-	require.NotNil(result.Meta.Filters.ServiceID)
-	require.NotNil(result.Meta.Filters.Start)
-	require.NotNil(result.Meta.Filters.End)
-	require.NotNil(result.Meta.Filters.DomainExactMatch)
-	require.NotNil(result.Meta.Filters.Limit)
+	filters := result.Meta.Filters
+	require.NotNil(filters.Domain)
+	require.NotNil(filters.DomainExactMatch)
+	require.NotNil(filters.End)
+	require.NotNil(filters.Limit)
+	require.NotNil(filters.ServiceID)
+	require.NotNil(filters.Start)
 
-	assert.Equal(TestDeliveryServiceID, *result.Meta.Filters.ServiceID)
-	assert.Equal(limit, *result.Meta.Filters.Limit)
-	assert.True(*result.Meta.Filters.DomainExactMatch)
-	assertRFC3339TimeEqual(t, start, *result.Meta.Filters.Start)
-	assertRFC3339TimeEqual(t, end, *result.Meta.Filters.End)
+	assert.Equal(domain, *filters.Domain)
+	assert.True(*filters.DomainExactMatch)
+	assertRFC3339TimeEqual(t, end, *filters.End)
+	assert.Equal(limit, *filters.Limit)
+	assert.ElementsMatch([]string{"IAD", "DFW"}, filters.POPs)
+	assert.Equal(TestDeliveryServiceID, *filters.ServiceID)
+	assertRFC3339TimeEqual(t, start, *filters.Start)
 
 	require.NotNil(result.Data)
 	assert.Empty(result.Data)
