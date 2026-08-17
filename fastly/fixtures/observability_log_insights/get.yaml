@@ -7,21 +7,21 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
-    url: https://api.fastly.com/observability/log-insights?end=2026-08-13T15%3A00%3A00Z&limit=10&service_id=kKJb5bOFI47uHeBVluGfX1&start=2026-08-12T15%3A00%3A00Z&visualization=top-url-by-requests
+    url: https://api.fastly.com/observability/log-insights?domain=example.com&domain_exact_match=true&end=2026-08-13T15%3A00%3A00Z&limit=10&pops=IAD%2CDFW&service_id=kKJb5bOFI47uHeBVluGfX1&start=2026-08-12T15%3A00%3A00Z&visualization=top-url-by-requests
     method: GET
   response:
-    body: '{"data":[],"meta":{"filters":{"domain_exact_match":true,"end":"2026-08-13T15:00:00Z","limit":10,"service_id":"kKJb5bOFI47uHeBVluGfX1","start":"2026-08-12T15:00:00Z"}}}'
+    body: '{"data":[],"meta":{"filters":{"domain":"example.com","domain_exact_match":true,"end":"2026-08-13T15:00:00Z","limit":10,"pops":["DFW","IAD"],"service_id":"kKJb5bOFI47uHeBVluGfX1","start":"2026-08-12T15:00:00Z"}}}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "167"
+      - "211"
       Content-Type:
       - application/json
       Date:
-      - Thu, 13 Aug 2026 16:26:26 GMT
+      - Mon, 17 Aug 2026 17:38:39 GMT
       Pragma:
       - no-cache
       Server:
@@ -39,11 +39,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "1669"
+      - "2967"
       X-Served-By:
-      - cache-chi-kigq8000140-CHI, cache-lga21980-LGA
+      - cache-chi-klot8100090-CHI, cache-lga21963-LGA
       X-Timer:
-      - S1786638384.465022,VS0,VE1709
+      - S1786988317.979756,VS0,VE2998
     status: 200 OK
     code: 200
     duration: ""

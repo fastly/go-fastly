@@ -43,6 +43,25 @@ const (
 	LogInsightsVisualizationTop503Responses LogInsightsVisualization = "top-503-responses"
 )
 
+// LogInsightsVisualizations is a list of supported Log Insights visualizations.
+var LogInsightsVisualizations = []LogInsightsVisualization{
+	LogInsightsVisualizationTopURLByBandwidth,
+	LogInsightsVisualizationBottomURLByCacheHitRatio,
+	LogInsightsVisualizationTopURLByCacheHitRatio,
+	LogInsightsVisualizationCountryStatistics,
+	LogInsightsVisualizationTopURLByDurationSum,
+	LogInsightsVisualizationTop4XXURLs,
+	LogInsightsVisualizationTop5XXURLs,
+	LogInsightsVisualizationTopURLByMisses,
+	LogInsightsVisualizationTopURLByRequests,
+	LogInsightsVisualizationTopBrowserByRequests,
+	LogInsightsVisualizationTopContentTypeByRequests,
+	LogInsightsVisualizationTopDeviceByRequests,
+	LogInsightsVisualizationTopOSByRequests,
+	LogInsightsVisualizationResponseStatusCodes,
+	LogInsightsVisualizationTop503Responses,
+}
+
 // LogInsightsDimensions represents the dimensions returned by the Log Insights API.
 type LogInsightsDimensions struct {
 	Browser        *string `json:"browser"`
@@ -86,11 +105,13 @@ type LogInsightsData struct {
 
 // LogInsightsFilters represents the filters echoed in a Log Insights response.
 type LogInsightsFilters struct {
-	DomainExactMatch *bool   `json:"domain_exact_match"`
-	End              *string `json:"end"`
-	Limit            *int    `json:"limit"`
-	ServiceID        *string `json:"service_id"`
-	Start            *string `json:"start"`
+	Domain           *string  `json:"domain"`
+	DomainExactMatch *bool    `json:"domain_exact_match"`
+	End              *string  `json:"end"`
+	Limit            *int     `json:"limit"`
+	POPs             []string `json:"pops"`
+	ServiceID        *string  `json:"service_id"`
+	Start            *string  `json:"start"`
 }
 
 // LogInsightsMeta represents metadata returned by the Log Insights API.
