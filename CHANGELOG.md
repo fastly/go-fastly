@@ -8,6 +8,7 @@
 
 - feat(observability): add Log Explorer and Insights API support ([#851](https://github.com/fastly/go-fastly/pull/851))
 - feat(observability): expose supported values and complete Insights response filters ([#853](https://github.com/fastly/go-fastly/pull/853))
+- feat(ngwaf/rules): add support for the `signal_payload` type of `client_identifier` in NGWAF Rate Limit rules ([#854](https://github.com/fastly/go-fastly/pull/854))
 
 ### Dependencies:
 

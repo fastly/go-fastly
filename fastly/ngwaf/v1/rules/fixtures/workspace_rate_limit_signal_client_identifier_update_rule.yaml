@@ -1,0 +1,52 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"rate_limit":{"client_identifiers":[{"type":"signal_payload","signal":"site.rate-limit-signal-payload-identifier-test-workspace"}],"duration":600,"interval":600,"signal":"site.rate-limit-signal-payload-identifier-test-workspace","threshold":2},"scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]}}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/rules/6a8721b5e286caf0a279a4b4
+    method: PATCH
+  response:
+    body: |
+      {"id":"6a8721b5e286caf0a279a4b4","type":"rate_limit","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]},"enabled":true,"description":"rate_limit_signal_payload_client_identifier_test","group_operator":"all","conditions":[{"type":"single","field":"ip","operator":"equals","value":"127.0.0.1"}],"actions":[{"type":"block_signal","signal":"site.rate-limit-signal-payload-identifier-test-workspace"}],"rate_limit":{"signal":"site.rate-limit-signal-payload-identifier-test-workspace","threshold":2,"interval":600,"duration":600,"client_identifiers":[{"type":"signal_payload","signal":"site.rate-limit-signal-payload-identifier-test-workspace"}]},"created_at":"2026-08-20T15:48:05Z","created_by":"rcarillo+devex@fastly.com","updated_at":"2026-08-20T15:48:05Z","customer_id":"4dOhK7xEkULiabovMyhRBu"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "812"
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 20 Aug 2026 15:48:06 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "736"
+      X-Served-By:
+      - cache-chi-kigq8000169-CHI, cache-ewr-kewr1740077-EWR
+      X-Timer:
+      - S1787240886.732932,VS0,VE766
+    status: 200 OK
+    code: 200
+    duration: ""

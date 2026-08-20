@@ -157,6 +157,8 @@ type CreateClientIdentifier struct {
 	Name *string `json:"name,omitempty"`
 	// Type is the type of the client identifier
 	Type *string `json:"type"`
+	// Signal is the signal associated with the client identifier.
+	Signal string `json:"signal,omitempty"`
 }
 
 // Private structs to ensure correct condition types.

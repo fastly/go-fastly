@@ -1431,6 +1431,188 @@ func runRateLimitRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 	assert.Contains(updatedMultivalConditions[0].Conditions, ConditionMul{Type: conditionType, Field: updatedField10, Operator: updatedOperator10, Value: updatedValue10})
 }
 
+func TestClient_Rate_Limit_Rule_SignalPayloadClientIdentifier_WorkspaceScope(t *testing.T) {
+	runRateLimitSignalPayloadClientIdentifierTest(t, scope.ScopeTypeWorkspace, fastly.TestNGWAFWorkspaceID)
+}
+
+// runRateLimitSignalPayloadClientIdentifierTest exercises the "signal_payload"
+// rate-limit client identifier variant end-to-end (Create, Get, Update), to
+// guard against the SDK silently dropping the identifier's `signal` field.
+func runRateLimitSignalPayloadClientIdentifierTest(t *testing.T, scopeType scope.Type, appliesToID string) {
+	assert := require.New(t)
+
+	var err error
+
+	ruleType := "rate_limit"
+	description := "rate_limit_signal_payload_client_identifier_test"
+	groupOperator := "all"
+	enabled := true
+
+	actionType := "block_signal"
+
+	field1 := "ip"
+	operator1 := "equals"
+	value1 := "127.0.0.1"
+
+	testSignalName := "Rate limit signal payload identifier test " + string(scopeType)
+	testDescription := "This is a description"
+
+	// Create the signal referenced by both the rate limit and the
+	// signal_payload client identifier.
+	var signal *signals.Signal
+	fastly.Record(t, fmt.Sprintf("%s_rate_limit_signal_client_identifier_create_signal", scopeType), func(c *fastly.Client) {
+		signal, err = signals.Create(context.TODO(), c, &signals.CreateInput{
+			Description: fastly.ToPointer(testDescription),
+			Name:        fastly.ToPointer(testSignalName),
+			Scope: &scope.Scope{
+				Type:      scopeType,
+				AppliesTo: []string{appliesToID},
+			},
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	threshold := 1
+	interval := 60
+	duration := 300
+	clientIdentifierType := "signal_payload"
+
+	// Create a rate-limit rule whose client identifier is a signal_payload.
+	var rule *Rule
+	fastly.Record(t, fmt.Sprintf("%s_rate_limit_signal_client_identifier_create_rule", scopeType), func(c *fastly.Client) {
+		rule, err = Create(context.TODO(), c, &CreateInput{
+			Scope: &scope.Scope{
+				Type:      scopeType,
+				AppliesTo: []string{appliesToID},
+			},
+			Type:          &ruleType,
+			Description:   &description,
+			GroupOperator: &groupOperator,
+			Enabled:       &enabled,
+			RateLimit: &CreateRateLimit{
+				Signal:    &signal.ReferenceID,
+				Threshold: &threshold,
+				Interval:  &interval,
+				Duration:  &duration,
+				ClientIdentifiers: []*CreateClientIdentifier{
+					{
+						Type:   &clientIdentifierType,
+						Signal: signal.ReferenceID,
+					},
+				},
+			},
+			Actions: []*CreateAction{
+				{
+					Type:   &actionType,
+					Signal: &signal.ReferenceID,
+				},
+			},
+			Conditions: []*CreateCondition{
+				{
+					Field:    &field1,
+					Operator: &operator1,
+					Value:    &value1,
+				},
+			},
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Ensure we delete the test rule and signal at the end.
+	defer func() {
+		fastly.Record(t, fmt.Sprintf("%s_rate_limit_signal_client_identifier_delete_rule", scopeType), func(c *fastly.Client) {
+			err = Delete(context.TODO(), c, &DeleteInput{
+				RuleID: fastly.ToPointer(rule.RuleID),
+				Scope: &scope.Scope{
+					Type:      scopeType,
+					AppliesTo: []string{appliesToID},
+				},
+			})
+		})
+		if err != nil {
+			t.Errorf("error during rule cleanup: %v", err)
+		}
+		fastly.Record(t, fmt.Sprintf("%s_rate_limit_signal_client_identifier_delete_signal", scopeType), func(c *fastly.Client) {
+			err = signals.Delete(context.TODO(), c, &signals.DeleteInput{
+				Scope: &scope.Scope{
+					Type:      scopeType,
+					AppliesTo: []string{appliesToID},
+				},
+				SignalID: fastly.ToPointer(signal.SignalID),
+			})
+		})
+		if err != nil {
+			t.Errorf("error during signal cleanup: %v", err)
+		}
+	}()
+
+	assert.Len(rule.RateLimit.ClientIdentifiers, 1)
+	assert.Equal(clientIdentifierType, rule.RateLimit.ClientIdentifiers[0].Type)
+	assert.Equal(signal.ReferenceID, rule.RateLimit.ClientIdentifiers[0].Signal)
+	assert.Empty(rule.RateLimit.ClientIdentifiers[0].Key)
+	assert.Empty(rule.RateLimit.ClientIdentifiers[0].Name)
+
+	// Get the rule and confirm the signal_payload identifier round-trips.
+	var fetched *Rule
+	fastly.Record(t, fmt.Sprintf("%s_rate_limit_signal_client_identifier_get_rule", scopeType), func(c *fastly.Client) {
+		fetched, err = Get(context.TODO(), c, &GetInput{
+			RuleID: fastly.ToPointer(rule.RuleID),
+			Scope: &scope.Scope{
+				Type:      scopeType,
+				AppliesTo: []string{appliesToID},
+			},
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	assert.Len(fetched.RateLimit.ClientIdentifiers, 1)
+	assert.Equal(clientIdentifierType, fetched.RateLimit.ClientIdentifiers[0].Type)
+	assert.Equal(signal.ReferenceID, fetched.RateLimit.ClientIdentifiers[0].Signal)
+
+	// Update the rule, keeping the signal_payload identifier, and confirm it
+	// still round-trips through Update().
+	updatedThreshold := 2
+	updatedInterval := 600
+	updatedDuration := 600
+
+	var updatedRule *Rule
+	fastly.Record(t, fmt.Sprintf("%s_rate_limit_signal_client_identifier_update_rule", scopeType), func(c *fastly.Client) {
+		updatedRule, err = Update(context.TODO(), c, &UpdateInput{
+			Scope: &scope.Scope{
+				Type:      scopeType,
+				AppliesTo: []string{appliesToID},
+			},
+			RuleID: fastly.ToPointer(rule.RuleID),
+			RateLimit: &UpdateRateLimit{
+				Signal:    &signal.ReferenceID,
+				Threshold: &updatedThreshold,
+				Interval:  &updatedInterval,
+				Duration:  &updatedDuration,
+				ClientIdentifiers: []*UpdateClientIdentifier{
+					{
+						Type:   &clientIdentifierType,
+						Signal: signal.ReferenceID,
+					},
+				},
+			},
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	assert.Equal(updatedThreshold, updatedRule.RateLimit.Threshold)
+	assert.Len(updatedRule.RateLimit.ClientIdentifiers, 1)
+	assert.Equal(clientIdentifierType, updatedRule.RateLimit.ClientIdentifiers[0].Type)
+	assert.Equal(signal.ReferenceID, updatedRule.RateLimit.ClientIdentifiers[0].Signal)
+}
+
 func TestClient_Deception_Rule_WorkspaceScope(t *testing.T) {
 	runDeceptionRuleTest(t, scope.ScopeTypeWorkspace, fastly.TestNGWAFWorkspaceID)
 }

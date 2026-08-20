@@ -144,6 +144,8 @@ type ClientIdentifier struct {
 	Name string `json:"name"`
 	// Type is the type of identifier.
 	Type string `json:"type"`
+	// Signal is the signal associated with the client identifier.
+	Signal string `json:"signal"`
 }
 
 // Rule represents the complete configuration of a WAF rule.
