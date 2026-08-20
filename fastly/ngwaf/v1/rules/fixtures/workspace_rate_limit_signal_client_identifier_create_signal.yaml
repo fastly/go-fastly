@@ -1,0 +1,53 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"description":"This is a description","name":"Rate limit signal payload
+      identifier test workspace"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/17.2.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/signals
+    method: POST
+  response:
+    body: |
+      {"id":"KxdApFNOJuvA2rxXv0jQHc","reference_id":"site.rate-limit-signal-payload-identifier-test-workspace","name":"Rate limit signal payload identifier test workspace","description":"This is a description","created_at":"2026-08-20T15:48:04Z","created_by":"rcarillo+devex@fastly.com","updated_at":"2026-08-20T15:48:04Z","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]},"customer_id":"4dOhK7xEkULiabovMyhRBu"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "426"
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 20 Aug 2026 15:48:04 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "3300"
+      X-Served-By:
+      - cache-chi-kigq8000166-CHI, cache-ewr-kewr1740077-EWR
+      X-Timer:
+      - S1787240881.264677,VS0,VE3340
+    status: 201 Created
+    code: 201
+    duration: ""

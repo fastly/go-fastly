@@ -89,3 +89,78 @@ func TestConditionItem_Marshal_DoesNotEmitFieldsWrapper(t *testing.T) {
 	assert.Equal("equals", m["operator"])
 	assert.Equal("1.2.3.4", m["value"])
 }
+
+func TestCreateClientIdentifier_Marshal_SignalPayload(t *testing.T) {
+	assert := require.New(t)
+
+	typ := "signal_payload"
+	ci := &CreateClientIdentifier{
+		Type:   &typ,
+		Signal: "site.test",
+	}
+
+	b, err := json.Marshal(ci)
+	assert.NoError(err)
+
+	var m map[string]any
+	assert.NoError(json.Unmarshal(b, &m))
+
+	assert.Equal("signal_payload", m["type"])
+	assert.Equal("site.test", m["signal"])
+	_, hasKey := m["key"]
+	_, hasName := m["name"]
+	assert.False(hasKey, "signal_payload identifier must not emit key")
+	assert.False(hasName, "signal_payload identifier must not emit name")
+}
+
+func TestCreateClientIdentifier_Marshal_OmitsSignalForOtherTypes(t *testing.T) {
+	assert := require.New(t)
+
+	typ := "ip"
+	ci := &CreateClientIdentifier{Type: &typ}
+
+	b, err := json.Marshal(ci)
+	assert.NoError(err)
+
+	var m map[string]any
+	assert.NoError(json.Unmarshal(b, &m))
+
+	_, hasSignal := m["signal"]
+	assert.False(hasSignal, "ip identifier must not emit an empty signal field")
+}
+
+func TestUpdateClientIdentifier_Marshal_SignalPayload(t *testing.T) {
+	assert := require.New(t)
+
+	typ := "signal_payload"
+	ci := &UpdateClientIdentifier{
+		Type:   &typ,
+		Signal: "site.test",
+	}
+
+	b, err := json.Marshal(ci)
+	assert.NoError(err)
+
+	var m map[string]any
+	assert.NoError(json.Unmarshal(b, &m))
+
+	assert.Equal("signal_payload", m["type"])
+	assert.Equal("site.test", m["signal"])
+}
+
+func TestUpdateClientIdentifier_Marshal_OmitsSignalForOtherTypes(t *testing.T) {
+	assert := require.New(t)
+
+	typ := "request_header"
+	name := "X-Test"
+	ci := &UpdateClientIdentifier{Type: &typ, Name: &name}
+
+	b, err := json.Marshal(ci)
+	assert.NoError(err)
+
+	var m map[string]any
+	assert.NoError(json.Unmarshal(b, &m))
+
+	_, hasSignal := m["signal"]
+	assert.False(hasSignal, "request_header identifier must not emit an empty signal field")
+}
