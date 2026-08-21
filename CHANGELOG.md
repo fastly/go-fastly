@@ -11,6 +11,8 @@
 - feat(ngwaf/rules): add support for the `signal_payload` type of `client_identifier` in NGWAF Rate Limit rules ([#854](https://github.com/fastly/go-fastly/pull/854))
 
 ### Dependencies:
+- build(deps): `github.com/stretchr/testify` from 1.11.1 to 1.12.0 ([#855](https://github.com/fastly/go-fastly/pull/855))
+- build(deps): `golang.org/x/crypto` from 0.54.0 to 0.55.0 ([#855](https://github.com/fastly/go-fastly/pull/855))
 
 ### Bug fixes:
 
