@@ -11,6 +11,7 @@
 ## [v17.3.0](https://github.com/fastly/go-fastly/releases/tag/v17.3.0) (2026-08-24)
 
 ### Enhancements:
+- feat(customer/contacts): add support for customer contacts (list/create/delete) ([#813](https://github.com/fastly/go-fastly/pull/813))
 
 - feat(observability): add Log Explorer and Insights API support ([#851](https://github.com/fastly/go-fastly/pull/851))
 - feat(observability): expose supported values and complete Insights response filters ([#853](https://github.com/fastly/go-fastly/pull/853))
