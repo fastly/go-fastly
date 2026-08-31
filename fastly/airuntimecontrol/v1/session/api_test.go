@@ -21,5 +21,14 @@ func TestClient_Sessions(t *testing.T) {
 		})
 	})
 	require.NoError(t, err)
-	require.GreaterOrEqual(t, len(sessions), 2, "expected at least two pages worth of sessions")
+	require.Len(t, sessions, 3)
+
+	var foundSecondPageItem bool
+	for _, s := range sessions {
+		if s.ID == "sess_546" {
+			foundSecondPageItem = true
+			break
+		}
+	}
+	require.True(t, foundSecondPageItem, "expected an item from the second page")
 }
