@@ -23,8 +23,6 @@ type ListInput struct {
 	From *time.Time
 	// To is the (inclusive) end of the time range. Defaults to now.
 	To *time.Time
-	// Cursor is the pagination cursor.
-	Cursor *string
 	// Limit is the maximum number of results per page.
 	Limit *int
 	// Sort is the sort field. Prefix with "-" for descending order (e.g. "-created_at").
@@ -32,8 +30,29 @@ type ListInput struct {
 }
 
 // List retrieves session logs including request/response data and metadata,
-// with optional filtering and pagination.
-func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Sessions, error) {
+// automatically paginating through all pages returned by the API, with
+// optional filtering.
+func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]Session, error) {
+	var (
+		out    []Session
+		cursor *string
+	)
+	for {
+		page, err := listPage(ctx, c, i, cursor)
+		if err != nil {
+			return nil, err
+		}
+		out = append(out, page.Data...)
+		if page.Meta.NextCursor == "" {
+			break
+		}
+		cursor = &page.Meta.NextCursor
+	}
+	return out, nil
+}
+
+// listPage retrieves a single page of session logs.
+func listPage(ctx context.Context, c *fastly.Client, i *ListInput, cursor *string) (*Sessions, error) {
 	requestOptions := fastly.CreateRequestOptions()
 	if i.Key != nil && *i.Key != "" {
 		requestOptions.Params["key"] = *i.Key
@@ -50,8 +69,8 @@ func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Sessions, error
 	if i.To != nil {
 		requestOptions.Params["to"] = i.To.Format(time.RFC3339)
 	}
-	if i.Cursor != nil && *i.Cursor != "" {
-		requestOptions.Params["cursor"] = *i.Cursor
+	if cursor != nil && *cursor != "" {
+		requestOptions.Params["cursor"] = *cursor
 	}
 	if i.Limit != nil {
 		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)

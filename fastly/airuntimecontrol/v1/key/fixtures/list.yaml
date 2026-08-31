@@ -6,23 +6,21 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/17.0.0 (+github.com/fastly/go-fastly; go1.26.4)
+      - FastlyGo/17.3.0 (+github.com/fastly/go-fastly; go1.26.5)
     url: https://api.fastly.com/ai-runtime-control/v1/keys?provider=Anthropic
     method: GET
   response:
     body: |
-      {"data":[{"id":"75352aad10d9828b8de7","type":"token","customer_id":"4dOhK7xEkULiabovMyhRBu","created_at":"2026-07-29T16:22:37Z","deleted_at":null,"expires_at":"2026-07-30T16:22:36Z","name":"go-fastly-test-key","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"6YHKQR3CxW7dGb67TNV4IB","user_name":"Richard Carillo","created_by":"Richard Carillo","last_used_at":null,"updated_at":"2026-07-29T16:22:37Z"}],"meta":{"next_cursor":"","limit":10,"sort":"created_at","total":1}}
+      {"data":[{"id":"2ce6822da510e60b037e","type":"token","customer_id":"4dOhK7xEkULiabovMyhRBu","created_at":"2026-07-29T16:35:42Z","deleted_at":null,"expires_at":"2026-07-30T16:33:11Z","name":"test","model":"claude-sonnet-4-6","provider":"anthropic","user_id":"6YHKQR3CxW7dGb67TNV4IB","user_name":"Richard Carillo","created_by":"Richard Carillo","last_used_at":null,"updated_at":"2026-07-29T16:35:42Z","security_enabled":null,"security_action":null},{"id":"ea477ab192ae1f8cb713","type":"token","customer_id":"4dOhK7xEkULiabovMyhRBu","created_at":"2026-07-29T16:36:52Z","deleted_at":null,"expires_at":"2026-07-30T16:33:11Z","name":"test","model":"claude-sonnet-4-6","provider":"anthropic","user_id":"6YHKQR3CxW7dGb67TNV4IB","user_name":"Richard Carillo","created_by":"Richard Carillo","last_used_at":"2026-07-29T16:59:13Z","updated_at":"2026-07-29T16:59:13Z","security_enabled":null,"security_action":null},{"id":"fbdf3c51010403a7eabd","type":"token","customer_id":"4dOhK7xEkULiabovMyhRBu","created_at":"2026-07-29T17:00:15Z","deleted_at":null,"expires_at":"2026-07-30T16:33:11Z","name":"opus-6","model":"claude-opus-4-6","provider":"anthropic","user_id":"6YHKQR3CxW7dGb67TNV4IB","user_name":"Richard Carillo","created_by":"Richard Carillo","last_used_at":"2026-07-29T17:00:37Z","updated_at":"2026-07-29T17:00:37Z","security_enabled":null,"security_action":null},{"id":"426698e15c3212cac551","type":"token","customer_id":"4dOhK7xEkULiabovMyhRBu","created_at":"2026-08-03T17:42:42Z","deleted_at":null,"expires_at":"2026-08-04T17:42:41Z","name":"go-fastly-test-key-2","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"6YHKQR3CxW7dGb67TNV4IB","user_name":"Richard Carillo","created_by":"Richard Carillo","last_used_at":null,"updated_at":"2026-08-03T17:42:42Z","security_enabled":null,"security_action":null},{"id":"c2bc54eef21ad50a5450","type":"token","customer_id":"4dOhK7xEkULiabovMyhRBu","created_at":"2026-08-03T17:42:42Z","deleted_at":null,"expires_at":"2026-08-04T17:42:41Z","name":"go-fastly-test-key","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"6YHKQR3CxW7dGb67TNV4IB","user_name":"Richard Carillo","created_by":"Richard Carillo","last_used_at":null,"updated_at":"2026-08-03T17:42:42Z","security_enabled":null,"security_action":null},{"id":"72878269b43880bf16ed","type":"token","customer_id":"4dOhK7xEkULiabovMyhRBu","created_at":"2026-08-03T18:03:20Z","deleted_at":null,"expires_at":"2026-08-04T18:03:19Z","name":"go-fastly-test-key","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"6YHKQR3CxW7dGb67TNV4IB","user_name":"Richard Carillo","created_by":"Richard Carillo","last_used_at":null,"updated_at":"2026-08-03T18:03:20Z","security_enabled":null,"security_action":null},{"id":"dd2fdadf1342ea2f6987","type":"token","customer_id":"4dOhK7xEkULiabovMyhRBu","created_at":"2026-08-03T18:03:20Z","deleted_at":null,"expires_at":"2026-08-04T18:03:19Z","name":"go-fastly-test-key-2","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"6YHKQR3CxW7dGb67TNV4IB","user_name":"Richard Carillo","created_by":"Richard Carillo","last_used_at":null,"updated_at":"2026-08-03T18:03:20Z","security_enabled":null,"security_action":null},{"id":"a879bf960faf6f0d95ce","type":"token","customer_id":"4dOhK7xEkULiabovMyhRBu","created_at":"2026-08-11T15:35:18Z","deleted_at":null,"expires_at":"2026-08-12T15:35:17Z","name":"go-fastly-test-key-2","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"6YHKQR3CxW7dGb67TNV4IB","user_name":"Richard Carillo","created_by":"Richard Carillo","last_used_at":null,"updated_at":"2026-08-11T15:35:18Z","security_enabled":null,"security_action":null},{"id":"efe048fec7043ed88a79","type":"token","customer_id":"4dOhK7xEkULiabovMyhRBu","created_at":"2026-08-11T15:35:18Z","deleted_at":null,"expires_at":"2026-08-12T15:35:17Z","name":"go-fastly-test-key","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"6YHKQR3CxW7dGb67TNV4IB","user_name":"Richard Carillo","created_by":"Richard Carillo","last_used_at":null,"updated_at":"2026-08-11T15:35:18Z","security_enabled":null,"security_action":null},{"id":"20bfa79283b1fba6178d","type":"token","customer_id":"4dOhK7xEkULiabovMyhRBu","created_at":"2026-08-11T15:36:43Z","deleted_at":null,"expires_at":"2026-08-12T15:36:43Z","name":"go-fastly-test-key","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"6YHKQR3CxW7dGb67TNV4IB","user_name":"Richard Carillo","created_by":"Richard Carillo","last_used_at":null,"updated_at":"2026-08-11T15:36:43Z","security_enabled":null,"security_action":null}],"meta":{"next_cursor":"eyJzb3J0IjoiY3JlYXRlZF9hdCIsInNvcnRfdmFsdWUiOiIyMDI2LTA4LTExIDE1OjM2OjQzIiwic29ydF9udWxsIjpmYWxzZSwiaWQiOiIyMGJmYTc5MjgzYjFmYmE2MTc4ZCIsImRpciI6Im5leHQifQ","limit":10,"sort":"created_at","total":10}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
-      Content-Length:
-      - "490"
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jul 2026 16:22:36 GMT
+      - Mon, 31 Aug 2026 13:34:55 GMT
       Pragma:
       - no-cache
       Server:
@@ -36,11 +34,54 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "18"
+      - "17"
       X-Served-By:
-      - cache-chi-kigq8000128-CHI, cache-ewr-kewr1740069-EWR
+      - cache-chi-klot8100128-CHI, cache-ewr-kewr1740081-EWR
       X-Timer:
-      - S1785342157.776675,VS0,VE49
+      - S1788183295.135474,VS0,VE47
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/17.3.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/ai-runtime-control/v1/keys?cursor=eyJzb3J0IjoiY3JlYXRlZF9hdCIsInNvcnRfdmFsdWUiOiIyMDI2LTA4LTExIDE1OjM2OjQzIiwic29ydF9udWxsIjpmYWxzZSwiaWQiOiIyMGJmYTc5MjgzYjFmYmE2MTc4ZCIsImRpciI6Im5leHQifQ&provider=Anthropic
+    method: GET
+  response:
+    body: |
+      {"data":[{"id":"ec5c01f186d816bf8e5c","type":"token","customer_id":"4dOhK7xEkULiabovMyhRBu","created_at":"2026-08-11T15:36:44Z","deleted_at":null,"expires_at":"2026-08-12T15:36:43Z","name":"go-fastly-test-key-2","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"6YHKQR3CxW7dGb67TNV4IB","user_name":"Richard Carillo","created_by":"Richard Carillo","last_used_at":null,"updated_at":"2026-08-11T15:36:44Z","security_enabled":null,"security_action":null},{"id":"78ff28125b9d78b0289d","type":"token","customer_id":"4dOhK7xEkULiabovMyhRBu","created_at":"2026-08-31T13:34:55Z","deleted_at":null,"expires_at":"2026-09-01T13:34:54Z","name":"go-fastly-test-key","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"6YHKQR3CxW7dGb67TNV4IB","user_name":"Richard Carillo","created_by":"Richard Carillo","last_used_at":null,"updated_at":"2026-08-31T13:34:55Z","security_enabled":false,"security_action":"log"}],"meta":{"prev_cursor":"eyJzb3J0IjoiY3JlYXRlZF9hdCIsInNvcnRfdmFsdWUiOiIyMDI2LTA4LTExIDE1OjM2OjQ0Iiwic29ydF9udWxsIjpmYWxzZSwiaWQiOiJlYzVjMDFmMTg2ZDgxNmJmOGU1YyIsImRpciI6InByZXYifQ","limit":10,"sort":"created_at","total":2}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "1154"
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 31 Aug 2026 13:34:55 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "38"
+      X-Served-By:
+      - cache-chi-kigq8000051-CHI, cache-ewr-kewr1740081-EWR
+      X-Timer:
+      - S1788183295.220706,VS0,VE68
     status: 200 OK
     code: 200
     duration: ""

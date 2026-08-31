@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"strconv"
 	"time"
 
 	"github.com/fastly/go-fastly/v17/fastly"
@@ -23,10 +22,6 @@ type ListInput struct {
 	From *time.Time
 	// To is the (inclusive) end of the time range. Defaults to now.
 	To *time.Time
-	// Cursor is the pagination cursor.
-	Cursor *string
-	// Limit is the maximum number of results per page.
-	Limit *int
 	// Sort is the sort field. Prefix with "-" for descending order (e.g. "-date").
 	Sort *string
 }
@@ -50,20 +45,13 @@ func (i *ListInput) requestOptions() fastly.RequestOptions {
 	if i.To != nil {
 		requestOptions.Params["to"] = i.To.Format(time.RFC3339)
 	}
-	if i.Cursor != nil && *i.Cursor != "" {
-		requestOptions.Params["cursor"] = *i.Cursor
-	}
-	if i.Limit != nil {
-		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
-	}
 	if i.Sort != nil && *i.Sort != "" {
 		requestOptions.Params["sort"] = *i.Sort
 	}
 	return requestOptions
 }
 
-// List returns usage metrics for AI services, with optional filtering and
-// pagination.
+// List returns usage metrics for AI services, with optional filtering.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) (*UsageMetrics, error) {
 	path := fastly.ToSafeURL("ai-runtime-control", "v1", "usage-metrics")
 

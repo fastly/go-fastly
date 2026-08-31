@@ -25,13 +25,8 @@ type ProviderConnections struct {
 	Meta Meta `json:"meta"`
 }
 
-// Meta is the pagination metadata returned by the list operation.
+// Meta contains metadata returned by the list operation.
 type Meta struct {
-	// NextCursor is the cursor used to retrieve the next page of results.
-	// It is empty when there are no further pages.
-	NextCursor string `json:"next_cursor"`
-	// Limit is the maximum number of results returned per page.
-	Limit int `json:"limit"`
 	// Sort is the sort field applied to the results.
 	Sort string `json:"sort"`
 	// Total is the total number of results.

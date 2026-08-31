@@ -55,14 +55,23 @@ func TestClient_Keys(t *testing.T) {
 	require.Equal(t, keyID, fetched.ID)
 
 	// List virtual keys.
-	var keys *VirtualKeys
+	var keys []VirtualKeyListItem
 	fastly.Record(t, "list", func(c *fastly.Client) {
 		keys, err = List(ctx, c, &ListInput{
 			Provider: fastly.ToPointer("Anthropic"),
 		})
 	})
 	require.NoError(t, err)
-	require.NotNil(t, keys)
+	require.GreaterOrEqual(t, len(keys), 2, "expected at least two pages worth of keys")
+
+	var foundSecondPageItem bool
+	for _, k := range keys {
+		if k.ID == "ec5c01f186d816bf8e5c" || k.ID == "78ff28125b9d78b0289d" {
+			foundSecondPageItem = true
+			break
+		}
+	}
+	require.True(t, foundSecondPageItem, "expected an item from the second page")
 
 	// Update the virtual key.
 	var updated *VirtualKey

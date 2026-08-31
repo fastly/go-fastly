@@ -14,12 +14,21 @@ func TestClient_Sessions(t *testing.T) {
 
 	var err error
 
-	var sessions *Sessions
+	var sessions []Session
 	fastly.Record(t, "list", func(c *fastly.Client) {
 		sessions, err = List(ctx, c, &ListInput{
-			Limit: fastly.ToPointer(10),
+			Limit: fastly.ToPointer(2),
 		})
 	})
 	require.NoError(t, err)
-	require.NotNil(t, sessions)
+	require.Len(t, sessions, 3)
+
+	var foundSecondPageItem bool
+	for _, s := range sessions {
+		if s.ID == "sess_546" {
+			foundSecondPageItem = true
+			break
+		}
+	}
+	require.True(t, foundSecondPageItem, "expected an item from the second page")
 }

@@ -15,7 +15,7 @@ type GetInput struct {
 	ID *string
 }
 
-// Get retrieves a specific provider connection for a customer.
+// Get retrieves a specific provider connection.
 func Get(ctx context.Context, c *fastly.Client, i *GetInput) (*ProviderConnection, error) {
 	if i.ID == nil {
 		return nil, fastly.ErrMissingID
