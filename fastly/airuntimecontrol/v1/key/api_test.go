@@ -62,7 +62,16 @@ func TestClient_Keys(t *testing.T) {
 		})
 	})
 	require.NoError(t, err)
-	require.NotEmpty(t, keys)
+	require.GreaterOrEqual(t, len(keys), 2, "expected at least two pages worth of keys")
+
+	var foundSecondPageItem bool
+	for _, k := range keys {
+		if k.ID == "ec5c01f186d816bf8e5c" || k.ID == "78ff28125b9d78b0289d" {
+			foundSecondPageItem = true
+			break
+		}
+	}
+	require.True(t, foundSecondPageItem, "expected an item from the second page")
 
 	// Update the virtual key.
 	var updated *VirtualKey
