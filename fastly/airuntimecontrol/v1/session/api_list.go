@@ -30,7 +30,8 @@ type ListInput struct {
 }
 
 // List retrieves session logs including request/response data and metadata,
-// automatically paginating through all pages, with optional filtering.
+// automatically paginating through all pages returned by the API, with
+// optional filtering.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]Session, error) {
 	var (
 		out    []Session

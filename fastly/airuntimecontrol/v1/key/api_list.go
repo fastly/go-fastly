@@ -27,7 +27,7 @@ type ListInput struct {
 }
 
 // List retrieves all virtual keys, automatically paginating through all
-// pages, with optional filtering.
+// pages returned by the API, with optional filtering.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]VirtualKeyListItem, error) {
 	var (
 		out    []VirtualKeyListItem
