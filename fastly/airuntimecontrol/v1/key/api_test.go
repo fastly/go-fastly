@@ -55,14 +55,14 @@ func TestClient_Keys(t *testing.T) {
 	require.Equal(t, keyID, fetched.ID)
 
 	// List virtual keys.
-	var keys *VirtualKeys
+	var keys []VirtualKeyListItem
 	fastly.Record(t, "list", func(c *fastly.Client) {
 		keys, err = List(ctx, c, &ListInput{
 			Provider: fastly.ToPointer("Anthropic"),
 		})
 	})
 	require.NoError(t, err)
-	require.NotNil(t, keys)
+	require.NotEmpty(t, keys)
 
 	// Update the virtual key.
 	var updated *VirtualKey

@@ -16,18 +16,14 @@ func TestClient_UsageMetrics(t *testing.T) {
 
 	var metrics *UsageMetrics
 	fastly.Record(t, "list", func(c *fastly.Client) {
-		metrics, err = List(ctx, c, &ListInput{
-			Limit: fastly.ToPointer(10),
-		})
+		metrics, err = List(ctx, c, &ListInput{})
 	})
 	require.NoError(t, err)
 	require.NotNil(t, metrics)
 
 	var csv []byte
 	fastly.Record(t, "export", func(c *fastly.Client) {
-		csv, err = Export(ctx, c, &ListInput{
-			Limit: fastly.ToPointer(10),
-		})
+		csv, err = Export(ctx, c, &ListInput{})
 	})
 	require.NoError(t, err)
 	require.NotNil(t, csv)

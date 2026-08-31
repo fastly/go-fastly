@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"name":"go-fastly-test-key","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"go-fastly-test-user","expires_at":"2026-07-30T16:22:36Z"}'
+    body: '{"name":"go-fastly-test-key","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"go-fastly-test-user","expires_at":"2026-09-01T13:34:54Z"}'
     form: {}
     headers:
       Accept:
@@ -10,12 +10,12 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/17.0.0 (+github.com/fastly/go-fastly; go1.26.4)
+      - FastlyGo/17.3.0 (+github.com/fastly/go-fastly; go1.26.5)
     url: https://api.fastly.com/ai-runtime-control/v1/keys
     method: POST
   response:
     body: |
-      {"id":"75352aad10d9828b8de7","name":"go-fastly-test-key","user_id":"6YHKQR3CxW7dGb67TNV4IB","user_name":"Richard Carillo","customer_id":"4dOhK7xEkULiabovMyhRBu","model":"claude-sonnet-4-20250514","provider":"Anthropic","expires_at":"2026-07-30T16:22:36Z","created_at":"2026-07-29T16:22:36.661235774Z","updated_at":"2026-07-29T16:22:36.661235774Z","access_token":"arc_sk_go-fastly-test"}
+      {"id":"78ff28125b9d78b0289d","name":"go-fastly-test-key","user_id":"6YHKQR3CxW7dGb67TNV4IB","user_name":"Richard Carillo","customer_id":"4dOhK7xEkULiabovMyhRBu","model":"claude-sonnet-4-20250514","provider":"Anthropic","expires_at":"2026-09-01T13:34:54Z","created_at":"2026-08-31T13:34:54.963892069Z","updated_at":"2026-08-31T13:34:54.963892069Z","access_token":"arc_sk_0Ni7TN42uWopKcewVliiDh3CKhq0e8ld42b216b"}
     headers:
       Accept-Ranges:
       - bytes
@@ -26,7 +26,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jul 2026 16:22:36 GMT
+      - Mon, 31 Aug 2026 13:34:54 GMT
       Pragma:
       - no-cache
       Server:
@@ -40,11 +40,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "208"
+      - "142"
       X-Served-By:
-      - cache-chi-klot8100168-CHI, cache-ewr-kewr1740069-EWR
+      - cache-chi-kigq8000073-CHI, cache-ewr-kewr1740081-EWR
       X-Timer:
-      - S1785342156.448775,VS0,VE241
+      - S1788183295.829562,VS0,VE170
     status: 201 Created
     code: 201
     duration: ""

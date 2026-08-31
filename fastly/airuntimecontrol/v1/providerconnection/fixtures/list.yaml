@@ -6,23 +6,23 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/17.0.0 (+github.com/fastly/go-fastly; go1.26.4)
+      - FastlyGo/17.3.0 (+github.com/fastly/go-fastly; go1.26.5)
     url: https://api.fastly.com/ai-runtime-control/v1/provider-connections
     method: GET
   response:
     body: |
-      {"data":[{"id":"885e088ea88209b3ab87","name":"sample","models":["claude-opus-4-7"],"base_url":"https://api.anthropic.com","created_at":"2026-07-29T16:39:57Z","updated_at":"2026-07-29T16:39:57Z"},{"id":"bc19efbb5a86780953c7","name":"go-fastly-test-connection","models":["claude-opus-4-7"],"base_url":"https://api.anthropic.com","created_at":"2026-07-29T16:47:14Z","updated_at":"2026-07-29T16:47:14Z"}],"meta":{"next_cursor":"","limit":10,"sort":"created_at","total":2}}
+      {"data":[{"id":"5d61c667aba01a00ce59","name":"sample","models":["claude-opus-4-7"],"base_url":"https://api.anthropic.com","created_at":"2026-08-11T15:42:51Z","updated_at":"2026-08-11T15:42:51Z"},{"id":"0f56dd456f3300ac72df","name":"sample2","models":["claude-opus-4-8"],"base_url":"https://api.anthropic.com","created_at":"2026-08-11T15:42:59Z","updated_at":"2026-08-11T15:42:59Z"},{"id":"2882d00e2bb32dc56952","name":"sample4","models":["claude-opus-4-8"],"base_url":"https://api.anthropic.com","created_at":"2026-08-11T15:43:05Z","updated_at":"2026-08-11T15:43:05Z"},{"id":"2e4e916e9ba5988c14e8","name":"sample5","models":["claude-opus-4-7"],"base_url":"https://api.anthropic.com","created_at":"2026-08-11T15:43:13Z","updated_at":"2026-08-11T15:43:13Z"},{"id":"a8bd862aa81dcebbeaac","name":"go-fastly-test-connection","models":["claude-opus-4-7"],"base_url":"https://api.anthropic.com","created_at":"2026-08-31T13:34:54Z","updated_at":"2026-08-31T13:34:54Z"}],"meta":{"sort":"created_at","total":5}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "469"
+      - "1002"
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jul 2026 16:47:15 GMT
+      - Mon, 31 Aug 2026 13:34:55 GMT
       Pragma:
       - no-cache
       Server:
@@ -36,11 +36,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "27"
+      - "22"
       X-Served-By:
-      - cache-chi-klot8100143-CHI, cache-ewr-kewr1740095-EWR
+      - cache-chi-klot8100109-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1785343635.996197,VS0,VE62
+      - S1788183295.212168,VS0,VE54
     status: 200 OK
     code: 200
     duration: ""

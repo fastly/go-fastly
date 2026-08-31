@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"strconv"
 
 	"github.com/fastly/go-fastly/v17/fastly"
 )
@@ -12,24 +11,13 @@ import (
 // ListInput specifies the information needed for the List() function to
 // perform the operation.
 type ListInput struct {
-	// Cursor is the pagination cursor.
-	Cursor *string
-	// Limit is the maximum number of results per page.
-	Limit *int
 	// Sort is the sort field. Prefix with "-" for descending order (e.g. "-created_at").
 	Sort *string
 }
 
-// List retrieves all configured provider connections for a customer, with
-// optional pagination.
+// List retrieves all configured provider connections.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) (*ProviderConnections, error) {
 	requestOptions := fastly.CreateRequestOptions()
-	if i.Cursor != nil && *i.Cursor != "" {
-		requestOptions.Params["cursor"] = *i.Cursor
-	}
-	if i.Limit != nil {
-		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
-	}
 	if i.Sort != nil && *i.Sort != "" {
 		requestOptions.Params["sort"] = *i.Sort
 	}

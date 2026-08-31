@@ -14,12 +14,12 @@ func TestClient_Sessions(t *testing.T) {
 
 	var err error
 
-	var sessions *Sessions
+	var sessions []Session
 	fastly.Record(t, "list", func(c *fastly.Client) {
 		sessions, err = List(ctx, c, &ListInput{
 			Limit: fastly.ToPointer(10),
 		})
 	})
 	require.NoError(t, err)
-	require.NotNil(t, sessions)
+	require.NotEmpty(t, sessions)
 }

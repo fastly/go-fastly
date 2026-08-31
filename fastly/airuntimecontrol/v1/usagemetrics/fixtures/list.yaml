@@ -6,23 +6,21 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/17.0.0 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/ai-runtime-control/v1/usage-metrics?limit=10
+      - FastlyGo/17.3.0 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/ai-runtime-control/v1/usage-metrics
     method: GET
   response:
     body: |
-      {"data":[{"date":"2026-07-29T00:00:00Z","usage_type":"requests","quantity":1,"virtual_key_id":"ea477ab192ae1f8cb713","virtual_key_name":"test","provider":"anthropic","model":"claude-opus-4-6"},{"date":"2026-07-29T00:00:00Z","usage_type":"input_tokens","quantity":0,"virtual_key_id":"ea477ab192ae1f8cb713","virtual_key_name":"test","provider":"anthropic","model":"claude-opus-4-6"},{"date":"2026-07-29T00:00:00Z","usage_type":"output_tokens","quantity":0,"virtual_key_id":"ea477ab192ae1f8cb713","virtual_key_name":"test","provider":"anthropic","model":"claude-opus-4-6"},{"date":"2026-07-29T00:00:00Z","usage_type":"requests","quantity":1,"virtual_key_id":"ea477ab192ae1f8cb713","virtual_key_name":"test","provider":"anthropic","model":"claude-opus-4-7"},{"date":"2026-07-29T00:00:00Z","usage_type":"input_tokens","quantity":0,"virtual_key_id":"ea477ab192ae1f8cb713","virtual_key_name":"test","provider":"anthropic","model":"claude-opus-4-7"},{"date":"2026-07-29T00:00:00Z","usage_type":"output_tokens","quantity":0,"virtual_key_id":"ea477ab192ae1f8cb713","virtual_key_name":"test","provider":"anthropic","model":"claude-opus-4-7"},{"date":"2026-07-29T00:00:00Z","usage_type":"requests","quantity":1,"virtual_key_id":"fbdf3c51010403a7eabd","virtual_key_name":"opus-6","provider":"anthropic","model":"claude-opus-4-6"},{"date":"2026-07-29T00:00:00Z","usage_type":"input_tokens","quantity":0,"virtual_key_id":"fbdf3c51010403a7eabd","virtual_key_name":"opus-6","provider":"anthropic","model":"claude-opus-4-6"},{"date":"2026-07-29T00:00:00Z","usage_type":"output_tokens","quantity":0,"virtual_key_id":"fbdf3c51010403a7eabd","virtual_key_name":"opus-6","provider":"anthropic","model":"claude-opus-4-6"}],"meta":{"next_cursor":"","limit":10,"sort":"date","total":9}}
+      {"data":[{"date":"2026-07-29T00:00:00Z","usage_type":"requests","quantity":1,"virtual_key_id":"ea477ab192ae1f8cb713","virtual_key_name":"test","provider":"anthropic","model":"claude-opus-4-6"},{"date":"2026-07-29T00:00:00Z","usage_type":"input_tokens","quantity":0,"virtual_key_id":"ea477ab192ae1f8cb713","virtual_key_name":"test","provider":"anthropic","model":"claude-opus-4-6"},{"date":"2026-07-29T00:00:00Z","usage_type":"output_tokens","quantity":0,"virtual_key_id":"ea477ab192ae1f8cb713","virtual_key_name":"test","provider":"anthropic","model":"claude-opus-4-6"},{"date":"2026-07-29T00:00:00Z","usage_type":"violations","quantity":0,"virtual_key_id":"ea477ab192ae1f8cb713","virtual_key_name":"test","provider":"anthropic","model":"claude-opus-4-6"},{"date":"2026-07-29T00:00:00Z","usage_type":"requests","quantity":1,"virtual_key_id":"ea477ab192ae1f8cb713","virtual_key_name":"test","provider":"anthropic","model":"claude-opus-4-7"},{"date":"2026-07-29T00:00:00Z","usage_type":"input_tokens","quantity":0,"virtual_key_id":"ea477ab192ae1f8cb713","virtual_key_name":"test","provider":"anthropic","model":"claude-opus-4-7"},{"date":"2026-07-29T00:00:00Z","usage_type":"output_tokens","quantity":0,"virtual_key_id":"ea477ab192ae1f8cb713","virtual_key_name":"test","provider":"anthropic","model":"claude-opus-4-7"},{"date":"2026-07-29T00:00:00Z","usage_type":"violations","quantity":0,"virtual_key_id":"ea477ab192ae1f8cb713","virtual_key_name":"test","provider":"anthropic","model":"claude-opus-4-7"},{"date":"2026-07-29T00:00:00Z","usage_type":"requests","quantity":1,"virtual_key_id":"fbdf3c51010403a7eabd","virtual_key_name":"opus-6","provider":"anthropic","model":"claude-opus-4-6"},{"date":"2026-07-29T00:00:00Z","usage_type":"input_tokens","quantity":0,"virtual_key_id":"fbdf3c51010403a7eabd","virtual_key_name":"opus-6","provider":"anthropic","model":"claude-opus-4-6"},{"date":"2026-07-29T00:00:00Z","usage_type":"output_tokens","quantity":0,"virtual_key_id":"fbdf3c51010403a7eabd","virtual_key_name":"opus-6","provider":"anthropic","model":"claude-opus-4-6"},{"date":"2026-07-29T00:00:00Z","usage_type":"violations","quantity":0,"virtual_key_id":"fbdf3c51010403a7eabd","virtual_key_name":"opus-6","provider":"anthropic","model":"claude-opus-4-6"}],"meta":{"sort":"date","total":12}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
-      Content-Length:
-      - "1761"
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jul 2026 17:04:50 GMT
+      - Mon, 31 Aug 2026 13:34:54 GMT
       Pragma:
       - no-cache
       Server:
@@ -36,11 +34,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "36"
+      - "21"
       X-Served-By:
-      - cache-chi-kigq8000154-CHI, cache-ewr-kewr1740093-EWR
+      - cache-chi-klot8100079-CHI, cache-ewr-kewr1740025-EWR
       X-Timer:
-      - S1785344691.852835,VS0,VE69
+      - S1788183295.838706,VS0,VE52
     status: 200 OK
     code: 200
     duration: ""
