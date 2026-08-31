@@ -17,9 +17,9 @@ func TestClient_Sessions(t *testing.T) {
 	var sessions []Session
 	fastly.Record(t, "list", func(c *fastly.Client) {
 		sessions, err = List(ctx, c, &ListInput{
-			Limit: fastly.ToPointer(10),
+			Limit: fastly.ToPointer(2),
 		})
 	})
 	require.NoError(t, err)
-	require.NotEmpty(t, sessions)
+	require.GreaterOrEqual(t, len(sessions), 2, "expected at least two pages worth of sessions")
 }
