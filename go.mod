@@ -10,12 +10,12 @@ require (
 	github.com/hashicorp/go-cleanhttp v0.5.2
 	github.com/mitchellh/mapstructure v1.5.0
 	github.com/peterhellberg/link v1.2.0
-	github.com/stretchr/testify v1.12.0
+	github.com/stretchr/testify v1.12.1
 	golang.org/x/crypto v0.55.0
 )
 
 require (
+	go.yaml.in/yaml/v3 v3.0.5 // indirect
 	golang.org/x/sys v0.47.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
