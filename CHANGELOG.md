@@ -6,9 +6,13 @@
 
 ### Bug fixes:
 
-- fix(airuntimecontrol): updated pagination to reflect the API behavior  ([#859](https://github.com/fastly/go-fastly/pull/859))
-
 ### Dependencies:
+
+## [v17.3.1](https://github.com/fastly/go-fastly/releases/tag/v17.3.1) (2026-09-03)
+
+### Bug fixes:
+
+- fix(airuntimecontrol): updated pagination to reflect the API behavior  ([#859](https://github.com/fastly/go-fastly/pull/859))
 
 ## [v17.3.0](https://github.com/fastly/go-fastly/releases/tag/v17.3.0) (2026-08-24)
 
