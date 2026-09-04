@@ -1,0 +1,47 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/17.3.1 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/ru915jl5J9UXx116WgMDBQ/details?filter%5Bversions.staged%5D=true
+    method: GET
+  response:
+    body: '{"comment":"test staged filter","created_at":"2026-09-04T16:41:32Z","environments":[],"updated_at":"2026-09-04T16:41:32Z","name":"test-service-staged-filter","deleted_at":null,"type":"vcl","customer_id":"4dOhK7xEkULiabovMyhRBu","id":"ru915jl5J9UXx116WgMDBQ","versions":[{"updated_at":"2026-09-04T16:41:34Z","created_at":"2026-09-04T16:41:32Z","comment":"","testing":false,"service_id":"ru915jl5J9UXx116WgMDBQ","locked":true,"deployed":false,"deleted_at":null,"active":true,"number":1,"environments":[{"name":"production","service_id":"ru915jl5J9UXx116WgMDBQ","active_version":1}],"staging":false},{"testing":false,"locked":false,"service_id":"ru915jl5J9UXx116WgMDBQ","created_at":"2026-09-04T16:41:33Z","comment":"","updated_at":"2026-09-04T16:41:36Z","staging":true,"environments":[{"name":"staging","service_id":"GAiXlJfaYoH6qCyHJBnUsv","active_version":2}],"active":false,"number":2,"deleted_at":null,"deployed":false},{"service_id":"ru915jl5J9UXx116WgMDBQ","environments":[],"staging":false,"number":3,"active":false,"deleted_at":null,"deployed":false,"updated_at":"2026-09-04T16:41:36Z","locked":false,"testing":false,"created_at":"2026-09-04T16:41:36Z","comment":""}],"version":{"service_id":"ru915jl5J9UXx116WgMDBQ","locked":false,"active":false,"updated_at":"2026-09-04T16:41:36Z","deleted_at":null,"deployed":false,"testing":false,"created_at":"2026-09-04T16:41:36Z","comment":"","environments":[],"staging":false,"number":3,"acls":[],"backends":[],"cache_settings":[],"conditions":[],"dictionaries":[],"directors":[],"domains":[],"gzips":[],"headers":[],"healthchecks":[],"request_settings":[],"response_objects":[],"snippets":[],"vcls":[],"wordpress":[],"settings":{"general.default_pci":0,"general.stale_if_error":false,"general.stale_if_error_ttl":43200,"general.default_host":"","general.default_ttl":3600}},"active_version":{"environments":[{"name":"production","service_id":"ru915jl5J9UXx116WgMDBQ","active_version":1}],"testing":false,"staging":false,"number":1,"updated_at":"2026-09-04T16:41:34Z","active":true,"created_at":"2026-09-04T16:41:32Z","deployed":false,"service_id":"ru915jl5J9UXx116WgMDBQ","comment":"","deleted_at":null,"locked":true,"acls":[],"backends":[],"cache_settings":[],"conditions":[],"dictionaries":[],"directors":[],"domains":[],"gzips":[],"headers":[],"healthchecks":[],"request_settings":[],"response_objects":[],"snippets":[],"vcls":[],"wordpress":[],"settings":{"general.stale_if_error_ttl":43200,"general.default_host":"","general.default_ttl":3600,"general.default_pci":0,"general.stale_if_error":false}}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 04 Sep 2026 16:41:37 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "546"
+      X-Served-By:
+      - cache-chi-klot8100140-CHI, cache-ewr-kewr1740057-EWR
+      X-Timer:
+      - S1788540097.991383,VS0,VE581
+    status: 200 OK
+    code: 200
+    duration: ""

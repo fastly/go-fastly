@@ -1,0 +1,57 @@
+---
+version: 1
+interactions:
+- request:
+    body: comment=test+staged+filter&name=test-service-staged-filter
+    form:
+      comment:
+      - test staged filter
+      name:
+      - test-service-staged-filter
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/17.3.1 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service
+    method: POST
+  response:
+    body: '{"customer_id":"4dOhK7xEkULiabovMyhRBu","comment":"test staged filter","name":"test-service-staged-filter","deleted_at":null,"id":"ru915jl5J9UXx116WgMDBQ","type":"vcl","environments":[],"publish_key":"","versions":[{"updated_at":"2026-09-04T16:41:32Z","locked":false,"service_id":"ru915jl5J9UXx116WgMDBQ","created_at":"2026-09-04T16:41:32Z","environments":[],"active":false,"comment":"","deployed":false,"staging":false,"number":1,"deleted_at":null,"testing":false}],"paused":false,"updated_at":"2026-09-04T16:41:32Z","created_at":"2026-09-04T16:41:32Z"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 04 Sep 2026 16:41:32 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9989"
+      Fastly-Ratelimit-Reset:
+      - "1788541200"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "473"
+      X-Served-By:
+      - cache-chi-kmdw8640056-CHI, cache-ewr-kewr1740057-EWR
+      X-Timer:
+      - S1788540092.478860,VS0,VE501
+    status: 200 OK
+    code: 200
+    duration: ""

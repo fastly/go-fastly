@@ -494,6 +494,115 @@ func TestClient_GetServiceDetails_WithFilters(t *testing.T) {
 	}
 }
 
+// TestClient_GetServiceDetails_StagedFilter asserts that
+// filter[versions.staged]=true populates the singular "version" field with
+// the staged version, mirroring how filter[versions.active]=true populates
+// it with the active version. The "versions" array is always the full,
+// unfiltered list of versions.
+//
+// KNOWN FAILING: a third, untouched draft version is created after staging
+// so that the staged version and the latest version are distinct (v1
+// active, v2 staged, v3 latest draft). As of 2026-09-04 the live API
+// returns v3 (the latest draft) instead of v2 (the actually staged
+// version) once the two diverge -- it appears to conflate "staged" with
+// "latest" rather than tracking the staging environment's active version.
+// This reproduces with a real API key; see PXENG-10471 (which fixed
+// population of the "version" field itself, but not this divergent case).
+// Left failing intentionally to flag the gap to the API team rather than
+// weakening the assertion to match the buggy response.
+func TestClient_GetServiceDetails_StagedFilter(t *testing.T) {
+	var err error
+
+	var s *Service
+	Record(t, "services/details_staged_filter/create", func(c *Client) {
+		s, err = c.CreateService(context.TODO(), &CreateServiceInput{
+			Name:    ToPointer("test-service-staged-filter"),
+			Comment: ToPointer("test staged filter"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	defer func() {
+		Record(t, "services/details_staged_filter/cleanup", func(c *Client) {
+			_, _ = c.DeactivateVersion(context.TODO(), &DeactivateVersionInput{
+				ServiceID:      *s.ServiceID,
+				ServiceVersion: 1,
+			})
+			_ = c.DeleteService(context.TODO(), &DeleteServiceInput{
+				ServiceID: *s.ServiceID,
+			})
+		})
+	}()
+
+	var v2 *Version
+	Record(t, "services/details_staged_filter/create_version", func(c *Client) {
+		v2, err = c.CreateVersion(context.TODO(), &CreateVersionInput{
+			ServiceID: *s.ServiceID,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	Record(t, "services/details_staged_filter/activate_production", func(c *Client) {
+		_, err = c.ActivateVersion(context.TODO(), &ActivateVersionInput{
+			ServiceID:      *s.ServiceID,
+			ServiceVersion: 1,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	Record(t, "services/details_staged_filter/activate_staging", func(c *Client) {
+		_, err = c.ActivateVersion(context.TODO(), &ActivateVersionInput{
+			ServiceID:      *s.ServiceID,
+			ServiceVersion: *v2.Number,
+			Environment:    "staging",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Create a third, untouched draft version on top of the staged one, so
+	// "staged" (v2) and "latest" (v3) are distinct versions.
+	Record(t, "services/details_staged_filter/create_version_latest_draft", func(c *Client) {
+		_, err = c.CreateVersion(context.TODO(), &CreateVersionInput{
+			ServiceID: *s.ServiceID,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	var stagedFiltered *ServiceDetail
+	Record(t, "services/details_staged_filter/staged_filter", func(c *Client) {
+		stagedFiltered, err = c.GetServiceDetails(context.TODO(), &GetServiceDetailsInput{
+			ServiceID: *s.ServiceID,
+			Filters: []ServiceDetailsFilter{
+				{Key: "versions.staged", Value: true},
+			},
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if stagedFiltered.Version == nil {
+		t.Fatal("Service Detail Version is nil")
+	}
+	if gotNumber, gotStaging := *stagedFiltered.Version.Number, *stagedFiltered.Version.Staging; gotNumber != 2 || !gotStaging {
+		t.Errorf(
+			"filter[versions.staged]=true: expected version 2 (staging=true), got version %d (staging=%t) -- "+
+				"the API appears to be returning the latest version rather than the staged one",
+			gotNumber, gotStaging,
+		)
+	}
+}
+
 func TestClient_GetServiceDetails_validation(t *testing.T) {
 	_, err := TestClient.GetServiceDetails(context.TODO(), &GetServiceDetailsInput{})
 	if !errors.Is(err, ErrMissingServiceID) {
