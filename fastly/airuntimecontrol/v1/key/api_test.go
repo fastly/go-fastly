@@ -10,6 +10,10 @@ import (
 	"github.com/fastly/go-fastly/v17/fastly"
 )
 
+// arcSecretFields are the response fields that carry live secrets or PII and must never
+// be written to a fixture verbatim.
+var arcSecretFields = []string{"access_token", "user_id", "customer_id", "user_name", "created_by"}
+
 func TestClient_Keys(t *testing.T) {
 	ctx := context.TODO()
 
@@ -19,7 +23,7 @@ func TestClient_Keys(t *testing.T) {
 
 	// Create a virtual key.
 	var created *VirtualKeyWithToken
-	fastly.Record(t, "create", func(c *fastly.Client) {
+	fastly.RecordRedacted(t, "create", arcSecretFields, func(c *fastly.Client) {
 		created, err = Create(ctx, c, &CreateInput{
 			Name:      fastly.ToPointer("go-fastly-test-key"),
 			Model:     fastly.ToPointer("claude-sonnet-4-20250514"),
@@ -45,7 +49,7 @@ func TestClient_Keys(t *testing.T) {
 
 	// Get the virtual key.
 	var fetched *VirtualKeyListItem
-	fastly.Record(t, "get", func(c *fastly.Client) {
+	fastly.RecordRedacted(t, "get", arcSecretFields, func(c *fastly.Client) {
 		fetched, err = Get(ctx, c, &GetInput{
 			KeyID: fastly.ToPointer(keyID),
 		})
@@ -56,7 +60,7 @@ func TestClient_Keys(t *testing.T) {
 
 	// List virtual keys.
 	var keys []VirtualKeyListItem
-	fastly.Record(t, "list", func(c *fastly.Client) {
+	fastly.RecordRedacted(t, "list", arcSecretFields, func(c *fastly.Client) {
 		keys, err = List(ctx, c, &ListInput{
 			Provider: fastly.ToPointer("Anthropic"),
 		})
@@ -75,7 +79,7 @@ func TestClient_Keys(t *testing.T) {
 
 	// Update the virtual key.
 	var updated *VirtualKey
-	fastly.Record(t, "update", func(c *fastly.Client) {
+	fastly.RecordRedacted(t, "update", arcSecretFields, func(c *fastly.Client) {
 		updated, err = Update(ctx, c, &UpdateInput{
 			KeyID: fastly.ToPointer(keyID),
 			Name:  fastly.ToPointer("go-fastly-test-key-updated"),
@@ -88,7 +92,7 @@ func TestClient_Keys(t *testing.T) {
 	// Rotate the virtual key.
 	newExpiresAt := time.Now().Add(48 * time.Hour).UTC().Truncate(time.Second)
 	var rotated *VirtualKeyWithToken
-	fastly.Record(t, "rotate", func(c *fastly.Client) {
+	fastly.RecordRedacted(t, "rotate", arcSecretFields, func(c *fastly.Client) {
 		rotated, err = Rotate(ctx, c, &RotateInput{
 			KeyID:     fastly.ToPointer(keyID),
 			ExpiresAt: &newExpiresAt,
