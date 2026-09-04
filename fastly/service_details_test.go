@@ -594,8 +594,12 @@ func TestClient_GetServiceDetails_StagedFilter(t *testing.T) {
 	if stagedFiltered.Version == nil {
 		t.Fatal("Service Detail Version is nil")
 	}
-	if *stagedFiltered.Version.Number != 2 || !*stagedFiltered.Version.Staging {
-		t.Errorf("expected the staged version (2) back, got: %#v", stagedFiltered.Version)
+	if gotNumber, gotStaging := *stagedFiltered.Version.Number, *stagedFiltered.Version.Staging; gotNumber != 2 || !gotStaging {
+		t.Errorf(
+			"filter[versions.staged]=true: expected version 2 (staging=true), got version %d (staging=%t) -- "+
+				"the API appears to be returning the latest version rather than the staged one",
+			gotNumber, gotStaging,
+		)
 	}
 }
 
