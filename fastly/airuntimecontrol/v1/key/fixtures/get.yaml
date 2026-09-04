@@ -11,7 +11,7 @@ interactions:
     method: GET
   response:
     body: |
-      {"id":"78ff28125b9d78b0289d","type":"token","created_at":"2026-08-31T13:34:55Z","deleted_at":null,"expires_at":"2026-09-01T13:34:54Z","name":"go-fastly-test-key","model":"claude-sonnet-4-20250514","provider":"Anthropic","last_used_at":null,"updated_at":"2026-08-31T13:34:55Z","user_id":"6YHKQR3CxW7dGb67TNV4IB","created_by":"Richard Carillo","security_enabled":false,"security_action":"log"}
+      {"id":"78ff28125b9d78b0289d","type":"token","created_at":"2026-08-31T13:34:55Z","deleted_at":null,"expires_at":"2026-09-01T13:34:54Z","name":"go-fastly-test-key","model":"claude-sonnet-4-20250514","provider":"Anthropic","last_used_at":null,"updated_at":"2026-08-31T13:34:55Z","user_id":"XXXXXXXXXXXXXXXXXXXXXX","created_by":"XXXXXXXXXXXXXXXXXXXXXX","security_enabled":false,"security_action":"log"}
     headers:
       Accept-Ranges:
       - bytes
