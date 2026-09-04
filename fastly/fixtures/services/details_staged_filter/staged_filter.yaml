@@ -6,12 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/17.3.0 (+github.com/fastly/go-fastly; go1.26.5)
-    url: https://api.fastly.com/service/6pnJcrmFGNV5m1Ys4JVHX8/details?filter%5Bversions.staged%5D=true
+      - FastlyGo/17.3.1 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/ru915jl5J9UXx116WgMDBQ/details?filter%5Bversions.staged%5D=true
     method: GET
   response:
-    body: '{"type":"vcl","name":"test-service-staged-filter","comment":"test staged
-      filter","versions":[{"deployed":false,"service_id":"6pnJcrmFGNV5m1Ys4JVHX8","updated_at":"2026-09-04T14:41:28Z","number":1,"locked":true,"staging":false,"active":true,"testing":false,"comment":"","deleted_at":null,"environments":[{"name":"production","service_id":"6pnJcrmFGNV5m1Ys4JVHX8","active_version":1}],"created_at":"2026-09-04T14:41:23Z"},{"locked":false,"service_id":"6pnJcrmFGNV5m1Ys4JVHX8","number":2,"updated_at":"2026-09-04T14:41:30Z","deployed":false,"created_at":"2026-09-04T14:41:24Z","environments":[{"name":"staging","service_id":"GkMDvvFnB3pTJgc1SJ8XWZ","active_version":2}],"deleted_at":null,"comment":"","testing":false,"staging":true,"active":false}],"created_at":"2026-09-04T14:41:23Z","environments":[{"name":"staging","service_id":"GkMDvvFnB3pTJgc1SJ8XWZ","active_version":2}],"customer_id":"4dOhK7xEkULiabovMyhRBu","id":"6pnJcrmFGNV5m1Ys4JVHX8","deleted_at":null,"updated_at":"2026-09-04T14:41:23Z","version":{"staging":true,"number":2,"testing":false,"environments":[{"name":"staging","service_id":"GkMDvvFnB3pTJgc1SJ8XWZ","active_version":2}],"updated_at":"2026-09-04T14:41:30Z","active":false,"service_id":"6pnJcrmFGNV5m1Ys4JVHX8","deployed":false,"created_at":"2026-09-04T14:41:24Z","deleted_at":null,"locked":false,"comment":"","acls":[],"backends":[],"cache_settings":[],"conditions":[],"dictionaries":[],"directors":[],"domains":[],"gzips":[],"headers":[],"healthchecks":[],"request_settings":[],"response_objects":[],"snippets":[],"vcls":[],"wordpress":[],"settings":{"general.default_ttl":3600,"general.default_pci":0,"general.stale_if_error":false,"general.default_host":"","general.stale_if_error_ttl":43200}},"active_version":{"deleted_at":null,"deployed":false,"testing":false,"locked":true,"service_id":"6pnJcrmFGNV5m1Ys4JVHX8","updated_at":"2026-09-04T14:41:28Z","active":true,"staging":false,"number":1,"created_at":"2026-09-04T14:41:23Z","comment":"","environments":[{"name":"production","service_id":"6pnJcrmFGNV5m1Ys4JVHX8","active_version":1}],"acls":[],"backends":[],"cache_settings":[],"conditions":[],"dictionaries":[],"directors":[],"domains":[],"gzips":[],"headers":[],"healthchecks":[],"request_settings":[],"response_objects":[],"snippets":[],"vcls":[],"wordpress":[],"settings":{"general.default_pci":0,"general.default_host":"","general.default_ttl":3600,"general.stale_if_error":false,"general.stale_if_error_ttl":43200}}}'
+    body: '{"comment":"test staged filter","created_at":"2026-09-04T16:41:32Z","environments":[],"updated_at":"2026-09-04T16:41:32Z","name":"test-service-staged-filter","deleted_at":null,"type":"vcl","customer_id":"4dOhK7xEkULiabovMyhRBu","id":"ru915jl5J9UXx116WgMDBQ","versions":[{"updated_at":"2026-09-04T16:41:34Z","created_at":"2026-09-04T16:41:32Z","comment":"","testing":false,"service_id":"ru915jl5J9UXx116WgMDBQ","locked":true,"deployed":false,"deleted_at":null,"active":true,"number":1,"environments":[{"name":"production","service_id":"ru915jl5J9UXx116WgMDBQ","active_version":1}],"staging":false},{"testing":false,"locked":false,"service_id":"ru915jl5J9UXx116WgMDBQ","created_at":"2026-09-04T16:41:33Z","comment":"","updated_at":"2026-09-04T16:41:36Z","staging":true,"environments":[{"name":"staging","service_id":"GAiXlJfaYoH6qCyHJBnUsv","active_version":2}],"active":false,"number":2,"deleted_at":null,"deployed":false},{"service_id":"ru915jl5J9UXx116WgMDBQ","environments":[],"staging":false,"number":3,"active":false,"deleted_at":null,"deployed":false,"updated_at":"2026-09-04T16:41:36Z","locked":false,"testing":false,"created_at":"2026-09-04T16:41:36Z","comment":""}],"version":{"service_id":"ru915jl5J9UXx116WgMDBQ","locked":false,"active":false,"updated_at":"2026-09-04T16:41:36Z","deleted_at":null,"deployed":false,"testing":false,"created_at":"2026-09-04T16:41:36Z","comment":"","environments":[],"staging":false,"number":3,"acls":[],"backends":[],"cache_settings":[],"conditions":[],"dictionaries":[],"directors":[],"domains":[],"gzips":[],"headers":[],"healthchecks":[],"request_settings":[],"response_objects":[],"snippets":[],"vcls":[],"wordpress":[],"settings":{"general.default_pci":0,"general.stale_if_error":false,"general.stale_if_error_ttl":43200,"general.default_host":"","general.default_ttl":3600}},"active_version":{"environments":[{"name":"production","service_id":"ru915jl5J9UXx116WgMDBQ","active_version":1}],"testing":false,"staging":false,"number":1,"updated_at":"2026-09-04T16:41:34Z","active":true,"created_at":"2026-09-04T16:41:32Z","deployed":false,"service_id":"ru915jl5J9UXx116WgMDBQ","comment":"","deleted_at":null,"locked":true,"acls":[],"backends":[],"cache_settings":[],"conditions":[],"dictionaries":[],"directors":[],"domains":[],"gzips":[],"headers":[],"healthchecks":[],"request_settings":[],"response_objects":[],"snippets":[],"vcls":[],"wordpress":[],"settings":{"general.stale_if_error_ttl":43200,"general.default_host":"","general.default_ttl":3600,"general.default_pci":0,"general.stale_if_error":false}}}'
     headers:
       Accept-Ranges:
       - bytes
@@ -20,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Sep 2026 14:41:31 GMT
+      - Fri, 04 Sep 2026 16:41:37 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,11 +37,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "597"
+      - "546"
       X-Served-By:
-      - cache-chi-klot8100137-CHI, cache-nyc-kteb1890058-NYC
+      - cache-chi-klot8100140-CHI, cache-ewr-kewr1740057-EWR
       X-Timer:
-      - S1788532890.450553,VS0,VE632
+      - S1788540097.991383,VS0,VE581
     status: 200 OK
     code: 200
     duration: ""

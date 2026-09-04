@@ -12,11 +12,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/17.3.0 (+github.com/fastly/go-fastly; go1.26.5)
+      - FastlyGo/17.3.1 (+github.com/fastly/go-fastly; go1.26.5)
     url: https://api.fastly.com/service
     method: POST
   response:
-    body: '{"customer_id":"4dOhK7xEkULiabovMyhRBu","comment":"test staged filter","name":"test-service-staged-filter","paused":false,"publish_key":"","created_at":"2026-09-04T14:41:23Z","type":"vcl","updated_at":"2026-09-04T14:41:23Z","id":"6pnJcrmFGNV5m1Ys4JVHX8","environments":[],"deleted_at":null,"versions":[{"comment":"","created_at":"2026-09-04T14:41:23Z","service_id":"6pnJcrmFGNV5m1Ys4JVHX8","locked":false,"testing":false,"updated_at":"2026-09-04T14:41:23Z","number":1,"active":false,"environments":[],"staging":false,"deployed":false,"deleted_at":null}]}'
+    body: '{"customer_id":"4dOhK7xEkULiabovMyhRBu","comment":"test staged filter","name":"test-service-staged-filter","deleted_at":null,"id":"ru915jl5J9UXx116WgMDBQ","type":"vcl","environments":[],"publish_key":"","versions":[{"updated_at":"2026-09-04T16:41:32Z","locked":false,"service_id":"ru915jl5J9UXx116WgMDBQ","created_at":"2026-09-04T16:41:32Z","environments":[],"active":false,"comment":"","deployed":false,"staging":false,"number":1,"deleted_at":null,"testing":false}],"paused":false,"updated_at":"2026-09-04T16:41:32Z","created_at":"2026-09-04T16:41:32Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -25,11 +25,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Sep 2026 14:41:23 GMT
+      - Fri, 04 Sep 2026 16:41:32 GMT
       Fastly-Ratelimit-Remaining:
-      - "9970"
+      - "9989"
       Fastly-Ratelimit-Reset:
-      - "1788534000"
+      - "1788541200"
       Pragma:
       - no-cache
       Server:
@@ -47,11 +47,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "471"
+      - "473"
       X-Served-By:
-      - cache-chi-klot8100041-CHI, cache-nyc-kteb1890058-NYC
+      - cache-chi-kmdw8640056-CHI, cache-ewr-kewr1740057-EWR
       X-Timer:
-      - S1788532883.394047,VS0,VE502
+      - S1788540092.478860,VS0,VE501
     status: 200 OK
     code: 200
     duration: ""

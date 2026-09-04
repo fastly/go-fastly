@@ -499,6 +499,17 @@ func TestClient_GetServiceDetails_WithFilters(t *testing.T) {
 // the staged version, mirroring how filter[versions.active]=true populates
 // it with the active version. The "versions" array is always the full,
 // unfiltered list of versions.
+//
+// KNOWN FAILING: a third, untouched draft version is created after staging
+// so that the staged version and the latest version are distinct (v1
+// active, v2 staged, v3 latest draft). As of 2026-09-04 the live API
+// returns v3 (the latest draft) instead of v2 (the actually staged
+// version) once the two diverge -- it appears to conflate "staged" with
+// "latest" rather than tracking the staging environment's active version.
+// This reproduces with a real API key; see PXENG-10471 (which fixed
+// population of the "version" field itself, but not this divergent case).
+// Left failing intentionally to flag the gap to the API team rather than
+// weakening the assertion to match the buggy response.
 func TestClient_GetServiceDetails_StagedFilter(t *testing.T) {
 	var err error
 
@@ -550,6 +561,17 @@ func TestClient_GetServiceDetails_StagedFilter(t *testing.T) {
 			ServiceID:      *s.ServiceID,
 			ServiceVersion: *v2.Number,
 			Environment:    "staging",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Create a third, untouched draft version on top of the staged one, so
+	// "staged" (v2) and "latest" (v3) are distinct versions.
+	Record(t, "services/details_staged_filter/create_version_latest_draft", func(c *Client) {
+		_, err = c.CreateVersion(context.TODO(), &CreateVersionInput{
+			ServiceID: *s.ServiceID,
 		})
 	})
 	if err != nil {
