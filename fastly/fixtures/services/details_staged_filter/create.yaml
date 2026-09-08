@@ -16,7 +16,7 @@ interactions:
     url: https://api.fastly.com/service
     method: POST
   response:
-    body: '{"customer_id":"4dOhK7xEkULiabovMyhRBu","comment":"test staged filter","name":"test-service-staged-filter","deleted_at":null,"id":"ru915jl5J9UXx116WgMDBQ","type":"vcl","environments":[],"publish_key":"","versions":[{"updated_at":"2026-09-04T16:41:32Z","locked":false,"service_id":"ru915jl5J9UXx116WgMDBQ","created_at":"2026-09-04T16:41:32Z","environments":[],"active":false,"comment":"","deployed":false,"staging":false,"number":1,"deleted_at":null,"testing":false}],"paused":false,"updated_at":"2026-09-04T16:41:32Z","created_at":"2026-09-04T16:41:32Z"}'
+    body: '{"customer_id":"4dOhK7xEkULiabovMyhRBu","comment":"test staged filter","name":"test-service-staged-filter","versions":[{"active":false,"staging":false,"service_id":"5q3qqdHMP2inUOS8fyetni","locked":false,"updated_at":"2026-09-08T17:02:29Z","comment":"","deployed":false,"environments":[],"number":1,"testing":false,"created_at":"2026-09-08T17:02:29Z","deleted_at":null}],"id":"5q3qqdHMP2inUOS8fyetni","publish_key":"","deleted_at":null,"paused":false,"created_at":"2026-09-08T17:02:29Z","type":"vcl","environments":[],"updated_at":"2026-09-08T17:02:29Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -25,11 +25,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Sep 2026 16:41:32 GMT
+      - Tue, 08 Sep 2026 17:02:30 GMT
       Fastly-Ratelimit-Remaining:
-      - "9989"
+      - "9999"
       Fastly-Ratelimit-Reset:
-      - "1788541200"
+      - "1788890400"
       Pragma:
       - no-cache
       Server:
@@ -47,11 +47,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "473"
+      - "490"
       X-Served-By:
-      - cache-chi-kmdw8640056-CHI, cache-ewr-kewr1740057-EWR
+      - cache-chi-kmdw8640056-CHI, cache-ewr-kewr1740081-EWR
       X-Timer:
-      - S1788540092.478860,VS0,VE501
+      - S1788886950.521712,VS0,VE519
     status: 200 OK
     code: 200
     duration: ""

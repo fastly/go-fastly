@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/17.3.1 (+github.com/fastly/go-fastly; go1.26.5)
-    url: https://api.fastly.com/service/ru915jl5J9UXx116WgMDBQ/version/1/deactivate
+    url: https://api.fastly.com/service/5q3qqdHMP2inUOS8fyetni/version/1/deactivate
     method: PUT
   response:
-    body: '{"updated_at":"2026-09-04T16:41:34Z","comment":"","staging":false,"active":false,"locked":true,"number":1,"deleted_at":null,"service_id":"ru915jl5J9UXx116WgMDBQ","environments":[{"name":"production","service_id":"ru915jl5J9UXx116WgMDBQ","active_version":1}],"created_at":"2026-09-04T16:41:32Z","testing":false,"deployed":false}'
+    body: '{"number":1,"testing":false,"environments":[{"name":"production","service_id":"5q3qqdHMP2inUOS8fyetni","active_version":1}],"active":false,"comment":"","created_at":"2026-09-08T17:02:29Z","staging":false,"locked":true,"service_id":"5q3qqdHMP2inUOS8fyetni","deployed":false,"deleted_at":null,"updated_at":"2026-09-08T17:02:31Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,11 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Sep 2026 16:41:38 GMT
+      - Tue, 08 Sep 2026 17:02:34 GMT
       Fastly-Ratelimit-Remaining:
-      - "9984"
+      - "9994"
       Fastly-Ratelimit-Reset:
-      - "1788541200"
+      - "1788890400"
       Pragma:
       - no-cache
       Server:
@@ -41,11 +41,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "494"
+      - "519"
       X-Served-By:
-      - cache-chi-klot8100105-CHI, cache-ewr-kewr1740057-EWR
+      - cache-chi-kigq8000118-CHI, cache-ewr-kewr1740081-EWR
       X-Timer:
-      - S1788540098.599681,VS0,VE526
+      - S1788886954.188086,VS0,VE548
     status: 200 OK
     code: 200
     duration: ""
@@ -55,7 +55,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/17.3.1 (+github.com/fastly/go-fastly; go1.26.5)
-    url: https://api.fastly.com/service/ru915jl5J9UXx116WgMDBQ
+    url: https://api.fastly.com/service/5q3qqdHMP2inUOS8fyetni
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -67,11 +67,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Sep 2026 16:41:38 GMT
+      - Tue, 08 Sep 2026 17:02:35 GMT
       Fastly-Ratelimit-Remaining:
-      - "9983"
+      - "9993"
       Fastly-Ratelimit-Reset:
-      - "1788541200"
+      - "1788890400"
       Pragma:
       - no-cache
       Server:
@@ -89,11 +89,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "412"
+      - "429"
       X-Served-By:
-      - cache-chi-kigq8000174-CHI, cache-ewr-kewr1740057-EWR
+      - cache-chi-klot8100076-CHI, cache-ewr-kewr1740081-EWR
       X-Timer:
-      - S1788540098.143571,VS0,VE441
+      - S1788886955.758105,VS0,VE459
     status: 200 OK
     code: 200
     duration: ""

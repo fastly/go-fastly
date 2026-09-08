@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/17.3.1 (+github.com/fastly/go-fastly; go1.26.5)
-    url: https://api.fastly.com/service/ru915jl5J9UXx116WgMDBQ/version/1/activate
+    url: https://api.fastly.com/service/5q3qqdHMP2inUOS8fyetni/version/1/activate
     method: PUT
   response:
-    body: '{"service_id":"ru915jl5J9UXx116WgMDBQ","locked":true,"number":1,"deployed":false,"updated_at":"2026-09-04T16:41:32Z","environments":[],"created_at":"2026-09-04T16:41:32Z","deleted_at":null,"testing":false,"comment":"","active":true,"staging":false,"msg":"Warning:
+    body: '{"created_at":"2026-09-08T17:02:29Z","environments":[],"deleted_at":null,"comment":"","testing":false,"service_id":"5q3qqdHMP2inUOS8fyetni","locked":true,"number":1,"deployed":false,"updated_at":"2026-09-08T17:02:29Z","active":true,"staging":false,"msg":"Warning:
       No default director found\nat: (default Line 174 Pos 1)\n       error 550 \"Doesnt
       exist\";\n--------------------------------"}'
     headers:
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Sep 2026 16:41:34 GMT
+      - Tue, 08 Sep 2026 17:02:31 GMT
       Fastly-Ratelimit-Remaining:
-      - "9987"
+      - "9997"
       Fastly-Ratelimit-Reset:
-      - "1788541200"
+      - "1788890400"
       Pragma:
       - no-cache
       Server:
@@ -43,11 +43,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "1328"
+      - "1102"
       X-Served-By:
-      - cache-chi-kigq8000157-CHI, cache-ewr-kewr1740057-EWR
+      - cache-chi-klot8100130-CHI, cache-ewr-kewr1740081-EWR
       X-Timer:
-      - S1788540094.528791,VS0,VE1357
+      - S1788886950.498530,VS0,VE1134
     status: 200 OK
     code: 200
     duration: ""
