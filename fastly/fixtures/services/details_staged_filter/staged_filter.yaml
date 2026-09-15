@@ -1,0 +1,48 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/17.3.1 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/5q3qqdHMP2inUOS8fyetni/details?filter%5Bversions.staged%5D=true
+    method: GET
+  response:
+    body: '{"id":"5q3qqdHMP2inUOS8fyetni","versions":[{"deployed":false,"environments":[{"name":"staging","service_id":"pvFkKhw7Ul8bPXGE74GzPx","active_version":2}],"locked":false,"deleted_at":null,"staging":true,"number":2,"updated_at":"2026-09-08T17:02:32Z","service_id":"5q3qqdHMP2inUOS8fyetni","testing":false,"comment":"","created_at":"2026-09-08T17:02:30Z","active":false}],"deleted_at":null,"comment":"test
+      staged filter","created_at":"2026-09-08T17:02:29Z","updated_at":"2026-09-08T17:02:29Z","type":"vcl","environments":[{"name":"staging","service_id":"pvFkKhw7Ul8bPXGE74GzPx","active_version":2}],"name":"test-service-staged-filter","customer_id":"4dOhK7xEkULiabovMyhRBu","version":{"service_id":"5q3qqdHMP2inUOS8fyetni","deployed":false,"deleted_at":null,"updated_at":"2026-09-08T17:02:32Z","environments":[{"name":"staging","service_id":"pvFkKhw7Ul8bPXGE74GzPx","active_version":2}],"locked":false,"created_at":"2026-09-08T17:02:30Z","number":2,"active":false,"staging":true,"comment":"","testing":false,"acls":[],"backends":[],"cache_settings":[],"conditions":[],"dictionaries":[],"directors":[],"domains":[],"gzips":[],"headers":[],"healthchecks":[],"request_settings":[],"response_objects":[],"snippets":[],"vcls":[],"wordpress":[],"settings":{"general.stale_if_error":false,"general.stale_if_error_ttl":43200,"general.default_host":"","general.default_pci":0,"general.default_ttl":3600}},"active_version":null}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 08 Sep 2026 17:02:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "487"
+      X-Served-By:
+      - cache-chi-kigq8000138-CHI, cache-ewr-kewr1740081-EWR
+      X-Timer:
+      - S1788886954.631646,VS0,VE524
+    status: 200 OK
+    code: 200
+    duration: ""

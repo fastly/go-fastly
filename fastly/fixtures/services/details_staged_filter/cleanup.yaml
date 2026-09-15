@@ -1,0 +1,99 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/17.3.1 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/5q3qqdHMP2inUOS8fyetni/version/1/deactivate
+    method: PUT
+  response:
+    body: '{"number":1,"testing":false,"environments":[{"name":"production","service_id":"5q3qqdHMP2inUOS8fyetni","active_version":1}],"active":false,"comment":"","created_at":"2026-09-08T17:02:29Z","staging":false,"locked":true,"service_id":"5q3qqdHMP2inUOS8fyetni","deployed":false,"deleted_at":null,"updated_at":"2026-09-08T17:02:31Z"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 08 Sep 2026 17:02:34 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9994"
+      Fastly-Ratelimit-Reset:
+      - "1788890400"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "519"
+      X-Served-By:
+      - cache-chi-kigq8000118-CHI, cache-ewr-kewr1740081-EWR
+      X-Timer:
+      - S1788886954.188086,VS0,VE548
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/17.3.1 (+github.com/fastly/go-fastly; go1.26.5)
+    url: https://api.fastly.com/service/5q3qqdHMP2inUOS8fyetni
+    method: DELETE
+  response:
+    body: '{"status":"ok"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 08 Sep 2026 17:02:35 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9993"
+      Fastly-Ratelimit-Reset:
+      - "1788890400"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "429"
+      X-Served-By:
+      - cache-chi-klot8100076-CHI, cache-ewr-kewr1740081-EWR
+      X-Timer:
+      - S1788886955.758105,VS0,VE459
+    status: 200 OK
+    code: 200
+    duration: ""
