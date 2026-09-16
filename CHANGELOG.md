@@ -6,6 +6,12 @@
 
 ### Bug fixes:
 
+### Dependencies:
+
+## [v17.3.2](https://github.com/fastly/go-fastly/releases/tag/v17.3.2) (2026-09-16)
+
+### Bug fixes:
+
 - fix(airuntimecontrol): updated the api response for Provider Connections to include the `secret_id` attribute ([#865](https://github.com/fastly/go-fastly/pull/865))
 
 ### Dependencies:
