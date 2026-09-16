@@ -6,6 +6,8 @@
 
 ### Bug fixes:
 
+- fix(airuntimecontrol): updated the api response for Provider Connections to include the `secret_id` attribute ([#865](https://github.com/fastly/go-fastly/pull/865))
+
 ### Dependencies:
 - build(deps): `golang.org/x/crypto` from 0.55.0 to 0.56.0 ([#862](https://github.com/fastly/go-fastly/pull/862))
 - build(deps): `golang.org/x/sys` from 0.47.0 to 0.48.0 ([#862](https://github.com/fastly/go-fastly/pull/862))
