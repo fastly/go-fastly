@@ -29,6 +29,7 @@ func TestClient_ProviderConnections(t *testing.T) {
 	require.NoError(t, err)
 	require.NotNil(t, created)
 	require.NotEmpty(t, created.ID)
+	require.NotEmpty(t, created.SecretID)
 
 	connID := created.ID
 
@@ -50,6 +51,7 @@ func TestClient_ProviderConnections(t *testing.T) {
 	require.NoError(t, err)
 	require.NotNil(t, fetched)
 	require.Equal(t, connID, fetched.ID)
+	require.NotEmpty(t, fetched.SecretID)
 
 	// List provider connections.
 	var conns *ProviderConnections
@@ -70,6 +72,7 @@ func TestClient_ProviderConnections(t *testing.T) {
 	require.NoError(t, err)
 	require.NotNil(t, updated)
 	require.Equal(t, connID, updated.ID)
+	require.NotEmpty(t, updated.SecretID)
 }
 
 func TestClient_Create_validation(t *testing.T) {

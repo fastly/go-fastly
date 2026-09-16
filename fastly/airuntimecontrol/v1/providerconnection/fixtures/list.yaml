@@ -6,23 +6,23 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/17.3.0 (+github.com/fastly/go-fastly; go1.26.5)
+      - FastlyGo/17.3.1 (+github.com/fastly/go-fastly; go1.27.0)
     url: https://api.fastly.com/ai-runtime-control/v1/provider-connections
     method: GET
   response:
     body: |
-      {"data":[{"id":"5d61c667aba01a00ce59","name":"sample","models":["claude-opus-4-7"],"base_url":"https://api.anthropic.com","created_at":"2026-08-11T15:42:51Z","updated_at":"2026-08-11T15:42:51Z"},{"id":"0f56dd456f3300ac72df","name":"sample2","models":["claude-opus-4-8"],"base_url":"https://api.anthropic.com","created_at":"2026-08-11T15:42:59Z","updated_at":"2026-08-11T15:42:59Z"},{"id":"2882d00e2bb32dc56952","name":"sample4","models":["claude-opus-4-8"],"base_url":"https://api.anthropic.com","created_at":"2026-08-11T15:43:05Z","updated_at":"2026-08-11T15:43:05Z"},{"id":"2e4e916e9ba5988c14e8","name":"sample5","models":["claude-opus-4-7"],"base_url":"https://api.anthropic.com","created_at":"2026-08-11T15:43:13Z","updated_at":"2026-08-11T15:43:13Z"},{"id":"a8bd862aa81dcebbeaac","name":"go-fastly-test-connection","models":["claude-opus-4-7"],"base_url":"https://api.anthropic.com","created_at":"2026-08-31T13:34:54Z","updated_at":"2026-08-31T13:34:54Z"}],"meta":{"sort":"created_at","total":5}}
+      {"data":[{"id":"5d61c667aba01a00ce59","secret_id":"Jc9rDeJ5QRWTXEORuQXAeL","name":"sample","models":["claude-opus-4-7"],"base_url":"https://api.anthropic.com","auth_type":"api-key","created_at":"2026-08-11T15:42:51Z","updated_at":"2026-08-11T15:42:51Z"},{"id":"0f56dd456f3300ac72df","secret_id":"aDLHyuekyk7Jd8AvbKMMWi","name":"sample2","models":["claude-opus-4-8"],"base_url":"https://api.anthropic.com","auth_type":"api-key","created_at":"2026-08-11T15:42:59Z","updated_at":"2026-08-11T15:42:59Z"},{"id":"2882d00e2bb32dc56952","secret_id":"rAblqe3GYv8w241RtNdQQK","name":"sample4","models":["claude-opus-4-8"],"base_url":"https://api.anthropic.com","auth_type":"api-key","created_at":"2026-08-11T15:43:05Z","updated_at":"2026-08-11T15:43:05Z"},{"id":"2e4e916e9ba5988c14e8","secret_id":"MHUepw8wtzVMgHhmZGnIe6","name":"sample5","models":["claude-opus-4-7"],"base_url":"https://api.anthropic.com","auth_type":"api-key","created_at":"2026-08-11T15:43:13Z","updated_at":"2026-08-11T15:43:13Z"},{"id":"07f0d366fb9e0d18303e","secret_id":"XSvAjTZoxadqXlhsmYN0OC","name":"sample99","models":["claude-opus-4-7"],"base_url":"https://api.anthropic.com","auth_type":"api-key","created_at":"2026-09-11T14:32:59Z","updated_at":"2026-09-11T14:32:59Z"},{"id":"4a6dd12b063c9ec58703","secret_id":"GE00EiUnBsklofWUCpXLIa","name":"go-fastly-test-connection","models":["claude-opus-4-7"],"base_url":"https://api.anthropic.com","auth_type":"api-key","created_at":"2026-09-16T13:47:48Z","updated_at":"2026-09-16T13:47:48Z"}],"meta":{"sort":"created_at","total":6}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "1002"
+      - "1544"
       Content-Type:
       - application/json
       Date:
-      - Mon, 31 Aug 2026 13:34:55 GMT
+      - Wed, 16 Sep 2026 13:47:48 GMT
       Pragma:
       - no-cache
       Server:
@@ -36,11 +36,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "22"
+      - "14"
       X-Served-By:
-      - cache-chi-klot8100109-CHI, cache-ewr-kewr1740021-EWR
+      - cache-chi-kigq8000149-CHI, cache-ewr-kewr1740078-EWR
       X-Timer:
-      - S1788183295.212168,VS0,VE54
+      - S1789566469.950363,VS0,VE44
     status: 200 OK
     code: 200
     duration: ""

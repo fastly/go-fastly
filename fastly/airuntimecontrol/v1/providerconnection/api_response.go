@@ -5,6 +5,8 @@ package providerconnection
 type ProviderConnection struct {
 	// ID is the unique identifier of the provider connection.
 	ID string `json:"id"`
+	// SecretID is the unique identifier of the secret backing the connection's API key.
+	SecretID string `json:"secret_id,omitempty"`
 	// Name is the human-readable name of the provider.
 	Name string `json:"name"`
 	// Models is the list of allowed AI model identifiers.
