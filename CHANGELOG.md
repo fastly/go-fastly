@@ -4,6 +4,8 @@
 
 ### Enhancements:
 
+- feat(custom_tls_configuration): add staging ip ([#867](https://github.com/fastly/go-fastly/pull/867))
+
 ### Bug fixes:
 
 ### Dependencies:
