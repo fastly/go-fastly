@@ -27,6 +27,9 @@ func TestClient_CustomTLSConfiguration(t *testing.T) {
 	if conID != gcon.ID {
 		t.Errorf("bad ID: %q (%q)", conID, gcon.ID)
 	}
+	if gcon.StagingIP == nil || *gcon.StagingIP != "167.82.83.42" {
+		t.Errorf("bad StagingIP: %v", gcon.StagingIP)
+	}
 
 	// List
 	var lcon []*CustomTLSConfiguration
