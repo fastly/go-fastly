@@ -19,6 +19,7 @@ type CustomTLSConfiguration struct {
 	HTTPProtocols []string     `jsonapi:"attr,http_protocols"`
 	ID            string       `jsonapi:"primary,tls_configuration"`
 	Name          string       `jsonapi:"attr,name"`
+	StagingIP     *string      `jsonapi:"attr,staging_ip"`
 	TLSProtocols  []string     `jsonapi:"attr,tls_protocols"`
 	UpdatedAt     *time.Time   `jsonapi:"attr,updated_at,iso8601"`
 }
