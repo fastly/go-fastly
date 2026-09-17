@@ -4,11 +4,15 @@
 
 ### Enhancements:
 
-- feat(custom_tls_configuration): add staging ip ([#867](https://github.com/fastly/go-fastly/pull/867))
-
 ### Bug fixes:
 
 ### Dependencies:
+
+## [v17.4.0](https://github.com/fastly/go-fastly/releases/tag/v17.4.0) (2026-09-17)
+
+### Enhancements:
+
+- feat(custom_tls_configuration): add staging ip ([#867](https://github.com/fastly/go-fastly/pull/867))
 
 ## [v17.3.2](https://github.com/fastly/go-fastly/releases/tag/v17.3.2) (2026-09-16)
 
@@ -17,6 +21,7 @@
 - fix(airuntimecontrol): updated the api response for Provider Connections to include the `secret_id` attribute ([#865](https://github.com/fastly/go-fastly/pull/865))
 
 ### Dependencies:
+
 - build(deps): `golang.org/x/crypto` from 0.55.0 to 0.56.0 ([#862](https://github.com/fastly/go-fastly/pull/862))
 - build(deps): `golang.org/x/sys` from 0.47.0 to 0.48.0 ([#862](https://github.com/fastly/go-fastly/pull/862))
 
