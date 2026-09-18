@@ -11,6 +11,7 @@
 ## [v17.4.0](https://github.com/fastly/go-fastly/releases/tag/v17.4.0) (2026-09-17)
 
 ### Enhancements:
+- feat(customer/contacts): add support for customer contacts (list/create/delete) ([#813](https://github.com/fastly/go-fastly/pull/813))
 
 - feat(custom_tls_configuration): add staging ip ([#867](https://github.com/fastly/go-fastly/pull/867))
 
