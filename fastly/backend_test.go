@@ -21,15 +21,15 @@ func TestClient_Backends_Compute(t *testing.T) {
 		b, err = c.CreateBackend(context.TODO(), &CreateBackendInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-backend-compute"),
-			Address:        ToPointer("integ-test.go-fastly.com"),
-			ConnectTimeout: ToPointer(1500),
-			MaxUse:         ToPointer(100),
-			MaxLifetime:    ToPointer(60000),
-			OverrideHost:   ToPointer("origin.example.com"),
-			SSLCheckCert:   ToPointer(Compatibool(false)),
-			SSLCiphers:     ToPointer("DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384"),
-			SSLSNIHostname: ToPointer("ssl-hostname.com"),
+			Name:           new("test-backend-compute"),
+			Address:        new("integ-test.go-fastly.com"),
+			ConnectTimeout: new(1500),
+			MaxUse:         new(100),
+			MaxLifetime:    new(60000),
+			OverrideHost:   new("origin.example.com"),
+			SSLCheckCert:   new(Compatibool(false)),
+			SSLCiphers:     new("DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384"),
+			SSLSNIHostname: new("ssl-hostname.com"),
 		})
 	})
 	if err != nil {
@@ -134,16 +134,16 @@ func TestClient_Backends_Compute(t *testing.T) {
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-backend-compute",
-			NewName:        ToPointer("new-test-backend-compute"),
-			MaxUse:         ToPointer(200),
-			MaxLifetime:    ToPointer(120000),
-			OverrideHost:   ToPointer("www.example.com"),
-			Port:           ToPointer(1234),
-			PreferIPv6:     ToPointer(Compatibool(true)),
-			ShareKey:       ToPointer("sharedkey"),
-			SSLCiphers:     ToPointer("HIGH"),
-			SSLCheckCert:   ToPointer(Compatibool(false)),
-			SSLSNIHostname: ToPointer("ssl-hostname-updated.com"),
+			NewName:        new("new-test-backend-compute"),
+			MaxUse:         new(200),
+			MaxLifetime:    new(120000),
+			OverrideHost:   new("www.example.com"),
+			Port:           new(1234),
+			PreferIPv6:     new(Compatibool(true)),
+			ShareKey:       new("sharedkey"),
+			SSLCiphers:     new("HIGH"),
+			SSLCheckCert:   new(Compatibool(false)),
+			SSLSNIHostname: new("ssl-hostname-updated.com"),
 		})
 	})
 	if err != nil {
@@ -205,8 +205,8 @@ func TestClient_Backends_Compute(t *testing.T) {
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-backend-compute",
-			OverrideHost:   ToPointer(""),
-			Port:           ToPointer(0),
+			OverrideHost:   new(""),
+			Port:           new(0),
 		})
 	})
 	if err != nil {
@@ -247,15 +247,15 @@ func TestClient_Backends(t *testing.T) {
 		b, err = c.CreateBackend(context.TODO(), &CreateBackendInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-backend"),
-			Address:        ToPointer("integ-test.go-fastly.com"),
-			ConnectTimeout: ToPointer(1500),
-			MaxUse:         ToPointer(100),
-			MaxLifetime:    ToPointer(60000),
-			OverrideHost:   ToPointer("origin.example.com"),
-			SSLCheckCert:   ToPointer(Compatibool(false)),
-			SSLCiphers:     ToPointer("DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384"),
-			SSLSNIHostname: ToPointer("ssl-hostname.com"),
+			Name:           new("test-backend"),
+			Address:        new("integ-test.go-fastly.com"),
+			ConnectTimeout: new(1500),
+			MaxUse:         new(100),
+			MaxLifetime:    new(60000),
+			OverrideHost:   new("origin.example.com"),
+			SSLCheckCert:   new(Compatibool(false)),
+			SSLCiphers:     new("DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384"),
+			SSLSNIHostname: new("ssl-hostname.com"),
 		})
 	})
 	if err != nil {
@@ -360,16 +360,16 @@ func TestClient_Backends(t *testing.T) {
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-backend",
-			NewName:        ToPointer("new-test-backend"),
-			MaxUse:         ToPointer(200),
-			MaxLifetime:    ToPointer(120000),
-			OverrideHost:   ToPointer("www.example.com"),
-			Port:           ToPointer(1234),
-			PreferIPv6:     ToPointer(Compatibool(true)),
-			ShareKey:       ToPointer("sharedkey"),
-			SSLCiphers:     ToPointer("HIGH"),
-			SSLCheckCert:   ToPointer(Compatibool(false)),
-			SSLSNIHostname: ToPointer("ssl-hostname-updated.com"),
+			NewName:        new("new-test-backend"),
+			MaxUse:         new(200),
+			MaxLifetime:    new(120000),
+			OverrideHost:   new("www.example.com"),
+			Port:           new(1234),
+			PreferIPv6:     new(Compatibool(true)),
+			ShareKey:       new("sharedkey"),
+			SSLCiphers:     new("HIGH"),
+			SSLCheckCert:   new(Compatibool(false)),
+			SSLSNIHostname: new("ssl-hostname-updated.com"),
 		})
 	})
 	if err != nil {
@@ -431,8 +431,8 @@ func TestClient_Backends(t *testing.T) {
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-backend",
-			OverrideHost:   ToPointer(""),
-			Port:           ToPointer(0),
+			OverrideHost:   new(""),
+			Port:           new(0),
 		})
 	})
 	if err != nil {

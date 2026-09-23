@@ -27,9 +27,9 @@ func TestClient_Notifications(t *testing.T) {
 		Config: map[string]string{
 			"address": "noreply@fastly.com",
 		},
-		Description: ToPointer("test description"),
-		Name:        ToPointer("test name"),
-		Type:        ToPointer("mailinglist"),
+		Description: new("test description"),
+		Name:        new("test name"),
+		Type:        new("mailinglist"),
 	}
 
 	// Create integration
@@ -53,10 +53,10 @@ func TestClient_Notifications(t *testing.T) {
 	var sir *SearchIntegrationsResponse
 	Record(t, "notifications/search_integrations", func(c *Client) {
 		sir, err = c.SearchIntegrations(context.TODO(), &SearchIntegrationsInput{
-			Cursor: ToPointer(""),
-			Limit:  ToPointer(3),
-			Sort:   ToPointer("-created_at"),
-			Type:   ToPointer("mailinglist"),
+			Cursor: new(""),
+			Limit:  new(3),
+			Sort:   new("-created_at"),
+			Type:   new("mailinglist"),
 		})
 	})
 	if err != nil {
@@ -110,7 +110,7 @@ func TestClient_Notifications(t *testing.T) {
 	// Create mailinglist integration confirmation
 	Record(t, "notifications/create_mailinglist_confirmation", func(c *Client) {
 		err = c.CreateMailinglistConfirmation(context.TODO(), &CreateMailinglistConfirmationInput{
-			Email: ToPointer("noreply@fastly.com"),
+			Email: new("noreply@fastly.com"),
 		})
 	})
 	if err != nil {
@@ -123,10 +123,10 @@ func TestClient_Notifications(t *testing.T) {
 			Config: map[string]string{
 				"webhook": "https://foo.com/bar",
 			},
-			Description: ToPointer("test description updated"),
+			Description: new("test description updated"),
 			ID:          *gi.ID,
-			Name:        ToPointer("test name updated"),
-			Type:        ToPointer("webhook"),
+			Name:        new("test name updated"),
+			Type:        new("webhook"),
 		})
 	})
 	if err != nil {
@@ -217,9 +217,9 @@ func TestClient_Notifications(t *testing.T) {
 		Record(t, "notifications/create_"+nti.fixture+"_integration", func(c *Client) {
 			newCir, err = c.CreateIntegration(context.TODO(), &CreateIntegrationInput{
 				Config:      nti.config,
-				Description: ToPointer("test " + nti.fixture + " description"),
-				Name:        ToPointer("test " + nti.fixture + " name"),
-				Type:        ToPointer(nti.typ),
+				Description: new("test " + nti.fixture + " description"),
+				Name:        new("test " + nti.fixture + " name"),
+				Type:        new(nti.typ),
 			})
 		})
 		if err != nil {

@@ -21,12 +21,12 @@ func TestClient_Honeycombs(t *testing.T) {
 		h, err = c.CreateHoneycomb(context.TODO(), &CreateHoneycombInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-honeycomb"),
-			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
-			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("none"),
-			Token:          ToPointer("super-secure-token"),
-			Dataset:        ToPointer("testDataset"),
+			Name:           new("test-honeycomb"),
+			Format:         new("%h %l %u %t \"%r\" %>s %b"),
+			FormatVersion:  new(2),
+			Placement:      new("none"),
+			Token:          new("super-secure-token"),
+			Dataset:        new("testDataset"),
 		})
 	})
 	if err != nil {
@@ -122,10 +122,10 @@ func TestClient_Honeycombs(t *testing.T) {
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-honeycomb",
-			NewName:          ToPointer("new-test-honeycomb"),
-			Token:            ToPointer("new-token"),
-			Dataset:          ToPointer("newDataset"),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-honeycomb"),
+			Token:            new("new-token"),
+			Dataset:          new("newDataset"),
+			ProcessingRegion: new("eu"),
 			Placement:        NullValue[string](),
 		})
 	})
@@ -176,12 +176,12 @@ func TestClient_Honeycombs_Compute(t *testing.T) {
 		h, err = c.CreateHoneycomb(context.TODO(), &CreateHoneycombInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-honeycomb"),
-			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
-			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("none"),
-			Token:          ToPointer("super-secure-token"),
-			Dataset:        ToPointer("testDataset"),
+			Name:           new("test-honeycomb"),
+			Format:         new("%h %l %u %t \"%r\" %>s %b"),
+			FormatVersion:  new(2),
+			Placement:      new("none"),
+			Token:          new("super-secure-token"),
+			Dataset:        new("testDataset"),
 		})
 	})
 	if err != nil {
@@ -277,10 +277,10 @@ func TestClient_Honeycombs_Compute(t *testing.T) {
 			ServiceID:        TestComputeServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-honeycomb",
-			NewName:          ToPointer("new-test-honeycomb"),
-			Token:            ToPointer("new-token"),
-			Dataset:          ToPointer("newDataset"),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-honeycomb"),
+			Token:            new("new-token"),
+			Dataset:          new("newDataset"),
+			ProcessingRegion: new("eu"),
 			Placement:        NewNullable("none"),
 		})
 	})

@@ -19,14 +19,14 @@ func TestClient_Pools(t *testing.T) {
 	var p *Pool
 	Record(t, "pools/create", func(c *Client) {
 		p, err = c.CreatePool(context.TODO(), &CreatePoolInput{
-			Comment:         ToPointer("test pool"),
-			Name:            ToPointer("test_pool"),
-			Quorum:          ToPointer(50),
+			Comment:         new("test pool"),
+			Name:            new("test_pool"),
+			Quorum:          new(50),
 			ServiceID:       TestDeliveryServiceID,
 			ServiceVersion:  *tv.Number,
-			TLSCertHostname: ToPointer("example.com"),
-			Type:            ToPointer(PoolTypeRandom),
-			UseTLS:          ToPointer(Compatibool(true)),
+			TLSCertHostname: new("example.com"),
+			Type:            new(PoolTypeRandom),
+			UseTLS:          new(Compatibool(true)),
 		})
 	})
 	if err != nil {
@@ -110,9 +110,9 @@ func TestClient_Pools(t *testing.T) {
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test_pool",
-			NewName:        ToPointer("new_test_pool"),
-			Quorum:         ToPointer(0),
-			Type:           ToPointer(PoolTypeHash),
+			NewName:        new("new_test_pool"),
+			Quorum:         new(0),
+			Type:           new(PoolTypeHash),
 		})
 	})
 	if err != nil {
@@ -160,7 +160,7 @@ func TestClient_CreatePool_validation(t *testing.T) {
 	var err error
 
 	_, err = TestClient.CreatePool(context.TODO(), &CreatePoolInput{
-		Name:           ToPointer("test"),
+		Name:           new("test"),
 		ServiceVersion: 1,
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
@@ -168,7 +168,7 @@ func TestClient_CreatePool_validation(t *testing.T) {
 	}
 
 	_, err = TestClient.CreatePool(context.TODO(), &CreatePoolInput{
-		Name:      ToPointer("test"),
+		Name:      new("test"),
 		ServiceID: "foo",
 	})
 	if !errors.Is(err, ErrMissingServiceVersion) {

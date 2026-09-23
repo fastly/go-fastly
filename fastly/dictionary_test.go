@@ -20,7 +20,7 @@ func TestClient_Dictionaries(t *testing.T) {
 		d, err = c.CreateDictionary(context.TODO(), &CreateDictionaryInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
-			Name:           ToPointer("test_dictionary"),
+			Name:           new("test_dictionary"),
 		})
 	})
 	if err != nil {
@@ -86,7 +86,7 @@ func TestClient_Dictionaries(t *testing.T) {
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 			Name:           "test_dictionary",
-			NewName:        ToPointer("new_test_dictionary"),
+			NewName:        new("new_test_dictionary"),
 		})
 	})
 	if err != nil {

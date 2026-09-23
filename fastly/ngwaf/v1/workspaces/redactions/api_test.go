@@ -19,9 +19,9 @@ func TestClient_Redactions(t *testing.T) {
 
 	fastly.Record(t, "create_redaction", func(c *fastly.Client) {
 		redaction, err = Create(context.TODO(), c, &CreateInput{
-			Field:       fastly.ToPointer(testField),
-			Type:        fastly.ToPointer(testType),
-			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+			Field:       new(testField),
+			Type:        new(testType),
+			WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 		})
 	})
 	if err != nil {
@@ -39,8 +39,8 @@ func TestClient_Redactions(t *testing.T) {
 	defer func() {
 		fastly.Record(t, "delete_redaction", func(c *fastly.Client) {
 			err = Delete(context.TODO(), c, &DeleteInput{
-				RedactionID: fastly.ToPointer(redactionID),
-				WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+				RedactionID: new(redactionID),
+				WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 			})
 		})
 		if err != nil {
@@ -52,8 +52,8 @@ func TestClient_Redactions(t *testing.T) {
 	var getTestRedaction *Redaction
 	fastly.Record(t, "get_redaction", func(c *fastly.Client) {
 		getTestRedaction, err = Get(context.TODO(), c, &GetInput{
-			RedactionID: fastly.ToPointer(redactionID),
-			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+			RedactionID: new(redactionID),
+			WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 		})
 	})
 	if err != nil {
@@ -73,10 +73,10 @@ func TestClient_Redactions(t *testing.T) {
 	var updatedRedaction *Redaction
 	fastly.Record(t, "update_redaction", func(c *fastly.Client) {
 		updatedRedaction, err = Update(context.TODO(), c, &UpdateInput{
-			Field:       fastly.ToPointer(updatedRedactionField),
-			RedactionID: fastly.ToPointer(redactionID),
-			Type:        fastly.ToPointer(updatedRedactionType),
-			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+			Field:       new(updatedRedactionField),
+			RedactionID: new(redactionID),
+			Type:        new(updatedRedactionType),
+			WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 		})
 	})
 	if err != nil {
@@ -93,7 +93,7 @@ func TestClient_Redactions(t *testing.T) {
 	var listedRedactions *Redactions
 	fastly.Record(t, "list_redaction", func(c *fastly.Client) {
 		listedRedactions, err = List(context.TODO(), c, &ListInput{
-			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+			WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 		})
 	})
 	if err != nil {
@@ -120,7 +120,7 @@ func TestClient_GetRedaction_validation(t *testing.T) {
 	}
 	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		RedactionID: nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingRedactionID) {
 		t.Errorf("expected ErrMissingRedactionID: got %s", err)
@@ -137,15 +137,15 @@ func TestClient_CreateRedaction_validation(t *testing.T) {
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		Field:       nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingField) {
 		t.Errorf("expected ErrMissingField: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Field:       fastly.ToPointer("somefield"),
+		Field:       new("somefield"),
 		Type:        nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingType) {
 		t.Errorf("expected ErrMissingType: got %s", err)
@@ -162,7 +162,7 @@ func TestClient_UpdateRedaction_validation(t *testing.T) {
 	}
 	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
 		RedactionID: nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingRedactionID) {
 		t.Errorf("expected ErrMissingRedactionID: got %s", err)
@@ -179,7 +179,7 @@ func TestClient_DeleteRedaction_validation(t *testing.T) {
 	}
 	err = Delete(context.TODO(), fastly.TestClient, &DeleteInput{
 		RedactionID: nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingRedactionID) {
 		t.Errorf("expected ErrMissingRedactionID: got %s", err)

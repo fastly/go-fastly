@@ -49,8 +49,8 @@ func TestClient_Resources(t *testing.T) {
 		r, err = c.CreateResource(context.TODO(), &CreateResourceInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer(kvStoreNameForServiceLinking),
-			ResourceID:     ToPointer(o.StoreID),
+			Name:           new(kvStoreNameForServiceLinking),
+			ResourceID:     new(o.StoreID),
 		})
 	})
 	if err != nil {
@@ -110,7 +110,7 @@ func TestClient_Resources(t *testing.T) {
 			ResourceID:     *r.LinkID,
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("new-kv-store-alias-for-my-service"),
+			Name:           new("new-kv-store-alias-for-my-service"),
 		})
 	})
 	if err != nil {
@@ -258,13 +258,13 @@ func TestResourceJSONRoundtrip(t *testing.T) {
 	r := Resource{
 		CreatedAt:      &now,
 		DeletedAt:      &now,
-		HREF:           ToPointer("the/href"),
-		LinkID:         ToPointer("the-id"),
-		Name:           ToPointer("the-name"),
-		ResourceID:     ToPointer("the-resource-id"),
-		ResourceType:   ToPointer("the-resource-type"),
-		ServiceID:      ToPointer("the-service-id"),
-		ServiceVersion: ToPointer(1),
+		HREF:           new("the/href"),
+		LinkID:         new("the-id"),
+		Name:           new("the-name"),
+		ResourceID:     new("the-resource-id"),
+		ResourceType:   new("the-resource-type"),
+		ServiceID:      new("the-service-id"),
+		ServiceVersion: new(1),
 		UpdatedAt:      &now,
 	}
 

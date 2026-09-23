@@ -25,10 +25,10 @@ func TestClient_Keys(t *testing.T) {
 	var created *VirtualKeyWithToken
 	fastly.RecordRedacted(t, "create", arcSecretFields, func(c *fastly.Client) {
 		created, err = Create(ctx, c, &CreateInput{
-			Name:      fastly.ToPointer("go-fastly-test-key"),
-			Model:     fastly.ToPointer("claude-sonnet-4-20250514"),
-			Provider:  fastly.ToPointer("Anthropic"),
-			UserID:    fastly.ToPointer("go-fastly-test-user"),
+			Name:      new("go-fastly-test-key"),
+			Model:     new("claude-sonnet-4-20250514"),
+			Provider:  new("Anthropic"),
+			UserID:    new("go-fastly-test-user"),
 			ExpiresAt: &expiresAt,
 		})
 	})
@@ -42,7 +42,7 @@ func TestClient_Keys(t *testing.T) {
 	defer func() {
 		fastly.Record(t, "delete", func(c *fastly.Client) {
 			_ = Delete(ctx, c, &DeleteInput{
-				KeyID: fastly.ToPointer(keyID),
+				KeyID: new(keyID),
 			})
 		})
 	}()
@@ -51,7 +51,7 @@ func TestClient_Keys(t *testing.T) {
 	var fetched *VirtualKeyListItem
 	fastly.RecordRedacted(t, "get", arcSecretFields, func(c *fastly.Client) {
 		fetched, err = Get(ctx, c, &GetInput{
-			KeyID: fastly.ToPointer(keyID),
+			KeyID: new(keyID),
 		})
 	})
 	require.NoError(t, err)
@@ -62,7 +62,7 @@ func TestClient_Keys(t *testing.T) {
 	var keys []VirtualKeyListItem
 	fastly.RecordRedacted(t, "list", arcSecretFields, func(c *fastly.Client) {
 		keys, err = List(ctx, c, &ListInput{
-			Provider: fastly.ToPointer("Anthropic"),
+			Provider: new("Anthropic"),
 		})
 	})
 	require.NoError(t, err)
@@ -81,8 +81,8 @@ func TestClient_Keys(t *testing.T) {
 	var updated *VirtualKey
 	fastly.RecordRedacted(t, "update", arcSecretFields, func(c *fastly.Client) {
 		updated, err = Update(ctx, c, &UpdateInput{
-			KeyID: fastly.ToPointer(keyID),
-			Name:  fastly.ToPointer("go-fastly-test-key-updated"),
+			KeyID: new(keyID),
+			Name:  new("go-fastly-test-key-updated"),
 		})
 	})
 	require.NoError(t, err)
@@ -94,7 +94,7 @@ func TestClient_Keys(t *testing.T) {
 	var rotated *VirtualKeyWithToken
 	fastly.RecordRedacted(t, "rotate", arcSecretFields, func(c *fastly.Client) {
 		rotated, err = Rotate(ctx, c, &RotateInput{
-			KeyID:     fastly.ToPointer(keyID),
+			KeyID:     new(keyID),
 			ExpiresAt: &newExpiresAt,
 		})
 	})
@@ -107,30 +107,30 @@ func TestClient_Create_validation(t *testing.T) {
 	ctx := context.TODO()
 
 	_, err := Create(ctx, fastly.TestClient, &CreateInput{
-		Model:    fastly.ToPointer("opus-4.6"),
-		Provider: fastly.ToPointer("Anthropic"),
-		UserID:   fastly.ToPointer("user-1"),
+		Model:    new("opus-4.6"),
+		Provider: new("Anthropic"),
+		UserID:   new("user-1"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingName)
 
 	_, err = Create(ctx, fastly.TestClient, &CreateInput{
-		Name:     fastly.ToPointer("my-key"),
-		Provider: fastly.ToPointer("Anthropic"),
-		UserID:   fastly.ToPointer("user-1"),
+		Name:     new("my-key"),
+		Provider: new("Anthropic"),
+		UserID:   new("user-1"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingModel)
 
 	_, err = Create(ctx, fastly.TestClient, &CreateInput{
-		Name:   fastly.ToPointer("my-key"),
-		Model:  fastly.ToPointer("opus-4.6"),
-		UserID: fastly.ToPointer("user-1"),
+		Name:   new("my-key"),
+		Model:  new("opus-4.6"),
+		UserID: new("user-1"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingProvider)
 
 	_, err = Create(ctx, fastly.TestClient, &CreateInput{
-		Name:     fastly.ToPointer("my-key"),
-		Model:    fastly.ToPointer("opus-4.6"),
-		Provider: fastly.ToPointer("Anthropic"),
+		Name:     new("my-key"),
+		Model:    new("opus-4.6"),
+		Provider: new("Anthropic"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingUserID)
 }
@@ -167,7 +167,7 @@ func TestClient_Rotate_validation(t *testing.T) {
 	require.ErrorIs(t, err, fastly.ErrMissingKeyID)
 
 	_, err = Rotate(ctx, fastly.TestClient, &RotateInput{
-		KeyID:     fastly.ToPointer("key-1"),
+		KeyID:     new("key-1"),
 		ExpiresAt: nil,
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingExpiresAt)

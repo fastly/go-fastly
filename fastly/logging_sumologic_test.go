@@ -21,12 +21,12 @@ func TestClient_Sumologics(t *testing.T) {
 		s, err = c.CreateSumologic(context.TODO(), &CreateSumologicInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-sumologic"),
-			URL:            ToPointer("https://foo.sumologic.com"),
-			Format:         ToPointer("format"),
-			FormatVersion:  ToPointer(1),
-			MessageType:    ToPointer("classic"),
-			Placement:      ToPointer("none"),
+			Name:           new("test-sumologic"),
+			URL:            new("https://foo.sumologic.com"),
+			Format:         new("format"),
+			FormatVersion:  new(1),
+			MessageType:    new("classic"),
+			Placement:      new("none"),
 		})
 	})
 	if err != nil {
@@ -122,8 +122,8 @@ func TestClient_Sumologics(t *testing.T) {
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-sumologic",
-			NewName:          ToPointer("new-test-sumologic"),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-sumologic"),
+			ProcessingRegion: new("eu"),
 			Placement:        NullValue[string](),
 		})
 	})
@@ -168,12 +168,12 @@ func TestClient_Sumologics_Compute(t *testing.T) {
 		s, err = c.CreateSumologic(context.TODO(), &CreateSumologicInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-sumologic"),
-			URL:            ToPointer("https://foo.sumologic.com"),
-			Format:         ToPointer("format"),
-			FormatVersion:  ToPointer(1),
-			MessageType:    ToPointer("classic"),
-			Placement:      ToPointer("none"),
+			Name:           new("test-sumologic"),
+			URL:            new("https://foo.sumologic.com"),
+			Format:         new("format"),
+			FormatVersion:  new(1),
+			MessageType:    new("classic"),
+			Placement:      new("none"),
 		})
 	})
 	if err != nil {
@@ -269,8 +269,8 @@ func TestClient_Sumologics_Compute(t *testing.T) {
 			ServiceID:        TestComputeServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-sumologic",
-			NewName:          ToPointer("new-test-sumologic"),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-sumologic"),
+			ProcessingRegion: new("eu"),
 			Placement:        NewNullable("none"),
 		})
 	})

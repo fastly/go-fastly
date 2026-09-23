@@ -22,8 +22,8 @@ func TestClient_ERL(t *testing.T) {
 		e, err = c.CreateERL(context.TODO(), &CreateERLInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
-			Name:           ToPointer("test_erl"),
-			Action:         ToPointer(ERLActionResponse),
+			Name:           new("test_erl"),
+			Action:         new(ERLActionResponse),
 			ClientKey: &[]string{
 				"req.http.Fastly-Client-IP",
 			},
@@ -31,14 +31,14 @@ func TestClient_ERL(t *testing.T) {
 				http.MethodGet,
 				http.MethodPost,
 			},
-			PenaltyBoxDuration: ToPointer(30),
+			PenaltyBoxDuration: new(30),
 			Response: &ERLResponseType{
-				ERLStatus:      ToPointer(http.StatusTooManyRequests),
-				ERLContentType: ToPointer(JSONMimeType),
-				ERLContent:     ToPointer("Too many requests"),
+				ERLStatus:      new(http.StatusTooManyRequests),
+				ERLContentType: new(JSONMimeType),
+				ERLContent:     new("Too many requests"),
 			},
-			RpsLimit:   ToPointer(20),
-			WindowSize: ToPointer(ERLWindowSize(10)),
+			RpsLimit:   new(20),
+			WindowSize: new(ERLWindowSize(10)),
 		})
 	})
 	if err != nil {
@@ -108,7 +108,7 @@ func TestClient_ERL(t *testing.T) {
 	Record(t, fixtureBase+"update", func(c *Client) {
 		ua, err = c.UpdateERL(context.TODO(), &UpdateERLInput{
 			ERLID: *e.RateLimiterID,
-			Name:  ToPointer("test_erl"),
+			Name:  new("test_erl"),
 		})
 	})
 	if err != nil {
@@ -134,10 +134,10 @@ func TestClient_ERL(t *testing.T) {
 		elog, err = c.CreateERL(context.TODO(), &CreateERLInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
-			Name:           ToPointer("test_erl"),
-			Action:         ToPointer(ERLActionLogOnly),
+			Name:           new("test_erl"),
+			Action:         new(ERLActionLogOnly),
 			// IMPORTANT: API will 400 if LoggerType not set with log_only action.
-			LoggerType: ToPointer(ERLLogAzureBlob),
+			LoggerType: new(ERLLogAzureBlob),
 			ClientKey: &[]string{
 				"req.http.Fastly-Client-IP",
 			},
@@ -145,9 +145,9 @@ func TestClient_ERL(t *testing.T) {
 				http.MethodGet,
 				http.MethodPost,
 			},
-			PenaltyBoxDuration: ToPointer(30),
-			RpsLimit:           ToPointer(20),
-			WindowSize:         ToPointer(ERLWindowSize(10)),
+			PenaltyBoxDuration: new(30),
+			RpsLimit:           new(20),
+			WindowSize:         new(ERLWindowSize(10)),
 		})
 	})
 	if err != nil {

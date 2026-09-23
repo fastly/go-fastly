@@ -64,9 +64,9 @@ func TestClient_GetLogInsights(t *testing.T) {
 			ServiceID:        TestDeliveryServiceID,
 			Start:            start,
 			End:              end,
-			Domain:           ToPointer(domain),
-			DomainExactMatch: ToPointer(true),
-			Limit:            ToPointer(limit),
+			Domain:           new(domain),
+			DomainExactMatch: new(true),
+			Limit:            new(limit),
 			POPs:             []string{"IAD", "DFW"},
 			Visualization:    LogInsightsVisualizationTopURLByRequests,
 		})

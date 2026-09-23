@@ -24,18 +24,18 @@ func TestClient_BatchModifyACLEntries_Create(t *testing.T) {
 		ACLID:     *testACL.ACLID,
 		Entries: []*BatchACLEntry{
 			{
-				Operation: ToPointer(CreateBatchOperation),
-				IP:        ToPointer("127.0.0.1"),
-				Subnet:    ToPointer(24),
-				Negated:   ToPointer(Compatibool(false)),
-				Comment:   ToPointer("ACL Entry 1"),
+				Operation: new(CreateBatchOperation),
+				IP:        new("127.0.0.1"),
+				Subnet:    new(24),
+				Negated:   new(Compatibool(false)),
+				Comment:   new("ACL Entry 1"),
 			},
 			{
-				Operation: ToPointer(CreateBatchOperation),
-				IP:        ToPointer("192.168.0.1"),
-				Subnet:    ToPointer(24),
-				Negated:   ToPointer(Compatibool(true)),
-				Comment:   ToPointer("ACL Entry 2"),
+				Operation: new(CreateBatchOperation),
+				IP:        new("192.168.0.1"),
+				Subnet:    new(24),
+				Negated:   new(Compatibool(true)),
+				Comment:   new("ACL Entry 2"),
 			},
 		},
 	}
@@ -120,18 +120,18 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 		ACLID:     *testACL.ACLID,
 		Entries: []*BatchACLEntry{
 			{
-				Operation: ToPointer(CreateBatchOperation),
-				IP:        ToPointer("127.0.0.1"),
-				Subnet:    ToPointer(24),
-				Negated:   ToPointer(Compatibool(false)),
-				Comment:   ToPointer("ACL Entry 1"),
+				Operation: new(CreateBatchOperation),
+				IP:        new("127.0.0.1"),
+				Subnet:    new(24),
+				Negated:   new(Compatibool(false)),
+				Comment:   new("ACL Entry 1"),
 			},
 			{
-				Operation: ToPointer(CreateBatchOperation),
-				IP:        ToPointer("192.168.0.1"),
-				Subnet:    ToPointer(24),
-				Negated:   ToPointer(Compatibool(true)),
-				Comment:   ToPointer("ACL Entry 2"),
+				Operation: new(CreateBatchOperation),
+				IP:        new("192.168.0.1"),
+				Subnet:    new(24),
+				Negated:   new(Compatibool(true)),
+				Comment:   new("ACL Entry 2"),
 			},
 		},
 	}
@@ -165,7 +165,7 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 		ACLID:     *testACL.ACLID,
 		Entries: []*BatchACLEntry{
 			{
-				Operation: ToPointer(DeleteBatchOperation),
+				Operation: new(DeleteBatchOperation),
 				EntryID:   createdACLEntries[0].EntryID,
 			},
 		},
@@ -219,18 +219,18 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 		ACLID:     *testACL.ACLID,
 		Entries: []*BatchACLEntry{
 			{
-				Operation: ToPointer(CreateBatchOperation),
-				IP:        ToPointer("127.0.0.1"),
-				Subnet:    ToPointer(24),
-				Negated:   ToPointer(Compatibool(false)),
-				Comment:   ToPointer("ACL Entry 1"),
+				Operation: new(CreateBatchOperation),
+				IP:        new("127.0.0.1"),
+				Subnet:    new(24),
+				Negated:   new(Compatibool(false)),
+				Comment:   new("ACL Entry 1"),
 			},
 			{
-				Operation: ToPointer(CreateBatchOperation),
-				IP:        ToPointer("192.168.0.1"),
-				Subnet:    ToPointer(24),
-				Negated:   ToPointer(Compatibool(true)),
-				Comment:   ToPointer("ACL Entry 2"),
+				Operation: new(CreateBatchOperation),
+				IP:        new("192.168.0.1"),
+				Subnet:    new(24),
+				Negated:   new(Compatibool(true)),
+				Comment:   new("ACL Entry 2"),
 			},
 		},
 	}
@@ -264,12 +264,12 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 		ACLID:     *testACL.ACLID,
 		Entries: []*BatchACLEntry{
 			{
-				Operation: ToPointer(UpdateBatchOperation),
+				Operation: new(UpdateBatchOperation),
 				EntryID:   createdACLEntries[0].EntryID,
-				IP:        ToPointer("127.0.0.2"),
-				Subnet:    ToPointer(16),
-				Negated:   ToPointer(Compatibool(true)),
-				Comment:   ToPointer("Updated ACL Entry 1"),
+				IP:        new("127.0.0.2"),
+				Subnet:    new(16),
+				Negated:   new(Compatibool(true)),
+				Comment:   new("Updated ACL Entry 1"),
 			},
 		},
 	}

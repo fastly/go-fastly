@@ -20,25 +20,25 @@ func TestClient_FastlyAlerts(t *testing.T) {
 		"type":      "above_threshold",
 	}
 	cadi := &CreateAlertDefinitionInput{
-		Description:        ToPointer("test description"),
+		Description:        new("test description"),
 		Dimensions:         testDimensions,
 		EvaluationStrategy: testEvaluationStrategy,
 		IntegrationIDs:     []string{},
-		Metric:             ToPointer("status_5xx_rate"),
-		Name:               ToPointer("test name"),
-		ServiceID:          ToPointer(TestDeliveryServiceID),
-		Source:             ToPointer("domains"),
+		Metric:             new("status_5xx_rate"),
+		Name:               new("test name"),
+		ServiceID:          new(TestDeliveryServiceID),
+		Source:             new("domains"),
 	}
 
 	tadi := &TestAlertDefinitionInput{
-		Description:        ToPointer("test description"),
+		Description:        new("test description"),
 		Dimensions:         testDimensions,
 		EvaluationStrategy: testEvaluationStrategy,
 		IntegrationIDs:     []string{},
-		Metric:             ToPointer("status_5xx_rate"),
-		Name:               ToPointer("test name"),
-		ServiceID:          ToPointer(TestDeliveryServiceID),
-		Source:             ToPointer("domains"),
+		Metric:             new("status_5xx_rate"),
+		Name:               new("test name"),
+		ServiceID:          new(TestDeliveryServiceID),
+		Source:             new("domains"),
 	}
 
 	var err error
@@ -100,11 +100,11 @@ func TestClient_FastlyAlerts(t *testing.T) {
 	var adr *AlertDefinitionsResponse
 	Record(t, "alerts/list_alert_definitions", func(c *Client) {
 		adr, err = c.ListAlertDefinitions(context.TODO(), &ListAlertDefinitionsInput{
-			Cursor:    ToPointer(""),
-			Limit:     ToPointer(10),
-			Name:      ToPointer(ad.Name),
-			ServiceID: ToPointer(TestDeliveryServiceID),
-			Sort:      ToPointer("name"),
+			Cursor:    new(""),
+			Limit:     new(10),
+			Name:      new(ad.Name),
+			ServiceID: new(TestDeliveryServiceID),
+			Sort:      new("name"),
 		})
 	})
 	if err != nil {
@@ -132,13 +132,13 @@ func TestClient_FastlyAlerts(t *testing.T) {
 	var uad *AlertDefinition
 	Record(t, "alerts/update_alert_definition", func(c *Client) {
 		uad, err = c.UpdateAlertDefinition(context.TODO(), &UpdateAlertDefinitionInput{
-			Description:        ToPointer("test description"),
+			Description:        new("test description"),
 			Dimensions:         testDimensions,
 			EvaluationStrategy: testEvaluationStrategy,
-			ID:                 ToPointer(ad.ID),
+			ID:                 new(ad.ID),
 			IntegrationIDs:     []string{},
-			Metric:             ToPointer("status_5xx"),
-			Name:               ToPointer("test name updated"),
+			Metric:             new("status_5xx"),
+			Name:               new("test name updated"),
 		})
 	})
 	if err != nil {
@@ -161,14 +161,14 @@ func TestClient_FastlyAlerts(t *testing.T) {
 	// List History
 	Record(t, "alerts/list_alert_history", func(c *Client) {
 		_, err = c.ListAlertHistory(context.TODO(), &ListAlertHistoryInput{
-			After:        ToPointer("2006-01-02T15:04:05Z"),
-			Before:       ToPointer("2056-01-02T15:04:05Z"),
-			Cursor:       ToPointer(""),
-			DefinitionID: ToPointer(ad.ID),
-			Limit:        ToPointer(10),
-			ServiceID:    ToPointer(TestDeliveryServiceID),
-			Sort:         ToPointer("-start"),
-			Status:       ToPointer(""),
+			After:        new("2006-01-02T15:04:05Z"),
+			Before:       new("2056-01-02T15:04:05Z"),
+			Cursor:       new(""),
+			DefinitionID: new(ad.ID),
+			Limit:        new(10),
+			ServiceID:    new(TestDeliveryServiceID),
+			Sort:         new("-start"),
+			Status:       new(""),
 		})
 	})
 	if err != nil {
@@ -187,14 +187,14 @@ func TestClient_FastlyPercentAlerts(t *testing.T) {
 		"ignore_below": float64(5),
 	}
 	cadi := &CreateAlertDefinitionInput{
-		Description:        ToPointer("test description"),
+		Description:        new("test description"),
 		Dimensions:         testDimensions,
 		EvaluationStrategy: testEvaluationStrategy,
 		IntegrationIDs:     []string{},
-		Metric:             ToPointer("status_5xx"),
-		Name:               ToPointer("test name"),
-		ServiceID:          ToPointer(TestDeliveryServiceID),
-		Source:             ToPointer("stats"),
+		Metric:             new("status_5xx"),
+		Name:               new("test name"),
+		ServiceID:          new(TestDeliveryServiceID),
+		Source:             new("stats"),
 	}
 
 	// Create

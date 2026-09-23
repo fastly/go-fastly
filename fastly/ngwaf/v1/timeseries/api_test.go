@@ -30,7 +30,7 @@ func TestTimeSeries_List(t *testing.T) {
 		ts, err = List(context.TODO(), c, &ListInput{
 			From:        &tsFrom,
 			Granularity: &tsGranularity,
-			Metrics:     fastly.ToPointer(tsMetrics),
+			Metrics:     new(tsMetrics),
 			To:          &tsTo,
 		})
 	})
@@ -48,7 +48,7 @@ func TestClient_List_Timeseries_validation(t *testing.T) {
 
 	_, err = List(context.TODO(), fastly.TestClient, &ListInput{
 		From:    nil,
-		Metrics: fastly.ToPointer(tsMetrics),
+		Metrics: new(tsMetrics),
 	})
 	if !errors.Is(err, fastly.ErrMissingFrom) {
 		t.Errorf("expected ErrMissingFrom: got %s", err)
@@ -56,7 +56,7 @@ func TestClient_List_Timeseries_validation(t *testing.T) {
 
 	_, err = List(context.TODO(), fastly.TestClient, &ListInput{
 		From:    &empty,
-		Metrics: fastly.ToPointer(tsMetrics),
+		Metrics: new(tsMetrics),
 	})
 	if !errors.Is(err, fastly.ErrMissingFrom) {
 		t.Errorf("expected ErrMissingFrom: got %s", err)

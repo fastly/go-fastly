@@ -42,8 +42,8 @@ func TestClient_TLSSubscription(t *testing.T) {
 		_, err = c.CreateDomain(context.TODO(), &CreateDomainInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer(domain1),
-			Comment:        ToPointer("comment"),
+			Name:           new(domain1),
+			Comment:        new("comment"),
 		})
 	})
 	if err != nil {
@@ -54,8 +54,8 @@ func TestClient_TLSSubscription(t *testing.T) {
 		_, err = c.CreateDomain(context.TODO(), &CreateDomainInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer(domain2),
-			Comment:        ToPointer("comment"),
+			Name:           new(domain2),
+			Comment:        new("comment"),
 		})
 	})
 	if err != nil {
@@ -210,8 +210,8 @@ func TestClient_TLSSubscription_Compute(t *testing.T) {
 		_, err = c.CreateDomain(context.TODO(), &CreateDomainInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer(domain1),
-			Comment:        ToPointer("comment"),
+			Name:           new(domain1),
+			Comment:        new("comment"),
 		})
 	})
 	if err != nil {
@@ -222,8 +222,8 @@ func TestClient_TLSSubscription_Compute(t *testing.T) {
 		_, err = c.CreateDomain(context.TODO(), &CreateDomainInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer(domain2),
-			Comment:        ToPointer("comment"),
+			Name:           new(domain2),
+			Comment:        new("comment"),
 		})
 	})
 	if err != nil {
@@ -236,7 +236,7 @@ func TestClient_TLSSubscription_Compute(t *testing.T) {
 		_, err = c.UpdatePackage(context.TODO(), &UpdatePackageInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
-			PackagePath:    ToPointer("test_assets/package/valid.tar.gz"),
+			PackagePath:    new("test_assets/package/valid.tar.gz"),
 		})
 	})
 
@@ -245,13 +245,13 @@ func TestClient_TLSSubscription_Compute(t *testing.T) {
 		_, err = c.CreateBackend(context.TODO(), &CreateBackendInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-backend-compute"),
-			Address:        ToPointer("integ-test3.go-fastly-3.com"),
-			ConnectTimeout: ToPointer(1500),
-			OverrideHost:   ToPointer("origin.example.com"),
-			SSLCheckCert:   ToPointer(Compatibool(false)),
-			SSLCiphers:     ToPointer("DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384"),
-			SSLSNIHostname: ToPointer("ssl-hostname.com"),
+			Name:           new("test-backend-compute"),
+			Address:        new("integ-test3.go-fastly-3.com"),
+			ConnectTimeout: new(1500),
+			OverrideHost:   new("origin.example.com"),
+			SSLCheckCert:   new(Compatibool(false)),
+			SSLCiphers:     new("DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384"),
+			SSLSNIHostname: new("ssl-hostname.com"),
 		})
 	})
 	if err != nil {

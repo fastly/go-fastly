@@ -15,8 +15,8 @@ const (
 
 func TestClient_GetEvent(t *testing.T) {
 	getEventInput := new(GetInput)
-	getEventInput.EventID = fastly.ToPointer(TestEventID)
-	getEventInput.WorkspaceID = fastly.ToPointer(fastly.TestNGWAFWorkspaceID)
+	getEventInput.EventID = new(TestEventID)
+	getEventInput.WorkspaceID = new(fastly.TestNGWAFWorkspaceID)
 
 	var event *Event
 	var err error
@@ -117,8 +117,8 @@ func TestClient_GetEvent(t *testing.T) {
 
 	var events *Events
 	listEventInput := new(ListInput)
-	listEventInput.WorkspaceID = fastly.ToPointer(fastly.TestNGWAFWorkspaceID)
-	listEventInput.From = fastly.ToPointer("2024-05-27T14:08:03Z")
+	listEventInput.WorkspaceID = new(fastly.TestNGWAFWorkspaceID)
+	listEventInput.From = new("2024-05-27T14:08:03Z")
 
 	// get a list of events
 	fastly.Record(t, "list_event", func(c *fastly.Client) {
@@ -187,9 +187,9 @@ func TestClient_GetEvent(t *testing.T) {
 	}
 
 	expireEventInput := new(ExpireInput)
-	expireEventInput.WorkspaceID = fastly.ToPointer(fastly.TestNGWAFWorkspaceID)
-	expireEventInput.EventID = fastly.ToPointer(TestEventID)
-	expireEventInput.IsExpired = fastly.ToPointer(true)
+	expireEventInput.WorkspaceID = new(fastly.TestNGWAFWorkspaceID)
+	expireEventInput.EventID = new(TestEventID)
+	expireEventInput.IsExpired = new(true)
 
 	// expire an event.
 	// this test relies on the fixture, in order to rerun this without the fixture you will have to have a new unexpired event.
@@ -267,7 +267,7 @@ func TestClient_GetEvent_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
 	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 		EventID:     nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingEventID) {
@@ -284,7 +284,7 @@ func TestClient_ListEvent_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
 	_, err = List(context.TODO(), fastly.TestClient, &ListInput{
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 		From:        nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingFrom) {
@@ -301,7 +301,7 @@ func TestClient_ExpireEvent_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
 	_, err = Expire(context.TODO(), fastly.TestClient, &ExpireInput{
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 		EventID:     nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingEventID) {
@@ -309,8 +309,8 @@ func TestClient_ExpireEvent_validation(t *testing.T) {
 	}
 
 	_, err = Expire(context.TODO(), fastly.TestClient, &ExpireInput{
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
-		EventID:     fastly.ToPointer(string(TestEventID)),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
+		EventID:     new(string(TestEventID)),
 		IsExpired:   nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingIsExpired) {

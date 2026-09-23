@@ -18,10 +18,10 @@ func TestTSIGKeys(t *testing.T) {
 	var key *TSIGKey
 	fastly.Record(t, "create_tsig_key", func(c *fastly.Client) {
 		key, err = Create(ctx, c, &CreateInput{
-			Name:        fastly.ToPointer("go-fastly-test-key"),
-			Algorithm:   fastly.ToPointer("hmac-sha256"),
-			Secret:      fastly.ToPointer("dGVzdHNlY3JldA=="),
-			Description: fastly.ToPointer("go-fastly test TSIG key"),
+			Name:        new("go-fastly-test-key"),
+			Algorithm:   new("hmac-sha256"),
+			Secret:      new("dGVzdHNlY3JldA=="),
+			Description: new("go-fastly test TSIG key"),
 		})
 	})
 	require.NoError(t, err)
@@ -80,9 +80,9 @@ func TestTSIGKeys(t *testing.T) {
 	var key2 *TSIGKey
 	fastly.Record(t, "create_tsig_key_2", func(c *fastly.Client) {
 		key2, err = Create(ctx, c, &CreateInput{
-			Name:      fastly.ToPointer("go-fastly-test-key-2"),
-			Algorithm: fastly.ToPointer("hmac-sha256"),
-			Secret:    fastly.ToPointer("dGVzdHNlY3JldA=="),
+			Name:      new("go-fastly-test-key-2"),
+			Algorithm: new("hmac-sha256"),
+			Secret:    new("dGVzdHNlY3JldA=="),
 		})
 	})
 	require.NoError(t, err)
@@ -113,20 +113,20 @@ func TestTSIGKeys_validation(t *testing.T) {
 	require.ErrorIs(t, err, fastly.ErrMissingID)
 
 	_, err = Create(ctx, fastly.TestClient, &CreateInput{
-		Algorithm: fastly.ToPointer("hmac-sha256"),
-		Secret:    fastly.ToPointer("dGVzdHNlY3JldA=="),
+		Algorithm: new("hmac-sha256"),
+		Secret:    new("dGVzdHNlY3JldA=="),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingName)
 
 	_, err = Create(ctx, fastly.TestClient, &CreateInput{
-		Name:   fastly.ToPointer("go-fastly-test-key"),
-		Secret: fastly.ToPointer("dGVzdHNlY3JldA=="),
+		Name:   new("go-fastly-test-key"),
+		Secret: new("dGVzdHNlY3JldA=="),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingAlgorithm)
 
 	_, err = Create(ctx, fastly.TestClient, &CreateInput{
-		Name:      fastly.ToPointer("go-fastly-test-key"),
-		Algorithm: fastly.ToPointer("hmac-sha256"),
+		Name:      new("go-fastly-test-key"),
+		Algorithm: new("hmac-sha256"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingSecret)
 

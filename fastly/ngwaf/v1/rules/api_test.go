@@ -312,7 +312,7 @@ func runRuleTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 	defer func() {
 		fastly.Record(t, fmt.Sprintf("%s_delete_rule", scopeType), func(c *fastly.Client) {
 			err = Delete(context.TODO(), c, &DeleteInput{
-				RuleID: fastly.ToPointer(rule.RuleID),
+				RuleID: new(rule.RuleID),
 				Scope: &scope.Scope{
 					Type:      scopeType,
 					AppliesTo: []string{appliesToID},
@@ -328,7 +328,7 @@ func runRuleTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 	var testRule *Rule
 	fastly.Record(t, fmt.Sprintf("%s_get_rule", scopeType), func(c *fastly.Client) {
 		testRule, err = Get(context.TODO(), c, &GetInput{
-			RuleID: fastly.ToPointer(rule.RuleID),
+			RuleID: new(rule.RuleID),
 			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
@@ -495,7 +495,7 @@ func runRuleTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
-			RuleID:         fastly.ToPointer(rule.RuleID),
+			RuleID:         new(rule.RuleID),
 			Description:    &updatedDescription,
 			GroupOperator:  &updatedGroupOperator,
 			Enabled:        &updatedEnabled,
@@ -788,8 +788,8 @@ func runRateLimitRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 
 	fastly.Record(t, fmt.Sprintf("%s_rate_limit_create_signal", scopeType), func(c *fastly.Client) {
 		signal, err = signals.Create(context.TODO(), c, &signals.CreateInput{
-			Description: fastly.ToPointer(testDescription),
-			Name:        fastly.ToPointer(testSignalName),
+			Description: new(testDescription),
+			Name:        new(testSignalName),
 			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
@@ -917,7 +917,7 @@ func runRateLimitRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 	defer func() {
 		fastly.Record(t, fmt.Sprintf("%s_rate_limit_delete_rule", scopeType), func(c *fastly.Client) {
 			err = Delete(context.TODO(), c, &DeleteInput{
-				RuleID: fastly.ToPointer(rule.RuleID),
+				RuleID: new(rule.RuleID),
 				Scope: &scope.Scope{
 					Type:      scopeType,
 					AppliesTo: []string{appliesToID},
@@ -933,7 +933,7 @@ func runRateLimitRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 					Type:      scopeType,
 					AppliesTo: []string{appliesToID},
 				},
-				SignalID: fastly.ToPointer(signal.SignalID),
+				SignalID: new(signal.SignalID),
 			})
 		})
 		if err != nil {
@@ -1049,7 +1049,7 @@ func runRateLimitRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 	var testRule *Rule
 	fastly.Record(t, fmt.Sprintf("%s_rate_limit_get_rule", scopeType), func(c *fastly.Client) {
 		testRule, err = Get(context.TODO(), c, &GetInput{
-			RuleID: fastly.ToPointer(rule.RuleID),
+			RuleID: new(rule.RuleID),
 			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
@@ -1224,7 +1224,7 @@ func runRateLimitRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
-			RuleID:        fastly.ToPointer(rule.RuleID),
+			RuleID:        new(rule.RuleID),
 			Description:   &updatedDescription,
 			GroupOperator: &updatedGroupOperator,
 			Enabled:       &updatedEnabled,
@@ -1462,8 +1462,8 @@ func runRateLimitSignalPayloadClientIdentifierTest(t *testing.T, scopeType scope
 	var signal *signals.Signal
 	fastly.Record(t, fmt.Sprintf("%s_rate_limit_signal_client_identifier_create_signal", scopeType), func(c *fastly.Client) {
 		signal, err = signals.Create(context.TODO(), c, &signals.CreateInput{
-			Description: fastly.ToPointer(testDescription),
-			Name:        fastly.ToPointer(testSignalName),
+			Description: new(testDescription),
+			Name:        new(testSignalName),
 			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
@@ -1526,7 +1526,7 @@ func runRateLimitSignalPayloadClientIdentifierTest(t *testing.T, scopeType scope
 	defer func() {
 		fastly.Record(t, fmt.Sprintf("%s_rate_limit_signal_client_identifier_delete_rule", scopeType), func(c *fastly.Client) {
 			err = Delete(context.TODO(), c, &DeleteInput{
-				RuleID: fastly.ToPointer(rule.RuleID),
+				RuleID: new(rule.RuleID),
 				Scope: &scope.Scope{
 					Type:      scopeType,
 					AppliesTo: []string{appliesToID},
@@ -1542,7 +1542,7 @@ func runRateLimitSignalPayloadClientIdentifierTest(t *testing.T, scopeType scope
 					Type:      scopeType,
 					AppliesTo: []string{appliesToID},
 				},
-				SignalID: fastly.ToPointer(signal.SignalID),
+				SignalID: new(signal.SignalID),
 			})
 		})
 		if err != nil {
@@ -1560,7 +1560,7 @@ func runRateLimitSignalPayloadClientIdentifierTest(t *testing.T, scopeType scope
 	var fetched *Rule
 	fastly.Record(t, fmt.Sprintf("%s_rate_limit_signal_client_identifier_get_rule", scopeType), func(c *fastly.Client) {
 		fetched, err = Get(context.TODO(), c, &GetInput{
-			RuleID: fastly.ToPointer(rule.RuleID),
+			RuleID: new(rule.RuleID),
 			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
@@ -1588,7 +1588,7 @@ func runRateLimitSignalPayloadClientIdentifierTest(t *testing.T, scopeType scope
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
-			RuleID: fastly.ToPointer(rule.RuleID),
+			RuleID: new(rule.RuleID),
 			RateLimit: &UpdateRateLimit{
 				Signal:    &signal.ReferenceID,
 				Threshold: &updatedThreshold,
@@ -1811,7 +1811,7 @@ func runDeceptionRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 	defer func() {
 		fastly.Record(t, fmt.Sprintf("%s_deception_delete_rule", scopeType), func(c *fastly.Client) {
 			err = Delete(context.TODO(), c, &DeleteInput{
-				RuleID: fastly.ToPointer(rule.RuleID),
+				RuleID: new(rule.RuleID),
 				Scope: &scope.Scope{
 					Type:      scopeType,
 					AppliesTo: []string{appliesToID},
@@ -1924,7 +1924,7 @@ func runDeceptionRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 	var testRule *Rule
 	fastly.Record(t, fmt.Sprintf("%s_deception_get_rule", scopeType), func(c *fastly.Client) {
 		testRule, err = Get(context.TODO(), c, &GetInput{
-			RuleID: fastly.ToPointer(rule.RuleID),
+			RuleID: new(rule.RuleID),
 			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
@@ -2087,7 +2087,7 @@ func runDeceptionRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
-			RuleID:        fastly.ToPointer(rule.RuleID),
+			RuleID:        new(rule.RuleID),
 			Description:   &updatedDescription,
 			GroupOperator: &updatedGroupOperator,
 			Enabled:       &updatedEnabled,
@@ -2312,7 +2312,7 @@ func TestClient_TemplatedSignalRule_WorkspaceScope(t *testing.T) {
 	defer func() {
 		fastly.Record(t, "workspace_templated_signal_delete_rule", func(c *fastly.Client) {
 			err = Delete(context.TODO(), c, &DeleteInput{
-				RuleID: fastly.ToPointer(rule.RuleID),
+				RuleID: new(rule.RuleID),
 				Scope: &scope.Scope{
 					Type:      scope.ScopeTypeWorkspace,
 					AppliesTo: []string{fastly.TestNGWAFWorkspaceID},
@@ -2337,7 +2337,7 @@ func TestClient_CreateRule_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingType: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Type:  fastly.ToPointer("request"),
+		Type:  new("request"),
 		Scope: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingScope) {
@@ -2354,7 +2354,7 @@ func TestClient_GetRule_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingRuleID: got %s", err)
 	}
 	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
-		RuleID: fastly.ToPointer("123"),
+		RuleID: new("123"),
 		Scope:  nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingScope) {
@@ -2381,7 +2381,7 @@ func TestClient_UpdateRule_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingRuleID: got %s", err)
 	}
 	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
-		RuleID: fastly.ToPointer("123"),
+		RuleID: new("123"),
 		Scope:  nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingScope) {
@@ -2398,7 +2398,7 @@ func TestClient_DeleteRule_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingRuleID: got %s", err)
 	}
 	err = Delete(context.TODO(), fastly.TestClient, &DeleteInput{
-		RuleID: fastly.ToPointer("123"),
+		RuleID: new("123"),
 		Scope:  nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingScope) {

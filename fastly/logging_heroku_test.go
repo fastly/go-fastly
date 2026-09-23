@@ -21,12 +21,12 @@ func TestClient_Herokus(t *testing.T) {
 		h, err = c.CreateHeroku(context.TODO(), &CreateHerokuInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-heroku"),
-			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
-			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("none"),
-			Token:          ToPointer("super-secure-token"),
-			URL:            ToPointer("https://1.us.logplex.io/logs"),
+			Name:           new("test-heroku"),
+			Format:         new("%h %l %u %t \"%r\" %>s %b"),
+			FormatVersion:  new(2),
+			Placement:      new("none"),
+			Token:          new("super-secure-token"),
+			URL:            new("https://1.us.logplex.io/logs"),
 		})
 	})
 	if err != nil {
@@ -122,9 +122,9 @@ func TestClient_Herokus(t *testing.T) {
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-heroku",
-			NewName:          ToPointer("new-test-heroku"),
-			Token:            ToPointer("new-token"),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-heroku"),
+			Token:            new("new-token"),
+			ProcessingRegion: new("eu"),
 			Placement:        NullValue[string](),
 		})
 	})
@@ -172,12 +172,12 @@ func TestClient_Herokus_Compute(t *testing.T) {
 		h, err = c.CreateHeroku(context.TODO(), &CreateHerokuInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-heroku"),
-			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
-			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("none"),
-			Token:          ToPointer("super-secure-token"),
-			URL:            ToPointer("https://1.us.logplex.io/logs"),
+			Name:           new("test-heroku"),
+			Format:         new("%h %l %u %t \"%r\" %>s %b"),
+			FormatVersion:  new(2),
+			Placement:      new("none"),
+			Token:          new("super-secure-token"),
+			URL:            new("https://1.us.logplex.io/logs"),
 		})
 	})
 	if err != nil {
@@ -273,9 +273,9 @@ func TestClient_Herokus_Compute(t *testing.T) {
 			ServiceID:        TestComputeServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-heroku",
-			NewName:          ToPointer("new-test-heroku"),
-			Token:            ToPointer("new-token"),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-heroku"),
+			Token:            new("new-token"),
+			ProcessingRegion: new("eu"),
 			Placement:        NewNullable("none"),
 		})
 	})

@@ -21,13 +21,13 @@ func TestClient_Scalyrs(t *testing.T) {
 		s, err = c.CreateScalyr(context.TODO(), &CreateScalyrInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-scalyr"),
-			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
-			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("none"),
-			ProjectID:      ToPointer("logplex"),
-			Region:         ToPointer("US"),
-			Token:          ToPointer("super-secure-token"),
+			Name:           new("test-scalyr"),
+			Format:         new("%h %l %u %t \"%r\" %>s %b"),
+			FormatVersion:  new(2),
+			Placement:      new("none"),
+			ProjectID:      new("logplex"),
+			Region:         new("US"),
+			Token:          new("super-secure-token"),
 		})
 	})
 	if err != nil {
@@ -129,11 +129,11 @@ func TestClient_Scalyrs(t *testing.T) {
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-scalyr",
-			NewName:          ToPointer("new-test-scalyr"),
-			ProjectID:        ToPointer("app-name"),
-			Region:           ToPointer("EU"),
-			Token:            ToPointer("new-token"),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-scalyr"),
+			ProjectID:        new("app-name"),
+			Region:           new("EU"),
+			Token:            new("new-token"),
+			ProcessingRegion: new("eu"),
 			Placement:        NullValue[string](),
 		})
 	})
@@ -187,13 +187,13 @@ func TestClient_Scalyrs_Compute(t *testing.T) {
 		s, err = c.CreateScalyr(context.TODO(), &CreateScalyrInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-scalyr"),
-			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
-			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("none"),
-			ProjectID:      ToPointer("logplex"),
-			Region:         ToPointer("US"),
-			Token:          ToPointer("super-secure-token"),
+			Name:           new("test-scalyr"),
+			Format:         new("%h %l %u %t \"%r\" %>s %b"),
+			FormatVersion:  new(2),
+			Placement:      new("none"),
+			ProjectID:      new("logplex"),
+			Region:         new("US"),
+			Token:          new("super-secure-token"),
 		})
 	})
 	if err != nil {
@@ -295,11 +295,11 @@ func TestClient_Scalyrs_Compute(t *testing.T) {
 			ServiceID:        TestComputeServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-scalyr",
-			NewName:          ToPointer("new-test-scalyr"),
-			ProjectID:        ToPointer("app-name"),
-			Region:           ToPointer("EU"),
-			Token:            ToPointer("new-token"),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-scalyr"),
+			ProjectID:        new("app-name"),
+			Region:           new("EU"),
+			Token:            new("new-token"),
+			ProcessingRegion: new("eu"),
 			Placement:        NewNullable("none"),
 		})
 	})

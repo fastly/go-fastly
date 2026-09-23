@@ -45,9 +45,9 @@ func TestClient_CreateAutomationToken(t *testing.T) {
 	input := &CreateAutomationTokenInput{
 		Name:     "my-test-token",
 		Role:     EngineerRole,
-		Scope:    ToPointer(GlobalScope),
-		Username: ToPointer("XXXXXXXXXXXXXXXXXXXXXX"),
-		Password: ToPointer("XXXXXXXXXXXXXXXXXXXXXX"),
+		Scope:    new(GlobalScope),
+		Username: new("XXXXXXXXXXXXXXXXXXXXXX"),
+		Password: new("XXXXXXXXXXXXXXXXXXXXXX"),
 	}
 
 	var token *AutomationToken

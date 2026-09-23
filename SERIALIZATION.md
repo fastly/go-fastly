@@ -43,8 +43,8 @@ service with SID `1234abcd` might look like this:
   client.CreateBackend(&fastly.CreateBackendInput {
     ServiceID: serviceID,
     ServiceVersion: 5,
-    Name: fastly.ToPointer('test'),
-    Address: fastly.ToPointer('example.com'),
+    Name: new('test'),
+    Address: new('example.com'),
     Context: requestContext
   })
 ```

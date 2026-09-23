@@ -99,7 +99,7 @@ func TestClient_GetLogRecords(t *testing.T) {
 			ServiceID: TestDeliveryServiceID,
 			Start:     start,
 			End:       end,
-			Limit:     ToPointer(limit),
+			Limit:     new(limit),
 			Filters: []LogExplorerFilter{
 				{
 					Field:    LogExplorerFilterFieldResponseTime,

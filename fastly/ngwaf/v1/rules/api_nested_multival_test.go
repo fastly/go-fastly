@@ -176,7 +176,7 @@ func runNestedMultivalTest(t *testing.T, scopeType scope.Type, appliesToID strin
 	defer func() {
 		fastly.Record(t, fmt.Sprintf("%s_delete_nested_multival_rule", scopeType), func(c *fastly.Client) {
 			err = Delete(context.TODO(), c, &DeleteInput{
-				RuleID: fastly.ToPointer(rule.RuleID),
+				RuleID: new(rule.RuleID),
 				Scope: &scope.Scope{
 					Type:      scopeType,
 					AppliesTo: []string{appliesToID},
@@ -214,7 +214,7 @@ func runNestedMultivalTest(t *testing.T, scopeType scope.Type, appliesToID strin
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
-			RuleID:         fastly.ToPointer(rule.RuleID),
+			RuleID:         new(rule.RuleID),
 			Description:    &updatedDescription,
 			GroupOperator:  &groupOperator,
 			Enabled:        &enabled,

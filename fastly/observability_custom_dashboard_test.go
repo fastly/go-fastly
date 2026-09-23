@@ -12,7 +12,7 @@ func TestClient_ObservabilityCustomDashboards(t *testing.T) {
 	t.Parallel()
 
 	cocd := &CreateObservabilityCustomDashboardInput{
-		Description: ToPointer("My dashboard is super cool."),
+		Description: new("My dashboard is super cool."),
 		Name:        "My Cool Dashboard",
 		Items: []DashboardItem{{
 			DataSource: DashboardDataSource{
@@ -112,10 +112,10 @@ func TestClient_ObservabilityCustomDashboards(t *testing.T) {
 	})
 	Record(t, "observability_custom_dashboards/update_custom_dashboard", func(c *Client) {
 		ucd, err = c.UpdateObservabilityCustomDashboard(context.TODO(), &UpdateObservabilityCustomDashboardInput{
-			Description: ToPointer("My dashboard just got even cooler."),
+			Description: new("My dashboard just got even cooler."),
 			ID:          &ocd.ID,
 			Items:       &items,
-			Name:        ToPointer("My Updated Dashboard"),
+			Name:        new("My Updated Dashboard"),
 		})
 	})
 	if err != nil {

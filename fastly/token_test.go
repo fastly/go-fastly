@@ -57,10 +57,10 @@ func TestClient_CreateToken(t *testing.T) {
 	t.Parallel()
 
 	input := &CreateTokenInput{
-		Name:     ToPointer("my-test-token"),
-		Scope:    ToPointer(GlobalScope),
-		Username: ToPointer("XXXXXXXXXXXXXXXXXXXXXX"),
-		Password: ToPointer("XXXXXXXXXXXXXXXXXXXXXX"),
+		Name:     new("my-test-token"),
+		Scope:    new(GlobalScope),
+		Username: new("XXXXXXXXXXXXXXXXXXXXXX"),
+		Password: new("XXXXXXXXXXXXXXXXXXXXXX"),
 	}
 
 	var token *Token
@@ -115,10 +115,10 @@ func TestClient_CreateAndBulkDeleteTokens(t *testing.T) {
 
 	Record(t, "tokens/create_and_bulk_delete", func(c *Client) {
 		token1, err := c.CreateToken(context.TODO(), &CreateTokenInput{
-			Name:     ToPointer("my-test-token-1"),
-			Scope:    ToPointer(GlobalScope),
-			Username: ToPointer("testing@fastly.com"),
-			Password: ToPointer("foobar"),
+			Name:     new("my-test-token-1"),
+			Scope:    new(GlobalScope),
+			Username: new("testing@fastly.com"),
+			Password: new("foobar"),
 			Services: []string{"0Us63sb8R1BpWQBIhluncu", "7frORaFZvHgC6eRAJdA7kf"},
 		})
 		if err != nil {
@@ -126,10 +126,10 @@ func TestClient_CreateAndBulkDeleteTokens(t *testing.T) {
 		}
 
 		token2, err := c.CreateToken(context.TODO(), &CreateTokenInput{
-			Name:     ToPointer("my-test-token-2"),
-			Scope:    ToPointer(GlobalScope),
-			Username: ToPointer("testing@fastly.com"),
-			Password: ToPointer("foobar"),
+			Name:     new("my-test-token-2"),
+			Scope:    new(GlobalScope),
+			Username: new("testing@fastly.com"),
+			Password: new("foobar"),
 			Services: []string{"0Us63sb8R1BpWQBIhluncu", "7frORaFZvHgC6eRAJdA7kf"},
 		})
 		if err != nil {

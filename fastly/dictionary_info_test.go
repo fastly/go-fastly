@@ -29,14 +29,14 @@ func TestClient_GetDictionaryInfo(t *testing.T) {
 			DictionaryID: *testDictionary.DictionaryID,
 			Items: []*BatchDictionaryItem{
 				{
-					Operation: ToPointer(CreateBatchOperation),
-					ItemKey:   ToPointer("test-dictionary-item-0"),
-					ItemValue: ToPointer("value"),
+					Operation: new(CreateBatchOperation),
+					ItemKey:   new("test-dictionary-item-0"),
+					ItemValue: new("value"),
 				},
 				{
-					Operation: ToPointer(CreateBatchOperation),
-					ItemKey:   ToPointer("test-dictionary-item-1"),
-					ItemValue: ToPointer("value"),
+					Operation: new(CreateBatchOperation),
+					ItemKey:   new("test-dictionary-item-1"),
+					ItemValue: new("value"),
 				},
 			},
 		})

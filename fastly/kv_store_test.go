@@ -181,7 +181,7 @@ func TestClient_KVStore(t *testing.T) {
 			Key:      testKey,
 			Prepend:  true,
 			Value:    "prefix",
-			Metadata: ToPointer("meta"),
+			Metadata: new("meta"),
 		})
 		require.NoErrorf(err, "updating key %q", testKey)
 

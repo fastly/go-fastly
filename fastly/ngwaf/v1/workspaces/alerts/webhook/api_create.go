@@ -62,7 +62,7 @@ func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Alert, erro
 		Context:     i.Context,
 		Description: i.Description,
 		Events:      i.Events,
-		Type:        fastly.ToPointer(IntegrationType),
+		Type:        new(IntegrationType),
 		WorkspaceID: i.WorkspaceID,
 	}
 

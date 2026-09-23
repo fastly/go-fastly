@@ -26,7 +26,7 @@ func TestStatsClient_GetRealtimeStats(t *testing.T) {
 		_, err = c.GetRealtimeStats(context.TODO(), &GetRealtimeStatsInput{
 			ServiceID: TestDeliveryServiceID,
 			Timestamp: 0,
-			Limit:     ToPointer(uint32(3)),
+			Limit:     new(uint32(3)),
 		})
 	})
 	if err != nil {
@@ -46,7 +46,7 @@ func TestStatsClient_GetRealtimeStatsJSON(t *testing.T) {
 		err = c.GetRealtimeStatsJSON(context.TODO(), &GetRealtimeStatsInput{
 			ServiceID: TestDeliveryServiceID,
 			Timestamp: 0,
-			Limit:     ToPointer(uint32(3)),
+			Limit:     new(uint32(3)),
 		}, &ret)
 	})
 	if err != nil {

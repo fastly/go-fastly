@@ -14,32 +14,32 @@ func TestClient_Create_validation(t *testing.T) {
 
 	_, err := Create(ctx, fastly.TestClient, &CreateInput{
 		ServiceID: nil,
-		Method:    fastly.ToPointer("GET"),
-		Domain:    fastly.ToPointer("example.com"),
-		Path:      fastly.ToPointer("/test"),
+		Method:    new("GET"),
+		Domain:    new("example.com"),
+		Path:      new("/test"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingServiceID)
 
 	_, err = Create(ctx, fastly.TestClient, &CreateInput{
-		ServiceID: fastly.ToPointer("svc"),
+		ServiceID: new("svc"),
 		Method:    nil,
-		Domain:    fastly.ToPointer("example.com"),
-		Path:      fastly.ToPointer("/test"),
+		Domain:    new("example.com"),
+		Path:      new("/test"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingMethod)
 
 	_, err = Create(ctx, fastly.TestClient, &CreateInput{
-		ServiceID: fastly.ToPointer("svc"),
-		Method:    fastly.ToPointer("GET"),
+		ServiceID: new("svc"),
+		Method:    new("GET"),
 		Domain:    nil,
-		Path:      fastly.ToPointer("/test"),
+		Path:      new("/test"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingDomain)
 
 	_, err = Create(ctx, fastly.TestClient, &CreateInput{
-		ServiceID: fastly.ToPointer("svc"),
-		Method:    fastly.ToPointer("GET"),
-		Domain:    fastly.ToPointer("example.com"),
+		ServiceID: new("svc"),
+		Method:    new("GET"),
+		Domain:    new("example.com"),
 		Path:      nil,
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingPath)
@@ -50,12 +50,12 @@ func TestClient_Describe_validation(t *testing.T) {
 
 	_, err := Describe(ctx, fastly.TestClient, &DescribeInput{
 		ServiceID:   nil,
-		OperationID: fastly.ToPointer("op"),
+		OperationID: new("op"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingServiceID)
 
 	_, err = Describe(ctx, fastly.TestClient, &DescribeInput{
-		ServiceID:   fastly.ToPointer("svc"),
+		ServiceID:   new("svc"),
 		OperationID: nil,
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingID)
@@ -66,12 +66,12 @@ func TestClient_Delete_validation(t *testing.T) {
 
 	err := Delete(ctx, fastly.TestClient, &DeleteInput{
 		ServiceID:   nil,
-		OperationID: fastly.ToPointer("op"),
+		OperationID: new("op"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingServiceID)
 
 	err = Delete(ctx, fastly.TestClient, &DeleteInput{
-		ServiceID:   fastly.ToPointer("svc"),
+		ServiceID:   new("svc"),
 		OperationID: nil,
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingID)
@@ -82,12 +82,12 @@ func TestClient_Update_validation(t *testing.T) {
 
 	_, err := Update(ctx, fastly.TestClient, &UpdateInput{
 		ServiceID:   nil,
-		OperationID: fastly.ToPointer("op"),
+		OperationID: new("op"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingServiceID)
 
 	_, err = Update(ctx, fastly.TestClient, &UpdateInput{
-		ServiceID:   fastly.ToPointer("svc"),
+		ServiceID:   new("svc"),
 		OperationID: nil,
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingID)
@@ -114,50 +114,50 @@ func TestClient_Tags_validation(t *testing.T) {
 
 	_, err := CreateTag(ctx, fastly.TestClient, &CreateTagInput{
 		ServiceID: nil,
-		Name:      fastly.ToPointer("name"),
+		Name:      new("name"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingServiceID)
 
 	_, err = CreateTag(ctx, fastly.TestClient, &CreateTagInput{
-		ServiceID: fastly.ToPointer("svc"),
+		ServiceID: new("svc"),
 		Name:      nil,
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingName)
 
 	_, err = DescribeTag(ctx, fastly.TestClient, &DescribeTagInput{
 		ServiceID: nil,
-		TagID:     fastly.ToPointer("tag"),
+		TagID:     new("tag"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingServiceID)
 
 	_, err = DescribeTag(ctx, fastly.TestClient, &DescribeTagInput{
-		ServiceID: fastly.ToPointer("svc"),
+		ServiceID: new("svc"),
 		TagID:     nil,
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingID)
 
 	_, err = UpdateTag(ctx, fastly.TestClient, &UpdateTagInput{
 		ServiceID: nil,
-		TagID:     fastly.ToPointer("tag"),
-		Name:      fastly.ToPointer("tag-name"),
+		TagID:     new("tag"),
+		Name:      new("tag-name"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingServiceID)
 
 	_, err = UpdateTag(ctx, fastly.TestClient, &UpdateTagInput{
-		ServiceID: fastly.ToPointer("svc"),
+		ServiceID: new("svc"),
 		TagID:     nil,
-		Name:      fastly.ToPointer("tag-name"),
+		Name:      new("tag-name"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingID)
 
 	err = DeleteTag(ctx, fastly.TestClient, &DeleteTagInput{
 		ServiceID: nil,
-		TagID:     fastly.ToPointer("tag"),
+		TagID:     new("tag"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingServiceID)
 
 	err = DeleteTag(ctx, fastly.TestClient, &DeleteTagInput{
-		ServiceID: fastly.ToPointer("svc"),
+		ServiceID: new("svc"),
 		TagID:     nil,
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingID)
@@ -171,21 +171,21 @@ func TestClient_UpdateDiscoveredStatus_validation(t *testing.T) {
 
 	_, err := UpdateDiscoveredStatus(ctx, fastly.TestClient, &UpdateDiscoveredStatusInput{
 		ServiceID:   nil,
-		OperationID: fastly.ToPointer("op"),
-		Status:      fastly.ToPointer("IGNORED"),
+		OperationID: new("op"),
+		Status:      new("IGNORED"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingServiceID)
 
 	_, err = UpdateDiscoveredStatus(ctx, fastly.TestClient, &UpdateDiscoveredStatusInput{
-		ServiceID:   fastly.ToPointer("svc"),
+		ServiceID:   new("svc"),
 		OperationID: nil,
-		Status:      fastly.ToPointer("IGNORED"),
+		Status:      new("IGNORED"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingID)
 
 	_, err = UpdateDiscoveredStatus(ctx, fastly.TestClient, &UpdateDiscoveredStatusInput{
-		ServiceID:   fastly.ToPointer("svc"),
-		OperationID: fastly.ToPointer("op"),
+		ServiceID:   new("svc"),
+		OperationID: new("op"),
 		Status:      nil,
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingStatus)
@@ -197,21 +197,21 @@ func TestClient_BulkUpdateDiscoveredStatus_validation(t *testing.T) {
 	_, err := BulkUpdateDiscoveredStatus(ctx, fastly.TestClient, &BulkUpdateDiscoveredStatusInput{
 		ServiceID:    nil,
 		OperationIDs: []string{"op"},
-		Status:       fastly.ToPointer("IGNORED"),
+		Status:       new("IGNORED"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingServiceID)
 
 	_, err = BulkUpdateDiscoveredStatus(ctx, fastly.TestClient, &BulkUpdateDiscoveredStatusInput{
-		ServiceID:    fastly.ToPointer("svc"),
+		ServiceID:    new("svc"),
 		OperationIDs: []string{"op"},
 		Status:       nil,
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingStatus)
 
 	_, err = BulkUpdateDiscoveredStatus(ctx, fastly.TestClient, &BulkUpdateDiscoveredStatusInput{
-		ServiceID:    fastly.ToPointer("svc"),
+		ServiceID:    new("svc"),
 		OperationIDs: nil,
-		Status:       fastly.ToPointer("IGNORED"),
+		Status:       new("IGNORED"),
 	})
 	require.Error(t, err)
 	require.ErrorContains(t, err, "OperationIDs")
@@ -224,16 +224,16 @@ func TestClient_BulkCreateOperations_validation(t *testing.T) {
 		ServiceID: nil,
 		Operations: []OperationBulkCreateItem{
 			{
-				Method: fastly.ToPointer("GET"),
-				Domain: fastly.ToPointer("example.com"),
-				Path:   fastly.ToPointer("/x"),
+				Method: new("GET"),
+				Domain: new("example.com"),
+				Path:   new("/x"),
 			},
 		},
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingServiceID)
 
 	_, err = BulkCreateOperations(ctx, fastly.TestClient, &BulkCreateOperationsInput{
-		ServiceID:  fastly.ToPointer("svc"),
+		ServiceID:  new("svc"),
 		Operations: nil,
 	})
 	require.Error(t, err)
@@ -251,7 +251,7 @@ func TestClient_BulkAddTags_validation(t *testing.T) {
 	require.ErrorIs(t, err, fastly.ErrMissingServiceID)
 
 	_, err = BulkAddTags(ctx, fastly.TestClient, &BulkAddTagsInput{
-		ServiceID:    fastly.ToPointer("svc"),
+		ServiceID:    new("svc"),
 		OperationIDs: nil,
 		TagIDs:       []string{"tag"},
 	})
@@ -259,7 +259,7 @@ func TestClient_BulkAddTags_validation(t *testing.T) {
 	require.ErrorContains(t, err, "OperationIDs")
 
 	_, err = BulkAddTags(ctx, fastly.TestClient, &BulkAddTagsInput{
-		ServiceID:    fastly.ToPointer("svc"),
+		ServiceID:    new("svc"),
 		OperationIDs: []string{"op"},
 		TagIDs:       nil,
 	})

@@ -33,9 +33,9 @@ func TestClient_Users(t *testing.T) {
 	var u *User
 	Record(t, fixtureBase+"create", func(c *Client) {
 		u, err = c.CreateUser(context.TODO(), &CreateUserInput{
-			Login: ToPointer(login),
-			Name:  ToPointer("test user"),
-			Role:  ToPointer("engineer"),
+			Login: new(login),
+			Name:  new("test user"),
+			Role:  new("engineer"),
 		})
 	})
 	if err != nil {
@@ -96,8 +96,8 @@ func TestClient_Users(t *testing.T) {
 	Record(t, fixtureBase+"update", func(c *Client) {
 		uu, err = c.UpdateUser(context.TODO(), &UpdateUserInput{
 			UserID: *u.UserID,
-			Name:   ToPointer("updated user"),
-			Role:   ToPointer("superuser"),
+			Name:   new("updated user"),
+			Role:   new("superuser"),
 		})
 	})
 	if err != nil {

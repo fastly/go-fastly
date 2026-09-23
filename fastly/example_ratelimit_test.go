@@ -35,8 +35,8 @@ func ExampleClient_RateLimitRemaining() {
 	_, err = c.CreateDictionaryItem(context.TODO(), &fastly.CreateDictionaryItemInput{
 		ServiceID:    sid,
 		DictionaryID: *dict.DictionaryID,
-		ItemKey:      fastly.ToPointer("test-dictionary-item"),
-		ItemValue:    fastly.ToPointer("value"),
+		ItemKey:      new("test-dictionary-item"),
+		ItemValue:    new("value"),
 	})
 	if err != nil {
 		log.Fatal(err)

@@ -21,9 +21,9 @@ func TestClient_Tags(t *testing.T) {
 	var tag1 *OperationTag
 	fastly.Record(t, "create_tag", func(c *fastly.Client) {
 		tag1, err = CreateTag(ctx, c, &CreateTagInput{
-			ServiceID:   fastly.ToPointer(serviceID),
-			Name:        fastly.ToPointer(tagName1),
-			Description: fastly.ToPointer("go-fastly test tag"),
+			ServiceID:   new(serviceID),
+			Name:        new(tagName1),
+			Description: new("go-fastly test tag"),
 		})
 	})
 	require.NoError(t, err)
@@ -35,8 +35,8 @@ func TestClient_Tags(t *testing.T) {
 	defer func() {
 		fastly.Record(t, "delete_tag", func(c *fastly.Client) {
 			_ = DeleteTag(ctx, c, &DeleteTagInput{
-				ServiceID: fastly.ToPointer(serviceID),
-				TagID:     fastly.ToPointer(tag1.ID),
+				ServiceID: new(serviceID),
+				TagID:     new(tag1.ID),
 			})
 		})
 	}()
@@ -45,8 +45,8 @@ func TestClient_Tags(t *testing.T) {
 	var described *OperationTag
 	fastly.Record(t, "describe_tag", func(c *fastly.Client) {
 		described, err = DescribeTag(ctx, c, &DescribeTagInput{
-			ServiceID: fastly.ToPointer(serviceID),
-			TagID:     fastly.ToPointer(tag1.ID),
+			ServiceID: new(serviceID),
+			TagID:     new(tag1.ID),
 		})
 	})
 	require.NoError(t, err)
@@ -60,10 +60,10 @@ func TestClient_Tags(t *testing.T) {
 	var updated *OperationTag
 	fastly.Record(t, "update_tag", func(c *fastly.Client) {
 		updated, err = UpdateTag(ctx, c, &UpdateTagInput{
-			ServiceID:   fastly.ToPointer(serviceID),
-			TagID:       fastly.ToPointer(tag1.ID),
-			Name:        fastly.ToPointer(tagName1),
-			Description: fastly.ToPointer("updated"),
+			ServiceID:   new(serviceID),
+			TagID:       new(tag1.ID),
+			Name:        new(tagName1),
+			Description: new("updated"),
 		})
 	})
 	require.NoError(t, err)
@@ -77,9 +77,9 @@ func TestClient_Tags(t *testing.T) {
 	var tag2 *OperationTag
 	fastly.Record(t, "create_tag_2", func(c *fastly.Client) {
 		tag2, err = CreateTag(ctx, c, &CreateTagInput{
-			ServiceID:   fastly.ToPointer(serviceID),
-			Name:        fastly.ToPointer(tagName2),
-			Description: fastly.ToPointer("go-fastly test tag 2"),
+			ServiceID:   new(serviceID),
+			Name:        new(tagName2),
+			Description: new("go-fastly test tag 2"),
 		})
 	})
 	require.NoError(t, err)
@@ -90,8 +90,8 @@ func TestClient_Tags(t *testing.T) {
 	defer func() {
 		fastly.Record(t, "delete_tag_2", func(c *fastly.Client) {
 			_ = DeleteTag(ctx, c, &DeleteTagInput{
-				ServiceID: fastly.ToPointer(serviceID),
-				TagID:     fastly.ToPointer(tag2.ID),
+				ServiceID: new(serviceID),
+				TagID:     new(tag2.ID),
 			})
 		})
 	}()
@@ -100,9 +100,9 @@ func TestClient_Tags(t *testing.T) {
 	var tags *OperationTags
 	fastly.Record(t, "list_tags", func(c *fastly.Client) {
 		tags, err = ListTags(ctx, c, &ListTagsInput{
-			ServiceID: fastly.ToPointer(serviceID),
-			Limit:     fastly.ToPointer(100),
-			Page:      fastly.ToPointer(0),
+			ServiceID: new(serviceID),
+			Limit:     new(100),
+			Page:      new(0),
 		})
 	})
 	require.NoError(t, err)
@@ -125,9 +125,9 @@ func TestClient_Tags(t *testing.T) {
 	// limit respected) and assert that page 0 and page 1 return different items.
 	limit := 1
 	p := NewTagPaginator(ctx, fastly.TestClient, &ListTagsInput{
-		ServiceID: fastly.ToPointer(serviceID),
+		ServiceID: new(serviceID),
 		Limit:     &limit,
-		Page:      fastly.ToPointer(0),
+		Page:      new(0),
 	})
 
 	var (

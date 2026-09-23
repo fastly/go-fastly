@@ -19,9 +19,9 @@ func TestZones(t *testing.T) {
 	var key *tsigkeys.TSIGKey
 	fastly.Record(t, "create_tsig_key", func(c *fastly.Client) {
 		key, err = tsigkeys.Create(ctx, c, &tsigkeys.CreateInput{
-			Name:      fastly.ToPointer("go-fastly-test-key"),
-			Algorithm: fastly.ToPointer("hmac-sha256"),
-			Secret:    fastly.ToPointer("dGVzdHNlY3JldA=="),
+			Name:      new("go-fastly-test-key"),
+			Algorithm: new("hmac-sha256"),
+			Secret:    new("dGVzdHNlY3JldA=="),
 		})
 	})
 	require.NoError(t, err)
@@ -40,14 +40,14 @@ func TestZones(t *testing.T) {
 	var zone *Zone
 	fastly.Record(t, "create_zone", func(c *fastly.Client) {
 		zone, err = Create(ctx, c, &CreateInput{
-			Name:        fastly.ToPointer("go-fastly-test.com"),
-			Type:        fastly.ToPointer("secondary"),
-			Description: fastly.ToPointer("go-fastly test zone"),
+			Name:        new("go-fastly-test.com"),
+			Type:        new("secondary"),
+			Description: new("go-fastly test zone"),
 			XfrConfigInbound: &XfrConfigInboundInput{
 				Primaries: []Primary{
 					{
-						Address:     fastly.ToPointer("1.2.3.4"),
-						Description: fastly.ToPointer("primary DNS server"),
+						Address:     new("1.2.3.4"),
+						Description: new("primary DNS server"),
 					},
 				},
 				InboundTSIGKeyID: fastly.NewNullable(*key.ID),
@@ -125,9 +125,9 @@ func TestZones(t *testing.T) {
 	var zone2 *Zone
 	fastly.Record(t, "create_zone_2", func(c *fastly.Client) {
 		zone2, err = Create(ctx, c, &CreateInput{
-			Name:        fastly.ToPointer("go-fastly-test-2.com"),
-			Type:        fastly.ToPointer("secondary"),
-			Description: fastly.ToPointer("go-fastly test zone 2"),
+			Name:        new("go-fastly-test-2.com"),
+			Type:        new("secondary"),
+			Description: new("go-fastly test zone 2"),
 		})
 	})
 	require.NoError(t, err)
@@ -157,12 +157,12 @@ func TestZones_validation(t *testing.T) {
 	require.ErrorIs(t, err, fastly.ErrMissingID)
 
 	_, err = Create(ctx, fastly.TestClient, &CreateInput{
-		Type: fastly.ToPointer("primary"),
+		Type: new("primary"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingName)
 
 	_, err = Create(ctx, fastly.TestClient, &CreateInput{
-		Name: fastly.ToPointer("example.com"),
+		Name: new("example.com"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingType)
 

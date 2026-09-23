@@ -15,8 +15,8 @@ func TestClient_Services(t *testing.T) {
 	var s *Service
 	Record(t, "services/create", func(c *Client) {
 		s, err = c.CreateService(context.TODO(), &CreateServiceInput{
-			Name:    ToPointer("test-service"),
-			Comment: ToPointer("comment"),
+			Name:    new("test-service"),
+			Comment: new("comment"),
 		})
 	})
 	if err != nil {
@@ -47,8 +47,8 @@ func TestClient_Services(t *testing.T) {
 	var ss []*Service
 	Record(t, "services/list", func(c *Client) {
 		ss, err = c.ListServices(context.TODO(), &ListServicesInput{
-			Direction: ToPointer("descend"),
-			Sort:      ToPointer("created"),
+			Direction: new("descend"),
+			Sort:      new("created"),
 		})
 	})
 	if err != nil {
@@ -63,9 +63,9 @@ func TestClient_Services(t *testing.T) {
 	var paginator *ListPaginator[Service]
 	Record(t, "services/list_paginator", func(c *Client) {
 		paginator = c.GetServices(context.TODO(), &GetServicesInput{
-			Direction: ToPointer("descend"),
-			PerPage:   ToPointer(200),
-			Sort:      ToPointer("created"),
+			Direction: new("descend"),
+			PerPage:   new(200),
+			Sort:      new("created"),
 		})
 
 		for paginator.HasNext() {
@@ -153,7 +153,7 @@ func TestClient_Services(t *testing.T) {
 	Record(t, "services/update", func(c *Client) {
 		us, err = c.UpdateService(context.TODO(), &UpdateServiceInput{
 			ServiceID: *s.ServiceID,
-			Name:      ToPointer("new-test-service"),
+			Name:      new("new-test-service"),
 		})
 	})
 	if err != nil {
@@ -197,9 +197,9 @@ func TestClient_Services_Compute(t *testing.T) {
 	var s *Service
 	Record(t, "services/compute/create", func(c *Client) {
 		s, err = c.CreateService(context.TODO(), &CreateServiceInput{
-			Name:    ToPointer("test-service"),
-			Comment: ToPointer("comment"),
-			Type:    ToPointer("wasm"),
+			Name:    new("test-service"),
+			Comment: new("comment"),
+			Type:    new("wasm"),
 		})
 	})
 	if err != nil {
@@ -233,8 +233,8 @@ func TestClient_Services_Compute(t *testing.T) {
 	var ss []*Service
 	Record(t, "services/compute/list", func(c *Client) {
 		ss, err = c.ListServices(context.TODO(), &ListServicesInput{
-			Direction: ToPointer("descend"),
-			Sort:      ToPointer("created"),
+			Direction: new("descend"),
+			Sort:      new("created"),
 		})
 	})
 	if err != nil {
@@ -249,9 +249,9 @@ func TestClient_Services_Compute(t *testing.T) {
 	var paginator *ListPaginator[Service]
 	Record(t, "services/compute/list_paginator", func(c *Client) {
 		paginator = c.GetServices(context.TODO(), &GetServicesInput{
-			Direction: ToPointer("descend"),
-			PerPage:   ToPointer(200),
-			Sort:      ToPointer("created"),
+			Direction: new("descend"),
+			PerPage:   new(200),
+			Sort:      new("created"),
 		})
 
 		for paginator.HasNext() {
@@ -339,7 +339,7 @@ func TestClient_Services_Compute(t *testing.T) {
 	Record(t, "services/compute/update", func(c *Client) {
 		us, err = c.UpdateService(context.TODO(), &UpdateServiceInput{
 			ServiceID: *s.ServiceID,
-			Name:      ToPointer("new-test-service"),
+			Name:      new("new-test-service"),
 		})
 	})
 	if err != nil {
@@ -404,8 +404,8 @@ func TestClient_GetServiceDetails_WithFilters(t *testing.T) {
 	var s *Service
 	Record(t, "services/details_with_filters/create", func(c *Client) {
 		s, err = c.CreateService(context.TODO(), &CreateServiceInput{
-			Name:    ToPointer("test-service-filters"),
-			Comment: ToPointer("test filters"),
+			Name:    new("test-service-filters"),
+			Comment: new("test filters"),
 		})
 	})
 	if err != nil {
@@ -472,7 +472,7 @@ func TestClient_GetServiceDetails_WithFilters(t *testing.T) {
 	Record(t, "services/details_with_filters/version", func(c *Client) {
 		nsd3, err = c.GetServiceDetails(context.TODO(), &GetServiceDetailsInput{
 			ServiceID: *s.ServiceID,
-			Version:   ToPointer(1),
+			Version:   new(1),
 		})
 	})
 	if err != nil {
@@ -516,8 +516,8 @@ func TestClient_GetServiceDetails_StagedFilter(t *testing.T) {
 	var s *Service
 	Record(t, "services/details_staged_filter/create", func(c *Client) {
 		s, err = c.CreateService(context.TODO(), &CreateServiceInput{
-			Name:    ToPointer("test-service-staged-filter"),
-			Comment: ToPointer("test staged filter"),
+			Name:    new("test-service-staged-filter"),
+			Comment: new("test staged filter"),
 		})
 	})
 	if err != nil {

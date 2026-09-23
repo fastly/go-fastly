@@ -19,7 +19,7 @@ func TestClient_Versions(t *testing.T) {
 	Record(t, "versions/create", func(c *Client) {
 		v, err = c.CreateVersion(context.TODO(), &CreateVersionInput{
 			ServiceID: TestDeliveryServiceID,
-			Comment:   ToPointer("test comment"),
+			Comment:   new("test comment"),
 		})
 	})
 	if err != nil {
@@ -73,7 +73,7 @@ func TestClient_Versions(t *testing.T) {
 		uv, err = c.UpdateVersion(context.TODO(), &UpdateVersionInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
-			Comment:        ToPointer("new comment"),
+			Comment:        new("new comment"),
 		})
 	})
 	if err != nil {
@@ -130,7 +130,7 @@ func TestClient_Versions_Compute(t *testing.T) {
 	Record(t, "versions/compute/create", func(c *Client) {
 		v, err = c.CreateVersion(context.TODO(), &CreateVersionInput{
 			ServiceID: TestComputeServiceID,
-			Comment:   ToPointer("test comment"),
+			Comment:   new("test comment"),
 		})
 	})
 	if err != nil {
@@ -184,7 +184,7 @@ func TestClient_Versions_Compute(t *testing.T) {
 		uv, err = c.UpdateVersion(context.TODO(), &UpdateVersionInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *v.Number,
-			Comment:        ToPointer("new comment"),
+			Comment:        new("new comment"),
 		})
 	})
 	if err != nil {

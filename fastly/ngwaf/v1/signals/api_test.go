@@ -36,8 +36,8 @@ func runSignalsTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 
 	fastly.Record(t, fmt.Sprintf("%s_create_signal", scopeType), func(c *fastly.Client) {
 		signal, err = Create(context.TODO(), c, &CreateInput{
-			Description: fastly.ToPointer(testDescription),
-			Name:        fastly.ToPointer(testSignalName),
+			Description: new(testDescription),
+			Name:        new(testSignalName),
 			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
@@ -66,7 +66,7 @@ func runSignalsTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 					Type:      scopeType,
 					AppliesTo: []string{appliesToID},
 				},
-				SignalID: fastly.ToPointer(signalID),
+				SignalID: new(signalID),
 			})
 		})
 		if err != nil {
@@ -82,7 +82,7 @@ func runSignalsTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
-			SignalID: fastly.ToPointer(signalID),
+			SignalID: new(signalID),
 		})
 	})
 	if err != nil {
@@ -101,12 +101,12 @@ func runSignalsTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 	var updatedSignal *Signal
 	fastly.Record(t, fmt.Sprintf("%s_update_signal", scopeType), func(c *fastly.Client) {
 		updatedSignal, err = Update(context.TODO(), c, &UpdateInput{
-			Description: fastly.ToPointer(string(updatedSignalDescription)),
+			Description: new(string(updatedSignalDescription)),
 			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
-			SignalID: fastly.ToPointer(signalID),
+			SignalID: new(signalID),
 		})
 	})
 	if err != nil {
@@ -178,7 +178,7 @@ func TestClient_CreateSignal_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingName: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Name:  fastly.ToPointer("some Name"),
+		Name:  new("some Name"),
 		Scope: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingScope) {
@@ -195,7 +195,7 @@ func TestClient_UpdateSignal_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingSignalID: got %s", err)
 	}
 	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
-		SignalID: fastly.ToPointer("someID"),
+		SignalID: new("someID"),
 		Scope:    nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingScope) {
@@ -203,7 +203,7 @@ func TestClient_UpdateSignal_validation(t *testing.T) {
 	}
 	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
 		Description: nil,
-		SignalID:    fastly.ToPointer("someID"),
+		SignalID:    new("someID"),
 		Scope: &scope.Scope{
 			Type:      scope.ScopeTypeWorkspace,
 			AppliesTo: []string{},
@@ -223,7 +223,7 @@ func TestClient_DeleteSignal_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingSignalID: got %s", err)
 	}
 	err = Delete(context.TODO(), fastly.TestClient, &DeleteInput{
-		SignalID: fastly.ToPointer("someID"),
+		SignalID: new("someID"),
 		Scope:    nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingScope) {

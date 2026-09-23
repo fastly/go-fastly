@@ -22,11 +22,11 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 		n, err = c.CreateNewRelicOTLP(context.TODO(), &CreateNewRelicOTLPInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-newrelicotlp"),
-			Token:          ToPointer("abcd1234"),
-			URL:            ToPointer("https://example.nr-data.net"),
-			Format:         ToPointer("format"),
-			Placement:      ToPointer("none"),
+			Name:           new("test-newrelicotlp"),
+			Token:          new("abcd1234"),
+			URL:            new("https://example.nr-data.net"),
+			Format:         new("format"),
+			Placement:      new("none"),
 		})
 	})
 	if err != nil {
@@ -122,9 +122,9 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-newrelicotlp",
-			NewName:          ToPointer("new-test-newrelicotlp"),
-			FormatVersion:    ToPointer(2),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-newrelicotlp"),
+			FormatVersion:    new(2),
+			ProcessingRegion: new("eu"),
 			Placement:        NullValue[string](),
 		})
 	})
@@ -172,11 +172,11 @@ func TestClient_NewRelicOTLP_Compute(t *testing.T) {
 		n, err = c.CreateNewRelicOTLP(context.TODO(), &CreateNewRelicOTLPInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-newrelicotlp"),
-			Token:          ToPointer("abcd1234"),
-			URL:            ToPointer("https://example.nr-data.net"),
-			Format:         ToPointer("format"),
-			Placement:      ToPointer("none"),
+			Name:           new("test-newrelicotlp"),
+			Token:          new("abcd1234"),
+			URL:            new("https://example.nr-data.net"),
+			Format:         new("format"),
+			Placement:      new("none"),
 		})
 	})
 	if err != nil {
@@ -272,9 +272,9 @@ func TestClient_NewRelicOTLP_Compute(t *testing.T) {
 			ServiceID:        TestComputeServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-newrelicotlp",
-			NewName:          ToPointer("new-test-newrelicotlp"),
-			FormatVersion:    ToPointer(2),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-newrelicotlp"),
+			FormatVersion:    new(2),
+			ProcessingRegion: new("eu"),
 			Placement:        NewNullable("none"),
 		})
 	})
@@ -321,7 +321,7 @@ func TestUpdateNewRelicOTLPInput_MarshalJSON(t *testing.T) {
 				Name:           "test-newrelicotlp",
 				ServiceID:      "foo",
 				ServiceVersion: 1,
-				NewName:        ToPointer("new-test-newrelicotlp"),
+				NewName:        new("new-test-newrelicotlp"),
 			},
 			wantJSON: `{"name":"new-test-newrelicotlp"}`,
 		},

@@ -27,7 +27,7 @@ func TestClient_Providers(t *testing.T) {
 	var models *Models
 	fastly.Record(t, "list_models", func(c *fastly.Client) {
 		models, err = ListModels(ctx, c, &ListModelsInput{
-			ProviderID: fastly.ToPointer(providerID),
+			ProviderID: new(providerID),
 		})
 	})
 	require.NoError(t, err)
