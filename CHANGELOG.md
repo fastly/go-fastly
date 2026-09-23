@@ -8,6 +8,8 @@
 
 ### Enhancements:
 
+- feat(domainmanagement): add support for routing configs, paths, rules, drafts, and versions ([CDTOOL-1743](https://fastly.atlassian.net/browse/CDTOOL-1743))
+
 ### Bug fixes:
 
 ### Dependencies:

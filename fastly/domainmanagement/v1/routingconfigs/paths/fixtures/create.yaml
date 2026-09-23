@@ -1,0 +1,50 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"path":"/fiesta"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/17.4.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/domain-management/v1/routing-configs/5vAluJJmMKxmAZLIVjVP6T/paths
+    method: POST
+  response:
+    body: |
+      {"created_at":"2026-09-23T16:50:03.548062992Z","id":"5EEbCR1aP6Ajdck5dNazHe","links":{"rules":"/domain-management/v1/routing-configs/5vAluJJmMKxmAZLIVjVP6T/paths/5EEbCR1aP6Ajdck5dNazHe/rules","self":"/domain-management/v1/routing-configs/5vAluJJmMKxmAZLIVjVP6T/paths/5EEbCR1aP6Ajdck5dNazHe"},"path":"/fiesta"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "310"
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 23 Sep 2026 16:50:03 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "80"
+      X-Served-By:
+      - cache-chi-klot8100159-CHI, cache-ewr-kewr1740056-EWR
+      X-Timer:
+      - S1790182203.483693,VS0,VE113
+    status: 201 Created
+    code: 201
+    duration: ""

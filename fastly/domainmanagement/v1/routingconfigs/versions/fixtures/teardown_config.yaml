@@ -1,0 +1,41 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/17.4.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/domain-management/v1/routing-configs/2rI2h8Ya3lvL61jrxvTqPn?force=true
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Date:
+      - Wed, 23 Sep 2026 16:50:07 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "2335"
+      X-Served-By:
+      - cache-chi-kigq8000097-CHI, cache-nyc-kteb1890022-NYC
+      X-Timer:
+      - S1790182205.266518,VS0,VE2363
+    status: 204 No Content
+    code: 204
+    duration: ""
