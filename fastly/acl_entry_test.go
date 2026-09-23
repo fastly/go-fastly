@@ -25,10 +25,10 @@ func TestClient_ACLEntries(t *testing.T) {
 		e, err = c.CreateACLEntry(context.TODO(), &CreateACLEntryInput{
 			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ACLID,
-			IP:        ToPointer("10.0.0.3"),
-			Subnet:    ToPointer(8),
-			Negated:   ToPointer(Compatibool(false)),
-			Comment:   ToPointer("test entry"),
+			IP:        new("10.0.0.3"),
+			Subnet:    new(8),
+			Negated:   new(Compatibool(false)),
+			Comment:   new("test entry"),
 		})
 	})
 	if err != nil {
@@ -56,9 +56,9 @@ func TestClient_ACLEntries(t *testing.T) {
 	Record(t, fixtureBase+"list", func(c *Client) {
 		es, err = c.ListACLEntries(context.TODO(), &ListACLEntriesInput{
 			ACLID:     *testACL.ACLID,
-			Direction: ToPointer("descend"),
+			Direction: new("descend"),
 			ServiceID: *testService.ServiceID,
-			Sort:      ToPointer("created"),
+			Sort:      new("created"),
 		})
 	})
 	if err != nil {
@@ -75,10 +75,10 @@ func TestClient_ACLEntries(t *testing.T) {
 	Record(t, fixtureBase+"list2", func(c *Client) {
 		paginator = c.GetACLEntries(context.TODO(), &GetACLEntriesInput{
 			ACLID:     *testACL.ACLID,
-			Direction: ToPointer("ascend"),
-			PerPage:   ToPointer(50),
+			Direction: new("ascend"),
+			PerPage:   new(50),
 			ServiceID: *testService.ServiceID,
-			Sort:      ToPointer("ip"),
+			Sort:      new("ip"),
 		})
 
 		for paginator.HasNext() {
@@ -133,8 +133,8 @@ func TestClient_ACLEntries(t *testing.T) {
 			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ACLID,
 			EntryID:   *e.EntryID,
-			IP:        ToPointer("10.0.0.4"),
-			Negated:   ToPointer(Compatibool(true)),
+			IP:        new("10.0.0.4"),
+			Negated:   new(Compatibool(true)),
 		})
 	})
 	if err != nil {

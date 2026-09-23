@@ -59,7 +59,7 @@ func TestClient_DomainToolsStatusEstimate(t *testing.T) {
 	fastly.Record(t, "get_estimate", func(client *fastly.Client) {
 		status, err = Get(context.TODO(), client, &GetInput{
 			Domain: domain,
-			Scope:  fastly.ToPointer(ScopeEstimate),
+			Scope:  new(ScopeEstimate),
 		})
 	})
 
@@ -89,7 +89,7 @@ func TestClient_DomainToolsStatusOffers(t *testing.T) {
 	fastly.Record(t, "get_offers", func(client *fastly.Client) {
 		status, err = Get(context.TODO(), client, &GetInput{
 			Domain: domain,
-			Scope:  fastly.ToPointer(ScopeEstimate),
+			Scope:  new(ScopeEstimate),
 		})
 	})
 

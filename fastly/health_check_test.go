@@ -22,21 +22,21 @@ func TestClient_HealthChecks(t *testing.T) {
 		hc, err = c.CreateHealthCheck(context.TODO(), &CreateHealthCheckInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-healthcheck"),
-			Method:         ToPointer(http.MethodHead),
-			Headers: ToPointer([]string{
+			Name:           new("test-healthcheck"),
+			Method:         new(http.MethodHead),
+			Headers: new([]string{
 				"Foo: Bar",
 				"Baz: Qux",
 			}),
-			Host:             ToPointer("example.com"),
-			Path:             ToPointer("/foo"),
-			HTTPVersion:      ToPointer("1.1"),
-			Timeout:          ToPointer(1500),
-			CheckInterval:    ToPointer(2500),
-			ExpectedResponse: ToPointer(http.StatusOK),
-			Window:           ToPointer(5000),
-			Threshold:        ToPointer(10),
-			Initial:          ToPointer(10),
+			Host:             new("example.com"),
+			Path:             new("/foo"),
+			HTTPVersion:      new("1.1"),
+			Timeout:          new(1500),
+			CheckInterval:    new(2500),
+			ExpectedResponse: new(http.StatusOK),
+			Window:           new(5000),
+			Threshold:        new(10),
+			Initial:          new(10),
 		})
 	})
 	if err != nil {
@@ -171,8 +171,8 @@ func TestClient_HealthChecks(t *testing.T) {
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-healthcheck",
-			NewName:        ToPointer("new-test-healthcheck"),
-			Headers:        ToPointer([]string{"Beep: Boop"}),
+			NewName:        new("new-test-healthcheck"),
+			Headers:        new([]string{"Beep: Boop"}),
 		})
 	})
 	if err != nil {
@@ -213,20 +213,20 @@ func TestClient_HealthChecks_Compute(t *testing.T) {
 		hc, err = c.CreateHealthCheck(context.TODO(), &CreateHealthCheckInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-healthcheck"),
-			Method:         ToPointer(http.MethodHead),
-			Headers: ToPointer([]string{
+			Name:           new("test-healthcheck"),
+			Method:         new(http.MethodHead),
+			Headers: new([]string{
 				"Foo: Bar",
 				"Baz: Qux",
 			}),
-			Host:             ToPointer("example.com"),
-			Path:             ToPointer("/foo"),
-			Timeout:          ToPointer(1500),
-			CheckInterval:    ToPointer(2500),
-			ExpectedResponse: ToPointer(http.StatusOK),
-			Window:           ToPointer(5000),
-			Threshold:        ToPointer(10),
-			Initial:          ToPointer(10),
+			Host:             new("example.com"),
+			Path:             new("/foo"),
+			Timeout:          new(1500),
+			CheckInterval:    new(2500),
+			ExpectedResponse: new(http.StatusOK),
+			Window:           new(5000),
+			Threshold:        new(10),
+			Initial:          new(10),
 		})
 	})
 	if err != nil {
@@ -361,8 +361,8 @@ func TestClient_HealthChecks_Compute(t *testing.T) {
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-healthcheck",
-			NewName:        ToPointer("new-test-healthcheck"),
-			Headers:        ToPointer([]string{"Beep: Boop"}),
+			NewName:        new("new-test-healthcheck"),
+			Headers:        new([]string{"Beep: Boop"}),
 		})
 	})
 	if err != nil {

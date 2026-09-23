@@ -21,17 +21,17 @@ func TestClient_RequestSettings(t *testing.T) {
 		rs, err = c.CreateRequestSetting(context.TODO(), &CreateRequestSettingInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-request-setting"),
-			ForceMiss:      ToPointer(Compatibool(true)),
-			ForceSSL:       ToPointer(Compatibool(true)),
-			Action:         ToPointer(RequestSettingActionLookup),
-			BypassBusyWait: ToPointer(Compatibool(true)),
-			MaxStaleAge:    ToPointer(30),
-			HashKeys:       ToPointer("a,b,c"),
-			XForwardedFor:  ToPointer(RequestSettingXFFLeave),
-			TimerSupport:   ToPointer(Compatibool(true)),
-			GeoHeaders:     ToPointer(Compatibool(true)),
-			DefaultHost:    ToPointer("example.com"),
+			Name:           new("test-request-setting"),
+			ForceMiss:      new(Compatibool(true)),
+			ForceSSL:       new(Compatibool(true)),
+			Action:         new(RequestSettingActionLookup),
+			BypassBusyWait: new(Compatibool(true)),
+			MaxStaleAge:    new(30),
+			HashKeys:       new("a,b,c"),
+			XForwardedFor:  new(RequestSettingXFFLeave),
+			TimerSupport:   new(Compatibool(true)),
+			GeoHeaders:     new(Compatibool(true)),
+			DefaultHost:    new("example.com"),
 		})
 	})
 	if err != nil {
@@ -157,8 +157,8 @@ func TestClient_RequestSettings(t *testing.T) {
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-request-setting",
-			NewName:        ToPointer("new-test-request-setting"),
-			Action:         ToPointer(RequestSettingActionPass),
+			NewName:        new("new-test-request-setting"),
+			Action:         new(RequestSettingActionPass),
 		})
 	})
 	if err != nil {
@@ -178,7 +178,7 @@ func TestClient_RequestSettings(t *testing.T) {
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-request-setting",
-			Action:         ToPointer(RequestSettingAction("")),
+			Action:         new(RequestSettingAction("")),
 		})
 	})
 	if err != nil {
@@ -195,7 +195,7 @@ func TestClient_RequestSettings(t *testing.T) {
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-request-setting",
-			Action:         ToPointer(RequestSettingActionUnset),
+			Action:         new(RequestSettingActionUnset),
 		})
 	})
 	if err != nil {

@@ -37,14 +37,14 @@ func runListsTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 	var list *List
 	fastly.Record(t, fmt.Sprintf("%s_create_list", scopeType), func(c *fastly.Client) {
 		list, err = Create(context.TODO(), c, &CreateInput{
-			Description: fastly.ToPointer(listDescription),
-			Entries:     fastly.ToPointer(listEntries),
-			Name:        fastly.ToPointer(testListName),
+			Description: new(listDescription),
+			Entries:     new(listEntries),
+			Name:        new(testListName),
 			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
 			},
-			Type: fastly.ToPointer(listType),
+			Type: new(listType),
 		})
 	})
 	if err != nil {
@@ -76,7 +76,7 @@ func runListsTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 	defer func() {
 		fastly.Record(t, fmt.Sprintf("%s_delete_list", scopeType), func(c *fastly.Client) {
 			err = Delete(context.TODO(), c, &DeleteInput{
-				ListID: fastly.ToPointer(list.ListID),
+				ListID: new(list.ListID),
 				Scope: &scope.Scope{
 					Type:      scopeType,
 					AppliesTo: []string{appliesToID},
@@ -92,7 +92,7 @@ func runListsTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 	var getList *List
 	fastly.Record(t, fmt.Sprintf("%s_get_list", scopeType), func(c *fastly.Client) {
 		getList, err = Get(context.TODO(), c, &GetInput{
-			ListID: fastly.ToPointer(list.ListID),
+			ListID: new(list.ListID),
 			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
@@ -133,9 +133,9 @@ func runListsTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 	var updateList *List
 	fastly.Record(t, fmt.Sprintf("%s_update_list", scopeType), func(c *fastly.Client) {
 		updateList, err = Update(context.TODO(), c, &UpdateInput{
-			Description: fastly.ToPointer(updateListDescription),
-			Entries:     fastly.ToPointer(updateListEntries),
-			ListID:      fastly.ToPointer(list.ListID),
+			Description: new(updateListDescription),
+			Entries:     new(updateListEntries),
+			ListID:      new(list.ListID),
 			Scope: &scope.Scope{
 				Type:      scopeType,
 				AppliesTo: []string{appliesToID},
@@ -217,24 +217,24 @@ func TestClient_CreateList_validation(t *testing.T) {
 		t.Errorf("expected ErrmissingEntries: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Entries: fastly.ToPointer([]string{listEntry}),
+		Entries: new([]string{listEntry}),
 		Name:    nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingName) {
 		t.Errorf("expected ErrMissingName: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Entries: fastly.ToPointer([]string{listEntry}),
-		Name:    fastly.ToPointer(listName),
+		Entries: new([]string{listEntry}),
+		Name:    new(listName),
 		Type:    nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingType) {
 		t.Errorf("expected ErrMissingType: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Entries: fastly.ToPointer([]string{listEntry}),
-		Name:    fastly.ToPointer(listName),
-		Type:    fastly.ToPointer(listType),
+		Entries: new([]string{listEntry}),
+		Name:    new(listName),
+		Type:    new(listType),
 		Scope:   nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingScope) {
@@ -251,7 +251,7 @@ func TestClient_GetList_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingListID: got %s", err)
 	}
 	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
-		ListID: fastly.ToPointer("someID"),
+		ListID: new("someID"),
 		Scope:  nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingScope) {
@@ -268,7 +268,7 @@ func TestClient_UpdateList_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingListID: got %s", err)
 	}
 	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
-		ListID: fastly.ToPointer("someID"),
+		ListID: new("someID"),
 		Scope:  nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingScope) {
@@ -285,7 +285,7 @@ func TestClient_DeleteList_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingListID: got %s", err)
 	}
 	err = Delete(context.TODO(), fastly.TestClient, &DeleteInput{
-		ListID: fastly.ToPointer("someID"),
+		ListID: new("someID"),
 		Scope:  nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingScope) {

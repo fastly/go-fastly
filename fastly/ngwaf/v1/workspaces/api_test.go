@@ -16,10 +16,10 @@ func TestClient_Workspace(t *testing.T) {
 	const wsDefaultBlockingResponseCode = 406
 
 	wsAttackSignalThresholds := new(AttackSignalThresholdsCreateInput)
-	wsAttackSignalThresholds.OneMinute = fastly.ToPointer(10000)
-	wsAttackSignalThresholds.TenMinutes = fastly.ToPointer(10000)
-	wsAttackSignalThresholds.OneHour = fastly.ToPointer(10000)
-	wsAttackSignalThresholds.Immediate = fastly.ToPointer(true)
+	wsAttackSignalThresholds.OneMinute = new(10000)
+	wsAttackSignalThresholds.TenMinutes = new(10000)
+	wsAttackSignalThresholds.OneHour = new(10000)
+	wsAttackSignalThresholds.Immediate = new(true)
 
 	wsClientIPHeaders := []string{"X-Forwarded-For", "X-Real-IP"}
 
@@ -45,10 +45,10 @@ func TestClient_Workspace(t *testing.T) {
 	var ws *Workspace
 	fastly.Record(t, "create_workspace", func(c *fastly.Client) {
 		ws, err = Create(context.TODO(), c, &CreateInput{
-			Name:                   fastly.ToPointer(wsName),
-			Description:            fastly.ToPointer(wsDescription),
-			Mode:                   fastly.ToPointer(wsMode),
-			IPAnonymization:        fastly.ToPointer(wsIPAnonymization),
+			Name:                   new(wsName),
+			Description:            new(wsDescription),
+			Mode:                   new(wsMode),
+			IPAnonymization:        new(wsIPAnonymization),
 			AttackSignalThresholds: wsAttackSignalThresholds,
 			ClientIPHeaders:        wsClientIPHeaders,
 		})
@@ -96,7 +96,7 @@ func TestClient_Workspace(t *testing.T) {
 	defer func() {
 		fastly.Record(t, "delete_workspace", func(c *fastly.Client) {
 			err = Delete(context.TODO(), c, &DeleteInput{
-				WorkspaceID: fastly.ToPointer(ws.WorkspaceID),
+				WorkspaceID: new(ws.WorkspaceID),
 			})
 		})
 		if err != nil {
@@ -108,7 +108,7 @@ func TestClient_Workspace(t *testing.T) {
 	var gws *Workspace
 	fastly.Record(t, "get_workspace", func(c *fastly.Client) {
 		gws, err = Get(context.TODO(), c, &GetInput{
-			WorkspaceID: fastly.ToPointer(ws.WorkspaceID),
+			WorkspaceID: new(ws.WorkspaceID),
 		})
 	})
 	if err != nil {
@@ -159,24 +159,24 @@ func TestClient_Workspace(t *testing.T) {
 	const uwsDefaultRedirectURL = "http://www.test-redirect.com"
 
 	uwsAttackSignalThresholds := new(AttackSignalThresholdsUpdateInput)
-	uwsAttackSignalThresholds.OneMinute = fastly.ToPointer(5000)
-	uwsAttackSignalThresholds.TenMinutes = fastly.ToPointer(5000)
-	uwsAttackSignalThresholds.OneHour = fastly.ToPointer(5000)
-	uwsAttackSignalThresholds.Immediate = fastly.ToPointer(false)
+	uwsAttackSignalThresholds.OneMinute = new(5000)
+	uwsAttackSignalThresholds.TenMinutes = new(5000)
+	uwsAttackSignalThresholds.OneHour = new(5000)
+	uwsAttackSignalThresholds.Immediate = new(false)
 
 	uwsClientIPHeaders := []string{"X-Forwarded-For"}
 
 	var uws *Workspace
 	fastly.Record(t, "update_workspace", func(c *fastly.Client) {
 		uws, err = Update(context.TODO(), c, &UpdateInput{
-			WorkspaceID:                 fastly.ToPointer(ws.WorkspaceID),
-			Name:                        fastly.ToPointer(uwsName),
-			Description:                 fastly.ToPointer(uwsDescription),
-			Mode:                        fastly.ToPointer(uwsMode),
-			IPAnonymization:             fastly.ToPointer(uwsIPAnonymization),
+			WorkspaceID:                 new(ws.WorkspaceID),
+			Name:                        new(uwsName),
+			Description:                 new(uwsDescription),
+			Mode:                        new(uwsMode),
+			IPAnonymization:             new(uwsIPAnonymization),
 			AttackSignalThresholds:      uwsAttackSignalThresholds,
-			DefaultBlockingResponseCode: fastly.ToPointer(uwsDefaultBlockingResponseCode),
-			DefaultRedirectURL:          fastly.ToPointer(uwsDefaultRedirectURL),
+			DefaultBlockingResponseCode: new(uwsDefaultBlockingResponseCode),
+			DefaultRedirectURL:          new(uwsDefaultRedirectURL),
 			ClientIPHeaders:             uwsClientIPHeaders,
 		})
 	})
@@ -242,7 +242,7 @@ func TestClient_CreateWorkspace_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingName: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Name: fastly.ToPointer("test"),
+		Name: new("test"),
 		Mode: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingMode) {

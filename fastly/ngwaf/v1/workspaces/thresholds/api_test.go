@@ -26,12 +26,12 @@ func TestClient_Thresholds(t *testing.T) {
 
 	fastly.Record(t, "create_threshold", func(c *fastly.Client) {
 		threshold, err = Create(context.TODO(), c, &CreateInput{
-			Action:      fastly.ToPointer(testAction),
-			Interval:    fastly.ToPointer(testInterval),
-			Limit:       fastly.ToPointer(testLimit),
-			Name:        fastly.ToPointer(testName),
-			Signal:      fastly.ToPointer(testSignal),
-			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+			Action:      new(testAction),
+			Interval:    new(testInterval),
+			Limit:       new(testLimit),
+			Name:        new(testName),
+			Signal:      new(testSignal),
+			WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 		})
 	})
 	if err != nil {
@@ -67,8 +67,8 @@ func TestClient_Thresholds(t *testing.T) {
 	defer func() {
 		fastly.Record(t, "delete_threshold", func(c *fastly.Client) {
 			err = Delete(context.TODO(), c, &DeleteInput{
-				ThresholdID: fastly.ToPointer(thresholdID),
-				WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+				ThresholdID: new(thresholdID),
+				WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 			})
 		})
 		if err != nil {
@@ -80,8 +80,8 @@ func TestClient_Thresholds(t *testing.T) {
 	var getTestThreshold *Threshold
 	fastly.Record(t, "get_threshold", func(c *fastly.Client) {
 		getTestThreshold, err = Get(context.TODO(), c, &GetInput{
-			ThresholdID: fastly.ToPointer(thresholdID),
-			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+			ThresholdID: new(thresholdID),
+			WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 		})
 	})
 	if err != nil {
@@ -127,16 +127,16 @@ func TestClient_Thresholds(t *testing.T) {
 	var updatedThreshold *Threshold
 	fastly.Record(t, "update_threshold", func(c *fastly.Client) {
 		updatedThreshold, err = Update(context.TODO(), c, &UpdateInput{
-			Action:      fastly.ToPointer(updatedtestAction),
-			Duration:    fastly.ToPointer(updatedTestDuration),
-			DontNotify:  fastly.ToPointer(updatedTestDontNotify),
-			Enabled:     fastly.ToPointer(updatedTestEnabled),
-			Interval:    fastly.ToPointer(updatedTestInterval),
-			Limit:       fastly.ToPointer(updateTestLimit),
-			Name:        fastly.ToPointer(updatedTestName),
-			Signal:      fastly.ToPointer(updatedTestSignal),
-			ThresholdID: fastly.ToPointer(thresholdID),
-			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+			Action:      new(updatedtestAction),
+			Duration:    new(updatedTestDuration),
+			DontNotify:  new(updatedTestDontNotify),
+			Enabled:     new(updatedTestEnabled),
+			Interval:    new(updatedTestInterval),
+			Limit:       new(updateTestLimit),
+			Name:        new(updatedTestName),
+			Signal:      new(updatedTestSignal),
+			ThresholdID: new(thresholdID),
+			WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 		})
 	})
 	if err != nil {
@@ -171,8 +171,8 @@ func TestClient_Thresholds(t *testing.T) {
 	var listedThresholds *Thresholds
 	fastly.Record(t, "list_threshold", func(c *fastly.Client) {
 		listedThresholds, err = List(context.TODO(), c, &ListInput{
-			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
-			Limit:       fastly.ToPointer(1),
+			WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
+			Limit:       new(1),
 		})
 	})
 	if err != nil {
@@ -199,7 +199,7 @@ func TestClient_GetThreshold_validation(t *testing.T) {
 	}
 	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		ThresholdID: nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingThresholdID) {
 		t.Errorf("expected ErrMissingThresholdID: got %s", err)
@@ -216,45 +216,45 @@ func TestClient_CreateThreshold_validation(t *testing.T) {
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		Name:        nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingName) {
 		t.Errorf("expected ErrMissingName: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		Action:      nil,
-		Name:        fastly.ToPointer(testName),
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		Name:        new(testName),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingAction) {
 		t.Errorf("expected ErrMissingAction: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Action:      fastly.ToPointer(testAction),
+		Action:      new(testAction),
 		Limit:       nil,
-		Name:        fastly.ToPointer(testName),
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		Name:        new(testName),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingLimit) {
 		t.Errorf("expected ErrMissingLimit: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Action:      fastly.ToPointer(testAction),
-		Limit:       fastly.ToPointer(testLimit),
+		Action:      new(testAction),
+		Limit:       new(testLimit),
 		Interval:    nil,
-		Name:        fastly.ToPointer(testName),
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		Name:        new(testName),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingInterval) {
 		t.Errorf("expected ErrMissingInterval: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Action:      fastly.ToPointer(testAction),
-		Limit:       fastly.ToPointer(testLimit),
-		Interval:    fastly.ToPointer(testInterval),
+		Action:      new(testAction),
+		Limit:       new(testLimit),
+		Interval:    new(testInterval),
 		Signal:      nil,
-		Name:        fastly.ToPointer(testName),
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		Name:        new(testName),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingSignal) {
 		t.Errorf("expected ErrMissingSignal: got %s", err)
@@ -271,15 +271,15 @@ func TestClient_UpdateThreshold_validation(t *testing.T) {
 	}
 	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
 		ThresholdID: nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingThresholdID) {
 		t.Errorf("expected ErrMissingThresholdID: got %s", err)
 	}
 	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
-		ThresholdID: fastly.ToPointer("someID"),
+		ThresholdID: new("someID"),
 		Action:      nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingAction) {
 		t.Errorf("expected ErrMissingAction: got %s", err)
@@ -296,7 +296,7 @@ func TestClient_DeleteThreshold_validation(t *testing.T) {
 	}
 	err = Delete(context.TODO(), fastly.TestClient, &DeleteInput{
 		ThresholdID: nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingThresholdID) {
 		t.Errorf("expected ErrMissingThresholdID: got %s", err)

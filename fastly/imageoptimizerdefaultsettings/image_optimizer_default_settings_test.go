@@ -64,10 +64,10 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 					ServiceVersion: *testVersion.Number,
 					// just use default resizefilter & jpegtype since it doesn't matter much, and it's annoying
 					// to parse the API output strings back into enums.
-					ResizeFilter: fastly.ToPointer(fastly.ImageOptimizerNearest),
+					ResizeFilter: new(fastly.ImageOptimizerNearest),
 					Webp:         &originalSettings.Webp,
 					WebpQuality:  &originalSettings.WebpQuality,
-					JpegType:     fastly.ToPointer(fastly.ImageOptimizerAuto),
+					JpegType:     new(fastly.ImageOptimizerAuto),
 					JpegQuality:  &originalSettings.JpegQuality,
 					Upscale:      &originalSettings.Upscale,
 					AllowVideo:   &originalSettings.AllowVideo,
@@ -227,13 +227,13 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 		defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(context.TODO(), &fastly.UpdateImageOptimizerDefaultSettingsInput{
 			ServiceID:      fastly.TestDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
-			ResizeFilter:   fastly.ToPointer(fastly.ImageOptimizerLanczos3),
-			Webp:           fastly.ToPointer(false),
-			WebpQuality:    fastly.ToPointer(85),
-			JpegType:       fastly.ToPointer(fastly.ImageOptimizerAuto),
-			JpegQuality:    fastly.ToPointer(85),
-			Upscale:        fastly.ToPointer(false),
-			AllowVideo:     fastly.ToPointer(false),
+			ResizeFilter:   new(fastly.ImageOptimizerLanczos3),
+			Webp:           new(false),
+			WebpQuality:    new(85),
+			JpegType:       new(fastly.ImageOptimizerAuto),
+			JpegQuality:    new(85),
+			Upscale:        new(false),
+			AllowVideo:     new(false),
 		})
 	})
 }

@@ -42,8 +42,8 @@ sub vcl_hash {
 		vcl, err = c.CreateVCL(context.TODO(), &CreateVCLInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-vcl"),
-			Content:        ToPointer(content),
+			Name:           new("test-vcl"),
+			Content:        new(content),
 		})
 	})
 	if err != nil {
@@ -115,7 +115,7 @@ sub vcl_hash {
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-vcl",
-			NewName:        ToPointer("new-test-vcl"),
+			NewName:        new("new-test-vcl"),
 		})
 	})
 	if err != nil {

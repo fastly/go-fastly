@@ -35,7 +35,7 @@ func TestClient_ComputeACL(t *testing.T) {
 	var acl *ComputeACL
 	fastly.Record(t, "create_acl", func(c *fastly.Client) {
 		acl, err = Create(context.TODO(), c, &CreateInput{
-			Name: fastly.ToPointer(aclName),
+			Name: new(aclName),
 		})
 	})
 	if err != nil {
@@ -49,7 +49,7 @@ func TestClient_ComputeACL(t *testing.T) {
 	defer func() {
 		fastly.Record(t, "delete_acl", func(c *fastly.Client) {
 			err = Delete(context.TODO(), c, &DeleteInput{
-				ComputeACLID: fastly.ToPointer(acl.ComputeACLID),
+				ComputeACLID: new(acl.ComputeACLID),
 			})
 		})
 		if err != nil {
@@ -61,7 +61,7 @@ func TestClient_ComputeACL(t *testing.T) {
 	var da *ComputeACL
 	fastly.Record(t, "describe_acl", func(c *fastly.Client) {
 		da, err = Describe(context.TODO(), c, &DescribeInput{
-			ComputeACLID: fastly.ToPointer(acl.ComputeACLID),
+			ComputeACLID: new(acl.ComputeACLID),
 		})
 	})
 	if err != nil {
@@ -76,31 +76,31 @@ func TestClient_ComputeACL(t *testing.T) {
 
 	entries := []*BatchComputeACLEntry{
 		{
-			Operation: fastly.ToPointer("create"),
-			Prefix:    fastly.ToPointer("1.2.3.0/24"),
-			Action:    fastly.ToPointer("BLOCK"),
+			Operation: new("create"),
+			Prefix:    new("1.2.3.0/24"),
+			Action:    new("BLOCK"),
 		},
 		{
-			Operation: fastly.ToPointer("update"),
-			Prefix:    fastly.ToPointer("1.2.3.4/32"),
-			Action:    fastly.ToPointer("ALLOW"),
+			Operation: new("update"),
+			Prefix:    new("1.2.3.4/32"),
+			Action:    new("ALLOW"),
 		},
 		{
-			Operation: fastly.ToPointer("create"),
-			Prefix:    fastly.ToPointer("23.23.23.23/32"),
-			Action:    fastly.ToPointer("ALLOW"),
+			Operation: new("create"),
+			Prefix:    new("23.23.23.23/32"),
+			Action:    new("ALLOW"),
 		},
 		{
-			Operation: fastly.ToPointer("update"),
-			Prefix:    fastly.ToPointer("192.168.0.0/16"),
-			Action:    fastly.ToPointer("BLOCK"),
+			Operation: new("update"),
+			Prefix:    new("192.168.0.0/16"),
+			Action:    new("BLOCK"),
 		},
 	}
 
 	// Add the entries to the test compute ACL.
 	fastly.Record(t, "update_acl", func(c *fastly.Client) {
 		err = Update(context.TODO(), c, &UpdateInput{
-			ComputeACLID: fastly.ToPointer(acl.ComputeACLID),
+			ComputeACLID: new(acl.ComputeACLID),
 			Entries:      entries,
 		})
 	})
@@ -112,7 +112,7 @@ func TestClient_ComputeACL(t *testing.T) {
 	fastly.Record(t, "list_entries_with_empty_cursor", func(c *fastly.Client) {
 		cursor := ""
 		_, err := ListEntries(context.TODO(), c, &ListEntriesInput{
-			ComputeACLID: fastly.ToPointer(acl.ComputeACLID),
+			ComputeACLID: new(acl.ComputeACLID),
 			Cursor:       &cursor,
 		})
 		if err != nil {
@@ -124,7 +124,7 @@ func TestClient_ComputeACL(t *testing.T) {
 	var actualACLEntries *ComputeACLEntries
 	fastly.Record(t, "list_entries", func(c *fastly.Client) {
 		actualACLEntries, err = ListEntries(context.TODO(), c, &ListEntriesInput{
-			ComputeACLID: fastly.ToPointer(acl.ComputeACLID),
+			ComputeACLID: new(acl.ComputeACLID),
 		})
 	})
 	if err != nil {
@@ -160,8 +160,8 @@ func TestClient_ComputeACL(t *testing.T) {
 	input := &ListEntriesInput{}
 	fastly.Record(t, "lookup_entries", func(c *fastly.Client) {
 		for {
-			input.ComputeACLID = fastly.ToPointer(acl.ComputeACLID)
-			input.Limit = fastly.ToPointer(int(Limit))
+			input.ComputeACLID = new(acl.ComputeACLID)
+			input.Limit = new(int(Limit))
 
 			actualACLEntries, err = ListEntries(context.TODO(), c, input)
 			if err != nil {
@@ -179,8 +179,8 @@ func TestClient_ComputeACL(t *testing.T) {
 			}
 
 			entry, err := Lookup(context.TODO(), c, &LookupInput{
-				ComputeACLID: fastly.ToPointer(acl.ComputeACLID),
-				ComputeACLIP: fastly.ToPointer(ip.Mask(ipNet.Mask).String()),
+				ComputeACLID: new(acl.ComputeACLID),
+				ComputeACLIP: new(ip.Mask(ipNet.Mask).String()),
 			})
 			if err != nil {
 				t.Errorf("error during IP lookup: %v", err)
@@ -202,7 +202,7 @@ func TestClient_ComputeACL(t *testing.T) {
 				break
 			}
 
-			input.Cursor = fastly.ToPointer(cursor)
+			input.Cursor = new(cursor)
 
 			page++
 		}
@@ -211,8 +211,8 @@ func TestClient_ComputeACL(t *testing.T) {
 	// Lookup a non-existing IP in the test compute ACL
 	fastly.Record(t, "lookup_non_existing_ip", func(c *fastly.Client) {
 		entry, err := Lookup(context.TODO(), c, &LookupInput{
-			ComputeACLID: fastly.ToPointer(acl.ComputeACLID),
-			ComputeACLIP: fastly.ToPointer("73.49.184.42"),
+			ComputeACLID: new(acl.ComputeACLID),
+			ComputeACLIP: new("73.49.184.42"),
 		})
 		if entry != nil {
 			t.Errorf("unexpected lookup result: got %+v, expected 'nil'", entry)
@@ -254,14 +254,14 @@ func TestClient_Lookup_validation(t *testing.T) {
 	var err error
 	_, err = Lookup(context.TODO(), fastly.TestClient, &LookupInput{
 		ComputeACLID: nil,
-		ComputeACLIP: fastly.ToPointer("1.2.3.4"),
+		ComputeACLIP: new("1.2.3.4"),
 	})
 	if err != fastly.ErrMissingComputeACLID {
 		t.Errorf("expected ErrMissingComputeACLID: got %s", err)
 	}
 
 	_, err = Lookup(context.TODO(), fastly.TestClient, &LookupInput{
-		ComputeACLID: fastly.ToPointer("foo"),
+		ComputeACLID: new("foo"),
 		ComputeACLIP: nil,
 	})
 	if err != fastly.ErrMissingComputeACLIP {

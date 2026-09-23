@@ -25,8 +25,8 @@ func TestClient_DictionaryItems(t *testing.T) {
 		createdDictionaryItem, err = c.CreateDictionaryItem(context.TODO(), &CreateDictionaryItemInput{
 			ServiceID:    *testService.ServiceID,
 			DictionaryID: *testDictionary.DictionaryID,
-			ItemKey:      ToPointer("test-dictionary-item"),
-			ItemValue:    ToPointer("value"),
+			ItemKey:      new("test-dictionary-item"),
+			ItemValue:    new("value"),
 		})
 	})
 	if err != nil {
@@ -72,10 +72,10 @@ func TestClient_DictionaryItems(t *testing.T) {
 	Record(t, fixtureBase+"list2", func(c *Client) {
 		paginator = c.GetDictionaryItems(context.TODO(), &GetDictionaryItemsInput{
 			DictionaryID: *testDictionary.DictionaryID,
-			Direction:    ToPointer("ascend"),
-			PerPage:      ToPointer(50),
+			Direction:    new("ascend"),
+			PerPage:      new(50),
 			ServiceID:    *testService.ServiceID,
-			Sort:         ToPointer("item_key"),
+			Sort:         new("item_key"),
 		})
 
 		for paginator.HasNext() {

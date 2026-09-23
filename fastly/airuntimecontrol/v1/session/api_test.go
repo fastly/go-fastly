@@ -17,7 +17,7 @@ func TestClient_Sessions(t *testing.T) {
 	var sessions []Session
 	fastly.Record(t, "list", func(c *fastly.Client) {
 		sessions, err = List(ctx, c, &ListInput{
-			Limit: fastly.ToPointer(2),
+			Limit: new(2),
 		})
 	})
 	require.NoError(t, err)

@@ -18,9 +18,9 @@ func TestClient_GetOriginMetricsForService(t *testing.T) {
 	var err error
 	Record(t, "origin_inspector/metrics_for_service", func(c *Client) {
 		_, err = c.GetOriginMetricsForService(context.TODO(), &GetOriginMetricsInput{
-			Cursor:      ToPointer(""),
+			Cursor:      new(""),
 			Datacenters: []string{"LHR", "JFK"},
-			Downsample:  ToPointer("day"),
+			Downsample:  new("day"),
 			End:         &end,
 			GroupBy:     []string{"host"},
 			Hosts:       []string{"host01"},

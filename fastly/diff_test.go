@@ -38,8 +38,8 @@ func TestClient_Diff(t *testing.T) {
 		_, err = c.CreateBackend(context.TODO(), &CreateBackendInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv2.Number,
-			Name:           ToPointer("test-backend"),
-			Address:        ToPointer("integ-test.go-fastly.com"),
+			Name:           new("test-backend"),
+			Address:        new("integ-test.go-fastly.com"),
 		})
 	})
 	if err != nil {

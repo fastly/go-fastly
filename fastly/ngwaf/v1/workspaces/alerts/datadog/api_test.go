@@ -16,8 +16,8 @@ func Test_Alerts(t *testing.T) {
 	var err error
 	var alert *Alert
 	testConfig := &CreateConfig{
-		Key:  fastly.ToPointer("123456789"),
-		Site: fastly.ToPointer("us1"),
+		Key:  new("123456789"),
+		Site: new("us1"),
 	}
 	testDescription := "This is a test alert."
 	testEvent := "flag"
@@ -28,7 +28,7 @@ func Test_Alerts(t *testing.T) {
 		alert, err = Create(context.TODO(), c, &CreateInput{
 			Config:      testConfig,
 			Events:      &[]string{testEvent},
-			Description: fastly.ToPointer(testDescription),
+			Description: new(testDescription),
 			WorkspaceID: &testWorkspaceID,
 		})
 	})
@@ -62,8 +62,8 @@ func Test_Alerts(t *testing.T) {
 	defer func() {
 		fastly.Record(t, "delete_alert", func(c *fastly.Client) {
 			err = Delete(context.TODO(), c, &DeleteInput{
-				AlertID:     fastly.ToPointer(alertID),
-				WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+				AlertID:     new(alertID),
+				WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 			})
 		})
 		if err != nil {
@@ -75,8 +75,8 @@ func Test_Alerts(t *testing.T) {
 	var getTestAlert *Alert
 	fastly.Record(t, "get_alert", func(c *fastly.Client) {
 		getTestAlert, err = Get(context.TODO(), c, &GetInput{
-			AlertID:     fastly.ToPointer(alertID),
-			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+			AlertID:     new(alertID),
+			WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 		})
 	})
 	if err != nil {
@@ -103,15 +103,15 @@ func Test_Alerts(t *testing.T) {
 
 	// Update the test workspace alert.
 	updatedConfig := &UpdateConfig{
-		Key:  fastly.ToPointer("987654321"),
-		Site: fastly.ToPointer("us3"),
+		Key:  new("987654321"),
+		Site: new("us3"),
 	}
 	updatedEvent := "flag"
 	var updateAlert *Alert
 	fastly.Record(t, "update_alert", func(c *fastly.Client) {
 		updateAlert, err = Update(context.TODO(), c, &UpdateInput{
-			AlertID:     fastly.ToPointer(alertID),
-			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+			AlertID:     new(alertID),
+			WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 			Config:      updatedConfig,
 			Events:      &[]string{updatedEvent},
 		})
@@ -173,31 +173,31 @@ func TestClient_CreateAlert_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingConfig) {
 		t.Errorf("expected ErrMissingConfig: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Config:      &CreateConfig{Key: fastly.ToPointer("111222333"), Site: fastly.ToPointer("us1")},
+		Config:      &CreateConfig{Key: new("111222333"), Site: new("us1")},
 		Events:      nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingEvents) {
 		t.Errorf("expected ErrMissingEvents: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Config:      &CreateConfig{Site: fastly.ToPointer("us1")},
+		Config:      &CreateConfig{Site: new("us1")},
 		Events:      &[]string{"flag"},
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingKey) {
 		t.Errorf("expected ErrMissingKey: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Config:      &CreateConfig{Key: fastly.ToPointer("444555666")},
+		Config:      &CreateConfig{Key: new("444555666")},
 		Events:      &[]string{"flag"},
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingSite) {
 		t.Errorf("expected ErrMissingSite: got %s", err)
@@ -214,7 +214,7 @@ func TestClient_GetAlert_validation(t *testing.T) {
 	}
 	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		AlertID:     nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingAlertID) {
 		t.Errorf("expected ErrMissingAlertID: got %s", err)
@@ -230,7 +230,7 @@ func TestClient_UpdateAlert_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingAlertID: got %s", err)
 	}
 	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
-		AlertID:     fastly.ToPointer("test-id"),
+		AlertID:     new("test-id"),
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
@@ -248,7 +248,7 @@ func TestClient_DeleteAlert_validation(t *testing.T) {
 	}
 	err = Delete(context.TODO(), fastly.TestClient, &DeleteInput{
 		AlertID:     nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingAlertID) {
 		t.Errorf("expected ErrMissingAlertID: got %s", err)

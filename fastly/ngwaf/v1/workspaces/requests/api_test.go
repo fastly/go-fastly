@@ -17,8 +17,8 @@ const (
 
 func TestClient_requests(t *testing.T) {
 	getrequestInput := new(GetInput)
-	getrequestInput.RequestID = fastly.ToPointer(string(TestRequestID))
-	getrequestInput.WorkspaceID = fastly.ToPointer(fastly.TestNGWAFWorkspaceID)
+	getrequestInput.RequestID = new(string(TestRequestID))
+	getrequestInput.WorkspaceID = new(fastly.TestNGWAFWorkspaceID)
 
 	var request *Request
 	var err error
@@ -237,9 +237,9 @@ func TestClient_requests(t *testing.T) {
 
 	var Requests *Requests
 	listRequestInput := new(ListInput)
-	listRequestInput.WorkspaceID = fastly.ToPointer(fastly.TestNGWAFWorkspaceID)
-	listRequestInput.Limit = fastly.ToPointer(100)
-	listRequestInput.Query = fastly.ToPointer("from:-2d")
+	listRequestInput.WorkspaceID = new(fastly.TestNGWAFWorkspaceID)
+	listRequestInput.Limit = new(100)
+	listRequestInput.Query = new("from:-2d")
 
 	// get a list of requests
 	fastly.Record(t, "list_request", func(c *fastly.Client) {
@@ -320,7 +320,7 @@ func TestClient_Getrequest_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
 	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+		WorkspaceID: new(fastly.TestNGWAFWorkspaceID),
 		RequestID:   nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingRequestID) {

@@ -17,13 +17,13 @@ func TestClient_Package(t *testing.T) {
 
 	testData := Package{
 		Metadata: &PackageMetadata{
-			ClonedFrom:  ToPointer("https://github.com/fastly/compute-starter-kit-rust-empty"),
-			Description: ToPointer("An empty starter kit project template."),
-			FilesHash:   ToPointer("75ff1cf4d953ff2242bb38e4a01b04503622baf4b7dc540256f4dd5fc89df5aed7fea115adab0b71caa79f6483bb846ac0d4f4f937885fb03ee35d2dfafba6f3"),
-			HashSum:     ToPointer("ecc068efcd4071d36d6460152dcc50461b649f01f28589917540a69d33e9b1477decb5f5a9a2f6c269d83a13827502c1fe1f2efc3bdd6beadaabd23e22eb84fd"),
-			Language:    ToPointer("rust"),
-			Name:        ToPointer("test-package"),
-			Size:        ToPointer(int64(1540845)),
+			ClonedFrom:  new("https://github.com/fastly/compute-starter-kit-rust-empty"),
+			Description: new("An empty starter kit project template."),
+			FilesHash:   new("75ff1cf4d953ff2242bb38e4a01b04503622baf4b7dc540256f4dd5fc89df5aed7fea115adab0b71caa79f6483bb846ac0d4f4f937885fb03ee35d2dfafba6f3"),
+			HashSum:     new("ecc068efcd4071d36d6460152dcc50461b649f01f28589917540a69d33e9b1477decb5f5a9a2f6c269d83a13827502c1fe1f2efc3bdd6beadaabd23e22eb84fd"),
+			Language:    new("rust"),
+			Name:        new("test-package"),
+			Size:        new(int64(1540845)),
 		},
 	}
 
@@ -36,7 +36,7 @@ func TestClient_Package(t *testing.T) {
 		wp, err = c.UpdatePackage(context.TODO(), &UpdatePackageInput{
 			ServiceID:      *testService.ServiceID,
 			ServiceVersion: *testVersion.Number,
-			PackagePath:    ToPointer("test_assets/package/valid.tar.gz"),
+			PackagePath:    new("test_assets/package/valid.tar.gz"),
 		})
 	})
 	if err != nil {
@@ -152,7 +152,7 @@ func TestClient_Package(t *testing.T) {
 		wp, err = c.UpdatePackage(context.TODO(), &UpdatePackageInput{
 			ServiceID:      *testService.ServiceID,
 			ServiceVersion: *testVersion.Number,
-			PackagePath:    ToPointer("test_assets/package/invalid.tar.gz"),
+			PackagePath:    new("test_assets/package/invalid.tar.gz"),
 		})
 	})
 	if err == nil && (wp.Metadata.Size != nil || wp.Metadata.Language != nil || wp.Metadata.HashSum != nil || wp.Metadata.Description != nil || wp.Metadata.Name != nil) {

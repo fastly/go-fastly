@@ -17,8 +17,8 @@ func TestClient_DomainToolsSuggestion(t *testing.T) {
 	fastly.Record(t, "get", func(client *fastly.Client) {
 		suggestions, err = Get(context.TODO(), client, &GetInput{
 			Query:    "fastly testing",
-			Defaults: fastly.ToPointer("com"),
-			Keywords: fastly.ToPointer("testing"),
+			Defaults: new("com"),
+			Keywords: new("testing"),
 		})
 	})
 

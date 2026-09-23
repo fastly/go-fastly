@@ -1,7 +1,5 @@
 package products
 
-import "github.com/fastly/go-fastly/v17/fastly"
-
 // ProductOutput is an interface used to constrain the 'O' type
 // parameters of API operation functions. Use of this interface allows
 // the FunctionalTest constructors to apply common validation steps to
@@ -70,8 +68,8 @@ func (o EnableOutput) ServiceID() string {
 }
 
 func NewEnableOutput(productID, serviceID string) (result EnableOutput) {
-	result.Product = &EnableOutputNested{Object: fastly.ToPointer("product"), ID: &productID}
-	result.Service = &EnableOutputNested{Object: fastly.ToPointer("service"), ID: &serviceID}
+	result.Product = &EnableOutputNested{Object: new("product"), ID: &productID}
+	result.Service = &EnableOutputNested{Object: new("service"), ID: &serviceID}
 	return
 }
 

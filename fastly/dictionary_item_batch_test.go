@@ -23,14 +23,14 @@ func TestClient_BatchModifyDictionaryItems_Create(t *testing.T) {
 		DictionaryID: *testDictionary.DictionaryID,
 		Items: []*BatchDictionaryItem{
 			{
-				Operation: ToPointer(CreateBatchOperation),
-				ItemKey:   ToPointer("key1"),
-				ItemValue: ToPointer("val1"),
+				Operation: new(CreateBatchOperation),
+				ItemKey:   new("key1"),
+				ItemValue: new("val1"),
 			},
 			{
-				Operation: ToPointer(CreateBatchOperation),
-				ItemKey:   ToPointer("key2"),
-				ItemValue: ToPointer("val2"),
+				Operation: new(CreateBatchOperation),
+				ItemKey:   new("key2"),
+				ItemValue: new("val2"),
 			},
 		},
 	}
@@ -95,14 +95,14 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 		DictionaryID: *testDictionary.DictionaryID,
 		Items: []*BatchDictionaryItem{
 			{
-				Operation: ToPointer(CreateBatchOperation),
-				ItemKey:   ToPointer("key1"),
-				ItemValue: ToPointer("val1"),
+				Operation: new(CreateBatchOperation),
+				ItemKey:   new("key1"),
+				ItemValue: new("val1"),
 			},
 			{
-				Operation: ToPointer(CreateBatchOperation),
-				ItemKey:   ToPointer("key2"),
-				ItemValue: ToPointer("val2"),
+				Operation: new(CreateBatchOperation),
+				ItemKey:   new("key2"),
+				ItemValue: new("val2"),
 			},
 		},
 	}
@@ -121,9 +121,9 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 		DictionaryID: *testDictionary.DictionaryID,
 		Items: []*BatchDictionaryItem{
 			{
-				Operation: ToPointer(DeleteBatchOperation),
-				ItemKey:   ToPointer("key2"),
-				ItemValue: ToPointer("val2"),
+				Operation: new(DeleteBatchOperation),
+				ItemKey:   new("key2"),
+				ItemValue: new("val2"),
 			},
 		},
 	}
@@ -172,14 +172,14 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 		DictionaryID: *testDictionary.DictionaryID,
 		Items: []*BatchDictionaryItem{
 			{
-				Operation: ToPointer(CreateBatchOperation),
-				ItemKey:   ToPointer("key1"),
-				ItemValue: ToPointer("val1"),
+				Operation: new(CreateBatchOperation),
+				ItemKey:   new("key1"),
+				ItemValue: new("val1"),
 			},
 			{
-				Operation: ToPointer(CreateBatchOperation),
-				ItemKey:   ToPointer("key2"),
-				ItemValue: ToPointer("val2"),
+				Operation: new(CreateBatchOperation),
+				ItemKey:   new("key2"),
+				ItemValue: new("val2"),
 			},
 		},
 	}
@@ -198,9 +198,9 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 		DictionaryID: *testDictionary.DictionaryID,
 		Items: []*BatchDictionaryItem{
 			{
-				Operation: ToPointer(UpdateBatchOperation),
-				ItemKey:   ToPointer("key2"),
-				ItemValue: ToPointer("val2Updated"),
+				Operation: new(UpdateBatchOperation),
+				ItemKey:   new("key2"),
+				ItemValue: new("val2Updated"),
 			},
 		},
 	}
@@ -278,9 +278,9 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 		DictionaryID: *testDictionary.DictionaryID,
 		Items: []*BatchDictionaryItem{
 			{
-				Operation: ToPointer(CreateBatchOperation),
-				ItemKey:   ToPointer("key1"),
-				ItemValue: ToPointer("val1"),
+				Operation: new(CreateBatchOperation),
+				ItemKey:   new("key1"),
+				ItemValue: new("val1"),
 			},
 		},
 	}
@@ -299,14 +299,14 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 		DictionaryID: *testDictionary.DictionaryID,
 		Items: []*BatchDictionaryItem{
 			{
-				Operation: ToPointer(UpsertBatchOperation),
-				ItemKey:   ToPointer("key1"),
-				ItemValue: ToPointer("val1Updated"),
+				Operation: new(UpsertBatchOperation),
+				ItemKey:   new("key1"),
+				ItemValue: new("val1Updated"),
 			},
 			{
-				Operation: ToPointer(UpsertBatchOperation),
-				ItemKey:   ToPointer("key2"),
-				ItemValue: ToPointer("val2"),
+				Operation: new(UpsertBatchOperation),
+				ItemKey:   new("key2"),
+				ItemValue: new("val2"),
 			},
 		},
 	}

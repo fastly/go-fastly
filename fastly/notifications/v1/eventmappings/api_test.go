@@ -18,9 +18,9 @@ func TestClient_EventMappings(t *testing.T) {
 	var created *EventMapping
 	fastly.Record(t, "create", func(c *fastly.Client) {
 		created, err = Create(ctx, c, &CreateInput{
-			Name:           fastly.ToPointer("go-fastly-test-mapping"),
-			Description:    fastly.ToPointer("Sends a notification when any user logs in"),
-			ScopeType:      fastly.ToPointer(ScopeTypeAccount),
+			Name:           new("go-fastly-test-mapping"),
+			Description:    new("Sends a notification when any user logs in"),
+			ScopeType:      new(ScopeTypeAccount),
 			EventTypes:     []string{"user.login"},
 			IntegrationIDs: []string{"7znp3LzS0yF0jiNU9FuQxW"},
 		})
@@ -35,7 +35,7 @@ func TestClient_EventMappings(t *testing.T) {
 	defer func() {
 		fastly.Record(t, "delete", func(c *fastly.Client) {
 			_ = Delete(ctx, c, &DeleteInput{
-				MappingID: fastly.ToPointer(mappingID),
+				MappingID: new(mappingID),
 			})
 		})
 	}()
@@ -44,7 +44,7 @@ func TestClient_EventMappings(t *testing.T) {
 	var fetched *EventMapping
 	fastly.Record(t, "get", func(c *fastly.Client) {
 		fetched, err = Get(ctx, c, &GetInput{
-			MappingID: fastly.ToPointer(mappingID),
+			MappingID: new(mappingID),
 		})
 	})
 	require.NoError(t, err)
@@ -55,7 +55,7 @@ func TestClient_EventMappings(t *testing.T) {
 	var mappings []EventMapping
 	fastly.Record(t, "list", func(c *fastly.Client) {
 		mappings, err = List(ctx, c, &ListInput{
-			ScopeType: fastly.ToPointer(ScopeTypeAccount),
+			ScopeType: new(ScopeTypeAccount),
 		})
 	})
 	require.NoError(t, err)
@@ -65,10 +65,10 @@ func TestClient_EventMappings(t *testing.T) {
 	var updated *EventMapping
 	fastly.Record(t, "update", func(c *fastly.Client) {
 		updated, err = Update(ctx, c, &UpdateInput{
-			MappingID:      fastly.ToPointer(mappingID),
-			Name:           fastly.ToPointer("go-fastly-test-mapping-updated"),
-			Description:    fastly.ToPointer("Updated description"),
-			ScopeType:      fastly.ToPointer(ScopeTypeAccount),
+			MappingID:      new(mappingID),
+			Name:           new("go-fastly-test-mapping-updated"),
+			Description:    new("Updated description"),
+			ScopeType:      new(ScopeTypeAccount),
 			EventTypes:     []string{"user.login", "user.create"},
 			IntegrationIDs: []string{"7znp3LzS0yF0jiNU9FuQxW"},
 		})
@@ -83,29 +83,29 @@ func TestClient_Create_validation(t *testing.T) {
 	ctx := context.TODO()
 
 	_, err := Create(ctx, fastly.TestClient, &CreateInput{
-		ScopeType:      fastly.ToPointer(ScopeTypeAccount),
+		ScopeType:      new(ScopeTypeAccount),
 		EventTypes:     []string{"user.login"},
 		IntegrationIDs: []string{"integration-1"},
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingName)
 
 	_, err = Create(ctx, fastly.TestClient, &CreateInput{
-		Name:           fastly.ToPointer("my-mapping"),
+		Name:           new("my-mapping"),
 		EventTypes:     []string{"user.login"},
 		IntegrationIDs: []string{"integration-1"},
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingScopeType)
 
 	_, err = Create(ctx, fastly.TestClient, &CreateInput{
-		Name:           fastly.ToPointer("my-mapping"),
-		ScopeType:      fastly.ToPointer(ScopeTypeAccount),
+		Name:           new("my-mapping"),
+		ScopeType:      new(ScopeTypeAccount),
 		IntegrationIDs: []string{"integration-1"},
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingEventTypes)
 
 	_, err = Create(ctx, fastly.TestClient, &CreateInput{
-		Name:       fastly.ToPointer("my-mapping"),
-		ScopeType:  fastly.ToPointer(ScopeTypeAccount),
+		Name:       new("my-mapping"),
+		ScopeType:  new(ScopeTypeAccount),
 		EventTypes: []string{"user.login"},
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingIntegrationIDs)
@@ -122,38 +122,38 @@ func TestClient_Update_validation(t *testing.T) {
 	ctx := context.TODO()
 
 	_, err := Update(ctx, fastly.TestClient, &UpdateInput{
-		ScopeType:      fastly.ToPointer(ScopeTypeAccount),
+		ScopeType:      new(ScopeTypeAccount),
 		EventTypes:     []string{"user.login"},
 		IntegrationIDs: []string{"integration-1"},
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingMappingID)
 
 	_, err = Update(ctx, fastly.TestClient, &UpdateInput{
-		MappingID:      fastly.ToPointer("mapping-1"),
+		MappingID:      new("mapping-1"),
 		EventTypes:     []string{"user.login"},
 		IntegrationIDs: []string{"integration-1"},
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingName)
 
 	_, err = Update(ctx, fastly.TestClient, &UpdateInput{
-		MappingID:      fastly.ToPointer("mapping-1"),
-		Name:           fastly.ToPointer("my-mapping"),
+		MappingID:      new("mapping-1"),
+		Name:           new("my-mapping"),
 		IntegrationIDs: []string{"integration-1"},
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingScopeType)
 
 	_, err = Update(ctx, fastly.TestClient, &UpdateInput{
-		MappingID:      fastly.ToPointer("mapping-1"),
-		Name:           fastly.ToPointer("my-mapping"),
-		ScopeType:      fastly.ToPointer(ScopeTypeAccount),
+		MappingID:      new("mapping-1"),
+		Name:           new("my-mapping"),
+		ScopeType:      new(ScopeTypeAccount),
 		IntegrationIDs: []string{"integration-1"},
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingEventTypes)
 
 	_, err = Update(ctx, fastly.TestClient, &UpdateInput{
-		MappingID:  fastly.ToPointer("mapping-1"),
-		Name:       fastly.ToPointer("my-mapping"),
-		ScopeType:  fastly.ToPointer(ScopeTypeAccount),
+		MappingID:  new("mapping-1"),
+		Name:       new("my-mapping"),
+		ScopeType:  new(ScopeTypeAccount),
 		EventTypes: []string{"user.login"},
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingIntegrationIDs)

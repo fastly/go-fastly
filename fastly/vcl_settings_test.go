@@ -38,9 +38,9 @@ func TestClient_Settings(t *testing.T) {
 		us, err = c.UpdateSettings(context.TODO(), &UpdateSettingsInput{
 			ServiceID:       TestDeliveryServiceID,
 			ServiceVersion:  *tv.Number,
-			DefaultTTL:      ToPointer(uint(1800)),
-			StaleIfError:    ToPointer(true),
-			StaleIfErrorTTL: ToPointer(uint(57600)),
+			DefaultTTL:      new(uint(1800)),
+			StaleIfError:    new(true),
+			StaleIfErrorTTL: new(uint(57600)),
 		})
 	})
 	if err != nil {
@@ -61,7 +61,7 @@ func TestClient_Settings(t *testing.T) {
 func TestClient_UpdateSettingsInput_default_ttl(t *testing.T) {
 	t.Parallel()
 	s := UpdateSettingsInput{
-		DefaultTTL:     ToPointer(uint(0)),
+		DefaultTTL:     new(uint(0)),
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	}

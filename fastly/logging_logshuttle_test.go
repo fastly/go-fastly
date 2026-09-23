@@ -21,12 +21,12 @@ func TestClient_Logshuttles(t *testing.T) {
 		l, err = c.CreateLogshuttle(context.TODO(), &CreateLogshuttleInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-logshuttle"),
-			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
-			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("none"),
-			Token:          ToPointer("super-secure-token"),
-			URL:            ToPointer("https://logs.example.com"),
+			Name:           new("test-logshuttle"),
+			Format:         new("%h %l %u %t \"%r\" %>s %b"),
+			FormatVersion:  new(2),
+			Placement:      new("none"),
+			Token:          new("super-secure-token"),
+			URL:            new("https://logs.example.com"),
 		})
 	})
 	if err != nil {
@@ -122,10 +122,10 @@ func TestClient_Logshuttles(t *testing.T) {
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-logshuttle",
-			NewName:          ToPointer("new-test-logshuttle"),
-			Token:            ToPointer("new-token"),
-			URL:              ToPointer("https://logs2.example.com"),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-logshuttle"),
+			Token:            new("new-token"),
+			URL:              new("https://logs2.example.com"),
+			ProcessingRegion: new("eu"),
 			Placement:        NullValue[string](),
 		})
 	})
@@ -176,12 +176,12 @@ func TestClient_Logshuttles_Compute(t *testing.T) {
 		l, err = c.CreateLogshuttle(context.TODO(), &CreateLogshuttleInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-logshuttle"),
-			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
-			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("none"),
-			Token:          ToPointer("super-secure-token"),
-			URL:            ToPointer("https://logs.example.com"),
+			Name:           new("test-logshuttle"),
+			Format:         new("%h %l %u %t \"%r\" %>s %b"),
+			FormatVersion:  new(2),
+			Placement:      new("none"),
+			Token:          new("super-secure-token"),
+			URL:            new("https://logs.example.com"),
 		})
 	})
 	if err != nil {
@@ -277,10 +277,10 @@ func TestClient_Logshuttles_Compute(t *testing.T) {
 			ServiceID:        TestComputeServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-logshuttle",
-			NewName:          ToPointer("new-test-logshuttle"),
-			Token:            ToPointer("new-token"),
-			URL:              ToPointer("https://logs2.example.com"),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-logshuttle"),
+			Token:            new("new-token"),
+			URL:              new("https://logs2.example.com"),
+			ProcessingRegion: new("eu"),
 			Placement:        NewNullable("none"),
 		})
 	})

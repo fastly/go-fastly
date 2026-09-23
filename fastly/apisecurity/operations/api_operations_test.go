@@ -22,9 +22,9 @@ func TestClient_Operations(t *testing.T) {
 	var tag *OperationTag
 	fastly.Record(t, "create_tag_for_operation", func(c *fastly.Client) {
 		tag, err = CreateTag(ctx, c, &CreateTagInput{
-			ServiceID:   fastly.ToPointer(serviceID),
-			Name:        fastly.ToPointer(tagName),
-			Description: fastly.ToPointer("go-fastly test tag"),
+			ServiceID:   new(serviceID),
+			Name:        new(tagName),
+			Description: new("go-fastly test tag"),
 		})
 	})
 	require.NoError(t, err)
@@ -35,8 +35,8 @@ func TestClient_Operations(t *testing.T) {
 	defer func() {
 		fastly.Record(t, "delete_tag_for_operation", func(c *fastly.Client) {
 			_ = DeleteTag(ctx, c, &DeleteTagInput{
-				ServiceID: fastly.ToPointer(serviceID),
-				TagID:     fastly.ToPointer(tag.ID),
+				ServiceID: new(serviceID),
+				TagID:     new(tag.ID),
 			})
 		})
 	}()
@@ -45,10 +45,10 @@ func TestClient_Operations(t *testing.T) {
 	var op1 *Operation
 	fastly.Record(t, "create_operation", func(c *fastly.Client) {
 		op1, err = Create(ctx, c, &CreateInput{
-			ServiceID: fastly.ToPointer(serviceID),
-			Method:    fastly.ToPointer("GET"),
-			Domain:    fastly.ToPointer("example.com"),
-			Path:      fastly.ToPointer("/test"),
+			ServiceID: new(serviceID),
+			Method:    new("GET"),
+			Domain:    new("example.com"),
+			Path:      new("/test"),
 			TagIDs:    []string{tag.ID},
 		})
 	})
@@ -59,8 +59,8 @@ func TestClient_Operations(t *testing.T) {
 	defer func() {
 		fastly.Record(t, "delete_operation", func(c *fastly.Client) {
 			_ = Delete(ctx, c, &DeleteInput{
-				ServiceID:   fastly.ToPointer(serviceID),
-				OperationID: fastly.ToPointer(op1.ID),
+				ServiceID:   new(serviceID),
+				OperationID: new(op1.ID),
 			})
 		})
 	}()
@@ -69,10 +69,10 @@ func TestClient_Operations(t *testing.T) {
 	var op2 *Operation
 	fastly.Record(t, "create_operation_2", func(c *fastly.Client) {
 		op2, err = Create(ctx, c, &CreateInput{
-			ServiceID: fastly.ToPointer(serviceID),
-			Method:    fastly.ToPointer("GET"),
-			Domain:    fastly.ToPointer("example.com"),
-			Path:      fastly.ToPointer("/test-pagination"),
+			ServiceID: new(serviceID),
+			Method:    new("GET"),
+			Domain:    new("example.com"),
+			Path:      new("/test-pagination"),
 			TagIDs:    []string{tag.ID},
 		})
 	})
@@ -83,8 +83,8 @@ func TestClient_Operations(t *testing.T) {
 	defer func() {
 		fastly.Record(t, "delete_operation_2", func(c *fastly.Client) {
 			_ = Delete(ctx, c, &DeleteInput{
-				ServiceID:   fastly.ToPointer(serviceID),
-				OperationID: fastly.ToPointer(op2.ID),
+				ServiceID:   new(serviceID),
+				OperationID: new(op2.ID),
 			})
 		})
 	}()
@@ -93,8 +93,8 @@ func TestClient_Operations(t *testing.T) {
 	var described *Operation
 	fastly.Record(t, "describe_operation", func(c *fastly.Client) {
 		described, err = Describe(ctx, c, &DescribeInput{
-			ServiceID:   fastly.ToPointer(serviceID),
-			OperationID: fastly.ToPointer(op1.ID),
+			ServiceID:   new(serviceID),
+			OperationID: new(op1.ID),
 		})
 	})
 	require.NoError(t, err)
@@ -105,9 +105,9 @@ func TestClient_Operations(t *testing.T) {
 	var updated *Operation
 	fastly.Record(t, "update_operation", func(c *fastly.Client) {
 		updated, err = Update(ctx, c, &UpdateInput{
-			ServiceID:   fastly.ToPointer(serviceID),
-			OperationID: fastly.ToPointer(op1.ID),
-			Description: fastly.ToPointer("updated"),
+			ServiceID:   new(serviceID),
+			OperationID: new(op1.ID),
+			Description: new("updated"),
 			TagIDs:      []string{tag.ID},
 		})
 	})
@@ -120,10 +120,10 @@ func TestClient_Operations(t *testing.T) {
 	var ops *Operations
 	fastly.Record(t, "list_operations", func(c *fastly.Client) {
 		ops, err = ListOperations(ctx, c, &ListOperationsInput{
-			ServiceID: fastly.ToPointer(serviceID),
+			ServiceID: new(serviceID),
 			Method:    []string{"GET"},
 			Domain:    []string{"example.com"},
-			Path:      fastly.ToPointer("/test"),
+			Path:      new("/test"),
 		})
 	})
 	require.NoError(t, err)
@@ -141,11 +141,11 @@ func TestClient_Operations(t *testing.T) {
 	// ---- Pagination test for operations ----
 	limit := 1
 	p := NewOperationPaginator(ctx, fastly.TestClient, &ListOperationsInput{
-		ServiceID: fastly.ToPointer(serviceID),
+		ServiceID: new(serviceID),
 		Method:    []string{"GET"},
 		Domain:    []string{"example.com"},
 		Limit:     &limit,
-		Page:      fastly.ToPointer(0),
+		Page:      new(0),
 	})
 
 	var collected []Operation
@@ -178,10 +178,10 @@ func TestClient_Operations(t *testing.T) {
 	var discoveredFiltered *DiscoveredOperations
 	fastly.Record(t, "list_discovered_operations", func(c *fastly.Client) {
 		discoveredFiltered, err = ListDiscovered(ctx, c, &ListDiscoveredInput{
-			ServiceID: fastly.ToPointer(serviceID),
+			ServiceID: new(serviceID),
 			Method:    []string{"GET"},
 			Domain:    []string{"example.com"},
-			Path:      fastly.ToPointer("/test"),
+			Path:      new("/test"),
 		})
 	})
 	require.NoError(t, err)
@@ -190,9 +190,9 @@ func TestClient_Operations(t *testing.T) {
 	var discoveredAny *DiscoveredOperations
 	fastly.Record(t, "list_discovered_operations_any", func(c *fastly.Client) {
 		discoveredAny, err = ListDiscovered(ctx, c, &ListDiscoveredInput{
-			ServiceID: fastly.ToPointer(serviceID),
-			Limit:     fastly.ToPointer(1),
-			Page:      fastly.ToPointer(0),
+			ServiceID: new(serviceID),
+			Limit:     new(1),
+			Page:      new(0),
 		})
 	})
 	require.NoError(t, err)
@@ -204,9 +204,9 @@ func TestClient_Operations(t *testing.T) {
 		var singleUpdated *DiscoveredOperation
 		fastly.Record(t, "update_discovered_operation_status", func(c *fastly.Client) {
 			singleUpdated, err = UpdateDiscoveredStatus(ctx, c, &UpdateDiscoveredStatusInput{
-				ServiceID:   fastly.ToPointer(serviceID),
-				OperationID: fastly.ToPointer(discoveredID),
-				Status:      fastly.ToPointer("IGNORED"),
+				ServiceID:   new(serviceID),
+				OperationID: new(discoveredID),
+				Status:      new("IGNORED"),
 			})
 		})
 		require.NoError(t, err)
@@ -215,9 +215,9 @@ func TestClient_Operations(t *testing.T) {
 		var bulkUpdatedDiscovered *BulkOperationResultsResponse
 		fastly.Record(t, "bulk_update_discovered_operation_status", func(c *fastly.Client) {
 			bulkUpdatedDiscovered, err = BulkUpdateDiscoveredStatus(ctx, c, &BulkUpdateDiscoveredStatusInput{
-				ServiceID:    fastly.ToPointer(serviceID),
+				ServiceID:    new(serviceID),
 				OperationIDs: []string{discoveredID},
-				Status:       fastly.ToPointer("IGNORED"),
+				Status:       new("IGNORED"),
 			})
 		})
 		require.NoError(t, err)
@@ -228,13 +228,13 @@ func TestClient_Operations(t *testing.T) {
 	var bulkCreated *BulkCreateOperationsResponse
 	fastly.Record(t, "bulk_create_operations", func(c *fastly.Client) {
 		bulkCreated, err = BulkCreateOperations(ctx, c, &BulkCreateOperationsInput{
-			ServiceID: fastly.ToPointer(serviceID),
+			ServiceID: new(serviceID),
 			Operations: []OperationBulkCreateItem{
 				{
-					Method:      fastly.ToPointer("GET"),
-					Domain:      fastly.ToPointer("example.com"),
-					Path:        fastly.ToPointer("/bulk-test-1"),
-					Description: fastly.ToPointer("bulk test 1"),
+					Method:      new("GET"),
+					Domain:      new("example.com"),
+					Path:        new("/bulk-test-1"),
+					Description: new("bulk test 1"),
 				},
 			},
 		})
@@ -257,8 +257,8 @@ func TestClient_Operations(t *testing.T) {
 		fastly.Record(t, "delete_bulk_operations", func(c *fastly.Client) {
 			for _, opID := range createdIDs {
 				_ = Delete(ctx, c, &DeleteInput{
-					ServiceID:   fastly.ToPointer(serviceID),
-					OperationID: fastly.ToPointer(opID),
+					ServiceID:   new(serviceID),
+					OperationID: new(opID),
 				})
 			}
 		})
@@ -267,7 +267,7 @@ func TestClient_Operations(t *testing.T) {
 	var bulkTagged *BulkOperationResultsResponse
 	fastly.Record(t, "bulk_add_tags_to_operations", func(c *fastly.Client) {
 		bulkTagged, err = BulkAddTags(ctx, c, &BulkAddTagsInput{
-			ServiceID:    fastly.ToPointer(serviceID),
+			ServiceID:    new(serviceID),
 			OperationIDs: createdIDs,
 			TagIDs:       []string{tag.ID},
 		})

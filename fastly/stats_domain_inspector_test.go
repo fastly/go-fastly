@@ -24,10 +24,10 @@ func TestClient_GetDomainMetricsForService(t *testing.T) {
 			Datacenters: []string{"SJC", "STP"},
 			Metrics:     []string{"resp_body_bytes", "status_2xx"},
 			GroupBy:     []string{"domain"},
-			Downsample:  ToPointer("hour"),
+			Downsample:  new("hour"),
 			Regions:     []string{"usa"},
-			Limit:       ToPointer(10),
-			Cursor:      ToPointer(""),
+			Limit:       new(10),
+			Cursor:      new(""),
 		})
 	})
 	if err != nil {

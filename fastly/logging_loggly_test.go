@@ -21,10 +21,10 @@ func TestClient_Loggly(t *testing.T) {
 		lg, err = c.CreateLoggly(context.TODO(), &CreateLogglyInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-loggly"),
-			Token:          ToPointer("abcd1234"),
-			Format:         ToPointer("format"),
-			Placement:      ToPointer("none"),
+			Name:           new("test-loggly"),
+			Token:          new("abcd1234"),
+			Format:         new("format"),
+			Placement:      new("none"),
 		})
 	})
 	if err != nil {
@@ -114,9 +114,9 @@ func TestClient_Loggly(t *testing.T) {
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-loggly",
-			NewName:          ToPointer("new-test-loggly"),
-			FormatVersion:    ToPointer(2),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-loggly"),
+			FormatVersion:    new(2),
+			ProcessingRegion: new("eu"),
 			Placement:        NullValue[string](),
 		})
 	})
@@ -164,10 +164,10 @@ func TestClient_Loggly_Compute(t *testing.T) {
 		lg, err = c.CreateLoggly(context.TODO(), &CreateLogglyInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-loggly"),
-			Token:          ToPointer("abcd1234"),
-			Format:         ToPointer("format"),
-			Placement:      ToPointer("none"),
+			Name:           new("test-loggly"),
+			Token:          new("abcd1234"),
+			Format:         new("format"),
+			Placement:      new("none"),
 		})
 	})
 	if err != nil {
@@ -257,9 +257,9 @@ func TestClient_Loggly_Compute(t *testing.T) {
 			ServiceID:        TestComputeServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-loggly",
-			NewName:          ToPointer("new-test-loggly"),
-			FormatVersion:    ToPointer(2),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-loggly"),
+			FormatVersion:    new(2),
+			ProcessingRegion: new("eu"),
 			Placement:        NewNullable("none"),
 		})
 	})

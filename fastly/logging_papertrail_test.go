@@ -21,12 +21,12 @@ func TestClient_Papertrails(t *testing.T) {
 		p, err = c.CreatePapertrail(context.TODO(), &CreatePapertrailInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-papertrail"),
-			Address:        ToPointer("integ-test.go-fastly.com"),
-			Port:           ToPointer(1234),
-			FormatVersion:  ToPointer(2),
-			Format:         ToPointer("format"),
-			Placement:      ToPointer("none"),
+			Name:           new("test-papertrail"),
+			Address:        new("integ-test.go-fastly.com"),
+			Port:           new(1234),
+			FormatVersion:  new(2),
+			Format:         new("format"),
+			Placement:      new("none"),
 		})
 	})
 	if err != nil {
@@ -122,8 +122,8 @@ func TestClient_Papertrails(t *testing.T) {
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-papertrail",
-			NewName:          ToPointer("new-test-papertrail"),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-papertrail"),
+			ProcessingRegion: new("eu"),
 			Placement:        NullValue[string](),
 		})
 	})
@@ -168,12 +168,12 @@ func TestClient_Papertrails_Compute(t *testing.T) {
 		p, err = c.CreatePapertrail(context.TODO(), &CreatePapertrailInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-papertrail"),
-			Address:        ToPointer("integ-test.go-fastly.com"),
-			Port:           ToPointer(1234),
-			FormatVersion:  ToPointer(2),
-			Format:         ToPointer("format"),
-			Placement:      ToPointer("none"),
+			Name:           new("test-papertrail"),
+			Address:        new("integ-test.go-fastly.com"),
+			Port:           new(1234),
+			FormatVersion:  new(2),
+			Format:         new("format"),
+			Placement:      new("none"),
 		})
 	})
 	if err != nil {
@@ -269,8 +269,8 @@ func TestClient_Papertrails_Compute(t *testing.T) {
 			ServiceID:        TestComputeServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-papertrail",
-			NewName:          ToPointer("new-test-papertrail"),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-papertrail"),
+			ProcessingRegion: new("eu"),
 			Placement:        NewNullable("none"),
 		})
 	})

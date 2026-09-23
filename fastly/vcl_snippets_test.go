@@ -28,12 +28,12 @@ func TestClient_Snippets(t *testing.T) {
 
 	Record(t, "vcl_snippets/create_with_required_fields_only", func(c *Client) {
 		cs, err = c.CreateSnippet(context.TODO(), &CreateSnippetInput{
-			Content:        ToPointer(vclContent),
-			Dynamic:        ToPointer(0),
-			Name:           ToPointer(svName),
+			Content:        new(vclContent),
+			Dynamic:        new(0),
+			Name:           new(svName),
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Type:           ToPointer(SnippetTypeFetch),
+			Type:           new(SnippetTypeFetch),
 		})
 	})
 
@@ -66,11 +66,11 @@ func TestClient_Snippets(t *testing.T) {
 		cs, err = c.CreateSnippet(context.TODO(), &CreateSnippetInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer(sdName),
-			Content:        ToPointer(vclContent),
-			Type:           ToPointer(SnippetTypeFetch),
-			Dynamic:        ToPointer(dynamic),
-			Priority:       ToPointer(priority),
+			Name:           new(sdName),
+			Content:        new(vclContent),
+			Type:           new(SnippetTypeFetch),
+			Dynamic:        new(dynamic),
+			Priority:       new(priority),
 		})
 	})
 
@@ -201,9 +201,9 @@ func TestClient_Snippets(t *testing.T) {
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           svName,
-			NewName:        ToPointer(svNameUpdated),
-			Priority:       ToPointer(priority),
-			Content:        ToPointer(vclContentUpdated),
+			NewName:        new(svNameUpdated),
+			Priority:       new(priority),
+			Content:        new(vclContentUpdated),
 			Type:           &hit,
 		})
 	})
@@ -234,7 +234,7 @@ func TestClient_Snippets(t *testing.T) {
 		ds, err = c.UpdateDynamicSnippet(context.TODO(), &UpdateDynamicSnippetInput{
 			ServiceID: TestDeliveryServiceID,
 			SnippetID: *cs.SnippetID,
-			Content:   ToPointer(vclContentUpdated),
+			Content:   new(vclContentUpdated),
 		})
 	})
 

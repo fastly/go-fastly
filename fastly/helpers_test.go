@@ -7,49 +7,6 @@ import (
 	"testing"
 )
 
-func TestToPointer(t *testing.T) {
-	t.Parallel()
-
-	t.Run("string", func(t *testing.T) {
-		t.Parallel()
-
-		input := "hello"
-		got := ToPointer(input)
-		if got == nil {
-			t.Fatal("expected non-nil pointer")
-		}
-		if *got != input {
-			t.Errorf("expected %q, got %q", input, *got)
-		}
-	})
-
-	t.Run("int", func(t *testing.T) {
-		t.Parallel()
-
-		input := 42
-		got := ToPointer(input)
-		if got == nil {
-			t.Fatal("expected non-nil pointer")
-		}
-		if *got != input {
-			t.Errorf("expected %d, got %d", input, *got)
-		}
-	})
-
-	t.Run("bool", func(t *testing.T) {
-		t.Parallel()
-
-		input := true
-		got := ToPointer(input)
-		if got == nil {
-			t.Fatal("expected non-nil pointer")
-		}
-		if *got != input {
-			t.Errorf("expected %t, got %t", input, *got)
-		}
-	})
-}
-
 func TestToValue(t *testing.T) {
 	t.Parallel()
 
@@ -63,7 +20,7 @@ func TestToValue(t *testing.T) {
 		}{
 			{
 				name:  "non-nil pointer returns value",
-				input: ToPointer("hello"),
+				input: new("hello"),
 				want:  "hello",
 			},
 			{
@@ -96,7 +53,7 @@ func TestToValue(t *testing.T) {
 		}{
 			{
 				name:  "non-nil pointer returns value",
-				input: ToPointer(42),
+				input: new(42),
 				want:  42,
 			},
 			{
@@ -129,7 +86,7 @@ func TestToValue(t *testing.T) {
 		}{
 			{
 				name:  "non-nil pointer returns value",
-				input: ToPointer(true),
+				input: new(true),
 				want:  true,
 			},
 			{

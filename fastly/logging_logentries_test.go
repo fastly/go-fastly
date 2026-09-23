@@ -21,13 +21,13 @@ func TestClient_Logentries(t *testing.T) {
 		le, err = c.CreateLogentries(context.TODO(), &CreateLogentriesInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-logentries"),
-			Port:           ToPointer(0),
-			UseTLS:         ToPointer(Compatibool(true)),
-			Token:          ToPointer("abcd1234"),
-			Format:         ToPointer("format"),
-			Placement:      ToPointer("none"),
-			Region:         ToPointer("us"),
+			Name:           new("test-logentries"),
+			Port:           new(0),
+			UseTLS:         new(Compatibool(true)),
+			Token:          new("abcd1234"),
+			Format:         new("format"),
+			Placement:      new("none"),
+			Region:         new("us"),
 		})
 	})
 	if err != nil {
@@ -132,12 +132,12 @@ func TestClient_Logentries(t *testing.T) {
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-logentries",
-			NewName:          ToPointer("new-test-logentries"),
-			FormatVersion:    ToPointer(2),
-			Region:           ToPointer("ap"),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-logentries"),
+			FormatVersion:    new(2),
+			Region:           new("ap"),
+			ProcessingRegion: new("eu"),
 			Placement:        NullValue[string](),
-			UseTLS:           ToPointer(Compatibool(false)),
+			UseTLS:           new(Compatibool(false)),
 		})
 	})
 	if err != nil {
@@ -190,13 +190,13 @@ func TestClient_Logentries_Compute(t *testing.T) {
 		le, err = c.CreateLogentries(context.TODO(), &CreateLogentriesInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-logentries"),
-			Port:           ToPointer(0),
-			UseTLS:         ToPointer(Compatibool(true)),
-			Token:          ToPointer("abcd1234"),
-			Format:         ToPointer("format"),
-			Placement:      ToPointer("none"),
-			Region:         ToPointer("us"),
+			Name:           new("test-logentries"),
+			Port:           new(0),
+			UseTLS:         new(Compatibool(true)),
+			Token:          new("abcd1234"),
+			Format:         new("format"),
+			Placement:      new("none"),
+			Region:         new("us"),
 		})
 	})
 	if err != nil {
@@ -301,10 +301,10 @@ func TestClient_Logentries_Compute(t *testing.T) {
 			ServiceID:        TestComputeServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-logentries",
-			NewName:          ToPointer("new-test-logentries"),
-			FormatVersion:    ToPointer(2),
-			Region:           ToPointer("ap"),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-logentries"),
+			FormatVersion:    new(2),
+			Region:           new("ap"),
+			ProcessingRegion: new("eu"),
 			Placement:        NewNullable("none"),
 		})
 	})

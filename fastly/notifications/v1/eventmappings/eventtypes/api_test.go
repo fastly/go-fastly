@@ -17,7 +17,7 @@ func TestClient_EventTypes(t *testing.T) {
 	var types *Collection
 	fastly.Record(t, "list", func(c *fastly.Client) {
 		types, err = List(ctx, c, &ListInput{
-			ScopeType: fastly.ToPointer("account"),
+			ScopeType: new("account"),
 		})
 	})
 	require.NoError(t, err)

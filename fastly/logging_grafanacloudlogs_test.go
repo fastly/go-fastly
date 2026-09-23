@@ -21,13 +21,13 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 		d, err = c.CreateGrafanaCloudLogs(context.TODO(), &CreateGrafanaCloudLogsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-grafanacloudlogs"),
-			URL:            ToPointer("https://test123.grafana.net"),
-			User:           ToPointer("123456"),
-			Token:          ToPointer("abcd1234"),
-			Format:         ToPointer("format"),
-			Placement:      ToPointer("none"),
-			Index:          ToPointer("{\"env\": \"prod\"}"),
+			Name:           new("test-grafanacloudlogs"),
+			URL:            new("https://test123.grafana.net"),
+			User:           new("123456"),
+			Token:          new("abcd1234"),
+			Format:         new("format"),
+			Placement:      new("none"),
+			Index:          new("{\"env\": \"prod\"}"),
 		})
 	})
 	if err != nil {
@@ -123,13 +123,13 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-grafanacloudlogs",
-			NewName:          ToPointer("new-test-grafanacloudlogs"),
-			FormatVersion:    ToPointer(2),
-			URL:              ToPointer("https://test456.grafana.net"),
-			Token:            ToPointer("abcd6789"),
+			NewName:          new("new-test-grafanacloudlogs"),
+			FormatVersion:    new(2),
+			URL:              new("https://test456.grafana.net"),
+			Token:            new("abcd6789"),
 			Placement:        NullValue[string](),
-			Index:            ToPointer("{\"env\": \"staging\"}"),
-			ProcessingRegion: ToPointer("eu"),
+			Index:            new("{\"env\": \"staging\"}"),
+			ProcessingRegion: new("eu"),
 		})
 	})
 	if err != nil {
@@ -182,13 +182,13 @@ func TestClient_GrafanaCloudLogs_Compute(t *testing.T) {
 		d, err = c.CreateGrafanaCloudLogs(context.TODO(), &CreateGrafanaCloudLogsInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-grafanacloudlogs"),
-			URL:            ToPointer("https://test123.grafana.net"),
-			User:           ToPointer("123456"),
-			Token:          ToPointer("abcd1234"),
-			Format:         ToPointer("format"),
-			Placement:      ToPointer("none"),
-			Index:          ToPointer("{\"env\": \"prod\"}"),
+			Name:           new("test-grafanacloudlogs"),
+			URL:            new("https://test123.grafana.net"),
+			User:           new("123456"),
+			Token:          new("abcd1234"),
+			Format:         new("format"),
+			Placement:      new("none"),
+			Index:          new("{\"env\": \"prod\"}"),
 		})
 	})
 	if err != nil {
@@ -284,13 +284,13 @@ func TestClient_GrafanaCloudLogs_Compute(t *testing.T) {
 			ServiceID:        TestComputeServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-grafanacloudlogs",
-			NewName:          ToPointer("new-test-grafanacloudlogs"),
-			FormatVersion:    ToPointer(2),
-			URL:              ToPointer("https://test456.grafana.net"),
-			Token:            ToPointer("abcd6789"),
+			NewName:          new("new-test-grafanacloudlogs"),
+			FormatVersion:    new(2),
+			URL:              new("https://test456.grafana.net"),
+			Token:            new("abcd6789"),
 			Placement:        NewNullable("none"),
-			Index:            ToPointer("{\"env\": \"staging\"}"),
-			ProcessingRegion: ToPointer("eu"),
+			Index:            new("{\"env\": \"staging\"}"),
+			ProcessingRegion: new("eu"),
 		})
 	})
 	if err != nil {

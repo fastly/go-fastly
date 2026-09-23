@@ -34,7 +34,7 @@ func TestTime_Series(t *testing.T) {
 			End:         &tsEnd,
 			Granularity: &tsGranularity,
 			Start:       &tsStart,
-			Metrics:     fastly.ToPointer(tsMetrics),
+			Metrics:     new(tsMetrics),
 			WorkspaceID: &testWorkspaceID,
 		})
 	})
@@ -56,7 +56,7 @@ func TestClient_GetVirtualPatch_validation(t *testing.T) {
 	var err error
 	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		Start:       nil,
-		Metrics:     fastly.ToPointer(tsMetrics),
+		Metrics:     new(tsMetrics),
 		WorkspaceID: &testWorkspaceID,
 	})
 	if !errors.Is(err, fastly.ErrMissingStart) {
@@ -73,7 +73,7 @@ func TestClient_GetVirtualPatch_validation(t *testing.T) {
 
 		_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 			Start:       &tsStart,
-			Metrics:     fastly.ToPointer(tsMetrics),
+			Metrics:     new(tsMetrics),
 			WorkspaceID: nil,
 		})
 		if !errors.Is(err, fastly.ErrMissingWorkspaceID) {

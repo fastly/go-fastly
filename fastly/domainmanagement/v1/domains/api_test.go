@@ -19,8 +19,8 @@ func TestClient_Domain(t *testing.T) {
 	desc := "my description"
 	fastly.Record(t, "create", func(c *fastly.Client) {
 		d, err = Create(context.TODO(), c, &CreateInput{
-			Description: fastly.ToPointer(desc),
-			FQDN:        fastly.ToPointer(fqdn),
+			Description: new(desc),
+			FQDN:        new(fqdn),
 		})
 	})
 	if err != nil {
@@ -38,7 +38,7 @@ func TestClient_Domain(t *testing.T) {
 
 	fastly.Record(t, "create_duplicate", func(c *fastly.Client) {
 		_, err = Create(context.TODO(), c, &CreateInput{
-			FQDN: fastly.ToPointer(fqdn),
+			FQDN: new(fqdn),
 		})
 	})
 	if err == nil {
@@ -64,9 +64,9 @@ func TestClient_Domain(t *testing.T) {
 	var cl *Collection
 	fastly.Record(t, "list", func(c *fastly.Client) {
 		cl, err = List(context.TODO(), c, &ListInput{
-			Limit: fastly.ToPointer(10),
-			FQDN:  fastly.ToPointer(d.FQDN),
-			Sort:  fastly.ToPointer("fqdn"),
+			Limit: new(10),
+			FQDN:  new(d.FQDN),
+			Sort:  new("fqdn"),
 		})
 	})
 	if err != nil {
@@ -98,9 +98,9 @@ func TestClient_Domain(t *testing.T) {
 	descUpdated := "updated description"
 	fastly.Record(t, "update", func(c *fastly.Client) {
 		ud, err = Update(context.TODO(), c, &UpdateInput{
-			Description: fastly.ToPointer(descUpdated),
-			DomainID:    fastly.ToPointer(d.DomainID),
-			ServiceID:   fastly.ToPointer(fastly.TestDeliveryServiceID),
+			Description: new(descUpdated),
+			DomainID:    new(d.DomainID),
+			ServiceID:   new(fastly.TestDeliveryServiceID),
 		})
 	})
 	if err != nil {

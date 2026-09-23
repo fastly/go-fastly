@@ -18,12 +18,12 @@ func TestClient_ProviderConnections(t *testing.T) {
 	var created *ProviderConnection
 	fastly.Record(t, "create", func(c *fastly.Client) {
 		created, err = Create(ctx, c, &CreateInput{
-			Name:    fastly.ToPointer("go-fastly-test-connection"),
+			Name:    new("go-fastly-test-connection"),
 			Models:  []string{"claude-opus-4-7"},
-			BaseURL: fastly.ToPointer("https://api.anthropic.com"),
+			BaseURL: new("https://api.anthropic.com"),
 			// `sk-go-fastly-test` is a placeholder and will need to be replaced with a real Anthropic API key
 			// in order to re-run these tests.
-			APIKey: fastly.ToPointer("sk-go-fastly-test"),
+			APIKey: new("sk-go-fastly-test"),
 		})
 	})
 	require.NoError(t, err)
@@ -36,7 +36,7 @@ func TestClient_ProviderConnections(t *testing.T) {
 	defer func() {
 		fastly.Record(t, "delete", func(c *fastly.Client) {
 			_ = Delete(ctx, c, &DeleteInput{
-				ID: fastly.ToPointer(connID),
+				ID: new(connID),
 			})
 		})
 	}()
@@ -45,7 +45,7 @@ func TestClient_ProviderConnections(t *testing.T) {
 	var fetched *ProviderConnection
 	fastly.Record(t, "get", func(c *fastly.Client) {
 		fetched, err = Get(ctx, c, &GetInput{
-			ID: fastly.ToPointer(connID),
+			ID: new(connID),
 		})
 	})
 	require.NoError(t, err)
@@ -65,7 +65,7 @@ func TestClient_ProviderConnections(t *testing.T) {
 	var updated *ProviderConnection
 	fastly.Record(t, "update", func(c *fastly.Client) {
 		updated, err = Update(ctx, c, &UpdateInput{
-			ID:     fastly.ToPointer(connID),
+			ID:     new(connID),
 			Models: []string{"claude-opus-4-6", "claude-sonnet-4-6"},
 		})
 	})
@@ -80,29 +80,29 @@ func TestClient_Create_validation(t *testing.T) {
 
 	_, err := Create(ctx, fastly.TestClient, &CreateInput{
 		Models:  []string{"gpt-4"},
-		BaseURL: fastly.ToPointer("https://api.openai.com/v1"),
-		APIKey:  fastly.ToPointer("secret"),
+		BaseURL: new("https://api.openai.com/v1"),
+		APIKey:  new("secret"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingName)
 
 	_, err = Create(ctx, fastly.TestClient, &CreateInput{
-		Name:    fastly.ToPointer("OpenAI"),
-		BaseURL: fastly.ToPointer("https://api.openai.com/v1"),
-		APIKey:  fastly.ToPointer("secret"),
+		Name:    new("OpenAI"),
+		BaseURL: new("https://api.openai.com/v1"),
+		APIKey:  new("secret"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingModels)
 
 	_, err = Create(ctx, fastly.TestClient, &CreateInput{
-		Name:   fastly.ToPointer("OpenAI"),
+		Name:   new("OpenAI"),
 		Models: []string{"gpt-4"},
-		APIKey: fastly.ToPointer("secret"),
+		APIKey: new("secret"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingBaseURL)
 
 	_, err = Create(ctx, fastly.TestClient, &CreateInput{
-		Name:    fastly.ToPointer("OpenAI"),
+		Name:    new("OpenAI"),
 		Models:  []string{"gpt-4"},
-		BaseURL: fastly.ToPointer("https://api.openai.com/v1"),
+		BaseURL: new("https://api.openai.com/v1"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingAPIKey)
 }

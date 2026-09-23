@@ -21,11 +21,11 @@ func TestClient_NewRelic(t *testing.T) {
 		newRelicResp1, err = c.CreateNewRelic(context.TODO(), &CreateNewRelicInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-newrelic"),
-			Token:          ToPointer("abcd1234"),
-			Format:         ToPointer("format"),
-			Placement:      ToPointer("none"),
-			Region:         ToPointer("us"),
+			Name:           new("test-newrelic"),
+			Token:          new("abcd1234"),
+			Format:         new("format"),
+			Placement:      new("none"),
+			Region:         new("us"),
 		})
 	})
 	if err != nil {
@@ -36,11 +36,11 @@ func TestClient_NewRelic(t *testing.T) {
 		newRelicResp2, err = c.CreateNewRelic(context.TODO(), &CreateNewRelicInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-newrelic-2"),
-			Token:          ToPointer("abcd1234"),
-			Format:         ToPointer("format"),
-			Placement:      ToPointer("none"),
-			Region:         ToPointer("eu"),
+			Name:           new("test-newrelic-2"),
+			Token:          new("abcd1234"),
+			Format:         new("format"),
+			Placement:      new("none"),
+			Region:         new("eu"),
 		})
 	})
 	if err != nil {
@@ -52,11 +52,11 @@ func TestClient_NewRelic(t *testing.T) {
 		_, err = c.CreateNewRelic(context.TODO(), &CreateNewRelicInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-newrelic-3"),
-			Token:          ToPointer("abcd1234"),
-			Format:         ToPointer("format"),
-			Placement:      ToPointer("none"),
-			Region:         ToPointer("abc"),
+			Name:           new("test-newrelic-3"),
+			Token:          new("abcd1234"),
+			Format:         new("format"),
+			Placement:      new("none"),
+			Region:         new("abc"),
 		})
 	})
 	if err == nil {
@@ -206,10 +206,10 @@ func TestClient_NewRelic(t *testing.T) {
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-newrelic",
-			NewName:          ToPointer("new-test-newrelic"),
-			FormatVersion:    ToPointer(2),
-			Region:           ToPointer("eu"),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-newrelic"),
+			FormatVersion:    new(2),
+			Region:           new("eu"),
+			ProcessingRegion: new("eu"),
 			Placement:        NullValue[string](),
 		})
 	})
@@ -226,7 +226,7 @@ func TestClient_NewRelic(t *testing.T) {
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-newrelic",
-			Region:         ToPointer("zz"),
+			Region:         new("zz"),
 			Placement:      NullValue[string](),
 		})
 	})
@@ -275,11 +275,11 @@ func TestClient_NewRelic_Compute(t *testing.T) {
 		newRelicResp1, err = c.CreateNewRelic(context.TODO(), &CreateNewRelicInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-newrelic"),
-			Token:          ToPointer("abcd1234"),
-			Format:         ToPointer("format"),
-			Placement:      ToPointer("none"),
-			Region:         ToPointer("us"),
+			Name:           new("test-newrelic"),
+			Token:          new("abcd1234"),
+			Format:         new("format"),
+			Placement:      new("none"),
+			Region:         new("us"),
 		})
 	})
 	if err != nil {
@@ -290,11 +290,11 @@ func TestClient_NewRelic_Compute(t *testing.T) {
 		newRelicResp2, err = c.CreateNewRelic(context.TODO(), &CreateNewRelicInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-newrelic-2"),
-			Token:          ToPointer("abcd1234"),
-			Format:         ToPointer("format"),
-			Placement:      ToPointer("none"),
-			Region:         ToPointer("eu"),
+			Name:           new("test-newrelic-2"),
+			Token:          new("abcd1234"),
+			Format:         new("format"),
+			Placement:      new("none"),
+			Region:         new("eu"),
 		})
 	})
 	if err != nil {
@@ -306,11 +306,11 @@ func TestClient_NewRelic_Compute(t *testing.T) {
 		_, err = c.CreateNewRelic(context.TODO(), &CreateNewRelicInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-newrelic-3"),
-			Token:          ToPointer("abcd1234"),
-			Format:         ToPointer("format"),
-			Placement:      ToPointer("none"),
-			Region:         ToPointer("abc"),
+			Name:           new("test-newrelic-3"),
+			Token:          new("abcd1234"),
+			Format:         new("format"),
+			Placement:      new("none"),
+			Region:         new("abc"),
 		})
 	})
 	if err == nil {
@@ -460,10 +460,10 @@ func TestClient_NewRelic_Compute(t *testing.T) {
 			ServiceID:        TestComputeServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-newrelic",
-			NewName:          ToPointer("new-test-newrelic"),
-			FormatVersion:    ToPointer(2),
-			Region:           ToPointer("eu"),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-newrelic"),
+			FormatVersion:    new(2),
+			Region:           new("eu"),
+			ProcessingRegion: new("eu"),
 			Placement:        NewNullable("none"),
 		})
 	})
@@ -480,7 +480,7 @@ func TestClient_NewRelic_Compute(t *testing.T) {
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-newrelic",
-			Region:         ToPointer("zz"),
+			Region:         new("zz"),
 			Placement:      NewNullable("none"),
 		})
 	})

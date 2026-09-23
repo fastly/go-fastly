@@ -21,11 +21,11 @@ func TestClient_Datadog_Compute(t *testing.T) {
 		d, err = c.CreateDatadog(context.TODO(), &CreateDatadogInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-datadog"),
-			Region:         ToPointer("US"),
-			Token:          ToPointer("abcd1234"),
-			Format:         ToPointer("format"),
-			Placement:      ToPointer("none"),
+			Name:           new("test-datadog"),
+			Region:         new("US"),
+			Token:          new("abcd1234"),
+			Format:         new("format"),
+			Placement:      new("none"),
 		})
 	})
 	if err != nil {
@@ -118,10 +118,10 @@ func TestClient_Datadog_Compute(t *testing.T) {
 			ServiceID:        TestComputeServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-datadog",
-			NewName:          ToPointer("new-test-datadog"),
-			Region:           ToPointer("EU"),
-			FormatVersion:    ToPointer(2),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-datadog"),
+			Region:           new("EU"),
+			FormatVersion:    new(2),
+			ProcessingRegion: new("eu"),
 			Placement:        NewNullable("none"),
 		})
 	})
@@ -172,11 +172,11 @@ func TestClient_Datadog(t *testing.T) {
 		d, err = c.CreateDatadog(context.TODO(), &CreateDatadogInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
-			Name:           ToPointer("test-datadog"),
-			Region:         ToPointer("US"),
-			Token:          ToPointer("abcd1234"),
-			Format:         ToPointer("format"),
-			Placement:      ToPointer("none"),
+			Name:           new("test-datadog"),
+			Region:         new("US"),
+			Token:          new("abcd1234"),
+			Format:         new("format"),
+			Placement:      new("none"),
 		})
 	})
 	if err != nil {
@@ -269,10 +269,10 @@ func TestClient_Datadog(t *testing.T) {
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-datadog",
-			NewName:          ToPointer("new-test-datadog"),
-			Region:           ToPointer("EU"),
-			FormatVersion:    ToPointer(2),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-datadog"),
+			Region:           new("EU"),
+			FormatVersion:    new(2),
+			ProcessingRegion: new("eu"),
 			Placement:        NullValue[string](),
 		})
 	})

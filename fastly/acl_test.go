@@ -20,7 +20,7 @@ func TestClient_ACLs(t *testing.T) {
 		a, err = c.CreateACL(context.TODO(), &CreateACLInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
-			Name:           ToPointer("test_acl"),
+			Name:           new("test_acl"),
 		})
 	})
 	if err != nil {
@@ -98,7 +98,7 @@ func TestClient_ACLs(t *testing.T) {
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 			Name:           "test_acl",
-			NewName:        ToPointer("new_test_acl"),
+			NewName:        new("new_test_acl"),
 		})
 	})
 	if err != nil {

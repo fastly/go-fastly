@@ -63,7 +63,7 @@ func TestClient_CustomTLSCertificate(t *testing.T) {
 			// NOTE: We set to an explicit false to avoid a test error.
 			// This is because we don't activate a real TLS certificate in the test.
 			// Filtering by active certs would return zero results from the API call.
-			FilterInUse: ToPointer(false),
+			FilterInUse: new(false),
 		})
 	})
 	if err != nil {
@@ -164,7 +164,7 @@ func TestClient_ListCustomTLSCertificates_validation(t *testing.T) {
 	var err error
 	Record(t, "custom_tls/list", func(c *Client) {
 		_, err = c.ListCustomTLSCertificates(context.TODO(), &ListCustomTLSCertificatesInput{
-			FilterInUse: ToPointer(false),
+			FilterInUse: new(false),
 		})
 	})
 	if err != nil {

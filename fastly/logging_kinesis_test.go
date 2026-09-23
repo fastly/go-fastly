@@ -23,14 +23,14 @@ func TestClient_Kinesis(t *testing.T) {
 		kinesisCreateResp1, err = c.CreateKinesis(context.TODO(), &CreateKinesisInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
-			Name:           ToPointer("test-kinesis"),
-			StreamName:     ToPointer("stream-name"),
-			Region:         ToPointer("us-east-1"),
-			AccessKey:      ToPointer("AKIAIOSFODNN7EXAMPLE"),
-			SecretKey:      ToPointer("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
-			Format:         ToPointer("format"),
-			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("none"),
+			Name:           new("test-kinesis"),
+			StreamName:     new("stream-name"),
+			Region:         new("us-east-1"),
+			AccessKey:      new("AKIAIOSFODNN7EXAMPLE"),
+			SecretKey:      new("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
+			Format:         new("format"),
+			FormatVersion:  new(2),
+			Placement:      new("none"),
 		})
 	})
 	if err != nil {
@@ -41,13 +41,13 @@ func TestClient_Kinesis(t *testing.T) {
 		kinesisCreateResp2, err = c.CreateKinesis(context.TODO(), &CreateKinesisInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
-			Name:           ToPointer("test-kinesis-2"),
-			StreamName:     ToPointer("stream-name"),
-			Region:         ToPointer("us-east-1"),
-			IAMRole:        ToPointer("arn:aws:iam::123456789012:role/S3Access"),
-			Format:         ToPointer("format"),
-			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("none"),
+			Name:           new("test-kinesis-2"),
+			StreamName:     new("stream-name"),
+			Region:         new("us-east-1"),
+			IAMRole:        new("arn:aws:iam::123456789012:role/S3Access"),
+			Format:         new("format"),
+			FormatVersion:  new(2),
+			Placement:      new("none"),
 		})
 	})
 	if err != nil {
@@ -59,15 +59,15 @@ func TestClient_Kinesis(t *testing.T) {
 		_, err = c.CreateKinesis(context.TODO(), &CreateKinesisInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
-			Name:           ToPointer("test-kinesis-3"),
-			StreamName:     ToPointer("stream-name"),
-			Region:         ToPointer("us-east-1"),
-			AccessKey:      ToPointer("AKIAIOSFODNN7EXAMPLE"),
-			SecretKey:      ToPointer("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
-			IAMRole:        ToPointer("arn:aws:iam::123456789012:role/S3Access"),
-			Format:         ToPointer("format"),
-			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("none"),
+			Name:           new("test-kinesis-3"),
+			StreamName:     new("stream-name"),
+			Region:         new("us-east-1"),
+			AccessKey:      new("AKIAIOSFODNN7EXAMPLE"),
+			SecretKey:      new("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
+			IAMRole:        new("arn:aws:iam::123456789012:role/S3Access"),
+			Format:         new("format"),
+			FormatVersion:  new(2),
+			Placement:      new("none"),
 		})
 	})
 	if err == nil {
@@ -79,13 +79,13 @@ func TestClient_Kinesis(t *testing.T) {
 		_, err = c.CreateKinesis(context.TODO(), &CreateKinesisInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
-			Name:           ToPointer("test-kinesis-3"),
-			StreamName:     ToPointer("stream-name"),
-			Region:         ToPointer("us-east-1"),
-			IAMRole:        ToPointer("badarn"),
-			Format:         ToPointer("format"),
-			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("none"),
+			Name:           new("test-kinesis-3"),
+			StreamName:     new("stream-name"),
+			Region:         new("us-east-1"),
+			IAMRole:        new("badarn"),
+			Format:         new("format"),
+			FormatVersion:  new(2),
+			Placement:      new("none"),
 		})
 	})
 	if err == nil {
@@ -247,8 +247,8 @@ func TestClient_Kinesis(t *testing.T) {
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *v.Number,
 			Name:             "test-kinesis",
-			NewName:          ToPointer("new-test-kinesis"),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-kinesis"),
+			ProcessingRegion: new("eu"),
 			Placement:        NullValue[string](),
 		})
 	})
@@ -266,9 +266,9 @@ func TestClient_Kinesis(t *testing.T) {
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
 			Name:           "new-test-kinesis",
-			AccessKey:      ToPointer(""),
-			SecretKey:      ToPointer(""),
-			IAMRole:        ToPointer("arn:aws:iam::123456789012:role/S3Access"),
+			AccessKey:      new(""),
+			SecretKey:      new(""),
+			IAMRole:        new("arn:aws:iam::123456789012:role/S3Access"),
 			Placement:      NullValue[string](),
 		})
 	})
@@ -286,9 +286,9 @@ func TestClient_Kinesis(t *testing.T) {
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
 			Name:           "test-kinesis-2",
-			AccessKey:      ToPointer("AKIAIOSFODNN7EXAMPLE"),
-			SecretKey:      ToPointer("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
-			IAMRole:        ToPointer(""),
+			AccessKey:      new("AKIAIOSFODNN7EXAMPLE"),
+			SecretKey:      new("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
+			IAMRole:        new(""),
 			Placement:      NullValue[string](),
 		})
 	})
@@ -306,7 +306,7 @@ func TestClient_Kinesis(t *testing.T) {
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
 			Name:           "test-kinesis",
-			IAMRole:        ToPointer("badarn"),
+			IAMRole:        new("badarn"),
 			Placement:      NullValue[string](),
 		})
 	})
@@ -369,14 +369,14 @@ func TestClient_Kinesis_Compute(t *testing.T) {
 		kinesisCreateResp1, err = c.CreateKinesis(context.TODO(), &CreateKinesisInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *v.Number,
-			Name:           ToPointer("test-kinesis"),
-			StreamName:     ToPointer("stream-name"),
-			Region:         ToPointer("us-east-1"),
-			AccessKey:      ToPointer("AKIAIOSFODNN7EXAMPLE"),
-			SecretKey:      ToPointer("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
-			Format:         ToPointer("format"),
-			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("none"),
+			Name:           new("test-kinesis"),
+			StreamName:     new("stream-name"),
+			Region:         new("us-east-1"),
+			AccessKey:      new("AKIAIOSFODNN7EXAMPLE"),
+			SecretKey:      new("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
+			Format:         new("format"),
+			FormatVersion:  new(2),
+			Placement:      new("none"),
 		})
 	})
 	if err != nil {
@@ -387,13 +387,13 @@ func TestClient_Kinesis_Compute(t *testing.T) {
 		kinesisCreateResp2, err = c.CreateKinesis(context.TODO(), &CreateKinesisInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *v.Number,
-			Name:           ToPointer("test-kinesis-2"),
-			StreamName:     ToPointer("stream-name"),
-			Region:         ToPointer("us-east-1"),
-			IAMRole:        ToPointer("arn:aws:iam::123456789012:role/S3Access"),
-			Format:         ToPointer("format"),
-			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("none"),
+			Name:           new("test-kinesis-2"),
+			StreamName:     new("stream-name"),
+			Region:         new("us-east-1"),
+			IAMRole:        new("arn:aws:iam::123456789012:role/S3Access"),
+			Format:         new("format"),
+			FormatVersion:  new(2),
+			Placement:      new("none"),
 		})
 	})
 	if err != nil {
@@ -405,15 +405,15 @@ func TestClient_Kinesis_Compute(t *testing.T) {
 		_, err = c.CreateKinesis(context.TODO(), &CreateKinesisInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *v.Number,
-			Name:           ToPointer("test-kinesis-3"),
-			StreamName:     ToPointer("stream-name"),
-			Region:         ToPointer("us-east-1"),
-			AccessKey:      ToPointer("AKIAIOSFODNN7EXAMPLE"),
-			SecretKey:      ToPointer("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
-			IAMRole:        ToPointer("arn:aws:iam::123456789012:role/S3Access"),
-			Format:         ToPointer("format"),
-			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("none"),
+			Name:           new("test-kinesis-3"),
+			StreamName:     new("stream-name"),
+			Region:         new("us-east-1"),
+			AccessKey:      new("AKIAIOSFODNN7EXAMPLE"),
+			SecretKey:      new("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
+			IAMRole:        new("arn:aws:iam::123456789012:role/S3Access"),
+			Format:         new("format"),
+			FormatVersion:  new(2),
+			Placement:      new("none"),
 		})
 	})
 	if err == nil {
@@ -425,13 +425,13 @@ func TestClient_Kinesis_Compute(t *testing.T) {
 		_, err = c.CreateKinesis(context.TODO(), &CreateKinesisInput{
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *v.Number,
-			Name:           ToPointer("test-kinesis-3"),
-			StreamName:     ToPointer("stream-name"),
-			Region:         ToPointer("us-east-1"),
-			IAMRole:        ToPointer("badarn"),
-			Format:         ToPointer("format"),
-			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("none"),
+			Name:           new("test-kinesis-3"),
+			StreamName:     new("stream-name"),
+			Region:         new("us-east-1"),
+			IAMRole:        new("badarn"),
+			Format:         new("format"),
+			FormatVersion:  new(2),
+			Placement:      new("none"),
 		})
 	})
 	if err == nil {
@@ -593,8 +593,8 @@ func TestClient_Kinesis_Compute(t *testing.T) {
 			ServiceID:        TestComputeServiceID,
 			ServiceVersion:   *v.Number,
 			Name:             "test-kinesis",
-			NewName:          ToPointer("new-test-kinesis"),
-			ProcessingRegion: ToPointer("eu"),
+			NewName:          new("new-test-kinesis"),
+			ProcessingRegion: new("eu"),
 			Placement:        NewNullable("none"),
 		})
 	})
@@ -612,9 +612,9 @@ func TestClient_Kinesis_Compute(t *testing.T) {
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *v.Number,
 			Name:           "new-test-kinesis",
-			AccessKey:      ToPointer(""),
-			SecretKey:      ToPointer(""),
-			IAMRole:        ToPointer("arn:aws:iam::123456789012:role/S3Access"),
+			AccessKey:      new(""),
+			SecretKey:      new(""),
+			IAMRole:        new("arn:aws:iam::123456789012:role/S3Access"),
 			Placement:      NewNullable("none"),
 		})
 	})
@@ -632,9 +632,9 @@ func TestClient_Kinesis_Compute(t *testing.T) {
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *v.Number,
 			Name:           "test-kinesis-2",
-			AccessKey:      ToPointer("AKIAIOSFODNN7EXAMPLE"),
-			SecretKey:      ToPointer("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
-			IAMRole:        ToPointer(""),
+			AccessKey:      new("AKIAIOSFODNN7EXAMPLE"),
+			SecretKey:      new("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
+			IAMRole:        new(""),
 			Placement:      NewNullable("none"),
 		})
 	})
@@ -652,7 +652,7 @@ func TestClient_Kinesis_Compute(t *testing.T) {
 			ServiceID:      TestComputeServiceID,
 			ServiceVersion: *v.Number,
 			Name:           "test-kinesis",
-			IAMRole:        ToPointer("badarn"),
+			IAMRole:        new("badarn"),
 			Placement:      NewNullable("none"),
 		})
 	})

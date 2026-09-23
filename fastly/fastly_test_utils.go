@@ -190,9 +190,9 @@ func createTestService(t *testing.T, serviceFixture, serviceNameSuffix string) *
 
 	Record(t, serviceFixture, func(client *Client) {
 		service, err = client.CreateService(context.TODO(), &CreateServiceInput{
-			Name:    ToPointer(fmt.Sprintf("test_service_%s", serviceNameSuffix)),
-			Comment: ToPointer("go-fastly client test"),
-			Type:    ToPointer(ServiceTypeVCL),
+			Name:    new(fmt.Sprintf("test_service_%s", serviceNameSuffix)),
+			Comment: new("go-fastly client test"),
+			Type:    new(ServiceTypeVCL),
 		})
 	})
 	if err != nil {
@@ -208,9 +208,9 @@ func createTestServiceWasm(t *testing.T, serviceFixture, serviceNameSuffix strin
 
 	Record(t, serviceFixture, func(client *Client) {
 		service, err = client.CreateService(context.TODO(), &CreateServiceInput{
-			Name:    ToPointer(fmt.Sprintf("test_service_wasm_%s", serviceNameSuffix)),
-			Comment: ToPointer("go-fastly wasm client test"),
-			Type:    ToPointer(ServiceTypeWasm),
+			Name:    new(fmt.Sprintf("test_service_wasm_%s", serviceNameSuffix)),
+			Comment: new("go-fastly wasm client test"),
+			Type:    new(ServiceTypeWasm),
 		})
 	})
 	if err != nil {
@@ -275,7 +275,7 @@ func createTestDictionary(t *testing.T, dictionaryFixture, serviceID string, ver
 		dictionary, err = client.CreateDictionary(context.TODO(), &CreateDictionaryInput{
 			ServiceID:      serviceID,
 			ServiceVersion: version,
-			Name:           ToPointer(fmt.Sprintf("test_dictionary_%s", dictionaryNameSuffix)),
+			Name:           new(fmt.Sprintf("test_dictionary_%s", dictionaryNameSuffix)),
 		})
 	})
 	if err != nil {
@@ -307,7 +307,7 @@ func createTestACL(t *testing.T, createFixture, serviceID string, version int, a
 		acl, err = client.CreateACL(context.TODO(), &CreateACLInput{
 			ServiceID:      serviceID,
 			ServiceVersion: version,
-			Name:           ToPointer(fmt.Sprintf("test_acl_%s", aclNameSuffix)),
+			Name:           new(fmt.Sprintf("test_acl_%s", aclNameSuffix)),
 		})
 	})
 	if err != nil {
@@ -339,7 +339,7 @@ func createTestPool(t *testing.T, createFixture, serviceID string, version int, 
 		pool, err = client.CreatePool(context.TODO(), &CreatePoolInput{
 			ServiceID:      serviceID,
 			ServiceVersion: version,
-			Name:           ToPointer(fmt.Sprintf("test_pool_%s", poolNameSuffix)),
+			Name:           new(fmt.Sprintf("test_pool_%s", poolNameSuffix)),
 		})
 	})
 	if err != nil {
