@@ -19,7 +19,7 @@ type GetDiffInput struct {
 // the specified routing config. The routing config must have both an active
 // and a draft version.
 func GetDiff(ctx context.Context, c *fastly.Client, i *GetDiffInput) (*Diff, error) {
-	if i.RoutingConfigID == nil {
+	if i.RoutingConfigID == nil || *i.RoutingConfigID == "" {
 		return nil, fastly.ErrMissingRoutingConfigID
 	}
 

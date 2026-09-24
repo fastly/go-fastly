@@ -18,7 +18,7 @@ type DeactivateInput struct {
 // Deactivate deactivates the specified routing config's active version,
 // leaving it with no active version.
 func Deactivate(ctx context.Context, c *fastly.Client, i *DeactivateInput) (*Data, error) {
-	if i.RoutingConfigID == nil {
+	if i.RoutingConfigID == nil || *i.RoutingConfigID == "" {
 		return nil, fastly.ErrMissingRoutingConfigID
 	}
 

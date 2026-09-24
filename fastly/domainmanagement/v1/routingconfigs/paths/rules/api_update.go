@@ -27,13 +27,13 @@ type UpdateInput struct {
 
 // Update updates the specified rule.
 func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Data, error) {
-	if i.RoutingConfigID == nil {
+	if i.RoutingConfigID == nil || *i.RoutingConfigID == "" {
 		return nil, fastly.ErrMissingRoutingConfigID
 	}
-	if i.PathID == nil {
+	if i.PathID == nil || *i.PathID == "" {
 		return nil, fastly.ErrMissingPathID
 	}
-	if i.RuleID == nil {
+	if i.RuleID == nil || *i.RuleID == "" {
 		return nil, fastly.ErrMissingRuleID
 	}
 

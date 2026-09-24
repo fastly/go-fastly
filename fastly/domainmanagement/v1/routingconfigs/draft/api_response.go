@@ -33,6 +33,8 @@ type Diff struct {
 type PathChange struct {
 	// Path is the added or deleted path.
 	Path *paths.Data `json:"path,omitempty"`
+	// Rules lists the rules belonging to the added or deleted path.
+	Rules []rules.Data `json:"rules,omitempty"`
 }
 
 // PathModification describes the differences for a path that exists in both

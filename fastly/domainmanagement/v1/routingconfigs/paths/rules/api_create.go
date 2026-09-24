@@ -25,10 +25,10 @@ type CreateInput struct {
 
 // Create creates a new rule within the specified path.
 func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Data, error) {
-	if i.RoutingConfigID == nil {
+	if i.RoutingConfigID == nil || *i.RoutingConfigID == "" {
 		return nil, fastly.ErrMissingRoutingConfigID
 	}
-	if i.PathID == nil {
+	if i.PathID == nil || *i.PathID == "" {
 		return nil, fastly.ErrMissingPathID
 	}
 	if i.Action == nil {

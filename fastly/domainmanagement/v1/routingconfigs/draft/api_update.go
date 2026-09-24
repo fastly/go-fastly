@@ -20,7 +20,7 @@ type UpdateInput struct {
 
 // Update sets the comment on the specified routing config's draft version.
 func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Data, error) {
-	if i.RoutingConfigID == nil {
+	if i.RoutingConfigID == nil || *i.RoutingConfigID == "" {
 		return nil, fastly.ErrMissingRoutingConfigID
 	}
 	if i.Comment == nil {

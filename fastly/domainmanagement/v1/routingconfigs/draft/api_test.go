@@ -111,6 +111,9 @@ func TestClient_Draft(t *testing.T) {
 	if len(diff.Added) != 1 {
 		t.Errorf("bad diff added: %v", diff.Added)
 	}
+	if len(diff.Added[0].Rules) != 1 {
+		t.Errorf("bad diff added rules: %v", diff.Added[0].Rules)
+	}
 
 	// Update (set a comment on the draft)
 	var d *Data
@@ -141,6 +144,13 @@ func TestClient_Draft(t *testing.T) {
 func TestClient_GetDiff_validation(t *testing.T) {
 	_, err := GetDiff(context.TODO(), fastly.TestClient, &GetDiffInput{
 		RoutingConfigID: nil,
+	})
+	if !errors.Is(err, fastly.ErrMissingRoutingConfigID) {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = GetDiff(context.TODO(), fastly.TestClient, &GetDiffInput{
+		RoutingConfigID: new(""),
 	})
 	if !errors.Is(err, fastly.ErrMissingRoutingConfigID) {
 		t.Errorf("bad error: %s", err)

@@ -17,7 +17,7 @@ type DeleteInactiveInput struct {
 // DeleteInactive permanently deletes all inactive versions of the specified
 // routing config. This destroys rollback history and cannot be undone.
 func DeleteInactive(ctx context.Context, c *fastly.Client, i *DeleteInactiveInput) error {
-	if i.RoutingConfigID == nil {
+	if i.RoutingConfigID == nil || *i.RoutingConfigID == "" {
 		return fastly.ErrMissingRoutingConfigID
 	}
 

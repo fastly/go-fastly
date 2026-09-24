@@ -51,7 +51,7 @@ func TestClient_Path(t *testing.T) {
 	}
 
 	// List
-	var cl *Collection
+	var cl []Data
 	fastly.Record(t, "list", func(c *fastly.Client) {
 		cl, err = List(context.TODO(), c, &ListInput{
 			RoutingConfigID: &rc.RoutingConfigID,
@@ -60,7 +60,7 @@ func TestClient_Path(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(cl.Data) != 1 {
+	if len(cl) != 1 {
 		t.Errorf("bad paths list: %v", cl)
 	}
 
@@ -122,6 +122,22 @@ func TestClient_GetPath_validation(t *testing.T) {
 		PathID:          new("abc"),
 	})
 	if !errors.Is(err, fastly.ErrMissingRoutingConfigID) {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
+		RoutingConfigID: new(""),
+		PathID:          new("abc"),
+	})
+	if !errors.Is(err, fastly.ErrMissingRoutingConfigID) {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
+		RoutingConfigID: new("abc"),
+		PathID:          new(""),
+	})
+	if !errors.Is(err, fastly.ErrMissingPathID) {
 		t.Errorf("bad error: %s", err)
 	}
 }

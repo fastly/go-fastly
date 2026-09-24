@@ -20,7 +20,7 @@ type DeleteInput struct {
 
 // Delete deletes the specified routing config.
 func Delete(ctx context.Context, c *fastly.Client, i *DeleteInput) error {
-	if i.RoutingConfigID == nil {
+	if i.RoutingConfigID == nil || *i.RoutingConfigID == "" {
 		return fastly.ErrMissingRoutingConfigID
 	}
 

@@ -17,7 +17,7 @@ type GetInput struct {
 
 // Get retrieves a specified routing config.
 func Get(ctx context.Context, c *fastly.Client, i *GetInput) (*Data, error) {
-	if i.RoutingConfigID == nil {
+	if i.RoutingConfigID == nil || *i.RoutingConfigID == "" {
 		return nil, fastly.ErrMissingRoutingConfigID
 	}
 

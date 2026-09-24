@@ -18,7 +18,7 @@ type ActivateInput struct {
 // Activate activates the current draft version of the specified routing
 // config, making it the active version.
 func Activate(ctx context.Context, c *fastly.Client, i *ActivateInput) (*Data, error) {
-	if i.RoutingConfigID == nil {
+	if i.RoutingConfigID == nil || *i.RoutingConfigID == "" {
 		return nil, fastly.ErrMissingRoutingConfigID
 	}
 

@@ -21,10 +21,10 @@ type UpdateInput struct {
 
 // Update updates the specified path.
 func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Data, error) {
-	if i.RoutingConfigID == nil {
+	if i.RoutingConfigID == nil || *i.RoutingConfigID == "" {
 		return nil, fastly.ErrMissingRoutingConfigID
 	}
-	if i.PathID == nil {
+	if i.PathID == nil || *i.PathID == "" {
 		return nil, fastly.ErrMissingPathID
 	}
 

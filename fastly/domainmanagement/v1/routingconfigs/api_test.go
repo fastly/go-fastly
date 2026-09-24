@@ -61,7 +61,7 @@ func TestClient_RoutingConfig(t *testing.T) {
 	}
 
 	// List
-	var cl *Collection
+	var cl []Data
 	fastly.Record(t, "list", func(c *fastly.Client) {
 		cl, err = List(context.TODO(), c, &ListInput{
 			Limit: new(10),
@@ -70,7 +70,7 @@ func TestClient_RoutingConfig(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(cl.Data) < 1 {
+	if len(cl) < 1 {
 		t.Errorf("bad routing configs list: %v", cl)
 	}
 
@@ -131,6 +131,13 @@ func TestClient_GetRoutingConfig_validation(t *testing.T) {
 	var err error
 	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		RoutingConfigID: nil,
+	})
+	if !errors.Is(err, fastly.ErrMissingRoutingConfigID) {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
+		RoutingConfigID: new(""),
 	})
 	if !errors.Is(err, fastly.ErrMissingRoutingConfigID) {
 		t.Errorf("bad error: %s", err)

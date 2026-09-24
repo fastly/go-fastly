@@ -104,7 +104,7 @@ func TestClient_Version(t *testing.T) {
 	}
 
 	// List (should show v1 as an inactive version)
-	var cl *Collection
+	var cl []Data
 	fastly.Record(t, "list", func(c *fastly.Client) {
 		cl, err = List(context.TODO(), c, &ListInput{
 			RoutingConfigID: &rc.RoutingConfigID,
@@ -113,10 +113,10 @@ func TestClient_Version(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(cl.Data) != 1 {
+	if len(cl) != 1 {
 		t.Fatalf("bad versions list: %v", cl)
 	}
-	v1 := cl.Data[0]
+	v1 := cl[0]
 
 	// Activate (reactivate v1)
 	var ad *routingconfigs.Data
@@ -173,6 +173,14 @@ func TestClient_ActivateVersion_validation(t *testing.T) {
 	_, err = Activate(context.TODO(), fastly.TestClient, &ActivateInput{
 		RoutingConfigID: new("abc"),
 		VersionID:       nil,
+	})
+	if !errors.Is(err, fastly.ErrMissingVersionID) {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = Activate(context.TODO(), fastly.TestClient, &ActivateInput{
+		RoutingConfigID: new("abc"),
+		VersionID:       new(""),
 	})
 	if !errors.Is(err, fastly.ErrMissingVersionID) {
 		t.Errorf("bad error: %s", err)

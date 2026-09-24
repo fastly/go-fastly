@@ -95,7 +95,7 @@ func TestClient_Rule(t *testing.T) {
 	}
 
 	// List
-	var cl *Collection
+	var cl []Data
 	fastly.Record(t, "list", func(c *fastly.Client) {
 		cl, err = List(context.TODO(), c, &ListInput{
 			RoutingConfigID: &rc.RoutingConfigID,
@@ -105,7 +105,7 @@ func TestClient_Rule(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(cl.Data) != 2 {
+	if len(cl) != 2 {
 		t.Errorf("bad rules list: %v", cl)
 	}
 
@@ -186,6 +186,15 @@ func TestClient_GetRule_validation(t *testing.T) {
 		RoutingConfigID: new("abc"),
 		PathID:          new("abc"),
 		RuleID:          nil,
+	})
+	if !errors.Is(err, fastly.ErrMissingRuleID) {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
+		RoutingConfigID: new("abc"),
+		PathID:          new("abc"),
+		RuleID:          new(""),
 	})
 	if !errors.Is(err, fastly.ErrMissingRuleID) {
 		t.Errorf("bad error: %s", err)

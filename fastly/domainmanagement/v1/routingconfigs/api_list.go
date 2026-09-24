@@ -13,11 +13,7 @@ import (
 // ListInput specifies the information needed for the List() function to
 // perform the operation.
 type ListInput struct {
-	// Cursor is the cursor value from the next_cursor field of a previous
-	// response, used to retrieve the next page. To request the first page, this
-	// should be an empty string or nil.
-	Cursor *string
-	// Limit is the maximum number of results to return.
+	// Limit is the maximum number of results to return per page.
 	Limit *int
 	// Sort is the order in which to list the results.
 	Sort *string
@@ -26,12 +22,32 @@ type ListInput struct {
 	State []string
 }
 
-// List retrieves a list of routing configs, with optional filtering and
-// pagination.
-func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Collection, error) {
+// List retrieves all routing configs, with optional filtering, automatically
+// paginating through all pages.
+func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]Data, error) {
+	var (
+		out    []Data
+		cursor *string
+	)
+	for {
+		page, err := listPage(ctx, c, i, cursor)
+		if err != nil {
+			return nil, err
+		}
+		out = append(out, page.Data...)
+		if page.Meta.NextCursor == "" {
+			break
+		}
+		cursor = &page.Meta.NextCursor
+	}
+	return out, nil
+}
+
+// listPage retrieves a single page of routing configs.
+func listPage(ctx context.Context, c *fastly.Client, i *ListInput, cursor *string) (*Collection, error) {
 	requestOptions := fastly.CreateRequestOptions()
-	if i.Cursor != nil {
-		requestOptions.Params["cursor"] = *i.Cursor
+	if cursor != nil {
+		requestOptions.Params["cursor"] = *cursor
 	}
 	if i.Limit != nil {
 		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
