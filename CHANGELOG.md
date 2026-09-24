@@ -4,13 +4,18 @@
 
 ## BREAKING:
 
-- refactor(helpers): remove ToPointer method ([#871](https://github.com/fastly/go-fastly/pull/871))
+### Enhancements:
+
+### Bug fixes:
+
+### Dependencies:
+
+## [v17.5.0](https://github.com/fastly/go-fastly/releases/tag/v17.5.0) (2026-09-24)
 
 ### Enhancements:
 
 - feat(domainmanagement): add support for routing configs, paths, rules, drafts, and versions ([#872](https://github.com/fastly/go-fastly/pull/872))
-
-### Bug fixes:
+- refactor(helpers): remove ToPointer method ([#871](https://github.com/fastly/go-fastly/pull/871))
 
 ### Dependencies:
 
