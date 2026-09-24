@@ -119,7 +119,8 @@ type VisualizationConfig struct {
 	PlotType PlotType `json:"plot_type"`
 }
 
-type dashboardItemOption interface {
+// DashboardItemOption is a functional option for configuring a DashboardItem.
+type DashboardItemOption interface {
 	apply(*DashboardItem)
 }
 type optionFunc func(*DashboardItem)
@@ -128,37 +129,37 @@ func (f optionFunc) apply(di *DashboardItem) {
 	f(di)
 }
 
-func WithTitle(title string) dashboardItemOption {
+func WithTitle(title string) DashboardItemOption {
 	return optionFunc(func(di *DashboardItem) {
 		di.Title = title
 	})
 }
 
-func WithSubtitle(subtitle string) dashboardItemOption {
+func WithSubtitle(subtitle string) DashboardItemOption {
 	return optionFunc(func(di *DashboardItem) {
 		di.Subtitle = subtitle
 	})
 }
 
-func WithSpan(span uint8) dashboardItemOption {
+func WithSpan(span uint8) DashboardItemOption {
 	return optionFunc(func(di *DashboardItem) {
 		di.Span = span
 	})
 }
 
-func WithCalculationMethod(calculationMethod CalculationMethod) dashboardItemOption {
+func WithCalculationMethod(calculationMethod CalculationMethod) DashboardItemOption {
 	return optionFunc(func(di *DashboardItem) {
 		di.Visualization.Config.CalculationMethod = &calculationMethod
 	})
 }
 
-func WithFormat(format VisualizationFormat) dashboardItemOption {
+func WithFormat(format VisualizationFormat) DashboardItemOption {
 	return optionFunc(func(di *DashboardItem) {
 		di.Visualization.Config.Format = &format
 	})
 }
 
-func NewDashboardItem(sourceType DashboardSourceType, metrics []string, plotType PlotType, options ...dashboardItemOption) DashboardItem {
+func NewDashboardItem(sourceType DashboardSourceType, metrics []string, plotType PlotType, options ...DashboardItemOption) DashboardItem {
 	di := DashboardItem{
 		DataSource: DashboardDataSource{
 			Type: sourceType,
