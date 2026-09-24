@@ -1,0 +1,50 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"path":"/second"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/17.4.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/domain-management/v1/routing-configs/2rI2h8Ya3lvL61jrxvTqPn/paths
+    method: POST
+  response:
+    body: |
+      {"created_at":"2026-09-23T16:50:04.61061688Z","id":"O0LRZaceM0TtEgKJhLy6i","links":{"rules":"/domain-management/v1/routing-configs/2rI2h8Ya3lvL61jrxvTqPn/paths/O0LRZaceM0TtEgKJhLy6i/rules","self":"/domain-management/v1/routing-configs/2rI2h8Ya3lvL61jrxvTqPn/paths/O0LRZaceM0TtEgKJhLy6i"},"path":"/second"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "306"
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 23 Sep 2026 16:50:04 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "145"
+      X-Served-By:
+      - cache-chi-klot8100127-CHI, cache-nyc-kteb1890022-NYC
+      X-Timer:
+      - S1790182204.497954,VS0,VE176
+    status: 201 Created
+    code: 201
+    duration: ""

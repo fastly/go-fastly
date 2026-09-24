@@ -8,6 +8,8 @@
 
 ### Enhancements:
 
+- feat(domainmanagement): add support for routing configs, paths, rules, drafts, and versions ([#872](https://github.com/fastly/go-fastly/pull/872))
+
 ### Bug fixes:
 
 ### Dependencies:

@@ -566,6 +566,22 @@ var ErrMissingEventTypes = NewFieldError("EventTypes")
 // requires an "IntegrationIDs" key, but one was not set.
 var ErrMissingIntegrationIDs = NewFieldError("IntegrationIDs")
 
+// ErrMissingRoutingConfigID is an error that is returned when an input struct
+// requires a "RoutingConfigID" key, but one was not set.
+var ErrMissingRoutingConfigID = NewFieldError("RoutingConfigID")
+
+// ErrMissingPathID is an error that is returned when an input struct
+// requires a "PathID" key, but one was not set.
+var ErrMissingPathID = NewFieldError("PathID")
+
+// ErrMissingVersionID is an error that is returned when an input struct
+// requires a "VersionID" key, but one was not set.
+var ErrMissingVersionID = NewFieldError("VersionID")
+
+// ErrMissingComment is an error that is returned when an input struct
+// requires a "Comment" key, but one was not set.
+var ErrMissingComment = NewFieldError("Comment")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 
