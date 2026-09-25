@@ -582,6 +582,14 @@ var ErrMissingVersionID = NewFieldError("VersionID")
 // requires a "Comment" key, but one was not set.
 var ErrMissingComment = NewFieldError("Comment")
 
+// ErrMissingCategoryID is an error that is returned when an input struct
+// requires a "CategoryID" key, but one was not set.
+var ErrMissingCategoryID = NewFieldError("CategoryID")
+
+// ErrMissingBotID is an error that is returned when an input struct
+// requires a "BotID" key, but one was not set.
+var ErrMissingBotID = NewFieldError("BotID")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 

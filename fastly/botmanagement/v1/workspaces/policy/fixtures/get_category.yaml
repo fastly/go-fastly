@@ -1,0 +1,49 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/17.4.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/bot-management/v1/workspaces/XXXXXXXXXXXXXXXXXXXXXX/policy/categories/cat_monitoring_and_site_tools
+    method: GET
+  response:
+    body: '{"category_id":"cat_monitoring_and_site_tools","name":"Monitoring & Site
+      Tools","description":"Tools which access your site to monitor performance, uptime,
+      proving domain control, etc.","action":{"type":"allow"}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "212"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 25 Sep 2026 18:25:42 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "235"
+      X-Served-By:
+      - cache-chi-kigq8000156-CHI, cache-ewr-kewr1740030-EWR
+      X-Timer:
+      - S1790360742.959406,VS0,VE266
+    status: 200 OK
+    code: 200
+    duration: ""
