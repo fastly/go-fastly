@@ -6,6 +6,8 @@
 
 ### Enhancements:
 
+- feat(botmanagement): add support for Bot Management operations ([#876](https://github.com/fastly/go-fastly/pull/876))
+
 ### Bug fixes:
 
 ### Dependencies:

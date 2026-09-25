@@ -1,0 +1,65 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/17.4.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/bot-management/v1/workspaces/XXXXXXXXXXXXXXXXXXXXXX/policy/categories/cat_monitoring_and_site_tools/bots?limit=1000
+    method: GET
+  response:
+    body: '{"meta":{"limit":1000,"total":33,"next_cursor":null},"data":[{"bot_id":"bot_amazon_route_53_health_check_service","name":"Amazon
+      Route 53 Health Check Service","action":{"type":"inherit"}},{"bot_id":"bot_better_uptime","name":"Better
+      Uptime","action":{"type":"inherit"}},{"bot_id":"bot_checkly","name":"Checkly","action":{"type":"inherit"}},{"bot_id":"bot_cookiebot","name":"Cookiebot","action":{"type":"inherit"}},{"bot_id":"bot_dash0_monitoring","name":"Dash0
+      Monitoring","action":{"type":"inherit"}},{"bot_id":"bot_datadog_synthetic_bots","name":"Datadog
+      Synthetic Bots","action":{"type":"inherit"}},{"bot_id":"bot_fastly_cache_check","name":"Fastly
+      Cache Check","action":{"type":"inherit"}},{"bot_id":"bot_google_association_service","name":"Google
+      Association Service","action":{"type":"inherit"}},{"bot_id":"bot_google_business_link_verification","name":"Google
+      Business Link Verification","action":{"type":"inherit"}},{"bot_id":"bot_google_inspection_tool","name":"Google
+      Inspection Tool","action":{"type":"inherit"}},{"bot_id":"bot_google_pagespeed_insights","name":"Google
+      PageSpeed Insights","action":{"type":"inherit"}},{"bot_id":"bot_google_schema_markup_validator","name":"Google
+      Schema Markup Validator","action":{"type":"inherit"}},{"bot_id":"bot_google_site_verifier","name":"Google
+      Site Verifier","action":{"type":"inherit"}},{"bot_id":"bot_gtmetrix","name":"GTmetrix","action":{"type":"inherit"}},{"bot_id":"bot_hetrixtools_uptime_monitoring_bot","name":"HetrixTools
+      Uptime Monitoring Bot","action":{"type":"inherit"}},{"bot_id":"bot_hydrozen","name":"Hydrozen","action":{"type":"inherit"}},{"bot_id":"bot_ioccheckbot","name":"IOCCheckBot","action":{"type":"inherit"}},{"bot_id":"bot_logicmonitor_sitemonitor","name":"LogicMonitor
+      SiteMonitor","action":{"type":"inherit"}},{"bot_id":"bot_momenticbot","name":"MomenticBot","action":{"type":"inherit"}},{"bot_id":"bot_monitage_uptime_bot","name":"Monitage
+      Uptime Bot","action":{"type":"inherit"}},{"bot_id":"bot_new_relic","name":"New
+      Relic","action":{"type":"inherit"}},{"bot_id":"bot_ohdearbot","name":"OhDearBot","action":{"type":"inherit"}},{"bot_id":"bot_pagegym","name":"PageGym","action":{"type":"inherit"}},{"bot_id":"bot_parsely_crawler","name":"Parsely
+      Crawler","action":{"type":"inherit"}},{"bot_id":"bot_pingdom_bot","name":"Pingdom
+      Bot","action":{"type":"inherit"}},{"bot_id":"bot_qatech_web_agent","name":"QA.tech
+      Web Agent","action":{"type":"inherit"}},{"bot_id":"bot_redirect_pizza_destination_monitor","name":"Redirect
+      Pizza Destination Monitor","action":{"type":"inherit"}},{"bot_id":"bot_sentry_uptime_monitoring_bot","name":"Sentry
+      Uptime Monitoring Bot","action":{"type":"inherit"}},{"bot_id":"bot_site24x7","name":"Site24x7","action":{"type":"inherit"}},{"bot_id":"bot_statuscake","name":"StatusCake","action":{"type":"inherit"}},{"bot_id":"bot_termlybot","name":"TermlyBot","action":{"type":"inherit"}},{"bot_id":"bot_updownio","name":"Updown.io","action":{"type":"inherit"}},{"bot_id":"bot_uptimerobot","name":"UptimeRobot","action":{"type":"inherit"}}]}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 25 Sep 2026 18:25:43 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "233"
+      X-Served-By:
+      - cache-chi-klot8100129-CHI, cache-ewr-kewr1740030-EWR
+      X-Timer:
+      - S1790360743.891546,VS0,VE272
+    status: 200 OK
+    code: 200
+    duration: ""
