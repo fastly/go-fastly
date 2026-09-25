@@ -1,0 +1,50 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"action":{"type":"service","value":"kKJb5bOFI47uHeBVluGfX1"}}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/17.5.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/domain-management/v1/routing-configs/79NSSnAdr7eLQXQZqJ7yBN/paths/2LcLvej32atu1zOWAsqtLt/rules
+    method: POST
+  response:
+    body: |
+      {"action":{"type":"service","value":"kKJb5bOFI47uHeBVluGfX1"},"conditions":[],"created_at":"2026-09-25T20:41:23.496683096Z","id":"3mjFTpAjwrKNyTks70N50r","is_default":true,"updated_at":"2026-09-25T20:41:23.496683096Z"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "219"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 25 Sep 2026 20:41:23 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "111"
+      X-Served-By:
+      - cache-chi-klot8100057-CHI, cache-ewr-kewr1740053-EWR
+      X-Timer:
+      - S1790368883.396455,VS0,VE144
+    status: 201 Created
+    code: 201
+    duration: ""
