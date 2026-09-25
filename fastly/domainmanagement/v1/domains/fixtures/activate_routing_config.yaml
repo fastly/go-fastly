@@ -7,18 +7,18 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/17.5.0 (+github.com/fastly/go-fastly; go1.27.1)
-    url: https://api.fastly.com/domain-management/v1/domains/pPYOMApBAcxbIJGjtyXcmg
-    method: GET
+    url: https://api.fastly.com/domain-management/v1/routing-configs/5fXNeLtY5TFDuVIet0vzMH/activate
+    method: POST
   response:
-    body: '{"id":"pPYOMApBAcxbIJGjtyXcmg","created_at":"2026-09-25T19:16:50.000Z","fqdn":"1.fastly-sdk-gofastly-testing.com","updated_at":"2026-09-25T19:16:50.000Z","service_id":null,"activated":false,"verified":false,"description":"my
-      description","routing_configuration_id":null}'
+    body: |
+      {"created_at":"2026-09-25T19:16:51Z","id":"5fXNeLtY5TFDuVIet0vzMH","links":{"paths":"/domain-management/v1/routing-configs/5fXNeLtY5TFDuVIet0vzMH/paths","self":"/domain-management/v1/routing-configs/5fXNeLtY5TFDuVIet0vzMH"},"name":"gofastly-sdk-testing-domain-routing-config","state":"active","updated_at":"2026-09-25T19:16:51Z"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "270"
+      - "330"
       Content-Type:
       - application/json
       Date:
@@ -35,14 +35,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
-      X-Content-Type-Options:
-      - nosniff
       X-Envoy-Upstream-Service-Time:
-      - "81"
+      - "86"
       X-Served-By:
-      - cache-chi-kigq8000053-CHI, cache-ewr-kewr1740063-EWR
+      - cache-chi-kmdw8640075-CHI, cache-ewr-kewr1740063-EWR
       X-Timer:
-      - S1790363811.131798,VS0,VE117
+      - S1790363812.668650,VS0,VE119
     status: 200 OK
     code: 200
     duration: ""
