@@ -7,17 +7,24 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/17.5.0 (+github.com/fastly/go-fastly; go1.27.1)
-    url: https://api.fastly.com/domain-management/v1/domains/pPYOMApBAcxbIJGjtyXcmg
-    method: DELETE
+    url: https://api.fastly.com/domain-management/v1/routing-configs/79NSSnAdr7eLQXQZqJ7yBN/paths
+    method: GET
   response:
-    body: ""
+    body: |
+      {"detail":"No version found for config.","title":"Not Found"}
     headers:
       Accept-Ranges:
       - bytes
+      Age:
+      - "1"
       Cache-Control:
       - no-store
+      Content-Length:
+      - "62"
+      Content-Type:
+      - application/problem+json
       Date:
-      - Fri, 25 Sep 2026 19:16:52 GMT
+      - Fri, 25 Sep 2026 20:41:23 GMT
       Pragma:
       - no-cache
       Server:
@@ -27,17 +34,15 @@ interactions:
       Via:
       - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - MISS, HIT
       X-Cache-Hits:
-      - 0, 0
-      X-Content-Type-Options:
-      - nosniff
+      - 0, 1
       X-Envoy-Upstream-Service-Time:
-      - "100"
+      - "42"
       X-Served-By:
-      - cache-chi-kigq8000053-CHI, cache-ewr-kewr1740063-EWR
+      - cache-chi-kigq8000144-CHI, cache-ewr-kewr1740053-EWR
       X-Timer:
-      - S1790363812.044464,VS0,VE134
-    status: 204 No Content
-    code: 204
+      - S1790368884.720902,VS0,VE23
+    status: 404 Not Found
+    code: 404
     duration: ""

@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"description":"my description","fqdn":"1.fastly-sdk-gofastly-testing.com","service_id":null}'
+    body: '{"name":"gofastly-sdk-testing-active-list-bug"}'
     form: {}
     headers:
       Accept:
@@ -11,22 +11,22 @@ interactions:
       - application/json
       User-Agent:
       - FastlyGo/17.5.0 (+github.com/fastly/go-fastly; go1.27.1)
-    url: https://api.fastly.com/domain-management/v1/domains
+    url: https://api.fastly.com/domain-management/v1/routing-configs
     method: POST
   response:
-    body: '{"id":"pPYOMApBAcxbIJGjtyXcmg","created_at":"2026-09-25T19:16:50.000Z","fqdn":"1.fastly-sdk-gofastly-testing.com","updated_at":"2026-09-25T19:16:50.000Z","service_id":null,"activated":false,"verified":false,"description":"my
-      description","routing_configuration_id":null}'
+    body: |
+      {"created_at":"2026-09-25T20:41:23.012676674Z","id":"79NSSnAdr7eLQXQZqJ7yBN","links":{"paths":"/domain-management/v1/routing-configs/79NSSnAdr7eLQXQZqJ7yBN/paths","self":"/domain-management/v1/routing-configs/79NSSnAdr7eLQXQZqJ7yBN"},"name":"gofastly-sdk-testing-active-list-bug"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "270"
+      - "281"
       Content-Type:
       - application/json
       Date:
-      - Fri, 25 Sep 2026 19:16:50 GMT
+      - Fri, 25 Sep 2026 20:41:23 GMT
       Pragma:
       - no-cache
       Server:
@@ -39,14 +39,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
-      X-Content-Type-Options:
-      - nosniff
       X-Envoy-Upstream-Service-Time:
-      - "133"
+      - "60"
       X-Served-By:
-      - cache-chi-kigq8000067-CHI, cache-ewr-kewr1740063-EWR
+      - cache-chi-kigq8000076-CHI, cache-ewr-kewr1740053-EWR
       X-Timer:
-      - S1790363811.609516,VS0,VE166
+      - S1790368883.983557,VS0,VE95
     status: 201 Created
     code: 201
     duration: ""

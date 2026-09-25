@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/17.5.0 (+github.com/fastly/go-fastly; go1.27.1)
-    url: https://api.fastly.com/domain-management/v1/domains/pPYOMApBAcxbIJGjtyXcmg
+    url: https://api.fastly.com/domain-management/v1/routing-configs/79NSSnAdr7eLQXQZqJ7yBN?force=true
     method: DELETE
   response:
     body: ""
@@ -17,7 +17,7 @@ interactions:
       Cache-Control:
       - no-store
       Date:
-      - Fri, 25 Sep 2026 19:16:52 GMT
+      - Fri, 25 Sep 2026 20:41:23 GMT
       Pragma:
       - no-cache
       Server:
@@ -30,14 +30,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
-      X-Content-Type-Options:
-      - nosniff
       X-Envoy-Upstream-Service-Time:
-      - "100"
+      - "171"
       X-Served-By:
-      - cache-chi-kigq8000053-CHI, cache-ewr-kewr1740063-EWR
+      - cache-chi-kigq8000049-CHI, cache-ewr-kewr1740053-EWR
       X-Timer:
-      - S1790363812.044464,VS0,VE134
+      - S1790368884.764461,VS0,VE204
     status: 204 No Content
     code: 204
     duration: ""
