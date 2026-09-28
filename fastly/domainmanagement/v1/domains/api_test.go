@@ -3,9 +3,13 @@ package domains
 import (
 	"context"
 	"errors"
+	"strings"
 	"testing"
 
 	"github.com/fastly/go-fastly/v17/fastly"
+	"github.com/fastly/go-fastly/v17/fastly/domainmanagement/v1/routingconfigs"
+	"github.com/fastly/go-fastly/v17/fastly/domainmanagement/v1/routingconfigs/paths"
+	"github.com/fastly/go-fastly/v17/fastly/domainmanagement/v1/routingconfigs/paths/rules"
 )
 
 func TestClient_Domain(t *testing.T) {
@@ -50,7 +54,7 @@ func TestClient_Domain(t *testing.T) {
 	} else {
 		var okErr bool
 		for _, he := range httpError.Errors {
-			if he.Detail == "fqdn has already been taken" {
+			if strings.Contains(he.Detail, "already been taken") {
 				okErr = true
 				break
 			}
@@ -93,14 +97,62 @@ func TestClient_Domain(t *testing.T) {
 		t.Errorf("bad fqdn: %q (%q)", d.FQDN, gd.FQDN)
 	}
 
+	// Create and activate a routing config to associate with the domain in
+	// the Update step below (association requires an active routing config).
+	var rc *routingconfigs.Data
+	rcName := "gofastly-sdk-testing-domain-routing-config"
+	fastly.Record(t, "create_routing_config", func(c *fastly.Client) {
+		rc, err = routingconfigs.Create(context.TODO(), c, &routingconfigs.CreateInput{
+			Name: new(rcName),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	var rp *paths.Data
+	fastly.Record(t, "create_routing_config_path", func(c *fastly.Client) {
+		rp, err = paths.Create(context.TODO(), c, &paths.CreateInput{
+			RoutingConfigID: &rc.RoutingConfigID,
+			Path:            new("/"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	fastly.Record(t, "create_routing_config_rule", func(c *fastly.Client) {
+		_, err = rules.Create(context.TODO(), c, &rules.CreateInput{
+			RoutingConfigID: &rc.RoutingConfigID,
+			PathID:          &rp.PathID,
+			Action: &rules.Action{
+				Type:  "service",
+				Value: fastly.TestDeliveryServiceID,
+			},
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	fastly.Record(t, "activate_routing_config", func(c *fastly.Client) {
+		_, err = routingconfigs.Activate(context.TODO(), c, &routingconfigs.ActivateInput{
+			RoutingConfigID: &rc.RoutingConfigID,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
 	// Update
 	var ud *Data
 	descUpdated := "updated description"
 	fastly.Record(t, "update", func(c *fastly.Client) {
 		ud, err = Update(context.TODO(), c, &UpdateInput{
-			Description: new(descUpdated),
-			DomainID:    new(d.DomainID),
-			ServiceID:   new(fastly.TestDeliveryServiceID),
+			Description:            new(descUpdated),
+			DomainID:               new(d.DomainID),
+			RoutingConfigurationID: fastly.NewNullable(rc.RoutingConfigID),
+			ServiceID:              new(fastly.TestDeliveryServiceID),
 		})
 	})
 	if err != nil {
@@ -110,13 +162,35 @@ func TestClient_Domain(t *testing.T) {
 		t.Errorf("bad description: %q (%q)", descUpdated, ud.Description)
 	}
 	if ud.ServiceID == nil || *ud.ServiceID != fastly.TestDeliveryServiceID {
-		t.Errorf("bad service id: %v", *ud.ServiceID)
+		t.Errorf("bad service id: %v", ud.ServiceID)
+	}
+	if ud.RoutingConfigurationID == nil || *ud.RoutingConfigurationID != rc.RoutingConfigID {
+		t.Errorf("bad routing configuration id: %v", ud.RoutingConfigurationID)
 	}
 
 	// Delete
 	fastly.Record(t, "delete", func(c *fastly.Client) {
 		err = Delete(context.TODO(), c, &DeleteInput{
 			DomainID: &d.DomainID,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Clean up the routing config created above.
+	fastly.Record(t, "deactivate_routing_config", func(c *fastly.Client) {
+		_, err = routingconfigs.Deactivate(context.TODO(), c, &routingconfigs.DeactivateInput{
+			RoutingConfigID: &rc.RoutingConfigID,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	fastly.Record(t, "delete_routing_config", func(c *fastly.Client) {
+		err = routingconfigs.Delete(context.TODO(), c, &routingconfigs.DeleteInput{
+			RoutingConfigID: &rc.RoutingConfigID,
 		})
 	})
 	if err != nil {

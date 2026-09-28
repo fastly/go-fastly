@@ -15,6 +15,11 @@ type UpdateInput struct {
 	Description *string `json:"description"`
 	// DomainID is the domain identifier (required).
 	DomainID *string `json:"-"`
+	// RoutingConfigurationID is the routing config identifier to associate
+	// with the domain (optional). Leave nil to leave the association
+	// unchanged, use fastly.NullValue[string]() to remove the association, or
+	// fastly.NewNullable(id) to set it.
+	RoutingConfigurationID *fastly.Nullable[string] `json:"routing_configuration_id,omitempty"`
 	// ServiceID is the service_id associated with the domain or nil if there
 	// is no association (optional)
 	ServiceID *string `json:"service_id"`
