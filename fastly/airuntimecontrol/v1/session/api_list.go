@@ -54,13 +54,13 @@ func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]Session, error
 // listPage retrieves a single page of session logs.
 func listPage(ctx context.Context, c *fastly.Client, i *ListInput, cursor *string) (*Sessions, error) {
 	requestOptions := fastly.CreateRequestOptions()
-	if i.Key != nil && *i.Key != "" {
+	if !fastly.IsNilOrEmpty(i.Key) {
 		requestOptions.Params["key"] = *i.Key
 	}
-	if i.Provider != nil && *i.Provider != "" {
+	if !fastly.IsNilOrEmpty(i.Provider) {
 		requestOptions.Params["provider"] = *i.Provider
 	}
-	if i.Model != nil && *i.Model != "" {
+	if !fastly.IsNilOrEmpty(i.Model) {
 		requestOptions.Params["model"] = *i.Model
 	}
 	if i.From != nil {
@@ -69,13 +69,13 @@ func listPage(ctx context.Context, c *fastly.Client, i *ListInput, cursor *strin
 	if i.To != nil {
 		requestOptions.Params["to"] = i.To.Format(time.RFC3339)
 	}
-	if cursor != nil && *cursor != "" {
+	if !fastly.IsNilOrEmpty(cursor) {
 		requestOptions.Params["cursor"] = *cursor
 	}
 	if i.Limit != nil {
 		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
-	if i.Sort != nil && *i.Sort != "" {
+	if !fastly.IsNilOrEmpty(i.Sort) {
 		requestOptions.Params["sort"] = *i.Sort
 	}
 

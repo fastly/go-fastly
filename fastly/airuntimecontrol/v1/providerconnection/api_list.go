@@ -18,7 +18,7 @@ type ListInput struct {
 // List retrieves all configured provider connections.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) (*ProviderConnections, error) {
 	requestOptions := fastly.CreateRequestOptions()
-	if i.Sort != nil && *i.Sort != "" {
+	if !fastly.IsNilOrEmpty(i.Sort) {
 		requestOptions.Params["sort"] = *i.Sort
 	}
 

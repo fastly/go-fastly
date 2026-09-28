@@ -206,13 +206,29 @@ func TestClient_Policy_validation(t *testing.T) {
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingWorkspaceID)
 
+	_, err = ListCategories(ctx, fastly.TestClient, &ListCategoriesInput{
+		WorkspaceID: new(""),
+	})
+	require.ErrorIs(t, err, fastly.ErrMissingWorkspaceID)
+
 	_, err = GetCategory(ctx, fastly.TestClient, &GetCategoryInput{
 		WorkspaceID: nil,
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingWorkspaceID)
 
 	_, err = GetCategory(ctx, fastly.TestClient, &GetCategoryInput{
+		WorkspaceID: new(""),
+	})
+	require.ErrorIs(t, err, fastly.ErrMissingWorkspaceID)
+
+	_, err = GetCategory(ctx, fastly.TestClient, &GetCategoryInput{
 		CategoryID:  nil,
+		WorkspaceID: new("workspace"),
+	})
+	require.ErrorIs(t, err, fastly.ErrMissingCategoryID)
+
+	_, err = GetCategory(ctx, fastly.TestClient, &GetCategoryInput{
+		CategoryID:  new(""),
 		WorkspaceID: new("workspace"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingCategoryID)
@@ -223,7 +239,18 @@ func TestClient_Policy_validation(t *testing.T) {
 	require.ErrorIs(t, err, fastly.ErrMissingWorkspaceID)
 
 	_, err = UpdateCategory(ctx, fastly.TestClient, &UpdateCategoryInput{
+		WorkspaceID: new(""),
+	})
+	require.ErrorIs(t, err, fastly.ErrMissingWorkspaceID)
+
+	_, err = UpdateCategory(ctx, fastly.TestClient, &UpdateCategoryInput{
 		CategoryID:  nil,
+		WorkspaceID: new("workspace"),
+	})
+	require.ErrorIs(t, err, fastly.ErrMissingCategoryID)
+
+	_, err = UpdateCategory(ctx, fastly.TestClient, &UpdateCategoryInput{
+		CategoryID:  new(""),
 		WorkspaceID: new("workspace"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingCategoryID)
@@ -240,13 +267,29 @@ func TestClient_Policy_validation(t *testing.T) {
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingWorkspaceID)
 
+	_, err = ListBots(ctx, fastly.TestClient, &ListBotsInput{
+		WorkspaceID: new(""),
+	})
+	require.ErrorIs(t, err, fastly.ErrMissingWorkspaceID)
+
 	_, err = GetBot(ctx, fastly.TestClient, &GetBotInput{
 		WorkspaceID: nil,
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingWorkspaceID)
 
 	_, err = GetBot(ctx, fastly.TestClient, &GetBotInput{
+		WorkspaceID: new(""),
+	})
+	require.ErrorIs(t, err, fastly.ErrMissingWorkspaceID)
+
+	_, err = GetBot(ctx, fastly.TestClient, &GetBotInput{
 		CategoryID:  nil,
+		WorkspaceID: new("workspace"),
+	})
+	require.ErrorIs(t, err, fastly.ErrMissingCategoryID)
+
+	_, err = GetBot(ctx, fastly.TestClient, &GetBotInput{
+		CategoryID:  new(""),
 		WorkspaceID: new("workspace"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingCategoryID)
@@ -258,8 +301,20 @@ func TestClient_Policy_validation(t *testing.T) {
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingBotID)
 
+	_, err = GetBot(ctx, fastly.TestClient, &GetBotInput{
+		BotID:       new(""),
+		CategoryID:  new("category"),
+		WorkspaceID: new("workspace"),
+	})
+	require.ErrorIs(t, err, fastly.ErrMissingBotID)
+
 	_, err = UpdateBot(ctx, fastly.TestClient, &UpdateBotInput{
 		WorkspaceID: nil,
+	})
+	require.ErrorIs(t, err, fastly.ErrMissingWorkspaceID)
+
+	_, err = UpdateBot(ctx, fastly.TestClient, &UpdateBotInput{
+		WorkspaceID: new(""),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingWorkspaceID)
 
@@ -270,7 +325,20 @@ func TestClient_Policy_validation(t *testing.T) {
 	require.ErrorIs(t, err, fastly.ErrMissingCategoryID)
 
 	_, err = UpdateBot(ctx, fastly.TestClient, &UpdateBotInput{
+		CategoryID:  new(""),
+		WorkspaceID: new("workspace"),
+	})
+	require.ErrorIs(t, err, fastly.ErrMissingCategoryID)
+
+	_, err = UpdateBot(ctx, fastly.TestClient, &UpdateBotInput{
 		BotID:       nil,
+		CategoryID:  new("category"),
+		WorkspaceID: new("workspace"),
+	})
+	require.ErrorIs(t, err, fastly.ErrMissingBotID)
+
+	_, err = UpdateBot(ctx, fastly.TestClient, &UpdateBotInput{
+		BotID:       new(""),
 		CategoryID:  new("category"),
 		WorkspaceID: new("workspace"),
 	})

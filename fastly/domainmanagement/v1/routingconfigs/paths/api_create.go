@@ -20,7 +20,7 @@ type CreateInput struct {
 
 // Create creates a new path within the specified routing config.
 func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Data, error) {
-	if i.RoutingConfigID == nil || *i.RoutingConfigID == "" {
+	if fastly.IsNilOrEmpty(i.RoutingConfigID) {
 		return nil, fastly.ErrMissingRoutingConfigID
 	}
 	if i.Path == nil {

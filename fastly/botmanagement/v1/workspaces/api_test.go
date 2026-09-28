@@ -85,6 +85,12 @@ func TestClient_Workspaces_validation(t *testing.T) {
 	_, err := Get(ctx, fastly.TestClient, &GetInput{WorkspaceID: nil})
 	require.ErrorIs(t, err, fastly.ErrMissingWorkspaceID)
 
+	_, err = Get(ctx, fastly.TestClient, &GetInput{WorkspaceID: new("")})
+	require.ErrorIs(t, err, fastly.ErrMissingWorkspaceID)
+
 	_, err = Update(ctx, fastly.TestClient, &UpdateInput{WorkspaceID: nil})
+	require.ErrorIs(t, err, fastly.ErrMissingWorkspaceID)
+
+	_, err = Update(ctx, fastly.TestClient, &UpdateInput{WorkspaceID: new("")})
 	require.ErrorIs(t, err, fastly.ErrMissingWorkspaceID)
 }

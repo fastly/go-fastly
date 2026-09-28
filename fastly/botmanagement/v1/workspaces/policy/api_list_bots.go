@@ -25,7 +25,7 @@ type ListBotsInput struct {
 // ListBots retrieves all bots in a workspace, or in a single category if
 // CategoryID is set, automatically paginating through all pages.
 func ListBots(ctx context.Context, c *fastly.Client, i *ListBotsInput) ([]Bot, error) {
-	if i.WorkspaceID == nil {
+	if fastly.IsNilOrEmpty(i.WorkspaceID) {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
 
@@ -39,7 +39,7 @@ func ListBots(ctx context.Context, c *fastly.Client, i *ListBotsInput) ([]Bot, e
 			return nil, err
 		}
 		out = append(out, page.Data...)
-		if page.Meta.NextCursor == nil || *page.Meta.NextCursor == "" {
+		if fastly.IsNilOrEmpty(page.Meta.NextCursor) {
 			break
 		}
 		cursor = page.Meta.NextCursor
@@ -51,7 +51,7 @@ func ListBots(ctx context.Context, c *fastly.Client, i *ListBotsInput) ([]Bot, e
 func listBotsPage(ctx context.Context, c *fastly.Client, i *ListBotsInput, cursor *string) (*Bots, error) {
 	path := fastly.ToSafeURL("bot-management", "v1", "workspaces", *i.WorkspaceID, "policy", "bots")
 	// Also handles listing bots in a category if CategoryID is provided.
-	if i.CategoryID != nil {
+	if !fastly.IsNilOrEmpty(i.CategoryID) {
 		path = fastly.ToSafeURL("bot-management", "v1", "workspaces", *i.WorkspaceID, "policy", "categories", *i.CategoryID, "bots")
 	}
 

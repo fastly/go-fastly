@@ -20,13 +20,13 @@ type GetBotInput struct {
 
 // GetBot retrieves a specified bot.
 func GetBot(ctx context.Context, c *fastly.Client, i *GetBotInput) (*Bot, error) {
-	if i.WorkspaceID == nil {
+	if fastly.IsNilOrEmpty(i.WorkspaceID) {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
-	if i.CategoryID == nil {
+	if fastly.IsNilOrEmpty(i.CategoryID) {
 		return nil, fastly.ErrMissingCategoryID
 	}
-	if i.BotID == nil {
+	if fastly.IsNilOrEmpty(i.BotID) {
 		return nil, fastly.ErrMissingBotID
 	}
 

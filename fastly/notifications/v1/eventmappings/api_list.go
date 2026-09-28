@@ -46,7 +46,7 @@ func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]EventMapping, 
 			return nil, err
 		}
 		out = append(out, page.Data...)
-		if page.Meta.NextCursor == nil || *page.Meta.NextCursor == "" {
+		if fastly.IsNilOrEmpty(page.Meta.NextCursor) {
 			break
 		}
 		cursor = page.Meta.NextCursor

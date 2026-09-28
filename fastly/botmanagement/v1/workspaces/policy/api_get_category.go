@@ -18,10 +18,10 @@ type GetCategoryInput struct {
 
 // GetCategory retrieves a specified category.
 func GetCategory(ctx context.Context, c *fastly.Client, i *GetCategoryInput) (*Category, error) {
-	if i.WorkspaceID == nil {
+	if fastly.IsNilOrEmpty(i.WorkspaceID) {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
-	if i.CategoryID == nil {
+	if fastly.IsNilOrEmpty(i.CategoryID) {
 		return nil, fastly.ErrMissingCategoryID
 	}
 

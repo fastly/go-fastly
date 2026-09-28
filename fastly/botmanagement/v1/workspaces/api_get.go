@@ -16,7 +16,7 @@ type GetInput struct {
 
 // Get retrieves a specified workspace.
 func Get(ctx context.Context, c *fastly.Client, i *GetInput) (*Workspace, error) {
-	if i.WorkspaceID == nil {
+	if fastly.IsNilOrEmpty(i.WorkspaceID) {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
 

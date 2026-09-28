@@ -22,10 +22,10 @@ type UpdateCategoryInput struct {
 
 // UpdateCategory updates a specified category.
 func UpdateCategory(ctx context.Context, c *fastly.Client, i *UpdateCategoryInput) (*Category, error) {
-	if i.WorkspaceID == nil {
+	if fastly.IsNilOrEmpty(i.WorkspaceID) {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
-	if i.CategoryID == nil {
+	if fastly.IsNilOrEmpty(i.CategoryID) {
 		return nil, fastly.ErrMissingCategoryID
 	}
 	if i.Action == nil {

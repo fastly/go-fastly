@@ -18,10 +18,10 @@ type DeleteInput struct {
 
 // Delete deletes the specified path.
 func Delete(ctx context.Context, c *fastly.Client, i *DeleteInput) error {
-	if i.RoutingConfigID == nil || *i.RoutingConfigID == "" {
+	if fastly.IsNilOrEmpty(i.RoutingConfigID) {
 		return fastly.ErrMissingRoutingConfigID
 	}
-	if i.PathID == nil || *i.PathID == "" {
+	if fastly.IsNilOrEmpty(i.PathID) {
 		return fastly.ErrMissingPathID
 	}
 

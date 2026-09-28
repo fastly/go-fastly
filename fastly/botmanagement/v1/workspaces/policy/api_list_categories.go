@@ -20,7 +20,7 @@ type ListCategoriesInput struct {
 
 // ListCategories retrieves all categories in a workspace, automatically paginating through all pages.
 func ListCategories(ctx context.Context, c *fastly.Client, i *ListCategoriesInput) ([]Category, error) {
-	if i.WorkspaceID == nil {
+	if fastly.IsNilOrEmpty(i.WorkspaceID) {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
 
@@ -34,7 +34,7 @@ func ListCategories(ctx context.Context, c *fastly.Client, i *ListCategoriesInpu
 			return nil, err
 		}
 		out = append(out, page.Data...)
-		if page.Meta.NextCursor == nil || *page.Meta.NextCursor == "" {
+		if fastly.IsNilOrEmpty(page.Meta.NextCursor) {
 			break
 		}
 		cursor = page.Meta.NextCursor

@@ -27,7 +27,7 @@ func UpdateDiscoveredStatus(ctx context.Context, c *fastly.Client, i *UpdateDisc
 	if i.OperationID == nil {
 		return nil, fastly.ErrMissingID
 	}
-	if i.Status == nil || *i.Status == "" {
+	if fastly.IsNilOrEmpty(i.Status) {
 		return nil, fastly.ErrMissingStatus
 	}
 

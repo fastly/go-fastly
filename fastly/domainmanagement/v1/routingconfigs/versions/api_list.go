@@ -23,7 +23,7 @@ type ListInput struct {
 // List retrieves all of the specified routing config's inactive versions,
 // automatically paginating through all pages.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]Data, error) {
-	if i.RoutingConfigID == nil || *i.RoutingConfigID == "" {
+	if fastly.IsNilOrEmpty(i.RoutingConfigID) {
 		return nil, fastly.ErrMissingRoutingConfigID
 	}
 

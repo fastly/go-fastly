@@ -23,7 +23,7 @@ type UpdateInput struct {
 
 // Update updates a specified workspace.
 func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Workspace, error) {
-	if i.WorkspaceID == nil {
+	if fastly.IsNilOrEmpty(i.WorkspaceID) {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
 

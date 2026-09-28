@@ -25,10 +25,10 @@ type ListInput struct {
 // List retrieves all rules belonging to the specified path, automatically
 // paginating through all pages.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]Data, error) {
-	if i.RoutingConfigID == nil || *i.RoutingConfigID == "" {
+	if fastly.IsNilOrEmpty(i.RoutingConfigID) {
 		return nil, fastly.ErrMissingRoutingConfigID
 	}
-	if i.PathID == nil || *i.PathID == "" {
+	if fastly.IsNilOrEmpty(i.PathID) {
 		return nil, fastly.ErrMissingPathID
 	}
 
