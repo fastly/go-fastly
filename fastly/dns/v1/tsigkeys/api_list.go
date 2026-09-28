@@ -31,7 +31,7 @@ func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]TSIGKey, error
 			return nil, err
 		}
 		out = append(out, page.Data...)
-		if fastly.IsNilOrEmpty(page.Meta.NextCursor) {
+		if page.Meta.NextCursor == nil || *page.Meta.NextCursor == "" {
 			break
 		}
 		cursor = page.Meta.NextCursor

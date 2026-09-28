@@ -27,7 +27,7 @@ type ListInput struct {
 // List retrieves all paths belonging to the specified routing config, with
 // optional filtering, automatically paginating through all pages.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]Data, error) {
-	if fastly.IsNilOrEmpty(i.RoutingConfigID) {
+	if i.RoutingConfigID == nil || *i.RoutingConfigID == "" {
 		return nil, fastly.ErrMissingRoutingConfigID
 	}
 

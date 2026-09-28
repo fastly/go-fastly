@@ -38,7 +38,7 @@ func ListDiscovered(ctx context.Context, c *fastly.Client, i *ListDiscoveredInpu
 
 	opts := fastly.CreateRequestOptions()
 
-	if !fastly.IsNilOrEmpty(i.Status) {
+	if i.Status != nil && *i.Status != "" {
 		opts.Params["status"] = *i.Status
 	}
 	if len(i.Method) > 0 {
@@ -47,7 +47,7 @@ func ListDiscovered(ctx context.Context, c *fastly.Client, i *ListDiscoveredInpu
 	if len(i.Domain) > 0 {
 		opts.Params["domain"] = strings.Join(i.Domain, ",")
 	}
-	if !fastly.IsNilOrEmpty(i.Path) {
+	if i.Path != nil && *i.Path != "" {
 		opts.Params["path"] = *i.Path
 	}
 

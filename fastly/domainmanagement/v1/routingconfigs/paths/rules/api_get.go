@@ -21,13 +21,13 @@ type GetInput struct {
 
 // Get retrieves a specified rule.
 func Get(ctx context.Context, c *fastly.Client, i *GetInput) (*Data, error) {
-	if fastly.IsNilOrEmpty(i.RoutingConfigID) {
+	if i.RoutingConfigID == nil || *i.RoutingConfigID == "" {
 		return nil, fastly.ErrMissingRoutingConfigID
 	}
-	if fastly.IsNilOrEmpty(i.PathID) {
+	if i.PathID == nil || *i.PathID == "" {
 		return nil, fastly.ErrMissingPathID
 	}
-	if fastly.IsNilOrEmpty(i.RuleID) {
+	if i.RuleID == nil || *i.RuleID == "" {
 		return nil, fastly.ErrMissingRuleID
 	}
 

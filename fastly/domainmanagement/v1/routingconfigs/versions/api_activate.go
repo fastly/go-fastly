@@ -21,10 +21,10 @@ type ActivateInput struct {
 // Activate reactivates a previous (inactive) version of the specified routing
 // config, making it the active version.
 func Activate(ctx context.Context, c *fastly.Client, i *ActivateInput) (*routingconfigs.Data, error) {
-	if fastly.IsNilOrEmpty(i.RoutingConfigID) {
+	if i.RoutingConfigID == nil || *i.RoutingConfigID == "" {
 		return nil, fastly.ErrMissingRoutingConfigID
 	}
-	if fastly.IsNilOrEmpty(i.VersionID) {
+	if i.VersionID == nil || *i.VersionID == "" {
 		return nil, fastly.ErrMissingVersionID
 	}
 

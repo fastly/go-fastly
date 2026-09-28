@@ -19,10 +19,10 @@ type GetInput struct {
 
 // Get retrieves a specified path.
 func Get(ctx context.Context, c *fastly.Client, i *GetInput) (*Data, error) {
-	if fastly.IsNilOrEmpty(i.RoutingConfigID) {
+	if i.RoutingConfigID == nil || *i.RoutingConfigID == "" {
 		return nil, fastly.ErrMissingRoutingConfigID
 	}
-	if fastly.IsNilOrEmpty(i.PathID) {
+	if i.PathID == nil || *i.PathID == "" {
 		return nil, fastly.ErrMissingPathID
 	}
 

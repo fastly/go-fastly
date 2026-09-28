@@ -30,13 +30,13 @@ type ListInput struct {
 // list and export endpoints.
 func (i *ListInput) requestOptions() fastly.RequestOptions {
 	requestOptions := fastly.CreateRequestOptions()
-	if !fastly.IsNilOrEmpty(i.Key) {
+	if i.Key != nil && *i.Key != "" {
 		requestOptions.Params["key"] = *i.Key
 	}
-	if !fastly.IsNilOrEmpty(i.Provider) {
+	if i.Provider != nil && *i.Provider != "" {
 		requestOptions.Params["provider"] = *i.Provider
 	}
-	if !fastly.IsNilOrEmpty(i.Model) {
+	if i.Model != nil && *i.Model != "" {
 		requestOptions.Params["model"] = *i.Model
 	}
 	if i.From != nil {
@@ -45,7 +45,7 @@ func (i *ListInput) requestOptions() fastly.RequestOptions {
 	if i.To != nil {
 		requestOptions.Params["to"] = i.To.Format(time.RFC3339)
 	}
-	if !fastly.IsNilOrEmpty(i.Sort) {
+	if i.Sort != nil && *i.Sort != "" {
 		requestOptions.Params["sort"] = *i.Sort
 	}
 	return requestOptions

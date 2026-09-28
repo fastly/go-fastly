@@ -38,7 +38,7 @@ func ListOperations(ctx context.Context, c *fastly.Client, i *ListOperationsInpu
 
 	opts := fastly.CreateRequestOptions()
 
-	if !fastly.IsNilOrEmpty(i.TagID) {
+	if i.TagID != nil && *i.TagID != "" {
 		opts.Params["tag_id"] = *i.TagID
 	}
 
@@ -50,7 +50,7 @@ func ListOperations(ctx context.Context, c *fastly.Client, i *ListOperationsInpu
 		opts.Params["domain"] = strings.Join(i.Domain, ",")
 	}
 
-	if !fastly.IsNilOrEmpty(i.Path) {
+	if i.Path != nil && *i.Path != "" {
 		opts.Params["path"] = *i.Path
 	}
 

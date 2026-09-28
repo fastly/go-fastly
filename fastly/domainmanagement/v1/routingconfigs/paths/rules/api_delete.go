@@ -20,13 +20,13 @@ type DeleteInput struct {
 
 // Delete deletes the specified rule.
 func Delete(ctx context.Context, c *fastly.Client, i *DeleteInput) error {
-	if fastly.IsNilOrEmpty(i.RoutingConfigID) {
+	if i.RoutingConfigID == nil || *i.RoutingConfigID == "" {
 		return fastly.ErrMissingRoutingConfigID
 	}
-	if fastly.IsNilOrEmpty(i.PathID) {
+	if i.PathID == nil || *i.PathID == "" {
 		return fastly.ErrMissingPathID
 	}
-	if fastly.IsNilOrEmpty(i.RuleID) {
+	if i.RuleID == nil || *i.RuleID == "" {
 		return fastly.ErrMissingRuleID
 	}
 

@@ -25,7 +25,7 @@ func BulkUpdateDiscoveredStatus(ctx context.Context, c *fastly.Client, i *BulkUp
 	if i.ServiceID == nil {
 		return nil, fastly.ErrMissingServiceID
 	}
-	if fastly.IsNilOrEmpty(i.Status) {
+	if i.Status == nil || *i.Status == "" {
 		return nil, fastly.ErrMissingStatus
 	}
 	if len(i.OperationIDs) == 0 {
