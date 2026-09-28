@@ -6,11 +6,15 @@
 
 ### Enhancements:
 
-- feat(domainmanagement): add support for routing config domain link ([#875](https://github.com/fastly/go-fastly/pull/875))
-
 ### Bug fixes:
 
 ### Dependencies:
+
+## [v17.7.0](https://github.com/fastly/go-fastly/releases/tag/v17.7.0) (2026-09-28)
+
+### Enhancements:
+
+- feat(domainmanagement): add support for routing config domain link ([#875](https://github.com/fastly/go-fastly/pull/875))
 
 ## [v17.6.0](https://github.com/fastly/go-fastly/releases/tag/v17.6.0) (2026-09-28)
 
