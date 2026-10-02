@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: account_name=service-account&bucket_name=bucket&compression_codec=snappy&format=format&format_version=2&message_type=blank&name=test-gcs&path=%2Fpath&period=12&placement=none&project_id=logging-project&secret_key=-----BEGIN+PRIVATE+KEY-----%0AMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC9aQoqdHVA86oq%0ATdRQ5HqwMfpiLBBMKNQcAJsO71RKNrDWwJJZiyYbvM4FOWRZFtRSdPIDgX0C0Wg1%0ANnqWYvHDyA5Ug%2BT8kowiQDn56dU6Km2FWO4wnqZeA8q5G7rQVXlqdibuiP7FglHA%0AeURUzFsqyymXMUGrqDPqrHsVWC2E3NTJEb4QlywtrwI13qbhlvTx6%2F9oRfUjytXJ%0ARuUIE5xL8yhRCagNr5ZW250aa%2BwBwu5DSCk5fDNr0eDuZjw84WHDll%2BmHxBFGV%2BX%0AKJ5jCOmGumGqjVWZesJpNN1My3M9bsY9layNJJ0eiDeHDEi%2FyXhhO%2FmNEXhvhq%2FR%0AfN0Jh2A3AgMBAAECggEAef%2BCEL5aF6%2FaVs0yh7fiXkKSp1ECXkud8ztgpEn63KJF%0AXM1EdnBt50fA2xSQUeGmeEXi6%2Bcngf0nRb8FToAEgLoGoOEjSJuLrzP3I8U9Fe3m%0ABRG2uZI2Ti%2FbD0eRGEc1oSDhCpsqnkTGK1bwcD4AKpwY%2Bc08Izh%2F2BOoY6McDoqh%0AdQ89jzTuMtD4cNlnPiIrY9HbxoNjshK2ax1OaeXyYKZFG1TxqMFv5gA%2FG5%2BS3Cwr%0AVG4fkAxYi5vdIK3b8jUXrTM%2FkpoTl%2Bd3dlQ7rRZYf7KyT31%2FHtJ%2FGNzxFI6upzO7%0AiDNrrUOyeOPjWXdzUh9budv3j%2B6UfbYK7uZIoebHIQKBgQDykYX1L%2FakGaOC2tfS%0AjzCWUzPxGFYVZQ7zD1PM6UyouuS1KLURDEGk9RxqVzTPh%2FpYd8Ivnz3vOVski5Zt%0A19ozLGxdtDhn122DcnVpfCdYzHBdAzPCzORenFohX%2BMhiX5fEotTlVi7wfOmzTP5%0AhUCMSd%2F17bJrV4XMLhkdrMRBFQKBgQDH5fwV7o%2BEj%2FZfcdGIa3mAFazToPDzxhHU%0AnwADxaxpNGKRU03XCaiYkykarLYdG6Rk%2B7dXUv8eLy%2B6Dcq1SWQtfCWKEor%2B%2BIIp%0A1RwWmFHfYriHGkmxSkkEkLFvL8old9xM5YWbEXc4QIXvnfR4BZxdyJHVzIDdbI2i%0AFgcn17U3GwKBgDd1njMY7ENIuWHJt16k7m7wRwfwkH4DxQ89ieNn0%2BcgE%2Fp3fC6R%0AptCYWg7WMXThmhNwDi3lMrvnWTdZ0uL6XyEkHwKtmdfkIV3UZZPglv5uf6JEgSkg%0Av3YCOXk3%2By5HyWTjUIejtc334kVY1XFPThrFKTeJSSnRsP2l7IgkYBqhAoGAYGsr%0AM3z1FrDF2nWw5odIfKJ30UAw2LRyB0eGH0uqhLgyzvwKcK2E98sLqYUi9llN6zOK%0A1IEA8xM5hxl97AFxY4sdJEMbbi55wim7uZ5Q51nbvbbNUsmM%2FLm6C%2FJWI8pzpVeU%0AIR7EjYp50AE1WOsD6CyFQ0W35pWkn0jWvL4L938CgYEAlax4dLE5%2BYCG5DeLT1%2FN%0Ain6kQjl7JS4oCNlPEj6aRPLX2OJresI7oOn%2BuNatKvlVyfPm6rdxeHCmER1FpR7Q%0AA%2FaNVjPeViKT%2FR4nK9ytsa%2Bs%2F1IJVrwLFHJK3toGE660g5w3vKrCjWisMdP4yzzQ%0Abv1KwcKoQbNVXwauH79JKc0%3D%0A-----END+PRIVATE+KEY-----%0A&timestamp_format=%25Y&user=user
+    body: account_name=service-account&bucket_name=bucket&compression_codec=snappy&format=format&format_version=2&message_type=blank&name=test-gcs&path=%2Fpath&period=12&placement=none&project_id=logging-project&public_key=-----BEGIN+PGP+PUBLIC+KEY+BLOCK-----%0A%0AmQENBFyUD8sBCACyFnB39AuuTygseek%2BeA4fo0cgwva6%2FFSjnWq7riouQee8GgQ%2F%0AibXTRyv4iVlwI12GswvMTIy7zNvs1R54i0qvsLr%2BIZ4GVGJqs6ZJnvQcqe3xPoR4%0A8AnBfw90o32r%2FLuHf6QCJXi%2BAEu35koNlNAvLJ2B%2BKACaNB7N0EeWmqpV%2F1V2k9p%0AlDYk%2Bth7LcCuaFNGqKS%2FPrMnnMqR6VDLCjHhNx4KR79b0Twm%2F2qp6an3hyNRu8Gn%0Adwxpf1%2FBUu3JWf%2BLqkN4Y3mbOmSUL3MaJNvyQguUzTfS0P0uGuBDHrJCVkMZCzDB%0A89ag55jCPHyGeHBTd02gHMWzsg3WMBWvCsrzABEBAAG0JXRlcnJhZm9ybSAodGVz%0AdCkgPHRlc3RAdGVycmFmb3JtLmNvbT6JAU4EEwEIADgWIQSHYyc6Kj9l6HzQsau6%0AvFFc9jxV%2FwUCXJQPywIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRC6vFFc%0A9jxV%2F815CAClb32OxV7wG01yF97TzlyTl8TnvjMtoG29Mw4nSyg%2BmjM3b8N7iXm9%0AOLX59fbDAWtBSldSZE22RXd3CvlFOG%2FEnKBXSjBtEqfyxYSnyOPkMPBYWGL%2FApkX%0ASvPYJ4LKdvipYToKFh3y9kk2gk1DcDBDyaaHvR%2B3rv1u3aoy7%2Fs2EltAfDS3ZQIq%0A7%2FcWTLJml%2FlleeB%2FY6rPj8xqeCYhE5ahw9gsV%2FMdqatl24V9Tks30iijx0Hhw%2BGx%0AkATUikMGr2GDVqoIRga5kXI7CzYff4rkc0Twn47fMHHHe%2FKY9M2yVnMHUXmAZwbG%0AM1cMI%2FNH1DjevCKdGBLcRJlhuLPKF%2FanuQENBFyUD8sBCADIpd7r7GuPd6n%2FIkxe%0Au6h7umV6IIPoAm88xCYpTbSZiaK30Svh6Ywra9jfE2KlU9o6Y%2Fart8ip0VJ3m07L%0A4RSfSpnzqgSwdjSq5hNour2Fo%2FBzYhK7yaz2AzVSbe33R0%2BRYhb4b%2F6N%2BbKbjwGF%0AftCsqVFMH%2BPyvYkLbvxyQrHlA9woAZaNThI1ztO5rGSnGUR8xt84eup28WIFKg0K%0AUEGUcTzz%2B8QGAwAra%2B0ewPXo%2FAkO%2B8BvZjDidP417u6gpBHOJ9qYIcO9FxHeqFyu%0AYrjlrxowEgXn5wO8xuNz6Vu1vhHGDHGDsRbZF8pv1d5O%2B0F1G7ttZ2GRRgVBZPwi%0AkiyRABEBAAGJATYEGAEIACAWIQSHYyc6Kj9l6HzQsau6vFFc9jxV%2FwUCXJQPywIb%0ADAAKCRC6vFFc9jxV%2F9YOCACe8qmOSnKQpQfW%2BPqYOqo3dt7JyweTs3FkD6NT8Zml%0AdYy%2FvkstbTjPpX6aTvUZjkb46BVi7AOneVHpD5GBqvRsZ9iVgDYHaehmLCdKiG5L%0A3Tp90NN%2BQY5WDbsGmsyk6%2B6ZMYejb4qYfweQeduOj27aavCJdLkCYMoRKfcFYI8c%0AFaNmEfKKy%2Fr1PO20NXEG6t9t05K%2FfrHy6ZG8bCNYdpagfFVot47r9JaQqWlTNtIR%0A5%2BzkkSq%2FeG9BEtRij3a6cTdQbktdBzx2KBeI0PYc1vlZR0LpuFKZqY9vlE6vTGLR%0AwMfrTEOvx0NxUM3rpaCgEmuWbB1G1Hu371oyr4srrr%2BN%0A%3D28dr%0A-----END+PGP+PUBLIC+KEY+BLOCK-----%0A&secret_key=-----BEGIN+PRIVATE+KEY-----%0AMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC9aQoqdHVA86oq%0ATdRQ5HqwMfpiLBBMKNQcAJsO71RKNrDWwJJZiyYbvM4FOWRZFtRSdPIDgX0C0Wg1%0ANnqWYvHDyA5Ug%2BT8kowiQDn56dU6Km2FWO4wnqZeA8q5G7rQVXlqdibuiP7FglHA%0AeURUzFsqyymXMUGrqDPqrHsVWC2E3NTJEb4QlywtrwI13qbhlvTx6%2F9oRfUjytXJ%0ARuUIE5xL8yhRCagNr5ZW250aa%2BwBwu5DSCk5fDNr0eDuZjw84WHDll%2BmHxBFGV%2BX%0AKJ5jCOmGumGqjVWZesJpNN1My3M9bsY9layNJJ0eiDeHDEi%2FyXhhO%2FmNEXhvhq%2FR%0AfN0Jh2A3AgMBAAECggEAef%2BCEL5aF6%2FaVs0yh7fiXkKSp1ECXkud8ztgpEn63KJF%0AXM1EdnBt50fA2xSQUeGmeEXi6%2Bcngf0nRb8FToAEgLoGoOEjSJuLrzP3I8U9Fe3m%0ABRG2uZI2Ti%2FbD0eRGEc1oSDhCpsqnkTGK1bwcD4AKpwY%2Bc08Izh%2F2BOoY6McDoqh%0AdQ89jzTuMtD4cNlnPiIrY9HbxoNjshK2ax1OaeXyYKZFG1TxqMFv5gA%2FG5%2BS3Cwr%0AVG4fkAxYi5vdIK3b8jUXrTM%2FkpoTl%2Bd3dlQ7rRZYf7KyT31%2FHtJ%2FGNzxFI6upzO7%0AiDNrrUOyeOPjWXdzUh9budv3j%2B6UfbYK7uZIoebHIQKBgQDykYX1L%2FakGaOC2tfS%0AjzCWUzPxGFYVZQ7zD1PM6UyouuS1KLURDEGk9RxqVzTPh%2FpYd8Ivnz3vOVski5Zt%0A19ozLGxdtDhn122DcnVpfCdYzHBdAzPCzORenFohX%2BMhiX5fEotTlVi7wfOmzTP5%0AhUCMSd%2F17bJrV4XMLhkdrMRBFQKBgQDH5fwV7o%2BEj%2FZfcdGIa3mAFazToPDzxhHU%0AnwADxaxpNGKRU03XCaiYkykarLYdG6Rk%2B7dXUv8eLy%2B6Dcq1SWQtfCWKEor%2B%2BIIp%0A1RwWmFHfYriHGkmxSkkEkLFvL8old9xM5YWbEXc4QIXvnfR4BZxdyJHVzIDdbI2i%0AFgcn17U3GwKBgDd1njMY7ENIuWHJt16k7m7wRwfwkH4DxQ89ieNn0%2BcgE%2Fp3fC6R%0AptCYWg7WMXThmhNwDi3lMrvnWTdZ0uL6XyEkHwKtmdfkIV3UZZPglv5uf6JEgSkg%0Av3YCOXk3%2By5HyWTjUIejtc334kVY1XFPThrFKTeJSSnRsP2l7IgkYBqhAoGAYGsr%0AM3z1FrDF2nWw5odIfKJ30UAw2LRyB0eGH0uqhLgyzvwKcK2E98sLqYUi9llN6zOK%0A1IEA8xM5hxl97AFxY4sdJEMbbi55wim7uZ5Q51nbvbbNUsmM%2FLm6C%2FJWI8pzpVeU%0AIR7EjYp50AE1WOsD6CyFQ0W35pWkn0jWvL4L938CgYEAlax4dLE5%2BYCG5DeLT1%2FN%0Ain6kQjl7JS4oCNlPEj6aRPLX2OJresI7oOn%2BuNatKvlVyfPm6rdxeHCmER1FpR7Q%0AA%2FaNVjPeViKT%2FR4nK9ytsa%2Bs%2F1IJVrwLFHJK3toGE660g5w3vKrCjWisMdP4yzzQ%0Abv1KwcKoQbNVXwauH79JKc0%3D%0A-----END+PRIVATE+KEY-----%0A&timestamp_format=%25Y&user=user
     form:
       account_name:
       - service-account
@@ -26,6 +26,38 @@ interactions:
       - none
       project_id:
       - logging-project
+      public_key:
+      - |
+        -----BEGIN PGP PUBLIC KEY BLOCK-----
+
+        mQENBFyUD8sBCACyFnB39AuuTygseek+eA4fo0cgwva6/FSjnWq7riouQee8GgQ/
+        ibXTRyv4iVlwI12GswvMTIy7zNvs1R54i0qvsLr+IZ4GVGJqs6ZJnvQcqe3xPoR4
+        8AnBfw90o32r/LuHf6QCJXi+AEu35koNlNAvLJ2B+KACaNB7N0EeWmqpV/1V2k9p
+        lDYk+th7LcCuaFNGqKS/PrMnnMqR6VDLCjHhNx4KR79b0Twm/2qp6an3hyNRu8Gn
+        dwxpf1/BUu3JWf+LqkN4Y3mbOmSUL3MaJNvyQguUzTfS0P0uGuBDHrJCVkMZCzDB
+        89ag55jCPHyGeHBTd02gHMWzsg3WMBWvCsrzABEBAAG0JXRlcnJhZm9ybSAodGVz
+        dCkgPHRlc3RAdGVycmFmb3JtLmNvbT6JAU4EEwEIADgWIQSHYyc6Kj9l6HzQsau6
+        vFFc9jxV/wUCXJQPywIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRC6vFFc
+        9jxV/815CAClb32OxV7wG01yF97TzlyTl8TnvjMtoG29Mw4nSyg+mjM3b8N7iXm9
+        OLX59fbDAWtBSldSZE22RXd3CvlFOG/EnKBXSjBtEqfyxYSnyOPkMPBYWGL/ApkX
+        SvPYJ4LKdvipYToKFh3y9kk2gk1DcDBDyaaHvR+3rv1u3aoy7/s2EltAfDS3ZQIq
+        7/cWTLJml/lleeB/Y6rPj8xqeCYhE5ahw9gsV/Mdqatl24V9Tks30iijx0Hhw+Gx
+        kATUikMGr2GDVqoIRga5kXI7CzYff4rkc0Twn47fMHHHe/KY9M2yVnMHUXmAZwbG
+        M1cMI/NH1DjevCKdGBLcRJlhuLPKF/anuQENBFyUD8sBCADIpd7r7GuPd6n/Ikxe
+        u6h7umV6IIPoAm88xCYpTbSZiaK30Svh6Ywra9jfE2KlU9o6Y/art8ip0VJ3m07L
+        4RSfSpnzqgSwdjSq5hNour2Fo/BzYhK7yaz2AzVSbe33R0+RYhb4b/6N+bKbjwGF
+        ftCsqVFMH+PyvYkLbvxyQrHlA9woAZaNThI1ztO5rGSnGUR8xt84eup28WIFKg0K
+        UEGUcTzz+8QGAwAra+0ewPXo/AkO+8BvZjDidP417u6gpBHOJ9qYIcO9FxHeqFyu
+        YrjlrxowEgXn5wO8xuNz6Vu1vhHGDHGDsRbZF8pv1d5O+0F1G7ttZ2GRRgVBZPwi
+        kiyRABEBAAGJATYEGAEIACAWIQSHYyc6Kj9l6HzQsau6vFFc9jxV/wUCXJQPywIb
+        DAAKCRC6vFFc9jxV/9YOCACe8qmOSnKQpQfW+PqYOqo3dt7JyweTs3FkD6NT8Zml
+        dYy/vkstbTjPpX6aTvUZjkb46BVi7AOneVHpD5GBqvRsZ9iVgDYHaehmLCdKiG5L
+        3Tp90NN+QY5WDbsGmsyk6+6ZMYejb4qYfweQeduOj27aavCJdLkCYMoRKfcFYI8c
+        FaNmEfKKy/r1PO20NXEG6t9t05K/frHy6ZG8bCNYdpagfFVot47r9JaQqWlTNtIR
+        5+zkkSq/eG9BEtRij3a6cTdQbktdBzx2KBeI0PYc1vlZR0LpuFKZqY9vlE6vTGLR
+        wMfrTEOvx0NxUM3rpaCgEmuWbB1G1Hu371oyr4srrr+N
+        =28dr
+        -----END PGP PUBLIC KEY BLOCK-----
       secret_key:
       - |
         -----BEGIN PRIVATE KEY-----
@@ -64,13 +96,14 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/16.0.1 (+github.com/fastly/go-fastly; go1.26.4)
-    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/117/logging/gcs
+      - FastlyGo/17.7.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/service/XsjdElScZGjmfCcTwsYRC1/version/122/logging/gcs
     method: POST
   response:
-    body: '{"account_name":"service-account","bucket_name":"bucket","compression_codec":"snappy","format":"format","format_version":"2","message_type":"blank","name":"test-gcs","path":"/path","period":"12","placement":"none","project_id":"logging-project","secret_key":"-----BEGIN
-      PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC9aQoqdHVA86oq\nTdRQ5HqwMfpiLBBMKNQcAJsO71RKNrDWwJJZiyYbvM4FOWRZFtRSdPIDgX0C0Wg1\nNnqWYvHDyA5Ug+T8kowiQDn56dU6Km2FWO4wnqZeA8q5G7rQVXlqdibuiP7FglHA\neURUzFsqyymXMUGrqDPqrHsVWC2E3NTJEb4QlywtrwI13qbhlvTx6/9oRfUjytXJ\nRuUIE5xL8yhRCagNr5ZW250aa+wBwu5DSCk5fDNr0eDuZjw84WHDll+mHxBFGV+X\nKJ5jCOmGumGqjVWZesJpNN1My3M9bsY9layNJJ0eiDeHDEi/yXhhO/mNEXhvhq/R\nfN0Jh2A3AgMBAAECggEAef+CEL5aF6/aVs0yh7fiXkKSp1ECXkud8ztgpEn63KJF\nXM1EdnBt50fA2xSQUeGmeEXi6+cngf0nRb8FToAEgLoGoOEjSJuLrzP3I8U9Fe3m\nBRG2uZI2Ti/bD0eRGEc1oSDhCpsqnkTGK1bwcD4AKpwY+c08Izh/2BOoY6McDoqh\ndQ89jzTuMtD4cNlnPiIrY9HbxoNjshK2ax1OaeXyYKZFG1TxqMFv5gA/G5+S3Cwr\nVG4fkAxYi5vdIK3b8jUXrTM/kpoTl+d3dlQ7rRZYf7KyT31/HtJ/GNzxFI6upzO7\niDNrrUOyeOPjWXdzUh9budv3j+6UfbYK7uZIoebHIQKBgQDykYX1L/akGaOC2tfS\njzCWUzPxGFYVZQ7zD1PM6UyouuS1KLURDEGk9RxqVzTPh/pYd8Ivnz3vOVski5Zt\n19ozLGxdtDhn122DcnVpfCdYzHBdAzPCzORenFohX+MhiX5fEotTlVi7wfOmzTP5\nhUCMSd/17bJrV4XMLhkdrMRBFQKBgQDH5fwV7o+Ej/ZfcdGIa3mAFazToPDzxhHU\nnwADxaxpNGKRU03XCaiYkykarLYdG6Rk+7dXUv8eLy+6Dcq1SWQtfCWKEor++IIp\n1RwWmFHfYriHGkmxSkkEkLFvL8old9xM5YWbEXc4QIXvnfR4BZxdyJHVzIDdbI2i\nFgcn17U3GwKBgDd1njMY7ENIuWHJt16k7m7wRwfwkH4DxQ89ieNn0+cgE/p3fC6R\nptCYWg7WMXThmhNwDi3lMrvnWTdZ0uL6XyEkHwKtmdfkIV3UZZPglv5uf6JEgSkg\nv3YCOXk3+y5HyWTjUIejtc334kVY1XFPThrFKTeJSSnRsP2l7IgkYBqhAoGAYGsr\nM3z1FrDF2nWw5odIfKJ30UAw2LRyB0eGH0uqhLgyzvwKcK2E98sLqYUi9llN6zOK\n1IEA8xM5hxl97AFxY4sdJEMbbi55wim7uZ5Q51nbvbbNUsmM/Lm6C/JWI8pzpVeU\nIR7EjYp50AE1WOsD6CyFQ0W35pWkn0jWvL4L938CgYEAlax4dLE5+YCG5DeLT1/N\nin6kQjl7JS4oCNlPEj6aRPLX2OJresI7oOn+uNatKvlVyfPm6rdxeHCmER1FpR7Q\nA/aNVjPeViKT/R4nK9ytsa+s/1IJVrwLFHJK3toGE660g5w3vKrCjWisMdP4yzzQ\nbv1KwcKoQbNVXwauH79JKc0=\n-----END
-      PRIVATE KEY-----\n","timestamp_format":"%Y","user":"user","service_id":"XsjdElScZGjmfCcTwsYRC1","version":"117","deleted_at":null,"public_key":null,"created_at":"2026-07-23T19:39:46Z","updated_at":"2026-07-23T19:39:46Z","gzip_level":"0","log_processing_region":"none","response_condition":""}'
+    body: '{"account_name":"service-account","bucket_name":"bucket","compression_codec":"snappy","format":"format","format_version":"2","message_type":"blank","name":"test-gcs","path":"/path","period":"12","placement":"none","project_id":"logging-project","public_key":"-----BEGIN
+      PGP PUBLIC KEY BLOCK-----\n\nmQENBFyUD8sBCACyFnB39AuuTygseek+eA4fo0cgwva6/FSjnWq7riouQee8GgQ/\nibXTRyv4iVlwI12GswvMTIy7zNvs1R54i0qvsLr+IZ4GVGJqs6ZJnvQcqe3xPoR4\n8AnBfw90o32r/LuHf6QCJXi+AEu35koNlNAvLJ2B+KACaNB7N0EeWmqpV/1V2k9p\nlDYk+th7LcCuaFNGqKS/PrMnnMqR6VDLCjHhNx4KR79b0Twm/2qp6an3hyNRu8Gn\ndwxpf1/BUu3JWf+LqkN4Y3mbOmSUL3MaJNvyQguUzTfS0P0uGuBDHrJCVkMZCzDB\n89ag55jCPHyGeHBTd02gHMWzsg3WMBWvCsrzABEBAAG0JXRlcnJhZm9ybSAodGVz\ndCkgPHRlc3RAdGVycmFmb3JtLmNvbT6JAU4EEwEIADgWIQSHYyc6Kj9l6HzQsau6\nvFFc9jxV/wUCXJQPywIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRC6vFFc\n9jxV/815CAClb32OxV7wG01yF97TzlyTl8TnvjMtoG29Mw4nSyg+mjM3b8N7iXm9\nOLX59fbDAWtBSldSZE22RXd3CvlFOG/EnKBXSjBtEqfyxYSnyOPkMPBYWGL/ApkX\nSvPYJ4LKdvipYToKFh3y9kk2gk1DcDBDyaaHvR+3rv1u3aoy7/s2EltAfDS3ZQIq\n7/cWTLJml/lleeB/Y6rPj8xqeCYhE5ahw9gsV/Mdqatl24V9Tks30iijx0Hhw+Gx\nkATUikMGr2GDVqoIRga5kXI7CzYff4rkc0Twn47fMHHHe/KY9M2yVnMHUXmAZwbG\nM1cMI/NH1DjevCKdGBLcRJlhuLPKF/anuQENBFyUD8sBCADIpd7r7GuPd6n/Ikxe\nu6h7umV6IIPoAm88xCYpTbSZiaK30Svh6Ywra9jfE2KlU9o6Y/art8ip0VJ3m07L\n4RSfSpnzqgSwdjSq5hNour2Fo/BzYhK7yaz2AzVSbe33R0+RYhb4b/6N+bKbjwGF\nftCsqVFMH+PyvYkLbvxyQrHlA9woAZaNThI1ztO5rGSnGUR8xt84eup28WIFKg0K\nUEGUcTzz+8QGAwAra+0ewPXo/AkO+8BvZjDidP417u6gpBHOJ9qYIcO9FxHeqFyu\nYrjlrxowEgXn5wO8xuNz6Vu1vhHGDHGDsRbZF8pv1d5O+0F1G7ttZ2GRRgVBZPwi\nkiyRABEBAAGJATYEGAEIACAWIQSHYyc6Kj9l6HzQsau6vFFc9jxV/wUCXJQPywIb\nDAAKCRC6vFFc9jxV/9YOCACe8qmOSnKQpQfW+PqYOqo3dt7JyweTs3FkD6NT8Zml\ndYy/vkstbTjPpX6aTvUZjkb46BVi7AOneVHpD5GBqvRsZ9iVgDYHaehmLCdKiG5L\n3Tp90NN+QY5WDbsGmsyk6+6ZMYejb4qYfweQeduOj27aavCJdLkCYMoRKfcFYI8c\nFaNmEfKKy/r1PO20NXEG6t9t05K/frHy6ZG8bCNYdpagfFVot47r9JaQqWlTNtIR\n5+zkkSq/eG9BEtRij3a6cTdQbktdBzx2KBeI0PYc1vlZR0LpuFKZqY9vlE6vTGLR\nwMfrTEOvx0NxUM3rpaCgEmuWbB1G1Hu371oyr4srrr+N\n=28dr\n-----END
+      PGP PUBLIC KEY BLOCK-----\n","secret_key":"-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC9aQoqdHVA86oq\nTdRQ5HqwMfpiLBBMKNQcAJsO71RKNrDWwJJZiyYbvM4FOWRZFtRSdPIDgX0C0Wg1\nNnqWYvHDyA5Ug+T8kowiQDn56dU6Km2FWO4wnqZeA8q5G7rQVXlqdibuiP7FglHA\neURUzFsqyymXMUGrqDPqrHsVWC2E3NTJEb4QlywtrwI13qbhlvTx6/9oRfUjytXJ\nRuUIE5xL8yhRCagNr5ZW250aa+wBwu5DSCk5fDNr0eDuZjw84WHDll+mHxBFGV+X\nKJ5jCOmGumGqjVWZesJpNN1My3M9bsY9layNJJ0eiDeHDEi/yXhhO/mNEXhvhq/R\nfN0Jh2A3AgMBAAECggEAef+CEL5aF6/aVs0yh7fiXkKSp1ECXkud8ztgpEn63KJF\nXM1EdnBt50fA2xSQUeGmeEXi6+cngf0nRb8FToAEgLoGoOEjSJuLrzP3I8U9Fe3m\nBRG2uZI2Ti/bD0eRGEc1oSDhCpsqnkTGK1bwcD4AKpwY+c08Izh/2BOoY6McDoqh\ndQ89jzTuMtD4cNlnPiIrY9HbxoNjshK2ax1OaeXyYKZFG1TxqMFv5gA/G5+S3Cwr\nVG4fkAxYi5vdIK3b8jUXrTM/kpoTl+d3dlQ7rRZYf7KyT31/HtJ/GNzxFI6upzO7\niDNrrUOyeOPjWXdzUh9budv3j+6UfbYK7uZIoebHIQKBgQDykYX1L/akGaOC2tfS\njzCWUzPxGFYVZQ7zD1PM6UyouuS1KLURDEGk9RxqVzTPh/pYd8Ivnz3vOVski5Zt\n19ozLGxdtDhn122DcnVpfCdYzHBdAzPCzORenFohX+MhiX5fEotTlVi7wfOmzTP5\nhUCMSd/17bJrV4XMLhkdrMRBFQKBgQDH5fwV7o+Ej/ZfcdGIa3mAFazToPDzxhHU\nnwADxaxpNGKRU03XCaiYkykarLYdG6Rk+7dXUv8eLy+6Dcq1SWQtfCWKEor++IIp\n1RwWmFHfYriHGkmxSkkEkLFvL8old9xM5YWbEXc4QIXvnfR4BZxdyJHVzIDdbI2i\nFgcn17U3GwKBgDd1njMY7ENIuWHJt16k7m7wRwfwkH4DxQ89ieNn0+cgE/p3fC6R\nptCYWg7WMXThmhNwDi3lMrvnWTdZ0uL6XyEkHwKtmdfkIV3UZZPglv5uf6JEgSkg\nv3YCOXk3+y5HyWTjUIejtc334kVY1XFPThrFKTeJSSnRsP2l7IgkYBqhAoGAYGsr\nM3z1FrDF2nWw5odIfKJ30UAw2LRyB0eGH0uqhLgyzvwKcK2E98sLqYUi9llN6zOK\n1IEA8xM5hxl97AFxY4sdJEMbbi55wim7uZ5Q51nbvbbNUsmM/Lm6C/JWI8pzpVeU\nIR7EjYp50AE1WOsD6CyFQ0W35pWkn0jWvL4L938CgYEAlax4dLE5+YCG5DeLT1/N\nin6kQjl7JS4oCNlPEj6aRPLX2OJresI7oOn+uNatKvlVyfPm6rdxeHCmER1FpR7Q\nA/aNVjPeViKT/R4nK9ytsa+s/1IJVrwLFHJK3toGE660g5w3vKrCjWisMdP4yzzQ\nbv1KwcKoQbNVXwauH79JKc0=\n-----END
+      PRIVATE KEY-----\n","timestamp_format":"%Y","user":"user","service_id":"XsjdElScZGjmfCcTwsYRC1","version":"122","gzip_level":"0","created_at":"2026-10-02T15:11:40Z","deleted_at":null,"response_condition":"","updated_at":"2026-10-02T15:11:40Z","log_processing_region":"none"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -79,11 +112,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 23 Jul 2026 19:39:46 GMT
+      - Fri, 02 Oct 2026 15:11:40 GMT
       Fastly-Ratelimit-Remaining:
-      - "9380"
+      - "9990"
       Fastly-Ratelimit-Reset:
-      - "1784836800"
+      - "1790956800"
       Pragma:
       - no-cache
       Server:
@@ -101,11 +134,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "582"
+      - "516"
       X-Served-By:
-      - cache-chi-kigq8000173-CHI, cache-iad-kiad7000025-IAD
+      - cache-chi-kigq8000138-CHI, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1784835586.909821,VS0,VE618
+      - S1790953900.123055,VS0,VE546
     status: 200 OK
     code: 200
     duration: ""
