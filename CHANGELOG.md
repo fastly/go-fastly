@@ -10,7 +10,7 @@
 
 ### Bug fixes:
 
-- fix(errors): preserve structured HTTP errors when Content-Type includes parameters
+- fix(errors): preserve structured HTTP errors when Content-Type includes parameters ([#882](https://github.com/fastly/go-fastly/pull/882))
 
 ### Dependencies:
 
