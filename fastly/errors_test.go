@@ -7,6 +7,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/jsonapi"
 )
 
@@ -110,7 +111,12 @@ func TestNewHTTPError(t *testing.T) {
 	t.Run("invalid JSON", func(t *testing.T) {
 		contentTypes := []string{
 			jsonapi.MediaType,
+			jsonapi.MediaType + "; ext=bulk",
 			"application/problem+json",
+			"application/problem+json; charset=utf-8",
+			"Application/Problem+Json",
+			jsonapi.MediaType + "; profile=",
+			"",
 			"default",
 		}
 
@@ -144,4 +150,85 @@ func TestNewHTTPError(t *testing.T) {
 			}
 		}
 	})
+}
+
+func TestNewHTTPError_ContentType(t *testing.T) {
+	t.Parallel()
+
+	meta := map[string]any{"request_id": "request123"}
+	cases := []struct {
+		name         string
+		contentTypes []string
+		body         string
+		want         *ErrorObject
+	}{
+		{
+			name: "jsonapi",
+			contentTypes: []string{
+				jsonapi.MediaType,
+				jsonapi.MediaType + "; ext=bulk",
+				jsonapi.MediaType + `; profile="https://example.com/errors"`,
+				"Application/Vnd.Api+Json",
+				" " + jsonapi.MediaType + " ",
+			},
+			body: `{"errors":[{"id":"abc123","status":"404","code":"not_found","title":"Not found","detail":"That resource does not exist","meta":{"request_id":"request123"}}]}`,
+			want: &ErrorObject{
+				ID:     "abc123",
+				Status: "404",
+				Code:   "not_found",
+				Title:  "Not found",
+				Detail: "That resource does not exist",
+				Meta:   &meta,
+			},
+		},
+		{
+			name: "problem detail",
+			contentTypes: []string{
+				"application/problem+json",
+				"application/problem+json; charset=utf-8",
+				`application/problem+json; charset="utf-8"`,
+				"Application/Problem+Json",
+				" application/problem+json ",
+			},
+			body: `{"title":"Error","detail":"this was an error","status":404}`,
+			want: &ErrorObject{
+				Title:  "Error",
+				Detail: "this was an error",
+				Status: "404",
+			},
+		},
+		{
+			name: "legacy",
+			contentTypes: []string{
+				"",
+				"application/json",
+				"application/json; charset=utf-8",
+				"text/plain",
+				jsonapi.MediaType + "; profile=",
+				"application/problem+json; charset=",
+			},
+			body: `{"msg":"hello","detail":"nope"}`,
+			want: &ErrorObject{Title: "hello", Detail: "nope"},
+		},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			for _, contentType := range tc.contentTypes {
+				t.Run(contentType, func(t *testing.T) {
+					resp := &http.Response{
+						StatusCode: http.StatusNotFound,
+						Header:     http.Header{"Content-Type": {contentType}},
+						Body:       io.NopCloser(strings.NewReader(tc.body)),
+					}
+					e := NewHTTPError(resp)
+					if e.StatusCode != http.StatusNotFound {
+						t.Errorf("expected status code %d, got %d", http.StatusNotFound, e.StatusCode)
+					}
+					if diff := cmp.Diff([]*ErrorObject{tc.want}, e.Errors); diff != "" {
+						t.Errorf("unexpected errors (-want +got):\n%s", diff)
+					}
+				})
+			}
+		})
+	}
 }

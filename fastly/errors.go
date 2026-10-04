@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"mime"
 	"net/http"
 	"strconv"
 
@@ -662,7 +663,12 @@ func NewHTTPError(resp *http.Response) *HTTPError {
 		})
 	}
 
-	switch resp.Header.Get("Content-Type") {
+	contentType := resp.Header.Get("Content-Type")
+	if mediaType, _, err := mime.ParseMediaType(contentType); err == nil {
+		contentType = mediaType
+	}
+
+	switch contentType {
 	case jsonapi.MediaType:
 		// If this is a jsonapi response, decode it accordingly.
 		if err := DecodeBodyMap(body, &e); err != nil {
