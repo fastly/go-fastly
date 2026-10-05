@@ -5,6 +5,7 @@
 ## BREAKING:
 
 ### Enhancements:
+- feat(customer/contacts): add support for customer contacts (list/create/delete) ([#813](https://github.com/fastly/go-fastly/pull/813))
 
 - feat(logging_gcs): add support for the `public_key` attribute ([#881](https://github.com/fastly/go-fastly/pull/881))
 
