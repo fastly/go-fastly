@@ -1,0 +1,136 @@
+name: PR template check
+
+# This check flags external pull requests that do not use the pull request template, and
+# closes them if the template is still missing after a grace period.
+#
+# pull_request_target is required so the token can label, comment on, and close
+# pull requests opened from forks. This is safe only because the workflow never
+# checks out or runs code from the pull request; it reads the PR body via the
+# event payload. Do not add an actions/checkout step to this workflow.
+on: # zizmor: ignore[dangerous-triggers] PR code is never checked out or executed
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - reopened
+      - ready_for_review
+      - converted_to_draft
+  schedule:
+    - cron: "0 18 * * *" # 1 PM EST
+  workflow_dispatch:
+
+permissions: {}
+
+env:
+  LABEL: needs-template
+  GRACE_DAYS: "3"
+  MARKER: "<!-- pr-template-check -->"
+
+jobs:
+  check:
+    if: >-
+      github.event_name == 'pull_request_target' &&
+      github.event.pull_request.user.type != 'Bot' &&
+      !contains(fromJSON('["OWNER", "MEMBER"]'), github.event.pull_request.author_association)
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write # Labels and comments on PRs use the issues API.
+      pull-requests: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    steps:
+      - name: Check PR body against template
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const { LABEL, GRACE_DAYS, MARKER } = process.env;
+            const pr = context.payload.pull_request;
+            const issue = { ...context.repo, issue_number: pr.number };
+
+            // Remove HTML comments so untouched template placeholders don't count as content.
+            const body = (pr.body || '').replace(/<!--[\s\S]*?-->/g, '');
+
+            // Only the parts above the template's "You can erase any parts of this template"
+            // note are required. These must match .github/PULL_REQUEST_TEMPLATE.md.
+            const problems = [];
+
+            // The change summary runs until the "All Submissions:" checklist or the next heading.
+            const summary = body.match(/^###\s+Change summary\s*$([\s\S]*?)(?=^\s*All Submissions:|^###|(?![\s\S]))/mi);
+            if (!summary) {
+              problems.push('the `### Change summary` section is missing');
+            } else if (summary[1].trim() === '') {
+              problems.push('the `### Change summary` section is empty');
+            }
+
+            if (!/^\s*All Submissions:\s*$/mi.test(body)) {
+              problems.push('the `All Submissions:` checklist is missing');
+            }
+
+            const { data: comments } = await github.rest.issues.listComments({ ...issue, per_page: 100 });
+            const existing = comments.find((c) => c.user.type === 'Bot' && c.body.includes(MARKER));
+
+            // Drafts are not checked. Clearing the label means the grace period starts
+            // fresh when the pull request is marked ready for review.
+            if (problems.length === 0 || pr.draft) {
+              await github.rest.issues.removeLabel({ ...issue, name: LABEL }).catch((e) => {
+                if (e.status !== 404) throw e;
+              });
+              if (existing) {
+                await github.rest.issues.deleteComment({ ...context.repo, comment_id: existing.id });
+              }
+              return;
+            }
+
+            const templateUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/blob/${pr.base.ref}/.github/PULL_REQUEST_TEMPLATE.md`;
+            const message = [
+              MARKER,
+              `Thanks for the contribution! This pull request doesn't follow our [pull request template](${templateUrl}):`,
+              '',
+              ...problems.map((p) => `- ${p}`),
+              '',
+              `Please edit the description to use the template. If it is still missing after ${GRACE_DAYS} days, this pull request will be closed automatically.`,
+            ].join('\n');
+
+            await github.rest.issues.addLabels({ ...issue, labels: [LABEL] });
+            if (existing) {
+              await github.rest.issues.updateComment({ ...context.repo, comment_id: existing.id, body: message });
+            } else {
+              await github.rest.issues.createComment({ ...issue, body: message });
+            }
+
+  close:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write # Comments on PRs use the issues API.
+      pull-requests: write
+    steps:
+      - name: Close PRs still missing the template
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const { LABEL, GRACE_DAYS } = process.env;
+            const cutoff = Date.now() - Number(GRACE_DAYS) * 24 * 60 * 60 * 1000;
+
+            const prs = await github.paginate(github.rest.pulls.list, {
+              ...context.repo,
+              state: 'open',
+              per_page: 100,
+            });
+
+            for (const pr of prs.filter((p) => !p.draft && p.labels.some((l) => l.name === LABEL))) {
+              const issue = { ...context.repo, issue_number: pr.number };
+              const events = await github.paginate(github.rest.issues.listEvents, { ...issue, per_page: 100 });
+              const labeled = events.filter((e) => e.event === 'labeled' && e.label?.name === LABEL).pop();
+              if (!labeled || new Date(labeled.created_at).getTime() > cutoff) {
+                continue;
+              }
+
+              core.info(`Closing #${pr.number}: labeled ${LABEL} at ${labeled.created_at}`);
+              await github.rest.issues.createComment({
+                ...issue,
+                body: `Closing because the pull request template is still missing after ${GRACE_DAYS} days. Feel free to open a new pull request that uses the template.`,
+              });
+              await github.rest.pulls.update({ ...context.repo, pull_number: pr.number, state: 'closed' });
+            }
