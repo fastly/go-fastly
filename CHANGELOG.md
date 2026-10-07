@@ -6,11 +6,15 @@
 
 ### Enhancements:
 
-- feat(logging_gcs): add support for the `public_key` attribute ([#881](https://github.com/fastly/go-fastly/pull/881))
-
 ### Bug fixes:
 
 ### Dependencies:
+
+## [v17.8.0](https://github.com/fastly/go-fastly/releases/tag/v17.8.0) (2026-10-07)
+
+### Enhancements:
+
+- feat(logging_gcs): add support for the `public_key` attribute ([#881](https://github.com/fastly/go-fastly/pull/881))
 
 ## [v17.7.0](https://github.com/fastly/go-fastly/releases/tag/v17.7.0) (2026-09-28)
 
