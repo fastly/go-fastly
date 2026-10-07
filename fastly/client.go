@@ -377,11 +377,7 @@ func (c *Client) Request(ctx context.Context, verb, p string, ro RequestOptions)
 		}
 	}
 
-	if err != nil {
-		return resp, err
-	}
-
-	if verb != http.MethodGet && verb != http.MethodHead {
+	if resp != nil && verb != http.MethodGet && verb != http.MethodHead {
 		remaining := resp.Header.Get("Fastly-RateLimit-Remaining")
 		if remaining != "" {
 			if val, err := strconv.Atoi(remaining); err == nil {
@@ -396,7 +392,7 @@ func (c *Client) Request(ctx context.Context, verb, p string, ro RequestOptions)
 		}
 	}
 
-	return resp, nil
+	return resp, err
 }
 
 // RequestOptions is the list of options to pass to the request.

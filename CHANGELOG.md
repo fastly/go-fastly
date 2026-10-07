@@ -8,6 +8,8 @@
 
 ### Bug fixes:
 
+- Preserve rate-limit response headers on failed write requests ([#877](https://github.com/fastly/go-fastly/pull/877)).
+
 ### Dependencies:
 
 ## [v17.8.0](https://github.com/fastly/go-fastly/releases/tag/v17.8.0) (2026-10-07)
