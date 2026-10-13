@@ -199,16 +199,12 @@ func TestClient_DeletePath_validation(t *testing.T) {
 	}
 }
 
-// TestClient_Path_ListReflectsActiveVersion: the docs
-// for this endpoint state it "returns paths from the active version if one
-// exists, otherwise from the draft," but in practice, once List has been
-// called on a routing config with no version yet (a legitimate 404), that
-// 404 response is cached and continues being served for the same URL even
-// after paths are created and the routing config is activated - despite the
-// cached response itself declaring Cache-Control: no-store. This test
-// reproduces that trigger (a List call while the config is still empty) and
-// then asserts the documented behavior; it is expected to FAIL until the
-// caching bug is fixed.
+// TestClient_Path_ListReflectsActiveVersion covers the documented behavior
+// that List "returns paths from the active version if one exists, otherwise
+// from the draft": listing on a routing config with no version yet returns
+// an empty list (previously this returned a 404 that got cached and kept
+// being served even after the routing config was activated and paths
+// existed; that bug has since been fixed on the API).
 func TestClient_Path_ListReflectsActiveVersion(t *testing.T) {
 	t.Parallel()
 
@@ -232,14 +228,16 @@ func TestClient_Path_ListReflectsActiveVersion(t *testing.T) {
 		})
 	}()
 
-	// Trigger: list paths while the routing config still has none. This is a
-	// legitimate 404 ("No version found for config"), but it's what ends up
-	// cached for this URL.
+	// Trigger: list paths while the routing config still has no version yet.
+	var before []Data
 	fastly.Record(t, "active_list_bug_list_before", func(c *fastly.Client) {
-		_, err = List(context.TODO(), c, &ListInput{RoutingConfigID: &rc.RoutingConfigID})
+		before, err = List(context.TODO(), c, &ListInput{RoutingConfigID: &rc.RoutingConfigID})
 	})
-	if err == nil {
-		t.Fatal("expected an error listing paths on a routing config with no version yet")
+	if err != nil {
+		t.Fatalf("List on a routing config with no version yet should return an empty list, not an error: %v", err)
+	}
+	if len(before) != 0 {
+		t.Errorf("expected no paths before activation, got %d: %v", len(before), before)
 	}
 
 	var p *Data
@@ -277,8 +275,7 @@ func TestClient_Path_ListReflectsActiveVersion(t *testing.T) {
 	}
 
 	// Per the documented behavior, this should now return the path we just
-	// activated. As of CDTOOL-1743 it instead returns the cached 404 from the
-	// "list before" call above.
+	// activated.
 	var cl []Data
 	fastly.Record(t, "active_list_bug_list_after", func(c *fastly.Client) {
 		cl, err = List(context.TODO(), c, &ListInput{RoutingConfigID: &rc.RoutingConfigID})

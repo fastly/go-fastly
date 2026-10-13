@@ -6,25 +6,23 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/17.5.0 (+github.com/fastly/go-fastly; go1.27.1)
-    url: https://api.fastly.com/domain-management/v1/routing-configs/79NSSnAdr7eLQXQZqJ7yBN/paths
+      - FastlyGo/17.8.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/domain-management/v1/routing-configs/5N4SAVGB7SoOQIw88ksDMz/paths
     method: GET
   response:
     body: |
-      {"detail":"No version found for config.","title":"Not Found"}
+      {"data":[],"meta":{"limit":10,"sort":"-created_at"}}
     headers:
       Accept-Ranges:
       - bytes
-      Age:
-      - "0"
       Cache-Control:
       - no-store
       Content-Length:
-      - "62"
+      - "53"
       Content-Type:
-      - application/problem+json
+      - application/json
       Date:
-      - Fri, 25 Sep 2026 20:41:23 GMT
+      - Tue, 13 Oct 2026 19:54:10 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,11 +36,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "42"
+      - "31"
       X-Served-By:
-      - cache-chi-kigq8000144-CHI, cache-ewr-kewr1740053-EWR
+      - cache-chi-klot8100154-CHI, cache-nyc-kteb1890045-NYC
       X-Timer:
-      - S1790368883.131078,VS0,VE90
-    status: 404 Not Found
-    code: 404
+      - S1791921251.915086,VS0,VE61
+    status: 200 OK
+    code: 200
     duration: ""

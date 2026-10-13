@@ -10,12 +10,12 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/17.5.0 (+github.com/fastly/go-fastly; go1.27.1)
+      - FastlyGo/17.8.0 (+github.com/fastly/go-fastly; go1.27.1)
     url: https://api.fastly.com/domain-management/v1/routing-configs
     method: POST
   response:
     body: |
-      {"created_at":"2026-09-25T20:41:23.012676674Z","id":"79NSSnAdr7eLQXQZqJ7yBN","links":{"paths":"/domain-management/v1/routing-configs/79NSSnAdr7eLQXQZqJ7yBN/paths","self":"/domain-management/v1/routing-configs/79NSSnAdr7eLQXQZqJ7yBN"},"name":"gofastly-sdk-testing-active-list-bug"}
+      {"created_at":"2026-10-13T19:54:10.844483642Z","id":"5N4SAVGB7SoOQIw88ksDMz","links":{"paths":"/domain-management/v1/routing-configs/5N4SAVGB7SoOQIw88ksDMz/paths","self":"/domain-management/v1/routing-configs/5N4SAVGB7SoOQIw88ksDMz"},"name":"gofastly-sdk-testing-active-list-bug"}
     headers:
       Accept-Ranges:
       - bytes
@@ -26,7 +26,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 25 Sep 2026 20:41:23 GMT
+      - Tue, 13 Oct 2026 19:54:10 GMT
       Pragma:
       - no-cache
       Server:
@@ -40,11 +40,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "60"
+      - "43"
       X-Served-By:
-      - cache-chi-kigq8000076-CHI, cache-ewr-kewr1740053-EWR
+      - cache-chi-kigq8000076-CHI, cache-nyc-kteb1890045-NYC
       X-Timer:
-      - S1790368883.983557,VS0,VE95
+      - S1791921251.822690,VS0,VE72
     status: 201 Created
     code: 201
     duration: ""
