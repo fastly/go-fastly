@@ -16,6 +16,7 @@ $ git remote add upstream git@github.com:fastly/go-fastly.git
 7. Run the linter and formatter `make all`. 
     1. You may need to install [golangci-lint](https://golangci-lint.run/welcome/install/) if you don't have it installed
 8. Open a pull request against `upstream main`.
-    1. Once you have marked your PR as `Ready for Review` please do not force push to the branch
+    1. Fill out the [pull request template](./.github/PULL_REQUEST_TEMPLATE.md). PRs that are ready for review but do not follow the template are labeled `needs-template` and closed automatically after 3 days.
+    2. Once you have marked your PR as `Ready for Review` please do not force push to the branch
 9. Add an entry in `CHANGELOG.md` in the `UNRELEASED` section under the appropriate heading with a link to the PR.
 10. Celebrate :tada:!
