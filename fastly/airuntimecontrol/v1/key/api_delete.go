@@ -10,11 +10,12 @@ import (
 // DeleteInput specifies the information needed for the Delete() function to
 // perform the operation.
 type DeleteInput struct {
-	// KeyID is the ID identifying the virtual key (required).
+	// KeyID is the ID of the virtual key (required).
 	KeyID *string
 }
 
-// Delete deletes an existing virtual key.
+// Delete deletes a virtual key. This also deletes any security configuration
+// associated with the key.
 func Delete(ctx context.Context, c *fastly.Client, i *DeleteInput) error {
 	if i.KeyID == nil {
 		return fastly.ErrMissingKeyID

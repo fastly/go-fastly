@@ -12,17 +12,18 @@ import (
 // ListInput specifies the information needed for the List() and Export()
 // functions to perform the operation.
 type ListInput struct {
-	// Key filters results by a specific virtual key ID.
+	// Key filters results to a specific virtual key ID.
 	Key *string
-	// Provider filters results by provider name.
+	// Provider filters results by AI provider connection ID.
 	Provider *string
-	// Model filters results by model name.
+	// Model filters results by AI model identifier.
 	Model *string
-	// From is the (inclusive) start of the time range.
+	// From is the start of the time range, in RFC 3339 format.
 	From *time.Time
-	// To is the (inclusive) end of the time range. Defaults to now.
+	// To is the end of the time range, in RFC 3339 format. Defaults to `now`.
 	To *time.Time
-	// Sort is the sort field. Prefix with "-" for descending order (e.g. "-date").
+	// Sort is the sort field. Prefix with `-` for descending order (e.g.,
+	// `sort=-date`). One of `date`, `-date`.
 	Sort *string
 }
 
@@ -51,7 +52,8 @@ func (i *ListInput) requestOptions() fastly.RequestOptions {
 	return requestOptions
 }
 
-// List returns usage metrics for AI services, with optional filtering.
+// List returns usage metrics for AI Runtime Control requests, including request
+// counts, session counts, input token counts, and output token counts.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) (*UsageMetrics, error) {
 	path := fastly.ToSafeURL("ai-runtime-control", "v1", "usage-metrics")
 

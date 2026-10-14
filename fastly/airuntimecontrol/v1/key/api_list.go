@@ -16,18 +16,21 @@ type ListInput struct {
 	Model *string
 	// Provider filters results by AI model provider.
 	Provider *string
-	// IncludeDeleted includes deleted virtual keys when true.
+	// IncludeDeleted includes deleted virtual keys in the results.
 	IncludeDeleted *bool
-	// Search filters virtual keys by substring match on key name.
+	// Search filters results to virtual keys whose name contains this substring.
 	Search *string
-	// Limit is the maximum number of results per page.
+	// Limit limits how many results are returned per page (1-100).
 	Limit *int
-	// Sort is the sort field. Prefix with "-" for descending order (e.g. "-created_at").
+	// Sort is the sort field. Prefix with `-` for descending order (e.g.,
+	// `sort=-created_at`). One of `created_at`, `updated_at`, `name`,
+	// `expires_at`, `user_name`, `last_used_at` (each optionally prefixed
+	// with `-`).
 	Sort *string
 }
 
-// List retrieves all virtual keys, automatically paginating through all
-// pages returned by the API, with optional filtering.
+// List lists the virtual keys belonging to your account. It automatically
+// paginates through all pages returned by the API.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]VirtualKeyListItem, error) {
 	var (
 		out    []VirtualKeyListItem

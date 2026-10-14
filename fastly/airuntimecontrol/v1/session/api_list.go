@@ -13,25 +13,26 @@ import (
 // ListInput specifies the information needed for the List() function to
 // perform the operation.
 type ListInput struct {
-	// Key filters results by a specific virtual key ID.
+	// Key filters results to a specific virtual key ID.
 	Key *string
-	// Provider filters results by provider name.
+	// Provider filters results by AI provider connection ID.
 	Provider *string
-	// Model filters results by model name.
+	// Model filters results by AI model identifier.
 	Model *string
-	// From is the (inclusive) start of the time range.
+	// From is the start of the time range, in RFC 3339 format.
 	From *time.Time
-	// To is the (inclusive) end of the time range. Defaults to now.
+	// To is the end of the time range, in RFC 3339 format. Defaults to `now`.
 	To *time.Time
-	// Limit is the maximum number of results per page.
+	// Limit limits how many results are returned per page (1-1000).
 	Limit *int
-	// Sort is the sort field. Prefix with "-" for descending order (e.g. "-created_at").
+	// Sort is the sort field. Prefix with `-` for descending order (e.g.,
+	// `sort=-created_at`). One of `created_at`, `-created_at`.
 	Sort *string
 }
 
-// List retrieves session logs including request/response data and metadata,
-// automatically paginating through all pages returned by the API, with
-// optional filtering.
+// List returns session logs, including request and response data and metadata,
+// for debugging and audit purposes. It automatically paginates through all
+// pages returned by the API.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]Session, error) {
 	var (
 		out    []Session

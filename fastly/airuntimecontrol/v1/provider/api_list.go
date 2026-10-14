@@ -8,8 +8,8 @@ import (
 	"github.com/fastly/go-fastly/v17/fastly"
 )
 
-// List returns the list of AI providers supported by ARC, with each provider's
-// available models nested within.
+// List returns the AI providers supported by AI Runtime Control, with each
+// provider's available models nested within.
 func List(ctx context.Context, c *fastly.Client) (*Providers, error) {
 	path := fastly.ToSafeURL("ai-runtime-control", "v1", "providers")
 

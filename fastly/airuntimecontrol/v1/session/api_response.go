@@ -6,33 +6,36 @@ type Log struct {
 	Request string `json:"request"`
 	// Response is the raw response data.
 	Response string `json:"response"`
-	// Attrs contains additional attributes.
+	// Attrs is additional attributes recorded for this request/response pair.
 	Attrs map[string]any `json:"attrs,omitempty"`
 }
 
 // Session represents a session log including request/response data and metadata.
 type Session struct {
-	// ID is the unique session identifier.
+	// ID is the unique identifier of the session. (Read-only)
 	ID string `json:"id"`
-	// VirtualKeyID is the ID of the virtual key used.
+	// VirtualKeyID is the ID of the virtual key used for this session.
 	VirtualKeyID string `json:"virtual_key_id"`
-	// VirtualKeyName is the human-readable name of the virtual key.
+	// VirtualKeyName is the display name of the virtual key used for this session.
 	VirtualKeyName string `json:"virtual_key_name"`
-	// Model is the AI model identifier.
+	// Model is the AI model identifier used.
 	Model string `json:"model"`
-	// Provider is the AI provider name.
+	// Provider is the name of the provider connection that ultimately served the
+	// session.
 	Provider string `json:"provider"`
-	// Requests is the number of requests in the session.
+	// Requests is the number of requests made in this session.
 	Requests int `json:"requests"`
-	// InputTokens is the total input tokens consumed.
+	// InputTokens is the total input tokens consumed in this session.
 	InputTokens int `json:"input_tokens"`
-	// OutputTokens is the total output tokens generated.
+	// OutputTokens is the total output tokens generated in this session.
 	OutputTokens int `json:"output_tokens"`
-	// CreatedAt is when the session was created.
+	// CreatedAt is the date and time the session was created, in RFC 3339 format.
+	// (Read-only)
 	CreatedAt string `json:"created_at,omitempty"`
-	// UpdatedAt is when the session was last updated.
+	// UpdatedAt is the date and time the session was last updated, in RFC 3339
+	// format. (Read-only)
 	UpdatedAt string `json:"updated_at,omitempty"`
-	// Logs is the list of request/response log entries for the session.
+	// Logs is the request and response pairs recorded for this session.
 	Logs []Log `json:"logs,omitempty"`
 }
 
@@ -40,19 +43,19 @@ type Session struct {
 type Sessions struct {
 	// Data is the list of returned sessions.
 	Data []Session `json:"data"`
-	// Meta contains pagination metadata.
+	// Meta is metadata about the request.
 	Meta Meta `json:"meta"`
 }
 
 // Meta is the pagination metadata returned by the list operation.
 type Meta struct {
-	// NextCursor is the cursor used to retrieve the next page of results.
-	// It is empty when there are no further pages.
+	// NextCursor is the cursor to use to request the next page of results. `null`
+	// when there are no more results.
 	NextCursor string `json:"next_cursor"`
-	// Limit is the maximum number of results returned per page.
+	// Limit is the `limit` value used when making the request.
 	Limit int `json:"limit"`
-	// Sort is the sort field applied to the results.
+	// Sort is the `sort` value used when making the request.
 	Sort string `json:"sort"`
-	// Total is the total number of results.
+	// Total is the count of results matching the request.
 	Total int `json:"total"`
 }

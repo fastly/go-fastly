@@ -12,13 +12,14 @@ import (
 // RotateInput specifies the information needed for the Rotate() function to
 // perform the operation.
 type RotateInput struct {
-	// KeyID is the ID identifying the virtual key (required).
+	// KeyID is the ID of the virtual key (required).
 	KeyID *string `json:"-"`
 	// ExpiresAt is the expiration timestamp for the rotated key (required).
 	ExpiresAt *time.Time `json:"expires_at"`
 }
 
-// Rotate rotates an existing virtual key, generating a new access token.
+// Rotate issues a new access token for a virtual key, invalidating the previous
+// one.
 func Rotate(ctx context.Context, c *fastly.Client, i *RotateInput) (*VirtualKeyWithToken, error) {
 	if i.KeyID == nil {
 		return nil, fastly.ErrMissingKeyID
