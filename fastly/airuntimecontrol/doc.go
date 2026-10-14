@@ -1,4 +1,3 @@
-// Package airuntimecontrol contains subpackages for the Fastly AI Runtime Control
-// (ARC) product, which provides usage monitoring, session logging, and virtual
-// key management for AI services.
+// Package airuntimecontrol contains subpackages for AI Runtime Control, a
+// gateway for managing and monitoring traffic to AI model providers.
 package airuntimecontrol

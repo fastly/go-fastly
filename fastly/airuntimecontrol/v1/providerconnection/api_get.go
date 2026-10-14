@@ -11,11 +11,11 @@ import (
 // GetInput specifies the information needed for the Get() function to perform
 // the operation.
 type GetInput struct {
-	// ID is the ID identifying the provider connection (required).
+	// ID is the ID of the provider connection (required).
 	ID *string
 }
 
-// Get retrieves a specific provider connection.
+// Get retrieves a single provider connection.
 func Get(ctx context.Context, c *fastly.Client, i *GetInput) (*ProviderConnection, error) {
 	if i.ID == nil {
 		return nil, fastly.ErrMissingID

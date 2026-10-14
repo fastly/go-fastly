@@ -12,7 +12,7 @@ import (
 // CreateInput specifies the information needed for the Create() function to
 // perform the operation.
 type CreateInput struct {
-	// Name is a human-readable name for the virtual key (required).
+	// Name is the display name of the virtual key (required).
 	Name *string `json:"name"`
 	// Model is the AI model identifier (required).
 	Model *string `json:"model"`
@@ -20,11 +20,13 @@ type CreateInput struct {
 	Provider *string `json:"provider"`
 	// UserID is the ID of the user creating the key (required).
 	UserID *string `json:"user_id"`
-	// ExpiresAt is the expiration timestamp of the key.
+	// ExpiresAt is the date and time the key expires, in RFC 3339 format. `null`
+	// if the key doesn't expire.
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
 }
 
-// Create creates a new virtual key for AI service authentication.
+// Create creates a new virtual key for authenticating requests through the AI
+// Runtime Control gateway.
 func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*VirtualKeyWithToken, error) {
 	if i.Name == nil {
 		return nil, fastly.ErrMissingName

@@ -11,11 +11,13 @@ import (
 // ListInput specifies the information needed for the List() function to
 // perform the operation.
 type ListInput struct {
-	// Sort is the sort field. Prefix with "-" for descending order (e.g. "-created_at").
+	// Sort is the sort field. Prefix with `-` for descending order (e.g.,
+	// `sort=-name`). One of `created_at`, `updated_at`, `name` (each optionally
+	// prefixed with `-`).
 	Sort *string
 }
 
-// List retrieves all configured provider connections.
+// List lists the provider connections belonging to your account.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) (*ProviderConnections, error) {
 	requestOptions := fastly.CreateRequestOptions()
 	if i.Sort != nil && *i.Sort != "" {

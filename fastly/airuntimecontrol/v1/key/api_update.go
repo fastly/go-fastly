@@ -12,19 +12,21 @@ import (
 // UpdateInput specifies the information needed for the Update() function to
 // perform the operation.
 type UpdateInput struct {
-	// KeyID is the ID identifying the virtual key (required).
+	// KeyID is the ID of the virtual key (required).
 	KeyID *string `json:"-"`
-	// Name is an updated human-readable name for the virtual key.
+	// Name is the display name of the virtual key.
 	Name *string `json:"name,omitempty"`
 	// Model is an updated AI model identifier.
 	Model *string `json:"model,omitempty"`
 	// Provider is an updated AI model provider.
 	Provider *string `json:"provider,omitempty"`
-	// ExpiresAt is an updated expiration timestamp.
+	// ExpiresAt is the date and time the key expires, in RFC 3339 format. `null`
+	// if the key doesn't expire.
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
 }
 
-// Update updates an existing virtual key.
+// Update updates the attributes of a virtual key. Only the fields you include
+// are changed.
 func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*VirtualKey, error) {
 	if i.KeyID == nil {
 		return nil, fastly.ErrMissingKeyID

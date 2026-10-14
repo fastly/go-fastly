@@ -11,11 +11,11 @@ import (
 // ListModelsInput specifies the information needed for the ListModels()
 // function to perform the operation.
 type ListModelsInput struct {
-	// ProviderID is the ID identifying the provider (required).
+	// ProviderID is the ID of the provider (required).
 	ProviderID *string
 }
 
-// ListModels returns the list of models available for a specific provider.
+// ListModels returns the models available for a specific provider.
 func ListModels(ctx context.Context, c *fastly.Client, i *ListModelsInput) (*Models, error) {
 	if i.ProviderID == nil {
 		return nil, fastly.ErrMissingProviderID
