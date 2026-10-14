@@ -8,6 +8,8 @@
 
 ### Bug fixes:
 
+- fix(airuntimecontrol): updated AI Runtime Control docs to reflect the latest references ([#885](https://github.com/fastly/go-fastly/pull/885))
+
 ### Dependencies:
 
 ## [v17.8.0](https://github.com/fastly/go-fastly/releases/tag/v17.8.0) (2026-10-07)
