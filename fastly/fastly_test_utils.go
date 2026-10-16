@@ -111,8 +111,10 @@ func RecordIgnoreBody(t *testing.T, fixture string, f func(*Client)) {
 // RedactedFixturePlaceholder matches the placeholder used in fastly/fixtures/tokens/create.yaml.
 const RedactedFixturePlaceholder = "XXXXXXXXXXXXXXXXXXXXXX"
 
-// RecordRedacted is like Record, but replaces the named response fields with
-// RedactedFixturePlaceholder before a new interaction is written to the cassette.
+// RecordRedacted is like Record, but replaces the named request and response
+// fields with RedactedFixturePlaceholder before a new interaction is written to
+// the cassette. Requests are matched on method and URL only, so redacting
+// request body fields does not affect replay.
 func RecordRedacted(t *testing.T, fixture string, redactFields []string, f func(*Client)) {
 	client := DefaultClient()
 
@@ -124,24 +126,28 @@ func RecordRedacted(t *testing.T, fixture string, redactFields []string, f func(
 	r := getRecorder(t, fixture)
 	defer stopRecorder(t, r)
 
-	r.AddFilter(redactResponseFields(redactFields))
+	r.AddFilter(redactBodyFields(redactFields))
 
 	client.HTTPClient.Transport = r
 	f(client)
 }
 
-func redactResponseFields(fields []string) cassette.Filter {
+func redactBodyFields(fields []string) cassette.Filter {
 	patterns := make([]*regexp.Regexp, len(fields))
 	for i, field := range fields {
 		patterns[i] = regexp.MustCompile(fmt.Sprintf(`"%s":"[^"]*"`, regexp.QuoteMeta(field)))
 	}
 
-	return func(i *cassette.Interaction) error {
-		body := i.Response.Body
+	redact := func(body string) string {
 		for j, re := range patterns {
 			body = re.ReplaceAllString(body, fmt.Sprintf(`"%s":"%s"`, fields[j], RedactedFixturePlaceholder))
 		}
-		i.Response.Body = body
+		return body
+	}
+
+	return func(i *cassette.Interaction) error {
+		i.Request.Body = redact(i.Request.Body)
+		i.Response.Body = redact(i.Response.Body)
 		return nil
 	}
 }

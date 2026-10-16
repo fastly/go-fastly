@@ -6,21 +6,22 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/17.3.0 (+github.com/fastly/go-fastly; go1.26.5)
-    url: https://api.fastly.com/ai-runtime-control/v1/keys?provider=Anthropic
+      - FastlyGo/17.8.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/ai-runtime-control/v1/keys?limit=1
     method: GET
   response:
-    body: |
-      {"data":[{"id":"2ce6822da510e60b037e","type":"token","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","created_at":"2026-07-29T16:35:42Z","deleted_at":null,"expires_at":"2026-07-30T16:33:11Z","name":"test","model":"claude-sonnet-4-6","provider":"anthropic","user_id":"XXXXXXXXXXXXXXXXXXXXXX","user_name":"XXXXXXXXXXXXXXXXXXXXXX","created_by":"XXXXXXXXXXXXXXXXXXXXXX","last_used_at":null,"updated_at":"2026-07-29T16:35:42Z","security_enabled":null,"security_action":null},{"id":"ea477ab192ae1f8cb713","type":"token","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","created_at":"2026-07-29T16:36:52Z","deleted_at":null,"expires_at":"2026-07-30T16:33:11Z","name":"test","model":"claude-sonnet-4-6","provider":"anthropic","user_id":"XXXXXXXXXXXXXXXXXXXXXX","user_name":"XXXXXXXXXXXXXXXXXXXXXX","created_by":"XXXXXXXXXXXXXXXXXXXXXX","last_used_at":"2026-07-29T16:59:13Z","updated_at":"2026-07-29T16:59:13Z","security_enabled":null,"security_action":null},{"id":"fbdf3c51010403a7eabd","type":"token","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","created_at":"2026-07-29T17:00:15Z","deleted_at":null,"expires_at":"2026-07-30T16:33:11Z","name":"opus-6","model":"claude-opus-4-6","provider":"anthropic","user_id":"XXXXXXXXXXXXXXXXXXXXXX","user_name":"XXXXXXXXXXXXXXXXXXXXXX","created_by":"XXXXXXXXXXXXXXXXXXXXXX","last_used_at":"2026-07-29T17:00:37Z","updated_at":"2026-07-29T17:00:37Z","security_enabled":null,"security_action":null},{"id":"426698e15c3212cac551","type":"token","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","created_at":"2026-08-03T17:42:42Z","deleted_at":null,"expires_at":"2026-08-04T17:42:41Z","name":"go-fastly-test-key-2","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"XXXXXXXXXXXXXXXXXXXXXX","user_name":"XXXXXXXXXXXXXXXXXXXXXX","created_by":"XXXXXXXXXXXXXXXXXXXXXX","last_used_at":null,"updated_at":"2026-08-03T17:42:42Z","security_enabled":null,"security_action":null},{"id":"c2bc54eef21ad50a5450","type":"token","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","created_at":"2026-08-03T17:42:42Z","deleted_at":null,"expires_at":"2026-08-04T17:42:41Z","name":"go-fastly-test-key","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"XXXXXXXXXXXXXXXXXXXXXX","user_name":"XXXXXXXXXXXXXXXXXXXXXX","created_by":"XXXXXXXXXXXXXXXXXXXXXX","last_used_at":null,"updated_at":"2026-08-03T17:42:42Z","security_enabled":null,"security_action":null},{"id":"72878269b43880bf16ed","type":"token","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","created_at":"2026-08-03T18:03:20Z","deleted_at":null,"expires_at":"2026-08-04T18:03:19Z","name":"go-fastly-test-key","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"XXXXXXXXXXXXXXXXXXXXXX","user_name":"XXXXXXXXXXXXXXXXXXXXXX","created_by":"XXXXXXXXXXXXXXXXXXXXXX","last_used_at":null,"updated_at":"2026-08-03T18:03:20Z","security_enabled":null,"security_action":null},{"id":"dd2fdadf1342ea2f6987","type":"token","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","created_at":"2026-08-03T18:03:20Z","deleted_at":null,"expires_at":"2026-08-04T18:03:19Z","name":"go-fastly-test-key-2","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"XXXXXXXXXXXXXXXXXXXXXX","user_name":"XXXXXXXXXXXXXXXXXXXXXX","created_by":"XXXXXXXXXXXXXXXXXXXXXX","last_used_at":null,"updated_at":"2026-08-03T18:03:20Z","security_enabled":null,"security_action":null},{"id":"a879bf960faf6f0d95ce","type":"token","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","created_at":"2026-08-11T15:35:18Z","deleted_at":null,"expires_at":"2026-08-12T15:35:17Z","name":"go-fastly-test-key-2","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"XXXXXXXXXXXXXXXXXXXXXX","user_name":"XXXXXXXXXXXXXXXXXXXXXX","created_by":"XXXXXXXXXXXXXXXXXXXXXX","last_used_at":null,"updated_at":"2026-08-11T15:35:18Z","security_enabled":null,"security_action":null},{"id":"efe048fec7043ed88a79","type":"token","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","created_at":"2026-08-11T15:35:18Z","deleted_at":null,"expires_at":"2026-08-12T15:35:17Z","name":"go-fastly-test-key","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"XXXXXXXXXXXXXXXXXXXXXX","user_name":"XXXXXXXXXXXXXXXXXXXXXX","created_by":"XXXXXXXXXXXXXXXXXXXXXX","last_used_at":null,"updated_at":"2026-08-11T15:35:18Z","security_enabled":null,"security_action":null},{"id":"20bfa79283b1fba6178d","type":"token","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","created_at":"2026-08-11T15:36:43Z","deleted_at":null,"expires_at":"2026-08-12T15:36:43Z","name":"go-fastly-test-key","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"XXXXXXXXXXXXXXXXXXXXXX","user_name":"XXXXXXXXXXXXXXXXXXXXXX","created_by":"XXXXXXXXXXXXXXXXXXXXXX","last_used_at":null,"updated_at":"2026-08-11T15:36:43Z","security_enabled":null,"security_action":null}],"meta":{"next_cursor":"eyJzb3J0IjoiY3JlYXRlZF9hdCIsInNvcnRfdmFsdWUiOiIyMDI2LTA4LTExIDE1OjM2OjQzIiwic29ydF9udWxsIjpmYWxzZSwiaWQiOiIyMGJmYTc5MjgzYjFmYmE2MTc4ZCIsImRpciI6Im5leHQifQ","limit":10,"sort":"created_at","total":10}}
+    body: '{"data":[{"id":"16e3933c925102d8128c","type":"token","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","created_at":"2026-10-14T19:18:41Z","deleted_at":null,"expires_at":"2026-07-30T16:33:11Z","name":"opus-6","model":"claude-opus-4-6","provider":"anthropic","user_id":"XXXXXXXXXXXXXXXXXXXXXX","user_name":"XXXXXXXXXXXXXXXXXXXXXX","created_by":"XXXXXXXXXXXXXXXXXXXXXX","last_used_at":null,"updated_at":"2026-10-14T19:18:41Z","security_enabled":false,"security_action":"log","rpm_limit":null,"tpm_limit":null,"spend_limit_enabled":false,"spend_limit_enabled_on":null}],"meta":{"next_cursor":"eyJzb3J0IjoiY3JlYXRlZF9hdCIsInNvcnRfdmFsdWUiOiIyMDI2LTEwLTE0IDE5OjE4OjQxIiwic29ydF9udWxsIjpmYWxzZSwiaWQiOiIxNmUzOTMzYzkyNTEwMmQ4MTI4YyIsImRpciI6Im5leHQifQ","limit":1,"sort":"created_at","total":1}}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
+      Content-Length:
+      - "762"
       Content-Type:
       - application/json
       Date:
-      - Mon, 31 Aug 2026 13:34:55 GMT
+      - Fri, 16 Oct 2026 14:53:06 GMT
       Pragma:
       - no-cache
       Server:
@@ -34,11 +35,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "17"
+      - "19"
       X-Served-By:
-      - cache-chi-klot8100128-CHI, cache-ewr-kewr1740081-EWR
+      - cache-chi-kigq8000092-CHI, cache-ewr-kewr1740085-EWR
       X-Timer:
-      - S1788183295.135474,VS0,VE47
+      - S1792162387.678583,VS0,VE51
     status: 200 OK
     code: 200
     duration: ""
@@ -47,23 +48,22 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/17.3.0 (+github.com/fastly/go-fastly; go1.26.5)
-    url: https://api.fastly.com/ai-runtime-control/v1/keys?cursor=eyJzb3J0IjoiY3JlYXRlZF9hdCIsInNvcnRfdmFsdWUiOiIyMDI2LTA4LTExIDE1OjM2OjQzIiwic29ydF9udWxsIjpmYWxzZSwiaWQiOiIyMGJmYTc5MjgzYjFmYmE2MTc4ZCIsImRpciI6Im5leHQifQ&provider=Anthropic
+      - FastlyGo/17.8.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/ai-runtime-control/v1/keys?cursor=eyJzb3J0IjoiY3JlYXRlZF9hdCIsInNvcnRfdmFsdWUiOiIyMDI2LTEwLTE0IDE5OjE4OjQxIiwic29ydF9udWxsIjpmYWxzZSwiaWQiOiIxNmUzOTMzYzkyNTEwMmQ4MTI4YyIsImRpciI6Im5leHQifQ&limit=1
     method: GET
   response:
-    body: |
-      {"data":[{"id":"ec5c01f186d816bf8e5c","type":"token","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","created_at":"2026-08-11T15:36:44Z","deleted_at":null,"expires_at":"2026-08-12T15:36:43Z","name":"go-fastly-test-key-2","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"XXXXXXXXXXXXXXXXXXXXXX","user_name":"XXXXXXXXXXXXXXXXXXXXXX","created_by":"XXXXXXXXXXXXXXXXXXXXXX","last_used_at":null,"updated_at":"2026-08-11T15:36:44Z","security_enabled":null,"security_action":null},{"id":"78ff28125b9d78b0289d","type":"token","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","created_at":"2026-08-31T13:34:55Z","deleted_at":null,"expires_at":"2026-09-01T13:34:54Z","name":"go-fastly-test-key","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"XXXXXXXXXXXXXXXXXXXXXX","user_name":"XXXXXXXXXXXXXXXXXXXXXX","created_by":"XXXXXXXXXXXXXXXXXXXXXX","last_used_at":null,"updated_at":"2026-08-31T13:34:55Z","security_enabled":false,"security_action":"log"}],"meta":{"prev_cursor":"eyJzb3J0IjoiY3JlYXRlZF9hdCIsInNvcnRfdmFsdWUiOiIyMDI2LTA4LTExIDE1OjM2OjQ0Iiwic29ydF9udWxsIjpmYWxzZSwiaWQiOiJlYzVjMDFmMTg2ZDgxNmJmOGU1YyIsImRpciI6InByZXYifQ","limit":10,"sort":"created_at","total":2}}
+    body: '{"data":[{"id":"4da18c028b82280a9ec4","type":"token","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","created_at":"2026-10-16T14:53:06Z","deleted_at":null,"expires_at":"2026-10-17T14:53:03Z","name":"go-fastly-test-key","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"XXXXXXXXXXXXXXXXXXXXXX","user_name":"XXXXXXXXXXXXXXXXXXXXXX","created_by":"XXXXXXXXXXXXXXXXXXXXXX","last_used_at":null,"updated_at":"2026-10-16T14:53:06Z","security_enabled":true,"security_action":"log","rpm_limit":60,"tpm_limit":10000,"spend_limit_enabled":false,"spend_limit_enabled_on":null}],"meta":{"prev_cursor":"eyJzb3J0IjoiY3JlYXRlZF9hdCIsInNvcnRfdmFsdWUiOiIyMDI2LTEwLTE2IDE0OjUzOjA2Iiwic29ydF9udWxsIjpmYWxzZSwiaWQiOiI0ZGExOGMwMjhiODIyODBhOWVjNCIsImRpciI6InByZXYifQ","limit":1,"sort":"created_at","total":1}}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "1154"
+      - "781"
       Content-Type:
       - application/json
       Date:
-      - Mon, 31 Aug 2026 13:34:55 GMT
+      - Fri, 16 Oct 2026 14:53:06 GMT
       Pragma:
       - no-cache
       Server:
@@ -77,11 +77,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "38"
+      - "13"
       X-Served-By:
-      - cache-chi-kigq8000051-CHI, cache-ewr-kewr1740081-EWR
+      - cache-chi-klot8100135-CHI, cache-ewr-kewr1740085-EWR
       X-Timer:
-      - S1788183295.220706,VS0,VE68
+      - S1792162387.777360,VS0,VE47
     status: 200 OK
     code: 200
     duration: ""

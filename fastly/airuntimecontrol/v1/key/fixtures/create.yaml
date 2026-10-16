@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"name":"go-fastly-test-key","model":"claude-sonnet-4-20250514","provider":"Anthropic","user_id":"go-fastly-test-user","expires_at":"2026-09-01T13:34:54Z"}'
+    body: '{"name":"go-fastly-test-key","model":"claude-sonnet-4-20250514","provider":"Anthropic","expires_at":"2026-10-17T14:53:03Z","security_enabled":true,"security_action":"log","rpm_limit":60,"tpm_limit":10000}'
     form: {}
     headers:
       Accept:
@@ -10,23 +10,22 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/17.3.0 (+github.com/fastly/go-fastly; go1.26.5)
+      - FastlyGo/17.8.0 (+github.com/fastly/go-fastly; go1.27.1)
     url: https://api.fastly.com/ai-runtime-control/v1/keys
     method: POST
   response:
-    body: |
-      {"id":"78ff28125b9d78b0289d","name":"go-fastly-test-key","user_id":"XXXXXXXXXXXXXXXXXXXXXX","user_name":"XXXXXXXXXXXXXXXXXXXXXX","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","model":"claude-sonnet-4-20250514","provider":"Anthropic","expires_at":"2026-09-01T13:34:54Z","created_at":"2026-08-31T13:34:54.963892069Z","updated_at":"2026-08-31T13:34:54.963892069Z","access_token":"XXXXXXXXXXXXXXXXXXXXXX"}
+    body: '{"id":"4da18c028b82280a9ec4","name":"go-fastly-test-key","user_id":"XXXXXXXXXXXXXXXXXXXXXX","user_name":"XXXXXXXXXXXXXXXXXXXXXX","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","model":"claude-sonnet-4-20250514","provider":"Anthropic","expires_at":"2026-10-17T14:53:03Z","created_at":"2026-10-16T14:53:06.484423604Z","updated_at":"2026-10-16T14:53:06.484423604Z","access_token":"XXXXXXXXXXXXXXXXXXXXXX","rpm_limit":60,"tpm_limit":10000}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "412"
+      - "444"
       Content-Type:
       - application/json
       Date:
-      - Mon, 31 Aug 2026 13:34:54 GMT
+      - Fri, 16 Oct 2026 14:53:06 GMT
       Pragma:
       - no-cache
       Server:
@@ -40,11 +39,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "142"
+      - "2593"
       X-Served-By:
-      - cache-chi-kigq8000073-CHI, cache-ewr-kewr1740081-EWR
+      - cache-chi-kigq8000163-CHI, cache-ewr-kewr1740085-EWR
       X-Timer:
-      - S1788183295.829562,VS0,VE170
+      - S1792162384.894763,VS0,VE2625
     status: 201 Created
     code: 201
     duration: ""

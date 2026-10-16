@@ -20,9 +20,11 @@ type Session struct {
 	VirtualKeyName string `json:"virtual_key_name"`
 	// Model is the AI model identifier used.
 	Model string `json:"model"`
-	// Provider is the name of the provider connection that ultimately served the
-	// session.
+	// Provider is the ID of the provider connection that served the session.
 	Provider string `json:"provider"`
+	// PrimaryProvider is the ID of the provider connection that was originally
+	// requested. Differs from Provider when the request failed over.
+	PrimaryProvider string `json:"primary_provider"`
 	// Requests is the number of requests made in this session.
 	Requests int `json:"requests"`
 	// InputTokens is the total input tokens consumed in this session.

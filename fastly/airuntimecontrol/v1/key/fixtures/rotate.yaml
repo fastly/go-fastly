@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"expires_at":"2026-09-02T13:34:55Z"}'
+    body: '{"expires_at":"2026-10-18T14:53:07Z"}'
     form: {}
     headers:
       Accept:
@@ -10,23 +10,22 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/17.3.0 (+github.com/fastly/go-fastly; go1.26.5)
-    url: https://api.fastly.com/ai-runtime-control/v1/keys/78ff28125b9d78b0289d/rotate
+      - FastlyGo/17.8.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/ai-runtime-control/v1/keys/4da18c028b82280a9ec4/rotate
     method: POST
   response:
-    body: |
-      {"id":"78ff28125b9d78b0289d","name":"go-fastly-test-key-updated","user_id":"XXXXXXXXXXXXXXXXXXXXXX","user_name":"XXXXXXXXXXXXXXXXXXXXXX","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","model":"claude-sonnet-4-20250514","provider":"Anthropic","expires_at":"2026-09-02T13:34:55Z","created_at":"2026-08-31T13:34:55Z","updated_at":"2026-08-31T13:34:55Z","access_token":"XXXXXXXXXXXXXXXXXXXXXX"}
+    body: '{"id":"4da18c028b82280a9ec4","name":"go-fastly-test-key-updated","user_id":"XXXXXXXXXXXXXXXXXXXXXX","user_name":"XXXXXXXXXXXXXXXXXXXXXX","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","model":"claude-sonnet-4-20250514","provider":"Anthropic","expires_at":"2026-10-18T14:53:07Z","created_at":"2026-10-16T14:53:06Z","updated_at":"2026-10-16T14:53:09Z","access_token":"XXXXXXXXXXXXXXXXXXXXXX"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "400"
+      - "399"
       Content-Type:
       - application/json
       Date:
-      - Mon, 31 Aug 2026 13:34:55 GMT
+      - Fri, 16 Oct 2026 14:53:09 GMT
       Pragma:
       - no-cache
       Server:
@@ -40,11 +39,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "36"
+      - "1412"
       X-Served-By:
-      - cache-chi-klot8100093-CHI, cache-ewr-kewr1740081-EWR
+      - cache-chi-klot8100179-CHI, cache-ewr-kewr1740085-EWR
       X-Timer:
-      - S1788183295.454972,VS0,VE67
+      - S1792162388.842331,VS0,VE1443
     status: 201 Created
     code: 201
     duration: ""

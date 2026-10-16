@@ -10,23 +10,22 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/17.3.1 (+github.com/fastly/go-fastly; go1.27.0)
-    url: https://api.fastly.com/ai-runtime-control/v1/provider-connections/4a6dd12b063c9ec58703
+      - FastlyGo/17.8.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/ai-runtime-control/v1/provider-connections/225cd8808e8e08b497a4
     method: PATCH
   response:
-    body: |
-      {"id":"4a6dd12b063c9ec58703","secret_id":"GE00EiUnBsklofWUCpXLIa","name":"go-fastly-test-connection","models":["claude-opus-4-6","claude-sonnet-4-6"],"base_url":"https://api.anthropic.com","auth_type":"api-key","created_at":"2026-09-16T13:47:48Z","updated_at":"2026-09-16T13:47:49Z"}
+    body: '{"id":"225cd8808e8e08b497a4","secret_id":"80rNG09StlXQFF8Ux7XrFD","name":"go-fastly-test-connection","models":["claude-opus-4-6","claude-sonnet-4-6"],"base_url":"https://api.anthropic.com","auth_type":"api-key","created_at":"2026-10-16T14:53:06Z","updated_at":"2026-10-16T14:53:07Z"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "284"
+      - "283"
       Content-Type:
       - application/json
       Date:
-      - Wed, 16 Sep 2026 13:47:49 GMT
+      - Fri, 16 Oct 2026 14:53:07 GMT
       Pragma:
       - no-cache
       Server:
@@ -40,11 +39,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "312"
+      - "353"
       X-Served-By:
-      - cache-chi-kigq8000112-CHI, cache-ewr-kewr1740078-EWR
+      - cache-chi-kmdw8640058-CHI, cache-ewr-kewr1740097-EWR
       X-Timer:
-      - S1789566469.010297,VS0,VE344
+      - S1792162387.870202,VS0,VE383
     status: 200 OK
     code: 200
     duration: ""

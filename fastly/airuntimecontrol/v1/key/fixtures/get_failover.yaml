@@ -1,0 +1,45 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/17.8.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/ai-runtime-control/v1/keys/4da18c028b82280a9ec4/failover
+    method: GET
+  response:
+    body: '{"targets":[],"timeout_enabled":true,"rate_limit_429_enabled":true,"server_error_5xx_enabled":true}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "99"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 16 Oct 2026 14:53:07 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "21"
+      X-Served-By:
+      - cache-chi-kmdw8640070-CHI, cache-ewr-kewr1740085-EWR
+      X-Timer:
+      - S1792162387.321055,VS0,VE56
+    status: 200 OK
+    code: 200
+    duration: ""
