@@ -126,9 +126,6 @@ type Meta struct {
 	// NextCursor is the cursor to use to request the next page of results. `null`
 	// when there are no more results.
 	NextCursor string `json:"next_cursor"`
-	// PrevCursor is the cursor to use to request the previous page of results.
-	// `null` when there is no previous page.
-	PrevCursor string `json:"prev_cursor"`
 	// Limit is the `limit` value used when making the request.
 	Limit int `json:"limit"`
 	// Sort is the `sort` value used when making the request.
