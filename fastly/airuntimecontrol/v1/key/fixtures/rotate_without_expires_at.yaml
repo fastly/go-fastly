@@ -1,0 +1,49 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/17.8.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/ai-runtime-control/v1/keys/4da18c028b82280a9ec4/rotate
+    method: POST
+  response:
+    body: '{"id":"4da18c028b82280a9ec4","name":"go-fastly-test-key-updated","user_id":"XXXXXXXXXXXXXXXXXXXXXX","user_name":"XXXXXXXXXXXXXXXXXXXXXX","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","model":"claude-sonnet-4-20250514","provider":"Anthropic","expires_at":null,"created_at":"2026-10-16T14:53:06Z","updated_at":"2026-10-16T14:53:10Z","access_token":"XXXXXXXXXXXXXXXXXXXXXX"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "381"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 16 Oct 2026 14:53:09 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "267"
+      X-Served-By:
+      - cache-chi-klot8100179-CHI, cache-ewr-kewr1740085-EWR
+      X-Timer:
+      - S1792162389.318114,VS0,VE301
+    status: 201 Created
+    code: 201
+    duration: ""

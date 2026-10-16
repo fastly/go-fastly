@@ -17,6 +17,20 @@ type VirtualKey struct {
 	// ExpiresAt is the date and time the key expires, in RFC 3339 format. `null`
 	// if the key doesn't expire.
 	ExpiresAt *string `json:"expires_at"`
+	// RPMLimit is the requests-per-minute limit for this key. `null` if there is
+	// no limit.
+	RPMLimit *int `json:"rpm_limit"`
+	// TPMLimit is the tokens-per-minute limit for this key. `null` if there is
+	// no limit.
+	TPMLimit *int `json:"tpm_limit"`
+	// SpendLimitEnabled is whether a spend limit is enabled for this key.
+	SpendLimitEnabled bool `json:"spend_limit_enabled"`
+	// SpendLimitEnabledOn is the date and time `spend_limit_enabled` was last
+	// set to `true`, in RFC 3339 format. `null` if the spend limit has never been
+	// enabled. This timestamp is not cleared when `spend_limit_enabled` is later
+	// set back to `false`, so it can be non-null even when the spend limit is
+	// currently disabled. (Read-only)
+	SpendLimitEnabledOn *string `json:"spend_limit_enabled_on"`
 	// CreatedAt is the date and time the key was created, in RFC 3339 format.
 	// (Read-only)
 	CreatedAt string `json:"created_at,omitempty"`
@@ -67,6 +81,27 @@ type VirtualKeyListItem struct {
 	// ExpiresAt is the date and time the key expires, in RFC 3339 format. `null`
 	// if the key doesn't expire.
 	ExpiresAt *string `json:"expires_at"`
+	// SecurityEnabled is whether AI Firewall security is enabled for requests made
+	// with this key. `null` if it has not been set.
+	SecurityEnabled *bool `json:"security_enabled"`
+	// SecurityAction is the action AI Firewall takes when it detects a violation
+	// on a request made with this key. One of `log`, `block`, `replace`. `null`
+	// if it has not been set.
+	SecurityAction *string `json:"security_action"`
+	// RPMLimit is the requests-per-minute limit for this key. `null` if there is
+	// no limit.
+	RPMLimit *int `json:"rpm_limit"`
+	// TPMLimit is the tokens-per-minute limit for this key. `null` if there is
+	// no limit.
+	TPMLimit *int `json:"tpm_limit"`
+	// SpendLimitEnabled is whether a spend limit is enabled for this key.
+	SpendLimitEnabled bool `json:"spend_limit_enabled"`
+	// SpendLimitEnabledOn is the date and time `spend_limit_enabled` was last
+	// set to `true`, in RFC 3339 format. `null` if the spend limit has never been
+	// enabled. This timestamp is not cleared when `spend_limit_enabled` is later
+	// set back to `false`, so it can be non-null even when the spend limit is
+	// currently disabled. (Read-only)
+	SpendLimitEnabledOn *string `json:"spend_limit_enabled_on"`
 	// DeletedAt is the date and time the key was deleted, in RFC 3339 format.
 	// `null` unless the key was deleted and `include_deleted` was used to retrieve
 	// it. (Read-only)
@@ -91,10 +126,34 @@ type Meta struct {
 	// NextCursor is the cursor to use to request the next page of results. `null`
 	// when there are no more results.
 	NextCursor string `json:"next_cursor"`
+	// PrevCursor is the cursor to use to request the previous page of results.
+	// `null` when there is no previous page.
+	PrevCursor string `json:"prev_cursor"`
 	// Limit is the `limit` value used when making the request.
 	Limit int `json:"limit"`
 	// Sort is the `sort` value used when making the request.
 	Sort string `json:"sort"`
 	// Total is the count of results matching the request.
 	Total int `json:"total"`
+}
+
+// FailoverTarget is a provider connection in a virtual key's failover policy.
+type FailoverTarget struct {
+	// ProviderConnectionID is the ID of the provider connection. The first entry
+	// in a policy's targets is the primary connection; subsequent entries are
+	// fallbacks, tried in order.
+	ProviderConnectionID string `json:"provider_connection_id"`
+}
+
+// Failover is the API response structure for the get failover and update
+// failover operations.
+type Failover struct {
+	// Targets is the ordered list of provider connections requests are sent to.
+	Targets []FailoverTarget `json:"targets"`
+	// TimeoutEnabled is whether timeouts trigger failover.
+	TimeoutEnabled bool `json:"timeout_enabled"`
+	// RateLimit429Enabled is whether 429 rate-limit responses trigger failover.
+	RateLimit429Enabled bool `json:"rate_limit_429_enabled"`
+	// ServerError5xxEnabled is whether 5xx server errors trigger failover.
+	ServerError5xxEnabled bool `json:"server_error_5xx_enabled"`
 }

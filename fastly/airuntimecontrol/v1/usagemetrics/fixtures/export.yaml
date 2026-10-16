@@ -8,24 +8,24 @@ interactions:
       Accept:
       - text/csv
       User-Agent:
-      - FastlyGo/17.3.0 (+github.com/fastly/go-fastly; go1.26.5)
-    url: https://api.fastly.com/ai-runtime-control/v1/usage-metrics/export
+      - FastlyGo/17.8.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/ai-runtime-control/v1/usage-metrics/export?sort=-date
     method: GET
   response:
     body: |
-      date,usage_type,quantity,virtual_key_id,virtual_key_name,provider,model
-      2026-07-29T00:00:00Z,requests,1,ea477ab192ae1f8cb713,test,anthropic,claude-opus-4-6
-      2026-07-29T00:00:00Z,input_tokens,0,ea477ab192ae1f8cb713,test,anthropic,claude-opus-4-6
-      2026-07-29T00:00:00Z,output_tokens,0,ea477ab192ae1f8cb713,test,anthropic,claude-opus-4-6
-      2026-07-29T00:00:00Z,violations,0,ea477ab192ae1f8cb713,test,anthropic,claude-opus-4-6
-      2026-07-29T00:00:00Z,requests,1,ea477ab192ae1f8cb713,test,anthropic,claude-opus-4-7
-      2026-07-29T00:00:00Z,input_tokens,0,ea477ab192ae1f8cb713,test,anthropic,claude-opus-4-7
-      2026-07-29T00:00:00Z,output_tokens,0,ea477ab192ae1f8cb713,test,anthropic,claude-opus-4-7
-      2026-07-29T00:00:00Z,violations,0,ea477ab192ae1f8cb713,test,anthropic,claude-opus-4-7
-      2026-07-29T00:00:00Z,requests,1,fbdf3c51010403a7eabd,opus-6,anthropic,claude-opus-4-6
-      2026-07-29T00:00:00Z,input_tokens,0,fbdf3c51010403a7eabd,opus-6,anthropic,claude-opus-4-6
-      2026-07-29T00:00:00Z,output_tokens,0,fbdf3c51010403a7eabd,opus-6,anthropic,claude-opus-4-6
-      2026-07-29T00:00:00Z,violations,0,fbdf3c51010403a7eabd,opus-6,anthropic,claude-opus-4-6
+      time,usage_type,quantity,virtual_key_id,virtual_key_name,primary_provider,provider,model
+      2026-07-29T00:00:00Z,requests,1,ea477ab192ae1f8cb713,test,07f0d366fb9e0d18303e,sample99,claude-opus-4-6
+      2026-07-29T00:00:00Z,input_tokens,0,ea477ab192ae1f8cb713,test,07f0d366fb9e0d18303e,sample99,claude-opus-4-6
+      2026-07-29T00:00:00Z,output_tokens,0,ea477ab192ae1f8cb713,test,07f0d366fb9e0d18303e,sample99,claude-opus-4-6
+      2026-07-29T00:00:00Z,violations,0,ea477ab192ae1f8cb713,test,07f0d366fb9e0d18303e,sample99,claude-opus-4-6
+      2026-07-29T00:00:00Z,requests,1,ea477ab192ae1f8cb713,test,07f0d366fb9e0d18303e,sample99,claude-opus-4-7
+      2026-07-29T00:00:00Z,input_tokens,0,ea477ab192ae1f8cb713,test,07f0d366fb9e0d18303e,sample99,claude-opus-4-7
+      2026-07-29T00:00:00Z,output_tokens,0,ea477ab192ae1f8cb713,test,07f0d366fb9e0d18303e,sample99,claude-opus-4-7
+      2026-07-29T00:00:00Z,violations,0,ea477ab192ae1f8cb713,test,07f0d366fb9e0d18303e,sample99,claude-opus-4-7
+      2026-07-29T00:00:00Z,requests,1,fbdf3c51010403a7eabd,opus-6,07f0d366fb9e0d18303e,sample99,claude-opus-4-6
+      2026-07-29T00:00:00Z,input_tokens,0,fbdf3c51010403a7eabd,opus-6,07f0d366fb9e0d18303e,sample99,claude-opus-4-6
+      2026-07-29T00:00:00Z,output_tokens,0,fbdf3c51010403a7eabd,opus-6,07f0d366fb9e0d18303e,sample99,claude-opus-4-6
+      2026-07-29T00:00:00Z,violations,0,fbdf3c51010403a7eabd,opus-6,07f0d366fb9e0d18303e,sample99,claude-opus-4-6
     headers:
       Accept-Ranges:
       - bytes
@@ -34,11 +34,11 @@ interactions:
       Content-Disposition:
       - attachment; filename=usage_metrics.csv
       Content-Length:
-      - "1121"
+      - "1378"
       Content-Type:
       - text/csv
       Date:
-      - Mon, 31 Aug 2026 13:34:54 GMT
+      - Fri, 16 Oct 2026 14:53:04 GMT
       Pragma:
       - no-cache
       Server:
@@ -52,11 +52,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "13"
+      - "60"
       X-Served-By:
-      - cache-chi-kigq8000127-CHI, cache-ewr-kewr1740025-EWR
+      - cache-chi-klot8100083-CHI, cache-ewr-kewr1740038-EWR
       X-Timer:
-      - S1788183295.928258,VS0,VE43
+      - S1792162384.135212,VS0,VE105
     status: 200 OK
     code: 200
     duration: ""

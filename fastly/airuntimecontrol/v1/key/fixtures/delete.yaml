@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/17.3.0 (+github.com/fastly/go-fastly; go1.26.5)
-    url: https://api.fastly.com/ai-runtime-control/v1/keys/78ff28125b9d78b0289d
+      - FastlyGo/17.8.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/ai-runtime-control/v1/keys/4da18c028b82280a9ec4
     method: DELETE
   response:
     body: ""
@@ -17,7 +17,7 @@ interactions:
       Cache-Control:
       - no-store
       Date:
-      - Mon, 31 Aug 2026 13:34:55 GMT
+      - Fri, 16 Oct 2026 14:53:09 GMT
       Pragma:
       - no-cache
       Server:
@@ -31,11 +31,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "50"
+      - "260"
       X-Served-By:
-      - cache-chi-klot8100095-CHI, cache-ewr-kewr1740081-EWR
+      - cache-chi-kigq8000091-CHI, cache-ewr-kewr1740085-EWR
       X-Timer:
-      - S1788183296.567258,VS0,VE79
+      - S1792162390.658636,VS0,VE296
     status: 204 No Content
     code: 204
     duration: ""

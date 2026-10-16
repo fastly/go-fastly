@@ -546,6 +546,30 @@ var ErrMissingBaseURL = NewFieldError("BaseURL")
 // requires an "APIKey" key, but one was not set.
 var ErrMissingAPIKey = NewFieldError("APIKey")
 
+// ErrMissingCustomerRoleARN is an error that is returned when an input struct
+// requires a "CustomerRoleARN" key, but one was not set.
+var ErrMissingCustomerRoleARN = NewFieldError("CustomerRoleARN")
+
+// ErrMissingRegion is an error that is returned when an input struct
+// requires a "Region" key, but one was not set.
+var ErrMissingRegion = NewFieldError("Region")
+
+// ErrMissingWorkloadProviderID is an error that is returned when an input
+// struct requires a "WorkloadProviderID" key, but one was not set.
+var ErrMissingWorkloadProviderID = NewFieldError("WorkloadProviderID")
+
+// ErrMissingServiceAccountEmail is an error that is returned when an input
+// struct requires a "ServiceAccountEmail" key, but one was not set.
+var ErrMissingServiceAccountEmail = NewFieldError("ServiceAccountEmail")
+
+// ErrMissingProjectID is an error that is returned when an input struct
+// requires a "ProjectID" key, but one was not set.
+var ErrMissingProjectID = NewFieldError("ProjectID")
+
+// ErrMissingProjectNumber is an error that is returned when an input struct
+// requires a "ProjectNumber" key, but one was not set.
+var ErrMissingProjectNumber = NewFieldError("ProjectNumber")
+
 // ErrMissingExpiresAt is an error that is returned when an input struct
 // requires an "ExpiresAt" key, but one was not set.
 var ErrMissingExpiresAt = NewFieldError("ExpiresAt")
