@@ -8,6 +8,7 @@
 
 ### Bug fixes:
 
+- Preserve rate-limit response headers on failed write requests ([#877](https://github.com/fastly/go-fastly/pull/877)).
 - fix(airuntimecontrol): updated AI Runtime Control docs to reflect the latest references ([#885](https://github.com/fastly/go-fastly/pull/885))
 
 ### Dependencies:
