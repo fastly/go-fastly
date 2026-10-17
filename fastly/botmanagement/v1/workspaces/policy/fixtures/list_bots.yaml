@@ -1,0 +1,196 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/17.4.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/bot-management/v1/workspaces/XXXXXXXXXXXXXXXXXXXXXX/policy/bots?limit=1000
+    method: GET
+  response:
+    body: '{"meta":{"limit":1000,"total":250,"next_cursor":null},"data":[{"bot_id":"bot_addsearchbot","name":"AddSearchBot","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_adidxbot","name":"AdIdxBot","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_adyen_webhook","name":"Adyen
+      Webhook","action":{"type":"inherit"},"category_id":"cat_platform_integrations"},{"bot_id":"bot_ahrefsbot","name":"AhrefsBot","action":{"type":"inherit"},"category_id":"cat_search_engine_optimization"},{"bot_id":"bot_ahrefssiteaudit","name":"AhrefsSiteAudit","action":{"type":"inherit"},"category_id":"cat_search_engine_optimization"},{"bot_id":"bot_ai2bot","name":"AI2Bot","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_algolia_crawler","name":"Algolia
+      Crawler","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_amazon_adbot","name":"Amazon
+      AdBot","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_amazon_quick_kb_crawler","name":"Amazon
+      Quick KB Crawler","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_amazon_route_53_health_check_service","name":"Amazon
+      Route 53 Health Check Service","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_amazon_searchbot","name":"Amazon
+      Searchbot","action":{"type":"inherit"},"category_id":"cat_ai_fetcher"},{"bot_id":"bot_amazon_user","name":"Amazon
+      User","action":{"type":"inherit"},"category_id":"cat_ai_fetcher"},{"bot_id":"bot_amazonbot","name":"Amazonbot","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_apple_podcasts","name":"Apple
+      Podcasts","action":{"type":"inherit"},"category_id":"cat_content_fetcher"},{"bot_id":"bot_applebot","name":"AppleBot","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_assaybot","name":"Assaybot","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_atlassian_jira_webhooks","name":"Atlassian
+      Jira Webhooks","action":{"type":"inherit"},"category_id":"cat_platform_integrations"},{"bot_id":"bot_atlassian_rovo","name":"Atlassian
+      Rovo","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_audisto","name":"Audisto","action":{"type":"inherit"},"category_id":"cat_search_engine_optimization"},{"bot_id":"bot_awario","name":"Awario","action":{"type":"inherit"},"category_id":"cat_search_engine_optimization"},{"bot_id":"bot_awesomium","name":"Awesomium","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_baidu_spider","name":"Baidu
+      Spider","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_barkrowler","name":"Barkrowler","action":{"type":"inherit"},"category_id":"cat_search_engine_optimization"},{"bot_id":"bot_better_uptime","name":"Better
+      Uptime","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_bing_video_preview","name":"Bing
+      Video Preview","action":{"type":"inherit"},"category_id":"cat_page_preview"},{"bot_id":"bot_bingbot","name":"BingBot","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_black_duck_software","name":"Black
+      Duck Software","action":{"type":"inherit"},"category_id":"cat_security_tools"},{"bot_id":"bot_blueno","name":"Blueno","action":{"type":"inherit"},"category_id":"cat_page_preview"},{"bot_id":"bot_botify","name":"Botify","action":{"type":"inherit"},"category_id":"cat_search_engine_optimization"},{"bot_id":"bot_brightbot","name":"Brightbot","action":{"type":"inherit"},"category_id":"cat_content_fetcher"},{"bot_id":"bot_buffer_link_preview","name":"Buffer
+      Link Preview","action":{"type":"inherit"},"category_id":"cat_page_preview"},{"bot_id":"bot_byte_spider","name":"Byte
+      Spider","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_cef","name":"Cef","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_cefsharp","name":"CefSharp","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_channel3bot","name":"Channel3Bot","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_chatgpt_user","name":"ChatGPT-User","action":{"type":"inherit"},"category_id":"cat_ai_fetcher"},{"bot_id":"bot_checkly","name":"Checkly","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_checkoutcom_webhook","name":"Checkout.com
+      Webhook","action":{"type":"inherit"},"category_id":"cat_platform_integrations"},{"bot_id":"bot_chrome","name":"Chrome","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_chrome_web_store","name":"Chrome
+      Web Store","action":{"type":"inherit"},"category_id":"cat_content_fetcher"},{"bot_id":"bot_claude_searchbot","name":"Claude
+      SearchBot","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_claude_user","name":"Claude
+      User","action":{"type":"inherit"},"category_id":"cat_ai_fetcher"},{"bot_id":"bot_claude_user_2","name":"Claude-User","action":{"type":"inherit"},"category_id":"cat_ai_fetcher"},{"bot_id":"bot_claude_web","name":"Claude-Web","action":{"type":"inherit"},"category_id":"cat_ai_fetcher"},{"bot_id":"bot_claudebot","name":"ClaudeBot","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_cludo","name":"Cludo","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_coachjs","name":"CoachJS","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_coc_coc_bot","name":"Coc
+      Coc Bot","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_common_crawl_bot","name":"Common
+      Crawl Bot","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_cookiebot","name":"Cookiebot","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_cotoyogi","name":"Cotoyogi","action":{"type":"inherit"},"category_id":"cat_research"},{"bot_id":"bot_coveo_bot","name":"Coveo
+      Bot","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_criteobot","name":"CriteoBot","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_dash0_monitoring","name":"Dash0
+      Monitoring","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_datadog_synthetic_bots","name":"Datadog
+      Synthetic Bots","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_dataforseo_bot","name":"DataForSeo
+      Bot","action":{"type":"inherit"},"category_id":"cat_search_engine_optimization"},{"bot_id":"bot_deceitful_user_agent","name":"Deceitful
+      User-Agent","action":{"type":"inherit"},"category_id":"cat_suspected"},{"bot_id":"bot_detectify","name":"Detectify","action":{"type":"inherit"},"category_id":"cat_security_tools"},{"bot_id":"bot_diffbot","name":"Diffbot","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_discord_bot","name":"Discord
+      Bot","action":{"type":"inherit"},"category_id":"cat_page_preview"},{"bot_id":"bot_duckassistbot","name":"DuckAssistBot","action":{"type":"inherit"},"category_id":"cat_ai_fetcher"},{"bot_id":"bot_duckduckbot","name":"DuckDuckBot","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_electron","name":"Electron","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_facebook_crawler","name":"Facebook
+      Crawler","action":{"type":"inherit"},"category_id":"cat_page_preview"},{"bot_id":"bot_facebook_webhooks","name":"Facebook
+      Webhooks","action":{"type":"inherit"},"category_id":"cat_platform_integrations"},{"bot_id":"bot_falbot","name":"FalBot","action":{"type":"inherit"},"category_id":"cat_platform_integrations"},{"bot_id":"bot_fastly_cache_check","name":"Fastly
+      Cache Check","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_fastly_verifier","name":"Fastly
+      Verifier","action":{"type":"inherit"},"category_id":"cat_platform_integrations"},{"bot_id":"bot_fminer","name":"FMiner","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_geb","name":"Geb","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_geedo_product_search","name":"Geedo
+      Product Search","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_gemini_deep_research","name":"Gemini-Deep-Research","action":{"type":"inherit"},"category_id":"cat_ai_fetcher"},{"bot_id":"bot_github_camo","name":"GitHub
+      Camo","action":{"type":"inherit"},"category_id":"cat_page_preview"},{"bot_id":"bot_github_hookshot","name":"GitHub
+      Hookshot","action":{"type":"inherit"},"category_id":"cat_platform_integrations"},{"bot_id":"bot_gobbler_feed_fetcher","name":"Gobbler
+      Feed Fetcher","action":{"type":"inherit"},"category_id":"cat_content_fetcher"},{"bot_id":"bot_google_admob_reward_verification","name":"Google
+      AdMob Reward Verification","action":{"type":"inherit"},"category_id":"cat_platform_integrations"},{"bot_id":"bot_google_ads_creatives_assistant","name":"Google
+      Ads Creatives Assistant","action":{"type":"inherit"},"category_id":"cat_ai_fetcher"},{"bot_id":"bot_google_adsbot","name":"Google
+      AdsBot","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_google_adsense","name":"Google
+      AdSense","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_google_adstxt","name":"Google
+      Adstxt","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_google_adswords","name":"Google
+      AdsWords","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_google_agent","name":"Google
+      Agent","action":{"type":"inherit"},"category_id":"cat_ai_fetcher"},{"bot_id":"bot_google_amp","name":"Google
+      AMP","action":{"type":"inherit"},"category_id":"cat_page_preview"},{"bot_id":"bot_google_api","name":"Google
+      API","action":{"type":"inherit"},"category_id":"cat_platform_integrations"},{"bot_id":"bot_google_association_service","name":"Google
+      Association Service","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_google_business_link_verification","name":"Google
+      Business Link Verification","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_google_display_ads_bot","name":"Google
+      Display Ads Bot","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_google_docs_sheets","name":"Google
+      Docs, Sheets","action":{"type":"inherit"},"category_id":"cat_page_preview"},{"bot_id":"bot_google_favicon","name":"Google
+      Favicon","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_google_feed_fetcher","name":"Google
+      Feed Fetcher","action":{"type":"inherit"},"category_id":"cat_content_fetcher"},{"bot_id":"bot_google_feedburner","name":"Google
+      FeedBurner","action":{"type":"inherit"},"category_id":"cat_content_fetcher"},{"bot_id":"bot_google_flights","name":"Google
+      Flights","action":{"type":"inherit"},"category_id":"cat_content_fetcher"},{"bot_id":"bot_google_flights_search","name":"Google
+      Flights Search","action":{"type":"inherit"},"category_id":"cat_content_fetcher"},{"bot_id":"bot_google_hotel_ads","name":"Google
+      Hotel Ads","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_google_image_proxy","name":"Google
+      Image Proxy","action":{"type":"inherit"},"category_id":"cat_content_fetcher"},{"bot_id":"bot_google_images","name":"Google
+      Images","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_google_inspection_tool","name":"Google
+      Inspection Tool","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_google_messages","name":"Google
+      Messages","action":{"type":"inherit"},"category_id":"cat_page_preview"},{"bot_id":"bot_google_news","name":"Google
+      News","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_google_notebooklm","name":"Google
+      NotebookLM","action":{"type":"inherit"},"category_id":"cat_ai_fetcher"},{"bot_id":"bot_google_other","name":"Google
+      Other","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_google_pagespeed_insights","name":"Google
+      PageSpeed Insights","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_google_pdf_viewer","name":"Google
+      PDF Viewer","action":{"type":"inherit"},"category_id":"cat_page_preview"},{"bot_id":"bot_google_pinpoint","name":"Google
+      Pinpoint","action":{"type":"inherit"},"category_id":"cat_research"},{"bot_id":"bot_google_private_prefetch_proxy","name":"Google
+      Private Prefetch Proxy","action":{"type":"inherit"},"category_id":"cat_content_fetcher"},{"bot_id":"bot_google_publisher_center","name":"Google
+      Publisher Center","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_google_read_aloud","name":"Google
+      Read Aloud","action":{"type":"inherit"},"category_id":"cat_accessibility"},{"bot_id":"bot_google_safety","name":"Google
+      Safety","action":{"type":"inherit"},"category_id":"cat_security_tools"},{"bot_id":"bot_google_schema_markup_validator","name":"Google
+      Schema Markup Validator","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_google_search_appliance","name":"Google
+      Search Appliance","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_google_site_verifier","name":"Google
+      Site Verifier","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_google_storebot","name":"Google
+      StoreBot","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_google_translate_frontend","name":"Google
+      Translate Frontend","action":{"type":"inherit"},"category_id":"cat_content_fetcher"},{"bot_id":"bot_google_vertex_ai_bot","name":"Google
+      Vertex AI Bot","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_google_videoads_stitching","name":"Google
+      Videoads Stitching","action":{"type":"inherit"},"category_id":"cat_content_fetcher"},{"bot_id":"bot_google_videos","name":"Google
+      Videos","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_google_web_preview","name":"Google
+      Web Preview","action":{"type":"inherit"},"category_id":"cat_page_preview"},{"bot_id":"bot_google_snippet_preview","name":"Google+
+      Snippet Preview","action":{"type":"inherit"},"category_id":"cat_page_preview"},{"bot_id":"bot_googlebot","name":"GoogleBot","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_gptbot","name":"GPTBot","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_gtmetrix","name":"GTmetrix","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_hetrixtools_uptime_monitoring_bot","name":"HetrixTools
+      Uptime Monitoring Bot","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_hydrozen","name":"Hydrozen","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_icc_crawler","name":"ICC
+      Crawler","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_iframely","name":"Iframely","action":{"type":"inherit"},"category_id":"cat_page_preview"},{"bot_id":"bot_imagesift_bot","name":"ImageSift
+      Bot","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_inngest_webhook","name":"Inngest
+      Webhook","action":{"type":"inherit"},"category_id":"cat_platform_integrations"},{"bot_id":"bot_integral_ads_crawler","name":"Integral
+      Ads Crawler","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_integral_ads_service_fetcher","name":"Integral
+      Ads Service Fetcher","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_integral_ads_wombles","name":"Integral
+      Ads Wombles","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_ioccheckbot","name":"IOCCheckBot","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_kagi","name":"Kagi","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_kangaroo_bot","name":"Kangaroo
+      Bot","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_kimi_searchbot","name":"Kimi-SearchBot","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_kimi_user","name":"Kimi-User","action":{"type":"inherit"},"category_id":"cat_ai_fetcher"},{"bot_id":"bot_kimibot","name":"KimiBot","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_line_poker","name":"Line
+      Poker","action":{"type":"inherit"},"category_id":"cat_page_preview"},{"bot_id":"bot_linerbot","name":"LinerBot","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_linespider","name":"Linespider","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_linkedinbot","name":"LinkedInBot","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_linkupbot","name":"LinkUpBot","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_logicmonitor_sitemonitor","name":"LogicMonitor
+      SiteMonitor","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_lumar","name":"Lumar","action":{"type":"inherit"},"category_id":"cat_search_engine_optimization"},{"bot_id":"bot_lumar_deepcrawl","name":"Lumar
+      Deepcrawl","action":{"type":"inherit"},"category_id":"cat_search_engine_optimization"},{"bot_id":"bot_malicious_bot_fingerprint","name":"Malicious
+      Bot Fingerprint","action":{"type":"inherit"},"category_id":"cat_suspected"},{"bot_id":"bot_marfeel_amphtml_crawler","name":"Marfeel
+      Amphtml Crawler","action":{"type":"inherit"},"category_id":"cat_search_engine_optimization"},{"bot_id":"bot_marfeel_amplify","name":"Marfeel
+      Amplify","action":{"type":"inherit"},"category_id":"cat_content_fetcher"},{"bot_id":"bot_marfeel_audit_crawler","name":"Marfeel
+      Audit Crawler","action":{"type":"inherit"},"category_id":"cat_search_engine_optimization"},{"bot_id":"bot_marfeel_flowcards","name":"Marfeel
+      Flowcards","action":{"type":"inherit"},"category_id":"cat_page_preview"},{"bot_id":"bot_marfeel_preview","name":"Marfeel
+      Preview","action":{"type":"inherit"},"category_id":"cat_page_preview"},{"bot_id":"bot_marfeel_social_crawler","name":"Marfeel
+      Social Crawler","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_meta_ai_crawler","name":"Meta
+      AI Crawler","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_meta_ai_fetcher","name":"Meta
+      AI Fetcher","action":{"type":"inherit"},"category_id":"cat_ai_fetcher"},{"bot_id":"bot_meta_externalads","name":"Meta
+      ExternalAds","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_meta_webindexer","name":"Meta-webindexer","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_microsoftpreview","name":"MicrosoftPreview","action":{"type":"inherit"},"category_id":"cat_page_preview"},{"bot_id":"bot_missing_headers","name":"Missing
+      header(s)","action":{"type":"inherit"},"category_id":"cat_suspected"},{"bot_id":"bot_missinglettr_bot","name":"Missinglettr
+      Bot","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_mistral_ai_index","name":"Mistral
+      AI Index","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_mistral_ai_user","name":"Mistral
+      AI User","action":{"type":"inherit"},"category_id":"cat_ai_fetcher"},{"bot_id":"bot_mobian_contextual_bot","name":"Mobian
+      Contextual Bot","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_mojeek","name":"Mojeek","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_momenticbot","name":"MomenticBot","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_monitage_uptime_bot","name":"Monitage
+      Uptime Bot","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_moz_dotbot","name":"Moz
+      dotbot","action":{"type":"inherit"},"category_id":"cat_search_engine_optimization"},{"bot_id":"bot_msnbot","name":"MSNBot","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_naver_ads","name":"Naver
+      Ads","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_neevabot","name":"Neevabot","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_new_relic","name":"New
+      Relic","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_new_york_times_bot","name":"New
+      York Times Bot","action":{"type":"inherit"},"category_id":"cat_content_fetcher"},{"bot_id":"bot_nightmarejs","name":"NightmareJS","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_obsrvrnet_bot","name":"Obsrvr.net
+      Bot","action":{"type":"inherit"},"category_id":"cat_search_engine_optimization"},{"bot_id":"bot_ohdearbot","name":"OhDearBot","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_openai_adsbot","name":"OpenAI
+      AdsBot","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_openai_image_downloader","name":"OpenAI
+      Image Downloader","action":{"type":"inherit"},"category_id":"cat_ai_fetcher"},{"bot_id":"bot_openai_searchbot","name":"OpenAI
+      SearchBot","action":{"type":"inherit"},"category_id":"cat_ai_fetcher"},{"bot_id":"bot_outbrain_bot","name":"Outbrain
+      Bot","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_ozone_bot","name":"Ozone
+      Bot","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_pagegym","name":"PageGym","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_parsely_crawler","name":"Parsely
+      Crawler","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_perplexity_bot","name":"Perplexity
+      Bot","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_perplexity_user_bot","name":"Perplexity
+      User Bot","action":{"type":"inherit"},"category_id":"cat_ai_fetcher"},{"bot_id":"bot_petalbot","name":"PetalBot","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_phantomas","name":"Phantomas","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_phantomjs","name":"PhantomJS","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_pingdom_bot","name":"Pingdom
+      Bot","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_pinterestbot","name":"PinterestBot","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_playwright","name":"Playwright","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_polar_webhooks","name":"Polar
+      Webhooks","action":{"type":"inherit"},"category_id":"cat_platform_integrations"},{"bot_id":"bot_prerender","name":"Prerender","action":{"type":"inherit"},"category_id":"cat_search_engine_optimization"},{"bot_id":"bot_puppeteer_stealth","name":"Puppeteer
+      Stealth","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_qatech_web_agent","name":"QA.tech
+      Web Agent","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_qualified_ai_bot","name":"Qualified
+      AI Bot","action":{"type":"inherit"},"category_id":"cat_ai_fetcher"},{"bot_id":"bot_quantcastbot","name":"Quantcastbot","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_qwant","name":"Qwant","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_razorpay_webhooks","name":"Razorpay
+      Webhooks","action":{"type":"inherit"},"category_id":"cat_platform_integrations"},{"bot_id":"bot_redirect_pizza_destination_monitor","name":"Redirect
+      Pizza Destination Monitor","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_rhino","name":"Rhino","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_salesforce_data_360","name":"Salesforce
+      Data 360","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_sanity_webhooks","name":"Sanity
+      Webhooks","action":{"type":"inherit"},"category_id":"cat_platform_integrations"},{"bot_id":"bot_sansec_security_monitor","name":"Sansec
+      Security Monitor","action":{"type":"inherit"},"category_id":"cat_security_tools"},{"bot_id":"bot_sbintuitionsbot","name":"SBIntuitionsBot","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_se_ranking_backlinks","name":"SE
+      Ranking Backlinks","action":{"type":"inherit"},"category_id":"cat_search_engine_optimization"},{"bot_id":"bot_seekport_bot","name":"Seekport
+      Bot","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_selenium","name":"Selenium","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_semrush_site_audit","name":"Semrush
+      Site Audit","action":{"type":"inherit"},"category_id":"cat_search_engine_optimization"},{"bot_id":"bot_sendgrid","name":"SendGrid","action":{"type":"inherit"},"category_id":"cat_platform_integrations"},{"bot_id":"bot_sentry_js_symbolicator","name":"Sentry
+      JS Symbolicator","action":{"type":"inherit"},"category_id":"cat_content_fetcher"},{"bot_id":"bot_sentry_uptime_monitoring_bot","name":"Sentry
+      Uptime Monitoring Bot","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_seobility","name":"Seobility","action":{"type":"inherit"},"category_id":"cat_search_engine_optimization"},{"bot_id":"bot_sequentum","name":"Sequentum","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_seznam","name":"Seznam","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_shapbot","name":"ShapBot","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_site24x7","name":"Site24x7","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_skype_preview","name":"Skype
+      Preview","action":{"type":"inherit"},"category_id":"cat_page_preview"},{"bot_id":"bot_slimerjs","name":"SlimerJS","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_sogou_web_spider","name":"Sogou
+      Web Spider","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_statuscake","name":"StatusCake","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_stripe_webhooks","name":"Stripe
+      Webhooks","action":{"type":"inherit"},"category_id":"cat_platform_integrations"},{"bot_id":"bot_stripebot","name":"Stripebot","action":{"type":"inherit"},"category_id":"cat_content_fetcher"},{"bot_id":"bot_suspicious_bot_fingerprint","name":"Suspicious
+      Bot Fingerprint","action":{"type":"inherit"},"category_id":"cat_suspected"},{"bot_id":"bot_svix","name":"svix","action":{"type":"inherit"},"category_id":"cat_platform_integrations"},{"bot_id":"bot_synopsys_whitehat_dast","name":"Synopsys
+      WhiteHat DAST","action":{"type":"inherit"},"category_id":"cat_security_tools"},{"bot_id":"bot_termlybot","name":"TermlyBot","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_thetradedesk","name":"TheTradeDesk","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_timpibot","name":"Timpibot","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_tollbit_tollbot","name":"Tollbit
+      Tollbot","action":{"type":"inherit"},"category_id":"cat_content_fetcher"},{"bot_id":"bot_trueanthem","name":"TrueAnthem","action":{"type":"inherit"},"category_id":"cat_online_marketing"},{"bot_id":"bot_tubes_crawler","name":"Tubes
+      Crawler","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_twitterbot","name":"TwitterBot","action":{"type":"inherit"},"category_id":"cat_page_preview"},{"bot_id":"bot_unknown","name":"unknown","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_updownio","name":"Updown.io","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_uptimerobot","name":"UptimeRobot","action":{"type":"inherit"},"category_id":"cat_monitoring_and_site_tools"},{"bot_id":"bot_user_agent_common_automation","name":"User-Agent:
+      Common Automation","action":{"type":"inherit"},"category_id":"cat_suspected"},{"bot_id":"bot_user_agent_common_headless_automation","name":"User-Agent:
+      Common Headless Automation","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_user_agent_crawler","name":"User-Agent:
+      Crawler","action":{"type":"inherit"},"category_id":"cat_suspected"},{"bot_id":"bot_user_agent_exploit","name":"User-Agent:
+      Exploit","action":{"type":"inherit"},"category_id":"cat_suspected"},{"bot_id":"bot_user_agent_malicious_scanner","name":"User-Agent:
+      Malicious Scanner","action":{"type":"inherit"},"category_id":"cat_suspected"},{"bot_id":"bot_user_agent_missing","name":"User-Agent:
+      Missing","action":{"type":"inherit"},"category_id":"cat_suspected"},{"bot_id":"bot_user_agent_page_preview","name":"User-Agent:
+      Page Preview","action":{"type":"inherit"},"category_id":"cat_suspected"},{"bot_id":"bot_user_agent_too_long","name":"User-Agent:
+      Too Long","action":{"type":"inherit"},"category_id":"cat_suspected"},{"bot_id":"bot_user_agent_too_short","name":"User-Agent:
+      Too Short","action":{"type":"inherit"},"category_id":"cat_suspected"},{"bot_id":"bot_velenpublicwebcrawler","name":"VelenPublicWebCrawler","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_webdriver","name":"WebDriver","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_webdriverio","name":"WebDriverIO","action":{"type":"inherit"},"category_id":"cat_headless"},{"bot_id":"bot_webzio_extended","name":"Webzio-Extended","action":{"type":"inherit"},"category_id":"cat_ai_crawler"},{"bot_id":"bot_yahoo_slurp","name":"Yahoo
+      Slurp","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_yandexbot","name":"YandexBot","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_yeti","name":"Yeti","action":{"type":"inherit"},"category_id":"cat_search_engine_crawler"},{"bot_id":"bot_youbot","name":"Youbot","action":{"type":"inherit"},"category_id":"cat_ai_crawler"}]}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 25 Sep 2026 18:25:42 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "243"
+      X-Served-By:
+      - cache-chi-kigq8000176-CHI, cache-ewr-kewr1740030-EWR
+      X-Timer:
+      - S1790360743.572894,VS0,VE287
+    status: 200 OK
+    code: 200
+    duration: ""

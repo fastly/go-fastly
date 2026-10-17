@@ -110,6 +110,43 @@ func TestToValue(t *testing.T) {
 	})
 }
 
+func TestIsNilOrEmpty(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		name  string
+		input *string
+		want  bool
+	}{
+		{
+			name:  "nil pointer",
+			input: nil,
+			want:  true,
+		},
+		{
+			name:  "empty string",
+			input: new(""),
+			want:  true,
+		},
+		{
+			name:  "non-empty string",
+			input: new("hello"),
+			want:  false,
+		},
+	}
+
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
+			if got := IsNilOrEmpty(tt.input); got != tt.want {
+				t.Errorf("expected %t, got %t", tt.want, got)
+			}
+		})
+	}
+}
+
 func TestNullString(t *testing.T) {
 	t.Parallel()
 

@@ -1,0 +1,113 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/17.4.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/bot-management/v1/workspaces/XXXXXXXXXXXXXXXXXXXXXX/policy/categories?limit=10
+    method: GET
+  response:
+    body: '{"meta":{"limit":10,"total":14,"next_cursor":"eyJ2IjoxLCJraW5kIjoiY2F0ZWdvcnkiLCJzY29wZSI6IjIwNzhkZDQzNWQyOTUyMmM4OTIwMzcyY2I2MTg1NzYwNzQ2MDg5MDViYWRmMWFhZDUwZTU3ZDEyY2YyYTg5YmQiLCJzb3J0IjoiUmVzZWFyY2giLCJwayI6Mn0"},"data":[{"category_id":"cat_accessibility","name":"Accessibility","description":"Tools
+      which make content accessible, such as screen readers, etc.","action":{"type":"allow"}},{"category_id":"cat_ai_crawler","name":"AI
+      Crawler","description":"Crawlers which extract content from websites for building
+      AI models or indexes.","action":{"type":"allow"}},{"category_id":"cat_ai_fetcher","name":"AI
+      Fetcher","description":"Bots which extract content from websites for enriching
+      AI results in response to a user query.","action":{"type":"allow"}},{"category_id":"cat_content_fetcher","name":"Content
+      Fetcher","description":"Tools which extract content from websites to be used
+      elsewhere.","action":{"type":"allow"}},{"category_id":"cat_headless","name":"Headless","description":"Bots
+      which access sites using headless browsers.","action":{"type":"challenge"}},{"category_id":"cat_monitoring_and_site_tools","name":"Monitoring
+      & Site Tools","description":"Tools which access your site to monitor performance,
+      uptime, proving domain control, etc.","action":{"type":"allow"}},{"category_id":"cat_online_marketing","name":"Online
+      Marketing","description":"Crawlers from online marketing platforms such as Facebook,
+      Pinterest, etc.","action":{"type":"allow"}},{"category_id":"cat_page_preview","name":"Page
+      Preview","description":"Tools which access your site to show a preview of the
+      page, in other online services, and social media platforms.","action":{"type":"allow"}},{"category_id":"cat_platform_integrations","name":"Platform
+      Integrations","description":"Integration with other platforms by accessing the
+      website''s API, notably WebHooks.","action":{"type":"allow"}},{"category_id":"cat_research","name":"Research","description":"Commercial
+      and academic tools which collect and analyze data for research purposes.","action":{"type":"allow"}}]}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 25 Sep 2026 18:25:41 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "258"
+      X-Served-By:
+      - cache-chi-klot8100120-CHI, cache-ewr-kewr1740030-EWR
+      X-Timer:
+      - S1790360741.326941,VS0,VE298
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/17.4.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/bot-management/v1/workspaces/XXXXXXXXXXXXXXXXXXXXXX/policy/categories?cursor=eyJ2IjoxLCJraW5kIjoiY2F0ZWdvcnkiLCJzY29wZSI6IjIwNzhkZDQzNWQyOTUyMmM4OTIwMzcyY2I2MTg1NzYwNzQ2MDg5MDViYWRmMWFhZDUwZTU3ZDEyY2YyYTg5YmQiLCJzb3J0IjoiUmVzZWFyY2giLCJwayI6Mn0&limit=10
+    method: GET
+  response:
+    body: '{"meta":{"limit":10,"total":14,"next_cursor":null},"data":[{"category_id":"cat_search_engine_crawler","name":"Search
+      Engine Crawler","description":"These are the crawlers which index your site
+      for search engines.","action":{"type":"allow"}},{"category_id":"cat_search_engine_optimization","name":"Search
+      Engine Optimization","description":"Website which analyze page content for SEO
+      purposes.","action":{"type":"allow"}},{"category_id":"cat_security_tools","name":"Security
+      Tools","description":"Security analysis tools to inspect your site for vulnerabilities,
+      misconfigurations and other security features.","action":{"type":"block"}},{"category_id":"cat_suspected","name":"Suspected","description":"Bots
+      which are suspected to be automated clients.","action":{"type":"challenge"}}]}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "785"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 25 Sep 2026 18:25:41 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "251"
+      X-Served-By:
+      - cache-chi-kigq8000107-CHI, cache-ewr-kewr1740030-EWR
+      X-Timer:
+      - S1790360742.643060,VS0,VE292
+    status: 200 OK
+    code: 200
+    duration: ""

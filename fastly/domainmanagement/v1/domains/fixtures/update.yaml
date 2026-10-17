@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"description":"updated description","service_id":"kKJb5bOFI47uHeBVluGfX1"}'
+    body: '{"description":"updated description","routing_configuration_id":"5fXNeLtY5TFDuVIet0vzMH","service_id":"kKJb5bOFI47uHeBVluGfX1"}'
     form: {}
     headers:
       Accept:
@@ -10,41 +10,43 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/11.0.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/domain-management/v1/domains/DMrAbNVlJcZgwFP2ISUNOQ
+      - FastlyGo/17.5.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/domain-management/v1/domains/pPYOMApBAcxbIJGjtyXcmg
     method: PATCH
   response:
-    body: '{"id":"DMrAbNVlJcZgwFP2ISUNOQ","created_at":"2025-08-01T18:18:48.000Z","fqdn":"1.fastly-sdk-gofastly-testing.com","updated_at":"2025-08-01T18:18:49.000Z","service_id":"kKJb5bOFI47uHeBVluGfX1","activated":false,"verified":false,"description":"updated
-      description"}'
+    body: '{"id":"pPYOMApBAcxbIJGjtyXcmg","created_at":"2026-09-25T19:16:50.000Z","fqdn":"1.fastly-sdk-gofastly-testing.com","updated_at":"2026-09-25T19:16:51.000Z","service_id":"kKJb5bOFI47uHeBVluGfX1","activated":false,"verified":false,"description":"updated
+      description","routing_configuration_id":"5fXNeLtY5TFDuVIet0vzMH"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "263"
+      - "315"
       Content-Type:
       - application/json
       Date:
-      - Fri, 01 Aug 2025 18:18:49 GMT
+      - Fri, 25 Sep 2026 19:16:52 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Strict-Transport-Security:
       - max-age=31536000
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
       X-Content-Type-Options:
       - nosniff
+      X-Envoy-Upstream-Service-Time:
+      - "171"
       X-Served-By:
-      - cache-chi-kigq8000025-CHI
+      - cache-chi-kigq8000053-CHI, cache-ewr-kewr1740063-EWR
       X-Timer:
-      - S1754072330.559256,VS0,VE226
+      - S1790363812.808208,VS0,VE201
     status: 200 OK
     code: 200
     duration: ""

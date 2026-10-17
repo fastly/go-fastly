@@ -9,8 +9,27 @@
 ### Bug fixes:
 
 - Preserve rate-limit response headers on failed write requests ([#877](https://github.com/fastly/go-fastly/pull/877)).
+- fix(airuntimecontrol): updated AI Runtime Control docs to reflect the latest references ([#885](https://github.com/fastly/go-fastly/pull/885))
 
 ### Dependencies:
+
+## [v17.8.0](https://github.com/fastly/go-fastly/releases/tag/v17.8.0) (2026-10-07)
+
+### Enhancements:
+
+- feat(logging_gcs): add support for the `public_key` attribute ([#881](https://github.com/fastly/go-fastly/pull/881))
+
+## [v17.7.0](https://github.com/fastly/go-fastly/releases/tag/v17.7.0) (2026-09-28)
+
+### Enhancements:
+
+- feat(domainmanagement): add support for routing config domain link ([#875](https://github.com/fastly/go-fastly/pull/875))
+
+## [v17.6.0](https://github.com/fastly/go-fastly/releases/tag/v17.6.0) (2026-09-28)
+
+### Enhancements:
+
+- feat(botmanagement): add support for Bot Management operations ([#876](https://github.com/fastly/go-fastly/pull/876))
 
 ## [v17.5.0](https://github.com/fastly/go-fastly/releases/tag/v17.5.0) (2026-09-24)
 

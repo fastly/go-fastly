@@ -1,0 +1,259 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/17.4.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/bot-management/v1/workspaces?limit=10
+    method: GET
+  response:
+    body: '{"meta":{"limit":10,"total":44,"next_cursor":"eyJ2IjoxLCJraW5kIjoid29ya3NwYWNlIiwic2NvcGUiOiJiZTdlMDMzN2I5YTYwMDE0MzQxZTZmNjhmMTEwMzU1ZGNlNzZhZDJkZTE4Y2M5ZDc3ZDNlMjZiNzRiOGE3YjQxIiwic29ydCI6IjIwMjYtMDktMDhUMTc6MTM6MTIuMDEyOTM3WiIsInBrIjo5NX0"},"data":[{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","description":"","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-02T21:36:53Z","updated_at":"2026-09-25T18:19:31Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-02T21:37:26Z","updated_at":"2026-09-02T21:37:26Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-08T14:24:09Z","updated_at":"2026-09-08T14:24:09Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-08T14:24:51Z","updated_at":"2026-09-08T14:24:51Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-08T14:27:46Z","updated_at":"2026-09-08T14:27:46Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-08T14:28:06Z","updated_at":"2026-09-08T14:28:06Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-08T14:37:56Z","updated_at":"2026-09-08T14:37:56Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-08T14:38:28Z","updated_at":"2026-09-08T14:38:28Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-08T17:12:27Z","updated_at":"2026-09-08T17:12:27Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-08T17:13:12Z","updated_at":"2026-09-08T17:13:12Z"}]}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 25 Sep 2026 18:25:41 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "231"
+      X-Served-By:
+      - cache-chi-kigq8000060-CHI, cache-ewr-kewr1740088-EWR
+      X-Timer:
+      - S1790360741.281746,VS0,VE268
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/17.4.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/bot-management/v1/workspaces?cursor=eyJ2IjoxLCJraW5kIjoid29ya3NwYWNlIiwic2NvcGUiOiJiZTdlMDMzN2I5YTYwMDE0MzQxZTZmNjhmMTEwMzU1ZGNlNzZhZDJkZTE4Y2M5ZDc3ZDNlMjZiNzRiOGE3YjQxIiwic29ydCI6IjIwMjYtMDktMDhUMTc6MTM6MTIuMDEyOTM3WiIsInBrIjo5NX0&limit=10
+    method: GET
+  response:
+    body: '{"meta":{"limit":10,"total":44,"next_cursor":"eyJ2IjoxLCJraW5kIjoid29ya3NwYWNlIiwic2NvcGUiOiJiZTdlMDMzN2I5YTYwMDE0MzQxZTZmNjhmMTEwMzU1ZGNlNzZhZDJkZTE4Y2M5ZDc3ZDNlMjZiNzRiOGE3YjQxIiwic29ydCI6IjIwMjYtMDktMTFUMTM6MzE6MDQuNzc2MTQ2WiIsInBrIjoxNTd9"},"data":[{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-08T19:56:58Z","updated_at":"2026-09-08T19:56:58Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-08T19:57:29Z","updated_at":"2026-09-08T19:57:29Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-08T20:47:47Z","updated_at":"2026-09-08T20:47:47Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-08T20:48:17Z","updated_at":"2026-09-08T20:48:17Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-09T20:43:13Z","updated_at":"2026-09-09T20:43:13Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-09T20:43:37Z","updated_at":"2026-09-09T20:43:37Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-09T20:47:26Z","updated_at":"2026-09-09T20:47:26Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-09T20:48:03Z","updated_at":"2026-09-09T20:48:03Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-11T13:30:45Z","updated_at":"2026-09-11T13:30:45Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-11T13:31:04Z","updated_at":"2026-09-11T13:31:04Z"}]}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 25 Sep 2026 18:25:41 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "234"
+      X-Served-By:
+      - cache-chi-kigq8000080-CHI, cache-ewr-kewr1740088-EWR
+      X-Timer:
+      - S1790360742.568941,VS0,VE265
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/17.4.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/bot-management/v1/workspaces?cursor=eyJ2IjoxLCJraW5kIjoid29ya3NwYWNlIiwic2NvcGUiOiJiZTdlMDMzN2I5YTYwMDE0MzQxZTZmNjhmMTEwMzU1ZGNlNzZhZDJkZTE4Y2M5ZDc3ZDNlMjZiNzRiOGE3YjQxIiwic29ydCI6IjIwMjYtMDktMTFUMTM6MzE6MDQuNzc2MTQ2WiIsInBrIjoxNTd9&limit=10
+    method: GET
+  response:
+    body: '{"meta":{"limit":10,"total":44,"next_cursor":"eyJ2IjoxLCJraW5kIjoid29ya3NwYWNlIiwic2NvcGUiOiJiZTdlMDMzN2I5YTYwMDE0MzQxZTZmNjhmMTEwMzU1ZGNlNzZhZDJkZTE4Y2M5ZDc3ZDNlMjZiNzRiOGE3YjQxIiwic29ydCI6IjIwMjYtMDktMTZUMjA6NTA6MjUuNzMzNDM5WiIsInBrIjoyMzh9"},"data":[{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-11T14:13:56Z","updated_at":"2026-09-11T14:13:56Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-11T14:14:34Z","updated_at":"2026-09-11T14:14:34Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-15T15:17:01Z","updated_at":"2026-09-15T15:17:01Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-15T15:25:51Z","updated_at":"2026-09-15T15:25:51Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-15T15:26:47Z","updated_at":"2026-09-15T15:26:47Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-15T15:43:14Z","updated_at":"2026-09-15T15:43:14Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-15T15:43:41Z","updated_at":"2026-09-15T15:43:41Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-16T20:47:43Z","updated_at":"2026-09-16T20:47:43Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-16T20:48:14Z","updated_at":"2026-09-16T20:48:14Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-16T20:50:25Z","updated_at":"2026-09-16T20:50:25Z"}]}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 25 Sep 2026 18:25:42 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "242"
+      X-Served-By:
+      - cache-chi-klot8100158-CHI, cache-ewr-kewr1740088-EWR
+      X-Timer:
+      - S1790360742.856613,VS0,VE278
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/17.4.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/bot-management/v1/workspaces?cursor=eyJ2IjoxLCJraW5kIjoid29ya3NwYWNlIiwic2NvcGUiOiJiZTdlMDMzN2I5YTYwMDE0MzQxZTZmNjhmMTEwMzU1ZGNlNzZhZDJkZTE4Y2M5ZDc3ZDNlMjZiNzRiOGE3YjQxIiwic29ydCI6IjIwMjYtMDktMTZUMjA6NTA6MjUuNzMzNDM5WiIsInBrIjoyMzh9&limit=10
+    method: GET
+  response:
+    body: '{"meta":{"limit":10,"total":44,"next_cursor":"eyJ2IjoxLCJraW5kIjoid29ya3NwYWNlIiwic2NvcGUiOiJiZTdlMDMzN2I5YTYwMDE0MzQxZTZmNjhmMTEwMzU1ZGNlNzZhZDJkZTE4Y2M5ZDc3ZDNlMjZiNzRiOGE3YjQxIiwic29ydCI6IjIwMjYtMDktMjNUMjA6MDc6NTMuOTYxNzM0WiIsInBrIjoyMDU2fQ"},"data":[{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-16T20:51:20Z","updated_at":"2026-09-16T20:51:20Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-16T20:51:50Z","updated_at":"2026-09-16T20:51:50Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-17T13:32:58Z","updated_at":"2026-09-17T13:32:58Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-18T14:09:51Z","updated_at":"2026-09-18T14:09:51Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-18T14:10:22Z","updated_at":"2026-09-18T14:10:22Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-18T14:36:52Z","updated_at":"2026-09-18T14:36:52Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-18T14:37:27Z","updated_at":"2026-09-18T14:37:27Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-22T01:19:40Z","updated_at":"2026-09-22T01:19:40Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-22T03:35:55Z","updated_at":"2026-09-22T03:35:55Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-23T20:07:53Z","updated_at":"2026-09-23T20:07:53Z"}]}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 25 Sep 2026 18:25:42 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "241"
+      X-Served-By:
+      - cache-chi-kmdw8640073-CHI, cache-ewr-kewr1740088-EWR
+      X-Timer:
+      - S1790360742.155449,VS0,VE291
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/17.4.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/bot-management/v1/workspaces?cursor=eyJ2IjoxLCJraW5kIjoid29ya3NwYWNlIiwic2NvcGUiOiJiZTdlMDMzN2I5YTYwMDE0MzQxZTZmNjhmMTEwMzU1ZGNlNzZhZDJkZTE4Y2M5ZDc3ZDNlMjZiNzRiOGE3YjQxIiwic29ydCI6IjIwMjYtMDktMjNUMjA6MDc6NTMuOTYxNzM0WiIsInBrIjoyMDU2fQ&limit=10
+    method: GET
+  response:
+    body: '{"meta":{"limit":10,"total":44,"next_cursor":null},"data":[{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-24T13:58:48Z","updated_at":"2026-09-24T13:58:48Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-24T13:58:51Z","updated_at":"2026-09-24T13:58:51Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-25T13:17:15Z","updated_at":"2026-09-25T13:17:15Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-25T13:48:48Z","updated_at":"2026-09-25T13:48:48Z"}]}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "832"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 25 Sep 2026 18:25:42 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "246"
+      X-Served-By:
+      - cache-chi-klot8100104-CHI, cache-ewr-kewr1740088-EWR
+      X-Timer:
+      - S1790360742.468270,VS0,VE285
+    status: 200 OK
+    code: 200
+    duration: ""

@@ -24,6 +24,9 @@ type Data struct {
 	// FQDN is the fully-qualified domain name of the domain. Read-only
 	// after creation.
 	FQDN string `json:"fqdn"`
+	// RoutingConfigurationID is the routing config identifier associated with
+	// the domain, or nil if there is no association.
+	RoutingConfigurationID *string `json:"routing_configuration_id"`
 	// ServiceID is the service_id associated with the domain or nil if there
 	// is no association.
 	ServiceID *string `json:"service_id"`

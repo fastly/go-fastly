@@ -11,17 +11,19 @@ import (
 // UpdateInput specifies the information needed for the Update() function to
 // perform the operation.
 type UpdateInput struct {
-	// ID is the ID identifying the provider connection (required).
+	// ID is the ID of the provider connection (required).
 	ID *string `json:"-"`
-	// Models is an updated list of allowed AI model identifiers.
+	// Models is the AI model identifiers this connection is allowed to use.
 	Models []string `json:"models,omitempty"`
-	// BaseURL is an updated base URL for the provider's API.
+	// BaseURL is the base URL of the provider's API. Present only for `api-key`
+	// connections.
 	BaseURL *string `json:"base_url,omitempty"`
-	// APIKey is an updated provider secret key for authentication.
+	// APIKey is the provider's secret API key.
 	APIKey *string `json:"api_key,omitempty"`
 }
 
-// Update updates an existing model provider connection.
+// Update updates the attributes of a provider connection. Only the fields you
+// include are changed.
 func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*ProviderConnection, error) {
 	if i.ID == nil {
 		return nil, fastly.ErrMissingID

@@ -6,12 +6,12 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/17.4.0 (+github.com/fastly/go-fastly; go1.27.1)
-    url: https://api.fastly.com/domain-management/v1/routing-configs/5vAluJJmMKxmAZLIVjVP6T/paths/5EEbCR1aP6Ajdck5dNazHe
+      - FastlyGo/17.8.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/domain-management/v1/routing-configs/1595JXo8VYwNTCRSaVcy4L/paths/67T2KWLiZ5fIxZqolDKzHZ
     method: GET
   response:
     body: |
-      {"created_at":"2026-09-23T16:50:04Z","id":"5EEbCR1aP6Ajdck5dNazHe","links":{"rules":"/domain-management/v1/routing-configs/5vAluJJmMKxmAZLIVjVP6T/paths/5EEbCR1aP6Ajdck5dNazHe/rules","self":"/domain-management/v1/routing-configs/5vAluJJmMKxmAZLIVjVP6T/paths/5EEbCR1aP6Ajdck5dNazHe"},"path":"/fiesta","updated_at":"2026-09-23T16:50:04Z"}
+      {"created_at":"2026-10-13T19:54:11Z","id":"67T2KWLiZ5fIxZqolDKzHZ","links":{"rules":"/domain-management/v1/routing-configs/1595JXo8VYwNTCRSaVcy4L/paths/67T2KWLiZ5fIxZqolDKzHZ/rules","self":"/domain-management/v1/routing-configs/1595JXo8VYwNTCRSaVcy4L/paths/67T2KWLiZ5fIxZqolDKzHZ"},"path":"/fiesta","updated_at":"2026-10-13T19:54:11Z"}
     headers:
       Accept-Ranges:
       - bytes
@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 23 Sep 2026 16:50:03 GMT
+      - Tue, 13 Oct 2026 19:54:11 GMT
       Pragma:
       - no-cache
       Server:
@@ -36,11 +36,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "35"
+      - "49"
       X-Served-By:
-      - cache-chi-klot8100156-CHI, cache-ewr-kewr1740056-EWR
+      - cache-chi-kigq8000116-CHI, cache-nyc-kteb1890045-NYC
       X-Timer:
-      - S1790182204.715190,VS0,VE69
+      - S1791921251.194490,VS0,VE81
     status: 200 OK
     code: 200
     duration: ""

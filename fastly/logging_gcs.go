@@ -23,6 +23,7 @@ type GCS struct {
 	Placement         *string    `mapstructure:"placement"`
 	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	ProjectID         *string    `mapstructure:"project_id"`
+	PublicKey         *string    `mapstructure:"public_key"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	SecretKey         *string    `mapstructure:"secret_key"`
 	ServiceID         *string    `mapstructure:"service_id"`
@@ -91,6 +92,8 @@ type CreateGCSInput struct {
 	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ProjectID is your Google Cloud Platform project ID. Not required if user and secret_key are present.
 	ProjectID *string `url:"project_id,omitempty"`
+	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
+	PublicKey *string `url:"public_key,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// SecretKey is your Google Cloud Platform account secret key. The private_key field in your service account authentication JSON. Not required if account_name is specified.
@@ -195,6 +198,8 @@ type UpdateGCSInput struct {
 	ProcessingRegion *string `json:"log_processing_region,omitempty"`
 	// ProjectID is your Google Cloud Platform project ID. Not required if user and secret_key are provided.
 	ProjectID *string `json:"project_id,omitempty"`
+	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
+	PublicKey *string `json:"public_key,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `json:"response_condition,omitempty"`
 	// SecretKey is your Google Cloud Platform account secret key. The private_key field in your service account authentication JSON. Not required if account_name is specified.

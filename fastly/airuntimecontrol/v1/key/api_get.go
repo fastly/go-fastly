@@ -11,11 +11,11 @@ import (
 // GetInput specifies the information needed for the Get() function to perform
 // the operation.
 type GetInput struct {
-	// KeyID is the ID identifying the virtual key (required).
+	// KeyID is the ID of the virtual key (required).
 	KeyID *string
 }
 
-// Get retrieves information on a specific virtual key.
+// Get retrieves a single virtual key.
 func Get(ctx context.Context, c *fastly.Client, i *GetInput) (*VirtualKeyListItem, error) {
 	if i.KeyID == nil {
 		return nil, fastly.ErrMissingKeyID

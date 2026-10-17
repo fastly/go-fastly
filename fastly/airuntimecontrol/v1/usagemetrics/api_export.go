@@ -8,8 +8,10 @@ import (
 	"github.com/fastly/go-fastly/v17/fastly"
 )
 
-// Export returns usage metrics as a CSV file download. It accepts the same
-// filter parameters as List and returns the raw CSV bytes.
+// Export returns usage metrics for AI Runtime Control requests as raw CSV
+// bytes. It accepts the same filter parameters as List, except Sort, which
+// isn't supported here. In the CSV output, the column named `time`
+// corresponds to the Date field returned by List.
 func Export(ctx context.Context, c *fastly.Client, i *ListInput) ([]byte, error) {
 	requestOptions := i.requestOptions()
 	requestOptions.Headers["Accept"] = "text/csv"

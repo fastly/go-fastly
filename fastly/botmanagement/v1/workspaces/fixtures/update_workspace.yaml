@@ -1,0 +1,50 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"description":"go-fastly test description"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/17.4.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/bot-management/v1/workspaces/XXXXXXXXXXXXXXXXXXXXXX
+    method: PATCH
+  response:
+    body: '{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default workspace","description":"go-fastly
+      test description","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-02T21:36:53Z","updated_at":"2026-09-25T18:25:43Z"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "235"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 25 Sep 2026 18:25:43 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "261"
+      X-Served-By:
+      - cache-chi-klot8100164-CHI, cache-ewr-kewr1740088-EWR
+      X-Timer:
+      - S1790360743.135611,VS0,VE297
+    status: 200 OK
+    code: 200
+    duration: ""

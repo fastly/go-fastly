@@ -35,6 +35,7 @@ func TestClient_GCSs(t *testing.T) {
 			MessageType:      new("blank"),
 			TimestampFormat:  new("%Y"),
 			Placement:        new("none"),
+			PublicKey:        new(pgpPublicKey()),
 		})
 	})
 	if err != nil {
@@ -187,6 +188,9 @@ func TestClient_GCSs(t *testing.T) {
 	if *gcsCreateResp1.Placement != "none" {
 		t.Errorf("bad placement: %q", *gcsCreateResp1.Placement)
 	}
+	if *gcsCreateResp1.PublicKey != pgpPublicKey() {
+		t.Errorf("bad public_key: %q", *gcsCreateResp1.PublicKey)
+	}
 	if gcsCreateResp2.CompressionCodec != nil {
 		t.Errorf("bad compression_codec: %q", *gcsCreateResp1.CompressionCodec)
 	}
@@ -269,6 +273,9 @@ func TestClient_GCSs(t *testing.T) {
 	if *gcsCreateResp1.Placement != *gcsGetResp.Placement {
 		t.Errorf("bad placement: %q", *gcsCreateResp1.Placement)
 	}
+	if *gcsCreateResp1.PublicKey != *gcsGetResp.PublicKey {
+		t.Errorf("bad public_key: %q", *gcsCreateResp1.PublicKey)
+	}
 
 	// Update
 	var gcsUpdateResp1, gcsUpdateResp2, gcsUpdateResp3 *GCS
@@ -281,6 +288,7 @@ func TestClient_GCSs(t *testing.T) {
 			MessageType:      new("classic"),
 			GzipLevel:        new(9),
 			ProcessingRegion: new("eu"),
+			PublicKey:        new(pgpPublicKeyUpdate()),
 			Placement:        NullValue[string](),
 		})
 	})
@@ -338,6 +346,9 @@ func TestClient_GCSs(t *testing.T) {
 	if *gcsUpdateResp1.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *gcsUpdateResp1.ProcessingRegion)
 	}
+	if *gcsUpdateResp1.PublicKey != pgpPublicKeyUpdate() {
+		t.Errorf("bad public_key: %q", *gcsUpdateResp1.PublicKey)
+	}
 	if *gcsUpdateResp2.CompressionCodec != "zstd" {
 		t.Errorf("bad compression_codec: %q", *gcsUpdateResp2.CompressionCodec)
 	}
@@ -393,6 +404,7 @@ func TestClient_GCSs_Compute(t *testing.T) {
 			MessageType:      new("blank"),
 			TimestampFormat:  new("%Y"),
 			Placement:        new("none"),
+			PublicKey:        new(pgpPublicKey()),
 		})
 	})
 	if err != nil {
@@ -545,6 +557,9 @@ func TestClient_GCSs_Compute(t *testing.T) {
 	if *gcsCreateResp1.Placement != "none" {
 		t.Errorf("bad placement: %q", *gcsCreateResp1.Placement)
 	}
+	if *gcsCreateResp1.PublicKey != pgpPublicKey() {
+		t.Errorf("bad public_key: %q", *gcsCreateResp1.PublicKey)
+	}
 	if gcsCreateResp2.CompressionCodec != nil {
 		t.Errorf("bad compression_codec: %q", *gcsCreateResp1.CompressionCodec)
 	}
@@ -627,6 +642,9 @@ func TestClient_GCSs_Compute(t *testing.T) {
 	if *gcsCreateResp1.Placement != *gcsGetResp.Placement {
 		t.Errorf("bad placement: %q", *gcsCreateResp1.Placement)
 	}
+	if *gcsCreateResp1.PublicKey != *gcsGetResp.PublicKey {
+		t.Errorf("bad public_key: %q", *gcsCreateResp1.PublicKey)
+	}
 
 	// Update
 	var gcsUpdateResp1, gcsUpdateResp2, gcsUpdateResp3 *GCS
@@ -639,6 +657,7 @@ func TestClient_GCSs_Compute(t *testing.T) {
 			MessageType:      new("classic"),
 			GzipLevel:        new(9),
 			ProcessingRegion: new("eu"),
+			PublicKey:        new(pgpPublicKeyUpdate()),
 			Placement:        NewNullable("none"),
 		})
 	})
@@ -695,6 +714,9 @@ func TestClient_GCSs_Compute(t *testing.T) {
 	}
 	if *gcsUpdateResp1.ProcessingRegion != "eu" {
 		t.Errorf("bad log_processing_region: %q", *gcsUpdateResp1.ProcessingRegion)
+	}
+	if *gcsUpdateResp1.PublicKey != pgpPublicKeyUpdate() {
+		t.Errorf("bad public_key: %q", *gcsUpdateResp1.PublicKey)
 	}
 	if *gcsUpdateResp2.CompressionCodec != "zstd" {
 		t.Errorf("bad compression_codec: %q", *gcsUpdateResp2.CompressionCodec)

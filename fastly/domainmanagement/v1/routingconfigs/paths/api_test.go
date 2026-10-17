@@ -7,6 +7,7 @@ import (
 
 	"github.com/fastly/go-fastly/v17/fastly"
 	"github.com/fastly/go-fastly/v17/fastly/domainmanagement/v1/routingconfigs"
+	"github.com/fastly/go-fastly/v17/fastly/domainmanagement/v1/routingconfigs/paths/rules"
 )
 
 func TestClient_Path(t *testing.T) {
@@ -195,5 +196,94 @@ func TestClient_DeletePath_validation(t *testing.T) {
 	})
 	if !errors.Is(err, fastly.ErrMissingPathID) {
 		t.Errorf("bad error: %s", err)
+	}
+}
+
+// TestClient_Path_ListReflectsActiveVersion covers the documented behavior
+// that List "returns paths from the active version if one exists, otherwise
+// from the draft": listing on a routing config with no version yet returns
+// an empty list (previously this returned a 404 that got cached and kept
+// being served even after the routing config was activated and paths
+// existed; that bug has since been fixed on the API).
+func TestClient_Path_ListReflectsActiveVersion(t *testing.T) {
+	t.Parallel()
+
+	var err error
+
+	var rc *routingconfigs.Data
+	fastly.Record(t, "active_list_bug_setup_config", func(c *fastly.Client) {
+		rc, err = routingconfigs.Create(context.TODO(), c, &routingconfigs.CreateInput{
+			Name: new("gofastly-sdk-testing-active-list-bug"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer func() {
+		fastly.Record(t, "active_list_bug_teardown_config", func(c *fastly.Client) {
+			_ = routingconfigs.Delete(context.TODO(), c, &routingconfigs.DeleteInput{
+				RoutingConfigID: &rc.RoutingConfigID,
+				Force:           new(true),
+			})
+		})
+	}()
+
+	// Trigger: list paths while the routing config still has no version yet.
+	var before []Data
+	fastly.Record(t, "active_list_bug_list_before", func(c *fastly.Client) {
+		before, err = List(context.TODO(), c, &ListInput{RoutingConfigID: &rc.RoutingConfigID})
+	})
+	if err != nil {
+		t.Fatalf("List on a routing config with no version yet should return an empty list, not an error: %v", err)
+	}
+	if len(before) != 0 {
+		t.Errorf("expected no paths before activation, got %d: %v", len(before), before)
+	}
+
+	var p *Data
+	fastly.Record(t, "active_list_bug_create_path", func(c *fastly.Client) {
+		p, err = Create(context.TODO(), c, &CreateInput{
+			RoutingConfigID: &rc.RoutingConfigID,
+			Path:            new("/"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	fastly.Record(t, "active_list_bug_create_rule", func(c *fastly.Client) {
+		_, err = rules.Create(context.TODO(), c, &rules.CreateInput{
+			RoutingConfigID: &rc.RoutingConfigID,
+			PathID:          &p.PathID,
+			Action: &rules.Action{
+				Type:  "service",
+				Value: fastly.TestDeliveryServiceID,
+			},
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	fastly.Record(t, "active_list_bug_activate", func(c *fastly.Client) {
+		_, err = routingconfigs.Activate(context.TODO(), c, &routingconfigs.ActivateInput{
+			RoutingConfigID: &rc.RoutingConfigID,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Per the documented behavior, this should now return the path we just
+	// activated.
+	var cl []Data
+	fastly.Record(t, "active_list_bug_list_after", func(c *fastly.Client) {
+		cl, err = List(context.TODO(), c, &ListInput{RoutingConfigID: &rc.RoutingConfigID})
+	})
+	if err != nil {
+		t.Fatalf("List after activation should succeed per documented behavior, got error: %v", err)
+	}
+	if len(cl) != 1 {
+		t.Errorf("expected 1 active path after activation, got %d: %v", len(cl), cl)
 	}
 }

@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/17.5.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/domain-management/v1/routing-configs/5fXNeLtY5TFDuVIet0vzMH/deactivate
+    method: POST
+  response:
+    body: |
+      {"created_at":"2026-09-25T19:16:51Z","id":"5fXNeLtY5TFDuVIet0vzMH","name":"gofastly-sdk-testing-domain-routing-config","state":"draft-only","updated_at":"2026-09-25T19:16:51Z"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "177"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 25 Sep 2026 19:16:52 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "58"
+      X-Served-By:
+      - cache-chi-klot8100133-CHI, cache-ewr-kewr1740063-EWR
+      X-Timer:
+      - S1790363812.203199,VS0,VE94
+    status: 200 OK
+    code: 200
+    duration: ""

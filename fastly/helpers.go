@@ -21,6 +21,13 @@ func ToValue[T MultiConstraint](v *T) T {
 	return zero
 }
 
+// IsNilOrEmpty reports whether v is nil or points to an empty string.
+// Use it to validate required *string input fields so that both unset and
+// empty values are rejected.
+func IsNilOrEmpty(v *string) bool {
+	return v == nil || *v == ""
+}
+
 // NullString is a helper that returns a pointer to the string value passed in
 // or nil if the string is empty.
 //
