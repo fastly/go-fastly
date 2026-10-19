@@ -1,0 +1,45 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/17.8.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/ai-runtime-control/v1/providers/bedrock/setup
+    method: GET
+  response:
+    body: '{"arc_role_arn":"XXXXXXXXXXXXXXXXXXXXXX","external_id":"XXXXXXXXXXXXXXXXXXXXXX"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "100"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 16 Oct 2026 14:53:09 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "1210"
+      X-Served-By:
+      - cache-chi-kmdw8640081-CHI, cache-ewr-kewr1740097-EWR
+      X-Timer:
+      - S1792162388.855253,VS0,VE1243
+    status: 200 OK
+    code: 200
+    duration: ""

@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"name":"go-fastly-test-connection","models":["claude-opus-4-7"],"base_url":"https://api.anthropic.com","api_key":"sk-go-fastly-test"}'
+    body: '{"name":"go-fastly-test-connection","models":["claude-opus-4-7"],"base_url":"https://api.anthropic.com","api_key":"XXXXXXXXXXXXXXXXXXXXXX"}'
     form: {}
     headers:
       Accept:
@@ -10,23 +10,22 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/17.3.1 (+github.com/fastly/go-fastly; go1.27.0)
+      - FastlyGo/17.8.0 (+github.com/fastly/go-fastly; go1.27.1)
     url: https://api.fastly.com/ai-runtime-control/v1/provider-connections
     method: POST
   response:
-    body: |
-      {"id":"4a6dd12b063c9ec58703","secret_id":"GE00EiUnBsklofWUCpXLIa","name":"go-fastly-test-connection","models":["claude-opus-4-7"],"base_url":"https://api.anthropic.com","auth_type":"api-key","created_at":"2026-09-16T13:47:48Z","updated_at":"2026-09-16T13:47:48Z"}
+    body: '{"id":"225cd8808e8e08b497a4","secret_id":"80rNG09StlXQFF8Ux7XrFD","name":"go-fastly-test-connection","models":["claude-opus-4-7"],"base_url":"https://api.anthropic.com","auth_type":"api-key","created_at":"2026-10-16T14:53:06Z","updated_at":"2026-10-16T14:53:06Z"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "264"
+      - "263"
       Content-Type:
       - application/json
       Date:
-      - Wed, 16 Sep 2026 13:47:48 GMT
+      - Fri, 16 Oct 2026 14:53:06 GMT
       Pragma:
       - no-cache
       Server:
@@ -40,11 +39,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "1992"
+      - "2648"
       X-Served-By:
-      - cache-chi-kigq8000149-CHI, cache-ewr-kewr1740078-EWR
+      - cache-chi-kigq8000177-CHI, cache-ewr-kewr1740097-EWR
       X-Timer:
-      - S1789566467.834107,VS0,VE2023
+      - S1792162384.875842,VS0,VE2678
     status: 201 Created
     code: 201
     duration: ""

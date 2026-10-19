@@ -20,6 +20,27 @@ type UpdateInput struct {
 	BaseURL *string `json:"base_url,omitempty"`
 	// APIKey is the provider's secret API key.
 	APIKey *string `json:"api_key,omitempty"`
+	// CustomerRoleARN is the ARN of the IAM role in the customer's AWS account
+	// that AI Runtime Control assumes to access Bedrock. Applies only to `aws-iam`
+	// connections.
+	CustomerRoleARN *string `json:"customer_role_arn,omitempty"`
+	// Region is the cloud region for API requests. Applies only to `aws-iam`
+	// and `gcp-iam` connections.
+	Region *string `json:"region,omitempty"`
+	// PoolID is the GCP workload identity pool ID. Applies only to `gcp-iam`
+	// connections.
+	PoolID *string `json:"pool_id,omitempty"`
+	// WorkloadProviderID is the GCP workload identity provider ID. Applies only
+	// to `gcp-iam` connections.
+	WorkloadProviderID *string `json:"workload_provider_id,omitempty"`
+	// ServiceAccountEmail is the email of the GCP service account to
+	// impersonate. Applies only to `gcp-iam` connections.
+	ServiceAccountEmail *string `json:"service_account_email,omitempty"`
+	// ProjectID is the GCP project ID. Applies only to `gcp-iam` connections.
+	ProjectID *string `json:"project_id,omitempty"`
+	// ProjectNumber is the GCP project number. Applies only to `gcp-iam`
+	// connections.
+	ProjectNumber *string `json:"project_number,omitempty"`
 }
 
 // Update updates the attributes of a provider connection. Only the fields you

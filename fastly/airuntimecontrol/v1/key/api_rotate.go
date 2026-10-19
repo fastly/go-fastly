@@ -14,8 +14,10 @@ import (
 type RotateInput struct {
 	// KeyID is the ID of the virtual key (required).
 	KeyID *string `json:"-"`
-	// ExpiresAt is the expiration timestamp for the rotated key (required).
-	ExpiresAt *time.Time `json:"expires_at"`
+	// ExpiresAt is the date and time the rotated key expires, in RFC 3339 format.
+	// If omitted, the rotated key does not expire, even if the key previously had
+	// an expiration.
+	ExpiresAt *time.Time `json:"expires_at,omitempty"`
 }
 
 // Rotate issues a new access token for a virtual key, invalidating the previous
@@ -23,9 +25,6 @@ type RotateInput struct {
 func Rotate(ctx context.Context, c *fastly.Client, i *RotateInput) (*VirtualKeyWithToken, error) {
 	if i.KeyID == nil {
 		return nil, fastly.ErrMissingKeyID
-	}
-	if i.ExpiresAt == nil {
-		return nil, fastly.ErrMissingExpiresAt
 	}
 
 	path := fastly.ToSafeURL("ai-runtime-control", "v1", "keys", *i.KeyID, "rotate")

@@ -6,23 +6,24 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/17.3.0 (+github.com/fastly/go-fastly; go1.26.5)
+      - FastlyGo/17.8.0 (+github.com/fastly/go-fastly; go1.27.1)
     url: https://api.fastly.com/ai-runtime-control/v1/sessions?limit=2
     method: GET
   response:
-    body: |
-      {"data":[{"id":"sess_544","virtual_key_id":"ea477ab192ae1f8cb713","virtual_key_name":"test","model":"claude-opus-4-7","provider":"anthropic","requests":1,"input_tokens":0,"output_tokens":0,"violations":0,"firewall_enabled":false,"created_at":"2026-07-29T16:58:01.060677Z","updated_at":"2026-07-29T16:58:01.060677Z","logs":[{"request":"Say hello in one short sentence.","response":"","attrs":{}}]},{"id":"sess_545","virtual_key_id":"ea477ab192ae1f8cb713","virtual_key_name":"test","model":"claude-opus-4-6","provider":"anthropic","requests":1,"input_tokens":0,"output_tokens":0,"violations":0,"firewall_enabled":false,"created_at":"2026-07-29T16:59:13.263874Z","updated_at":"2026-07-29T16:59:13.263874Z","logs":[{"request":"Say hello in one short sentence.","response":"","attrs":{}}]}],"meta":{"next_cursor":"eyJzb3J0IjoiY3JlYXRlZF9hdCIsInNvcnRfdmFsdWUiOiIyMDI2LTA3LTI5IDE2OjU5OjEzLjI2Mzg3NCIsInNvcnRfbnVsbCI6ZmFsc2UsImlkIjoiNTQ1IiwiZGlyIjoibmV4dCJ9","limit":2,"sort":"created_at","total":2}}
+    body: '{"data":[{"id":"sess_544","virtual_key_id":"ea477ab192ae1f8cb713","virtual_key_name":"test","model":"claude-opus-4-7","provider":"sample99","provider_connection_id":"07f0d366fb9e0d18303e","primary_provider":"07f0d366fb9e0d18303e","requests":1,"input_tokens":0,"output_tokens":0,"violations":0,"firewall_enabled":false,"created_at":"2026-07-29T16:58:01.060677Z","updated_at":"2026-07-29T16:58:01.060677Z","logs":[{"request":"Say
+      hello in one short sentence.","response":"","attrs":{}}]},{"id":"sess_545","virtual_key_id":"ea477ab192ae1f8cb713","virtual_key_name":"test","model":"claude-opus-4-6","provider":"sample99","provider_connection_id":"07f0d366fb9e0d18303e","primary_provider":"07f0d366fb9e0d18303e","requests":1,"input_tokens":0,"output_tokens":0,"violations":0,"firewall_enabled":false,"created_at":"2026-07-29T16:59:13.263874Z","updated_at":"2026-07-29T16:59:13.263874Z","logs":[{"request":"Say
+      hello in one short sentence.","response":"","attrs":{}}]}],"meta":{"next_cursor":"eyJzb3J0IjoiY3JlYXRlZF9hdCIsInNvcnRfdmFsdWUiOiIyMDI2LTA3LTI5IDE2OjU5OjEzLjI2Mzg3NCIsInNvcnRfbnVsbCI6ZmFsc2UsImlkIjoiNTQ1IiwiZGlyIjoibmV4dCJ9","limit":2,"sort":"created_at","total":2}}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "993"
+      - "1170"
       Content-Type:
       - application/json
       Date:
-      - Mon, 31 Aug 2026 15:03:14 GMT
+      - Fri, 16 Oct 2026 14:53:03 GMT
       Pragma:
       - no-cache
       Server:
@@ -36,11 +37,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "43"
+      - "53"
       X-Served-By:
-      - cache-chi-klot8100062-CHI, cache-ewr-kewr1740071-EWR
+      - cache-chi-klot8100160-CHI, cache-ewr-kewr1740047-EWR
       X-Timer:
-      - S1788188595.605344,VS0,VE77
+      - S1792162384.884647,VS0,VE92
     status: 200 OK
     code: 200
     duration: ""
@@ -49,23 +50,23 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/17.3.0 (+github.com/fastly/go-fastly; go1.26.5)
+      - FastlyGo/17.8.0 (+github.com/fastly/go-fastly; go1.27.1)
     url: https://api.fastly.com/ai-runtime-control/v1/sessions?cursor=eyJzb3J0IjoiY3JlYXRlZF9hdCIsInNvcnRfdmFsdWUiOiIyMDI2LTA3LTI5IDE2OjU5OjEzLjI2Mzg3NCIsInNvcnRfbnVsbCI6ZmFsc2UsImlkIjoiNTQ1IiwiZGlyIjoibmV4dCJ9&limit=2
     method: GET
   response:
-    body: |
-      {"data":[{"id":"sess_546","virtual_key_id":"fbdf3c51010403a7eabd","virtual_key_name":"opus-6","model":"claude-opus-4-6","provider":"anthropic","requests":1,"input_tokens":0,"output_tokens":0,"violations":0,"firewall_enabled":false,"created_at":"2026-07-29T17:00:37.662692Z","updated_at":"2026-07-29T17:00:37.662692Z","logs":[{"request":"Say hello in one short sentence.","response":"","attrs":{}}]}],"meta":{"prev_cursor":"eyJzb3J0IjoiY3JlYXRlZF9hdCIsInNvcnRfdmFsdWUiOiIyMDI2LTA3LTI5IDE3OjAwOjM3LjY2MjY5MiIsInNvcnRfbnVsbCI6ZmFsc2UsImlkIjoiNTQ2IiwiZGlyIjoicHJldiJ9","limit":2,"sort":"created_at","total":1}}
+    body: '{"data":[{"id":"sess_546","virtual_key_id":"fbdf3c51010403a7eabd","virtual_key_name":"opus-6","model":"claude-opus-4-6","provider":"sample99","provider_connection_id":"07f0d366fb9e0d18303e","primary_provider":"07f0d366fb9e0d18303e","requests":1,"input_tokens":0,"output_tokens":0,"violations":0,"firewall_enabled":false,"created_at":"2026-07-29T17:00:37.662692Z","updated_at":"2026-07-29T17:00:37.662692Z","logs":[{"request":"Say
+      hello in one short sentence.","response":"","attrs":{}}]}],"meta":{"prev_cursor":"eyJzb3J0IjoiY3JlYXRlZF9hdCIsInNvcnRfdmFsdWUiOiIyMDI2LTA3LTI5IDE3OjAwOjM3LjY2MjY5MiIsInNvcnRfbnVsbCI6ZmFsc2UsImlkIjoiNTQ2IiwiZGlyIjoicHJldiJ9","limit":2,"sort":"created_at","total":1}}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "607"
+      - "695"
       Content-Type:
       - application/json
       Date:
-      - Mon, 31 Aug 2026 15:03:14 GMT
+      - Fri, 16 Oct 2026 14:53:04 GMT
       Pragma:
       - no-cache
       Server:
@@ -79,11 +80,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "27"
+      - "167"
       X-Served-By:
-      - cache-chi-klot8100139-CHI, cache-ewr-kewr1740071-EWR
+      - cache-chi-kmdw8640035-CHI, cache-ewr-kewr1740047-EWR
       X-Timer:
-      - S1788188595.717681,VS0,VE58
+      - S1792162384.018919,VS0,VE211
     status: 200 OK
     code: 200
     duration: ""

@@ -25,17 +25,24 @@ func TestClient_Keys(t *testing.T) {
 	var created *VirtualKeyWithToken
 	fastly.RecordRedacted(t, "create", arcSecretFields, func(c *fastly.Client) {
 		created, err = Create(ctx, c, &CreateInput{
-			Name:      new("go-fastly-test-key"),
-			Model:     new("claude-sonnet-4-20250514"),
-			Provider:  new("Anthropic"),
-			UserID:    new("go-fastly-test-user"),
-			ExpiresAt: &expiresAt,
+			Name:            new("go-fastly-test-key"),
+			Model:           new("claude-sonnet-4-20250514"),
+			Provider:        new("Anthropic"),
+			ExpiresAt:       &expiresAt,
+			SecurityEnabled: new(true),
+			SecurityAction:  new("log"),
+			RPMLimit:        new(60),
+			TPMLimit:        new(10000),
 		})
 	})
 	require.NoError(t, err)
 	require.NotNil(t, created)
 	require.NotEmpty(t, created.ID)
 	require.NotEmpty(t, created.AccessToken)
+	require.NotNil(t, created.RPMLimit)
+	require.Equal(t, 60, *created.RPMLimit)
+	require.NotNil(t, created.TPMLimit)
+	require.Equal(t, 10000, *created.TPMLimit)
 
 	keyID := created.ID
 
@@ -57,37 +64,76 @@ func TestClient_Keys(t *testing.T) {
 	require.NoError(t, err)
 	require.NotNil(t, fetched)
 	require.Equal(t, keyID, fetched.ID)
+	require.NotNil(t, fetched.SecurityEnabled)
+	require.True(t, *fetched.SecurityEnabled)
+	require.NotNil(t, fetched.SecurityAction)
+	require.Equal(t, "log", *fetched.SecurityAction)
+	require.NotNil(t, fetched.RPMLimit)
+	require.Equal(t, 60, *fetched.RPMLimit)
 
 	// List virtual keys.
 	var keys []VirtualKeyListItem
 	fastly.RecordRedacted(t, "list", arcSecretFields, func(c *fastly.Client) {
 		keys, err = List(ctx, c, &ListInput{
-			Provider: new("Anthropic"),
+			Limit: new(1),
 		})
 	})
 	require.NoError(t, err)
 	require.GreaterOrEqual(t, len(keys), 2, "expected at least two pages worth of keys")
 
-	var foundSecondPageItem bool
+	var foundCreated bool
 	for _, k := range keys {
-		if k.ID == "ec5c01f186d816bf8e5c" || k.ID == "78ff28125b9d78b0289d" {
-			foundSecondPageItem = true
+		if k.ID == keyID {
+			foundCreated = true
 			break
 		}
 	}
-	require.True(t, foundSecondPageItem, "expected an item from the second page")
+	require.True(t, foundCreated, "expected the created key in the paginated results")
 
 	// Update the virtual key.
 	var updated *VirtualKey
 	fastly.RecordRedacted(t, "update", arcSecretFields, func(c *fastly.Client) {
 		updated, err = Update(ctx, c, &UpdateInput{
-			KeyID: new(keyID),
-			Name:  new("go-fastly-test-key-updated"),
+			KeyID:             new(keyID),
+			Name:              new("go-fastly-test-key-updated"),
+			RPMLimit:          fastly.NewNullable(120),
+			TPMLimit:          fastly.NullValue[int](),
+			SpendLimitEnabled: new(true),
 		})
 	})
 	require.NoError(t, err)
 	require.NotNil(t, updated)
 	require.Equal(t, keyID, updated.ID)
+	require.NotNil(t, updated.RPMLimit)
+	require.Equal(t, 120, *updated.RPMLimit)
+	require.Nil(t, updated.TPMLimit)
+	require.True(t, updated.SpendLimitEnabled)
+	require.NotNil(t, updated.SpendLimitEnabledOn)
+
+	// Get the failover policy.
+	var failover *FailoverPolicy
+	fastly.Record(t, "get_failover_policy", func(c *fastly.Client) {
+		failover, err = GetFailoverPolicy(ctx, c, &GetFailoverPolicyInput{
+			KeyID: new(keyID),
+		})
+	})
+	require.NoError(t, err)
+	require.NotNil(t, failover)
+
+	// Update the failover policy.
+	fastly.Record(t, "update_failover_policy", func(c *fastly.Client) {
+		failover, err = UpdateFailoverPolicy(ctx, c, &UpdateFailoverPolicyInput{
+			KeyID:                 new(keyID),
+			TimeoutEnabled:        new(true),
+			RateLimit429Enabled:   new(true),
+			ServerError5xxEnabled: new(false),
+		})
+	})
+	require.NoError(t, err)
+	require.NotNil(t, failover)
+	require.True(t, failover.TimeoutEnabled)
+	require.True(t, failover.RateLimit429Enabled)
+	require.False(t, failover.ServerError5xxEnabled)
 
 	// Rotate the virtual key.
 	newExpiresAt := time.Now().Add(48 * time.Hour).UTC().Truncate(time.Second)
@@ -101,6 +147,17 @@ func TestClient_Keys(t *testing.T) {
 	require.NoError(t, err)
 	require.NotNil(t, rotated)
 	require.NotEmpty(t, rotated.AccessToken)
+
+	// Rotate the virtual key without an expiration.
+	fastly.RecordRedacted(t, "rotate_without_expires_at", arcSecretFields, func(c *fastly.Client) {
+		rotated, err = Rotate(ctx, c, &RotateInput{
+			KeyID: new(keyID),
+		})
+	})
+	require.NoError(t, err)
+	require.NotNil(t, rotated)
+	require.NotEmpty(t, rotated.AccessToken)
+	require.Nil(t, rotated.ExpiresAt)
 }
 
 func TestClient_Create_validation(t *testing.T) {
@@ -109,30 +166,20 @@ func TestClient_Create_validation(t *testing.T) {
 	_, err := Create(ctx, fastly.TestClient, &CreateInput{
 		Model:    new("opus-4.6"),
 		Provider: new("Anthropic"),
-		UserID:   new("user-1"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingName)
 
 	_, err = Create(ctx, fastly.TestClient, &CreateInput{
 		Name:     new("my-key"),
 		Provider: new("Anthropic"),
-		UserID:   new("user-1"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingModel)
 
 	_, err = Create(ctx, fastly.TestClient, &CreateInput{
-		Name:   new("my-key"),
-		Model:  new("opus-4.6"),
-		UserID: new("user-1"),
+		Name:  new("my-key"),
+		Model: new("opus-4.6"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingProvider)
-
-	_, err = Create(ctx, fastly.TestClient, &CreateInput{
-		Name:     new("my-key"),
-		Model:    new("opus-4.6"),
-		Provider: new("Anthropic"),
-	})
-	require.ErrorIs(t, err, fastly.ErrMissingUserID)
 }
 
 func TestClient_Get_validation(t *testing.T) {
@@ -159,16 +206,20 @@ func TestClient_Delete_validation(t *testing.T) {
 func TestClient_Rotate_validation(t *testing.T) {
 	ctx := context.TODO()
 
-	expiresAt := time.Now()
-	_, err := Rotate(ctx, fastly.TestClient, &RotateInput{
-		KeyID:     nil,
-		ExpiresAt: &expiresAt,
-	})
+	_, err := Rotate(ctx, fastly.TestClient, &RotateInput{KeyID: nil})
 	require.ErrorIs(t, err, fastly.ErrMissingKeyID)
+}
 
-	_, err = Rotate(ctx, fastly.TestClient, &RotateInput{
-		KeyID:     new("key-1"),
-		ExpiresAt: nil,
-	})
-	require.ErrorIs(t, err, fastly.ErrMissingExpiresAt)
+func TestClient_GetFailoverPolicy_validation(t *testing.T) {
+	ctx := context.TODO()
+
+	_, err := GetFailoverPolicy(ctx, fastly.TestClient, &GetFailoverPolicyInput{KeyID: nil})
+	require.ErrorIs(t, err, fastly.ErrMissingKeyID)
+}
+
+func TestClient_UpdateFailoverPolicy_validation(t *testing.T) {
+	ctx := context.TODO()
+
+	_, err := UpdateFailoverPolicy(ctx, fastly.TestClient, &UpdateFailoverPolicyInput{KeyID: nil})
+	require.ErrorIs(t, err, fastly.ErrMissingKeyID)
 }
