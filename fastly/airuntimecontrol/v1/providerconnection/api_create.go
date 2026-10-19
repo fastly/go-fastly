@@ -23,8 +23,9 @@ type CreateInput struct {
 	BaseURL *string `json:"base_url,omitempty"`
 	// APIKey is the provider's secret API key (required for `api-key`).
 	APIKey *string `json:"api_key,omitempty"`
-	// CustomerRoleARN is the ARN of the IAM role in your AWS account that AI
-	// Runtime Control assumes to access Bedrock (required for `aws-iam`).
+	// CustomerRoleARN is the ARN of the IAM role in the customer's AWS account
+	// that AI Runtime Control assumes to access Bedrock (required for
+	// `aws-iam`).
 	CustomerRoleARN *string `json:"customer_role_arn,omitempty"`
 	// Region is the cloud region for API requests: the AWS region for Bedrock
 	// (`aws-iam`) or the GCP region for Vertex AI (`gcp-iam`). Required for

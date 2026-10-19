@@ -9,7 +9,7 @@ import (
 )
 
 // GetBedrockSetup returns the AI Runtime Control role ARN and external ID needed to
-// configure your IAM trust policy before creating an `aws-iam` (Bedrock)
+// configure the IAM trust policy before creating an `aws-iam` (Bedrock)
 // provider connection.
 func GetBedrockSetup(ctx context.Context, c *fastly.Client) (*BedrockSetup, error) {
 	path := fastly.ToSafeURL("ai-runtime-control", "v1", "providers", "bedrock", "setup")

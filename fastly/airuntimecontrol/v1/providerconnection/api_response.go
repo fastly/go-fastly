@@ -56,11 +56,11 @@ type Meta struct {
 // BedrockSetup is the API response structure for the GetBedrockSetup
 // operation.
 type BedrockSetup struct {
-	// ArcRoleARN is the ARN of the AI Runtime Control IAM role that your AWS
-	// account's IAM trust policy must trust.
+	// ArcRoleARN is the ARN of the AI Runtime Control IAM role that the
+	// customer's AWS account IAM trust policy must trust.
 	ArcRoleARN string `json:"arc_role_arn"`
 	// ExternalID is the external ID to use in the IAM trust policy. This is
-	// your customer ID.
+	// the customer ID.
 	ExternalID string `json:"external_id"`
 }
 
