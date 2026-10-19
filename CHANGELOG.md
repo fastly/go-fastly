@@ -6,8 +6,8 @@
 
 - breaking(airuntimecontrol): `usagemetrics.List` now automatically paginates and returns `[]UsageMetric` instead of `*UsageMetrics` ([#886](https://github.com/fastly/go-fastly/pull/886))
 
-- breaking(ngwaf): `rules.List` now automatically paginates and returns `[]Rule` instead of `*Rules`; `ListInput.Page` has been removed and `ListInput.Limit` now sets the page size ([CDTOOL-1724](https://fastly.atlassian.net/browse/CDTOOL-1724))
-- breaking(ngwaf): `workspaces.List` now automatically paginates and returns `[]Workspace` instead of `*Workspaces`; `ListInput.Page` has been removed and `ListInput.Limit` now sets the page size ([CDTOOL-1724](https://fastly.atlassian.net/browse/CDTOOL-1724))
+- breaking(ngwaf): `rules.List` now automatically paginates and returns `[]Rule` instead of `*Rules`; `ListInput.Page` has been removed and `ListInput.Limit` now sets the page size ([#888](https://github.com/fastly/go-fastly/pull/888))
+- breaking(ngwaf): `workspaces.List` now automatically paginates and returns `[]Workspace` instead of `*Workspaces`; `ListInput.Page` has been removed and `ListInput.Limit` now sets the page size ([#888](https://github.com/fastly/go-fastly/pull/888))
 
 ### Enhancements:
 
