@@ -16,7 +16,8 @@ type ListInput struct {
 	// returned (required).
 	Limit *int
 	// Page is the page number of the collection to request. List does
-	// not paginate automatically; increment Page until Meta.Total is reached.
+	// not paginate automatically; keep incrementing Page and accumulate
+	// results until the number collected reaches Meta.Total.
 	Page *int
 	// Query is a search query string. Please read the Search
 	// Syntax for help (required).

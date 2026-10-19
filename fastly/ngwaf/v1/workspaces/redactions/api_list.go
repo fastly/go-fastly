@@ -12,7 +12,8 @@ import (
 // ListInput specifies the information needed for the List() function
 // to perform the operation.
 type ListInput struct {
-	// Limit how many results are returned (1-100). Defaults to 100.
+	// Limit how many results are returned. The API accepts 1-100 and
+	// rejects other values. Defaults to 100.
 	Limit *int
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string
