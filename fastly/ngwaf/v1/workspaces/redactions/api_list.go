@@ -12,18 +12,25 @@ import (
 // ListInput specifies the information needed for the List() function
 // to perform the operation.
 type ListInput struct {
-	// Limit how many results are returned.
+	// Limit how many results are returned (1-100). Defaults to 100.
 	Limit *int
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string
 }
 
-// List retrieves a list of redactions, with optional pagination.
+// maxLimit is the largest page size the API accepts. The endpoint has no
+// paging, so it is also the most redactions one call can return.
+const maxLimit = 100
+
+// List retrieves a list of redactions, up to 100 by default (the API's
+// own default is 10).
 func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Redactions, error) {
 	requestOptions := fastly.CreateRequestOptions()
+	limit := maxLimit
 	if i.Limit != nil {
-		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
+		limit = *i.Limit
 	}
+	requestOptions.Params["limit"] = strconv.Itoa(limit)
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "redactions")
 

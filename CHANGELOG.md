@@ -6,6 +6,9 @@
 
 - breaking(airuntimecontrol): `usagemetrics.List` now automatically paginates and returns `[]UsageMetric` instead of `*UsageMetrics` ([#886](https://github.com/fastly/go-fastly/pull/886))
 
+- breaking(ngwaf): `rules.List` now automatically paginates and returns `[]Rule` instead of `*Rules`; `ListInput.Page` has been removed and `ListInput.Limit` now sets the page size ([CDTOOL-1724](https://fastly.atlassian.net/browse/CDTOOL-1724))
+- breaking(ngwaf): `workspaces.List` now automatically paginates and returns `[]Workspace` instead of `*Workspaces`; `ListInput.Page` has been removed and `ListInput.Limit` now sets the page size ([CDTOOL-1724](https://fastly.atlassian.net/browse/CDTOOL-1724))
+
 ### Enhancements:
 
 - feat(airuntimecontrol): add support for AI Firewall, rate limits, spend limits, and
@@ -14,6 +17,7 @@
 
 ### Bug fixes:
 
+- fix(ngwaf): `redactions.List` now requests the maximum page size (100) by default instead of the API default of 10, which silently truncated results ([CDTOOL-1725](https://fastly.atlassian.net/browse/CDTOOL-1725))
 - fix(airuntimecontrol): updated AI Runtime Control docs to reflect the latest references ([#885](https://github.com/fastly/go-fastly/pull/885))
 
 ### Dependencies:

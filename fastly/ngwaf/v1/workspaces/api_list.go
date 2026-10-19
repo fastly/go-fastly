@@ -12,17 +12,33 @@ import (
 // ListInput specifies the information needed for the List() function
 // to perform the operation.
 type ListInput struct {
-	// Limit how many results are returned.
+	// Limit how many results are returned per page.
 	Limit *int
 	// Mode filter results based on mode.
 	Mode *string
-	// Page number of the collection to request.
-	Page *int
 }
 
-// List retrieves a list of workspaces, with optional filtering and
-// pagination.
-func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Workspaces, error) {
+// List retrieves all workspaces, automatically paginating through every page.
+func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]Workspace, error) {
+	out := []Workspace{}
+	for page := 1; ; page++ {
+		ws, err := listPage(ctx, c, i, page)
+		if err != nil {
+			return nil, err
+		}
+		out = append(out, ws.Data...)
+
+		// Stop on an empty page or once meta.total is reached.
+		if len(ws.Data) == 0 || len(out) >= ws.Meta.Total {
+			break
+		}
+	}
+
+	return out, nil
+}
+
+// listPage retrieves a single page of workspaces.
+func listPage(ctx context.Context, c *fastly.Client, i *ListInput, page int) (*Workspaces, error) {
 	requestOptions := fastly.CreateRequestOptions()
 	if i.Limit != nil {
 		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
@@ -30,8 +46,8 @@ func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Workspaces, err
 	if i.Mode != nil {
 		requestOptions.Params["mode"] = *i.Mode
 	}
-	if i.Page != nil {
-		requestOptions.Params["page"] = strconv.Itoa(*i.Page)
+	if page > 1 {
+		requestOptions.Params["page"] = strconv.Itoa(page)
 	}
 
 	resp, err := c.Get(ctx, "/ngwaf/v1/workspaces", requestOptions)

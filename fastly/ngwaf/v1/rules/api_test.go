@@ -89,7 +89,7 @@ func runRuleTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 	value10 := "barCookie"
 
 	// List all rules.
-	var rs *Rules
+	var rs []Rule
 	fastly.Record(t, fmt.Sprintf("%s_list_rules", scopeType), func(c *fastly.Client) {
 		rs, err = List(context.TODO(), c, &ListInput{
 			Scope: &scope.Scope{
@@ -103,9 +103,8 @@ func runRuleTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 	}
 
 	assert.NotNil(rs)
-	assert.NotNil(rs.Data)
 
-	for _, rule := range rs.Data {
+	for _, rule := range rs {
 		// Ensure we are checking the correct scope
 		assert.Equal(string(scopeType), rule.Scope.Type)
 		assert.Contains(rule.Scope.AppliesTo, appliesToID)
@@ -755,7 +754,7 @@ func runRateLimitRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 	value10 := "barCookie"
 
 	// List all rules.
-	var rs *Rules
+	var rs []Rule
 	fastly.Record(t, fmt.Sprintf("%s_rate_limit_list_rules", scopeType), func(c *fastly.Client) {
 		rs, err = List(context.TODO(), c, &ListInput{
 			Scope: &scope.Scope{
@@ -769,9 +768,8 @@ func runRateLimitRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 	}
 
 	assert.NotNil(rs)
-	assert.NotNil(rs.Data)
 
-	for _, rule := range rs.Data {
+	for _, rule := range rs {
 		// Ensure we are checking the correct scope
 		assert.Equal(string(scopeType), rule.Scope.Type)
 		assert.Contains(rule.Scope.AppliesTo, appliesToID)
@@ -1685,7 +1683,7 @@ func runDeceptionRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 	value10 := "barCookie"
 
 	// List all rules.
-	var rs *Rules
+	var rs []Rule
 	fastly.Record(t, fmt.Sprintf("%s_deception_list_rules", scopeType), func(c *fastly.Client) {
 		rs, err = List(context.TODO(), c, &ListInput{
 			Scope: &scope.Scope{
@@ -1699,9 +1697,8 @@ func runDeceptionRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 	}
 
 	assert.NotNil(rs)
-	assert.NotNil(rs.Data)
 
-	for _, rule := range rs.Data {
+	for _, rule := range rs {
 		// Ensure we are checking the correct scope
 		assert.Equal(string(scopeType), rule.Scope.Type)
 		assert.Contains(rule.Scope.AppliesTo, appliesToID)
