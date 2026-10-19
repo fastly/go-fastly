@@ -4,12 +4,13 @@
 
 ## BREAKING:
 
-- breaking(airuntimecontrol): `usagemetrics.List` now automatically paginates and returns `[]UsageMetric` instead of `*UsageMetrics`, and `key.Rotate` no longer requires `ExpiresAt`; omitting it clears the key's expiration ([#886](https://github.com/fastly/go-fastly/pull/886))
+- breaking(airuntimecontrol): `usagemetrics.List` now automatically paginates and returns `[]UsageMetric` instead of `*UsageMetrics` ([#886](https://github.com/fastly/go-fastly/pull/886))
 
 ### Enhancements:
 
 - feat(airuntimecontrol): add support for AI Firewall, rate limits, spend limits, and
   failover policies on virtual keys, and for Bedrock and Vertex provider connections ([#886](https://github.com/fastly/go-fastly/pull/886))
+- feat(airuntimecontrol): `key.Rotate` no longer requires `ExpiresAt`; omitting it issues a rotated key with no expiration ([#886](https://github.com/fastly/go-fastly/pull/886))
 
 ### Bug fixes:
 
