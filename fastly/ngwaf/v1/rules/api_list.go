@@ -17,7 +17,7 @@ type ListInput struct {
 	Action *string
 	// Enabled filter results based on enabled.
 	Enabled *bool
-	// Limit how many results are returned per page.
+	// Limit is the maximum number of results to return.
 	Limit *int
 	// Scope defines where the rule is applied, including its type
 	// (e.g., "workspace" or "account") and the specific IDs it
@@ -42,7 +42,12 @@ func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]Rule, error) {
 		}
 		out = append(out, r.Data...)
 
-		// Stop on an empty page or once meta.total is reached.
+		// Stop on an empty page, once Limit results have been
+		// collected, or once meta.total is reached.
+		if i.Limit != nil && *i.Limit > 0 && len(out) >= *i.Limit {
+			out = out[:*i.Limit]
+			break
+		}
 		if len(r.Data) == 0 || len(out) >= r.Meta.Total {
 			break
 		}

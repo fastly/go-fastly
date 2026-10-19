@@ -12,7 +12,7 @@ import (
 // ListInput specifies the information needed for the List() function
 // to perform the operation.
 type ListInput struct {
-	// Limit how many results are returned per page.
+	// Limit is the maximum number of results to return.
 	Limit *int
 	// Mode filter results based on mode.
 	Mode *string
@@ -28,7 +28,12 @@ func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]Workspace, err
 		}
 		out = append(out, ws.Data...)
 
-		// Stop on an empty page or once meta.total is reached.
+		// Stop on an empty page, once Limit results have been
+		// collected, or once meta.total is reached.
+		if i.Limit != nil && *i.Limit > 0 && len(out) >= *i.Limit {
+			out = out[:*i.Limit]
+			break
+		}
 		if len(ws.Data) == 0 || len(out) >= ws.Meta.Total {
 			break
 		}

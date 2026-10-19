@@ -40,8 +40,7 @@ func TestClient_ListWorkspaces_paginates(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	limit := 2
-	wss, err := List(context.TODO(), c, &ListInput{Limit: &limit})
+	wss, err := List(context.TODO(), c, &ListInput{})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -57,5 +56,28 @@ func TestClient_ListWorkspaces_paginates(t *testing.T) {
 	// Page 1 omits the param; subsequent pages request 2 and 3.
 	if got := fmt.Sprint(pages); got != "[ 2 3]" {
 		t.Errorf("unexpected page requests: %s", got)
+	}
+}
+
+func TestClient_ListWorkspaces_limit(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		// Always serve two workspaces per page, regardless of the requested limit.
+		w.Header().Set("Content-Type", "application/json")
+		fmt.Fprint(w, `{"data":[{"id":"a"},{"id":"b"}],"meta":{"limit":2,"total":10}}`)
+	}))
+	defer srv.Close()
+
+	c, err := fastly.NewClientForEndpoint("test", srv.URL)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	limit := 3
+	wss, err := List(context.TODO(), c, &ListInput{Limit: &limit})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(wss) != limit {
+		t.Fatalf("expected %d workspaces, got %d", limit, len(wss))
 	}
 }
