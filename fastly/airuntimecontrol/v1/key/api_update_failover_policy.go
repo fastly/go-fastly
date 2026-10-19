@@ -8,9 +8,9 @@ import (
 	"github.com/fastly/go-fastly/v17/fastly"
 )
 
-// UpdateFailoverInput specifies the information needed for the
-// UpdateFailover() function to perform the operation.
-type UpdateFailoverInput struct {
+// UpdateFailoverPolicyInput specifies the information needed for the
+// UpdateFailoverPolicy() function to perform the operation.
+type UpdateFailoverPolicyInput struct {
 	// KeyID is the ID of the virtual key (required).
 	KeyID *string `json:"-"`
 	// Targets is the ordered list of provider connections requests are sent to.
@@ -25,8 +25,8 @@ type UpdateFailoverInput struct {
 	ServerError5xxEnabled *bool `json:"server_error_5xx_enabled,omitempty"`
 }
 
-// UpdateFailover sets the failover policy for a virtual key.
-func UpdateFailover(ctx context.Context, c *fastly.Client, i *UpdateFailoverInput) (*Failover, error) {
+// UpdateFailoverPolicy sets the failover policy for a virtual key.
+func UpdateFailoverPolicy(ctx context.Context, c *fastly.Client, i *UpdateFailoverPolicyInput) (*FailoverPolicy, error) {
 	if i.KeyID == nil {
 		return nil, fastly.ErrMissingKeyID
 	}
@@ -39,7 +39,7 @@ func UpdateFailover(ctx context.Context, c *fastly.Client, i *UpdateFailoverInpu
 	}
 	defer resp.Body.Close()
 
-	var f *Failover
+	var f *FailoverPolicy
 	if err := json.NewDecoder(resp.Body).Decode(&f); err != nil {
 		return nil, fmt.Errorf("failed to decode json response: %w", err)
 	}

@@ -111,9 +111,9 @@ func TestClient_Keys(t *testing.T) {
 	require.NotNil(t, updated.SpendLimitEnabledOn)
 
 	// Get the failover policy.
-	var failover *Failover
-	fastly.Record(t, "get_failover", func(c *fastly.Client) {
-		failover, err = GetFailover(ctx, c, &GetFailoverInput{
+	var failover *FailoverPolicy
+	fastly.Record(t, "get_failover_policy", func(c *fastly.Client) {
+		failover, err = GetFailoverPolicy(ctx, c, &GetFailoverPolicyInput{
 			KeyID: new(keyID),
 		})
 	})
@@ -121,8 +121,8 @@ func TestClient_Keys(t *testing.T) {
 	require.NotNil(t, failover)
 
 	// Update the failover policy.
-	fastly.Record(t, "update_failover", func(c *fastly.Client) {
-		failover, err = UpdateFailover(ctx, c, &UpdateFailoverInput{
+	fastly.Record(t, "update_failover_policy", func(c *fastly.Client) {
+		failover, err = UpdateFailoverPolicy(ctx, c, &UpdateFailoverPolicyInput{
 			KeyID:                 new(keyID),
 			TimeoutEnabled:        new(true),
 			RateLimit429Enabled:   new(true),
@@ -210,16 +210,16 @@ func TestClient_Rotate_validation(t *testing.T) {
 	require.ErrorIs(t, err, fastly.ErrMissingKeyID)
 }
 
-func TestClient_GetFailover_validation(t *testing.T) {
+func TestClient_GetFailoverPolicy_validation(t *testing.T) {
 	ctx := context.TODO()
 
-	_, err := GetFailover(ctx, fastly.TestClient, &GetFailoverInput{KeyID: nil})
+	_, err := GetFailoverPolicy(ctx, fastly.TestClient, &GetFailoverPolicyInput{KeyID: nil})
 	require.ErrorIs(t, err, fastly.ErrMissingKeyID)
 }
 
-func TestClient_UpdateFailover_validation(t *testing.T) {
+func TestClient_UpdateFailoverPolicy_validation(t *testing.T) {
 	ctx := context.TODO()
 
-	_, err := UpdateFailover(ctx, fastly.TestClient, &UpdateFailoverInput{KeyID: nil})
+	_, err := UpdateFailoverPolicy(ctx, fastly.TestClient, &UpdateFailoverPolicyInput{KeyID: nil})
 	require.ErrorIs(t, err, fastly.ErrMissingKeyID)
 }

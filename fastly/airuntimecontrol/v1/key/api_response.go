@@ -142,9 +142,9 @@ type FailoverTarget struct {
 	ProviderConnectionID string `json:"provider_connection_id"`
 }
 
-// Failover is the API response structure for the get failover and update
-// failover operations.
-type Failover struct {
+// FailoverPolicy is the API response structure for the get failover policy and
+// update failover policy operations.
+type FailoverPolicy struct {
 	// Targets is the ordered list of provider connections requests are sent to.
 	Targets []FailoverTarget `json:"targets"`
 	// TimeoutEnabled is whether timeouts trigger failover.
