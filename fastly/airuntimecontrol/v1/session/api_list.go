@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/fastly/go-fastly/v17/fastly"
+	"github.com/fastly/go-fastly/v18/fastly"
 )
 
 // ListInput specifies the information needed for the List() function to

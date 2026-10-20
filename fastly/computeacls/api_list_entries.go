@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/fastly/go-fastly/v17/fastly"
+	"github.com/fastly/go-fastly/v18/fastly"
 )
 
 // ListEntriesInput specifies the information needed for the ListEntries() function to perform

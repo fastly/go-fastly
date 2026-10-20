@@ -6,8 +6,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/fastly/go-fastly/v17/fastly"
-	"github.com/fastly/go-fastly/v17/fastly/botmanagement/v1/workspaces"
+	"github.com/fastly/go-fastly/v18/fastly"
+	"github.com/fastly/go-fastly/v18/fastly/botmanagement/v1/workspaces"
 )
 
 func TestClient_Policy(t *testing.T) {

@@ -7,7 +7,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/fastly/go-fastly/v17/fastly"
+	"github.com/fastly/go-fastly/v18/fastly"
 )
 
 // arcSecretFields are the response fields that carry live secrets or PII and must never

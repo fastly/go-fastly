@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/fastly/go-fastly/v17/fastly"
+	"github.com/fastly/go-fastly/v18/fastly"
 )
 
 // RotateInput specifies the information needed for the Rotate() function to

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/fastly/go-fastly/v17/fastly"
+	"github.com/fastly/go-fastly/v18/fastly"
 )
 
 // Export returns usage metrics for AI Runtime Control requests as raw CSV

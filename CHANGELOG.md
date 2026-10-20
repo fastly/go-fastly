@@ -4,6 +4,16 @@
 
 ## BREAKING:
 
+### Enhancements:
+
+### Bug fixes:
+
+### Dependencies:
+
+## [v18.0.0](https://github.com/fastly/go-fastly/releases/tag/v18.0.0) (2026-10-20)
+
+## BREAKING:
+
 - breaking(airuntimecontrol): `usagemetrics.List` now automatically paginates and returns `[]UsageMetric` instead of `*UsageMetrics` ([#886](https://github.com/fastly/go-fastly/pull/886))
 - breaking(ngwaf): `rules.List` now automatically paginates and returns `[]Rule` instead of `*Rules`; `ListInput.Page` has been removed and `ListInput.Limit` now sets the maximum number of results returned ([#888](https://github.com/fastly/go-fastly/pull/888))
 - breaking(ngwaf): `workspaces.List` now automatically paginates and returns `[]Workspace` instead of `*Workspaces`; `ListInput.Page` has been removed and `ListInput.Limit` now sets the maximum number of results returned ([#888](https://github.com/fastly/go-fastly/pull/888))
