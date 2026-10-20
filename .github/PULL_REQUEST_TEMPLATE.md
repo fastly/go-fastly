@@ -6,7 +6,7 @@ reasoning behind the changes, even if they seem minor. If relevant, link to any
 related discussions (e.g. Slack threads, tickets, documents).
 -->
 
- All Submissions:
+All Submissions:
 
 * [ ] Have you followed the guidelines in our Contributing document?
 * [ ] Have you checked to ensure there aren't other open [Pull Requests](https://github.com/fastly/go-fastly/pulls) for the same update/change?

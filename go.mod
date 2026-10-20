@@ -1,6 +1,6 @@
 module github.com/fastly/go-fastly/v17
 
-go 1.26.5
+go 1.26.10
 
 require (
 	github.com/dnaeon/go-vcr v1.2.0
