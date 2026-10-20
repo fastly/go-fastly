@@ -21,6 +21,8 @@
 
 ### Dependencies:
 
+-chore(go.mod): upgrade go to 1.26.10 ([#890](https://github.com/fastly/go-fastly/pull/890))
+
 ## [v17.8.0](https://github.com/fastly/go-fastly/releases/tag/v17.8.0) (2026-10-07)
 
 ### Enhancements:
