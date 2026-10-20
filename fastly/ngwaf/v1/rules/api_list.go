@@ -17,10 +17,8 @@ type ListInput struct {
 	Action *string
 	// Enabled filter results based on enabled.
 	Enabled *bool
-	// Limit how many results are returned.
+	// Limit is the maximum number of results to return.
 	Limit *int
-	// Page number of the collection to request.
-	Page *int
 	// Scope defines where the rule is applied, including its type
 	// (e.g., "workspace" or "account") and the specific IDs it
 	// applies to (required).
@@ -30,25 +28,55 @@ type ListInput struct {
 	Types *string
 }
 
-// List retrieves a list of rules, with optional filtering and
-// pagination.
-func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Rules, error) {
+// maxPageSize is the largest page size the API accepts.
+const maxPageSize = 1000
+
+// List retrieves all rules, automatically paginating through every page.
+func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]Rule, error) {
 	if i.Scope == nil {
 		return nil, fastly.ErrMissingScope
 	}
 
+	out := []Rule{}
+	for page := 1; ; page++ {
+		r, err := listPage(ctx, c, i, page)
+		if err != nil {
+			return nil, err
+		}
+		out = append(out, r.Data...)
+
+		// Stop on an empty page, once Limit results have been
+		// collected, or once meta.total is reached.
+		if i.Limit != nil && *i.Limit > 0 && len(out) >= *i.Limit {
+			out = out[:*i.Limit]
+			break
+		}
+		if len(r.Data) == 0 || len(out) >= r.Meta.Total {
+			break
+		}
+	}
+
+	return out, nil
+}
+
+// listPage retrieves a single page of rules.
+func listPage(ctx context.Context, c *fastly.Client, i *ListInput, page int) (*Rules, error) {
+	// Request the largest page the API allows, unless Limit asks for fewer.
+	perPage := maxPageSize
+	if i.Limit != nil && *i.Limit > 0 && *i.Limit < perPage {
+		perPage = *i.Limit
+	}
+
 	requestOptions := fastly.CreateRequestOptions()
+	requestOptions.Params["limit"] = strconv.Itoa(perPage)
 	if i.Action != nil {
 		requestOptions.Params["action"] = *i.Action
 	}
 	if i.Enabled != nil {
 		requestOptions.Params["enabled"] = strconv.FormatBool(*i.Enabled)
 	}
-	if i.Limit != nil {
-		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
-	}
-	if i.Page != nil {
-		requestOptions.Params["page"] = strconv.Itoa(*i.Page)
+	if page > 1 {
+		requestOptions.Params["page"] = strconv.Itoa(page)
 	}
 	if i.Types != nil {
 		requestOptions.Params["types"] = *i.Types

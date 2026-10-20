@@ -23,7 +23,7 @@ func TestClient_Workspace(t *testing.T) {
 
 	wsClientIPHeaders := []string{"X-Forwarded-For", "X-Real-IP"}
 
-	var wss *Workspaces
+	var wss []Workspace
 	var err error
 
 	// List all workspaces.
@@ -35,7 +35,7 @@ func TestClient_Workspace(t *testing.T) {
 	}
 
 	// Make sure the test workspace we're going to create isn't among them.
-	for _, ws := range wss.Data {
+	for _, ws := range wss {
 		if ws.Name == wsName {
 			t.Errorf("found test workspace %q, aborting", wsName)
 		}

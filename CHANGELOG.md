@@ -5,6 +5,8 @@
 ## BREAKING:
 
 - breaking(airuntimecontrol): `usagemetrics.List` now automatically paginates and returns `[]UsageMetric` instead of `*UsageMetrics` ([#886](https://github.com/fastly/go-fastly/pull/886))
+- breaking(ngwaf): `rules.List` now automatically paginates and returns `[]Rule` instead of `*Rules`; `ListInput.Page` has been removed and `ListInput.Limit` now sets the maximum number of results returned ([#888](https://github.com/fastly/go-fastly/pull/888))
+- breaking(ngwaf): `workspaces.List` now automatically paginates and returns `[]Workspace` instead of `*Workspaces`; `ListInput.Page` has been removed and `ListInput.Limit` now sets the maximum number of results returned ([#888](https://github.com/fastly/go-fastly/pull/888))
 
 ### Enhancements:
 
@@ -14,6 +16,7 @@
 
 ### Bug fixes:
 
+- fix(ngwaf): `redactions.List` now requests the maximum page size (100) by default instead of the API default of 10, which silently truncated results ([#888](https://github.com/fastly/go-fastly/pull/888))
 - fix(airuntimecontrol): updated AI Runtime Control docs to reflect the latest references ([#885](https://github.com/fastly/go-fastly/pull/885))
 
 ### Dependencies:

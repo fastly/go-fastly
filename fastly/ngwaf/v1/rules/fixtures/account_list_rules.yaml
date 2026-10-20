@@ -6,27 +6,25 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/12.1.2 (+github.com/fastly/go-fastly; go1.25.5)
-    url: https://api.fastly.com/ngwaf/v1/rules
+      - FastlyGo/17.8.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/ngwaf/v1/rules?limit=1000
     method: GET
   response:
     body: |
-      {"data":[],"meta":{"limit":100,"total":0}}
+      {"data":[{"id":"6a971761d16f428a36f71bff","type":"request","scope":{"type":"account","applies_to":["*"]},"enabled":true,"description":"Block requests from specific IP to login path","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"ip","operator":"equals","value":"192.0.2.1"},{"type":"single","field":"path","operator":"equals","value":"/login"}],"actions":[{"type":"block"}],"created_at":"2026-09-01T18:20:17Z","created_by":"rcarillo+devex@fastly.com","updated_at":"2026-09-01T18:20:17Z","customer_id":"4dOhK7xEkULiabovMyhRBu"},{"id":"6a97173c4f4814abae9422db","type":"request","scope":{"type":"account","applies_to":["*"]},"enabled":true,"description":"Block requests from specific IP to login path","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"ip","operator":"equals","value":"192.0.2.1"},{"type":"single","field":"path","operator":"equals","value":"/login"}],"actions":[{"type":"block"}],"created_at":"2026-09-01T18:19:40Z","created_by":"rcarillo+devex@fastly.com","updated_at":"2026-09-01T18:19:40Z","customer_id":"4dOhK7xEkULiabovMyhRBu"},{"id":"6a97171b61614e66788b91e5","type":"request","scope":{"type":"account","applies_to":["k6DNaVrrtYFWnRNBuDuEDP"]},"enabled":true,"description":"Block requests from specific IP to login path","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"ip","operator":"equals","value":"192.0.2.1"},{"type":"single","field":"path","operator":"equals","value":"/login"}],"actions":[{"type":"block"}],"created_at":"2026-09-01T18:19:07Z","created_by":"rcarillo+devex@fastly.com","updated_at":"2026-09-01T18:19:07Z","customer_id":"4dOhK7xEkULiabovMyhRBu"},{"id":"6a9706703dd0b799cf5175f8","type":"request","scope":{"type":"account","applies_to":["k6DNaVrrtYFWnRNBuDuEDP"]},"enabled":true,"description":"Block requests from specific IP to login path","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"ip","operator":"equals","value":"192.0.2.1"},{"type":"single","field":"path","operator":"equals","value":"/login"}],"actions":[{"type":"block"}],"created_at":"2026-09-01T17:08:00Z","created_by":"rcarillo+devex@fastly.com","updated_at":"2026-09-01T17:08:00Z","customer_id":"4dOhK7xEkULiabovMyhRBu"}],"meta":{"limit":1000,"total":4}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
-      Content-Length:
-      - "43"
       Content-Type:
       - application/json
       Date:
-      - Fri, 06 Feb 2026 20:34:47 GMT
+      - Tue, 20 Oct 2026 13:22:39 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -37,10 +35,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "428"
       X-Served-By:
-      - cache-chi-klot8100164-CHI, cache-ewr-kewr1740072-EWR
+      - cache-chi-kigq8000146-CHI, cache-ewr-kewr1740067-EWR
       X-Timer:
-      - S1770410087.694946,VS0,VE595
+      - S1792502559.067892,VS0,VE459
     status: 200 OK
     code: 200
     duration: ""
