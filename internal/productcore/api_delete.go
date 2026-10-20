@@ -3,7 +3,7 @@ package productcore
 import (
 	"context"
 
-	"github.com/fastly/go-fastly/v17/fastly"
+	"github.com/fastly/go-fastly/v18/fastly"
 )
 
 // DeleteInput specifies the information needed for the Delete
