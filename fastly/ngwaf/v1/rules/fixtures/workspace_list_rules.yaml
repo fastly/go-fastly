@@ -6,27 +6,27 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/12.1.2 (+github.com/fastly/go-fastly; go1.25.5)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/rules
+      - FastlyGo/17.8.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/rules?limit=1000
     method: GET
   response:
     body: |
-      {"data":[],"meta":{"limit":100,"total":0}}
+      {"data":[],"meta":{"limit":1000,"total":0}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "43"
+      - "44"
       Content-Type:
       - application/json
       Date:
-      - Fri, 06 Feb 2026 20:34:43 GMT
+      - Tue, 20 Oct 2026 13:22:39 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -37,10 +37,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "3042"
       X-Served-By:
-      - cache-chi-kigq8000059-CHI, cache-ewr-kewr1740072-EWR
+      - cache-chi-kmdw8640049-CHI, cache-ewr-kewr1740067-EWR
       X-Timer:
-      - S1770410083.741942,VS0,VE441
+      - S1792502556.953427,VS0,VE3079
     status: 200 OK
     code: 200
     duration: ""

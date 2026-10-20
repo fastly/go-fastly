@@ -28,6 +28,9 @@ type ListInput struct {
 	Types *string
 }
 
+// maxPageSize is the largest page size the API accepts.
+const maxPageSize = 1000
+
 // List retrieves all rules, automatically paginating through every page.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]Rule, error) {
 	if i.Scope == nil {
@@ -58,15 +61,19 @@ func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]Rule, error) {
 
 // listPage retrieves a single page of rules.
 func listPage(ctx context.Context, c *fastly.Client, i *ListInput, page int) (*Rules, error) {
+	// Request the largest page the API allows, unless Limit asks for fewer.
+	perPage := maxPageSize
+	if i.Limit != nil && *i.Limit > 0 && *i.Limit < perPage {
+		perPage = *i.Limit
+	}
+
 	requestOptions := fastly.CreateRequestOptions()
+	requestOptions.Params["limit"] = strconv.Itoa(perPage)
 	if i.Action != nil {
 		requestOptions.Params["action"] = *i.Action
 	}
 	if i.Enabled != nil {
 		requestOptions.Params["enabled"] = strconv.FormatBool(*i.Enabled)
-	}
-	if i.Limit != nil {
-		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
 	if page > 1 {
 		requestOptions.Params["page"] = strconv.Itoa(page)

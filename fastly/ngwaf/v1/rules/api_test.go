@@ -107,7 +107,10 @@ func runRuleTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 	for _, rule := range rs {
 		// Ensure we are checking the correct scope
 		assert.Equal(string(scopeType), rule.Scope.Type)
-		assert.Contains(rule.Scope.AppliesTo, appliesToID)
+		// Account rules may apply to specific workspaces rather than "*".
+		if scopeType == scope.ScopeTypeWorkspace {
+			assert.Contains(rule.Scope.AppliesTo, appliesToID)
+		}
 
 		// Assert the rule with description "test" does not exist
 		assert.NotEqual(description, rule.Description, "unexpected rule with description 'test' found")

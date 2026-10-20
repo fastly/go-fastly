@@ -21,9 +21,7 @@ type ListInput struct {
 	// returned. [Default 100]
 	Limit *int
 	// Page is the page number of the collection to
-	// request. [Default 0] List does not paginate automatically; keep
-	// incrementing Page and accumulate results until the number
-	// collected reaches Meta.Total.
+	// request. [Default 0]
 	Page *int
 	// Signal filters the list of events based on signal.
 	Signal *string

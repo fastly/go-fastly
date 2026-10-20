@@ -18,6 +18,9 @@ type ListInput struct {
 	Mode *string
 }
 
+// maxPageSize is the largest page size the API accepts.
+const maxPageSize = 1000
+
 // List retrieves all workspaces, automatically paginating through every page.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]Workspace, error) {
 	out := []Workspace{}
@@ -44,10 +47,14 @@ func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]Workspace, err
 
 // listPage retrieves a single page of workspaces.
 func listPage(ctx context.Context, c *fastly.Client, i *ListInput, page int) (*Workspaces, error) {
-	requestOptions := fastly.CreateRequestOptions()
-	if i.Limit != nil {
-		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
+	// Request the largest page the API allows, unless Limit asks for fewer.
+	perPage := maxPageSize
+	if i.Limit != nil && *i.Limit > 0 && *i.Limit < perPage {
+		perPage = *i.Limit
 	}
+
+	requestOptions := fastly.CreateRequestOptions()
+	requestOptions.Params["limit"] = strconv.Itoa(perPage)
 	if i.Mode != nil {
 		requestOptions.Params["mode"] = *i.Mode
 	}
