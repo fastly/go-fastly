@@ -9,9 +9,31 @@
 ### Bug fixes:
 
 - Preserve rate-limit response headers on failed write requests ([#877](https://github.com/fastly/go-fastly/pull/877)).
+
+### Dependencies:
+
+## [v18.0.0](https://github.com/fastly/go-fastly/releases/tag/v18.0.0) (2026-10-20)
+
+## BREAKING:
+
+- breaking(airuntimecontrol): `usagemetrics.List` now automatically paginates and returns `[]UsageMetric` instead of `*UsageMetrics` ([#886](https://github.com/fastly/go-fastly/pull/886))
+- breaking(ngwaf): `rules.List` now automatically paginates and returns `[]Rule` instead of `*Rules`; `ListInput.Page` has been removed and `ListInput.Limit` now sets the maximum number of results returned ([#888](https://github.com/fastly/go-fastly/pull/888))
+- breaking(ngwaf): `workspaces.List` now automatically paginates and returns `[]Workspace` instead of `*Workspaces`; `ListInput.Page` has been removed and `ListInput.Limit` now sets the maximum number of results returned ([#888](https://github.com/fastly/go-fastly/pull/888))
+
+### Enhancements:
+
+- feat(airuntimecontrol): add support for AI Firewall, rate limits, spend limits, and
+  failover policies on virtual keys, and for Bedrock and Vertex provider connections ([#886](https://github.com/fastly/go-fastly/pull/886))
+- feat(airuntimecontrol): `key.Rotate` no longer requires `ExpiresAt`; omitting it issues a rotated key with no expiration ([#886](https://github.com/fastly/go-fastly/pull/886))
+
+### Bug fixes:
+
+- fix(ngwaf): `redactions.List` now requests the maximum page size (100) by default instead of the API default of 10, which silently truncated results ([#888](https://github.com/fastly/go-fastly/pull/888))
 - fix(airuntimecontrol): updated AI Runtime Control docs to reflect the latest references ([#885](https://github.com/fastly/go-fastly/pull/885))
 
 ### Dependencies:
+
+-chore(go.mod): upgrade go to 1.26.10 ([#890](https://github.com/fastly/go-fastly/pull/890))
 
 ## [v17.8.0](https://github.com/fastly/go-fastly/releases/tag/v17.8.0) (2026-10-07)
 

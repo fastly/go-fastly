@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/fastly/go-fastly/v17/fastly"
+	"github.com/fastly/go-fastly/v18/fastly"
 )
 
 // UpdateInput specifies the information needed for the Update() function to
@@ -23,6 +23,22 @@ type UpdateInput struct {
 	// ExpiresAt is the date and time the key expires, in RFC 3339 format. `null`
 	// if the key doesn't expire.
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
+	// SecurityEnabled is whether AI Firewall security is enabled for requests made
+	// with this key.
+	SecurityEnabled *bool `json:"security_enabled,omitempty"`
+	// SecurityAction is the action AI Firewall takes when it detects a violation
+	// on a request made with this key. One of `log`, `block`, `replace`.
+	SecurityAction *string `json:"security_action,omitempty"`
+	// RPMLimit is the requests-per-minute limit for this key. Use
+	// fastly.NullValue[int]() to remove the limit.
+	RPMLimit *fastly.Nullable[int] `json:"rpm_limit,omitempty"`
+	// TPMLimit is the tokens-per-minute limit for this key. Use
+	// fastly.NullValue[int]() to remove the limit.
+	TPMLimit *fastly.Nullable[int] `json:"tpm_limit,omitempty"`
+	// SpendLimitEnabled is whether a spend limit is enabled for this key. This
+	// field cannot be set when the key is created; it can only be changed with
+	// Update.
+	SpendLimitEnabled *bool `json:"spend_limit_enabled,omitempty"`
 }
 
 // Update updates the attributes of a virtual key. Only the fields you include

@@ -2,9 +2,7 @@ package usagemetrics
 
 // UsageMetric represents a single AI usage metric record.
 type UsageMetric struct {
-	// Date is the date (or hour) the usage was measured. Formatted as `YYYY-MM-DD`
-	// when `granularity` is `daily`, or `YYYY-MM-DD HH:00:00` when `granularity`
-	// is `hourly`.
+	// Date is the date the usage was measured, in `YYYY-MM-DD` format.
 	Date string `json:"date"`
 	// UsageType is the type of usage being measured (one of `requests`,
 	// `sessions`, `input_tokens`, `output_tokens`).
@@ -16,9 +14,11 @@ type UsageMetric struct {
 	// VirtualKeyName is the display name of the virtual key this usage is
 	// attributed to.
 	VirtualKeyName string `json:"virtual_key_name"`
-	// Provider is the name of the provider connection that ultimately served the
-	// request.
+	// Provider is the ID of the provider connection that served the request.
 	Provider string `json:"provider"`
+	// PrimaryProvider is the ID of the provider connection that was originally
+	// requested. Differs from Provider when the request failed over.
+	PrimaryProvider string `json:"primary_provider"`
 	// Model is the AI model identifier used.
 	Model string `json:"model"`
 }
@@ -31,8 +31,13 @@ type UsageMetrics struct {
 	Meta Meta `json:"meta"`
 }
 
-// Meta contains metadata returned by the list operation.
+// Meta is the pagination metadata returned by the list operation.
 type Meta struct {
+	// NextCursor is the cursor to use to request the next page of results. `null`
+	// when there are no more results.
+	NextCursor string `json:"next_cursor"`
+	// Limit is the `limit` value used when making the request.
+	Limit int `json:"limit"`
 	// Sort is the `sort` value used when making the request.
 	Sort string `json:"sort"`
 	// Total is the count of results matching the request.

@@ -8,9 +8,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/fastly/go-fastly/v17/fastly"
-	"github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/scope"
-	"github.com/fastly/go-fastly/v17/fastly/ngwaf/v1/signals"
+	"github.com/fastly/go-fastly/v18/fastly"
+	"github.com/fastly/go-fastly/v18/fastly/ngwaf/v1/scope"
+	"github.com/fastly/go-fastly/v18/fastly/ngwaf/v1/signals"
 )
 
 func TestClient_Rule_WorkspaceScope(t *testing.T) {
@@ -89,7 +89,7 @@ func runRuleTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 	value10 := "barCookie"
 
 	// List all rules.
-	var rs *Rules
+	var rs []Rule
 	fastly.Record(t, fmt.Sprintf("%s_list_rules", scopeType), func(c *fastly.Client) {
 		rs, err = List(context.TODO(), c, &ListInput{
 			Scope: &scope.Scope{
@@ -103,12 +103,14 @@ func runRuleTest(t *testing.T, scopeType scope.Type, appliesToID string) {
 	}
 
 	assert.NotNil(rs)
-	assert.NotNil(rs.Data)
 
-	for _, rule := range rs.Data {
+	for _, rule := range rs {
 		// Ensure we are checking the correct scope
 		assert.Equal(string(scopeType), rule.Scope.Type)
-		assert.Contains(rule.Scope.AppliesTo, appliesToID)
+		// Account rules may apply to specific workspaces rather than "*".
+		if scopeType == scope.ScopeTypeWorkspace {
+			assert.Contains(rule.Scope.AppliesTo, appliesToID)
+		}
 
 		// Assert the rule with description "test" does not exist
 		assert.NotEqual(description, rule.Description, "unexpected rule with description 'test' found")
@@ -755,7 +757,7 @@ func runRateLimitRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 	value10 := "barCookie"
 
 	// List all rules.
-	var rs *Rules
+	var rs []Rule
 	fastly.Record(t, fmt.Sprintf("%s_rate_limit_list_rules", scopeType), func(c *fastly.Client) {
 		rs, err = List(context.TODO(), c, &ListInput{
 			Scope: &scope.Scope{
@@ -769,9 +771,8 @@ func runRateLimitRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 	}
 
 	assert.NotNil(rs)
-	assert.NotNil(rs.Data)
 
-	for _, rule := range rs.Data {
+	for _, rule := range rs {
 		// Ensure we are checking the correct scope
 		assert.Equal(string(scopeType), rule.Scope.Type)
 		assert.Contains(rule.Scope.AppliesTo, appliesToID)
@@ -1685,7 +1686,7 @@ func runDeceptionRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 	value10 := "barCookie"
 
 	// List all rules.
-	var rs *Rules
+	var rs []Rule
 	fastly.Record(t, fmt.Sprintf("%s_deception_list_rules", scopeType), func(c *fastly.Client) {
 		rs, err = List(context.TODO(), c, &ListInput{
 			Scope: &scope.Scope{
@@ -1699,9 +1700,8 @@ func runDeceptionRuleTest(t *testing.T, scopeType scope.Type, appliesToID string
 	}
 
 	assert.NotNil(rs)
-	assert.NotNil(rs.Data)
 
-	for _, rule := range rs.Data {
+	for _, rule := range rs {
 		// Ensure we are checking the correct scope
 		assert.Equal(string(scopeType), rule.Scope.Type)
 		assert.Contains(rule.Scope.AppliesTo, appliesToID)

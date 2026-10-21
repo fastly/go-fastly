@@ -1,6 +1,6 @@
-module github.com/fastly/go-fastly/v17
+module github.com/fastly/go-fastly/v18
 
-go 1.26.5
+go 1.26.10
 
 require (
 	github.com/dnaeon/go-vcr v1.2.0
@@ -11,11 +11,11 @@ require (
 	github.com/mitchellh/mapstructure v1.5.0
 	github.com/peterhellberg/link v1.2.0
 	github.com/stretchr/testify v1.12.1
-	golang.org/x/crypto v0.57.0
+	golang.org/x/crypto v0.58.0
 )
 
 require (
 	go.yaml.in/yaml/v3 v3.0.5 // indirect
-	golang.org/x/sys v0.48.0 // indirect
+	golang.org/x/sys v0.49.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
