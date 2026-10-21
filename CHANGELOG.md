@@ -9,7 +9,7 @@
 ### Bug fixes:
 
 - fix(client): preserve rate-limit response headers on failed write requests ([#877](https://github.com/fastly/go-fastly/pull/877))
-- fix(airuntimecontrol): `usagemetrics.Export` no longer sends `ListInput.Limit`, which the export endpoint does not support
+- fix(airuntimecontrol): `usagemetrics.Export` no longer sends `ListInput.Limit`, which the export endpoint does not support ([#892](https://github.com/fastly/go-fastly/pull/892))
 
 ### Dependencies:
 
