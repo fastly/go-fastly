@@ -23,7 +23,8 @@ type ListInput struct {
 	From *time.Time
 	// To is the end of the time range, in RFC 3339 format. Defaults to `now`.
 	To *time.Time
-	// Limit limits how many results are returned per page (1-1000).
+	// Limit limits how many results are returned per page (1-1000). Ignored
+	// by Export.
 	Limit *int
 	// Sort is the sort field. Prefix with `-` for descending order (e.g.,
 	// `sort=-date`). One of `date`, `-date`.
@@ -48,9 +49,6 @@ func (i *ListInput) requestOptions() fastly.RequestOptions {
 	}
 	if i.To != nil {
 		requestOptions.Params["to"] = i.To.Format(time.RFC3339)
-	}
-	if i.Limit != nil {
-		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
 	if i.Sort != nil && *i.Sort != "" {
 		requestOptions.Params["sort"] = *i.Sort
@@ -83,6 +81,9 @@ func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]UsageMetric, e
 // listPage retrieves a single page of usage metrics.
 func listPage(ctx context.Context, c *fastly.Client, i *ListInput, cursor *string) (*UsageMetrics, error) {
 	requestOptions := i.requestOptions()
+	if i.Limit != nil {
+		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
+	}
 	if cursor != nil && *cursor != "" {
 		requestOptions.Params["cursor"] = *cursor
 	}
