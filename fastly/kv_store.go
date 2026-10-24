@@ -497,15 +497,20 @@ type LengthReader interface {
 }
 
 // FileLengthReader allows an os.File type to be passed as a LengthReader to the
-// InsertKVStoreKeyInput.Body field.
+// InsertKVStoreKeyInput.Body field. Its length is the number of bytes remaining
+// from the file's current offset and decreases as bytes are read.
 func FileLengthReader(f *os.File) (LengthReader, error) {
 	s, err := f.Stat()
 	if err != nil {
 		return nil, err
 	}
+	offset, err := f.Seek(0, io.SeekCurrent)
+	if err != nil {
+		return nil, err
+	}
 	return &fileLenReader{
 		f:   f,
-		len: int(s.Size()),
+		len: int(max(0, s.Size()-offset)),
 	}, nil
 }
 
@@ -515,7 +520,9 @@ type fileLenReader struct {
 }
 
 func (f *fileLenReader) Read(p []byte) (int, error) {
-	return f.f.Read(p)
+	n, err := f.f.Read(p)
+	f.len = max(0, f.len-n)
+	return n, err
 }
 
 func (f *fileLenReader) Len() int {
