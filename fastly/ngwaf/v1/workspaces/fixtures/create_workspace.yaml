@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"attack_signal_thresholds":{"one_minute":10000,"ten_minutes":10000,"one_hour":10000,"immediate":true},"client_ip_headers":["X-Forwarded-For","X-Real-IP"],"description":"test-description","ip_anonymization":"hashed","mode":"log","name":"test-workspace"}'
+    body: '{"attack_signal_thresholds":{"one_minute":10000,"ten_minutes":10000,"one_hour":10000,"immediate":true},"auto_enable_new_virtual_patches":true,"client_ip_headers":["X-Forwarded-For","X-Real-IP"],"description":"test-description","ip_anonymization":"hashed","mode":"log","name":"test-workspace"}'
     form: {}
     headers:
       Accept:
@@ -10,27 +10,27 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/11.1.1 (+github.com/fastly/go-fastly; go1.24.2)
+      - FastlyGo/18.0.0 (+github.com/fastly/go-fastly; go1.27.1)
     url: https://api.fastly.com/ngwaf/v1/workspaces
     method: POST
   response:
     body: |
-      {"id":"MypxgPKkUl0JZAkQc59r5Y","name":"test-workspace","description":"test-description","mode":"log","attack_signal_thresholds":{"one_minute":10000,"ten_minutes":10000,"one_hour":10000,"immediate":true},"ip_anonymization":"hashed","default_blocking_response_code":406,"client_ip_headers":["X-Forwarded-For","X-Real-IP"],"created_at":"2025-08-06T18:16:55Z","updated_at":"2025-08-06T18:16:55.838529761Z"}
+      {"id":"UnA145tiUtX5kEkDqvl5eE","workspace_uid":"","name":"test-workspace","description":"test-description","mode":"log","attack_signal_thresholds":{"one_minute":10000,"ten_minutes":10000,"one_hour":10000,"immediate":true},"ip_anonymization":"hashed","default_blocking_response_code":406,"client_ip_headers":["X-Forwarded-For","X-Real-IP"],"auto_enable_new_virtual_patches":true,"created_at":"2026-10-26T13:49:07Z","updated_at":"2026-10-26T13:49:07.352682062Z","customer_id":"4dOhK7xEkULiabovMyhRBu"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "403"
+      - "500"
       Content-Type:
       - application/json
       Date:
-      - Wed, 06 Aug 2025 18:16:56 GMT
+      - Mon, 26 Oct 2026 13:49:10 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -41,10 +41,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "3417"
       X-Served-By:
-      - cache-chi-klot8100024-CHI, cache-nyc-kteb1890070-NYC
+      - cache-chi-kigq8000158-CHI, cache-ewr-kewr1740027-EWR
       X-Timer:
-      - S1754504216.612440,VS0,VE1279
+      - S1793022547.711279,VS0,VE3446
     status: 201 Created
     code: 201
     duration: ""
