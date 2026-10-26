@@ -6,27 +6,27 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/11.1.1 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/MypxgPKkUl0JZAkQc59r5Y
+      - FastlyGo/18.0.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/UnA145tiUtX5kEkDqvl5eE
     method: GET
   response:
     body: |
-      {"id":"MypxgPKkUl0JZAkQc59r5Y","name":"test-workspace","description":"test-description","mode":"log","attack_signal_thresholds":{"one_minute":10000,"ten_minutes":10000,"one_hour":10000,"immediate":true},"ip_anonymization":"hashed","default_blocking_response_code":406,"client_ip_headers":["X-Forwarded-For","X-Real-IP"],"created_at":"2025-08-06T18:16:55Z","updated_at":"2025-08-06T18:16:55.838Z"}
+      {"id":"UnA145tiUtX5kEkDqvl5eE","workspace_uid":"","name":"test-workspace","description":"test-description","mode":"log","attack_signal_thresholds":{"one_minute":10000,"ten_minutes":10000,"one_hour":10000,"immediate":true},"ip_anonymization":"hashed","default_blocking_response_code":406,"client_ip_headers":["X-Forwarded-For","X-Real-IP"],"auto_enable_new_virtual_patches":true,"created_at":"2026-10-26T13:49:07Z","updated_at":"2026-10-26T13:49:10Z","customer_id":"4dOhK7xEkULiabovMyhRBu"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "397"
+      - "490"
       Content-Type:
       - application/json
       Date:
-      - Wed, 06 Aug 2025 18:16:57 GMT
+      - Mon, 26 Oct 2026 13:49:10 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -37,10 +37,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "559"
       X-Served-By:
-      - cache-chi-klot8100081-CHI, cache-nyc-kteb1890070-NYC
+      - cache-chi-kigq8000052-CHI, cache-ewr-kewr1740027-EWR
       X-Timer:
-      - S1754504217.911773,VS0,VE99
+      - S1793022550.182732,VS0,VE589
     status: 200 OK
     code: 200
     duration: ""

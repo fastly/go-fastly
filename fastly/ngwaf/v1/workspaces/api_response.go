@@ -8,6 +8,10 @@ type Workspace struct {
 	// AttackSignalThresholds are the parameters for system site
 	// alerts.
 	AttackSignalThresholds AttackSignalThresholds `json:"attack_signal_thresholds"`
+	// AutoEnableNewVirtualPatches is whether or not virtual patches released after this setting
+	// is enabled are automatically enabled for the workspace in block mode. Virtual patches
+	// released before it was enabled are not changed.
+	AutoEnableNewVirtualPatches *bool `json:"auto_enable_new_virtual_patches"`
 	// ClientIPHeaders lists the request headers containing the
 	// client IP address.
 	ClientIPHeaders []string `json:"client_ip_headers"`
