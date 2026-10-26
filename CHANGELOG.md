@@ -6,6 +6,8 @@
 
 ### Enhancements:
 
+- feat(workspaces): add support for Automated Virtual Patching ([#896](https://github.com/fastly/go-fastly/pull/896))
+
 ### Bug fixes:
 
 - fix(client): preserve rate-limit response headers on failed write requests ([#877](https://github.com/fastly/go-fastly/pull/877))
