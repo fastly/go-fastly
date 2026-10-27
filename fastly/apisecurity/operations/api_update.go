@@ -18,7 +18,7 @@ type UpdateInput struct {
 	// Description is an updated description for the operation.
 	Description *string `json:"description,omitempty"`
 	// TagIDs is an updated list of associated operation tag IDs. A pointer to an
-    // empty slice clears all tags; nil leaves them unchanged.
+	// empty slice clears all tags; nil leaves them unchanged.
 	TagIDs *[]string `json:"tag_ids,omitempty"`
 }
 
