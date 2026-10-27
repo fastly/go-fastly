@@ -4,6 +4,8 @@
 
 ## BREAKING:
 
+- breaking(apisecurity/operations):  all tags can now be removed from an operation on update. `TagIDs` is now a pointer so an empty list can be sent ([#ZZZ](https://github.com/fastly/go-fastly/pull/ZZZ))
+
 ### Enhancements:
 
 ### Bug fixes:
