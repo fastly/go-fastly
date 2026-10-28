@@ -4,6 +4,8 @@
 
 ## BREAKING:
 
+- breaking(apisecurity/operations):  all tags can now be removed from an operation on update. The `UpdateInput.TagIDs` field type changed from `[]string` to `*[]string` so an empty list can be sent ([#898](https://github.com/fastly/go-fastly/pull/898))
+
 ### Enhancements:
 
 ### Bug fixes:
