@@ -8,6 +8,7 @@
 - breaking(airuntimecontrol): `usagemetrics.Export` now takes a new `*ExportInput` instead of `*ListInput`. `ExportInput` has the same fields as `ListInput` except `Limit`, which the export endpoint does not support ([#899](https://github.com/fastly/go-fastly/pull/899))
 
 ### Enhancements:
+- feat(customer/contacts): add support for customer contacts (list/create/delete) ([#813](https://github.com/fastly/go-fastly/pull/813))
 
 ### Bug fixes:
 
