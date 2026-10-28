@@ -12,26 +12,56 @@ import (
 // ListInput specifies the information needed for the List() function
 // to perform the operation.
 type ListInput struct {
-	// Limit how many results are returned.
+	// Limit is the maximum number of results to return.
 	Limit *int
-	// Page number of the collection to request.
-	Page *int
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string
 }
 
-// List retrieves a list of virtual patches, with optional pagination.
-func List(ctx context.Context, c *fastly.Client, i *ListInput) (*VirtualPatches, error) {
+// maxPageSize is the largest page size the API accepts.
+const maxPageSize = 1000
+
+// List retrieves all virtual patches, automatically paginating through every
+// page.
+func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]VirtualPatch, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
 
-	requestOptions := fastly.CreateRequestOptions()
-	if i.Page != nil {
-		requestOptions.Params["page"] = strconv.Itoa(*i.Page)
+	out := []VirtualPatch{}
+	for page := 1; ; page++ {
+		vps, err := listPage(ctx, c, i, page)
+		if err != nil {
+			return nil, err
+		}
+		out = append(out, vps.Data...)
+
+		// Stop on an empty page, once Limit results have been
+		// collected, or once meta.total is reached.
+		if i.Limit != nil && *i.Limit > 0 && len(out) >= *i.Limit {
+			out = out[:*i.Limit]
+			break
+		}
+		if len(vps.Data) == 0 || len(out) >= vps.Meta.Total {
+			break
+		}
 	}
-	if i.Limit != nil {
-		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
+
+	return out, nil
+}
+
+// listPage retrieves a single page of virtual patches.
+func listPage(ctx context.Context, c *fastly.Client, i *ListInput, page int) (*VirtualPatches, error) {
+	// Request the largest page the API allows, unless Limit asks for fewer.
+	perPage := maxPageSize
+	if i.Limit != nil && *i.Limit > 0 && *i.Limit < perPage {
+		perPage = *i.Limit
+	}
+
+	requestOptions := fastly.CreateRequestOptions()
+	requestOptions.Params["limit"] = strconv.Itoa(perPage)
+	if page > 1 {
+		requestOptions.Params["page"] = strconv.Itoa(page)
 	}
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "virtual-patches")

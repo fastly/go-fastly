@@ -10,27 +10,27 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/signals/JYLhUW8UOr3kfAhGYQzVXb
+      - FastlyGo/18.0.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/signals/626CA9e72Bo4dxnTAUJaQp
     method: PATCH
   response:
     body: |
-      {"id":"JYLhUW8UOr3kfAhGYQzVXb","reference_id":"site.a-real-name-workspace","name":"A Real Name workspace","description":"This is an updated description","created_at":"2025-07-21T14:42:20Z","updated_at":"2025-07-21T14:42:20Z","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]}}
+      {"id":"626CA9e72Bo4dxnTAUJaQp","reference_id":"site.a-real-name-workspace","name":"A Real Name workspace","description":"This is an updated description","created_at":"2026-10-28T17:06:09Z","created_by":"anthony.gomez@fastly.com","updated_at":"2026-10-28T17:06:09Z","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]},"customer_id":"4dOhK7xEkULiabovMyhRBu"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "295"
+      - "374"
       Content-Type:
       - application/json
       Date:
-      - Mon, 21 Jul 2025 14:42:27 GMT
+      - Wed, 28 Oct 2026 17:06:11 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -41,10 +41,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "980"
       X-Served-By:
-      - cache-chi-klot8100068-CHI, cache-ewr-kewr1740086-EWR
+      - cache-chi-klot8100070-CHI, cache-ewr-kewr1740069-EWR
       X-Timer:
-      - S1753108941.186872,VS0,VE6021
+      - S1793207170.279364,VS0,VE1013
     status: 200 OK
     code: 200
     duration: ""
