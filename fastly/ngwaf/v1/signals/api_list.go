@@ -13,20 +13,26 @@ import (
 // ListInput specifies the information needed for the List() function
 // to perform the operation.
 type ListInput struct {
-	// Limit how many results are returned.
+	// Limit how many results are returned. Defaults to the API maximum
+	// of 1000.
 	Limit *int
 	// Scope defines where the signal is located, including its type (e.g.,
 	// "workspace" or "account") and the specific IDs it applies to (required).
 	Scope *scope.Scope
 }
 
-// List retrieves a list of signals for the given workspace, with
-// optional pagination.
+// maxLimit is the largest page size the API accepts.
+const maxLimit = 1000
+
+// List retrieves a list of signals, up to 1000 by default (the API's own
+// default is 100).
 func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Signals, error) {
 	requestOptions := fastly.CreateRequestOptions()
+	limit := maxLimit
 	if i.Limit != nil {
-		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
+		limit = *i.Limit
 	}
+	requestOptions.Params["limit"] = strconv.Itoa(limit)
 
 	path, err := scope.BuildPath(i.Scope, "signals", "")
 	if err != nil {

@@ -10,27 +10,27 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
+      - FastlyGo/18.0.0 (+github.com/fastly/go-fastly; go1.27.1)
     url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/signals
     method: POST
   response:
     body: |
-      {"id":"JYLhUW8UOr3kfAhGYQzVXb","reference_id":"site.a-real-name-workspace","name":"A Real Name workspace","description":"This is a description","created_at":"2025-07-21T14:42:20Z","updated_at":"2025-07-21T14:42:20Z","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]}}
+      {"id":"626CA9e72Bo4dxnTAUJaQp","reference_id":"site.a-real-name-workspace","name":"A Real Name workspace","description":"This is a description","created_at":"2026-10-28T17:06:09Z","created_by":"anthony.gomez@fastly.com","updated_at":"2026-10-28T17:06:09Z","scope":{"type":"workspace","applies_to":["Am2qjXkgamuYp3u54rQkLD"]},"customer_id":"4dOhK7xEkULiabovMyhRBu"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "286"
+      - "365"
       Content-Type:
       - application/json
       Date:
-      - Mon, 21 Jul 2025 14:42:21 GMT
+      - Wed, 28 Oct 2026 17:06:09 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -41,10 +41,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "653"
       X-Served-By:
-      - cache-chi-klot8100078-CHI, cache-ewr-kewr1740086-EWR
+      - cache-chi-klot8100153-CHI, cache-ewr-kewr1740069-EWR
       X-Timer:
-      - S1753108941.633486,VS0,VE413
+      - S1793207169.952146,VS0,VE685
     status: 201 Created
     code: 201
     duration: ""

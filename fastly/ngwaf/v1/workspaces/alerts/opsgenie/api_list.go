@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/fastly/go-fastly/v18/fastly"
+	"github.com/fastly/go-fastly/v18/fastly/ngwaf/v1/workspaces/alerts"
 )
 
 // ListInput specifies the information needed for the List() function to perform
@@ -14,7 +15,8 @@ import (
 type ListInput struct {
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
-	// Limit how many results are returned.
+	// Limit how many results are returned. Defaults to the API maximum
+	// of 1000.
 	Limit *int
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string
@@ -27,9 +29,11 @@ func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Alerts, error) 
 	}
 
 	requestOptions := fastly.CreateRequestOptions()
+	limit := alerts.MaxLimit
 	if i.Limit != nil {
-		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
+		limit = *i.Limit
 	}
+	requestOptions.Params["limit"] = strconv.Itoa(limit)
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "alerts")
 
