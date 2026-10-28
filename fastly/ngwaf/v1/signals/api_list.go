@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/fastly/go-fastly/v18/fastly"
+	ngwafv1 "github.com/fastly/go-fastly/v18/fastly/ngwaf/v1"
 	"github.com/fastly/go-fastly/v18/fastly/ngwaf/v1/scope"
 )
 
@@ -21,14 +22,11 @@ type ListInput struct {
 	Scope *scope.Scope
 }
 
-// maxLimit is the largest page size the API accepts.
-const maxLimit = 1000
-
 // List retrieves a list of signals, up to 1000 by default (the API's own
 // default is 100).
 func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Signals, error) {
 	requestOptions := fastly.CreateRequestOptions()
-	limit := maxLimit
+	limit := ngwafv1.MaxLimit
 	if i.Limit != nil {
 		limit = *i.Limit
 	}

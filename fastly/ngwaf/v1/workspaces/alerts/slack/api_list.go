@@ -7,7 +7,7 @@ import (
 	"strconv"
 
 	"github.com/fastly/go-fastly/v18/fastly"
-	"github.com/fastly/go-fastly/v18/fastly/ngwaf/v1/workspaces/alerts"
+	ngwafv1 "github.com/fastly/go-fastly/v18/fastly/ngwaf/v1"
 )
 
 // ListInput specifies the information needed for the List() function to perform
@@ -29,7 +29,7 @@ func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Alerts, error) 
 	}
 
 	requestOptions := fastly.CreateRequestOptions()
-	limit := alerts.MaxLimit
+	limit := ngwafv1.MaxLimit
 	if i.Limit != nil {
 		limit = *i.Limit
 	}
