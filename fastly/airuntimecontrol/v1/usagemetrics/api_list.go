@@ -10,8 +10,8 @@ import (
 	"github.com/fastly/go-fastly/v18/fastly"
 )
 
-// ListInput specifies the information needed for the List() and Export()
-// functions to perform the operation.
+// ListInput specifies the information needed for the List() function to
+// perform the operation.
 type ListInput struct {
 	// Key filters results to a specific virtual key ID.
 	Key *string
@@ -23,37 +23,23 @@ type ListInput struct {
 	From *time.Time
 	// To is the end of the time range, in RFC 3339 format. Defaults to `now`.
 	To *time.Time
-	// Limit limits how many results are returned per page (1-1000). Ignored
-	// by Export.
+	// Limit limits how many results are returned per page (1-1000).
 	Limit *int
 	// Sort is the sort field. Prefix with `-` for descending order (e.g.,
 	// `sort=-date`). One of `date`, `-date`.
 	Sort *string
 }
 
-// requestOptions builds the shared query parameters for the usage metrics
-// list and export endpoints.
+// requestOptions builds the query parameters shared with Export.
 func (i *ListInput) requestOptions() fastly.RequestOptions {
-	requestOptions := fastly.CreateRequestOptions()
-	if i.Key != nil && *i.Key != "" {
-		requestOptions.Params["key"] = *i.Key
-	}
-	if i.Provider != nil && *i.Provider != "" {
-		requestOptions.Params["provider"] = *i.Provider
-	}
-	if i.Model != nil && *i.Model != "" {
-		requestOptions.Params["model"] = *i.Model
-	}
-	if i.From != nil {
-		requestOptions.Params["from"] = i.From.Format(time.RFC3339)
-	}
-	if i.To != nil {
-		requestOptions.Params["to"] = i.To.Format(time.RFC3339)
-	}
-	if i.Sort != nil && *i.Sort != "" {
-		requestOptions.Params["sort"] = *i.Sort
-	}
-	return requestOptions
+	return (&ExportInput{
+		Key:      i.Key,
+		Provider: i.Provider,
+		Model:    i.Model,
+		From:     i.From,
+		To:       i.To,
+		Sort:     i.Sort,
+	}).requestOptions()
 }
 
 // List returns usage metrics for AI Runtime Control requests, including request

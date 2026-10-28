@@ -25,7 +25,7 @@ func TestClient_UsageMetrics(t *testing.T) {
 
 	var csv []byte
 	fastly.Record(t, "export", func(c *fastly.Client) {
-		csv, err = Export(ctx, c, &ListInput{
+		csv, err = Export(ctx, c, &ExportInput{
 			Sort: new("-date"),
 		})
 	})
