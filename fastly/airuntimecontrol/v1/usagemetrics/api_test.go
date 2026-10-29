@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/fastly/go-fastly/v17/fastly"
+	"github.com/fastly/go-fastly/v18/fastly"
 )
 
 func TestClient_UsageMetrics(t *testing.T) {
@@ -25,7 +25,7 @@ func TestClient_UsageMetrics(t *testing.T) {
 
 	var csv []byte
 	fastly.Record(t, "export", func(c *fastly.Client) {
-		csv, err = Export(ctx, c, &ListInput{
+		csv, err = Export(ctx, c, &ExportInput{
 			Sort: new("-date"),
 		})
 	})

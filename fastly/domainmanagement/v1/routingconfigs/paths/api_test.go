@@ -5,9 +5,9 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/fastly/go-fastly/v17/fastly"
-	"github.com/fastly/go-fastly/v17/fastly/domainmanagement/v1/routingconfigs"
-	"github.com/fastly/go-fastly/v17/fastly/domainmanagement/v1/routingconfigs/paths/rules"
+	"github.com/fastly/go-fastly/v18/fastly"
+	"github.com/fastly/go-fastly/v18/fastly/domainmanagement/v1/routingconfigs"
+	"github.com/fastly/go-fastly/v18/fastly/domainmanagement/v1/routingconfigs/paths/rules"
 )
 
 func TestClient_Path(t *testing.T) {

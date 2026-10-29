@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/fastly/go-fastly/v17/fastly"
+	"github.com/fastly/go-fastly/v18/fastly"
 )
 
 // UpdateInput specifies the information needed for the Update() function to
@@ -17,8 +17,9 @@ type UpdateInput struct {
 	OperationID *string `json:"-"`
 	// Description is an updated description for the operation.
 	Description *string `json:"description,omitempty"`
-	// TagIDs is an updated list of associated operation tag IDs.
-	TagIDs []string `json:"tag_ids,omitempty"`
+	// TagIDs is an updated list of associated operation tag IDs. A pointer to an
+	// empty slice clears all tags; nil leaves them unchanged.
+	TagIDs *[]string `json:"tag_ids,omitempty"`
 }
 
 // Update partially updates an existing operation associated with a service.

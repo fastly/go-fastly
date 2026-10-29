@@ -3,8 +3,8 @@ package draft
 import (
 	"time"
 
-	"github.com/fastly/go-fastly/v17/fastly/domainmanagement/v1/routingconfigs/paths"
-	"github.com/fastly/go-fastly/v17/fastly/domainmanagement/v1/routingconfigs/paths/rules"
+	"github.com/fastly/go-fastly/v18/fastly/domainmanagement/v1/routingconfigs/paths"
+	"github.com/fastly/go-fastly/v18/fastly/domainmanagement/v1/routingconfigs/paths/rules"
 )
 
 // Data is the API response structure for the update (comment) operation.

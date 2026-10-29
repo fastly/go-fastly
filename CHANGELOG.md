@@ -4,7 +4,33 @@
 
 ## BREAKING:
 
+- breaking(apisecurity/operations):  all tags can now be removed from an operation on update. The `UpdateInput.TagIDs` field type changed from `[]string` to `*[]string` so an empty list can be sent ([#898](https://github.com/fastly/go-fastly/pull/898))
+- breaking(airuntimecontrol): `usagemetrics.Export` now takes a new `*ExportInput` instead of `*ListInput`. `ExportInput` has the same fields as `ListInput` except `Limit`, which the export endpoint does not support ([#899](https://github.com/fastly/go-fastly/pull/899))
+
+### Enhancements:
+
+### Bug fixes:
+
+### Dependencies:
+
+## [v18.1.0](https://github.com/fastly/go-fastly/releases/tag/v18.1.0) (2026-10-26)
+
+### Enhancements:
+
+- feat(workspaces): add support for Automated Virtual Patching ([#896](https://github.com/fastly/go-fastly/pull/896))
+
+### Bug fixes:
+
+- fix(client): preserve rate-limit response headers on failed write requests ([#877](https://github.com/fastly/go-fastly/pull/877))
+- fix(airuntimecontrol): `usagemetrics.Export` no longer sends `ListInput.Limit`, which the export endpoint does not support ([#892](https://github.com/fastly/go-fastly/pull/892))
+
+## [v18.0.0](https://github.com/fastly/go-fastly/releases/tag/v18.0.0) (2026-10-20)
+
+## BREAKING:
+
 - breaking(airuntimecontrol): `usagemetrics.List` now automatically paginates and returns `[]UsageMetric` instead of `*UsageMetrics` ([#886](https://github.com/fastly/go-fastly/pull/886))
+- breaking(ngwaf): `rules.List` now automatically paginates and returns `[]Rule` instead of `*Rules`; `ListInput.Page` has been removed and `ListInput.Limit` now sets the maximum number of results returned ([#888](https://github.com/fastly/go-fastly/pull/888))
+- breaking(ngwaf): `workspaces.List` now automatically paginates and returns `[]Workspace` instead of `*Workspaces`; `ListInput.Page` has been removed and `ListInput.Limit` now sets the maximum number of results returned ([#888](https://github.com/fastly/go-fastly/pull/888))
 
 ### Enhancements:
 
@@ -14,9 +40,12 @@
 
 ### Bug fixes:
 
+- fix(ngwaf): `redactions.List` now requests the maximum page size (100) by default instead of the API default of 10, which silently truncated results ([#888](https://github.com/fastly/go-fastly/pull/888))
 - fix(airuntimecontrol): updated AI Runtime Control docs to reflect the latest references ([#885](https://github.com/fastly/go-fastly/pull/885))
 
 ### Dependencies:
+
+-chore(go.mod): upgrade go to 1.26.10 ([#890](https://github.com/fastly/go-fastly/pull/890))
 
 ## [v17.8.0](https://github.com/fastly/go-fastly/releases/tag/v17.8.0) (2026-10-07)
 

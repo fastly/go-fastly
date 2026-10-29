@@ -11,27 +11,27 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/13.1.0 (+github.com/fastly/go-fastly; go1.25.4)
+      - FastlyGo/18.1.0 (+github.com/fastly/go-fastly; go1.27.1)
     url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/operations-bulk
     method: POST
   response:
     body: |
-      {"data":[{"id":"sWofay8oQUOccPUiKwisyA","status_code":201,"operation":{"id":"sWofay8oQUOccPUiKwisyA","method":"GET","domain":"example.com","path":"/bulk-test-1","description":"bulk test 1","rps":0,"updated_at":"2026-03-16T16:42:00Z","created_at":"2026-03-16T16:42:00Z","status":"SAVED"}}]}
+      {"data":[{"id":"ggJMd_2-SeKP4MUH6a85ZQ","status_code":201,"operation":{"id":"ggJMd_2-SeKP4MUH6a85ZQ","method":"GET","domain":"example.com","path":"/bulk-test-1","description":"bulk test 1","rps":0,"updated_at":"2026-10-27T19:10:48Z","created_at":"2026-10-27T19:10:48Z","status":"SAVED","protection_mode":"off"}}]}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "290"
+      - "314"
       Content-Type:
       - application/json
       Date:
-      - Mon, 16 Mar 2026 16:42:00 GMT
+      - Tue, 27 Oct 2026 19:10:48 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -42,10 +42,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "240"
       X-Served-By:
-      - cache-chi-kigq8000140-CHI, cache-mia-kfll1870076-MIA
+      - cache-chi-kmdw8640049-CHI, cache-ewr-kewr1740035-EWR
       X-Timer:
-      - S1773679321.544408,VS0,VE397
+      - S1793128248.019831,VS0,VE269
     status: 207 Multi-Status
     code: 207
     duration: ""

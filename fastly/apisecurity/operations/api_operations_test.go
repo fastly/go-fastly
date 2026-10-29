@@ -7,7 +7,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/fastly/go-fastly/v17/fastly"
+	"github.com/fastly/go-fastly/v18/fastly"
 )
 
 func TestClient_Operations(t *testing.T) {
@@ -108,13 +108,28 @@ func TestClient_Operations(t *testing.T) {
 			ServiceID:   new(serviceID),
 			OperationID: new(op1.ID),
 			Description: new("updated"),
-			TagIDs:      []string{tag.ID},
+			TagIDs:      &[]string{tag.ID},
 		})
 	})
 	require.NoError(t, err)
 	require.NotNil(t, updated)
 	require.Equal(t, op1.ID, updated.ID)
 	require.Equal(t, "updated", updated.Description)
+	require.Equal(t, []string{tag.ID}, updated.TagIDs)
+
+	// Update operation and clear tags.
+	fastly.Record(t, "update_clear_tags_operation", func(c *fastly.Client) {
+		updated, err = Update(ctx, c, &UpdateInput{
+			ServiceID:   new(serviceID),
+			OperationID: new(op1.ID),
+			Description: new("updated with cleared tags"),
+			TagIDs:      &[]string{},
+		})
+	})
+	require.NoError(t, err)
+	require.NotNil(t, updated)
+	require.Equal(t, "updated with cleared tags", updated.Description)
+	require.Empty(t, updated.TagIDs)
 
 	// List operations (with filters) - existing behavior.
 	var ops *Operations

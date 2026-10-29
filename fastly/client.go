@@ -24,7 +24,7 @@ import (
 	"github.com/hashicorp/go-cleanhttp"
 	"github.com/mitchellh/mapstructure"
 
-	"github.com/fastly/go-fastly/v17/fastly/impersonation"
+	"github.com/fastly/go-fastly/v18/fastly/impersonation"
 )
 
 // APIKeyEnvVar is the name of the environment variable where the Fastly API
@@ -64,7 +64,7 @@ const UserAgentEnvVar = "FASTLY_USER_AGENT"
 var ProjectURL = "github.com/fastly/go-fastly"
 
 // ProjectVersion is the version of this library.
-var ProjectVersion = "17.8.0"
+var ProjectVersion = "18.1.0"
 
 // UserAgent is the user agent for this particular client.
 var UserAgent = fmt.Sprintf("FastlyGo/%s (+%s; %s)",
@@ -377,11 +377,7 @@ func (c *Client) Request(ctx context.Context, verb, p string, ro RequestOptions)
 		}
 	}
 
-	if err != nil {
-		return resp, err
-	}
-
-	if verb != http.MethodGet && verb != http.MethodHead {
+	if resp != nil && verb != http.MethodGet && verb != http.MethodHead {
 		remaining := resp.Header.Get("Fastly-RateLimit-Remaining")
 		if remaining != "" {
 			if val, err := strconv.Atoi(remaining); err == nil {
@@ -396,7 +392,7 @@ func (c *Client) Request(ctx context.Context, verb, p string, ro RequestOptions)
 		}
 	}
 
-	return resp, nil
+	return resp, err
 }
 
 // RequestOptions is the list of options to pass to the request.

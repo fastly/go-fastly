@@ -7,11 +7,11 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/fastly/go-fastly/v17/fastly"
+	"github.com/fastly/go-fastly/v18/fastly"
 )
 
-// ListInput specifies the information needed for the List() and Export()
-// functions to perform the operation.
+// ListInput specifies the information needed for the List() function to
+// perform the operation.
 type ListInput struct {
 	// Key filters results to a specific virtual key ID.
 	Key *string
@@ -30,32 +30,16 @@ type ListInput struct {
 	Sort *string
 }
 
-// requestOptions builds the shared query parameters for the usage metrics
-// list and export endpoints.
+// requestOptions builds the query parameters shared with Export.
 func (i *ListInput) requestOptions() fastly.RequestOptions {
-	requestOptions := fastly.CreateRequestOptions()
-	if i.Key != nil && *i.Key != "" {
-		requestOptions.Params["key"] = *i.Key
-	}
-	if i.Provider != nil && *i.Provider != "" {
-		requestOptions.Params["provider"] = *i.Provider
-	}
-	if i.Model != nil && *i.Model != "" {
-		requestOptions.Params["model"] = *i.Model
-	}
-	if i.From != nil {
-		requestOptions.Params["from"] = i.From.Format(time.RFC3339)
-	}
-	if i.To != nil {
-		requestOptions.Params["to"] = i.To.Format(time.RFC3339)
-	}
-	if i.Limit != nil {
-		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
-	}
-	if i.Sort != nil && *i.Sort != "" {
-		requestOptions.Params["sort"] = *i.Sort
-	}
-	return requestOptions
+	return (&ExportInput{
+		Key:      i.Key,
+		Provider: i.Provider,
+		Model:    i.Model,
+		From:     i.From,
+		To:       i.To,
+		Sort:     i.Sort,
+	}).requestOptions()
 }
 
 // List returns usage metrics for AI Runtime Control requests, including request
@@ -83,6 +67,9 @@ func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]UsageMetric, e
 // listPage retrieves a single page of usage metrics.
 func listPage(ctx context.Context, c *fastly.Client, i *ListInput, cursor *string) (*UsageMetrics, error) {
 	requestOptions := i.requestOptions()
+	if i.Limit != nil {
+		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
+	}
 	if cursor != nil && *cursor != "" {
 		requestOptions.Params["cursor"] = *cursor
 	}

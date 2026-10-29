@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/13.1.0 (+github.com/fastly/go-fastly; go1.25.4)
-    url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/operations/sLTULjIBSV6SA1DHpnWTvQ
+      - FastlyGo/18.1.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/api-security/v1/services/kKJb5bOFI47uHeBVluGfX1/operations/rRF9CjDQSmybHqQ_aUdc9g
     method: DELETE
   response:
     body: ""
@@ -19,11 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 16 Mar 2026 16:42:02 GMT
+      - Tue, 27 Oct 2026 19:10:49 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -34,10 +34,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "229"
       X-Served-By:
-      - cache-chi-kigq8000147-CHI, cache-mia-kfll1870076-MIA
+      - cache-chi-klot8100130-CHI, cache-ewr-kewr1740035-EWR
       X-Timer:
-      - S1773679322.976090,VS0,VE347
+      - S1793128249.910774,VS0,VE264
     status: 204 No Content
     code: 204
     duration: ""

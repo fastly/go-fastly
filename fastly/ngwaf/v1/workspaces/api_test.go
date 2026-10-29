@@ -5,7 +5,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/fastly/go-fastly/v17/fastly"
+	"github.com/fastly/go-fastly/v18/fastly"
 )
 
 func TestClient_Workspace(t *testing.T) {
@@ -23,7 +23,9 @@ func TestClient_Workspace(t *testing.T) {
 
 	wsClientIPHeaders := []string{"X-Forwarded-For", "X-Real-IP"}
 
-	var wss *Workspaces
+	wsAutoEnableNewVirtualPatches := true
+
+	var wss []Workspace
 	var err error
 
 	// List all workspaces.
@@ -35,7 +37,7 @@ func TestClient_Workspace(t *testing.T) {
 	}
 
 	// Make sure the test workspace we're going to create isn't among them.
-	for _, ws := range wss.Data {
+	for _, ws := range wss {
 		if ws.Name == wsName {
 			t.Errorf("found test workspace %q, aborting", wsName)
 		}
@@ -45,12 +47,13 @@ func TestClient_Workspace(t *testing.T) {
 	var ws *Workspace
 	fastly.Record(t, "create_workspace", func(c *fastly.Client) {
 		ws, err = Create(context.TODO(), c, &CreateInput{
-			Name:                   new(wsName),
-			Description:            new(wsDescription),
-			Mode:                   new(wsMode),
-			IPAnonymization:        new(wsIPAnonymization),
-			AttackSignalThresholds: wsAttackSignalThresholds,
-			ClientIPHeaders:        wsClientIPHeaders,
+			Name:                        new(wsName),
+			Description:                 new(wsDescription),
+			Mode:                        new(wsMode),
+			IPAnonymization:             new(wsIPAnonymization),
+			AttackSignalThresholds:      wsAttackSignalThresholds,
+			AutoEnableNewVirtualPatches: new(wsAutoEnableNewVirtualPatches),
+			ClientIPHeaders:             wsClientIPHeaders,
 		})
 	})
 	if err != nil {
@@ -90,6 +93,9 @@ func TestClient_Workspace(t *testing.T) {
 	}
 	if ws.DefaultBlockingResponseCode != wsDefaultBlockingResponseCode {
 		t.Errorf("unexpected default blocking response code: got %d, expected %d", ws.DefaultBlockingResponseCode, wsDefaultBlockingResponseCode)
+	}
+	if ws.AutoEnableNewVirtualPatches == nil || *ws.AutoEnableNewVirtualPatches != wsAutoEnableNewVirtualPatches {
+		t.Errorf("unexpected auto_enable_new_virtual_patches: got %v, expected %t", ws.AutoEnableNewVirtualPatches, wsAutoEnableNewVirtualPatches)
 	}
 
 	// Ensure we delete the test workspace at the end.
@@ -149,6 +155,9 @@ func TestClient_Workspace(t *testing.T) {
 	if gws.DefaultBlockingResponseCode != ws.DefaultBlockingResponseCode {
 		t.Errorf("unexpected default blocking response code: got %d, expected %d", gws.DefaultBlockingResponseCode, ws.DefaultBlockingResponseCode)
 	}
+	if gws.AutoEnableNewVirtualPatches == nil || *gws.AutoEnableNewVirtualPatches != wsAutoEnableNewVirtualPatches {
+		t.Errorf("unexpected auto_enable_new_virtual_patches: got %v, expected %t", gws.AutoEnableNewVirtualPatches, wsAutoEnableNewVirtualPatches)
+	}
 
 	// Update the test workspace.
 	const uwsName = "test-workspace-updated"
@@ -166,6 +175,8 @@ func TestClient_Workspace(t *testing.T) {
 
 	uwsClientIPHeaders := []string{"X-Forwarded-For"}
 
+	uwsAutoEnableNewVirtualPatches := false
+
 	var uws *Workspace
 	fastly.Record(t, "update_workspace", func(c *fastly.Client) {
 		uws, err = Update(context.TODO(), c, &UpdateInput{
@@ -175,6 +186,7 @@ func TestClient_Workspace(t *testing.T) {
 			Mode:                        new(uwsMode),
 			IPAnonymization:             new(uwsIPAnonymization),
 			AttackSignalThresholds:      uwsAttackSignalThresholds,
+			AutoEnableNewVirtualPatches: new(uwsAutoEnableNewVirtualPatches),
 			DefaultBlockingResponseCode: new(uwsDefaultBlockingResponseCode),
 			DefaultRedirectURL:          new(uwsDefaultRedirectURL),
 			ClientIPHeaders:             uwsClientIPHeaders,
@@ -220,6 +232,9 @@ func TestClient_Workspace(t *testing.T) {
 	}
 	if uws.DefaultRedirectURL != uwsDefaultRedirectURL {
 		t.Errorf("unexpected default redirect URL: got %s, expected %s", uws.DefaultRedirectURL, uwsDefaultRedirectURL)
+	}
+	if uws.AutoEnableNewVirtualPatches == nil || *uws.AutoEnableNewVirtualPatches != uwsAutoEnableNewVirtualPatches {
+		t.Errorf("unexpected auto_enable_new_virtual_patches: got %v, expected %t", uws.AutoEnableNewVirtualPatches, uwsAutoEnableNewVirtualPatches)
 	}
 }
 

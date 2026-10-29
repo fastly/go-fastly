@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/fastly/go-fastly/v17/fastly"
+	"github.com/fastly/go-fastly/v18/fastly"
 )
 
 // AttackSignalThresholdsCreateInput are the parameters for system
@@ -23,6 +23,10 @@ type CreateInput struct {
 	// AttackSignalThresholds are the parameters for system site
 	// alerts.
 	AttackSignalThresholds *AttackSignalThresholdsCreateInput `json:"attack_signal_thresholds,omitempty"`
+	// AutoEnableNewVirtualPatches is whether or not virtual patches released after this setting
+	// is enabled are automatically enabled for the workspace in block mode. Virtual patches
+	// released before it was enabled are not changed.
+	AutoEnableNewVirtualPatches *bool `json:"auto_enable_new_virtual_patches,omitempty"`
 	// ClientIPHeaders lists the request headers containing the
 	// client IP address.
 	ClientIPHeaders []string `json:"client_ip_headers,omitempty"`

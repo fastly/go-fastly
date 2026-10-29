@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/fastly/go-fastly/v17/fastly"
+	"github.com/fastly/go-fastly/v18/fastly"
 )
 
 // CreateInput specifies the information needed for the Create() function to
