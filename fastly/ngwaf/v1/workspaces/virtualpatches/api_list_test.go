@@ -2,6 +2,7 @@ package virtualpatches
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
@@ -79,5 +80,33 @@ func TestClient_ListVirtualPatches_limit(t *testing.T) {
 	}
 	if len(vps) != limit {
 		t.Fatalf("expected %d virtual patches, got %d", limit, len(vps))
+	}
+}
+
+func TestClient_ListVirtualPatches_limitZero(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		t.Error("unexpected request for Limit=0")
+		w.WriteHeader(http.StatusInternalServerError)
+	}))
+	defer srv.Close()
+
+	c, err := fastly.NewClientForEndpoint("test", srv.URL)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	vps, err := List(context.TODO(), c, &ListInput{WorkspaceID: new("ws"), Limit: new(0)})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(vps) != 0 {
+		t.Fatalf("expected no virtual patches, got %d", len(vps))
+	}
+}
+
+func TestClient_ListVirtualPatches_limitNegative(t *testing.T) {
+	_, err := List(context.TODO(), fastly.TestClient, &ListInput{WorkspaceID: new("ws"), Limit: new(-1)})
+	if !errors.Is(err, fastly.ErrNegativeLimit) {
+		t.Errorf("expected ErrNegativeLimit: got %v", err)
 	}
 }

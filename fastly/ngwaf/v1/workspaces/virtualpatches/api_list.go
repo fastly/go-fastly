@@ -12,7 +12,8 @@ import (
 // ListInput specifies the information needed for the List() function
 // to perform the operation.
 type ListInput struct {
-	// Limit is the maximum number of results to return.
+	// Limit is the maximum number of results to return. It must not be
+	// negative; zero returns no results.
 	Limit *int
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string
@@ -27,8 +28,14 @@ func List(ctx context.Context, c *fastly.Client, i *ListInput) ([]VirtualPatch, 
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
+	if i.Limit != nil && *i.Limit < 0 {
+		return nil, fastly.ErrNegativeLimit
+	}
 
 	out := []VirtualPatch{}
+	if i.Limit != nil && *i.Limit == 0 {
+		return out, nil
+	}
 	for page := 1; ; page++ {
 		vps, err := listPage(ctx, c, i, page)
 		if err != nil {
