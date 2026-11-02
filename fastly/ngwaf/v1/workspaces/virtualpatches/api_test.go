@@ -16,7 +16,7 @@ const vpID = "CVE-2017-5638"
 
 func TestVirtual_Patches(t *testing.T) {
 	var err error
-	var vps *VirtualPatches
+	var vps []VirtualPatch
 
 	// List all virtual patches.
 	fastly.Record(t, "list_virtualpatches", func(c *fastly.Client) {
@@ -40,7 +40,7 @@ func TestVirtual_Patches(t *testing.T) {
 
 	// Create a map for quick lookup of listed virtual patches.
 	returnedPatches := make(map[string]VirtualPatch)
-	for _, patch := range vps.Data {
+	for _, patch := range vps {
 		returnedPatches[patch.ID] = patch
 	}
 

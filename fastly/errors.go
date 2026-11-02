@@ -155,6 +155,10 @@ var ErrMissingAction = NewFieldError("Action")
 // requires a "Limit" key, but one was not set.
 var ErrMissingLimit = NewFieldError("Limit")
 
+// ErrNegativeLimit is an error that is returned when an input struct
+// has a "Limit" key that is less than zero.
+var ErrNegativeLimit = NewFieldError("Limit").Message("must not be negative")
+
 // ErrMissingInterval is an error that is returned when an input struct
 // requires a "Interval" key, but one was not set.
 var ErrMissingInterval = NewFieldError("Interval")

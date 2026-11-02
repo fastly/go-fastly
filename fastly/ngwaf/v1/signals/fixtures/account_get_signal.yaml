@@ -6,27 +6,27 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
+      - FastlyGo/18.0.0 (+github.com/fastly/go-fastly; go1.27.1)
     url: https://api.fastly.com/ngwaf/v1/signals/corp.a-real-name-account
     method: GET
   response:
     body: |
-      {"id":"corp.a-real-name-account","reference_id":"corp.a-real-name-account","name":"A Real Name account","description":"This is a description","created_at":"2025-07-21T14:51:34Z","updated_at":"2025-07-21T14:51:34Z","scope":{"type":"account","applies_to":["*"]}}
+      {"id":"corp.a-real-name-account","reference_id":"corp.a-real-name-account","name":"A Real Name account","description":"This is a description","created_at":"2026-10-28T17:06:14Z","created_by":"anthony.gomez@fastly.com","updated_at":"2026-10-28T17:06:14Z","scope":{"type":"account","applies_to":["*"]},"customer_id":"4dOhK7xEkULiabovMyhRBu"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "261"
+      - "340"
       Content-Type:
       - application/json
       Date:
-      - Mon, 21 Jul 2025 14:51:34 GMT
+      - Wed, 28 Oct 2026 17:06:15 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -37,10 +37,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "414"
       X-Served-By:
-      - cache-chi-klot8100117-CHI, cache-nyc-kteb1890023-NYC
+      - cache-chi-klot8100141-CHI, cache-ewr-kewr1740069-EWR
       X-Timer:
-      - S1753109494.429484,VS0,VE93
+      - S1793207175.661017,VS0,VE445
     status: 200 OK
     code: 200
     duration: ""

@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"enabled":true,"mode":"block"}'
+    body: '{"action":null,"enabled":true,"mode":"block"}'
     form: {}
     headers:
       Accept:
@@ -10,7 +10,7 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/10.5.0 (+github.com/fastly/go-fastly; go1.24.3)
+      - FastlyGo/18.0.0 (+github.com/fastly/go-fastly; go1.27.1)
     url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/virtual-patches/CVE-2017-5638
     method: PATCH
   response:
@@ -26,11 +26,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sun, 29 Jun 2025 15:20:04 GMT
+      - Wed, 28 Oct 2026 17:05:52 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -41,10 +41,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "1404"
       X-Served-By:
-      - cache-chi-kigq8000174-CHI, cache-nyc-kteb1890090-NYC
+      - cache-chi-kmdw8640078-CHI, cache-ewr-kewr1740035-EWR
       X-Timer:
-      - S1751210404.605738,VS0,VE1055
+      - S1793207151.002003,VS0,VE1433
     status: 200 OK
     code: 200
     duration: ""
