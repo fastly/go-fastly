@@ -4,17 +4,23 @@
 
 ## BREAKING:
 
-- breaking(apisecurity/operations):  all tags can now be removed from an operation on update. The `UpdateInput.TagIDs` field type changed from `[]string` to `*[]string` so an empty list can be sent ([#898](https://github.com/fastly/go-fastly/pull/898))
-- breaking(airuntimecontrol): `usagemetrics.Export` now takes a new `*ExportInput` instead of `*ListInput`. `ExportInput` has the same fields as `ListInput` except `Limit`, which the export endpoint does not support ([#899](https://github.com/fastly/go-fastly/pull/899))
-- breaking(ngwaf): `virtualpatches.List` now automatically paginates and returns `[]VirtualPatch` instead of `*VirtualPatches`; `ListInput.Page` has been removed and `ListInput.Limit` now sets the maximum number of results returned ([#900](https://github.com/fastly/go-fastly/pull/900))
-
 ### Enhancements:
 
 ### Bug fixes:
 
-- fix(ngwaf): `signals.List`, `thresholds.List` and the `alerts/*` `List` functions now request the maximum page size (1000) by default instead of the API default of 100, which silently truncated results ([#900](https://github.com/fastly/go-fastly/pull/900))
-
 ### Dependencies:
+
+## [v19.0.0](https://github.com/fastly/go-fastly/releases/tag/v19.0.0) (2026-11-04)
+
+## BREAKING:
+
+- breaking(apisecurity/operations):  all tags can now be removed from an operation on update. The `UpdateInput.TagIDs` field type changed from `[]string` to `*[]string` so an empty list can be sent ([#898](https://github.com/fastly/go-fastly/pull/898))
+- breaking(airuntimecontrol): `usagemetrics.Export` now takes a new `*ExportInput` instead of `*ListInput`. `ExportInput` has the same fields as `ListInput` except `Limit`, which the export endpoint does not support ([#899](https://github.com/fastly/go-fastly/pull/899))
+- breaking(ngwaf): `virtualpatches.List` now automatically paginates and returns `[]VirtualPatch` instead of `*VirtualPatches`; `ListInput.Page` has been removed and `ListInput.Limit` now sets the maximum number of results returned ([#900](https://github.com/fastly/go-fastly/pull/900))
+
+### Bug fixes:
+
+- fix(ngwaf): `signals.List`, `thresholds.List` and the `alerts/*` `List` functions now request the maximum page size (1000) by default instead of the API default of 100, which silently truncated results ([#900](https://github.com/fastly/go-fastly/pull/900))
 
 ## [v18.1.0](https://github.com/fastly/go-fastly/releases/tag/v18.1.0) (2026-10-26)
 

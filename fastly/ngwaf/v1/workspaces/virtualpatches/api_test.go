@@ -5,7 +5,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/fastly/go-fastly/v18/fastly"
+	"github.com/fastly/go-fastly/v19/fastly"
 )
 
 // Global value for the test workspace ID.
