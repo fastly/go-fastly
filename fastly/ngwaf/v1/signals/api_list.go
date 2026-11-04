@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/fastly/go-fastly/v18/fastly"
-	ngwafv1 "github.com/fastly/go-fastly/v18/fastly/ngwaf/v1"
-	"github.com/fastly/go-fastly/v18/fastly/ngwaf/v1/scope"
+	"github.com/fastly/go-fastly/v19/fastly"
+	ngwafv1 "github.com/fastly/go-fastly/v19/fastly/ngwaf/v1"
+	"github.com/fastly/go-fastly/v19/fastly/ngwaf/v1/scope"
 )
 
 // ListInput specifies the information needed for the List() function

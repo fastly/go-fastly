@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/fastly/go-fastly/v18/fastly"
+	"github.com/fastly/go-fastly/v19/fastly"
 )
 
 func TestClient_ListVirtualPatches_paginates(t *testing.T) {

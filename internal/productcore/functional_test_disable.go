@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/fastly/go-fastly/v18/fastly"
-	"github.com/fastly/go-fastly/v18/internal/test_utils"
+	"github.com/fastly/go-fastly/v19/fastly"
+	"github.com/fastly/go-fastly/v19/internal/test_utils"
 )
 
 // DisableTestInput specifies the information needed for the

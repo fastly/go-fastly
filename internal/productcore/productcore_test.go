@@ -6,9 +6,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/fastly/go-fastly/v18/fastly"
-	"github.com/fastly/go-fastly/v18/fastly/products"
-	"github.com/fastly/go-fastly/v18/internal/productcore"
+	"github.com/fastly/go-fastly/v19/fastly"
+	"github.com/fastly/go-fastly/v19/fastly/products"
+	"github.com/fastly/go-fastly/v19/internal/productcore"
 )
 
 func TestDeleteMissingServiceID(t *testing.T) {

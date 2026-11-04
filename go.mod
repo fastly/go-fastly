@@ -1,4 +1,4 @@
-module github.com/fastly/go-fastly/v18
+module github.com/fastly/go-fastly/v19
 
 go 1.26.10
 
