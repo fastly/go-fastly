@@ -6,6 +6,8 @@
 
 ### Enhancements:
 
+- feat(backends): Add support for IAM attributes ([#904](https://github.com/fastly/go-fastly/pull/904))
+
 ### Bug fixes:
 
 ### Dependencies:
