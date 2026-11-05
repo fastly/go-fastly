@@ -106,15 +106,15 @@ type CreateBackendInput struct {
 	FirstByteTimeout *int `url:"first_byte_timeout,omitempty"`
 	// HealthCheck is the name of the healthcheck to use with this backend.
 	HealthCheck *string `url:"healthcheck,omitempty"`
-	// IAMExternalID is the TBD.
+	// IAMExternalID is the external ID used by the IAM provider.
 	IAMExternalID *string `url:"iam_external_id,omitempty"`
-	// IAMProduct is the TBD.
+	// IAMProduct is the product element used in the IAM signature.
 	IAMProduct *string `url:"iam_product,omitempty"`
-	// IAMRegion is the TBD.
+	// IAMRegion is the region used in the IAM signature and for endpoint selection.
 	IAMRegion *string `url:"iam_region,omitempty"`
-	// IAMRole is the TBD.
+	// IAMRole is the fully-qualified role name provided by the IAM provider.
 	IAMRole *string `url:"iam_role,omitempty"`
-	// IAMVendor is the TBD.
+	// IAMVendor is the label which identifies the storage vendor.
 	IAMVendor *string `url:"iam_vendor,omitempty"`
 	// KeepAliveTime is how long in seconds to keep a persistent connection to the backend between requests.
 	KeepAliveTime *int `url:"keepalive_time,omitempty"`
@@ -253,15 +253,15 @@ type UpdateBackendInput struct {
 	FirstByteTimeout *int `url:"first_byte_timeout,omitempty"`
 	// HealthCheck is the name of the healthcheck to use with this backend.
 	HealthCheck *string `url:"healthcheck,omitempty"`
-	// IAMExternalID is the TBD.
+	// IAMExternalID is the external ID used by the IAM provider.
 	IAMExternalID *string `url:"iam_external_id,omitempty"`
-	// IAMProduct is the TBD.
+	// IAMProduct is the product element used in the IAM signature.
 	IAMProduct *string `url:"iam_product,omitempty"`
-	// IAMRegion is the TBD.
+	// IAMRegion is the region used in the IAM signature and for endpoint selection.
 	IAMRegion *string `url:"iam_region,omitempty"`
-	// IAMRole is the TBD.
+	// IAMRole is the fully-qualified role name provided by the IAM provider.
 	IAMRole *string `url:"iam_role,omitempty"`
-	// IAMVendor is the TBD.
+	// IAMVendor is the label which identifies the storage vendor.
 	IAMVendor *string `url:"iam_vendor,omitempty"`
 	// KeepAliveTime is how long in seconds to keep a persistent connection to the backend between requests.
 	KeepAliveTime *int `url:"keepalive_time,omitempty"`
