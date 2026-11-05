@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/12.1.0 (+github.com/fastly/go-fastly; go1.26.2)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/145/backend/test-backend
+      - FastlyGo/19.0.0 (+github.com/fastly/go-fastly; go1.26.10)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/213/backend/test-backend
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Backend ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e test-backend, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 145 }''"}'
+      version =\u003e 213 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,15 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 06 May 2026 18:11:13 GMT
+      - Thu, 05 Nov 2026 20:36:03 GMT
       Fastly-Ratelimit-Remaining:
-      - "9986"
+      - "9993"
       Fastly-Ratelimit-Reset:
-      - "1778094000"
+      - "1793912400"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -42,10 +42,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "98"
       X-Served-By:
-      - cache-chi-kigq8000157-CHI, cache-ewr-kewr1740088-EWR
+      - cache-chi-klot8100100-CHI, cache-nyc-kteb1890097-NYC
       X-Timer:
-      - S1778091074.852671,VS0,VE138
+      - S1793910964.771780,VS0,VE131
     status: 404 Not Found
     code: 404
     duration: ""
@@ -54,13 +56,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/12.1.0 (+github.com/fastly/go-fastly; go1.26.2)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/145/backend/new-test-backend
+      - FastlyGo/19.0.0 (+github.com/fastly/go-fastly; go1.26.10)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/213/backend/new-test-backend
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Backend ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e new-test-backend, service =\u003e
-      kKJb5bOFI47uHeBVluGfX1, version =\u003e 145 }''"}'
+      kKJb5bOFI47uHeBVluGfX1, version =\u003e 213 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -69,15 +71,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 06 May 2026 18:11:14 GMT
+      - Thu, 05 Nov 2026 20:36:04 GMT
       Fastly-Ratelimit-Remaining:
-      - "9984"
+      - "9992"
       Fastly-Ratelimit-Reset:
-      - "1778094000"
+      - "1793912400"
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -90,10 +92,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "90"
       X-Served-By:
-      - cache-chi-kigq8000049-CHI, cache-ewr-kewr1740088-EWR
+      - cache-chi-kigq8000105-CHI, cache-nyc-kteb1890097-NYC
       X-Timer:
-      - S1778091074.170498,VS0,VE147
+      - S1793910964.921277,VS0,VE120
     status: 404 Not Found
     code: 404
     duration: ""
