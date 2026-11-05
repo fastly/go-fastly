@@ -21,7 +21,6 @@ import (
 
 	"github.com/google/go-querystring/query"
 	"github.com/google/jsonapi"
-	"github.com/hashicorp/go-cleanhttp"
 	"github.com/mitchellh/mapstructure"
 
 	"github.com/fastly/go-fastly/v19/fastly/impersonation"
@@ -182,8 +181,18 @@ func (c *Client) init() (*Client, error) {
 
 	if c.HTTPClient == nil {
 		c.HTTPClient = &http.Client{
-			// IMPORTANT: Avoid cleanhttp.DefaultTransport() which disables keepalive.
-			Transport: cleanhttp.DefaultPooledTransport(),
+			// IMPORTANT: Avoid a transport with DisableKeepAlives set. This mirrors
+			// http.DefaultTransport, minus the net.Dialer and ForceAttemptHTTP2
+			// fields, which TinyGo's net/http does not support. Leaving
+			// DialContext unset keeps HTTP/2 enabled on the standard library.
+			Transport: &http.Transport{
+				Proxy:                 http.ProxyFromEnvironment,
+				MaxIdleConns:          100,
+				IdleConnTimeout:       90 * time.Second,
+				TLSHandshakeTimeout:   10 * time.Second,
+				ExpectContinueTimeout: 1 * time.Second,
+				MaxIdleConnsPerHost:   runtime.GOMAXPROCS(0) + 1,
+			},
 		}
 	}
 
