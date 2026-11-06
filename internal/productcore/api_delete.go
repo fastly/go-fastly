@@ -11,7 +11,6 @@ import (
 type DeleteInput struct {
 	Client        *fastly.Client
 	ProductID     string
-	ServiceID     string
 	URLComponents []string
 }
 
@@ -20,11 +19,7 @@ type DeleteInput struct {
 // than a potential error), this function does not have any type
 // parameters.
 func Delete(ctx context.Context, i *DeleteInput) error {
-	if i.ServiceID == "" {
-		return fastly.ErrMissingServiceID
-	}
-
-	path := makeURL(i.ProductID, i.ServiceID, i.URLComponents)
+	path := makeURL(i.ProductID, i.URLComponents)
 
 	resp, err := i.Client.Delete(ctx, path, fastly.CreateRequestOptions())
 	if err != nil {

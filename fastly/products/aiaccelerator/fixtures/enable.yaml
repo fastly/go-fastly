@@ -1,0 +1,54 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/19.1.0 (+github.com/fastly/go-fastly; go1.26.10)
+    url: https://api.fastly.com/enabled-products/v1/ai_accelerator
+    method: PUT
+  response:
+    body: |
+      {"type":"","title":"you are not entitled to this product","status":403,"errors":null,"detail":""}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "98"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 06 Nov 2026 21:50:17 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Status:
+      - 403 Forbidden
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "1895"
+      X-Served-By:
+      - cache-chi-kmdw8640052-CHI, cache-iad-khef600063-IAD
+      X-Timer:
+      - S1794001815.109749,VS0,VE1925
+    status: 403 Forbidden
+    code: 403
+    duration: ""

@@ -8,11 +8,10 @@ package products
 // that the API operation functions only accept types which would also
 // be accepted by the FunctionalTest constructors.
 //
-// This interface matches the methods of the NullOutput, EnableOutput
-// and ConfigureOutput structs below.
+// This interface matches the methods of the NullOutput,
+// EnableOutput and ConfigureOutput structs below.
 type ProductOutput interface {
 	ProductID() string
-	ServiceID() string
 }
 
 // NullInput is used to indicate to the generic FunctionalTest
@@ -29,15 +28,10 @@ func (o NullOutput) ProductID() string {
 	return ""
 }
 
-func (o NullOutput) ServiceID() string {
-	return ""
-}
-
 // EnableOutput represents an enablement response from the Fastly
 // API. Products will embed this structure into their own.
 type EnableOutput struct {
 	Product *EnableOutputNested `mapstructure:"product"`
-	Service *EnableOutputNested `mapstructure:"service"`
 }
 
 type EnableOutputNested struct {
@@ -56,20 +50,8 @@ func (o EnableOutput) ProductID() string {
 	return ""
 }
 
-// ServiceID returns the ServiceID inside an EnableOutput structure.
-//
-// This method is required, even though the field in the structure is
-// exported, because the ProductOutput interface specifies it.
-func (o EnableOutput) ServiceID() string {
-	if o.Service != nil && o.Service.ID != nil {
-		return *o.Service.ID
-	}
-	return ""
-}
-
-func NewEnableOutput(productID, serviceID string) (result EnableOutput) {
+func NewEnableOutput(productID string) (result EnableOutput) {
 	result.Product = &EnableOutputNested{Object: new("product"), ID: &productID}
-	result.Service = &EnableOutputNested{Object: new("service"), ID: &serviceID}
 	return
 }
 

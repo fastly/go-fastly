@@ -6,35 +6,35 @@ import (
 	"github.com/fastly/go-fastly/v19/fastly"
 	"github.com/fastly/go-fastly/v19/fastly/products"
 	"github.com/fastly/go-fastly/v19/fastly/products/imageoptimizer"
-	"github.com/fastly/go-fastly/v19/internal/productcore"
+	"github.com/fastly/go-fastly/v19/internal/serviceproductcore"
 	"github.com/fastly/go-fastly/v19/internal/test_utils"
 )
 
-var functionalTests = []*test_utils.FunctionalTest{
-	productcore.NewDisableTest(&productcore.DisableTestInput{
+var functionalTests = []*test_utils.FunctionalTestService{
+	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		Phase:         "ensure disabled before testing",
 		OpFn:          imageoptimizer.Disable,
 		IgnoreFailure: true,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[imageoptimizer.EnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[imageoptimizer.ServiceEnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          imageoptimizer.Get,
 		ProductID:     imageoptimizer.ProductID,
 		ExpectFailure: true,
 	}),
-	productcore.NewEnableTest(&productcore.EnableTestInput[imageoptimizer.EnableOutput, products.NullInput]{
+	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[imageoptimizer.ServiceEnableOutput, products.ServiceNullInput]{
 		OpNoInputFn: imageoptimizer.Enable,
 		ProductID:   imageoptimizer.ProductID,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[imageoptimizer.EnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[imageoptimizer.ServiceEnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      imageoptimizer.Get,
 		ProductID: imageoptimizer.ProductID,
 	}),
-	productcore.NewDisableTest(&productcore.DisableTestInput{
+	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		OpFn: imageoptimizer.Disable,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[imageoptimizer.EnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[imageoptimizer.ServiceEnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          imageoptimizer.Get,
 		ProductID:     imageoptimizer.ProductID,
@@ -43,5 +43,5 @@ var functionalTests = []*test_utils.FunctionalTest{
 }
 
 func TestEnablementDelivery(t *testing.T) {
-	test_utils.ExecuteFunctionalTests(t, functionalTests, fastly.TestDeliveryServiceID)
+	test_utils.ExecuteFunctionalTestsService(t, functionalTests, fastly.TestDeliveryServiceID)
 }

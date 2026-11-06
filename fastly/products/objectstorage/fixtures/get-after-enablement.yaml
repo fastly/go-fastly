@@ -1,0 +1,52 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/19.1.0 (+github.com/fastly/go-fastly; go1.26.10)
+    url: https://api.fastly.com/enabled-products/v1/object_storage
+    method: GET
+  response:
+    body: |
+      {"product":{"id":"object_storage","object":"product"},"customer":{"id":"4dOhK7xEkULiabovMyhRBu","object":"customer"},"_links":{"self":"/enabled-products/v1/object_storage"}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "174"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 06 Nov 2026 21:57:49 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "149"
+      X-Served-By:
+      - cache-chi-kigq8000080-CHI, cache-nyc-kteb1890053-NYC
+      X-Timer:
+      - S1794002269.092552,VS0,VE181
+    status: 200 OK
+    code: 200
+    duration: ""
