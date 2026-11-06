@@ -7,6 +7,7 @@
 ### Enhancements:
 
 - feat(backends): Add support for IAM attributes ([#904](https://github.com/fastly/go-fastly/pull/904))
+- feat(tests): Make tests pass under tinygo. ([#907](https://github.com/fastly/go-fastly/pull/907))
 
 ### Bug fixes:
 

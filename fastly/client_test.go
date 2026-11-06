@@ -12,6 +12,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/fastly/go-fastly/v19/fastly/impersonation"
+	"github.com/fastly/go-fastly/v19/internal/tinygo"
 )
 
 func TestClient_RawRequest(t *testing.T) {
@@ -91,6 +92,10 @@ func TestClient_Impersonation(t *testing.T) {
 }
 
 func TestClient_RequestRateLimit(t *testing.T) {
+	if tinygo.Enabled {
+		t.Skip("httptest requires a network listener, unsupported in TinyGo")
+	}
+
 	cases := []struct {
 		name          string
 		method        string
@@ -139,6 +144,10 @@ func TestClient_RequestRateLimit(t *testing.T) {
 }
 
 func TestClient_RequestRateLimitCanceled(t *testing.T) {
+	if tinygo.Enabled {
+		t.Skip("requires network access, unsupported in TinyGo")
+	}
+
 	c, err := NewClientForEndpoint("", "http://127.0.0.1:1")
 	require.NoError(t, err)
 	c.remaining = 10
