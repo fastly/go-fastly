@@ -9,9 +9,14 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v19/fastly"
+	"github.com/fastly/go-fastly/v19/internal/tinygo"
 )
 
 func TestClient_ListWorkspaces_paginates(t *testing.T) {
+	if tinygo.Enabled {
+		t.Skip("httptest requires a network listener, unsupported in TinyGo")
+	}
+
 	const total = 5
 
 	var pages []string
@@ -60,6 +65,10 @@ func TestClient_ListWorkspaces_paginates(t *testing.T) {
 }
 
 func TestClient_ListWorkspaces_limit(t *testing.T) {
+	if tinygo.Enabled {
+		t.Skip("httptest requires a network listener, unsupported in TinyGo")
+	}
+
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		// Always serve two workspaces per page, regardless of the requested limit.
 		w.Header().Set("Content-Type", "application/json")
