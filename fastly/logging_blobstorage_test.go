@@ -3,12 +3,11 @@ package fastly
 import (
 	"context"
 	"errors"
-	"net/http"
 	"testing"
 )
 
 const (
-	MiB = http.DefaultMaxHeaderBytes
+	MiB = 1 << 20
 )
 
 func TestClient_BlobStorages_Compute(t *testing.T) {
