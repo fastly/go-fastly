@@ -4,8 +4,8 @@ GO ?= go
 # List of tests to run
 FILES ?= ./...
 
-# List all our actual files, excluding vendor
-GOPKGS ?= $(shell $(GO) list $(FILES) | grep -v /vendor/)
+# List all our actual files
+GOPKGS ?= $(shell $(GO) list $(FILES))
 
 # Tags specific for building
 GOTAGS ?=
