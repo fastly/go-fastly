@@ -7,8 +7,7 @@ API](https://docs.fastly.com/api).
 
 > **NOTE:** Support for the [Fastly
 > Compute](https://www.fastly.com/products/edge-compute) platform is
-> experimental. The client compiles with TinyGo, but parts of it may not
-> function correctly at runtime ([details](./DEVELOPMENT.md#compute)).
+> experimental ([details](./DEVELOPMENT.md#compute)).
 
 ## Versioning and Release Schedules
 

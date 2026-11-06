@@ -28,15 +28,9 @@ by the test suite.
 
 Support for the [Fastly Compute](https://www.fastly.com/products/edge-compute) platform is experimental.
 
-The client compiles with TinyGo, but TinyGo's `reflect` package is incomplete
-and parts of the client that decode API responses (via
-[github.com/mitchellh/mapstructure](https://github.com/mitchellh/mapstructure))
-can panic at runtime with errors such as `unimplemented: reflect.SliceOf()`.
-
-Under TinyGo the default HTTP transport is minimal, as TinyGo's `net/http` does
-not support the dialer and HTTP/2 options used with standard Go. You should
-supply your own transport that routes requests through a Compute backend, for
-example with `fsthttp` from the
+The client compiles with TinyGo and its unit tests pass. When running on
+Compute you should supply your own HTTP transport that routes requests through
+a Compute backend, for example with `fsthttp` from the
 [Compute Go SDK](https://github.com/fastly/compute-sdk-go):
 
 ```go
@@ -53,15 +47,23 @@ This presumes you have a backend named `fastly` that points to
 ### Running the tests with TinyGo
 
 ```bash
-cd fastly
-tinygo test -target=wasip1 -tags=safe -skip=TestClient
+make test-tinygo
 ```
+
+This runs `tinygo test -target=wasip1 -tags=safe` against all packages. The
+`TESTARGS` variable can be used to select tests, as with `make test`.
+
+> **NOTE:** The tests require a version of TinyGo that includes the `reflect`
+> additions from [tinygo-org/tinygo#6081](https://github.com/tinygo-org/tinygo/pull/6081),
+> which was merged after the 0.44.0 release. Earlier versions fail with
+> `unimplemented: reflect.SliceOf()`.
+
+If you want to run pieces by hand, the flags are:
 
 - `-tags=safe` stops `go-spew` from accessing `reflect` internals, which differ
   between Go and TinyGo.
-- `-skip=TestClient` skips tests that use `net/http/httptest`, as TinyGo's
-  networking support is incomplete.
+- `-target=wasip1` is not required, but it guards against code that assumes
+  ints are 64 bits wide.
 
-The full suite does not currently pass under TinyGo because of the `reflect`
-limitations described above (for example `TestStatsClient_*` and
-`TestDatacenters`). Use `-run` to select tests that do.
+Tests that rely on features TinyGo does not support (such as `net/http/httptest`)
+skip themselves when built with TinyGo.
