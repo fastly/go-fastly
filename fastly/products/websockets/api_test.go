@@ -16,17 +16,17 @@ var functionalTests = []*test_utils.FunctionalTestService{
 		OpFn:          websockets.Disable,
 		IgnoreFailure: true,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[websockets.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[websockets.EnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          websockets.Get,
 		ProductID:     websockets.ProductID,
 		ExpectFailure: true,
 	}),
-	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[websockets.ServiceEnableOutput, products.ServiceNullInput]{
+	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[websockets.EnableOutput, products.ServiceNullInput]{
 		OpNoInputFn: websockets.Enable,
 		ProductID:   websockets.ProductID,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[websockets.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[websockets.EnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      websockets.Get,
 		ProductID: websockets.ProductID,
@@ -34,7 +34,7 @@ var functionalTests = []*test_utils.FunctionalTestService{
 	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		OpFn: websockets.Disable,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[websockets.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[websockets.EnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          websockets.Get,
 		ProductID:     websockets.ProductID,

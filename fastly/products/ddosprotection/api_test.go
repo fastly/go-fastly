@@ -28,45 +28,45 @@ var functionalTests = []*test_utils.FunctionalTestService{
 		OpFn:          ddosprotection.Disable,
 		IgnoreFailure: true,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[ddosprotection.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[ddosprotection.EnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          ddosprotection.Get,
 		ProductID:     ddosprotection.ProductID,
 		ExpectFailure: true,
 	}),
-	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[ddosprotection.ServiceEnableOutput, ddosprotection.EnableInput]{
+	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[ddosprotection.EnableOutput, ddosprotection.EnableInput]{
 		OpWithInputFn: ddosprotection.Enable,
 		Input:         ddosprotection.EnableInput{},
 		ProductID:     ddosprotection.ProductID,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[ddosprotection.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[ddosprotection.EnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      ddosprotection.Get,
 		ProductID: ddosprotection.ProductID,
 	}),
-	serviceproductcore.NewGetConfigurationTest(&serviceproductcore.GetConfigurationTestInput[ddosprotection.ServiceConfigureOutput]{
+	serviceproductcore.NewGetConfigurationTest(&serviceproductcore.GetConfigurationTestInput[ddosprotection.ConfigureOutput]{
 		Phase:     "default",
 		OpFn:      ddosprotection.GetConfiguration,
 		ProductID: ddosprotection.ProductID,
-		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, o ddosprotection.ServiceConfigureOutput) {
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, o ddosprotection.ConfigureOutput) {
 			require.NotNilf(t, o.Configuration.Mode, "test '%s'", tc.Name)
 			require.Equalf(t, "log", *o.Configuration.Mode, "test '%s'", tc.Name)
 		},
 	}),
-	serviceproductcore.NewUpdateConfigurationTest(&serviceproductcore.UpdateConfigurationTestInput[ddosprotection.ServiceConfigureOutput, ddosprotection.ConfigureInput]{
+	serviceproductcore.NewUpdateConfigurationTest(&serviceproductcore.UpdateConfigurationTestInput[ddosprotection.ConfigureOutput, ddosprotection.ConfigureInput]{
 		OpFn:      ddosprotection.UpdateConfiguration,
 		Input:     ddosprotection.ConfigureInput{Mode: "block"},
 		ProductID: ddosprotection.ProductID,
-		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, o ddosprotection.ServiceConfigureOutput) {
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, o ddosprotection.ConfigureOutput) {
 			require.NotNilf(t, o.Configuration.Mode, "test '%s'", tc.Name)
 			require.Equalf(t, "block", *o.Configuration.Mode, "test '%s'", tc.Name)
 		},
 	}),
-	serviceproductcore.NewGetConfigurationTest(&serviceproductcore.GetConfigurationTestInput[ddosprotection.ServiceConfigureOutput]{
+	serviceproductcore.NewGetConfigurationTest(&serviceproductcore.GetConfigurationTestInput[ddosprotection.ConfigureOutput]{
 		Phase:     "after update",
 		OpFn:      ddosprotection.GetConfiguration,
 		ProductID: ddosprotection.ProductID,
-		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, o ddosprotection.ServiceConfigureOutput) {
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, o ddosprotection.ConfigureOutput) {
 			require.NotNilf(t, o.Configuration.Mode, "test '%s'", tc.Name)
 			require.Equalf(t, "block", *o.Configuration.Mode, "test '%s'", tc.Name)
 		},
@@ -74,23 +74,23 @@ var functionalTests = []*test_utils.FunctionalTestService{
 	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		OpFn: ddosprotection.Disable,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[ddosprotection.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[ddosprotection.EnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          ddosprotection.Get,
 		ProductID:     ddosprotection.ProductID,
 		ExpectFailure: true,
 	}),
-	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[ddosprotection.ServiceEnableOutput, ddosprotection.EnableInput]{
+	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[ddosprotection.EnableOutput, ddosprotection.EnableInput]{
 		Phase:         "enable with explicit mode",
 		OpWithInputFn: ddosprotection.Enable,
 		Input:         ddosprotection.EnableInput{Mode: "block"},
 		ProductID:     ddosprotection.ProductID,
 	}),
-	serviceproductcore.NewGetConfigurationTest(&serviceproductcore.GetConfigurationTestInput[ddosprotection.ServiceConfigureOutput]{
+	serviceproductcore.NewGetConfigurationTest(&serviceproductcore.GetConfigurationTestInput[ddosprotection.ConfigureOutput]{
 		Phase:     "verify mode parameter",
 		OpFn:      ddosprotection.GetConfiguration,
 		ProductID: ddosprotection.ProductID,
-		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, o ddosprotection.ServiceConfigureOutput) {
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, o ddosprotection.ConfigureOutput) {
 			require.NotNilf(t, o.Configuration.Mode, "test '%s'", tc.Name)
 			require.Equalf(t, "block", *o.Configuration.Mode, "test '%s'", tc.Name)
 		},

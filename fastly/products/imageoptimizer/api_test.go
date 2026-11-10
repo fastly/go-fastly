@@ -16,17 +16,17 @@ var functionalTests = []*test_utils.FunctionalTestService{
 		OpFn:          imageoptimizer.Disable,
 		IgnoreFailure: true,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[imageoptimizer.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[imageoptimizer.EnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          imageoptimizer.Get,
 		ProductID:     imageoptimizer.ProductID,
 		ExpectFailure: true,
 	}),
-	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[imageoptimizer.ServiceEnableOutput, products.ServiceNullInput]{
+	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[imageoptimizer.EnableOutput, products.ServiceNullInput]{
 		OpNoInputFn: imageoptimizer.Enable,
 		ProductID:   imageoptimizer.ProductID,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[imageoptimizer.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[imageoptimizer.EnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      imageoptimizer.Get,
 		ProductID: imageoptimizer.ProductID,
@@ -34,7 +34,7 @@ var functionalTests = []*test_utils.FunctionalTestService{
 	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		OpFn: imageoptimizer.Disable,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[imageoptimizer.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[imageoptimizer.EnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          imageoptimizer.Get,
 		ProductID:     imageoptimizer.ProductID,

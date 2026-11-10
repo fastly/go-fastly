@@ -19,10 +19,10 @@ type EnableInput struct {
 	WorkspaceID string `json:"workspace_id"`
 }
 
-// ServiceEnableOutput holds the details returned by the API from 'Get' and
+// EnableOutput holds the details returned by the API from 'Get' and
 // 'Enable' operations; this alias exists to ensure that users of this
 // package will have a stable name to reference.
-type ServiceEnableOutput = products.ServiceEnableOutput
+type EnableOutput = products.ServiceEnableOutput
 
 // ErrMissingWorkspaceID is the error returned by the Enable function
 // when it is passed an EnableInput struct with a WorkspaceID field
@@ -36,9 +36,9 @@ type ConfigureInput struct {
 	TrafficRamp string `json:"traffic_ramp,omitempty"`
 }
 
-// ServiceConfigureOutput holds the details returned by the API from
+// ConfigureOutput holds the details returned by the API from
 // 'GetConfiguration' and 'UpdateConfiguration' operations.
-type ServiceConfigureOutput struct {
+type ConfigureOutput struct {
 	products.ServiceConfigureOutput `mapstructure:",squash"`
 	Configuration                   *configureOutputNested `mapstructure:"configuration"`
 }
@@ -49,8 +49,8 @@ type configureOutputNested struct {
 }
 
 // Get gets the status of the Next-Gen WAF product on the service.
-func Get(ctx context.Context, c *fastly.Client, serviceID string) (ServiceEnableOutput, error) {
-	return serviceproductcore.Get[ServiceEnableOutput](ctx, &serviceproductcore.GetInput{
+func Get(ctx context.Context, c *fastly.Client, serviceID string) (EnableOutput, error) {
+	return serviceproductcore.Get[EnableOutput](ctx, &serviceproductcore.GetInput{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,
@@ -58,12 +58,12 @@ func Get(ctx context.Context, c *fastly.Client, serviceID string) (ServiceEnable
 }
 
 // Enable enables the Next-Gen WAF product on the service.
-func Enable(ctx context.Context, c *fastly.Client, serviceID string, i EnableInput) (ServiceEnableOutput, error) {
+func Enable(ctx context.Context, c *fastly.Client, serviceID string, i EnableInput) (EnableOutput, error) {
 	if i.WorkspaceID == "" {
-		return ServiceEnableOutput{}, ErrMissingWorkspaceID
+		return EnableOutput{}, ErrMissingWorkspaceID
 	}
 
-	return serviceproductcore.Put[ServiceEnableOutput](ctx, &serviceproductcore.PutInput[EnableInput]{
+	return serviceproductcore.Put[EnableOutput](ctx, &serviceproductcore.PutInput[EnableInput]{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,
@@ -81,8 +81,8 @@ func Disable(ctx context.Context, c *fastly.Client, serviceID string) error {
 }
 
 // GetConfiguration gets the configuration of the Next-Gen WAF product on the service.
-func GetConfiguration(ctx context.Context, c *fastly.Client, serviceID string) (ServiceConfigureOutput, error) {
-	return serviceproductcore.Get[ServiceConfigureOutput](ctx, &serviceproductcore.GetInput{
+func GetConfiguration(ctx context.Context, c *fastly.Client, serviceID string) (ConfigureOutput, error) {
+	return serviceproductcore.Get[ConfigureOutput](ctx, &serviceproductcore.GetInput{
 		Client:        c,
 		ProductID:     ProductID,
 		ServiceID:     serviceID,
@@ -91,8 +91,8 @@ func GetConfiguration(ctx context.Context, c *fastly.Client, serviceID string) (
 }
 
 // UpdateConfiguration updates the configuration of the Next-Gen WAF product on the service.
-func UpdateConfiguration(ctx context.Context, c *fastly.Client, serviceID string, i ConfigureInput) (ServiceConfigureOutput, error) {
-	return serviceproductcore.Patch[ServiceConfigureOutput](ctx, &serviceproductcore.PatchInput[ConfigureInput]{
+func UpdateConfiguration(ctx context.Context, c *fastly.Client, serviceID string, i ConfigureInput) (ConfigureOutput, error) {
+	return serviceproductcore.Patch[ConfigureOutput](ctx, &serviceproductcore.PatchInput[ConfigureInput]{
 		Client:        c,
 		ProductID:     ProductID,
 		ServiceID:     serviceID,

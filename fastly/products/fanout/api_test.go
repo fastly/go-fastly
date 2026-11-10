@@ -16,17 +16,17 @@ var functionalTests = []*test_utils.FunctionalTestService{
 		OpFn:          fanout.Disable,
 		IgnoreFailure: true,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[fanout.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[fanout.EnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          fanout.Get,
 		ProductID:     fanout.ProductID,
 		ExpectFailure: true,
 	}),
-	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[fanout.ServiceEnableOutput, products.ServiceNullInput]{
+	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[fanout.EnableOutput, products.ServiceNullInput]{
 		OpNoInputFn: fanout.Enable,
 		ProductID:   fanout.ProductID,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[fanout.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[fanout.EnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      fanout.Get,
 		ProductID: fanout.ProductID,
@@ -34,7 +34,7 @@ var functionalTests = []*test_utils.FunctionalTestService{
 	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		OpFn: fanout.Disable,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[fanout.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[fanout.EnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          fanout.Get,
 		ProductID:     fanout.ProductID,

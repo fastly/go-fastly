@@ -15,17 +15,17 @@ var functionalTests = []*test_utils.FunctionalTestService{
 		Phase: "ensure disabled before testing",
 		OpFn:  brotlicompression.Disable,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[brotlicompression.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[brotlicompression.EnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          brotlicompression.Get,
 		ProductID:     brotlicompression.ProductID,
 		ExpectFailure: true,
 	}),
-	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[brotlicompression.ServiceEnableOutput, products.ServiceNullInput]{
+	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[brotlicompression.EnableOutput, products.ServiceNullInput]{
 		OpNoInputFn: brotlicompression.Enable,
 		ProductID:   brotlicompression.ProductID,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[brotlicompression.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[brotlicompression.EnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      brotlicompression.Get,
 		ProductID: brotlicompression.ProductID,
@@ -33,7 +33,7 @@ var functionalTests = []*test_utils.FunctionalTestService{
 	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		OpFn: brotlicompression.Disable,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[brotlicompression.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[brotlicompression.EnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          brotlicompression.Get,
 		ProductID:     brotlicompression.ProductID,

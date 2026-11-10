@@ -34,45 +34,45 @@ var functionalTests = []*test_utils.FunctionalTestService{
 		OpFn:          ngwaf.Disable,
 		IgnoreFailure: true,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[ngwaf.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[ngwaf.EnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          ngwaf.Get,
 		ProductID:     ngwaf.ProductID,
 		ExpectFailure: true,
 	}),
-	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[ngwaf.ServiceEnableOutput, ngwaf.EnableInput]{
+	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[ngwaf.EnableOutput, ngwaf.EnableInput]{
 		OpWithInputFn: ngwaf.Enable,
 		Input:         ngwaf.EnableInput{WorkspaceID: fastly.TestNGWAFWorkspaceID},
 		ProductID:     ngwaf.ProductID,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[ngwaf.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[ngwaf.EnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      ngwaf.Get,
 		ProductID: ngwaf.ProductID,
 	}),
-	serviceproductcore.NewGetConfigurationTest(&serviceproductcore.GetConfigurationTestInput[ngwaf.ServiceConfigureOutput]{
+	serviceproductcore.NewGetConfigurationTest(&serviceproductcore.GetConfigurationTestInput[ngwaf.ConfigureOutput]{
 		Phase:     "default",
 		OpFn:      ngwaf.GetConfiguration,
 		ProductID: ngwaf.ProductID,
-		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, output ngwaf.ServiceConfigureOutput) {
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, output ngwaf.ConfigureOutput) {
 			require.NotNilf(t, output.Configuration.TrafficRamp, "test '%s'", tc.Name)
 			require.Equalf(t, "100", *output.Configuration.TrafficRamp, "test '%s'", tc.Name)
 		},
 	}),
-	serviceproductcore.NewUpdateConfigurationTest(&serviceproductcore.UpdateConfigurationTestInput[ngwaf.ServiceConfigureOutput, ngwaf.ConfigureInput]{
+	serviceproductcore.NewUpdateConfigurationTest(&serviceproductcore.UpdateConfigurationTestInput[ngwaf.ConfigureOutput, ngwaf.ConfigureInput]{
 		OpFn:      ngwaf.UpdateConfiguration,
 		Input:     ngwaf.ConfigureInput{TrafficRamp: "45"},
 		ProductID: ngwaf.ProductID,
-		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, output ngwaf.ServiceConfigureOutput) {
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, output ngwaf.ConfigureOutput) {
 			require.NotNilf(t, output.Configuration.TrafficRamp, "test '%s'", tc.Name)
 			require.Equalf(t, "45", *output.Configuration.TrafficRamp, "test '%s'", tc.Name)
 		},
 	}),
-	serviceproductcore.NewGetConfigurationTest(&serviceproductcore.GetConfigurationTestInput[ngwaf.ServiceConfigureOutput]{
+	serviceproductcore.NewGetConfigurationTest(&serviceproductcore.GetConfigurationTestInput[ngwaf.ConfigureOutput]{
 		Phase:     "after update",
 		OpFn:      ngwaf.GetConfiguration,
 		ProductID: ngwaf.ProductID,
-		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, output ngwaf.ServiceConfigureOutput) {
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, output ngwaf.ConfigureOutput) {
 			require.NotNilf(t, output.Configuration.TrafficRamp, "test '%s'", tc.Name)
 			require.Equalf(t, "45", *output.Configuration.TrafficRamp, "test '%s'", tc.Name)
 		},
@@ -80,7 +80,7 @@ var functionalTests = []*test_utils.FunctionalTestService{
 	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		OpFn: ngwaf.Disable,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[ngwaf.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[ngwaf.EnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          ngwaf.Get,
 		ProductID:     ngwaf.ProductID,

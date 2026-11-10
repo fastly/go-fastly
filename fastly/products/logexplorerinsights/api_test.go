@@ -16,17 +16,17 @@ var functionalTests = []*test_utils.FunctionalTestService{
 		OpFn:          logexplorerinsights.Disable,
 		IgnoreFailure: true,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[logexplorerinsights.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[logexplorerinsights.EnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          logexplorerinsights.Get,
 		ProductID:     logexplorerinsights.ProductID,
 		ExpectFailure: true,
 	}),
-	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[logexplorerinsights.ServiceEnableOutput, products.ServiceNullInput]{
+	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[logexplorerinsights.EnableOutput, products.ServiceNullInput]{
 		OpNoInputFn: logexplorerinsights.Enable,
 		ProductID:   logexplorerinsights.ProductID,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[logexplorerinsights.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[logexplorerinsights.EnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      logexplorerinsights.Get,
 		ProductID: logexplorerinsights.ProductID,
@@ -34,7 +34,7 @@ var functionalTests = []*test_utils.FunctionalTestService{
 	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		OpFn: logexplorerinsights.Disable,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[logexplorerinsights.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[logexplorerinsights.EnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          logexplorerinsights.Get,
 		ProductID:     logexplorerinsights.ProductID,

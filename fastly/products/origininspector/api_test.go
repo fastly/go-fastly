@@ -16,17 +16,17 @@ var functionalTests = []*test_utils.FunctionalTestService{
 		OpFn:          origininspector.Disable,
 		IgnoreFailure: true,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[origininspector.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[origininspector.EnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          origininspector.Get,
 		ProductID:     origininspector.ProductID,
 		ExpectFailure: true,
 	}),
-	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[origininspector.ServiceEnableOutput, products.ServiceNullInput]{
+	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[origininspector.EnableOutput, products.ServiceNullInput]{
 		OpNoInputFn: origininspector.Enable,
 		ProductID:   origininspector.ProductID,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[origininspector.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[origininspector.EnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      origininspector.Get,
 		ProductID: origininspector.ProductID,
@@ -34,7 +34,7 @@ var functionalTests = []*test_utils.FunctionalTestService{
 	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		OpFn: origininspector.Disable,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[origininspector.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[origininspector.EnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          origininspector.Get,
 		ProductID:     origininspector.ProductID,

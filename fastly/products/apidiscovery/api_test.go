@@ -16,17 +16,17 @@ var functionalTests = []*test_utils.FunctionalTestService{
 		OpFn:          apidiscovery.Disable,
 		IgnoreFailure: true,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[apidiscovery.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[apidiscovery.EnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          apidiscovery.Get,
 		ProductID:     apidiscovery.ProductID,
 		ExpectFailure: true,
 	}),
-	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[apidiscovery.ServiceEnableOutput, products.ServiceNullInput]{
+	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[apidiscovery.EnableOutput, products.ServiceNullInput]{
 		OpNoInputFn: apidiscovery.Enable,
 		ProductID:   apidiscovery.ProductID,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[apidiscovery.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[apidiscovery.EnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      apidiscovery.Get,
 		ProductID: apidiscovery.ProductID,
@@ -34,7 +34,7 @@ var functionalTests = []*test_utils.FunctionalTestService{
 	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		OpFn: apidiscovery.Disable,
 	}),
-	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[apidiscovery.ServiceEnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[apidiscovery.EnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          apidiscovery.Get,
 		ProductID:     apidiscovery.ProductID,
