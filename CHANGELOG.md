@@ -6,11 +6,15 @@
 
 ### Enhancements:
 
-- feat(products): Add support for account-level products. ([#911](https://github.com/fastly/go-fastly/pull/911))
-
 ### Bug fixes:
 
 ### Dependencies:
+
+## [v19.2.0](https://github.com/fastly/go-fastly/releases/tag/v19.2.0) (2026-11-10)
+
+### Enhancements:
+
+- feat(products): Add support for account-level products. ([#911](https://github.com/fastly/go-fastly/pull/911))
 
 ## [v19.1.0](https://github.com/fastly/go-fastly/releases/tag/v19.1.0) (2026-11-06)
 
