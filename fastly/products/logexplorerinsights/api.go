@@ -5,7 +5,7 @@ import (
 
 	"github.com/fastly/go-fastly/v19/fastly"
 	"github.com/fastly/go-fastly/v19/fastly/products"
-	"github.com/fastly/go-fastly/v19/internal/productcore"
+	"github.com/fastly/go-fastly/v19/internal/serviceproductcore"
 )
 
 const (
@@ -13,14 +13,14 @@ const (
 	ProductName = "Log Explorer & Insights"
 )
 
-// EnableOutput holds the details returned by the API from 'Get' and
+// ServiceEnableOutput holds the details returned by the API from 'Get' and
 // 'Enable' operations; this alias exists to ensure that users of this
 // package will have a stable name to reference.
-type EnableOutput = products.EnableOutput
+type ServiceEnableOutput = products.ServiceEnableOutput
 
 // Get gets the status of the Log Explorer Bot Management Insights product on the service.
-func Get(ctx context.Context, c *fastly.Client, serviceID string) (EnableOutput, error) {
-	return productcore.Get[EnableOutput](ctx, &productcore.GetInput{
+func Get(ctx context.Context, c *fastly.Client, serviceID string) (ServiceEnableOutput, error) {
+	return serviceproductcore.Get[ServiceEnableOutput](ctx, &serviceproductcore.GetInput{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,
@@ -28,8 +28,8 @@ func Get(ctx context.Context, c *fastly.Client, serviceID string) (EnableOutput,
 }
 
 // Enable enables the Log Explorer Bot Management Insights product on the service.
-func Enable(ctx context.Context, c *fastly.Client, serviceID string) (EnableOutput, error) {
-	return productcore.Put[EnableOutput](ctx, &productcore.PutInput[products.NullInput]{
+func Enable(ctx context.Context, c *fastly.Client, serviceID string) (ServiceEnableOutput, error) {
+	return serviceproductcore.Put[ServiceEnableOutput](ctx, &serviceproductcore.PutInput[products.ServiceNullInput]{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,
@@ -38,15 +38,15 @@ func Enable(ctx context.Context, c *fastly.Client, serviceID string) (EnableOutp
 
 // Disable disables the Log Explorer Bot Management Insights product on the service.
 func Disable(ctx context.Context, c *fastly.Client, serviceID string) error {
-	return productcore.Delete(ctx, &productcore.DeleteInput{
+	return serviceproductcore.Delete(ctx, &serviceproductcore.DeleteInput{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,
 	})
 }
 
-// NewEnableOutput is used to construct mock API output structures for
+// NewServiceEnableOutput is used to construct mock API output structures for
 // use in tests.
-func NewEnableOutput(serviceID string) EnableOutput {
-	return products.NewEnableOutput(ProductID, serviceID)
+func NewServiceEnableOutput(serviceID string) ServiceEnableOutput {
+	return products.NewServiceEnableOutput(ProductID, serviceID)
 }

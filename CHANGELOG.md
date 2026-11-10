@@ -6,6 +6,8 @@
 
 ### Enhancements:
 
+- feat(products): Add support for account-level products. ([#XXX](https://github.com/fastly/go-fastly/pull/XXX))
+
 ### Bug fixes:
 
 ### Dependencies:

@@ -1,4 +1,4 @@
-package productcore_test
+package serviceproductcore_test
 
 import (
 	"context"
@@ -8,13 +8,13 @@ import (
 
 	"github.com/fastly/go-fastly/v19/fastly"
 	"github.com/fastly/go-fastly/v19/fastly/products"
-	"github.com/fastly/go-fastly/v19/internal/productcore"
+	"github.com/fastly/go-fastly/v19/internal/serviceproductcore"
 )
 
 func TestDeleteMissingServiceID(t *testing.T) {
 	t.Parallel()
 
-	err := productcore.Delete(context.TODO(), &productcore.DeleteInput{
+	err := serviceproductcore.Delete(context.TODO(), &serviceproductcore.DeleteInput{
 		ServiceID: "",
 	})
 
@@ -24,7 +24,7 @@ func TestDeleteMissingServiceID(t *testing.T) {
 func TestGetMissingServiceID(t *testing.T) {
 	t.Parallel()
 
-	_, err := productcore.Get[*products.NullOutput](context.TODO(), &productcore.GetInput{
+	_, err := serviceproductcore.Get[*products.ServiceNullOutput](context.TODO(), &serviceproductcore.GetInput{
 		ServiceID: "",
 	})
 
@@ -34,7 +34,7 @@ func TestGetMissingServiceID(t *testing.T) {
 func TestPatchMissingServiceID(t *testing.T) {
 	t.Parallel()
 
-	_, err := productcore.Patch[*products.NullOutput](context.TODO(), &productcore.PatchInput[*products.NullInput]{
+	_, err := serviceproductcore.Patch[*products.ServiceNullOutput](context.TODO(), &serviceproductcore.PatchInput[*products.ServiceNullInput]{
 		ServiceID: "",
 	})
 
@@ -44,7 +44,7 @@ func TestPatchMissingServiceID(t *testing.T) {
 func TestPutMissingServiceID(t *testing.T) {
 	t.Parallel()
 
-	_, err := productcore.Put[*products.NullOutput](context.TODO(), &productcore.PutInput[*products.NullInput]{
+	_, err := serviceproductcore.Put[*products.ServiceNullOutput](context.TODO(), &serviceproductcore.PutInput[*products.ServiceNullInput]{
 		ServiceID: "",
 	})
 

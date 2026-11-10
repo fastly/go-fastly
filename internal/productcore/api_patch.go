@@ -15,7 +15,6 @@ import (
 type PatchInput[I any] struct {
 	Client        *fastly.Client
 	ProductID     string
-	ServiceID     string
 	URLComponents []string
 	Input         I
 }
@@ -31,12 +30,7 @@ type PatchInput[I any] struct {
 // is used to construct, populate, and return the output present in
 // the response body.
 func Patch[O products.ProductOutput, I any](ctx context.Context, i *PatchInput[I]) (o O, err error) {
-	if i.ServiceID == "" {
-		err = fastly.ErrMissingServiceID
-		return
-	}
-
-	path := makeURL(i.ProductID, i.ServiceID, i.URLComponents)
+	path := makeURL(i.ProductID, i.URLComponents)
 
 	resp, err := i.Client.PatchJSON(ctx, path, i.Input, fastly.CreateRequestOptions())
 	if err != nil {
