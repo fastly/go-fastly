@@ -6,7 +6,7 @@ import (
 
 	"github.com/fastly/go-fastly/v19/fastly"
 	"github.com/fastly/go-fastly/v19/fastly/products/ddosprotection"
-	"github.com/fastly/go-fastly/v19/internal/productcore"
+	"github.com/fastly/go-fastly/v19/internal/serviceproductcore"
 	"github.com/fastly/go-fastly/v19/internal/test_utils"
 
 	"github.com/stretchr/testify/require"
@@ -22,89 +22,89 @@ func TestUpdateConfigurationMissingMode(t *testing.T) {
 	require.ErrorIs(t, err, ddosprotection.ErrMissingMode)
 }
 
-var functionalTests = []*test_utils.FunctionalTest{
-	productcore.NewDisableTest(&productcore.DisableTestInput{
+var functionalTests = []*test_utils.FunctionalTestService{
+	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		Phase:         "ensure disabled before testing",
 		OpFn:          ddosprotection.Disable,
 		IgnoreFailure: true,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[ddosprotection.EnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[ddosprotection.EnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          ddosprotection.Get,
 		ProductID:     ddosprotection.ProductID,
 		ExpectFailure: true,
 	}),
-	productcore.NewEnableTest(&productcore.EnableTestInput[ddosprotection.EnableOutput, ddosprotection.EnableInput]{
+	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[ddosprotection.EnableOutput, ddosprotection.EnableInput]{
 		OpWithInputFn: ddosprotection.Enable,
 		Input:         ddosprotection.EnableInput{},
 		ProductID:     ddosprotection.ProductID,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[ddosprotection.EnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[ddosprotection.EnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      ddosprotection.Get,
 		ProductID: ddosprotection.ProductID,
 	}),
-	productcore.NewGetConfigurationTest(&productcore.GetConfigurationTestInput[ddosprotection.ConfigureOutput]{
+	serviceproductcore.NewGetConfigurationTest(&serviceproductcore.GetConfigurationTestInput[ddosprotection.ConfigureOutput]{
 		Phase:     "default",
 		OpFn:      ddosprotection.GetConfiguration,
 		ProductID: ddosprotection.ProductID,
-		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTest, o ddosprotection.ConfigureOutput) {
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, o ddosprotection.ConfigureOutput) {
 			require.NotNilf(t, o.Configuration.Mode, "test '%s'", tc.Name)
 			require.Equalf(t, "log", *o.Configuration.Mode, "test '%s'", tc.Name)
 		},
 	}),
-	productcore.NewUpdateConfigurationTest(&productcore.UpdateConfigurationTestInput[ddosprotection.ConfigureOutput, ddosprotection.ConfigureInput]{
+	serviceproductcore.NewUpdateConfigurationTest(&serviceproductcore.UpdateConfigurationTestInput[ddosprotection.ConfigureOutput, ddosprotection.ConfigureInput]{
 		OpFn:      ddosprotection.UpdateConfiguration,
 		Input:     ddosprotection.ConfigureInput{Mode: "block"},
 		ProductID: ddosprotection.ProductID,
-		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTest, o ddosprotection.ConfigureOutput) {
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, o ddosprotection.ConfigureOutput) {
 			require.NotNilf(t, o.Configuration.Mode, "test '%s'", tc.Name)
 			require.Equalf(t, "block", *o.Configuration.Mode, "test '%s'", tc.Name)
 		},
 	}),
-	productcore.NewGetConfigurationTest(&productcore.GetConfigurationTestInput[ddosprotection.ConfigureOutput]{
+	serviceproductcore.NewGetConfigurationTest(&serviceproductcore.GetConfigurationTestInput[ddosprotection.ConfigureOutput]{
 		Phase:     "after update",
 		OpFn:      ddosprotection.GetConfiguration,
 		ProductID: ddosprotection.ProductID,
-		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTest, o ddosprotection.ConfigureOutput) {
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, o ddosprotection.ConfigureOutput) {
 			require.NotNilf(t, o.Configuration.Mode, "test '%s'", tc.Name)
 			require.Equalf(t, "block", *o.Configuration.Mode, "test '%s'", tc.Name)
 		},
 	}),
-	productcore.NewDisableTest(&productcore.DisableTestInput{
+	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		OpFn: ddosprotection.Disable,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[ddosprotection.EnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[ddosprotection.EnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          ddosprotection.Get,
 		ProductID:     ddosprotection.ProductID,
 		ExpectFailure: true,
 	}),
-	productcore.NewEnableTest(&productcore.EnableTestInput[ddosprotection.EnableOutput, ddosprotection.EnableInput]{
+	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[ddosprotection.EnableOutput, ddosprotection.EnableInput]{
 		Phase:         "enable with explicit mode",
 		OpWithInputFn: ddosprotection.Enable,
 		Input:         ddosprotection.EnableInput{Mode: "block"},
 		ProductID:     ddosprotection.ProductID,
 	}),
-	productcore.NewGetConfigurationTest(&productcore.GetConfigurationTestInput[ddosprotection.ConfigureOutput]{
+	serviceproductcore.NewGetConfigurationTest(&serviceproductcore.GetConfigurationTestInput[ddosprotection.ConfigureOutput]{
 		Phase:     "verify mode parameter",
 		OpFn:      ddosprotection.GetConfiguration,
 		ProductID: ddosprotection.ProductID,
-		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTest, o ddosprotection.ConfigureOutput) {
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, o ddosprotection.ConfigureOutput) {
 			require.NotNilf(t, o.Configuration.Mode, "test '%s'", tc.Name)
 			require.Equalf(t, "block", *o.Configuration.Mode, "test '%s'", tc.Name)
 		},
 	}),
-	productcore.NewDisableTest(&productcore.DisableTestInput{
+	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		Phase: "cleanup after mode test",
 		OpFn:  ddosprotection.Disable,
 	}),
 }
 
 func TestEnablementAndConfigurationDelivery(t *testing.T) {
-	test_utils.ExecuteFunctionalTests(t, functionalTests, fastly.TestDeliveryServiceID)
+	test_utils.ExecuteFunctionalTestsService(t, functionalTests, fastly.TestDeliveryServiceID)
 }
 
 func TestEnablementAndConfigurationCompute(t *testing.T) {
-	test_utils.ExecuteFunctionalTests(t, functionalTests, fastly.TestComputeServiceID)
+	test_utils.ExecuteFunctionalTestsService(t, functionalTests, fastly.TestComputeServiceID)
 }

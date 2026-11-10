@@ -5,7 +5,7 @@ import (
 
 	"github.com/fastly/go-fastly/v19/fastly"
 	"github.com/fastly/go-fastly/v19/fastly/products"
-	"github.com/fastly/go-fastly/v19/internal/productcore"
+	"github.com/fastly/go-fastly/v19/internal/serviceproductcore"
 )
 
 const (
@@ -16,11 +16,11 @@ const (
 // EnableOutput holds the details returned by the API from 'Get' and
 // 'Enable' operations; this alias exists to ensure that users of this
 // package will have a stable name to reference.
-type EnableOutput = products.EnableOutput
+type EnableOutput = products.ServiceEnableOutput
 
 // Get gets the status of the Origin Inspector product on the service.
 func Get(ctx context.Context, c *fastly.Client, serviceID string) (EnableOutput, error) {
-	return productcore.Get[EnableOutput](ctx, &productcore.GetInput{
+	return serviceproductcore.Get[EnableOutput](ctx, &serviceproductcore.GetInput{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,
@@ -29,7 +29,7 @@ func Get(ctx context.Context, c *fastly.Client, serviceID string) (EnableOutput,
 
 // Enable enables the Origin Inspector product on the service.
 func Enable(ctx context.Context, c *fastly.Client, serviceID string) (EnableOutput, error) {
-	return productcore.Put[EnableOutput](ctx, &productcore.PutInput[products.NullInput]{
+	return serviceproductcore.Put[EnableOutput](ctx, &serviceproductcore.PutInput[products.ServiceNullInput]{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,
@@ -38,7 +38,7 @@ func Enable(ctx context.Context, c *fastly.Client, serviceID string) (EnableOutp
 
 // Disable disables the Origin Inspector product on the service.
 func Disable(ctx context.Context, c *fastly.Client, serviceID string) error {
-	return productcore.Delete(ctx, &productcore.DeleteInput{
+	return serviceproductcore.Delete(ctx, &serviceproductcore.DeleteInput{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,
@@ -48,5 +48,5 @@ func Disable(ctx context.Context, c *fastly.Client, serviceID string) error {
 // NewEnableOutput is used to construct mock API output structures for
 // use in tests.
 func NewEnableOutput(serviceID string) EnableOutput {
-	return products.NewEnableOutput(ProductID, serviceID)
+	return products.NewServiceEnableOutput(ProductID, serviceID)
 }

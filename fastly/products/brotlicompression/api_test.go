@@ -6,34 +6,34 @@ import (
 	"github.com/fastly/go-fastly/v19/fastly"
 	"github.com/fastly/go-fastly/v19/fastly/products"
 	"github.com/fastly/go-fastly/v19/fastly/products/brotlicompression"
-	"github.com/fastly/go-fastly/v19/internal/productcore"
+	"github.com/fastly/go-fastly/v19/internal/serviceproductcore"
 	"github.com/fastly/go-fastly/v19/internal/test_utils"
 )
 
-var functionalTests = []*test_utils.FunctionalTest{
-	productcore.NewDisableTest(&productcore.DisableTestInput{
+var functionalTests = []*test_utils.FunctionalTestService{
+	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		Phase: "ensure disabled before testing",
 		OpFn:  brotlicompression.Disable,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[brotlicompression.EnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[brotlicompression.EnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          brotlicompression.Get,
 		ProductID:     brotlicompression.ProductID,
 		ExpectFailure: true,
 	}),
-	productcore.NewEnableTest(&productcore.EnableTestInput[brotlicompression.EnableOutput, products.NullInput]{
+	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[brotlicompression.EnableOutput, products.ServiceNullInput]{
 		OpNoInputFn: brotlicompression.Enable,
 		ProductID:   brotlicompression.ProductID,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[brotlicompression.EnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[brotlicompression.EnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      brotlicompression.Get,
 		ProductID: brotlicompression.ProductID,
 	}),
-	productcore.NewDisableTest(&productcore.DisableTestInput{
+	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		OpFn: brotlicompression.Disable,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[brotlicompression.EnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[brotlicompression.EnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          brotlicompression.Get,
 		ProductID:     brotlicompression.ProductID,
@@ -42,5 +42,5 @@ var functionalTests = []*test_utils.FunctionalTest{
 }
 
 func TestEnablementDelivery(t *testing.T) {
-	test_utils.ExecuteFunctionalTests(t, functionalTests, fastly.TestDeliveryServiceID)
+	test_utils.ExecuteFunctionalTestsService(t, functionalTests, fastly.TestDeliveryServiceID)
 }

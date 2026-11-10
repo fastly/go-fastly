@@ -26,7 +26,7 @@ type UpdateConfigurationTestInput[O products.ProductOutput, I any] struct {
 	Phase string
 	// OpFn is the function to be invoked to perform the
 	// operation
-	OpFn func(context.Context, *fastly.Client, string, I) (O, error)
+	OpFn func(context.Context, *fastly.Client, I) (O, error)
 	// Input is the input to be provided to OpFn
 	Input I
 	// ProductID identifies the product for which information
@@ -67,10 +67,10 @@ func NewUpdateConfigurationTest[O products.ProductOutput, I any](i *UpdateConfig
 		r.Operation = "update-configuration"
 	}
 
-	r.TestFn = func(t *testing.T, tc *test_utils.FunctionalTest, c *fastly.Client, serviceID string) error {
-		result, err := i.OpFn(context.TODO(), c, serviceID, i.Input)
+	r.TestFn = func(t *testing.T, tc *test_utils.FunctionalTest, c *fastly.Client) error {
+		result, err := i.OpFn(context.TODO(), c, i.Input)
 		if err == nil {
-			validateOutput(t, tc, result, i.ProductID, serviceID)
+			validateOutput(t, tc, result, i.ProductID)
 			if i.CheckOutputFn != nil {
 				i.CheckOutputFn(t, tc, result)
 			}

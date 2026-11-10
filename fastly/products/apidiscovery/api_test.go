@@ -6,35 +6,35 @@ import (
 	"github.com/fastly/go-fastly/v19/fastly"
 	"github.com/fastly/go-fastly/v19/fastly/products"
 	"github.com/fastly/go-fastly/v19/fastly/products/apidiscovery"
-	"github.com/fastly/go-fastly/v19/internal/productcore"
+	"github.com/fastly/go-fastly/v19/internal/serviceproductcore"
 	"github.com/fastly/go-fastly/v19/internal/test_utils"
 )
 
-var functionalTests = []*test_utils.FunctionalTest{
-	productcore.NewDisableTest(&productcore.DisableTestInput{
+var functionalTests = []*test_utils.FunctionalTestService{
+	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		Phase:         "ensure disabled before testing",
 		OpFn:          apidiscovery.Disable,
 		IgnoreFailure: true,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[apidiscovery.EnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[apidiscovery.EnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          apidiscovery.Get,
 		ProductID:     apidiscovery.ProductID,
 		ExpectFailure: true,
 	}),
-	productcore.NewEnableTest(&productcore.EnableTestInput[apidiscovery.EnableOutput, products.NullInput]{
+	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[apidiscovery.EnableOutput, products.ServiceNullInput]{
 		OpNoInputFn: apidiscovery.Enable,
 		ProductID:   apidiscovery.ProductID,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[apidiscovery.EnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[apidiscovery.EnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      apidiscovery.Get,
 		ProductID: apidiscovery.ProductID,
 	}),
-	productcore.NewDisableTest(&productcore.DisableTestInput{
+	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		OpFn: apidiscovery.Disable,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[apidiscovery.EnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[apidiscovery.EnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          apidiscovery.Get,
 		ProductID:     apidiscovery.ProductID,
@@ -43,5 +43,5 @@ var functionalTests = []*test_utils.FunctionalTest{
 }
 
 func TestEnablementDelivery(t *testing.T) {
-	test_utils.ExecuteFunctionalTests(t, functionalTests, fastly.TestDeliveryServiceID)
+	test_utils.ExecuteFunctionalTestsService(t, functionalTests, fastly.TestDeliveryServiceID)
 }

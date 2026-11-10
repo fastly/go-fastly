@@ -6,35 +6,35 @@ import (
 	"github.com/fastly/go-fastly/v19/fastly"
 	"github.com/fastly/go-fastly/v19/fastly/products"
 	"github.com/fastly/go-fastly/v19/fastly/products/fanout"
-	"github.com/fastly/go-fastly/v19/internal/productcore"
+	"github.com/fastly/go-fastly/v19/internal/serviceproductcore"
 	"github.com/fastly/go-fastly/v19/internal/test_utils"
 )
 
-var functionalTests = []*test_utils.FunctionalTest{
-	productcore.NewDisableTest(&productcore.DisableTestInput{
+var functionalTests = []*test_utils.FunctionalTestService{
+	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		Phase:         "ensure disabled before testing",
 		OpFn:          fanout.Disable,
 		IgnoreFailure: true,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[fanout.EnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[fanout.EnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          fanout.Get,
 		ProductID:     fanout.ProductID,
 		ExpectFailure: true,
 	}),
-	productcore.NewEnableTest(&productcore.EnableTestInput[fanout.EnableOutput, products.NullInput]{
+	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[fanout.EnableOutput, products.ServiceNullInput]{
 		OpNoInputFn: fanout.Enable,
 		ProductID:   fanout.ProductID,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[fanout.EnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[fanout.EnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      fanout.Get,
 		ProductID: fanout.ProductID,
 	}),
-	productcore.NewDisableTest(&productcore.DisableTestInput{
+	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		OpFn: fanout.Disable,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[fanout.EnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[fanout.EnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          fanout.Get,
 		ProductID:     fanout.ProductID,
@@ -43,5 +43,5 @@ var functionalTests = []*test_utils.FunctionalTest{
 }
 
 func TestEnablementCompute(t *testing.T) {
-	test_utils.ExecuteFunctionalTests(t, functionalTests, fastly.TestComputeServiceID)
+	test_utils.ExecuteFunctionalTestsService(t, functionalTests, fastly.TestComputeServiceID)
 }

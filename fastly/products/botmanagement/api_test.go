@@ -7,7 +7,7 @@ import (
 	"github.com/fastly/go-fastly/v19/fastly"
 	"github.com/fastly/go-fastly/v19/fastly/products"
 	"github.com/fastly/go-fastly/v19/fastly/products/botmanagement"
-	"github.com/fastly/go-fastly/v19/internal/productcore"
+	"github.com/fastly/go-fastly/v19/internal/serviceproductcore"
 	"github.com/fastly/go-fastly/v19/internal/test_utils"
 
 	"github.com/stretchr/testify/require"
@@ -23,58 +23,58 @@ func TestUpdateConfigurationMissingContentGuard(t *testing.T) {
 	require.ErrorIs(t, err, botmanagement.ErrMissingContentGuard)
 }
 
-var functionalTests = []*test_utils.FunctionalTest{
-	productcore.NewDisableTest(&productcore.DisableTestInput{
+var functionalTests = []*test_utils.FunctionalTestService{
+	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		Phase:         "ensure disabled before testing",
 		OpFn:          botmanagement.Disable,
 		IgnoreFailure: true,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[botmanagement.EnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[botmanagement.EnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          botmanagement.Get,
 		ProductID:     botmanagement.ProductID,
 		ExpectFailure: true,
 	}),
-	productcore.NewEnableTest(&productcore.EnableTestInput[botmanagement.EnableOutput, products.NullInput]{
+	serviceproductcore.NewEnableTest(&serviceproductcore.EnableTestInput[botmanagement.EnableOutput, products.ServiceNullInput]{
 		OpNoInputFn: botmanagement.Enable,
 		ProductID:   botmanagement.ProductID,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[botmanagement.EnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[botmanagement.EnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      botmanagement.Get,
 		ProductID: botmanagement.ProductID,
 	}),
-	productcore.NewGetConfigurationTest(&productcore.GetConfigurationTestInput[botmanagement.ConfigureOutput]{
+	serviceproductcore.NewGetConfigurationTest(&serviceproductcore.GetConfigurationTestInput[botmanagement.ConfigureOutput]{
 		Phase:     "default",
 		OpFn:      botmanagement.GetConfiguration,
 		ProductID: botmanagement.ProductID,
-		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTest, o botmanagement.ConfigureOutput) {
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, o botmanagement.ConfigureOutput) {
 			require.NotNilf(t, o.Configuration.ContentGuard, "test '%s'", tc.Name)
 			require.Equalf(t, "off", *o.Configuration.ContentGuard, "test '%s'", tc.Name)
 		},
 	}),
-	productcore.NewUpdateConfigurationTest(&productcore.UpdateConfigurationTestInput[botmanagement.ConfigureOutput, botmanagement.ConfigureInput]{
+	serviceproductcore.NewUpdateConfigurationTest(&serviceproductcore.UpdateConfigurationTestInput[botmanagement.ConfigureOutput, botmanagement.ConfigureInput]{
 		OpFn:      botmanagement.UpdateConfiguration,
 		Input:     botmanagement.ConfigureInput{ContentGuard: "on"},
 		ProductID: botmanagement.ProductID,
-		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTest, o botmanagement.ConfigureOutput) {
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, o botmanagement.ConfigureOutput) {
 			require.NotNilf(t, o.Configuration.ContentGuard, "test '%s'", tc.Name)
 			require.Equalf(t, "on", *o.Configuration.ContentGuard, "test '%s'", tc.Name)
 		},
 	}),
-	productcore.NewGetConfigurationTest(&productcore.GetConfigurationTestInput[botmanagement.ConfigureOutput]{
+	serviceproductcore.NewGetConfigurationTest(&serviceproductcore.GetConfigurationTestInput[botmanagement.ConfigureOutput]{
 		Phase:     "after update",
 		OpFn:      botmanagement.GetConfiguration,
 		ProductID: botmanagement.ProductID,
-		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTest, o botmanagement.ConfigureOutput) {
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTestService, o botmanagement.ConfigureOutput) {
 			require.NotNilf(t, o.Configuration.ContentGuard, "test '%s'", tc.Name)
 			require.Equalf(t, "on", *o.Configuration.ContentGuard, "test '%s'", tc.Name)
 		},
 	}),
-	productcore.NewDisableTest(&productcore.DisableTestInput{
+	serviceproductcore.NewDisableTest(&serviceproductcore.DisableTestInput{
 		OpFn: botmanagement.Disable,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[botmanagement.EnableOutput]{
+	serviceproductcore.NewGetTest(&serviceproductcore.GetTestInput[botmanagement.EnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          botmanagement.Get,
 		ProductID:     botmanagement.ProductID,
@@ -83,5 +83,5 @@ var functionalTests = []*test_utils.FunctionalTest{
 }
 
 func TestEnablementAndConfigurationDelivery(t *testing.T) {
-	test_utils.ExecuteFunctionalTests(t, functionalTests, fastly.TestDeliveryServiceID)
+	test_utils.ExecuteFunctionalTestsService(t, functionalTests, fastly.TestDeliveryServiceID)
 }

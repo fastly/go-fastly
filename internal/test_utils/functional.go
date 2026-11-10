@@ -9,7 +9,7 @@ import (
 	"github.com/fastly/go-fastly/v19/fastly"
 )
 
-type FunctionalTest struct {
+type BaseFunctionalTest struct {
 	// CheckErrorFn is a function which can be used to perform
 	// additional validation of the error returned by TestFn; the
 	// function will be passed a formatted string containing the
@@ -20,8 +20,6 @@ type FunctionalTest struct {
 	// Operation is the operation being performed, which will be
 	// used to construct the recorded fixture file's name
 	Operation string
-	// TestFn is the function to be called to run the test
-	TestFn func(*testing.T, *FunctionalTest, *fastly.Client, string) error
 	// WantNoError indicates that the test case should fail if any
 	// error is returned by TestFn
 	WantNoError bool
@@ -30,7 +28,40 @@ type FunctionalTest struct {
 	WantError error
 }
 
-func ExecuteFunctionalTests(t *testing.T, tests []*FunctionalTest, serviceID string) {
+type FunctionalTest struct {
+	BaseFunctionalTest
+	// TestFn is the function to be called to run the test
+	TestFn func(*testing.T, *FunctionalTest, *fastly.Client) error
+}
+
+type FunctionalTestService struct {
+	BaseFunctionalTest
+	// TestFn is the function to be called to run the test
+	TestFn func(*testing.T, *FunctionalTestService, *fastly.Client, string) error
+}
+
+func ExecuteFunctionalTests(t *testing.T, tests []*FunctionalTest) {
+	t.Parallel()
+
+	var err error
+
+	for _, tc := range tests {
+		fastly.Record(t, tc.Operation, func(c *fastly.Client) {
+			err = tc.TestFn(t, tc, c)
+		})
+		if tc.WantNoError {
+			require.NoErrorf(t, err, "test '%s'", tc.Name)
+		}
+		if tc.WantError != nil {
+			require.ErrorIsf(t, err, tc.WantError, "test '%s'", tc.Name)
+		}
+		if tc.CheckErrorFn != nil {
+			tc.CheckErrorFn(t, fmt.Sprintf("test '%s", tc.Name), err)
+		}
+	}
+}
+
+func ExecuteFunctionalTestsService(t *testing.T, tests []*FunctionalTestService, serviceID string) {
 	t.Parallel()
 
 	var err error
