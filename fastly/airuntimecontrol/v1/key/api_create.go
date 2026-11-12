@@ -14,8 +14,8 @@ import (
 type CreateInput struct {
 	// Name is the display name of the virtual key (required).
 	Name *string `json:"name"`
-	// Model is the AI model identifier (required).
-	Model *string `json:"model"`
+	// Model is the AI model identifier.
+	Model *string `json:"model,omitempty"`
 	// Provider is the AI model provider name (required).
 	Provider *string `json:"provider"`
 	// ExpiresAt is the date and time the key expires, in RFC 3339 format. `null`
@@ -38,9 +38,6 @@ type CreateInput struct {
 func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*VirtualKeyWithToken, error) {
 	if i.Name == nil {
 		return nil, fastly.ErrMissingName
-	}
-	if i.Model == nil {
-		return nil, fastly.ErrMissingModel
 	}
 	if i.Provider == nil {
 		return nil, fastly.ErrMissingProvider
