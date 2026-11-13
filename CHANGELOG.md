@@ -6,7 +6,9 @@
 
 ### Enhancements:
 
+
 - feat(botmanagement/policy): add `UpdateCategoryBots` to set the action for every bot in a category
+- feat(logging): Add support for the Fastly Object Storage (FOS) logging endpoint.
 
 ### Bug fixes:
 
