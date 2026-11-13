@@ -7,8 +7,8 @@
 ### Enhancements:
 
 
-- feat(botmanagement/policy): add `UpdateCategoryBots` to set the action for every bot in a category
-- feat(logging): Add support for the Fastly Object Storage (FOS) logging endpoint.
+- feat(botmanagement/policy): add `UpdateCategoryBots` to set the action for every bot in a category ([#913](https://github.com/fastly/go-fastly/pull/913))
+- feat(logging): Add support for the Fastly Object Storage (FOS) logging endpoint. ([#914](https://github.com/fastly/go-fastly/pull/914))
 
 ### Bug fixes:
 
