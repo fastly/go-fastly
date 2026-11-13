@@ -75,39 +75,6 @@ func TestClient_Policy(t *testing.T) {
 	require.Equal(t, category.Name, gotCategory.Name)
 	require.Equal(t, category.Action.Type, gotCategory.Action.Type)
 
-	// Restore the original category action at the end.
-	defer func() {
-		fastly.Record(t, "restore_category", func(c *fastly.Client) {
-			_, err = UpdateCategory(ctx, c, &UpdateCategoryInput{
-				Action:      &Action{Type: category.Action.Type},
-				CategoryID:  new(category.CategoryID),
-				WorkspaceID: new(workspaceID),
-			})
-		})
-		if err != nil {
-			t.Errorf("error restoring category: %v", err)
-		}
-	}()
-
-	// Update the category action to a different value.
-	updatedCategoryAction := "block"
-	if category.Action.Type == updatedCategoryAction {
-		updatedCategoryAction = "challenge"
-	}
-
-	var updatedCategory *Category
-	fastly.Record(t, "update_category", func(c *fastly.Client) {
-		updatedCategory, err = UpdateCategory(ctx, c, &UpdateCategoryInput{
-			Action:      &Action{Type: updatedCategoryAction},
-			CategoryID:  new(category.CategoryID),
-			WorkspaceID: new(workspaceID),
-		})
-	})
-	require.NoError(t, err)
-	require.NotNil(t, updatedCategory)
-	require.Equal(t, category.CategoryID, updatedCategory.CategoryID)
-	require.Equal(t, updatedCategoryAction, updatedCategory.Action.Type)
-
 	// List all bots in the workspace. Each bot should report its category.
 	var workspaceBots []Bot
 	fastly.Record(t, "list_bots", func(c *fastly.Client) {
@@ -145,7 +112,8 @@ func TestClient_Policy(t *testing.T) {
 	require.NoError(t, err)
 	require.Len(t, paginatedCategoryBots, len(categoryBots))
 
-	bot := categoryBots[0]
+	botIndex := 0
+	bot := categoryBots[botIndex]
 
 	// Get the bot.
 	var gotBot *Bot
@@ -177,10 +145,12 @@ func TestClient_Policy(t *testing.T) {
 		}
 	}()
 
-	// Update the bot action to a different value.
-	updatedBotAction := "inherit"
+	// Update the bot action to a different value. don't choose "inherit", since
+	// we need to be sure that the "update_category_bots" test below actually
+	// makes changes
+	updatedBotAction := "allow"
 	if bot.Action.Type == updatedBotAction {
-		updatedBotAction = "allow"
+		updatedBotAction = "block"
 	}
 
 	var updatedBot *Bot
@@ -196,6 +166,121 @@ func TestClient_Policy(t *testing.T) {
 	require.NotNil(t, updatedBot)
 	require.Equal(t, bot.BotID, updatedBot.BotID)
 	require.Equal(t, updatedBotAction, updatedBot.Action.Type)
+
+	// update our references to this bot so that we're consistent
+	// without having to re-fetch it from the API
+	bot = *updatedBot
+	categoryBots[botIndex] = *updatedBot
+
+	// Restore the original category action at the end.
+	defer func() {
+		fastly.Record(t, "restore_category", func(c *fastly.Client) {
+			_, err = UpdateCategory(ctx, c, &UpdateCategoryInput{
+				Action:      &Action{Type: category.Action.Type},
+				CategoryID:  new(category.CategoryID),
+				WorkspaceID: new(workspaceID),
+			})
+		})
+		if err != nil {
+			t.Errorf("error restoring category: %v", err)
+		}
+	}()
+
+	// Update the category action to a different value.
+	updatedCategoryAction := "block"
+	if category.Action.Type == updatedCategoryAction {
+		updatedCategoryAction = "challenge"
+	}
+
+	var updatedCategory *Category
+	fastly.Record(t, "update_category", func(c *fastly.Client) {
+		updatedCategory, err = UpdateCategory(ctx, c, &UpdateCategoryInput{
+			Action:      &Action{Type: updatedCategoryAction},
+			CategoryID:  new(category.CategoryID),
+			WorkspaceID: new(workspaceID),
+		})
+	})
+	require.NoError(t, err)
+	require.NotNil(t, updatedCategory)
+	require.Equal(t, category.CategoryID, updatedCategory.CategoryID)
+	require.Equal(t, updatedCategoryAction, updatedCategory.Action.Type)
+
+	// Updating the category action keeps the action set on the bot above.
+	// Previously, it reset every bot in the category to "inherit".
+	var botAfterCategoryUpdate *Bot
+	fastly.Record(t, "get_bot_after_update_category", func(c *fastly.Client) {
+		botAfterCategoryUpdate, err = GetBot(ctx, c, &GetBotInput{
+			BotID:       new(bot.BotID),
+			CategoryID:  new(category.CategoryID),
+			WorkspaceID: new(workspaceID),
+		})
+	})
+	require.NoError(t, err)
+	require.NotNil(t, botAfterCategoryUpdate)
+	require.Equal(t, bot.Action.Type, botAfterCategoryUpdate.Action.Type)
+
+	allBotsUpdatedAction := "inherit"
+
+	// Return every bot in the category to its original action,
+	// since the below test will update every bot in the category
+	// to inherit the category's action.
+	defer func() {
+		fastly.Record(t, "restore_category_bots", func(c *fastly.Client) {
+			// only restore ones that weren't already set
+			// (to keep the size of the record smaller)
+			for _, b := range categoryBots {
+				if b.Action.Type == allBotsUpdatedAction {
+					continue
+				}
+
+				if _, err := UpdateBot(ctx, c, &UpdateBotInput{
+					Action:      &Action{Type: b.Action.Type},
+					BotID:       new(b.BotID),
+					CategoryID:  new(category.CategoryID),
+					WorkspaceID: new(workspaceID),
+				}); err != nil {
+					t.Errorf("error restoring bot %q: %v", b.BotID, err)
+				}
+			}
+		})
+	}()
+
+	// the `update_bot` test changed the action of one bot to "allow" or "block"
+	// after this call all bots in the category should have an action of "inherit"
+
+	var updatedCategoryBots []Bot
+	fastly.Record(t, "update_category_bots", func(c *fastly.Client) {
+		updatedCategoryBots, err = UpdateCategoryBots(ctx, c, &UpdateCategoryBotsInput{
+			Action:      &Action{Type: allBotsUpdatedAction},
+			CategoryID:  new(category.CategoryID),
+			WorkspaceID: new(workspaceID),
+		})
+	})
+	require.NoError(t, err)
+
+	var wantBotIDs, gotBotIDs []string
+	for _, b := range categoryBots {
+		wantBotIDs = append(wantBotIDs, b.BotID)
+	}
+	for _, b := range updatedCategoryBots {
+		gotBotIDs = append(gotBotIDs, b.BotID)
+		// Each bot should now inherit the category's action.
+		require.Equal(t, "inherit", b.Action.Type, "expected bot %q to inherit", b.BotID)
+	}
+	// patch should have listed all bots, not just what was changed
+	require.ElementsMatch(t, wantBotIDs, gotBotIDs)
+
+	// The category's own action is unchanged.
+	var categoryAfterBotsUpdate *Category
+	fastly.Record(t, "get_category_after_update_category_bots", func(c *fastly.Client) {
+		categoryAfterBotsUpdate, err = GetCategory(ctx, c, &GetCategoryInput{
+			CategoryID:  new(category.CategoryID),
+			WorkspaceID: new(workspaceID),
+		})
+	})
+	require.NoError(t, err)
+	require.NotNil(t, categoryAfterBotsUpdate)
+	require.Equal(t, updatedCategoryAction, categoryAfterBotsUpdate.Action.Type)
 }
 
 func TestClient_Policy_validation(t *testing.T) {
@@ -256,6 +341,35 @@ func TestClient_Policy_validation(t *testing.T) {
 	require.ErrorIs(t, err, fastly.ErrMissingCategoryID)
 
 	_, err = UpdateCategory(ctx, fastly.TestClient, &UpdateCategoryInput{
+		Action:      nil,
+		CategoryID:  new("category"),
+		WorkspaceID: new("workspace"),
+	})
+	require.ErrorIs(t, err, fastly.ErrMissingAction)
+
+	_, err = UpdateCategoryBots(ctx, fastly.TestClient, &UpdateCategoryBotsInput{
+		WorkspaceID: nil,
+	})
+	require.ErrorIs(t, err, fastly.ErrMissingWorkspaceID)
+
+	_, err = UpdateCategoryBots(ctx, fastly.TestClient, &UpdateCategoryBotsInput{
+		WorkspaceID: new(""),
+	})
+	require.ErrorIs(t, err, fastly.ErrMissingWorkspaceID)
+
+	_, err = UpdateCategoryBots(ctx, fastly.TestClient, &UpdateCategoryBotsInput{
+		CategoryID:  nil,
+		WorkspaceID: new("workspace"),
+	})
+	require.ErrorIs(t, err, fastly.ErrMissingCategoryID)
+
+	_, err = UpdateCategoryBots(ctx, fastly.TestClient, &UpdateCategoryBotsInput{
+		CategoryID:  new(""),
+		WorkspaceID: new("workspace"),
+	})
+	require.ErrorIs(t, err, fastly.ErrMissingCategoryID)
+
+	_, err = UpdateCategoryBots(ctx, fastly.TestClient, &UpdateCategoryBotsInput{
 		Action:      nil,
 		CategoryID:  new("category"),
 		WorkspaceID: new("workspace"),

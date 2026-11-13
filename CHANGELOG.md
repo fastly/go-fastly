@@ -6,6 +6,8 @@
 
 ### Enhancements:
 
+- feat(botmanagement/policy): add `UpdateCategoryBots` to set the action for every bot in a category
+
 ### Bug fixes:
 
 ### Dependencies:
