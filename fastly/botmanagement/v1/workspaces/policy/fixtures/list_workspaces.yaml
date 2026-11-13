@@ -8,12 +8,12 @@ interactions:
       Accept:
       - application/json
       User-Agent:
-      - FastlyGo/17.4.0 (+github.com/fastly/go-fastly; go1.27.1)
+      - FastlyGo/18.1.0 (+github.com/fastly/go-fastly; go1.26.10)
     url: https://api.fastly.com/bot-management/v1/workspaces?limit=1000
     method: GET
   response:
-    body: '{"meta":{"limit":1000,"total":44,"next_cursor":null},"data":[{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
-      workspace","description":"","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-02T21:36:53Z","updated_at":"2026-09-25T18:19:31Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+    body: '{"meta":{"limit":1000,"total":33,"next_cursor":null},"data":[{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
+      workspace","description":"","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-02T21:36:53Z","updated_at":"2026-09-25T18:25:43Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
       workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-02T21:37:26Z","updated_at":"2026-09-02T21:37:26Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
       workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-08T14:24:09Z","updated_at":"2026-09-08T14:24:09Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
       workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-08T14:24:51Z","updated_at":"2026-09-08T14:24:51Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
@@ -40,23 +40,12 @@ interactions:
       workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-15T15:26:47Z","updated_at":"2026-09-15T15:26:47Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
       workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-15T15:43:14Z","updated_at":"2026-09-15T15:43:14Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
       workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-15T15:43:41Z","updated_at":"2026-09-15T15:43:41Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
-      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-16T20:47:43Z","updated_at":"2026-09-16T20:47:43Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
-      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-16T20:48:14Z","updated_at":"2026-09-16T20:48:14Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
-      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-16T20:50:25Z","updated_at":"2026-09-16T20:50:25Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
-      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-16T20:51:20Z","updated_at":"2026-09-16T20:51:20Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
-      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-16T20:51:50Z","updated_at":"2026-09-16T20:51:50Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
-      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-17T13:32:58Z","updated_at":"2026-09-17T13:32:58Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
-      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-18T14:09:51Z","updated_at":"2026-09-18T14:09:51Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
-      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-18T14:10:22Z","updated_at":"2026-09-18T14:10:22Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
-      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-18T14:36:52Z","updated_at":"2026-09-18T14:36:52Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
-      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-18T14:37:27Z","updated_at":"2026-09-18T14:37:27Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
       workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-22T01:19:40Z","updated_at":"2026-09-22T01:19:40Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
       workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-22T03:35:55Z","updated_at":"2026-09-22T03:35:55Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
       workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-23T20:07:53Z","updated_at":"2026-09-23T20:07:53Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
-      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-24T13:58:48Z","updated_at":"2026-09-24T13:58:48Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
-      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-24T13:58:51Z","updated_at":"2026-09-24T13:58:51Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
       workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-25T13:17:15Z","updated_at":"2026-09-25T13:17:15Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Default
-      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-25T13:48:48Z","updated_at":"2026-09-25T13:48:48Z"}]}'
+      workspace","protection_mode":"log","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-25T13:48:48Z","updated_at":"2026-09-25T13:48:48Z"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"Not
+      default workspace","description":"Does it work","protection_mode":"off","services":["XXXXXXXXXXXXXXXXXXXXXX"],"created_at":"2026-09-28T16:33:20Z","updated_at":"2026-09-28T21:02:27Z"}]}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,7 +54,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 25 Sep 2026 18:25:40 GMT
+      - Fri, 13 Nov 2026 19:03:28 GMT
       Pragma:
       - no-cache
       Server:
@@ -79,11 +68,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "2169"
+      - "2166"
       X-Served-By:
-      - cache-chi-kmdw8640076-CHI, cache-ewr-kewr1740030-EWR
+      - cache-chi-kmdw8640071-CHI, cache-bur-kbur8200023-BUR
       X-Timer:
-      - S1790360739.777760,VS0,VE2201
+      - S1794596607.720118,VS0,VE2231
     status: 200 OK
     code: 200
     duration: ""
