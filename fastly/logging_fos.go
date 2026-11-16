@@ -23,10 +23,8 @@ type FOS struct {
 	Period            *int       `mapstructure:"period"`
 	Placement         *string    `mapstructure:"placement"`
 	PublicKey         *string    `mapstructure:"public_key"`
-	Redundancy        *string    `mapstructure:"redundancy"`
 	Region            *string    `mapstructure:"region"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
-	SecretKey         *string    `mapstructure:"secret_key"`
 	ServiceID         *string    `mapstructure:"service_id"`
 	ServiceVersion    *int       `mapstructure:"version"`
 	TimestampFormat   *string    `mapstructure:"timestamp_format"`
@@ -66,8 +64,6 @@ func (c *Client) ListFOSes(ctx context.Context, i *ListFOSesInput) ([]*FOS, erro
 
 // CreateFOSInput is used as input to the CreateFOS function.
 type CreateFOSInput struct {
-	//  AccessKey is the access key for your Fastly Object Storage account.
-	AccessKey *string `url:"access_key,omitempty"`
 	// BucketName is the name of the Fastly Object Storage bucket.
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.
@@ -92,14 +88,10 @@ type CreateFOSInput struct {
 	Placement *string `url:"placement,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
 	PublicKey *string `url:"public_key,omitempty"`
-	// Redundancy is the redundancy level.
-	Redundancy *string `url:"redundancy,omitempty"`
 	// Region is the region of the Fastly Object Storage bucket.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
-	// SecretKey is the secret key for your Fastly Object Storage account.
-	SecretKey *string `url:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
@@ -169,8 +161,6 @@ func (c *Client) GetFOS(ctx context.Context, i *GetFOSInput) (*FOS, error) {
 
 // UpdateFOSInput is used as input to the UpdateFOS function.
 type UpdateFOSInput struct {
-	//  AccessKey is the access key for your Fastly Object Storage account.
-	AccessKey *string `json:"access_key,omitempty"`
 	// BucketName is the name of the Fastly Object Storage bucket.
 	BucketName *string `json:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.
@@ -198,14 +188,10 @@ type UpdateFOSInput struct {
 	Placement *Nullable[string] `json:"placement,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
 	PublicKey *string `json:"public_key,omitempty"`
-	// Redundancy is the redundancy level.
-	Redundancy *string `json:"redundancy,omitempty"`
 	// Region is the region of the Fastly Object Storage bucket.
 	Region *string `json:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `json:"response_condition,omitempty"`
-	// SecretKey is the secret key for your Fastly Object Storage account.
-	SecretKey *string `json:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `json:"-"`
 	// ServiceVersion is the specific configuration version (required).

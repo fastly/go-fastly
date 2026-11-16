@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 13 Nov 2026 20:48:38 GMT
+      - Mon, 16 Nov 2026 16:05:06 GMT
       Fastly-Ratelimit-Remaining:
-      - "9994"
+      - "9984"
       Fastly-Ratelimit-Reset:
-      - "1794603600"
+      - "1794848400"
       Pragma:
       - no-cache
       Server:
@@ -43,11 +43,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "103"
+      - "85"
       X-Served-By:
-      - cache-chi-kmdw8640030-CHI, cache-ewr-kewr1740020-EWR
+      - cache-chi-kigq8000111-CHI, cache-ewr-kewr1740039-EWR
       X-Timer:
-      - S1794602918.099327,VS0,VE132
+      - S1794845106.294181,VS0,VE115
     status: 404 Not Found
     code: 404
     duration: ""
@@ -71,11 +71,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 13 Nov 2026 20:48:38 GMT
+      - Mon, 16 Nov 2026 16:05:06 GMT
       Fastly-Ratelimit-Remaining:
-      - "9993"
+      - "9983"
       Fastly-Ratelimit-Reset:
-      - "1794603600"
+      - "1794848400"
       Pragma:
       - no-cache
       Server:
@@ -93,11 +93,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "77"
+      - "90"
       X-Served-By:
-      - cache-chi-klot8100083-CHI, cache-ewr-kewr1740020-EWR
+      - cache-chi-kigq8000166-CHI, cache-ewr-kewr1740039-EWR
       X-Timer:
-      - S1794602918.247703,VS0,VE116
+      - S1794845106.422706,VS0,VE123
     status: 404 Not Found
     code: 404
     duration: ""

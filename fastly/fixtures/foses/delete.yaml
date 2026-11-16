@@ -19,11 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 13 Nov 2026 20:48:38 GMT
+      - Mon, 16 Nov 2026 16:05:06 GMT
       Fastly-Ratelimit-Remaining:
-      - "9995"
+      - "9985"
       Fastly-Ratelimit-Reset:
-      - "1794603600"
+      - "1794848400"
       Pragma:
       - no-cache
       Server:
@@ -41,11 +41,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "279"
+      - "345"
       X-Served-By:
-      - cache-chi-klot8100083-CHI, cache-ewr-kewr1740020-EWR
+      - cache-chi-kigq8000166-CHI, cache-ewr-kewr1740039-EWR
       X-Timer:
-      - S1794602918.764773,VS0,VE310
+      - S1794845106.907600,VS0,VE374
     status: 200 OK
     code: 200
     duration: ""

@@ -24,8 +24,6 @@ func TestClient_FOSes(t *testing.T) {
 			Name:             new("test-fos"),
 			BucketName:       new("bucket-name"),
 			Region:           new("us-east"),
-			AccessKey:        new("AKIAIOSFODNN7EXAMPLE"),
-			SecretKey:        new("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
 			Path:             new("/path"),
 			Period:           new(12),
 			CompressionCodec: new("snappy"),
@@ -176,6 +174,55 @@ func TestClient_FOSes(t *testing.T) {
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+}
+
+func TestClient_CreateFOS_requiredOnly(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	var tv *Version
+	Record(t, "foses/create_required_only_version", func(c *Client) {
+		tv = testVersion(t, c)
+	})
+
+	// Create using only the required configuration (no credentials: Fastly
+	// generates a bucket-scoped access key automatically).
+	var fos *FOS
+	Record(t, "foses/create_required_only", func(c *Client) {
+		fos, err = c.CreateFOS(context.TODO(), &CreateFOSInput{
+			ServiceID:      TestDeliveryServiceID,
+			ServiceVersion: *tv.Number,
+			Name:           new("test-fos-required-only"),
+			BucketName:     new("bucket-name"),
+			Region:         new("us-east"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	defer func() {
+		Record(t, "foses/create_required_only_cleanup", func(c *Client) {
+			_ = c.DeleteFOS(context.TODO(), &DeleteFOSInput{
+				ServiceID:      TestDeliveryServiceID,
+				ServiceVersion: *tv.Number,
+				Name:           "test-fos-required-only",
+			})
+		})
+	}()
+
+	if *fos.Name != "test-fos-required-only" {
+		t.Errorf("bad name: %q", *fos.Name)
+	}
+	if *fos.BucketName != "bucket-name" {
+		t.Errorf("bad bucket_name: %q", *fos.BucketName)
+	}
+	if *fos.Region != "us-east" {
+		t.Errorf("bad region: %q", *fos.Region)
+	}
+	if fos.AccessKey == nil || *fos.AccessKey == "" {
+		t.Errorf("expected a server-generated access_key in response")
 	}
 }
 
