@@ -6,12 +6,16 @@
 
 ### Enhancements:
 
-- feat(botmanagement/policy): add `UpdateCategoryBots` to set the action for every bot in a category ([#913](https://github.com/fastly/go-fastly/pull/913))
-- feat(logging): Add support for the Fastly Object Storage (FOS) logging endpoint. ([#914](https://github.com/fastly/go-fastly/pull/914))
-
 ### Bug fixes:
 
 ### Dependencies:
+
+## [v19.3.0](https://github.com/fastly/go-fastly/releases/tag/v19.3.0) (2026-11-16)
+
+### Enhancements:
+
+- feat(botmanagement/policy): add `UpdateCategoryBots` to set the action for every bot in a category ([#913](https://github.com/fastly/go-fastly/pull/913))
+- feat(logging): Add support for the Fastly Object Storage (FOS) logging endpoint. ([#914](https://github.com/fastly/go-fastly/pull/914))
 
 ## [v19.2.0](https://github.com/fastly/go-fastly/releases/tag/v19.2.0) (2026-11-10)
 
