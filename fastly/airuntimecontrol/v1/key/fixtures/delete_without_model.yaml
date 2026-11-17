@@ -1,0 +1,43 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/19.3.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/ai-runtime-control/v1/keys/115650bfb9d1c59d4cb9
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 17 Nov 2026 14:35:14 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "294"
+      X-Served-By:
+      - cache-chi-kigq8000137-CHI, cache-ewr-kewr1740092-EWR
+      X-Timer:
+      - S1794926115.575302,VS0,VE323
+    status: 204 No Content
+    code: 204
+    duration: ""

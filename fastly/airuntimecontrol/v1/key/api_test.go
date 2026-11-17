@@ -54,6 +54,30 @@ func TestClient_Keys(t *testing.T) {
 		})
 	}()
 
+	// Create a virtual key without a model.
+	var createdWithoutModel *VirtualKeyWithToken
+	fastly.RecordRedacted(t, "create_without_model", arcSecretFields, func(c *fastly.Client) {
+		createdWithoutModel, err = Create(ctx, c, &CreateInput{
+			Name:     new("go-fastly-test-key-without-model"),
+			Provider: new("Anthropic"),
+		})
+	})
+	require.NoError(t, err)
+	require.NotNil(t, createdWithoutModel)
+	require.NotEmpty(t, createdWithoutModel.ID)
+	require.NotEmpty(t, createdWithoutModel.AccessToken)
+	require.Empty(t, createdWithoutModel.Model)
+
+	keyWithoutModelID := createdWithoutModel.ID
+
+	defer func() {
+		fastly.Record(t, "delete_without_model", func(c *fastly.Client) {
+			_ = Delete(ctx, c, &DeleteInput{
+				KeyID: new(keyWithoutModelID),
+			})
+		})
+	}()
+
 	// Get the virtual key.
 	var fetched *VirtualKeyListItem
 	fastly.RecordRedacted(t, "get", arcSecretFields, func(c *fastly.Client) {
@@ -168,12 +192,6 @@ func TestClient_Create_validation(t *testing.T) {
 		Provider: new("Anthropic"),
 	})
 	require.ErrorIs(t, err, fastly.ErrMissingName)
-
-	_, err = Create(ctx, fastly.TestClient, &CreateInput{
-		Name:     new("my-key"),
-		Provider: new("Anthropic"),
-	})
-	require.ErrorIs(t, err, fastly.ErrMissingModel)
 
 	_, err = Create(ctx, fastly.TestClient, &CreateInput{
 		Name:  new("my-key"),

@@ -1,0 +1,49 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"name":"go-fastly-test-key-without-model","provider":"Anthropic"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/19.3.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/ai-runtime-control/v1/keys
+    method: POST
+  response:
+    body: '{"id":"115650bfb9d1c59d4cb9","name":"go-fastly-test-key-without-model","user_id":"XXXXXXXXXXXXXXXXXXXXXX","user_name":"XXXXXXXXXXXXXXXXXXXXXX","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","provider":"Anthropic","expires_at":null,"created_at":"2026-11-17T14:35:14.511754009Z","updated_at":"2026-11-17T14:35:14.511754009Z","access_token":"XXXXXXXXXXXXXXXXXXXXXX","rpm_limit":null,"tpm_limit":null}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "406"
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 17 Nov 2026 14:35:14 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "1989"
+      X-Served-By:
+      - cache-chi-kigq8000163-CHI, cache-ewr-kewr1740092-EWR
+      X-Timer:
+      - S1794926113.533193,VS0,VE2019
+    status: 201 Created
+    code: 201
+    duration: ""
