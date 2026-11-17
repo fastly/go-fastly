@@ -4,9 +4,6 @@
 
 ## BREAKING:
 
-- breaking(apisecurity/operations):  all tags can now be removed from an operation on update. The `UpdateInput.TagIDs` field type changed from `[]string` to `*[]string` so an empty list can be sent ([#898](https://github.com/fastly/go-fastly/pull/898))
-- breaking(airuntimecontrol): `usagemetrics.Export` now takes a new `*ExportInput` instead of `*ListInput`. `ExportInput` has the same fields as `ListInput` except `Limit`, which the export endpoint does not support ([#899](https://github.com/fastly/go-fastly/pull/899))
-
 ### Enhancements:
 
 ### Bug fixes:
@@ -14,6 +11,38 @@
 - fix(airuntimecontrol): updated the `model` field to be optional when creating a virtual key ([#889](https://github.com/fastly/go-fastly/pull/889))
 
 ### Dependencies:
+
+## [v19.3.0](https://github.com/fastly/go-fastly/releases/tag/v19.3.0) (2026-11-16)
+
+### Enhancements:
+
+- feat(botmanagement/policy): add `UpdateCategoryBots` to set the action for every bot in a category ([#913](https://github.com/fastly/go-fastly/pull/913))
+- feat(logging): Add support for the Fastly Object Storage (FOS) logging endpoint. ([#914](https://github.com/fastly/go-fastly/pull/914))
+
+## [v19.2.0](https://github.com/fastly/go-fastly/releases/tag/v19.2.0) (2026-11-10)
+
+### Enhancements:
+
+- feat(products): Add support for account-level products. ([#911](https://github.com/fastly/go-fastly/pull/911))
+
+## [v19.1.0](https://github.com/fastly/go-fastly/releases/tag/v19.1.0) (2026-11-06)
+
+### Enhancements:
+
+- feat(backends): Add support for IAM attributes ([#904](https://github.com/fastly/go-fastly/pull/904))
+- feat(tests): Make tests pass under tinygo. ([#907](https://github.com/fastly/go-fastly/pull/907))
+
+## [v19.0.0](https://github.com/fastly/go-fastly/releases/tag/v19.0.0) (2026-11-04)
+
+## BREAKING:
+
+- breaking(apisecurity/operations):  all tags can now be removed from an operation on update. The `UpdateInput.TagIDs` field type changed from `[]string` to `*[]string` so an empty list can be sent ([#898](https://github.com/fastly/go-fastly/pull/898))
+- breaking(airuntimecontrol): `usagemetrics.Export` now takes a new `*ExportInput` instead of `*ListInput`. `ExportInput` has the same fields as `ListInput` except `Limit`, which the export endpoint does not support ([#899](https://github.com/fastly/go-fastly/pull/899))
+- breaking(ngwaf): `virtualpatches.List` now automatically paginates and returns `[]VirtualPatch` instead of `*VirtualPatches`; `ListInput.Page` has been removed and `ListInput.Limit` now sets the maximum number of results returned ([#900](https://github.com/fastly/go-fastly/pull/900))
+
+### Bug fixes:
+
+- fix(ngwaf): `signals.List`, `thresholds.List` and the `alerts/*` `List` functions now request the maximum page size (1000) by default instead of the API default of 100, which silently truncated results ([#900](https://github.com/fastly/go-fastly/pull/900))
 
 ## [v18.1.0](https://github.com/fastly/go-fastly/releases/tag/v18.1.0) (2026-10-26)
 
@@ -47,7 +76,7 @@
 
 ### Dependencies:
 
--chore(go.mod): upgrade go to 1.26.10 ([#890](https://github.com/fastly/go-fastly/pull/890))
+- chore(go.mod): upgrade go to 1.26.10 ([#890](https://github.com/fastly/go-fastly/pull/890))
 
 ## [v17.8.0](https://github.com/fastly/go-fastly/releases/tag/v17.8.0) (2026-10-07)
 

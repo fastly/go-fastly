@@ -6,9 +6,15 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+
+	"github.com/fastly/go-fastly/v19/internal/tinygo"
 )
 
 func TestClient_FastlyAlerts(t *testing.T) {
+	if tinygo.Enabled {
+		t.Skip("go-cmp uses reflect.Type.MethodByName, unsupported in TinyGo")
+	}
+
 	t.Parallel()
 
 	testDimensions := map[string][]string{
@@ -177,6 +183,10 @@ func TestClient_FastlyAlerts(t *testing.T) {
 }
 
 func TestClient_FastlyPercentAlerts(t *testing.T) {
+	if tinygo.Enabled {
+		t.Skip("go-cmp uses reflect.Type.MethodByName, unsupported in TinyGo")
+	}
+
 	t.Parallel()
 
 	testDimensions := map[string][]string{}

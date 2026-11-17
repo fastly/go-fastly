@@ -6,7 +6,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.5.0 (+github.com/fastly/go-fastly; go1.24.3)
+      - FastlyGo/18.0.0 (+github.com/fastly/go-fastly; go1.27.1)
     url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/virtual-patches/CVE-2017-5638
     method: GET
   response:
@@ -22,11 +22,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sun, 29 Jun 2025 15:20:03 GMT
+      - Wed, 28 Oct 2026 17:05:50 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -37,10 +37,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "826"
       X-Served-By:
-      - cache-chi-kigq8000174-CHI, cache-nyc-kteb1890090-NYC
+      - cache-chi-kmdw8640078-CHI, cache-ewr-kewr1740035-EWR
       X-Timer:
-      - S1751210403.422056,VS0,VE176
+      - S1793207150.122803,VS0,VE858
     status: 200 OK
     code: 200
     duration: ""

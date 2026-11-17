@@ -8,14 +8,14 @@ interactions:
       Accept:
       - application/json
       User-Agent:
-      - FastlyGo/17.4.0 (+github.com/fastly/go-fastly; go1.27.1)
+      - FastlyGo/18.1.0 (+github.com/fastly/go-fastly; go1.26.10)
     url: https://api.fastly.com/bot-management/v1/workspaces/XXXXXXXXXXXXXXXXXXXXXX/policy/categories?limit=1000
     method: GET
   response:
     body: '{"meta":{"limit":1000,"total":14,"next_cursor":null},"data":[{"category_id":"cat_accessibility","name":"Accessibility","description":"Tools
       which make content accessible, such as screen readers, etc.","action":{"type":"allow"}},{"category_id":"cat_ai_crawler","name":"AI
       Crawler","description":"Crawlers which extract content from websites for building
-      AI models or indexes.","action":{"type":"allow"}},{"category_id":"cat_ai_fetcher","name":"AI
+      AI models or indexes.","action":{"type":"block"}},{"category_id":"cat_ai_fetcher","name":"AI
       Fetcher","description":"Bots which extract content from websites for enriching
       AI results in response to a user query.","action":{"type":"allow"}},{"category_id":"cat_content_fetcher","name":"Content
       Fetcher","description":"Tools which extract content from websites to be used
@@ -45,7 +45,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 25 Sep 2026 18:25:41 GMT
+      - Fri, 13 Nov 2026 19:03:29 GMT
       Pragma:
       - no-cache
       Server:
@@ -59,11 +59,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "264"
+      - "228"
       X-Served-By:
-      - cache-chi-klot8100085-CHI, cache-ewr-kewr1740030-EWR
+      - cache-chi-klot8100097-CHI, cache-bur-kbur8200023-BUR
       X-Timer:
-      - S1790360741.998632,VS0,VE300
+      - S1794596609.059407,VS0,VE297
     status: 200 OK
     code: 200
     duration: ""

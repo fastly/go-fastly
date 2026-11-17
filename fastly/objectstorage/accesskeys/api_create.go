@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"slices"
 
-	"github.com/fastly/go-fastly/v18/fastly"
+	"github.com/fastly/go-fastly/v19/fastly"
 )
 
 // Permissions can be one of these values only.

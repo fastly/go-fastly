@@ -1,4 +1,4 @@
-module github.com/fastly/go-fastly/v18
+module github.com/fastly/go-fastly/v19
 
 go 1.26.10
 
@@ -7,7 +7,6 @@ require (
 	github.com/google/go-cmp v0.7.0
 	github.com/google/go-querystring v1.2.0
 	github.com/google/jsonapi v1.0.0
-	github.com/hashicorp/go-cleanhttp v0.5.2
 	github.com/mitchellh/mapstructure v1.5.0
 	github.com/peterhellberg/link v1.2.0
 	github.com/stretchr/testify v1.12.1
@@ -15,7 +14,7 @@ require (
 )
 
 require (
-	go.yaml.in/yaml/v3 v3.0.5 // indirect
-	golang.org/x/sys v0.49.0 // indirect
+	go.yaml.in/yaml/v3 v3.0.6 // indirect
+	golang.org/x/sys v0.50.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )

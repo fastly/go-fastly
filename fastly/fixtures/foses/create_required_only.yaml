@@ -1,0 +1,63 @@
+---
+version: 1
+interactions:
+- request:
+    body: bucket_name=bucket-name&name=test-fos-required-only&region=us-east
+    form:
+      bucket_name:
+      - bucket-name
+      name:
+      - test-fos-required-only
+      region:
+      - us-east
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/19.2.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/3/logging/fos
+    method: POST
+  response:
+    body: '{"bucket_name":"bucket-name","name":"test-fos-required-only","region":"us-east","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"3","access_key":"cl5TmlPFciE7tUAYZZDT2L","compression_codec":null,"format":"{\n  \"timestamp\":\"%{strftime(\\{\"%Y-%m-%dT%H:%M:%S%z\"\\},
+      time.start)}V\",\n  \"client_ip\":\"%{req.http.Fastly-Client-IP}V\",\n  \"geo_country\":\"%{client.geo.country_name}V\",\n  \"geo_city\":\"%{client.geo.city}V\",\n  \"host\":\"%{if(req.http.Fastly-Orig-Host,
+      req.http.Fastly-Orig-Host, req.http.Host)}V\",\n  \"url\":\"%{json.escape(req.url)}V\",\n  \"request_method\":\"%{json.escape(req.method)}V\",\n  \"request_protocol\":\"%{json.escape(req.proto)}V\",\n  \"request_referer\":\"%{json.escape(req.http.referer)}V\",\n  \"request_user_agent\":\"%{json.escape(req.http.User-Agent)}V\",\n  \"response_state\":\"%{json.escape(fastly_info.state)}V\",\n  \"response_status\":%{resp.status}V,\n  \"response_reason\":%{if(resp.response,
+      \"%22\"+json.escape(resp.response)+\"%22\", \"null\")}V,\n  \"response_body_size\":%{resp.body_bytes_written}V,\n  \"fastly_server\":\"%{json.escape(server.identity)}V\",\n  \"fastly_is_edge\":%{if(fastly.ff.visits_this_service
+      == 0, \"true\", \"false\")}V\n}\n","message_type":"blank","file_max_bytes":0,"public_key":null,"response_condition":"","timestamp_format":"%Y-%m-%dT%H:%M:%S.000","gzip_level":"0","created_at":"2026-11-16T16:05:04Z","path":null,"log_processing_region":"none","period":"3600","updated_at":"2026-11-16T16:05:04Z","placement":null,"deleted_at":null,"format_version":"2"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 16 Nov 2026 16:05:04 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9988"
+      Fastly-Ratelimit-Reset:
+      - "1794848400"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "1620"
+      X-Served-By:
+      - cache-chi-klot8100171-CHI, cache-ewr-kewr1740039-EWR
+      X-Timer:
+      - S1794845103.089765,VS0,VE1652
+    status: 200 OK
+    code: 200
+    duration: ""

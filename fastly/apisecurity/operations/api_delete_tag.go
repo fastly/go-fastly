@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/fastly/go-fastly/v18/fastly"
+	"github.com/fastly/go-fastly/v19/fastly"
 )
 
 // DeleteTagInput specifies the information needed for the DeleteTag() function

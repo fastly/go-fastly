@@ -3,8 +3,8 @@ package productcore
 import (
 	"context"
 
-	"github.com/fastly/go-fastly/v18/fastly"
-	"github.com/fastly/go-fastly/v18/fastly/products"
+	"github.com/fastly/go-fastly/v19/fastly"
+	"github.com/fastly/go-fastly/v19/fastly/products"
 )
 
 // PutInput specifies the information needed for the Put()
@@ -15,7 +15,6 @@ import (
 type PutInput[I any] struct {
 	Client        *fastly.Client
 	ProductID     string
-	ServiceID     string
 	URLComponents []string
 	Input         I
 }
@@ -31,12 +30,7 @@ type PutInput[I any] struct {
 // is used to construct, populate, and return the output present in
 // the response body.
 func Put[O products.ProductOutput, I any](ctx context.Context, i *PutInput[I]) (o O, err error) {
-	if i.ServiceID == "" {
-		err = fastly.ErrMissingServiceID
-		return
-	}
-
-	path := makeURL(i.ProductID, i.ServiceID, i.URLComponents)
+	path := makeURL(i.ProductID, i.URLComponents)
 
 	resp, err := i.Client.PutJSON(ctx, path, i.Input, fastly.CreateRequestOptions())
 	if err != nil {

@@ -5,10 +5,9 @@
 A Go client module for interacting with most facets of the [Fastly
 API](https://docs.fastly.com/api).
 
-> **NOTE:** This API client may not function correctly when used on
-> the [Fastly Compute](https://www.fastly.com/products/edge-compute)
-> platform. Support for Compute is on the roadmap but has not yet been
-> prioritised ([details](./DEVELOPMENT.md#compute)).
+> **NOTE:** Support for the [Fastly
+> Compute](https://www.fastly.com/products/edge-compute) platform is
+> experimental ([details](./DEVELOPMENT.md#compute)).
 
 ## Versioning and Release Schedules
 
@@ -32,7 +31,7 @@ fixes available.
 ## Usage
 
 ```go
-import "github.com/fastly/go-fastly/v18/fastly"
+import "github.com/fastly/go-fastly/v19/fastly"
 ```
 
 ## Reference
@@ -42,4 +41,4 @@ import "github.com/fastly/go-fastly/v18/fastly"
 - [EXAMPLES.md](./EXAMPLES.md)
 - [TESTING.md](./TESTING.md)
 
-[latest]: https://pkg.go.dev/github.com/fastly/go-fastly/v18/fastly
+[latest]: https://pkg.go.dev/github.com/fastly/go-fastly/v19/fastly

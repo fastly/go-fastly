@@ -8,14 +8,14 @@ interactions:
       Accept:
       - application/json
       User-Agent:
-      - FastlyGo/17.4.0 (+github.com/fastly/go-fastly; go1.27.1)
+      - FastlyGo/18.1.0 (+github.com/fastly/go-fastly; go1.26.10)
     url: https://api.fastly.com/bot-management/v1/workspaces/XXXXXXXXXXXXXXXXXXXXXX/policy/categories?limit=10
     method: GET
   response:
     body: '{"meta":{"limit":10,"total":14,"next_cursor":"eyJ2IjoxLCJraW5kIjoiY2F0ZWdvcnkiLCJzY29wZSI6IjIwNzhkZDQzNWQyOTUyMmM4OTIwMzcyY2I2MTg1NzYwNzQ2MDg5MDViYWRmMWFhZDUwZTU3ZDEyY2YyYTg5YmQiLCJzb3J0IjoiUmVzZWFyY2giLCJwayI6Mn0"},"data":[{"category_id":"cat_accessibility","name":"Accessibility","description":"Tools
       which make content accessible, such as screen readers, etc.","action":{"type":"allow"}},{"category_id":"cat_ai_crawler","name":"AI
       Crawler","description":"Crawlers which extract content from websites for building
-      AI models or indexes.","action":{"type":"allow"}},{"category_id":"cat_ai_fetcher","name":"AI
+      AI models or indexes.","action":{"type":"block"}},{"category_id":"cat_ai_fetcher","name":"AI
       Fetcher","description":"Bots which extract content from websites for enriching
       AI results in response to a user query.","action":{"type":"allow"}},{"category_id":"cat_content_fetcher","name":"Content
       Fetcher","description":"Tools which extract content from websites to be used
@@ -38,7 +38,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 25 Sep 2026 18:25:41 GMT
+      - Fri, 13 Nov 2026 19:03:29 GMT
       Pragma:
       - no-cache
       Server:
@@ -52,11 +52,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "258"
+      - "207"
       X-Served-By:
-      - cache-chi-klot8100120-CHI, cache-ewr-kewr1740030-EWR
+      - cache-chi-kigq8000050-CHI, cache-bur-kbur8200023-BUR
       X-Timer:
-      - S1790360741.326941,VS0,VE298
+      - S1794596609.380491,VS0,VE267
     status: 200 OK
     code: 200
     duration: ""
@@ -67,7 +67,7 @@ interactions:
       Accept:
       - application/json
       User-Agent:
-      - FastlyGo/17.4.0 (+github.com/fastly/go-fastly; go1.27.1)
+      - FastlyGo/18.1.0 (+github.com/fastly/go-fastly; go1.26.10)
     url: https://api.fastly.com/bot-management/v1/workspaces/XXXXXXXXXXXXXXXXXXXXXX/policy/categories?cursor=eyJ2IjoxLCJraW5kIjoiY2F0ZWdvcnkiLCJzY29wZSI6IjIwNzhkZDQzNWQyOTUyMmM4OTIwMzcyY2I2MTg1NzYwNzQ2MDg5MDViYWRmMWFhZDUwZTU3ZDEyY2YyYTg5YmQiLCJzb3J0IjoiUmVzZWFyY2giLCJwayI6Mn0&limit=10
     method: GET
   response:
@@ -89,7 +89,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 25 Sep 2026 18:25:41 GMT
+      - Fri, 13 Nov 2026 19:03:29 GMT
       Pragma:
       - no-cache
       Server:
@@ -103,11 +103,11 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Envoy-Upstream-Service-Time:
-      - "251"
+      - "230"
       X-Served-By:
-      - cache-chi-kigq8000107-CHI, cache-ewr-kewr1740030-EWR
+      - cache-chi-kmdw8640043-CHI, cache-bur-kbur8200023-BUR
       X-Timer:
-      - S1790360742.643060,VS0,VE292
+      - S1794596610.669667,VS0,VE294
     status: 200 OK
     code: 200
     duration: ""

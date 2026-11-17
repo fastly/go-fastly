@@ -4,8 +4,8 @@ GO ?= go
 # List of tests to run
 FILES ?= ./...
 
-# List all our actual files, excluding vendor
-GOPKGS ?= $(shell $(GO) list $(FILES) | grep -v /vendor/)
+# List all our actual files
+GOPKGS ?= $(shell $(GO) list $(FILES))
 
 # Tags specific for building
 GOTAGS ?=
@@ -86,6 +86,11 @@ test-race: ## Runs the test suite with the -race flag to identify race condition
 	@echo "==> Testing ${NAME} (race)"
 	@$(TEST_COMMAND) -timeout=60s -race -tags="${GOTAGS}" ${GOPKGS} ${TESTARGS}
 .PHONY: test-race
+
+test-tinygo: ## Runs the test suite with TinyGo (wasip1 target) to verify Compute compatibility.
+	@echo "==> Testing ${NAME} (tinygo)"
+	@tinygo test -target=wasip1 -tags="safe ${GOTAGS}" ${TESTARGS} ${GOPKGS}
+.PHONY: test-tinygo
 
 test-full: ## Runs the tests with VCR disabled (i.e., makes external calls).
 	@echo "==> Testing ${NAME} with VCR disabled"

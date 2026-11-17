@@ -1,13 +1,9 @@
 package productcore
 
-import "github.com/fastly/go-fastly/v18/fastly"
+import "github.com/fastly/go-fastly/v19/fastly"
 
-func makeURL(productID, serviceID string, subComponents []string) string {
+func makeURL(productID string, subComponents []string) string {
 	path := []string{"enabled-products", "v1", productID}
-
-	if serviceID != "" {
-		path = append(path, "services", serviceID)
-	}
 
 	if len(subComponents) > 0 {
 		path = append(path, subComponents...)

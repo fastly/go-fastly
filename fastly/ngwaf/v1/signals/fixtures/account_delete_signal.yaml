@@ -6,7 +6,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
+      - FastlyGo/18.0.0 (+github.com/fastly/go-fastly; go1.27.1)
     url: https://api.fastly.com/ngwaf/v1/signals/corp.a-real-name-account
     method: DELETE
   response:
@@ -19,11 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 21 Jul 2025 14:51:35 GMT
+      - Wed, 28 Oct 2026 17:06:17 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -34,10 +34,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "874"
       X-Served-By:
-      - cache-chi-klot8100117-CHI, cache-nyc-kteb1890023-NYC
+      - cache-chi-klot8100141-CHI, cache-ewr-kewr1740069-EWR
       X-Timer:
-      - S1753109495.118868,VS0,VE460
+      - S1793207176.485053,VS0,VE905
     status: 204 No Content
     code: 204
     duration: ""

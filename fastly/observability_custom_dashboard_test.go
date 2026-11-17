@@ -6,9 +6,15 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
+
+	"github.com/fastly/go-fastly/v19/internal/tinygo"
 )
 
 func TestClient_ObservabilityCustomDashboards(t *testing.T) {
+	if tinygo.Enabled {
+		t.Skip("go-cmp uses reflect.Type.MethodByName, unsupported in TinyGo")
+	}
+
 	t.Parallel()
 
 	cocd := &CreateObservabilityCustomDashboardInput{

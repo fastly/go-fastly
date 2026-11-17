@@ -6,7 +6,7 @@ import (
 	"io"
 	"time"
 
-	"github.com/fastly/go-fastly/v18/fastly"
+	"github.com/fastly/go-fastly/v19/fastly"
 )
 
 // ExportInput specifies the information needed for the Export() function to

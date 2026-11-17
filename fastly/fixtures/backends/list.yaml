@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/12.1.0 (+github.com/fastly/go-fastly; go1.26.2)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/145/backend
+      - FastlyGo/19.0.0 (+github.com/fastly/go-fastly; go1.26.10)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/213/backend
     method: GET
   response:
-    body: '[{"port":80,"updated_at":"2026-05-06T18:11:06Z","weight":100,"error_threshold":0,"client_cert":null,"tcp_keepalive_interval":null,"name":"test-backend","connect_timeout":1500,"first_byte_timeout":15000,"between_bytes_timeout":10000,"created_at":"2026-05-06T18:11:06Z","healthcheck":null,"ssl_check_cert":false,"use_ssl":false,"ssl_cert_hostname":null,"ssl_sni_hostname":"ssl-hostname.com","hostname":"integ-test.go-fastly.com","address":"integ-test.go-fastly.com","min_tls_version":null,"ipv6":null,"request_condition":"","service_id":"kKJb5bOFI47uHeBVluGfX1","keepalive_time":null,"max_use":100,"ssl_client_key":null,"ssl_ciphers":"DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384","tcp_keepalive_time":null,"tcp_keepalive_enable":null,"override_host":"origin.example.com","ssl_hostname":null,"deleted_at":null,"auto_loadbalance":false,"prefer_ipv6":false,"shield":null,"ssl_ca_cert":null,"share_key":null,"comment":"","tcp_keepalive_probes":null,"max_conn":200,"ipv4":null,"max_lifetime":60000,"ssl_client_cert":null,"version":145,"max_tls_version":null}]'
+    body: '[{"shield":null,"deleted_at":null,"tcp_keepalive_interval":null,"ssl_hostname":null,"max_lifetime":60000,"created_at":"2026-11-05T20:36:01Z","service_id":"kKJb5bOFI47uHeBVluGfX1","ssl_ciphers":"DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384","address":"integ-test.go-fastly.com","hostname":"integ-test.go-fastly.com","max_use":100,"max_tls_version":null,"use_ssl":false,"iam_external_id":null,"tcp_keepalive_enable":null,"prefer_ipv6":false,"request_condition":"","auto_loadbalance":false,"ssl_client_key":null,"iam_region":null,"name":"test-backend","override_host":"origin.example.com","max_conn":200,"updated_at":"2026-11-05T20:36:01Z","client_cert":null,"error_threshold":0,"healthcheck":null,"comment":"","keepalive_time":null,"iam_idp":null,"ipv4":null,"ssl_sni_hostname":"ssl-hostname.com","between_bytes_timeout":10000,"ipv6":null,"tcp_keepalive_probes":null,"iam_product":null,"tcp_keepalive_time":null,"connect_timeout":1500,"port":80,"share_key":null,"version":213,"iam_role":null,"weight":100,"min_tls_version":null,"ssl_check_cert":false,"ssl_ca_cert":null,"ssl_client_cert":null,"first_byte_timeout":15000,"iam_vendor":null,"ssl_cert_hostname":null}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,11 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 06 May 2026 18:11:07 GMT
+      - Thu, 05 Nov 2026 20:36:02 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly istio-envoy
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -36,10 +36,12 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "106"
       X-Served-By:
-      - cache-chi-kigq8000094-CHI, cache-ewr-kewr1740088-EWR
+      - cache-chi-klot8100148-CHI, cache-nyc-kteb1890097-NYC
       X-Timer:
-      - S1778091067.089092,VS0,VE544
+      - S1793910962.960920,VS0,VE138
     status: 200 OK
     code: 200
     duration: ""

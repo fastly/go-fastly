@@ -5,9 +5,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/fastly/go-fastly/v18/fastly"
-	"github.com/fastly/go-fastly/v18/fastly/products"
-	"github.com/fastly/go-fastly/v18/internal/test_utils"
+	"github.com/fastly/go-fastly/v19/fastly"
+	"github.com/fastly/go-fastly/v19/fastly/products"
+	"github.com/fastly/go-fastly/v19/internal/test_utils"
 )
 
 // GetConfigurationTestInput specifies the information needed for the
@@ -25,7 +25,7 @@ type GetConfigurationTestInput[O products.ProductOutput] struct {
 	Phase string
 	// OpFn is the function to be invoked to perform the
 	// get operation
-	OpFn func(context.Context, *fastly.Client, string) (O, error)
+	OpFn func(context.Context, *fastly.Client) (O, error)
 	// ProductID identifies the product for which information
 	// should be obtained on the service; note that it is only
 	// used to validate the ProductID in the output from OpFn (if
@@ -56,10 +56,10 @@ func NewGetConfigurationTest[O products.ProductOutput](i *GetConfigurationTestIn
 		r.Operation = "get-configuration"
 	}
 
-	r.TestFn = func(t *testing.T, tc *test_utils.FunctionalTest, c *fastly.Client, serviceID string) error {
-		result, err := i.OpFn(context.TODO(), c, serviceID)
+	r.TestFn = func(t *testing.T, tc *test_utils.FunctionalTest, c *fastly.Client) error {
+		result, err := i.OpFn(context.TODO(), c)
 		if err == nil {
-			validateOutput(t, tc, result, i.ProductID, serviceID)
+			validateOutput(t, tc, result, i.ProductID)
 			if i.CheckOutputFn != nil {
 				i.CheckOutputFn(t, tc, result)
 			}

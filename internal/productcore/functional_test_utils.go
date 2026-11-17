@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/fastly/go-fastly/v18/fastly/products"
-	"github.com/fastly/go-fastly/v18/internal/test_utils"
+	"github.com/fastly/go-fastly/v19/fastly/products"
+	"github.com/fastly/go-fastly/v19/internal/test_utils"
 )
 
 // validateOutput provides common validation for all responses to
@@ -16,8 +16,7 @@ import (
 // and ServiceID on which the operation was invoked; this function
 // confirms that they were returned and that they have the expected
 // values.
-func validateOutput(t *testing.T, tc *test_utils.FunctionalTest, o products.ProductOutput, productID, serviceID string) {
+func validateOutput(t *testing.T, tc *test_utils.FunctionalTest, o products.ProductOutput, productID string) {
 	require.NotNilf(t, o, "test '%s'", tc.Name)
 	require.Equalf(t, productID, o.ProductID(), "test '%s'", tc.Name)
-	require.Equalf(t, serviceID, o.ServiceID(), "test '%s'", tc.Name)
 }

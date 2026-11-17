@@ -1,0 +1,103 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/19.2.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/2/logging/fos/test-fos
+    method: DELETE
+  response:
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e test-fos, service =\u003e kKJb5bOFI47uHeBVluGfX1,
+      version =\u003e 2 }''"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 16 Nov 2026 16:05:06 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9984"
+      Fastly-Ratelimit-Reset:
+      - "1794848400"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Status:
+      - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "85"
+      X-Served-By:
+      - cache-chi-kigq8000111-CHI, cache-ewr-kewr1740039-EWR
+      X-Timer:
+      - S1794845106.294181,VS0,VE115
+    status: 404 Not Found
+    code: 404
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/19.2.0 (+github.com/fastly/go-fastly; go1.27.1)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/2/logging/fos/new-test-fos
+    method: DELETE
+  response:
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e new-test-fos, service =\u003e kKJb5bOFI47uHeBVluGfX1,
+      version =\u003e 2 }''"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 16 Nov 2026 16:05:06 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9983"
+      Fastly-Ratelimit-Reset:
+      - "1794848400"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly istio-envoy
+      Status:
+      - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Envoy-Upstream-Service-Time:
+      - "90"
+      X-Served-By:
+      - cache-chi-kigq8000166-CHI, cache-ewr-kewr1740039-EWR
+      X-Timer:
+      - S1794845106.422706,VS0,VE123
+    status: 404 Not Found
+    code: 404
+    duration: ""

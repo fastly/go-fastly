@@ -232,7 +232,7 @@ func TestClient_Backends_Compute(t *testing.T) {
 	}
 }
 
-func TestClient_Backends(t *testing.T) {
+func TestClient_Backends_CDN(t *testing.T) {
 	t.Parallel()
 
 	var err error
@@ -370,6 +370,11 @@ func TestClient_Backends(t *testing.T) {
 			SSLCiphers:     new("HIGH"),
 			SSLCheckCert:   new(Compatibool(false)),
 			SSLSNIHostname: new("ssl-hostname-updated.com"),
+			IAMExternalID:  new("aws-external-id"),
+			IAMProduct:     new("aws-s3"),
+			IAMRegion:      new("us-east-1"),
+			IAMRole:        new("tester"),
+			IAMVendor:      new("aws"),
 		})
 	})
 	if err != nil {
@@ -401,6 +406,31 @@ func TestClient_Backends(t *testing.T) {
 	}
 	if *ub.SSLSNIHostname != "ssl-hostname-updated.com" {
 		t.Errorf("bad ssl_sni_hostname: %q", *ub.SSLSNIHostname)
+	}
+	if ub.IAMExternalID == nil {
+		t.Errorf("bad iam_external_id: nil")
+	} else if *ub.IAMExternalID != "aws-external-id" {
+		t.Errorf("bad iam_external_id: %q", *ub.IAMExternalID)
+	}
+	if ub.IAMProduct == nil {
+		t.Errorf("bad iam_product: nil")
+	} else if *ub.IAMProduct != "aws-s3" {
+		t.Errorf("bad iam_product: %q", *ub.IAMProduct)
+	}
+	if ub.IAMRegion == nil {
+		t.Errorf("bad iam_region: nil")
+	} else if *ub.IAMRegion != "us-east-1" {
+		t.Errorf("bad iam_region: %q", *ub.IAMRegion)
+	}
+	if ub.IAMRole == nil {
+		t.Errorf("bad iam_role: nil")
+	} else if *ub.IAMRole != "tester" {
+		t.Errorf("bad iam_role: %q", *ub.IAMRole)
+	}
+	if ub.IAMVendor == nil {
+		t.Errorf("bad iam_vendor: nil")
+	} else if *ub.IAMVendor != "aws" {
+		t.Errorf("bad iam_vendor: %q", *ub.IAMVendor)
 	}
 
 	// NOTE: The following test validates empty values are NOT sent.

@@ -20,6 +20,11 @@ type Backend struct {
 	FirstByteTimeout    *int       `mapstructure:"first_byte_timeout"`
 	HealthCheck         *string    `mapstructure:"healthcheck"`
 	Hostname            *string    `mapstructure:"hostname"`
+	IAMExternalID       *string    `mapstructure:"iam_external_id"`
+	IAMProduct          *string    `mapstructure:"iam_product"`
+	IAMRegion           *string    `mapstructure:"iam_region"`
+	IAMRole             *string    `mapstructure:"iam_role"`
+	IAMVendor           *string    `mapstructure:"iam_vendor"`
 	KeepAliveTime       *int       `mapstructure:"keepalive_time"`
 	MaxConn             *int       `mapstructure:"max_conn"`
 	MaxUse              *int       `mapstructure:"max_use"`
@@ -101,6 +106,16 @@ type CreateBackendInput struct {
 	FirstByteTimeout *int `url:"first_byte_timeout,omitempty"`
 	// HealthCheck is the name of the healthcheck to use with this backend.
 	HealthCheck *string `url:"healthcheck,omitempty"`
+	// IAMExternalID is the external ID used by the IAM provider.
+	IAMExternalID *string `url:"iam_external_id,omitempty"`
+	// IAMProduct is the product element used in the IAM signature.
+	IAMProduct *string `url:"iam_product,omitempty"`
+	// IAMRegion is the region used in the IAM signature and for endpoint selection.
+	IAMRegion *string `url:"iam_region,omitempty"`
+	// IAMRole is the fully-qualified role name provided by the IAM provider.
+	IAMRole *string `url:"iam_role,omitempty"`
+	// IAMVendor is the label which identifies the storage vendor.
+	IAMVendor *string `url:"iam_vendor,omitempty"`
 	// KeepAliveTime is how long in seconds to keep a persistent connection to the backend between requests.
 	KeepAliveTime *int `url:"keepalive_time,omitempty"`
 	// MaxConn is the maximum number of concurrent connections this backend will accept.
@@ -238,6 +253,16 @@ type UpdateBackendInput struct {
 	FirstByteTimeout *int `url:"first_byte_timeout,omitempty"`
 	// HealthCheck is the name of the healthcheck to use with this backend.
 	HealthCheck *string `url:"healthcheck,omitempty"`
+	// IAMExternalID is the external ID used by the IAM provider.
+	IAMExternalID *string `url:"iam_external_id,omitempty"`
+	// IAMProduct is the product element used in the IAM signature.
+	IAMProduct *string `url:"iam_product,omitempty"`
+	// IAMRegion is the region used in the IAM signature and for endpoint selection.
+	IAMRegion *string `url:"iam_region,omitempty"`
+	// IAMRole is the fully-qualified role name provided by the IAM provider.
+	IAMRole *string `url:"iam_role,omitempty"`
+	// IAMVendor is the label which identifies the storage vendor.
+	IAMVendor *string `url:"iam_vendor,omitempty"`
 	// KeepAliveTime is how long in seconds to keep a persistent connection to the backend between requests.
 	KeepAliveTime *int `url:"keepalive_time,omitempty"`
 	// MaxConn is the maximum number of concurrent connections this backend will accept.
