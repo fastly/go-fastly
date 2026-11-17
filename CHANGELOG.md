@@ -8,9 +8,13 @@
 
 ### Bug fixes:
 
-- fix(airuntimecontrol): updated the `model` field to be optional when creating a virtual key ([#889](https://github.com/fastly/go-fastly/pull/889))
-
 ### Dependencies:
+
+## [v19.3.1](https://github.com/fastly/go-fastly/releases/tag/v19.3.1) (2026-11-17)
+
+### Bug fixes:
+
+- fix(airuntimecontrol): updated the `model` field to be optional when creating a virtual key ([#889](https://github.com/fastly/go-fastly/pull/889))
 
 ## [v19.3.0](https://github.com/fastly/go-fastly/releases/tag/v19.3.0) (2026-11-16)
 
