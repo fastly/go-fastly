@@ -2,6 +2,10 @@
 
 ## [UNRELEASED]
 
+### Dependencies
+
+- build(deps): `golang.org/x/crypto` from 0.58.0 to 0.59.0 ([#919](https://github.com/fastly/go-fastly/pull/919))
+
 ## BREAKING:
 
 ### Enhancements:
