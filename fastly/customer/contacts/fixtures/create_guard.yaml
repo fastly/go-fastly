@@ -1,0 +1,55 @@
+---
+version: 1
+interactions:
+- request:
+    body: |
+      {"data":{"type":"customer_contact","attributes":{"contact_type":"emergency","email":"go-fastly-test+contact-guard+20260522@example.com","name":"guard contact"}}}
+    form: {}
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Content-Type:
+      - application/vnd.api+json
+      User-Agent:
+      - FastlyGo/15.0.1 (+github.com/fastly/go-fastly; go1.25.4)
+    url: https://api.fastly.com/customer/7i6ZbMEdjnTUNyk75XgWO0/contacts
+    method: POST
+  response:
+    body: '{"data":{"id":"6ojdEaGJGBQHW5RJzwswwy","type":"customer_contact","attributes":{"created_at":"2026-05-22T12:39:57Z","updated_at":"2026-05-22T12:39:57Z","deleted_at":null,"contact_type":"emergency","phone":null,"name":"guard
+      contact","email":"go-fastly-test+contact-guard+20260522@example.com"}}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/vnd.api+json
+      Date:
+      - Fri, 22 May 2026 12:39:57 GMT
+      Fastly-Ratelimit-Remaining:
+      - "984"
+      Fastly-Ratelimit-Reset:
+      - "1779454800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Status:
+      - 201 Created
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100080-CHI, cache-par-lfpg1960084-PAR
+      X-Timer:
+      - S1779453597.172522,VS0,VE216
+    status: 201 Created
+    code: 201
+    duration: ""
